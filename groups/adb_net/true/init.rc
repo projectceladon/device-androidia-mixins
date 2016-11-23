@@ -1,0 +1,27 @@
+on init
+    setprop service.adb.tcp.port 5555
+
+on boot
+    start adbd
+    setprop net.eth0.startonboot true
+
+# Adb over Network
+on property:service.adb.tcp.port=5555
+    stop adbd
+    start adbd
+
+on property:service.adb.tcp.port=-1
+    stop adbd
+    start adbd
+
+on property:debug.logcat=1
+    class_start debug
+
+service logcat /system/bin/logcat -v threadtime -f /data/log.txt
+    class debug
+
+service setconsole /system/bin/setconsole -g
+    class main
+    user root
+    oneshot
+
