@@ -1,6 +1,8 @@
 #Product Characteristics
 PRODUCT_DIR := $(dir $(lastword $(filter-out device/common/%,$(filter device/%,$(ALL_PRODUCTS)))))
 
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.dalvik.vm.native.bridge=libhoudini.so
+
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_AAPT_CONFIG := normal large xlarge mdpi hdpi xhdpi xxhdpi
@@ -54,19 +56,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
 
-# Ethernet support.
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml
-
 # Wifi
 PRODUCT_COPY_FILES += \
 	device/intel/android_ia/common/wifi/wpa_supplicant-common.conf:system/etc/wifi/wpa_supplicant.conf \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-
-# Bluetooth
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
 
 # Voip
 PRODUCT_COPY_FILES += \
@@ -206,10 +199,6 @@ endif
 
 #Enable low latency stream
 PRODUCT_PROPERTY_OVERRIDES += persist.audio.low_latency=1
-
-# Ethernet
-PRODUCT_PROPERTY_OVERRIDES += \
-   net.eth0.startonboot=1
 
 # AOSP Packages
 PRODUCT_PACKAGES += \

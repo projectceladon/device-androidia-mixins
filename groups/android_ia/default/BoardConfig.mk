@@ -4,10 +4,6 @@
 
 TARGET_BOARD_PLATFORM := android_ia
 
-# Some framework code requires this to enable BT
-BOARD_HAVE_BLUETOOTH := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/generic/common/bluetooth
-
 BOARD_USE_LEGACY_UI := true
 
 TARGET_USERIMAGES_USE_EXT4 := true
