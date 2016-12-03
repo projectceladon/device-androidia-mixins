@@ -1,0 +1,25 @@
+on post-fs-data
+    # To store BT paired info
+    mkdir /data/misc/hcid 0770 bluetooth bluetooth
+
+on boot
+    insmod /system/lib/modules/iptable_raw.ko
+    insmod /system/lib/modules/ip6table_raw.ko
+    insmod /system/lib/modules/8250_dw.ko
+    insmod /system/lib/modules/6lowpan_iphc.ko
+    insmod /system/lib/modules/bluetooth.ko
+    insmod /system/lib/modules/btusb.ko
+    insmod /system/lib/modules/ath3k.ko
+    chmod 0644 /sys/kernel/debug/bluetooth/l2cap_le_max_credits
+    chmod 0644 /sys/kernel/debug/bluetooth/l2cap_le_default_mps
+
+on post-fs-data
+    mkdir /data/misc/dhcp 0770 dhcp system
+
+service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
+    disabled
+    oneshot
+
+service iprenew_bt-pan /system/bin/dhcpcd -n
+    disabled
+    oneshot

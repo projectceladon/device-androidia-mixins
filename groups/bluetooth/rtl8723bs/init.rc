@@ -1,0 +1,84 @@
+{{#hsu}}
+########################################################
+#  BLUETOOTH CONFIGURATION - REALTEK SPECIFIC
+########################################################
+on boot
+    insmod /system/lib/modules/bt_lpm.ko
+    insmod /system/lib/modules/iptable_raw.ko
+    insmod /system/lib/modules/ip6table_raw.ko
+    insmod /system/lib/modules/6lowpan_iphc.ko
+    start rfkill_bt
+
+on post-fs
+    mkdir /config/bt
+    chown system bluetooth /config/bt
+    chmod 0770 /config/bt
+    start bd_prov
+
+on early-boot
+    chmod 0644 /config/bt/bd_addr.conf
+    setprop ro.bt.bdaddr_path "/config/bt/bd_addr.conf"
+
+service rfkill_bt /system/bin/sh /rfkill_bt.sh
+    class core
+    user root
+    oneshot
+
+service dhcpcd_bt-pan /system/bin/logwrapper /system/bin/dhcpcd -ABKL
+    class main
+    group bluetooth wifi system dhcp
+    disabled
+    oneshot
+
+service iprenew_bt-pan /system/bin/logwrapper /system/bin/dhcpcd -n
+    group bluetooth system dhcp
+    disabled
+    oneshot
+
+service bd_prov /system/bin/bd_prov
+    class core
+    user system
+    group system bluetooth
+    disabled
+    oneshot
+{{/hsu}}
+{{^hsu}}
+on post-fs-data
+    # To store BT paired info
+    mkdir /data/misc/hcid 0770 bluetooth bluetooth
+
+on boot
+    insmod /system/lib/modules/8250_dw.ko
+    insmod /system/lib/modules/bluetooth.ko
+    insmod /system/lib/modules/hci_uart.ko
+    chmod 0644 /sys/kernel/debug/bluetooth/l2cap_le_max_credits
+    chmod 0644 /sys/kernel/debug/bluetooth/l2cap_le_default_mps
+
+on post-fs-data
+    mkdir /data/misc/dhcp 0770 dhcp system
+
+on property:bluetooth.hwcfg=start
+    start btcfg
+
+on property:bluetooth.hwcfg=stop
+    stop btcfg
+
+service btcfg /system/bin/hciattach -n /dev/ttyS1 rtk_h5
+    user bluetooth
+    group bluetooth
+    oneshot
+    disabled
+
+service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
+    disabled
+    oneshot
+
+service iprenew_bt-pan /system/bin/dhcpcd -n
+    disabled
+    oneshot
+
+on boot
+    insmod /system/lib/modules/iptable_raw.ko
+    insmod /system/lib/modules/ip6table_raw.ko
+    insmod /system/lib/modules/6lowpan_iphc.ko
+{{/hsu}}

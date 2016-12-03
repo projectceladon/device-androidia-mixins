@@ -1,0 +1,13 @@
+#Bluedroid uhid support
+/dev/uhid                   0660 bluetooth bluetooth
+
+{{#hsu}}
+/dev/ttyHSU0                0660 bluetooth net_bt_stack
+{{/hsu}}
+{{^hsu}}
+/dev/ttyS1                  0660 bluetooth bluetooth
+
+# Bluetooth rfkill nodes
+/sys/devices/*/bluetooth/hci0/rfkill* state  0660 bluetooth bluetooth
+/sys/devices/*/bluetooth/hci0/rfkill* type   0440 bluetooth bluetooth
+{{/hsu}}
