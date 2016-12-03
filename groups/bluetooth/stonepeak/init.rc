@@ -3,11 +3,11 @@ on post-fs-data
     mkdir /data/misc/hcid 0770 bluetooth bluetooth
 
 on boot
-    insmod /system/lib/modules/iptable_raw.ko
-    insmod /system/lib/modules/ip6table_raw.ko
-    insmod /system/lib/modules/6lowpan_iphc.ko
-    insmod /system/lib/modules/bluetooth.ko
-    insmod /system/lib/modules/btusb.ko
+    insmod ${ro.boot.moduleslocation}/iptable_raw.ko
+    insmod ${ro.boot.moduleslocation}/ip6table_raw.ko
+    insmod ${ro.boot.moduleslocation}/6lowpan_iphc.ko
+    insmod ${ro.boot.moduleslocation}/bluetooth.ko
+    insmod ${ro.boot.moduleslocation}/btusb.ko
 
 on post-fs-data
     mkdir /data/misc/dhcp 0770 dhcp system
