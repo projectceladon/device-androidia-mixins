@@ -1,0 +1,3 @@
+# Enable SELinux labeling
+on post-fs
+    restorecon_recursive /config

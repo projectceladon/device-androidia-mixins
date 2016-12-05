@@ -1,0 +1,1 @@
+/dev/block/by-name/android_config       /config         ext4    noatime,nosuid,nodev,errors=panic          wait,check
