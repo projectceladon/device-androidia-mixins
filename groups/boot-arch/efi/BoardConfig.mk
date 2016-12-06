@@ -4,19 +4,19 @@
 
 # tell build system where to get the recovery.fstab. Userfastboot
 # uses this too.
-TARGET_RECOVERY_FSTAB ?= $(TARGET_DEVICE_DIR)/fstab
+#TARGET_RECOVERY_FSTAB ?= $(TARGET_DEVICE_DIR)/fstab
 
 # Used by ota_from_target_files to add platform-specific directives
 # to the OTA updater scripts
-TARGET_RELEASETOOLS_EXTENSIONS ?= device/intel/common/recovery
+#TARGET_RELEASETOOLS_EXTENSIONS ?= device/intel/common/recovery
 
 # Adds edify commands swap_entries and copy_partition for robust
 # update of the EFI system partition
-TARGET_RECOVERY_UPDATER_LIBS := libupdater_esp
+#TARGET_RECOVERY_UPDATER_LIBS := libupdater_esp
 
 # Extra libraries needed to be rolled into recovery updater
 # libgpt_static and libefivar are needed by libupdater_esp
-TARGET_RECOVERY_UPDATER_EXTRA_LIBS := libcommon_recovery libgpt_static libefivar
+#TARGET_RECOVERY_UPDATER_EXTRA_LIBS := libcommon_recovery libgpt_static libefivar
 
 # By default recovery minui expects RGBA framebuffer
 # also affects UI in Userfastboot
