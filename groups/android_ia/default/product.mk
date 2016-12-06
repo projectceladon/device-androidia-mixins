@@ -110,7 +110,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
 
 #Firmware
-SYMLINKS := $(subst $(FIRMWARES_DIR),$(TARGET_OUT)/lib/firmware,$(filter-out $(FIRMWARES_DIR)/$(FIRMWARE_FILTERS),$(shell find $(FIRMWARES_DIR) -type l)))
+SYMLINKS := $(subst $(FIRMWARES_DIR),$(TARGET_OUT)/etc/firmware,$(filter-out $(FIRMWARES_DIR)/$(FIRMWARE_FILTERS),$(shell find $(FIRMWARES_DIR) -type l)))
 
 $(SYMLINKS): FW_PATH := $(FIRMWARES_DIR)
 $(SYMLINKS):
