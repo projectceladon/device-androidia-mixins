@@ -102,3 +102,5 @@ endif
 ifneq ($(CSE_SPI_BIN),)
 BOARD_FLASHFILES += $(CSE_SPI_BIN):cse_spi.bin
 endif
+
+BOARD_KERNEL_CMDLINE += iTCO_wdt.force_no_reboot=1
