@@ -54,7 +54,7 @@ ifneq ($(BOARD_SFU_UPDATE),)
 endif
 	$(hide) $(ACP) $(BOARD_FIRST_STAGE_LOADER) $(efi_root)/loader.efi
 	$(hide) $(ACP) $(BOARD_FIRST_STAGE_LOADER) $(efi_root)/EFI/BOOT/$(efi_default_name)
-	$(hide) echo "Android-Things=\\EFI\\BOOT\\$(efi_default_name)" > $(efi_root)/manifest.txt
+	$(hide) echo "Android-IA=\\EFI\\BOOT\\$(efi_default_name)" > $(efi_root)/manifest.txt
 	$(hide) echo "Fastboot=\\EFI\\BOOT\\$(efi_default_name);-f">> $(efi_root)/manifest.txt
 	$(hide) (cd $(efi_root) && zip -qry ../$(notdir $@) .)
 
