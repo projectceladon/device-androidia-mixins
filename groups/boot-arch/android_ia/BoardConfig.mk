@@ -22,3 +22,6 @@ KERNELFLINGER_IGNORE_RSCI := true
 KERNELFLINGER_SSL_LIBRARY := boringssl
 # Specify system verity partition
 #PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/by-name/system
+
+# Avoid Watchdog truggered reboot
+BOARD_KERNEL_CMDLINE += iTCO_wdt.force_no_reboot=1
