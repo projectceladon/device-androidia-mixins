@@ -12,14 +12,6 @@ DEVICE_PACKAGE_OVERLAYS += device/intel/android_ia/common/overlay
 
 PRODUCT_PACKAGES += $(THIRD_PARTY_APPS)
 
-FIRMWARES_DIR ?= device/intel/android_ia/firmware
-
-# Include common settings.
-FIRMWARE_FILTERS ?= .git/% %.mk
-
-# Firmware
-$(call inherit-product,device/intel/android_ia/common/firmware.mk)
-
 # Get a list of languages.
 $(call inherit-product,$(SRC_TARGET_DIR)/product/locales_full.mk)
 
@@ -91,17 +83,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-
-#Firmware
-SYMLINKS := $(subst $(FIRMWARES_DIR),$(TARGET_OUT)/etc/firmware,$(filter-out $(FIRMWARES_DIR)/$(FIRMWARE_FILTERS),$(shell find $(FIRMWARES_DIR) -type l)))
-
-$(SYMLINKS): FW_PATH := $(FIRMWARES_DIR)
-$(SYMLINKS):
-	@link_to=`readlink $(subst $(TARGET_OUT)/lib/firmware,$(FW_PATH),$@)`; \
-	echo "Symlink: $@ -> $$link_to"; \
-	mkdir -p $(@D); ln -sf $$link_to $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(SYMLINKS)
 
 # please modify to appropriate value based on tuning
 PRODUCT_PROPERTY_OVERRIDES += \
