@@ -18,6 +18,10 @@
 # libgpt_static and libefivar are needed by libupdater_esp
 #TARGET_RECOVERY_UPDATER_EXTRA_LIBS := libcommon_recovery libgpt_static libefivar
 
+TARGET_NO_RECOVERY ?= true
+
+TARGET_BOARD_PLATFORM := android_ia
+
 # By default recovery minui expects RGBA framebuffer
 # also affects UI in Userfastboot
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
