@@ -1,1 +1,1 @@
-BOARD_SEPOLICY_DIRS += device/intel/sepolicy/debugfs
+BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/debugfs

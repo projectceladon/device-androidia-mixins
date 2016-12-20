@@ -26,4 +26,4 @@ else
 endif
 
 BOARD_SEPOLICY_M4DEFS += module_houdini=true
-BOARD_SEPOLICY_DIRS += device/intel/sepolicy/houdini
+BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/houdini
