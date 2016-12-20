@@ -11,7 +11,7 @@ BOARD_USE_64BIT_KERNEL := false
 KERNEL_MODULES_ROOT_PATH ?= /system/lib/modules
 KERNEL_MODULES_ROOT ?= $(KERNEL_MODULES_ROOT_PATH)
 
-FIRMWARES_DIR ?= device/intel/android_ia/firmware
+FIRMWARES_DIR ?= vendor/linux/firmware
 
 # Include common settings.
 FIRMWARE_FILTERS ?= .git/% %.mk
