@@ -1,6 +1,3 @@
-on init
-    symlink /fstab /fstab.android_ia
-
 on fs
     mount_all /fstab.${ro.hardware}
     mkdir /dev/pstore 0755 root system
