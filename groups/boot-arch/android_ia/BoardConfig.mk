@@ -25,3 +25,7 @@ KERNELFLINGER_SSL_LIBRARY := boringssl
 
 # Avoid Watchdog truggered reboot
 BOARD_KERNEL_CMDLINE += iTCO_wdt.force_no_reboot=1
+
+# Specify file for creating final flashfiles
+BOARD_GPT_INI ?= $(TARGET_DEVICE_DIR)/gpt.ini
+BOARD_GPT_BIN = $(PRODUCT_OUT)/gpt.bin
