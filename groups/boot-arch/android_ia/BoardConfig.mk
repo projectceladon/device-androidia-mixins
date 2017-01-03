@@ -33,3 +33,7 @@ BOARD_GPT_BIN = $(PRODUCT_OUT)/gpt.bin
 BOARD_FLASHFILES += $(PRODUCT_OUT)/system.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/gpt.bin
 BOARD_FLASHFILES += $(PRODUCT_OUT)/boot.img
+BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/installer.efi
+BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/kernelflinger.efi
+BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/startup.nsh
+BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/installer.cmd

@@ -1,0 +1,1 @@
+installer --batch installer.cmd
