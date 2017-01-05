@@ -12,5 +12,5 @@ PRODUCT_PACKAGES += \
     audio.usb.default
 
 PRODUCT_COPY_FILES += \
-    device/intel/android_ia/sound/mixer_paths.xml:system/etc/mixer_paths.xml \
-    device/intel/android_ia/sound/audio_policy.conf:system/etc/audio_policy.conf
+    device/intel/android_ia/common/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
+    device/intel/android_ia/common/audio/audio_policy.conf:system/etc/audio_policy.conf
