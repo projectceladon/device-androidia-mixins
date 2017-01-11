@@ -2,11 +2,6 @@ on init
     chown system system /sys/class/backlight/intel_backlight/brightness
     chown system system /sys/class/backlight/acpi_video0/brightness
     write /sys/fs/selinux/enforce 0
-    chmod 0666 /dev/adf0
-    chmod 0666 /dev/adf-interface0.0
-    chmod 0666 /dev/adf-overlay-engine0.0
-    chmod 0666 /dev/adf-overlay-engine0.1
-    chmod 0666 /dev/adf-overlay-engine0.2
 
 on post-fs
    #setprop debug.sf.nobootanimation 1
