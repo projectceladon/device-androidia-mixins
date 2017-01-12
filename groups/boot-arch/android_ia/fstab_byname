@@ -1,0 +1,23 @@
+# Android fstab file.
+# <src>                   <mnt_point> <type>  <mnt_flags and options>  <fs_mgr_flags>
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+/devices/*/usb*/*		auto	auto	defaults		voldmanaged=usb:auto,encryptable=userdata
+/devices/*/*sdmmc*/*		auto	auto	defaults		voldmanaged=sdcard1:auto,encryptable=userdata
+/devices/*/80860F14:01/mmc_*	auto	auto	defaults		voldmanaged=sdcard1:auto,encryptable=userdata
+
+/dev/block/by-name/android_system       /system         ext4    ro                                                 wait,verify=/dev/block/by-name/android_metadata
+/dev/block/by-name/android_cache        /cache          ext4    noatime,nosuid,nodev,errors=panic                           wait,check
+/dev/block/by-name/android_data         /data           ext4    noatime,nosuid,nodev,discard,noauto_da_alloc,errors=panic   wait,check,form
+attable,forceencrypt=/dev/block/by-name/android_metadata
+/dev/block/by-name/android_boot         /boot           emmc    defaults                                                    defaults
+/dev/block/by-name/android_recovery     /recovery       emmc    defaults                                                    defaults
+/dev/block/by-name/android_misc         /misc           emmc    defaults                                                    defaults
+/dev/block/by-name/android_bootloader   /bootloader     emmc    defaults                                                    recoveryonly
+/dev/block/by-name/android_bootloader2  /bootloader2    emmc    defaults                                                    recoveryonly
+/dev/block/by-name/android_persistent   /persistent     emmc    defaults                                                    defaults
+/dev/block/by-name/android_metadata     /metadata       emmc    defaults                                                    defaults
+/dev/block/by-name/android_bldr_utils   /bldr_utils     emmc    defaults                                                    recoveryonly
+
+# ------------------ END MIX-IN DEFINITIONS ------------------
