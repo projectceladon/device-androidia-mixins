@@ -65,24 +65,13 @@ $(KERNEL_MODULES_INSTALL): $(PRODUCT_OUT)/kernel $(ALL_EXTRA_MODULES)
 	$(hide) rm -f $(TARGET_OUT)/lib/modules/*/{build,source}
 {{#x86_64}}
 	$(hide) rm -rf $(TARGET_OUT)/lib64/modules
-	$(hide) mkdir $(TARGET_OUT)/lib64/modules
-{{/x86_64}}
-	$(hide) cd $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/
-	$(hide) for f in `find . -name '*.ko' -or -name 'modules.*'`; do \
-{{#x86_64}}
-		cp $$f $(TARGET_OUT)/lib64/modules/$$(basename $$f) -v || exit 1; \
+	$(hide) cp -rf $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/ $(TARGET_OUT)/lib64/modules
+	$(hide) ln -s /lib64/modules/$$(basename $$f) $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/$$f || exit 1;
 {{/x86_64}}
 {{^x86_64}}
-		cp $$f $(TARGET_OUT)/lib/modules/$$(basename $$f) -v || exit 1; \
+		$(hide) cp -rf $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/ $(TARGET_OUT)/lib/modules
+		$(hide) ln -s /lib/modules/$$(basename $$f) $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/$$f || exit 1;
 {{/x86_64}}
-		mkdir -p $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/$$(dirname $$f) ; \
-{{#x86_64}}
-		ln -s /lib64/modules/$$(basename $$f) $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/$$f || exit 1; \
-{{/x86_64}}
-{{^x86_64}}
-		ln -s /lib/modules/$$(basename $$f) $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/$$f || exit 1; \
-{{/x86_64}}
-		done
 	$(hide) touch $@
 
 # Makes sure any built modules will be included in the system image build.
