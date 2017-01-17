@@ -1,5 +1,5 @@
-{{#x86_64}}
 on init
+{{#x86_64}}
     symlink /system/lib64/modules /system/lib/modules
 {{/x86_64}}
     #create /etc & /lib folder if they dont exist

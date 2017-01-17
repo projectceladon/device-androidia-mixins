@@ -1,5 +1,4 @@
 on boot
-    insmod ${ro.boot.moduleslocation}/rfkill-gpio.ko
     start rfkill-init
 
 service rfkill-init /system/bin/rfkill-init.sh{{{force_disable}}}

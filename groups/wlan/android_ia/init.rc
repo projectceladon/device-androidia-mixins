@@ -13,11 +13,6 @@ on post-fs-data
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
     chown wifi wifi /data/misc/wifi
     chown wifi wifi /data/misc/wifi/wpa_supplicant.conf
-    insmod ${ro.boot.moduleslocation}/compat.ko
-    insmod ${ro.boot.moduleslocation}/cfg80211.ko
-    insmod ${ro.boot.moduleslocation}/mac80211.ko
-    insmod ${ro.boot.moduleslocation}/iwlwifi.ko d0i3_debug=1
-    insmod ${ro.boot.moduleslocation}/iwlmvm.ko always_on=1
     setprop wlan.interface "wlan0"
     setprop wlan.driver.status "ok"
 
