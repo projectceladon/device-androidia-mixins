@@ -61,7 +61,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version.xml
 
 PRODUCT_PACKAGES += \
-    vulkan.android_ia
+    vulkan.android_ia \
+    vulkan.mesa_intel
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.vulkan=android_ia
