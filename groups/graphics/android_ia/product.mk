@@ -11,14 +11,25 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/intel/android_ia/common/graphics/drirc:system/etc/drirc
 
+{{#drmhwc}}
+# DRM HWComposer
+PRODUCT_PACKAGES += \
+    hwcomposer.drm
 
-# HWComposer
+PRODUCT_PROPERTY_OVERRIDES += \
+   hwc.drm.use_overlay_planes=1 \
+   ro.hardware.hwcomposer=drm
+{{/drmhwc}}
+
+{{^drmhwc}}
+# HWComposer IA
 PRODUCT_PACKAGES += \
     hwcomposer.android_ia
 
 PRODUCT_PROPERTY_OVERRIDES += \
    hwc.drm.use_overlay_planes=1 \
    ro.hardware.hwcomposer=android_ia
+{{/drmhwc}}
 
 #Gralloc
 PRODUCT_PROPERTY_OVERRIDES += \
