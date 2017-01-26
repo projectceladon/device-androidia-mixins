@@ -1,0 +1,16 @@
+on boot
+    setprop wifi.interface wlan0
+
+service dhcpcd_wlan0 /system/bin/dhcpcd -dABKL
+    group dhcp
+    disabled
+    oneshot
+
+service wpa_supplicant /system/bin/wpa_supplicant \
+        -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
+        -I/system/etc/wifi/wpa_supplicant_overlay.conf \
+        -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
