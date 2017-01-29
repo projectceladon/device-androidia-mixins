@@ -157,7 +157,10 @@ PRODUCT_PACKAGES += \
     sensors.hsb \
     sftp \
     ssh \
-    sshd
+    sshd \
+    local_time.default.so \
+    vibrator.default.so \
+    keystore.default.so
 
 # Sensors
 PRODUCT_PACKAGES += \
