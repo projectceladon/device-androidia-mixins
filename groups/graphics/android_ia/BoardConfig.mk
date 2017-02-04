@@ -35,3 +35,11 @@ BOARD_USES_IA_HWCOMPOSER := false
 BOARD_USES_DRM_HWCOMPOSER := false
 BOARD_USES_IA_HWCOMPOSER := true
 {{/drmhwc}}
+
+{{#minigbm}}
+BOARD_USES_MINIGBM := true
+{{/minigbm}}
+
+{{^minigbm}}
+BOARD_USES_MINIGBM := false
+{{/minigbm}}

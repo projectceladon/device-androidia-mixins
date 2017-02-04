@@ -31,12 +31,23 @@ PRODUCT_PROPERTY_OVERRIDES += \
    ro.hardware.hwcomposer=android_ia
 {{/drmhwc}}
 
+{{#minigbm}}
+# Mini gbm
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.gralloc=android_ia
+
+PRODUCT_PACKAGES += \
+    gralloc.android_ia
+{{/minigbm}}
+
+{{^minigbm}}
 #Gralloc
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.gralloc=drm
 
 PRODUCT_PACKAGES += \
     gralloc.drm
+{{/minigbm}}
 
 {{^gen9+}}
 # GLES version. We cannot enable Android
