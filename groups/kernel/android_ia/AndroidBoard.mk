@@ -83,11 +83,11 @@ installclean: FILES += $(KERNEL_OUT) $(PRODUCT_OUT)/kernel
 kernel: $(PRODUCT_OUT)/kernel
 
 #Firmware
-SYMLINKS := $(subst $(FIRMWARES_DIR),$(TARGET_OUT)/etc/firmware,$(filter-out $(FIRMWARES_DIR)/$(FIRMWARE_FILTERS),$(shell find $(FIRMWARES_DIR) -type l)))
+SYMLINKS := $(subst $(FIRMWARES_DIR),$(PRODUCT_OUT)/system/vendor/firmware,$(filter-out $(FIRMWARES_DIR)/$(FIRMWARE_FILTERS),$(shell find $(FIRMWARES_DIR) -type l)))
 
 $(SYMLINKS): FW_PATH := $(FIRMWARES_DIR)
 $(SYMLINKS):
-	@link_to=`readlink $(subst $(TARGET_OUT)/etc/firmware,$(FW_PATH),$@)`; \
+	@link_to=`readlink $(subst $(PRODUCT_OUT)/system/vendor/firmware,$(FW_PATH),$@)`; \
 	echo "Symlink: $@ -> $$link_to"; \
 	mkdir -p $(@D); ln -sf $$link_to $@
 

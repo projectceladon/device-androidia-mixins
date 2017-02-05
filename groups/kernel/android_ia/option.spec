@@ -5,5 +5,5 @@ relative_sleepstates = false
 memory_hole = false
 x86_64 = true
 64bit_apps = true
-firmware_path = /system/etc/firmware
+firmware_path = /vendor/firmware
 kernel_config_dir = device/intel/android_ia/kernel_config

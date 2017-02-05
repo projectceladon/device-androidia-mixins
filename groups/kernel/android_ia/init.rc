@@ -6,9 +6,9 @@ on init
     mkdir /etc
     mkdir /lib
     #Try to make both i915 and Android happy.
-    symlink /system/etc/firmware /lib/firmware
-    symlink /system/etc/firmware /etc/firmware
-    symlink /system/etc/firmware /system/lib/firmware
+    symlink /vendor/firmware /lib/firmware
+    symlink /vendor/firmware /etc/firmware
+    symlink /vendor/firmware /system/lib/firmware
 
 {{#interactive_governor}}
 on boot
