@@ -4,16 +4,9 @@ endif
 
 TARGET_KERNEL_SRC ?= kernel/android_ia
 
-{{#x86_64}}
 TARGET_KERNEL_ARCH := x86_64
 TARGET_KERNEL_CONFIG ?= kernel_64_defconfig
-ADDITIONAL_DEFAULT_PROPERTIES += ro.boot.moduleslocation=/system/lib64/modules
-{{/x86_64}}
-
-{{^x86_64}}
-ADDITIONAL_DEFAULT_PROPERTIES += ro.boot.moduleslocation=/system/lib/modules
-$(error 32bit Kernel builds are not supported.)
-{{/x86_64}}
+ADDITIONAL_DEFAULT_PROPERTIES += ro.boot.moduleslocation=/vendor/lib/modules
 
 KERNEL_CONFIG_DIR := {{{kernel_config_dir}}}
 
@@ -63,15 +56,9 @@ $(KERNEL_MODULES_INSTALL): $(PRODUCT_OUT)/kernel $(ALL_EXTRA_MODULES)
 		$(subst +,,$(subst $(hide),,$(build_kernel))) M=$(abspath $(TARGET_OUT_INTERMEDIATES))/$${kmod}.kmodule modules_install ; \
 	done
 	$(hide) rm -f $(TARGET_OUT)/lib/modules/*/{build,source}
-{{#x86_64}}
-	$(hide) rm -rf $(TARGET_OUT)/lib64/modules
-	$(hide) cp -rf $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/ $(TARGET_OUT)/lib64/modules
-	$(hide) ln -s /lib64/modules/$$(basename $$f) $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/$$f || exit 1;
-{{/x86_64}}
-{{^x86_64}}
-		$(hide) cp -rf $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/ $(TARGET_OUT)/lib/modules
-		$(hide) ln -s /lib/modules/$$(basename $$f) $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/$$f || exit 1;
-{{/x86_64}}
+	$(hide) rm -rf $(PRODUCT_OUT)/system/vendor/lib/modules
+	$(hide) mkdir -p $(PRODUCT_OUT)/system/vendor/lib/
+	$(hide) cp -rf $(TARGET_OUT)/lib/modules/$(KERNELRELEASE)/ $(PRODUCT_OUT)/system/vendor/lib/modules
 	$(hide) touch $@
 
 # Makes sure any built modules will be included in the system image build.
@@ -81,14 +68,3 @@ installclean: FILES += $(KERNEL_OUT) $(PRODUCT_OUT)/kernel
 
 .PHONY: kernel
 kernel: $(PRODUCT_OUT)/kernel
-
-#Firmware
-SYMLINKS := $(subst $(FIRMWARES_DIR),$(PRODUCT_OUT)/system/vendor/firmware,$(filter-out $(FIRMWARES_DIR)/$(FIRMWARE_FILTERS),$(shell find $(FIRMWARES_DIR) -type l)))
-
-$(SYMLINKS): FW_PATH := $(FIRMWARES_DIR)
-$(SYMLINKS):
-	@link_to=`readlink $(subst $(PRODUCT_OUT)/system/vendor/firmware,$(FW_PATH),$@)`; \
-	echo "Symlink: $@ -> $$link_to"; \
-	mkdir -p $(@D); ln -sf $$link_to $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(SYMLINKS)
