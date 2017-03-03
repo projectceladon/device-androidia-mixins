@@ -8,7 +8,7 @@ TARGET_KERNEL_ARCH := x86
 BOARD_USE_64BIT_KERNEL := false
 {{/x86_64}}
 
-KERNEL_MODULES_ROOT_PATH ?= /system/lib/modules
+KERNEL_MODULES_ROOT_PATH ?= /vendor/lib/modules
 KERNEL_MODULES_ROOT ?= $(KERNEL_MODULES_ROOT_PATH)
 
 FIRMWARES_DIR ?= vendor/linux/firmware
