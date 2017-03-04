@@ -6,8 +6,6 @@ INTEL_VA := true
 BOARD_GRAPHIC_IS_GEN := true
 BOARD_GPU_DRIVERS := i965
 BOARD_USE_MESA := true
-GRALLOC_DRM := true
-BOARD_USES_IA_PLANNER := true
 
 # System's VSYNC phase offsets in nanoseconds
 VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
@@ -29,6 +27,7 @@ TARGET_USES_HWC2 := false
 {{#drmhwc}}
 BOARD_USES_DRM_HWCOMPOSER := true
 BOARD_USES_IA_HWCOMPOSER := false
+BOARD_USES_IA_PLANNER := true
 {{/drmhwc}}
 
 {{^drmhwc}}
