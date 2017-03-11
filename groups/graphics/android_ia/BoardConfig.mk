@@ -37,8 +37,10 @@ BOARD_USES_IA_HWCOMPOSER := true
 
 {{#minigbm}}
 BOARD_USES_MINIGBM := true
+BOARD_ENABLE_EXPLICIT_SYNC := true
 {{/minigbm}}
 
 {{^minigbm}}
 BOARD_USES_MINIGBM := false
+BOARD_ENABLE_EXPLICIT_SYNC := false
 {{/minigbm}}
