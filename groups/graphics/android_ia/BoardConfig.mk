@@ -14,15 +14,8 @@ SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
 BOARD_GPU_DRIVERS ?= i965 swrast
 ifneq ($(strip $(BOARD_GPU_DRIVERS)),)
 TARGET_HARDWARE_3D := true
-endif
-
-{{#hwc2}}
 TARGET_USES_HWC2 := true
-{{/hwc2}}
-
-{{^hwc2}}
-TARGET_USES_HWC2 := false
-{{/hwc2}}
+endif
 
 {{#drmhwc}}
 BOARD_USES_DRM_HWCOMPOSER := true
