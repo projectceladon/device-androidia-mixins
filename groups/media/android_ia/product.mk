@@ -1,3 +1,11 @@
+# libva, vaapi
+PRODUCT_PACKAGES += \
+    libva \
+    libva-android \
+    libva-egl \
+    libva-tpi \
+    i965_drv_video
+
 # Audio/video codec support.
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
