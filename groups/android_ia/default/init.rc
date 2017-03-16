@@ -63,6 +63,9 @@ on boot
     chmod 0660 /sys/devices/system/cpu/intel_pstate/max_perf_pct
     write /sys/kernel/debug/pstate_snb/setpoint 75
 
+    # adb over ethernet
+    setprop service.adb.tcp.port 5555
+
 service watchdogd /sbin/watchdogd 10 30
     user root
     class core
