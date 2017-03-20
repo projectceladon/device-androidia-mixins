@@ -1,2 +1,2 @@
-droid: android_ia-efi
-	-$(hide) $(ACP) $(ANDROID_IA_IMAGE) $(DIST_DIR)
+droid: flashfiles
+	-$(hide) $(ACP) $(out_flashfiles) $(DIST_DIR)
