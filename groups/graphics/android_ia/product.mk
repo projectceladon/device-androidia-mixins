@@ -84,7 +84,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     vulkan.android_ia \
-    vulkan.mesa_intel
+    libvulkan_intel
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.vulkan=android_ia
