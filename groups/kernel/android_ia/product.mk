@@ -10,6 +10,7 @@ BOARD_USE_64BIT_KERNEL := false
 
 KERNEL_MODULES_ROOT_PATH ?= /vendor/lib/modules
 KERNEL_MODULES_ROOT ?= $(KERNEL_MODULES_ROOT_PATH)
+ADDITIONAL_DEFAULT_PROPERTIES += ro.boot.moduleslocation=/vendor/lib/modules
 
 FIRMWARES_DIR ?= vendor/linux/firmware
 

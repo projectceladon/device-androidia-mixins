@@ -6,7 +6,6 @@ TARGET_KERNEL_SRC ?= kernel/android_ia
 
 TARGET_KERNEL_ARCH := x86_64
 TARGET_KERNEL_CONFIG ?= kernel_64_defconfig
-ADDITIONAL_DEFAULT_PROPERTIES += ro.boot.moduleslocation=/vendor/lib/modules
 
 KERNEL_CONFIG_DIR := {{{kernel_config_dir}}}
 
