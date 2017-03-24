@@ -1,0 +1,5 @@
+service oct_daemon /system/bin/oct_daemon
+	class late_start
+	user system
+	group radio
+	oneshot

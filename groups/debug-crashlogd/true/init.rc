@@ -1,0 +1,9 @@
+import /init.crashlogd.rc
+{{#ramdump}}
+
+on property:ro.debuggable=0 && property:ro.boot.bootreason=warm
+    exec -- /system/bin/reboot
+
+on property:ro.debuggable=0 && property:ro.boot.bootreason=watchdog
+    exec -- /system/bin/reboot
+{{/ramdump}}

@@ -1,0 +1,2 @@
+on post-fs
+    insmod ${ro.boot.moduleslocation}/lm_dump.ko
