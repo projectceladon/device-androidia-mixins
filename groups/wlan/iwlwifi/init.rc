@@ -35,8 +35,3 @@ service iprenew_p2p /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service load_iwlwifi /system/bin/load_iwlwifi.sh
-    class main
-    user root
-    group system wifi
-    oneshot
