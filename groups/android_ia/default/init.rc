@@ -82,3 +82,13 @@ service bugreport /system/bin/dumpstate -d -p -B \
     disabled
     oneshot
     keycodes 114 115 116
+
+on init
+   # Load persistent dm-verity state and detect if a restart was
+   # triggered after dm-verity detected a corrupted block
+   verity_load_state
+
+on fs
+   # Update dm-verity persistent state and set partition.*.verified
+   # properties
+   verity_update_state
