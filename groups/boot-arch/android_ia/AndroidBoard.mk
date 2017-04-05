@@ -2,7 +2,11 @@ define generate_flashfiles
 zip -qj $(1) $(2)
 endef
 
+ifneq ($(BUILD_NUMBER),)
+out_flashfiles := $(PRODUCT_OUT)/$(TARGET_PRODUCT)-flashfiles-$(BUILD_NUMBER).zip
+else
 out_flashfiles := $(PRODUCT_OUT)/$(TARGET_PRODUCT).flashfiles.$(TARGET_BUILD_VARIANT).$(USER).zip
+endif
 
 $(PRODUCT_OUT)/efi/installer.cmd:
 	$(ACP) $(TARGET_DEVICE_DIR)/$(@F) $@
