@@ -1,0 +1,1 @@
+/dev/block/by-name/android_factory      /factory        ext4    rw                                         wait

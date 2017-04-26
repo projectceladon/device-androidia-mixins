@@ -10,6 +10,7 @@ flash vendor vendor.img
 flash boot boot.img
 flash recovery recovery.img
 flash system system.img
+flash factory factory.img
 flash bootloader bootloader
 flashing lock
 continue
