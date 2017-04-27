@@ -17,4 +17,3 @@
 /dev/block/mmcblk1p2	/bootloader2    emmc    defaults                                                    recoveryonly
 /dev/block/mmcblk1p9	/persistent     emmc    defaults                                                    defaults
 /dev/block/mmcblk1p6	/metadata       emmc    defaults                                                    defaults
-# ------------------ END MIX-IN DEFINITIONS ------------------
