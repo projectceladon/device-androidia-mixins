@@ -19,5 +19,3 @@ attable,forceencrypt=/dev/block/by-name/android_metadata
 /dev/block/by-name/android_persistent   /persistent     emmc    defaults                                                    defaults
 /dev/block/by-name/android_metadata     /metadata       emmc    defaults                                                    defaults
 /dev/block/by-name/android_bldr_utils   /bldr_utils     emmc    defaults                                                    recoveryonly
-
-# ------------------ END MIX-IN DEFINITIONS ------------------
