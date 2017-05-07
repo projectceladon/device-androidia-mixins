@@ -1,5 +1,9 @@
+src_loader_file := $(PRODUCT_OUT)/efi/kernelflinger.efi
+tgt_loader_file := $(PRODUCT_OUT)/loader.efi
+
 define generate_flashfiles
-zip -qj $(1) $(2)
+$(shell cp $(src_loader_file) $(tgt_loader_file))
+zip -qj $(1) $(2) $(tgt_loader_file)
 endef
 
 ifneq ($(BUILD_NUMBER),)
