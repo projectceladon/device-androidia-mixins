@@ -56,3 +56,18 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/config.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/vendor.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/factory.img
 BOARD_FLASHFILES += $(TARGET_DEVICE_DIR)/flash.json
+
+# -- OTA RELATED DEFINES --
+# tell build system where to get the recovery.fstab.
+TARGET_RECOVERY_FSTAB ?= $(TARGET_DEVICE_DIR)/fstab 
+# Used by ota_from_target_files to add platform-specific directives
+# to the OTA updater scripts
+TARGET_RELEASETOOLS_EXTENSIONS ?= device/intel/common/recovery
+# Adds edify commands swap_entries and copy_partition for robust
+# update of the EFI system partition
+TARGET_RECOVERY_UPDATER_LIBS := libupdater_esp
+# Extra libraries needed to be rolled into recovery updater
+# libgpt_static and libefivar are needed by libupdater_esp
+TARGET_RECOVERY_UPDATER_EXTRA_LIBS := libcommon_recovery libgpt_static libefivar
+# By default recovery minui expects RGBA framebuffer
+TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
