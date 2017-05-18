@@ -41,3 +41,66 @@ on property:sys.boot_completed=1
 	write /sys/devices/system/cpu/cpufreq/interactive/boost 0
 	write /sys/devices/system/cpu/cpufreq/interactive/irq_load_threshold 2
 {{/boot_boost}}
+
+{{#disable_cpuidle_on_boot}}
+on early-init
+	write /sys/devices/system/cpu/cpu0/cpuidle/state1/disable 1
+	write /sys/devices/system/cpu/cpu0/cpuidle/state2/disable 1
+	write /sys/devices/system/cpu/cpu0/cpuidle/state3/disable 1
+	write /sys/devices/system/cpu/cpu0/cpuidle/state4/disable 1
+	write /sys/devices/system/cpu/cpu0/cpuidle/state5/disable 1
+	write /sys/devices/system/cpu/cpu0/cpuidle/state6/disable 1
+	write /sys/devices/system/cpu/cpu0/cpuidle/state7/disable 1
+	write /sys/devices/system/cpu/cpu1/cpuidle/state1/disable 1
+	write /sys/devices/system/cpu/cpu1/cpuidle/state2/disable 1
+	write /sys/devices/system/cpu/cpu1/cpuidle/state3/disable 1
+	write /sys/devices/system/cpu/cpu1/cpuidle/state4/disable 1
+	write /sys/devices/system/cpu/cpu1/cpuidle/state5/disable 1
+	write /sys/devices/system/cpu/cpu1/cpuidle/state6/disable 1
+	write /sys/devices/system/cpu/cpu1/cpuidle/state7/disable 1
+	write /sys/devices/system/cpu/cpu2/cpuidle/state1/disable 1
+	write /sys/devices/system/cpu/cpu2/cpuidle/state2/disable 1
+	write /sys/devices/system/cpu/cpu2/cpuidle/state3/disable 1
+	write /sys/devices/system/cpu/cpu2/cpuidle/state4/disable 1
+	write /sys/devices/system/cpu/cpu2/cpuidle/state5/disable 1
+	write /sys/devices/system/cpu/cpu2/cpuidle/state6/disable 1
+	write /sys/devices/system/cpu/cpu2/cpuidle/state7/disable 1
+	write /sys/devices/system/cpu/cpu3/cpuidle/state1/disable 1
+	write /sys/devices/system/cpu/cpu3/cpuidle/state2/disable 1
+	write /sys/devices/system/cpu/cpu3/cpuidle/state3/disable 1
+	write /sys/devices/system/cpu/cpu3/cpuidle/state4/disable 1
+	write /sys/devices/system/cpu/cpu3/cpuidle/state5/disable 1
+	write /sys/devices/system/cpu/cpu3/cpuidle/state6/disable 1
+	write /sys/devices/system/cpu/cpu3/cpuidle/state7/disable 1
+
+on property:sys.boot_completed=1
+	write /sys/devices/system/cpu/cpu0/cpuidle/state1/disable 0
+	write /sys/devices/system/cpu/cpu0/cpuidle/state2/disable 0
+	write /sys/devices/system/cpu/cpu0/cpuidle/state3/disable 0
+	write /sys/devices/system/cpu/cpu0/cpuidle/state4/disable 0
+	write /sys/devices/system/cpu/cpu0/cpuidle/state5/disable 0
+	write /sys/devices/system/cpu/cpu0/cpuidle/state6/disable 0
+	write /sys/devices/system/cpu/cpu0/cpuidle/state7/disable 0
+	write /sys/devices/system/cpu/cpu1/cpuidle/state1/disable 0
+	write /sys/devices/system/cpu/cpu1/cpuidle/state2/disable 0
+	write /sys/devices/system/cpu/cpu1/cpuidle/state3/disable 0
+	write /sys/devices/system/cpu/cpu1/cpuidle/state4/disable 0
+	write /sys/devices/system/cpu/cpu1/cpuidle/state5/disable 0
+	write /sys/devices/system/cpu/cpu1/cpuidle/state6/disable 0
+	write /sys/devices/system/cpu/cpu1/cpuidle/state7/disable 0
+	write /sys/devices/system/cpu/cpu2/cpuidle/state1/disable 0
+	write /sys/devices/system/cpu/cpu2/cpuidle/state2/disable 0
+	write /sys/devices/system/cpu/cpu2/cpuidle/state3/disable 0
+	write /sys/devices/system/cpu/cpu2/cpuidle/state4/disable 0
+	write /sys/devices/system/cpu/cpu2/cpuidle/state5/disable 0
+	write /sys/devices/system/cpu/cpu2/cpuidle/state6/disable 0
+	write /sys/devices/system/cpu/cpu2/cpuidle/state7/disable 0
+	write /sys/devices/system/cpu/cpu3/cpuidle/state1/disable 0
+	write /sys/devices/system/cpu/cpu3/cpuidle/state2/disable 0
+	write /sys/devices/system/cpu/cpu3/cpuidle/state3/disable 0
+	write /sys/devices/system/cpu/cpu3/cpuidle/state4/disable 0
+	write /sys/devices/system/cpu/cpu3/cpuidle/state5/disable 0
+	write /sys/devices/system/cpu/cpu3/cpuidle/state6/disable 0
+	write /sys/devices/system/cpu/cpu3/cpuidle/state7/disable 0
+
+{{/disable_cpuidle_on_boot}}
