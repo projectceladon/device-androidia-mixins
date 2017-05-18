@@ -7,3 +7,4 @@ x86_64 = true
 64bit_apps = true
 firmware_path = /vendor/firmware
 kernel_config_dir = device/intel/android_ia/kernel_config
+disable_cpuidle_on_boot = false
