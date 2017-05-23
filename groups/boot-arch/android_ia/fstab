@@ -9,7 +9,7 @@
 
 /dev/block/mmcblk1p7	/system         ext4    ro															wait
 /dev/block/mmcblk1p8	/cache          ext4    noatime,nosuid,nodev,errors=panic                           wait,check
-/dev/block/mmcblk1p12	/data           ext4    noatime,nosuid,nodev,discard,noauto_da_alloc,errors=panic   wait,check,formattable,forceencrypt=/dev/block/mmcblk1p6
+/dev/block/mmcblk1p13	/data           ext4    noatime,nosuid,nodev,discard,noauto_da_alloc,errors=panic   wait,check,formattable,forceencrypt=/dev/block/mmcblk1p6
 /dev/block/mmcblk1p3	/boot           emmc    defaults                                                    defaults
 /dev/block/mmcblk1p4	/recovery       emmc    defaults                                                    defaults
 /dev/block/mmcblk1p5	/misc           emmc    defaults                                                    defaults
