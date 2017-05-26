@@ -140,6 +140,8 @@ $(call dist-for-goals,droidcore,$(fastboot_usb_bin):$(TARGET_PRODUCT)-fastboot-u
 $(call dist-for-goals,droidcore,device/intel/build/testkeys/testkeys_lockdown.txt:test-keys_efi_lockdown.txt)
 $(call dist-for-goals,droidcore,device/intel/build/testkeys/unlock.txt:efi_unlock.txt)
 
+{{#bootloader_policy}}
+{{#blpolicy_use_efi_var}}
 ifeq ($(TARGET_BOOTLOADER_POLICY),$(filter $(TARGET_BOOTLOADER_POLICY),static external))
 # The bootloader policy is not built but is provided statically in the
 # repository or in $(PRODUCT_OUT)/.
@@ -153,7 +155,10 @@ TARGET_ODM_KEY_PAIR := device/intel/build/testkeys/odm
 TARGET_OAK_KEY_PAIR := device/intel/build/testkeys/OAK
 
 $(BOOTLOADER_POLICY_OEMVARS): sign-efi-sig-list
-        $(GEN_BLPOLICY_OEMVARS) -K $(TARGET_ODM_KEY_PAIR) \
+	$(GEN_BLPOLICY_OEMVARS) -K $(TARGET_ODM_KEY_PAIR) \
 		-O $(TARGET_OAK_KEY_PAIR).x509.pem -B $(TARGET_BOOTLOADER_POLICY) \
 		$(BOOTLOADER_POLICY_OEMVARS)
 endif
+{{/blpolicy_use_efi_var}}
+{{/bootloader_policy}}
+
