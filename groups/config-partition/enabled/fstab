@@ -1,1 +1,1 @@
-/dev/block/mmcblk1p11	/config         ext4    noatime,nosuid,nodev,errors=panic          wait,check
+/dev/block/mmcblk1p11	/oem_config         ext4    noatime,nosuid,nodev,errors=panic          wait,check
