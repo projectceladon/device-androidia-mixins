@@ -39,6 +39,9 @@ KERNELFLINGER_SSL_LIBRARY := openssl
 # Avoid Watchdog truggered reboot
 BOARD_KERNEL_CMDLINE += iTCO_wdt.force_no_reboot=1
 
+# Show the "OEM unlocking" option in Android "Developer options"
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/android_persistent
+
 # Specify file for creating final flashfiles
 BOARD_GPT_INI ?= $(TARGET_DEVICE_DIR)/gpt.ini
 BOARD_GPT_BIN = $(PRODUCT_OUT)/gpt.bin
