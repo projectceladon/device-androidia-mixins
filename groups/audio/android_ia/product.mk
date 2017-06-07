@@ -4,14 +4,6 @@ PRODUCT_PACKAGES_DEBUG += \
          tinyplay \
          tinycap
 
-ifneq ($(BOARD_USES_GENERIC_AUDIO), true)
-PRODUCT_PACKAGES += \
-    audio.primary.android_ia
-else
-PRODUCT_PACKAGES += \
-    audio.primary.default
-endif
-
 # Extended Audio HALs
 PRODUCT_PACKAGES += \
     audio.r_submix.default \
