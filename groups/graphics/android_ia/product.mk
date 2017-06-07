@@ -11,6 +11,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/intel/android_ia/common/graphics/drirc:system/etc/drirc
 
+# Memtrack HAL
+PRODUCT_PACKAGES += \
+    memtrack.android_ia
+
 {{#drmhwc}}
 # DRM HWComposer
 PRODUCT_PACKAGES += \
