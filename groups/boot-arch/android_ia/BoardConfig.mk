@@ -134,4 +134,9 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.oem_unlock_supported=1
 {{/bootloader_policy}}
 
+{{#assume_bios_secure_boot}}
+# Kernelfligner will assume the BIOS support secure boot. Not check the EFI variable SecureBoot
+# It is useful when the BIOS does not support secure boot.
+KERNELFLINGER_ASSUME_BIOS_SECURE_BOOT := true
+{{/assume_bios_secure_boot}}
 
