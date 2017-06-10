@@ -39,3 +39,11 @@ BOARD_USES_MINIGBM := false
 BOARD_ENABLE_EXPLICIT_SYNC := false
 INTEL_DRM_GRALLOC := external/drm_gralloc/
 {{/minigbm}}
+
+{{#gralloc1}}
+BOARD_USES_GRALLOC1 := true
+{{/gralloc1}}
+
+{{^gralloc1}}
+BOARD_USES_GRALLOC1 := false
+{{/gralloc1}}
