@@ -1,4 +1,4 @@
-on fs
+on early-init
     mount_all /fstab.${ro.hardware}
 
 on init
