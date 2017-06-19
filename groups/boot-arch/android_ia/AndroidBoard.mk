@@ -20,7 +20,14 @@ $(PRODUCT_OUT)/efi/startup.nsh:
 	$(ACP) $(TARGET_DEVICE_DIR)/$(@F) $@
 	sed -i '/#/d' $@
 
-$(out_flashfiles): $(BOARD_FLASHFILES) | $(ACP)
+$(out_flashfiles): $(BOARD_FLASHFILES) | $(ACP) | otapackage
+	$(hide) if [[ -e $(DIST_DIR)/system.img ]] ; then \
+	echo "copying system.img and vendor.img from out/dist first" ; \
+	mv $(PRODUCT_OUT)/system.img $(PRODUCT_OUT)/system.org.img ; \
+	mv $(PRODUCT_OUT)/vendor.img $(PRODUCT_OUT)/vendor.org.img ; \
+	$(ACP) $(DIST_DIR)/system.img $(PRODUCT_OUT)/system.img ; \
+	$(ACP) $(DIST_DIR)/vendor.img $(PRODUCT_OUT)/vendor.img ; \
+	echo "copying done" ; fi;
 	$(call generate_flashfiles,$@, $^)
 
 .PHONY: flashfiles
