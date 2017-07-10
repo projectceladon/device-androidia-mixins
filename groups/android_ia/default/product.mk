@@ -115,3 +115,26 @@ PRODUCT_PACKAGES += \
 # USB
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
+
+# Keymaster HAL
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service
+
+# Power HAL
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.0-impl \
+    android.hardware.power@1.0-service
+
+# DumpState HAL
+PRODUCT_PACKAGES += \
+    android.hardware.dumpstate@1.0-impl \
+    android.hardware.dumpstate@1.0-service
+
+# Configstore HAL
+PRODUCT_PACKAGES += \
+    android.hardware.configstore@1.0-impl
+
+# Vendor Interface Manifest
+PRODUCT_COPY_FILES += \
+    device/intel/android_ia/manifest.xml:vendor/manifest.xml

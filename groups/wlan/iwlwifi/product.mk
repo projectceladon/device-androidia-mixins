@@ -13,3 +13,7 @@ PRODUCT_COPY_FILES += \
 # Wifi configuration
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WLAN_DEVICE := iwlwifi
+
+# Wifi HAL.
+PRODUCT_PACKAGES += \
+  android.hardware.wifi@1.0-service
