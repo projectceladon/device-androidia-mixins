@@ -57,7 +57,7 @@ PRODUCT_PACKAGES += \
 # GLES version. We cannot enable Android
 # 3.2 support for Gen9+ devices.
 PRODUCT_PROPERTY_OVERRIDES += \
-   ro.opengles.version=196609
+    ro.opengles.version=196609
 
 {{#vulkan}}
 PRODUCT_COPY_FILES += \
@@ -73,7 +73,7 @@ PRODUCT_COPY_FILES += \
 
 # GLES version
 PRODUCT_PROPERTY_OVERRIDES += \
-   ro.opengles.version=196609
+   ro.opengles.version=196610
 
 {{#vulkan}}
 PRODUCT_COPY_FILES += \
