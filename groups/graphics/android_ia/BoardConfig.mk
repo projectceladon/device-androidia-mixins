@@ -6,6 +6,7 @@ INTEL_VA := true
 BOARD_GRAPHIC_IS_GEN := true
 BOARD_GPU_DRIVERS := i965
 BOARD_USE_MESA := true
+LIBDRM_VER := intel
 
 # System's VSYNC phase offsets in nanoseconds
 VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
