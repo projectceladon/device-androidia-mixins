@@ -46,6 +46,10 @@ on boot
 on property:sys.usb.config=none && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/os_desc/use 0
     setprop sys.usb.ffs.ready 0
+    write /sys/power/wake_unlock mylock
+
+on property:sys.usb.config=adb && property:sys.usb.configfs=1
+    write /sys/power/wake_lock mylock
 
 on property:init.svc.adbd=stopped
     setprop sys.usb.ffs.ready 0
@@ -61,6 +65,7 @@ on property:sys.usb.config=mtp,adb && property:sys.usb.configfs=1
     # write /config/usb_gadget/g1/os_desc/use 1
     write /config/usb_gadget/g1/idVendor 0x8087
     write /config/usb_gadget/g1/idProduct 0x0a5f
+    write /sys/power/wake_lock mylock
 
 on property:sys.usb.config=ptp && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/functions/ptp.gs1/os_desc/interface.MTP/compatible_id "PTP"
@@ -73,6 +78,7 @@ on property:sys.usb.config=ptp,adb && property:sys.usb.configfs=1
     # write /config/usb_gadget/g1/os_desc/use 1
     write /config/usb_gadget/g1/idVendor 0x8087
     write /config/usb_gadget/g1/idProduct 0x0a61
+    write /sys/power/wake_lock mylock
 
 on property:sys.usb.config=rndis && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/idVendor 0x8087
@@ -82,6 +88,7 @@ on property:sys.usb.config=rndis,adb && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/bcdUSB 0x310
     write /config/usb_gadget/g1/idVendor 0x8087
     write /config/usb_gadget/g1/idProduct 0x0a63
+    write /sys/power/wake_lock mylock
 
 on property:sys.usb.config=midi && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/idVendor 0x8087
@@ -90,6 +97,7 @@ on property:sys.usb.config=midi && property:sys.usb.configfs=1
 on property:sys.usb.config=midi,adb && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/idVendor 0x8087
     write /config/usb_gadget/g1/idProduct 0x0a67
+    write /sys/power/wake_lock mylock
 
 on property:sys.usb.config=accessory && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/idVendor 0x18d1
@@ -98,3 +106,4 @@ on property:sys.usb.config=accessory && property:sys.usb.configfs=1
 on property:sys.usb.config=accessory,adb && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/idVendor 0x18d1
     write /config/usb_gadget/g1/idProduct 0x2d01
+    write /sys/power/wake_lock mylock
