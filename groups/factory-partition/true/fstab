@@ -1,1 +1,1 @@
-/dev/block/mmcblk1p12      /factory        ext4    rw                                         wait
+/dev/block/by-name/android_factory      /factory        ext4    rw                                         wait
