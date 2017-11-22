@@ -49,6 +49,8 @@ on property:sys.usb.config=none && property:sys.usb.configfs=1
     write /sys/power/wake_unlock mylock
 
 on property:sys.usb.config=adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/idVendor 0x8087
+    write /config/usb_gadget/g1/idProduct 0x09ef
     write /sys/power/wake_lock mylock
 
 on property:init.svc.adbd=stopped
