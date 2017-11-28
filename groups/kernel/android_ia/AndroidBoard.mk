@@ -39,6 +39,9 @@ $(PRODUCT_OUT)/kernel: $(KERNEL_CONFIG) | $(ACP)
 	$(build_kernel) $(KERNEL_NAME) modules
 	$(hide) $(ACP) -fp $(KERNEL_BIN) $@
 
+EXTMOD_SRC := ../../../../../..
+TARGET_EXTRA_KERNEL_MODULES :=
+
 ALL_EXTRA_MODULES := $(patsubst %,$(TARGET_OUT_INTERMEDIATES)/kmodule/%,$(TARGET_EXTRA_KERNEL_MODULES))
 $(ALL_EXTRA_MODULES): $(TARGET_OUT_INTERMEDIATES)/kmodule/%: $(PRODUCT_OUT)/kernel
 	@echo Building additional kernel module $*
@@ -52,7 +55,7 @@ $(KERNEL_MODULES_INSTALL): $(PRODUCT_OUT)/kernel $(ALL_EXTRA_MODULES)
 	$(build_kernel) modules_install
 	$(hide) for kmod in "$(TARGET_EXTRA_KERNEL_MODULES)" ; do \
 		echo Installing additional kernel module $${kmod} ; \
-		$(subst +,,$(subst $(hide),,$(build_kernel))) M=$(abspath $(TARGET_OUT_INTERMEDIATES))/$${kmod}.kmodule modules_install ; \
+		$(subst +,,$(subst $(hide),,$(build_kernel))) M=$(abspath $(TARGET_OUT_INTERMEDIATES))/kernel/$${kmod} modules_install ; \
 	done
 	$(hide) rm -f $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/*/{build,source}
 	$(hide) mv $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/$(KERNELRELEASE)/* $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules
