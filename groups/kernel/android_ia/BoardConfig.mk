@@ -16,10 +16,14 @@ TARGET_NO_KERNEL ?= false
 KERNEL_LOGLEVEL ?= {{{loglevel}}}
 SERIAL_PARAMETER := console=tty0 console=ttyS2,115200n8
 
-BOARD_KERNEL_CMDLINE += root=/dev/ram0  androidboot.hardware=$(TARGET_PRODUCT) androidboot.selinux=permissive firmware_class.path={{{firmware_path}}} loglevel=$(KERNEL_LOGLEVEL)
+BOARD_KERNEL_CMDLINE += root=/dev/ram0  androidboot.hardware=$(TARGET_PRODUCT) firmware_class.path={{{firmware_path}}} loglevel=$(KERNEL_LOGLEVEL)
 
 ifneq ($(TARGET_BUILD_VARIANT),user)
 ifeq ($(SPARSE_IMG),true)
 BOARD_KERNEL_CMDLINE += $(SERIAL_PARAMETER)
 endif
 endif
+
+
+BOARD_SEPOLICY_M4DEFS += module_kernel=true
+BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/kernel
