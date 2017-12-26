@@ -1,0 +1,5 @@
+on fs
+    # Update device node r/w attribute
+    chown system system /dev/trusty-ipc-dev0
+    chmod 660 /dev/trusty-ipc-dev0
+

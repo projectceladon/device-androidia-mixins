@@ -12,5 +12,8 @@ flash recovery recovery.img
 flash system system.img
 flash factory factory.img
 flash bootloader bootloader
+{{#tos_partition}}
+flash tos tos.img
+{{/tos_partition}}
 flashing lock
 continue
