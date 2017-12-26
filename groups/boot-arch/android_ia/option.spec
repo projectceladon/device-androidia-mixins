@@ -8,3 +8,5 @@ bootloader_len = 33
 bootloader_policy = false
 magic_key_timeout = false
 
+[defaults]
+tos_partition = false

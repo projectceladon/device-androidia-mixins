@@ -60,6 +60,9 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/config.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/vendor.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/factory.img
 BOARD_FLASHFILES += $(TARGET_DEVICE_DIR)/flash.json
+{{#tos_partition}}
+BOARD_FLASHFILES += $(PRODUCT_OUT)/tos.img
+{{/tos_partition}}
 
 # -- OTA RELATED DEFINES --
 # tell build system where to get the recovery.fstab.
