@@ -9,7 +9,7 @@ endif
 
 ifeq ($(MIXIN_DEBUG_LOGS),true)
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.crashlogd.data_quota=50
-BOARD_SEPOLICY_DIRS += device/intel/sepolicy/crashlogd
+BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/crashlogd
 
 CRASHLOGD_LOGS_PATH := "/data/logs"
 CRASHLOGD_APLOG := true
