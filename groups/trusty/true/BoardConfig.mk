@@ -1,6 +1,13 @@
 TARGET_USE_TRUSTY := true
+
+{{#enable_hw_sec}}
+KM_VERSION := {{{keymaster_version}}}
+ifeq ($(KM_VERSION),1)
 BOARD_USES_TRUSTY := true
 BOARD_USES_KEYMASTER1 := true
+endif
+{{/enable_hw_sec}}
+
 BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy
 BOARD_SEPOLICY_M4DEFS += module_trusty=true
 
