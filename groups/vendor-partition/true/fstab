@@ -1,4 +1,4 @@
 # Following line is required if you use a vendor image.
 # If the vendor image is not used,
 # following line should be commented with the related ones in BoardConfig.mk
-/dev/block/by-name/android_vendor	/vendor         ext4    ro                                         wait
+/dev/block/by-name/vendor       /vendor         ext4    ro                                                          wait
