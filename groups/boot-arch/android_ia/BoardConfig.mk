@@ -58,9 +58,6 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/bootloader
 BOARD_FLASHFILES += $(PRODUCT_OUT)/fastboot-usb.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/recovery.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/cache.img
-BOARD_FLASHFILES += $(PRODUCT_OUT)/config.img
-BOARD_FLASHFILES += $(PRODUCT_OUT)/vendor.img
-BOARD_FLASHFILES += $(PRODUCT_OUT)/factory.img
 BOARD_FLASHFILES += $(TARGET_DEVICE_DIR)/flash.json
 {{#tos_partition}}
 BOARD_FLASHFILES += $(PRODUCT_OUT)/tos.img
@@ -68,7 +65,7 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/tos.img
 
 # -- OTA RELATED DEFINES --
 # tell build system where to get the recovery.fstab.
-TARGET_RECOVERY_FSTAB ?= $(TARGET_DEVICE_DIR)/fstab 
+TARGET_RECOVERY_FSTAB ?= $(TARGET_DEVICE_DIR)/fstab
 # Used by ota_from_target_files to add platform-specific directives
 # to the OTA updater scripts
 TARGET_RELEASETOOLS_EXTENSIONS ?= device/intel/common/recovery
