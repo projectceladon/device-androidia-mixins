@@ -12,7 +12,7 @@ else
 out_flashfiles := $(PRODUCT_OUT)/$(TARGET_PRODUCT).flashfiles.$(TARGET_BUILD_VARIANT).$(USER).zip
 endif
 
-$(PRODUCT_OUT)/efi/installer.cmd:
+$(PRODUCT_OUT)/efi/installer.cmd: $(TARGET_DEVICE_DIR)/$(@F)
 	$(ACP) $(TARGET_DEVICE_DIR)/$(@F) $@
 	sed -i '/#/d' $@
 
