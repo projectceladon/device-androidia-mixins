@@ -4,7 +4,7 @@ on charger
 
 on charger_adb
     mkdir /system
-    mount ext4 /dev/block/by-name/android_system /system ro
+    mount ext4 /dev/block/by-name/system /system ro
 
     # enable USB adb mode
     mkdir /dev/usb-ffs 0770 shell

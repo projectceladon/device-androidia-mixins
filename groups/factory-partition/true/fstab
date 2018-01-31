@@ -1,1 +1,1 @@
-/dev/block/by-name/android_factory      /factory        ext4    rw,noatime                                         wait
+/dev/block/by-name/factory      /factory        ext4    rw,noatime                                                  wait
