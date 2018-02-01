@@ -16,7 +16,12 @@ TARGET_NO_KERNEL ?= false
 KERNEL_LOGLEVEL ?= {{{loglevel}}}
 SERIAL_PARAMETER := console=tty0 console=ttyS2,115200n8
 
-BOARD_KERNEL_CMDLINE += root=/dev/ram0  androidboot.hardware=$(TARGET_PRODUCT) firmware_class.path={{{firmware_path}}} loglevel=$(KERNEL_LOGLEVEL)
+{{^slot-ab}}
+# If enable A/B, then the root should be system partition at last.
+BOARD_KERNEL_CMDLINE += root=/dev/ram0
+{{/slot-ab}}
+
+BOARD_KERNEL_CMDLINE += androidboot.hardware=$(TARGET_PRODUCT) firmware_class.path={{{firmware_path}}} loglevel=$(KERNEL_LOGLEVEL)
 
 ifneq ($(TARGET_BUILD_VARIANT),user)
 ifeq ($(SPARSE_IMG),true)
