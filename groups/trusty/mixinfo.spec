@@ -1,2 +1,2 @@
 [mixinfo]
-deps = sepolicy boot-arch
+deps = sepolicy boot-arch avb slot-ab

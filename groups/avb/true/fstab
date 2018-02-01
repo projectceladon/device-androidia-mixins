@@ -1,0 +1,1 @@
+/dev/block/by-name/vbmeta       /vbmeta         emmc    defaults                                                    defaults{{#slot-ab}},slotselect{{/slot-ab}}{{#avb}},avb{{/avb}}

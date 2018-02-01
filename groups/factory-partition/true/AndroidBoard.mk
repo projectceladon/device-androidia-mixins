@@ -19,3 +19,10 @@ selinux_fc :=
 
 .PHONY: factoryimage
 factoryimage: $(INSTALLED_FACTORYIMAGE_TARGET)
+
+{{#slot-ab}}
+make_dir_ab_factory:
+	@mkdir -p $(PRODUCT_OUT)/root/factory
+
+$(PRODUCT_OUT)/ramdisk.img: make_dir_ab_factory
+{{/slot-ab}}
