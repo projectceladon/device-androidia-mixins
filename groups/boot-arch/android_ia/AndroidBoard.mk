@@ -16,6 +16,10 @@ $(PRODUCT_OUT)/efi/installer.cmd: $(TARGET_DEVICE_DIR)/$(@F)
 	$(ACP) $(TARGET_DEVICE_DIR)/$(@F) $@
 	sed -i '/#/d' $@
 
+$(PRODUCT_OUT)/efi/flash.json: $(TARGET_DEVICE_DIR)/$(@F)
+	$(ACP) $(TARGET_DEVICE_DIR)/$(@F) $@
+	sed -i '/#/d' $@
+
 $(PRODUCT_OUT)/efi/startup.nsh:
 	$(ACP) $(TARGET_DEVICE_DIR)/$(@F) $@
 	sed -i '/#/d' $@

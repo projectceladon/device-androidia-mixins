@@ -62,7 +62,7 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/fastboot-usb.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/recovery.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/cache.img
 {{/slot-ab}}
-BOARD_FLASHFILES += $(TARGET_DEVICE_DIR)/flash.json
+BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/flash.json
 {{#tos_partition}}
 BOARD_FLASHFILES += $(PRODUCT_OUT)/tos.img
 {{/tos_partition}}
