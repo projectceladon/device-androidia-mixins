@@ -45,7 +45,7 @@ BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/boot-arch/android_ia
 #PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/android_persistent
 
 # Specify file for creating final flashfiles
-BOARD_GPT_INI ?= $(TARGET_DEVICE_DIR)/gpt.ini
+# BOARD_GPT_INI ?= $(TARGET_DEVICE_DIR)/gpt.ini
 BOARD_GPT_BIN = $(PRODUCT_OUT)/gpt.bin
 BOARD_FLASHFILES += $(PRODUCT_OUT)/system.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/gpt.bin
