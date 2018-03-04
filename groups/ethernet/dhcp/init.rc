@@ -17,3 +17,9 @@ on post-fs
     insmod /vendor/lib/modules/kernel/drivers/pps/pps_core.ko
     insmod /vendor/lib/modules/kernel/drivers/ptp/ptp.ko
     insmod /vendor/lib/modules/kernel/drivers/net/ethernet/intel/e1000e/e1000e.ko
+
+on post-fs
+    insmod /vendor/lib/modules/kernel/drivers/net/mii.ko
+    insmod /vendor/lib/modules/kernel/drivers/net/phy/libphy.ko
+    insmod /vendor/lib/modules/kernel/drivers/net/usb/usbnet.ko
+    insmod /vendor/lib/modules/kernel/drivers/net/usb/asix.ko
