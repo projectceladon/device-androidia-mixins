@@ -5,3 +5,7 @@ on boot
 
 on charger
     write /sys/devices/pci0000\:00/0000\:00\:14.0/power/control auto
+
+on post-fs
+   insmod /vendor/lib/modules/kernel/drivers/usb/serial/usbserial.ko
+   insmod /vendor/lib/modules/kernel/drivers/usb/serial/pl2303.ko
