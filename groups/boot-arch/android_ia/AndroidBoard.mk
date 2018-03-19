@@ -20,9 +20,16 @@ $(PRODUCT_OUT)/efi/flash.json: $(TARGET_DEVICE_DIR)/$(@F)
 	$(ACP) $(TARGET_DEVICE_DIR)/$(@F) $@
 	sed -i '/#/d' $@
 
-$(PRODUCT_OUT)/efi/startup.nsh:
+$(PRODUCT_OUT)/efi/startup.nsh: $(TARGET_DEVICE_DIR)/$(@F)
 	$(ACP) $(TARGET_DEVICE_DIR)/$(@F) $@
 	sed -i '/#/d' $@
+
+$(PRODUCT_OUT)/efi/unlock_device.nsh: $(TARGET_DEVICE_DIR)/$(@F)
+	$(ACP) $(TARGET_DEVICE_DIR)/$(@F) $@
+	sed -i '/#/d' $@
+
+$(PRODUCT_OUT)/efi/efivar_oemlock: $(TARGET_DEVICE_DIR)/$(@F)
+	$(ACP) $(TARGET_DEVICE_DIR)/$(@F) $@
 
 $(out_flashfiles): $(BOARD_FLASHFILES) | $(ACP)
 	$(call generate_flashfiles,$@, $^)
