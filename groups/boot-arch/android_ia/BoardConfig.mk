@@ -150,3 +150,11 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 KERNELFLINGER_ASSUME_BIOS_SECURE_BOOT := true
 {{/assume_bios_secure_boot}}
 
+{{#rpmb}}
+KERNELFLINGER_USE_RPMB := true
+{{/rpmb}}
+
+{{#rpmb_simulate}}
+KERNELFLINGER_USE_RPMB_SIMULATE := true
+{{/rpmb_simulate}}
+
