@@ -1,6 +1,13 @@
 #Product Characteristics
 PRODUCT_DIR := $(dir $(lastword $(filter-out device/common/%,$(filter device/%,$(ALL_PRODUCTS)))))
 
+INTEL_PATH_DEVICE := device/intel/android_ia
+INTEL_PATH_COMMON := device/intel/common
+INTEL_PATH_SEPOLICY := device/intel/android_ia/sepolicy
+INTEL_PATH_BUILD := device/intel/build
+INTEL_PATH_HARDWARE := hardware/intel
+INTEL_PATH_VENDOR := vendor/intel
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.dalvik.vm.native.bridge=libhoudini.so
 
 PRODUCT_TAGS += dalvik.gc.type-precise
