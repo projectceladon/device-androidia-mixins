@@ -8,7 +8,7 @@ BOARD_USES_KEYMASTER1 := true
 endif
 {{/enable_hw_sec}}
 
-BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy
+BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/trusty
 BOARD_SEPOLICY_M4DEFS += module_trusty=true
 
 LK_PRODUCT := androidia_64
