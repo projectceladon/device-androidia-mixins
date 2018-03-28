@@ -12,6 +12,8 @@ DEVICE_PACKAGE_OVERLAYS += device/intel/android_ia/common/overlay
 
 PRODUCT_PACKAGES += $(THIRD_PARTY_APPS)
 
+PRODUCT_PACKAGES += fio
+
 # Get a list of languages.
 $(call inherit-product,$(SRC_TARGET_DIR)/product/locales_full.mk)
 
