@@ -9,3 +9,4 @@ on charger
 on post-fs
    insmod /vendor/lib/modules/kernel/drivers/usb/serial/usbserial.ko
    insmod /vendor/lib/modules/kernel/drivers/usb/serial/pl2303.ko
+   insmod /vendor/lib/modules/kernel/drivers/usb/serial/ftdi_sio.ko
