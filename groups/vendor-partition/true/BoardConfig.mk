@@ -8,3 +8,6 @@ else
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := squashfs
 endif
 BOARD_FLASHFILES += $(PRODUCT_OUT)/vendor.img
+{{#slot-ab}}
+AB_OTA_PARTITIONS += vendor
+{{/slot-ab}}

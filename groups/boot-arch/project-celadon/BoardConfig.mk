@@ -69,6 +69,9 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/cache.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/flash.json
 {{#tos_partition}}
 BOARD_FLASHFILES += $(PRODUCT_OUT)/tos.img
+{{#slot-ab}}
+AB_OTA_PARTITIONS += tos
+{{/slot-ab}}
 {{/tos_partition}}
 
 # -- OTA RELATED DEFINES --
