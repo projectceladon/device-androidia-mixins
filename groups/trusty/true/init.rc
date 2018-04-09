@@ -3,3 +3,16 @@ on fs
     chown system system /dev/trusty-ipc-dev0
     chmod 666 /dev/trusty-ipc-dev0
 
+{{#enable_hw_sec}}
+on post-fs-data
+    mkdir /data/misc/securestorage 0700 system system
+    chmod 666 /dev/rpmb0
+
+{{#enable_storage_proxyd}}
+service storageproxyd /vendor/bin/storageproxyd -d /dev/trusty-ipc-dev0 -p /data/misc/securestorage -r /dev/rpmb0
+    class late_start
+    user root
+    group root
+{{/enable_storage_proxyd}}
+{{/enable_hw_sec}}
+
