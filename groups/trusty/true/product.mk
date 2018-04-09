@@ -15,6 +15,9 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_PACKAGES += \
-	libtrusty
+	libtrusty \
+	storageproxyd \
+	libtrustystorage \
+	libtrustystorageinterface \
 
 {{/enable_hw_sec}}
