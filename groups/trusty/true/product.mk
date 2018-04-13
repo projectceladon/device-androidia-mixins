@@ -19,5 +19,11 @@ PRODUCT_PACKAGES += \
 	storageproxyd \
 	libtrustystorage \
 	libtrustystorageinterface \
+	gatekeeper.trusty \
+	android.hardware.gatekeeper@1.0-impl \
+	android.hardware.gatekeeper@1.0-service
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.hardware.gatekeeper=trusty
 
 {{/enable_hw_sec}}
