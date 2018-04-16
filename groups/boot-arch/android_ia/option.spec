@@ -10,3 +10,5 @@ magic_key_timeout = false
 rpmb = false
 rpmb_simulate = false
 tos_partition = false
+disk_encryption=true
+file_encryption=false
