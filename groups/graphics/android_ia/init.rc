@@ -3,7 +3,7 @@ on init
     chown system system /sys/class/backlight/acpi_video0/brightness
     write /sys/fs/selinux/enforce 0
 
-on post-fs
+on post-fs-data
    #setprop debug.sf.nobootanimation 1
    mkdir /data/system 0770 system system
 
