@@ -10,3 +10,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 endif
 
+{{#slot-ab}}
+PRODUCT_PACKAGES += updater_ab_esp
+{{/slot-ab}}

@@ -15,3 +15,4 @@ clearrpmb_ufs=true
 startover=true
 bootloader = true
 fast_flashfiles=true
+flash_slot_b = false
