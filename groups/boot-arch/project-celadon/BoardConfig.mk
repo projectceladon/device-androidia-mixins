@@ -59,14 +59,12 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/kernelflinger.efi
 BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/startup.nsh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/unlock_device.nsh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/efivar_oemlock
-BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/installer.cmd
 BOARD_FLASHFILES += $(PRODUCT_OUT)/bootloader
 BOARD_FLASHFILES += $(PRODUCT_OUT)/fastboot-usb.img
 {{^slot-ab}}
 BOARD_FLASHFILES += $(PRODUCT_OUT)/recovery.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/cache.img
 {{/slot-ab}}
-BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/flash.json
 {{#tos_partition}}
 BOARD_FLASHFILES += $(PRODUCT_OUT)/tos.img
 {{#slot-ab}}
@@ -163,3 +161,10 @@ KERNELFLINGER_USE_RPMB := true
 KERNELFLINGER_USE_RPMB_SIMULATE := true
 {{/rpmb_simulate}}
 
+{{#slot-ab}}
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_vendor=true \
+    POSTINSTALL_PATH_vendor=bin/updater_ab_esp \
+    FILESYSTEM_TYPE_vendor=ext4 \
+    POSTINSTALL_OPTIONAL_vendor=true
+{{/slot-ab}}

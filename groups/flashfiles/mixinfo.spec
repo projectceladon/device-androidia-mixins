@@ -1,2 +1,2 @@
 [mixinfo]
-deps = variants slot-ab
+deps = variants boot-arch
