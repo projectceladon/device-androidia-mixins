@@ -1,8 +1,17 @@
-
-
-# Currently the update_verifier does not support AVB and A/B slot, so do not include it if enable AVB and A/B slot.
-# Will enable it after the update_verifier updated.
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     update_engine \
+    update_verifier \
+    update_engine_sideload \
+    libavb \
+    bootctrl.avb \
+    bootctrl.intel \
+    bootctrl.intel.static \
+    android.hardware.boot@1.0-impl \
+    android.hardware.boot@1.0-service
+
+PRODUCT_PACKAGES_DEBUG += \
     update_engine_client \
-    update_verifier
+    bootctl
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.bootctrl=intel
