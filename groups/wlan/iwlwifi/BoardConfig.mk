@@ -53,9 +53,9 @@ DEVICE_PACKAGE_OVERLAYS += device/intel/common/wlan/overlay-miracast-force-singl
 
 {{#gpp}}
 ifeq ($(findstring cws_manu,$(BOARD_SEPOLICY_DIRS)),)
-    BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/cws_manu
+    BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/cws_manu
 endif
 {{/gpp}}
 
 BOARD_SEPOLICY_M4DEFS += module_iwlwifi=true
-BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/wlan/iwlwifi
+BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/wlan/iwlwifi

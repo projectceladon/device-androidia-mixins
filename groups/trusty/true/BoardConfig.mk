@@ -8,10 +8,10 @@ BOARD_USES_KEYMASTER1 := true
 endif
 {{/enable_hw_sec}}
 
-BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/trusty
+BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/trusty
 BOARD_SEPOLICY_M4DEFS += module_trusty=true
 
-LK_PRODUCT := androidia_64
+LK_PRODUCT := project-celadon_64
 
 LKBUILD_TOOLCHAIN_ROOT = $(PWD)/vendor/intel/external/prebuilts/elf/
 LKBUILD_X86_TOOLCHAIN =

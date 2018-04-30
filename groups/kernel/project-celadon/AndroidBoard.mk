@@ -2,7 +2,7 @@ ifneq ($(TARGET_PREBUILT_KERNEL),)
 $(error TARGET_PREBUILT_KERNEL defined but AndroidIA kernels build from source)
 endif
 
-TARGET_KERNEL_SRC ?= kernel/android_ia
+TARGET_KERNEL_SRC ?= kernel/project-celadon
 
 TARGET_KERNEL_ARCH := x86_64
 TARGET_KERNEL_CONFIG ?= kernel_64_defconfig
@@ -27,7 +27,7 @@ build_kernel := $(MAKE) -C $(TARGET_KERNEL_SRC) \
 		$(if $(SHOW_COMMANDS),V=1) \
 		INSTALL_MOD_PATH=$(abspath "$(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)")
 
-KERNEL_CONFIG_FILE := device/intel/android_ia/kernel_config/$(TARGET_KERNEL_CONFIG)
+KERNEL_CONFIG_FILE := device/intel/project-celadon/kernel_config/$(TARGET_KERNEL_CONFIG)
 
 KERNEL_CONFIG := $(KERNEL_OUT)/.config
 $(KERNEL_CONFIG): $(KERNEL_CONFIG_FILE)

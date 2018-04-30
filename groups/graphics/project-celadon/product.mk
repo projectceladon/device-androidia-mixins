@@ -9,7 +9,7 @@ PRODUCT_PACKAGES += \
     libsync
 
 PRODUCT_COPY_FILES += \
-    device/intel/android_ia/common/graphics/drirc:system/etc/drirc
+    device/intel/project-celadon/common/graphics/drirc:system/etc/drirc
 
 {{#drmhwc}}
 # DRM HWComposer
@@ -24,20 +24,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
 {{^drmhwc}}
 # HWComposer IA
 PRODUCT_PACKAGES += \
-    hwcomposer.android_ia
+    hwcomposer.project-celadon
 
 PRODUCT_PROPERTY_OVERRIDES += \
    hwc.drm.use_overlay_planes=1 \
-   ro.hardware.hwcomposer=android_ia
+   ro.hardware.hwcomposer=project-celadon
 {{/drmhwc}}
 
 {{#minigbm}}
 # Mini gbm
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.gralloc=android_ia
+    ro.hardware.gralloc=project-celadon
 
 PRODUCT_PACKAGES += \
-    gralloc.android_ia
+    gralloc.project-celadon
 {{/minigbm}}
 
 {{^minigbm}}
@@ -83,11 +83,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version.xml
 
 PRODUCT_PACKAGES += \
-    vulkan.android_ia \
+    vulkan.project-celadon \
     libvulkan_intel
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.vulkan=android_ia
+    ro.hardware.vulkan=project-celadon
 {{/vulkan}}
 
 # Graphics HAL

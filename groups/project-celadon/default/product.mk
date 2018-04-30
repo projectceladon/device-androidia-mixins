@@ -1,9 +1,9 @@
 #Product Characteristics
 PRODUCT_DIR := $(dir $(lastword $(filter-out device/common/%,$(filter device/%,$(ALL_PRODUCTS)))))
 
-INTEL_PATH_DEVICE := device/intel/android_ia
+INTEL_PATH_DEVICE := device/intel/project-celadon
 INTEL_PATH_COMMON := device/intel/common
-INTEL_PATH_SEPOLICY := device/intel/android_ia/sepolicy
+INTEL_PATH_SEPOLICY := device/intel/project-celadon/sepolicy
 INTEL_PATH_BUILD := device/intel/build
 INTEL_PATH_HARDWARE := hardware/intel
 INTEL_PATH_VENDOR := vendor/intel
@@ -15,7 +15,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_AAPT_CONFIG := normal large xlarge mdpi hdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
-DEVICE_PACKAGE_OVERLAYS += device/intel/android_ia/common/overlay
+DEVICE_PACKAGE_OVERLAYS += device/intel/project-celadon/common/overlay
 
 PRODUCT_PACKAGES += $(THIRD_PARTY_APPS)
 
@@ -113,7 +113,7 @@ PRODUCT_PACKAGES += \
     NotePad \
     Provision \
     drmserver \
-    power.android_ia \
+    power.project-celadon \
     scp \
     sftp \
     ssh \
@@ -146,4 +146,4 @@ PRODUCT_PACKAGES += \
 
 # Vendor Interface Manifest
 PRODUCT_COPY_FILES += \
-    device/intel/android_ia/manifest.xml:vendor/manifest.xml
+    device/intel/project-celadon/manifest.xml:vendor/manifest.xml

@@ -17,7 +17,7 @@ ifneq ($(strip $(BOARD_GPU_DRIVERS)),)
 TARGET_HARDWARE_3D := true
 endif
 
-BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/graphics/android_ia
+BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/graphics/project-celadon
 
 {{#drmhwc}}
 BOARD_USES_DRM_HWCOMPOSER := true

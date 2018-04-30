@@ -11,7 +11,7 @@ endif
 
 ifeq ($(KM_VERSION),1)
 PRODUCT_PACKAGES += \
-	keystore.android_ia
+	keystore.project-celadon
 endif
 
 PRODUCT_PACKAGES += \

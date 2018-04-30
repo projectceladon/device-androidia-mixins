@@ -1,1 +1,1 @@
-BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/set_storage
+BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/set_storage
