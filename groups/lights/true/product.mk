@@ -1,7 +1,7 @@
 # Lights HAL
 BOARD_SEPOLICY_DIRS += \
-    device/intel/android_ia/sepolicy/light
+    device/intel/project-celadon/sepolicy/light
 
-PRODUCT_PACKAGES += lights.android_ia \
+PRODUCT_PACKAGES += lights.project-celadon \
     android.hardware.light@2.0-service \
     android.hardware.light@2.0-impl

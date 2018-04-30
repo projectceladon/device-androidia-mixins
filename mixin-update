@@ -541,7 +541,7 @@ def main(dry_run=False, sfiles=None, warn_only=False):
     out_of_sync = False
 
     if not sfiles:
-        sfiles = find_all_spec_files("device/intel/android_ia")
+        sfiles = find_all_spec_files("device/intel/project-celadon")
 
     mixin_tree = read_mixin_tree('device/intel/mixins/groups')
     for sf in sfiles:

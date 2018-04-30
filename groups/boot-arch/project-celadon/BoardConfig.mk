@@ -1,6 +1,6 @@
 #TARGET_NO_RECOVERY ?= false
 
-TARGET_BOARD_PLATFORM := android_ia
+TARGET_BOARD_PLATFORM := project-celadon
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 576716800
@@ -43,7 +43,7 @@ KERNELFLINGER_SSL_LIBRARY := openssl
 # Avoid Watchdog truggered reboot
 BOARD_KERNEL_CMDLINE += iTCO_wdt.force_no_reboot=1
 
-BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/boot-arch/android_ia
+BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/boot-arch/project-celadon
 
 # Show the "OEM unlocking" option in Android "Developer options"
 #PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/android_persistent

@@ -1,1 +1,1 @@
-BOARD_SEPOLICY_DIRS += device/intel/android_ia/sepolicy/camera/usbcamera
+BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/camera/usbcamera
