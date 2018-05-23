@@ -17,6 +17,8 @@ PRODUCT_PACKAGES += \
     VmsPublisherClientSample \
     VmsSubscriberClientSample \
 
-PRODUCT_PACKAGES += android.hardware.automotive.vehicle.intel@2.0-service
+PRODUCT_PACKAGES += android.hardware.automotive.vehicle.intel@2.0-service \
+					android.hardware.automotive.vehicle@2.0-service \
+					android.hardware.automotive.vehicle@2.0-impl
 
 VEHICLE_HAL_PROTO_TYPE := {{vhal-proto-type}}
