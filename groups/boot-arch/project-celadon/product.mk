@@ -13,3 +13,9 @@ endif
 {{#slot-ab}}
 PRODUCT_PACKAGES += updater_ab_esp
 {{/slot-ab}}
+
+{{#ignore_not_applicable_reset}}
+# Allow Kernelflinger to ignore the RSCI reset source "not_applicable"
+# when setting the bootreason
+KERNELFLINGER_IGNORE_NOT_APPLICABLE_RESET := true
+{{/ignore_not_applicable_reset}}
