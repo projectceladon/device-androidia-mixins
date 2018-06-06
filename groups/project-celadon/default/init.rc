@@ -119,3 +119,11 @@ on fs
    # Update dm-verity persistent state and set partition.*.verified
    # properties
    verity_update_state
+
+# switch to dbc_raw in beginning
+on post-fs
+    write /sys/bus/pci/devices/0000:00:15.0/dbc_func 0
+    write /sys/bus/pci/devices/0000:00:15.0/dbc enable
+    stop adbd
+    exec /system/bin/sleep 0.1
+    start adbd
