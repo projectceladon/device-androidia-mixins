@@ -11,8 +11,8 @@ on post-fs-data
 {{#enable_storage_proxyd}}
 service storageproxyd /vendor/bin/storageproxyd -d /dev/trusty-ipc-dev0 -p /data/misc/securestorage -r /dev/rpmb0
     class late_start
-    user root
-    group root
+    user system
+    group system
 {{/enable_storage_proxyd}}
 {{/enable_hw_sec}}
 
