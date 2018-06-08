@@ -7,8 +7,6 @@
 # rfkill node
 /dev/rfkill 0660 bluetooth bluetooth
 
-#Bluedroid uhid support
-/dev/uhid                                    0660 bluetooth bluetooth
 /dev/ttyS*                                   0660   system     radio
 
 # NFCC node
