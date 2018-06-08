@@ -11,6 +11,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/device-type/overlay-car
 $(call inherit-product, packages/services/Car/car_product/build/car.mk)
 
+$(call inherit-product,frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
+
 PRODUCT_PACKAGES += \
     radio.fm.default \
     CarSettings \
