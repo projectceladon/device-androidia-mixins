@@ -41,9 +41,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gpt.ini:root/gpt.$(TARGET_PRODUCT).ini \
     $(LOCAL_PATH)/init.recovery.rc:root/init.recovery.$(TARGET_PRODUCT).rc \
 
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml
-
 # Voip
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
