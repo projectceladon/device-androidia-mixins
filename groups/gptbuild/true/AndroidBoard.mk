@@ -74,7 +74,7 @@ $(GPTIMAGE_BIN): \
 	$(INTEL_PATH_BUILD)/create_gpt_image.py \
 		--create $@ \
 		--block $(BOARD_FLASH_BLOCK_SIZE) \
-		--table $(BOARD_GPT_INI) \
+		--table $(TARGET_DEVICE_DIR)/gpt.ini \
 		--size $(gptimage_size) \
 		--bootloader $(bootloader_bin) \
 		--bootloader2 $(bootloader_bin) \
