@@ -171,3 +171,7 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_vendor=ext4 \
     POSTINSTALL_OPTIONAL_vendor=true
 {{/slot-ab}}
+
+{{#usb_storage}}
+KERNELFLINGER_SUPPORT_USB_STORAGE := true
+{{/usb_storage}}
