@@ -18,6 +18,8 @@ KERNEL_MODULES_INSTALL := $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules
 
 KERNELRELEASE = $(shell cat $(KERNEL_OUT)/include/config/kernel.release)
 
+KMOD_OUT := $(shell readlink -f "$(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)")
+
 build_kernel := $(MAKE) -C $(TARGET_KERNEL_SRC) \
 		O=$(KERNEL_OUT) \
 		ARCH=$(TARGET_KERNEL_ARCH) \
@@ -25,7 +27,7 @@ build_kernel := $(MAKE) -C $(TARGET_KERNEL_SRC) \
 		KCFLAGS="$(KERNEL_CFLAGS)" \
 		KAFLAGS="$(KERNEL_AFLAGS)" \
 		$(if $(SHOW_COMMANDS),V=1) \
-		INSTALL_MOD_PATH=$(abspath "$(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)")
+		INSTALL_MOD_PATH=$(KMOD_OUT)
 
 KERNEL_CONFIG_FILE := device/intel/project-celadon/kernel_config/$(TARGET_KERNEL_CONFIG)
 
