@@ -12,9 +12,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.dalvik.vm.native.bridge=libhoudini.so
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-PRODUCT_AAPT_CONFIG := normal large xlarge mdpi hdpi xhdpi xxhdpi
-PRODUCT_AAPT_PREF_CONFIG := xxhdpi
-
 DEVICE_PACKAGE_OVERLAYS += device/intel/project-celadon/common/overlay
 
 PRODUCT_PACKAGES += $(THIRD_PARTY_APPS)
