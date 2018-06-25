@@ -21,6 +21,14 @@ PRODUCT_PACKAGES += $(THIRD_PARTY_APPS)
 
 PRODUCT_PACKAGES += fio
 
+# Set default sounds
+# Note: As the override mechanism, must make sure this config 
+# being in front of generic_no_telephony.mk(defined the aosp sound config) 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.notification_sound=Xenon.ogg \
+    ro.config.alarm_alert=Cesium.ogg \
+    ro.config.ringtone=Sceptrum.ogg \
+
 # Get a list of languages.
 $(call inherit-product,$(SRC_TARGET_DIR)/product/locales_full.mk)
 
