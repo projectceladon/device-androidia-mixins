@@ -16,6 +16,7 @@ LK_PRODUCT := project-celadon_64
 LKBUILD_TOOLCHAIN_ROOT = $(PWD)/vendor/intel/external/prebuilts/elf/
 LKBUILD_X86_TOOLCHAIN =
 LKBUILD_X64_TOOLCHAIN = $(LKBUILD_TOOLCHAIN_ROOT)x86_64-elf-4.9.1-Linux-x86_64/bin
+EVMMBUILD_TOOLCHAIN ?= x86_64-linux-android-
 TRUSTY_BUILDROOT = $(PWD)/$(PRODUCT_OUT)/obj/trusty/
 
 TRUSTY_ENV_VAR += LK_CORE_NUM={{lk_core_num}}
