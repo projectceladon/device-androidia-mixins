@@ -1,0 +1,5 @@
+/vendor/bin/thermal-daemon        u:object_r:thermal-daemon_exec:s0
+/vendor/etc/thermal_daemon(/.*)?        u:object_r:thermal-daemon_data_file:s0
+/data/misc/thermal-daemon(/.*)?	u:object_r:thermal-daemon_run_dir:s0
+/sys/devices/virtual/dmi/id/product_name		u:object_r:sysfs_dmi_id:s0
+/sys/devices/virtual/dmi/id/product_uuid		u:object_r:sysfs_dmi_id:s0

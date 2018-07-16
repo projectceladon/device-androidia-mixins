@@ -1,0 +1,25 @@
+#
+# thermal-daemon
+#
+
+type thermal-daemon, domain;
+type thermal-daemon_exec, exec_type, file_type, vendor_file_type;
+init_daemon_domain(thermal-daemon)
+
+allow thermal-daemon sysfs:dir r_dir_perms;
+allow thermal-daemon sysfs_thermal_management:dir r_dir_perms;
+allow thermal-daemon sysfs_thermal_management:file rw_file_perms;
+allow thermal-daemon sysfs_powercap:{ file lnk_file } rw_file_perms;
+allow thermal-daemon sysfs_powercap:dir r_dir_perms;
+allow thermal-daemon sysfs_thermal:file rw_file_perms;
+allow thermal-daemon sysfs_dmi_id:{ file lnk_file } rw_file_perms;
+allow thermal-daemon system_data_file:dir create_dir_perms;
+allow thermal-daemon system_data_file:dir rw_dir_perms;
+allow thermal-daemon thermal-daemon_run_dir:dir create_dir_perms;
+allow thermal-daemon thermal-daemon_run_dir:file create_file_perms;
+allow thermal-daemon thermal-daemon_data_file:dir r_file_perms;
+allow thermal-daemon thermal-daemon_data_file:file r_file_perms;
+allow thermal-daemon thermal_device:chr_file rw_file_perms;
+
+# properties
+set_prop(thermal-daemon, powerctl_prop)
