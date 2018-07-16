@@ -1,0 +1,22 @@
+service thermal-daemon /system/vendor/bin/thermal-daemon --config-file /system/vendor/etc/thermal-daemon/thermal-conf.xml
+    class main
+    user system
+    group system
+
+on boot
+    chown system system /sys/devices/system/cpu/intel_pstate/max_perf_pct
+    chown system system /sys/devices/system/cpu/intel_pstate/min_perf_pct
+    chown system system /sys/devices/system/cpu/intel_pstate/no_turbo
+    chown system system /sys/class/powercap/intel-rapl:0/enabled
+    chown system system /sys/class/powercap/intel-rapl:0/constraint_0_power_limit_uw
+    chown system system /sys/class/dmi/id/product_uuid
+    chown system system /sys/class/dmi/id/product_name
+    chown system system /system/vendor/etc/
+    chown system system /system/vendor/etc/thermal-conf.xml
+    restorecon_recursive /sys/class/powercap
+
+on post-fs
+    setprop persist.thermal.mode thermal-daemon
+    mkdir /data/misc/thermal-daemon 0771 system system
+    start thermal-daemon
+
