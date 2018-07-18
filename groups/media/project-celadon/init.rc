@@ -6,3 +6,11 @@ on post-fs-data
 
 on boot
     setprop persist.media.pfw.verbose true
+
+on post-fs
+    insmod /vendor/lib/modules/kernel/drivers/media/v4l2-core/videobuf2-core.ko
+    insmod /vendor/lib/modules/kernel/drivers/media/v4l2-core/videobuf2-v4l2.ko
+    insmod /vendor/lib/modules/kernel/drivers/media/v4l2-core/videobuf2-memops.ko
+    insmod /vendor/lib/modules/kernel/drivers/media/v4l2-core/videobuf2-dma-contig.ko
+    insmod /vendor/lib/modules/kernel/drivers/media/v4l2-core/videobuf2-vmalloc.ko
+    insmod /vendor/lib/modules/kernel/drivers/media/usb/uvc/uvcvideo.ko
