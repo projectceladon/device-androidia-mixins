@@ -2,7 +2,7 @@ BOARD_KERNEL_CMDLINE += vga=current i915.modeset=1 drm.atomic=1 i915.nuclear_pag
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 USE_INTEL_UFO_DRIVER := false
-INTEL_VA := true
+INTEL_VA := false
 HWC_DISABLE_VA_DRIVER := true
 BOARD_GRAPHIC_IS_GEN := true
 BOARD_GPU_DRIVERS := i965
