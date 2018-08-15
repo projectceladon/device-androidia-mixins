@@ -25,6 +25,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     libmfxhw32 \
     libmfxhw64 \
+    libmfx_hevce_hw32 \
+    libmfx_hevce_hw64 \
     libmfx_omx_core \
     libmfx_omx_components_hw \
     libstagefrighthw
