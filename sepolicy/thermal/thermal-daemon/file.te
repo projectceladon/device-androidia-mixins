@@ -1,0 +1,3 @@
+type thermal-daemon_data_file, file_type, data_file_type;
+type sysfs_dmi_id, fs_type, sysfs_type;
+type thermal-daemon_run_dir, fs_type, data_file_type;
