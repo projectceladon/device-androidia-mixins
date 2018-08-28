@@ -34,7 +34,7 @@ None: {
 # These are the set of product configuration files that are modified by mixins.
 # If they are named something else in the actual product directory, the mixin spec
 # file should setup the mapping in the "mapping" section
-_FILE_LIST = ["BoardConfig.mk", "init.rc", "init.recovery.rc", "fstab", "product.mk",
+_FILE_LIST = ["BoardConfig.mk", "init.rc", "init.recovery.rc", "fstab", "fstab.recovery", "product.mk",
               "ueventd.rc", "AndroidBoard.mk", "gpt.ini"]
 
 _PRODUCT_SPEC_FN = "mixins.spec"
