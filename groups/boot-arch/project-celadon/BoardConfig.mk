@@ -72,7 +72,7 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/cache.img
 
 # -- OTA RELATED DEFINES --
 # tell build system where to get the recovery.fstab.
-TARGET_RECOVERY_FSTAB ?= $(TARGET_DEVICE_DIR)/fstab
+TARGET_RECOVERY_FSTAB ?= $(TARGET_DEVICE_DIR)/fstab.recovery
 # Used by ota_from_target_files to add platform-specific directives
 # to the OTA updater scripts
 TARGET_RELEASETOOLS_EXTENSIONS ?= device/intel/common/recovery
