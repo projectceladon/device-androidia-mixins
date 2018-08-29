@@ -59,10 +59,6 @@ $(GPTIMAGE_BIN): \
 	$(hide) rm -f $(INSTALLED_CACHEIMAGE_TARGET).raw
 	{{/slot-ab}}
 
-	$(MAKE_EXT4FS) \
-		-l $(BOARD_USERDATAIMAGE_PARTITION_SIZE) -L data \
-		$(PRODUCT_OUT)/userdata.dummy
-
 	$(SIMG2IMG) $(INSTALLED_SYSTEMIMAGE) $(INSTALLED_SYSTEMIMAGE).raw
 	{{^slot-ab}}
 	$(SIMG2IMG) $(INSTALLED_CACHEIMAGE_TARGET) $(INSTALLED_CACHEIMAGE_TARGET).raw
@@ -92,7 +88,6 @@ $(GPTIMAGE_BIN): \
         {{#vendor-partition}}
 		--vendor $(INSTALLED_VENDORIMAGE_TARGET).raw \
         {{/vendor-partition}}
-		--data $(PRODUCT_OUT)/userdata.dummy \
 		--config $(raw_config) \
 		--factory $(raw_factory)
 
