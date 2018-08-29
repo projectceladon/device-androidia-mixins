@@ -25,7 +25,7 @@ configimage: $(INSTALLED_CONFIGIMAGE_TARGET)
 
 {{#slot-ab}}
 make_dir_ab_config:
-	@mkdir -p $(PRODUCT_OUT)/root/oem_config
+	@mkdir -p $(PRODUCT_OUT)/vendor/oem_config
 
 $(PRODUCT_OUT)/ramdisk.img: make_dir_ab_config
 {{/slot-ab}}
