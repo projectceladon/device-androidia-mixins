@@ -190,8 +190,10 @@ def sort_selections(selections, mixin_tree, verbose):
             parent = missing_parents.pop()
             if verbose:
                 print "moving %s before %s" % (parent[0], group)
-            sorted_selections.append(parent)
-            selections.remove(parent)
+            if parent not in sorted_selections:
+                sorted_selections.append(parent)
+            if parent in selections:
+                selections.remove(parent)
 
         sorted_selections.append((group, option, params))
 
