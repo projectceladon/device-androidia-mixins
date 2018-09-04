@@ -42,7 +42,8 @@ $(PRODUCT_OUT)/kernel: $(KERNEL_CONFIG) | $(ACP)
 	$(hide) $(ACP) -fp $(KERNEL_BIN) $@
 
 EXTMOD_SRC := ../../../../../..
-TARGET_EXTRA_KERNEL_MODULES :=
+TARGET_EXTRA_KERNEL_MODULES := $(EXTMOD_SRC)/kernel/modules/perftools-external/soc_perf_driver/src
+TARGET_EXTRA_KERNEL_MODULES += $(EXTMOD_SRC)/kernel/modules/perftools-external/socwatch_driver
 
 ALL_EXTRA_MODULES := $(patsubst %,$(TARGET_OUT_INTERMEDIATES)/kmodule/%,$(TARGET_EXTRA_KERNEL_MODULES))
 $(ALL_EXTRA_MODULES): $(TARGET_OUT_INTERMEDIATES)/kmodule/%: $(PRODUCT_OUT)/kernel
@@ -55,7 +56,7 @@ $(ALL_EXTRA_MODULES): $(TARGET_OUT_INTERMEDIATES)/kmodule/%: $(PRODUCT_OUT)/kern
 $(KERNEL_MODULES_INSTALL): $(PRODUCT_OUT)/kernel $(ALL_EXTRA_MODULES)
 	$(hide) rm -rf $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules
 	$(build_kernel) modules_install
-	$(hide) for kmod in "$(TARGET_EXTRA_KERNEL_MODULES)" ; do \
+	$(hide) for kmod in $(TARGET_EXTRA_KERNEL_MODULES) ; do \
 		echo Installing additional kernel module $${kmod} ; \
 		$(subst +,,$(subst $(hide),,$(build_kernel))) M=$(abspath $(TARGET_OUT_INTERMEDIATES))/kernel/$${kmod} modules_install ; \
 	done
