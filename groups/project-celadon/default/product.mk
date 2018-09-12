@@ -8,8 +8,6 @@ INTEL_PATH_BUILD := device/intel/build
 INTEL_PATH_HARDWARE := hardware/intel
 INTEL_PATH_VENDOR := vendor/intel
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.dalvik.vm.native.bridge=libhoudini.so
-
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 DEVICE_PACKAGE_OVERLAYS += device/intel/project-celadon/common/overlay
