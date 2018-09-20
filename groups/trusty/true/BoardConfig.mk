@@ -37,6 +37,6 @@ TRUSTY_ENV_VAR += BUILD_DIR=$(TRUSTY_BUILDROOT)
 TRUSTY_ENV_VAR += LKBIN_DIR=$(TRUSTY_BUILDROOT)/build-{{{lk_project}}}/
 
 #Workaround CPU lost issue on SIMICS, will remove this line below after PO.
-BOARD_KERNEL_CMDLINE += cpu_init_udelay=500000
+BOARD_KERNEL_CMDLINE += cpu_init_udelay=100000
 
 BOARD_TOSIMAGE_PARTITION_SIZE := 10485760
