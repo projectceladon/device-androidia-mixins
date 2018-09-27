@@ -14,3 +14,4 @@ rpmb = false
 rpmb_simulate = false
 tos_partition = false
 usb_storage = false
+data_use_f2fs = false
