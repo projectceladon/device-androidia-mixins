@@ -72,7 +72,7 @@ $(GPTIMAGE_BIN): \
 		--block $(BOARD_FLASH_BLOCK_SIZE) \
 		--table $(TARGET_DEVICE_DIR)/gpt.ini \
 		--size $(gptimage_size) \
-		--bootloader2 $(bootloader_bin) \
+		--bootloader $(bootloader_bin) \
 		--tos $(tos_bin) \
 		--multiboot $(multiboot_bin) \
 		--boot $(INSTALLED_BOOTIMAGE_TARGET) \
