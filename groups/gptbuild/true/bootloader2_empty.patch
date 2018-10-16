@@ -1,0 +1,29 @@
+From f76232aa1ad822a81871d7ed9aa3f4c106acf8a2 Mon Sep 17 00:00:00 2001
+From: mengkang <kangx.meng@intel.com>
+Date: Tue, 16 Oct 2018 11:05:24 +0800
+Subject: [PATCH] Fix error about the USB live boot image should set
+ bootloader2 partition empty modify
+ /device/intel/mixins/group/gptbuild/true/AndroidBoard.mk
+
+Tracked-On: OAM-69453
+
+Signed-off-by: mengkang <kangx.meng@intel.com>
+---
+ groups/gptbuild/true/AndroidBoard.mk | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/groups/gptbuild/true/AndroidBoard.mk b/groups/gptbuild/true/AndroidBoard.mk
+index e614dfa..3e33f3c 100644
+--- a/groups/gptbuild/true/AndroidBoard.mk
++++ b/groups/gptbuild/true/AndroidBoard.mk
+@@ -73,7 +73,6 @@ $(GPTIMAGE_BIN): \
+ 		--table $(TARGET_DEVICE_DIR)/gpt.ini \
+ 		--size $(gptimage_size) \
+ 		--bootloader $(bootloader_bin) \
+-		--bootloader2 $(bootloader_bin) \
+ 		--tos $(tos_bin) \
+ 		--multiboot $(multiboot_bin) \
+ 		--boot $(INSTALLED_BOOTIMAGE_TARGET) \
+-- 
+1.9.1
+
