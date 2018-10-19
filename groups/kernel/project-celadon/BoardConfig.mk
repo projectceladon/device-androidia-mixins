@@ -14,7 +14,7 @@ TARGET_PRELINK_MODULE := false
 TARGET_NO_KERNEL ?= false
 
 KERNEL_LOGLEVEL ?= {{{loglevel}}}
-SERIAL_PARAMETER := console=tty0 console=ttyS2,115200n8
+SERIAL_PARAMETER ?= console=tty0 console=ttyS0,115200n8
 
 {{^slot-ab}}
 # If enable A/B, then the root should be system partition at last.
