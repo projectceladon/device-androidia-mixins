@@ -77,7 +77,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Set filenames_mode to cts, for heh is not available
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.crypto.volume.filenames_mode=aes-256-cts
+    ro.crypto.volume.filenames_mode=aes-256-xts
 
 # Enable MultiWindow
 PRODUCT_PROPERTY_OVERRIDES += \
