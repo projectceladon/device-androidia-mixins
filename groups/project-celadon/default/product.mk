@@ -73,11 +73,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_height=512
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.rtc_local_time=1 \
-
-# Set filenames_mode to cts, for heh is not available
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.crypto.volume.filenames_mode=aes-256-cts
+    persist.rtc_local_time=1 
 
 # Enable MultiWindow
 PRODUCT_PROPERTY_OVERRIDES += \
