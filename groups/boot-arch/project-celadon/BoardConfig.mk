@@ -105,6 +105,13 @@ KERNELFLINGER_USE_RPMB_SIMULATE := true
 {{/rpmb_simulate}}
 
 {{#slot-ab}}
+{{#avb}}
+AB_OTA_PARTITIONS += vbmeta
+{{#trusty}}
+AB_OTA_PARTITIONS += tos
+{{/trusty}}
+{{/avb}}
+
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_vendor=true \
     POSTINSTALL_PATH_vendor=bin/updater_ab_esp \
