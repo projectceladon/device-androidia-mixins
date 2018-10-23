@@ -75,6 +75,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.rtc_local_time=1 \
 
+# Set filenames_mode to cts, for heh is not available
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.crypto.volume.filenames_mode=aes-256-cts
+
 # Enable MultiWindow
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.debug.multi_window=true
