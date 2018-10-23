@@ -22,7 +22,7 @@ PRODUCT_PACKAGES += fio
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.notification_sound=Xenon.ogg \
     ro.config.alarm_alert=Cesium.ogg \
-    ro.config.ringtone=Sceptrum.ogg \
+    ro.config.ringtone=Sceptrum.ogg
 
 # Get a list of languages.
 #$(call inherit-product,$(SRC_TARGET_DIR)/product/locales_full.mk)
@@ -43,12 +43,12 @@ PRODUCT_COPY_FILES += \
     $(if $(wildcard $(PRODUCT_DIR)init.$(TARGET_PRODUCT).rc),$(PRODUCT_DIR)init.$(TARGET_PRODUCT).rc,$(LOCAL_PATH)/init.rc):root/init.$(TARGET_PRODUCT).rc \
     $(if $(wildcard $(PRODUCT_DIR)ueventd.$(TARGET_PRODUCT).rc),$(PRODUCT_DIR)ueventd.$(TARGET_PRODUCT).rc,$(LOCAL_PATH)/ueventd.rc):root/ueventd.$(TARGET_PRODUCT).rc \
     $(LOCAL_PATH)/gpt.ini:root/gpt.$(TARGET_PRODUCT).ini \
-    $(LOCAL_PATH)/init.recovery.rc:root/init.recovery.$(TARGET_PRODUCT).rc \
+    $(LOCAL_PATH)/init.recovery.rc:root/init.recovery.$(TARGET_PRODUCT).rc 
 
 # Voip
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml \
+    frameworks/native/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml 
 
 # Usb
 PRODUCT_COPY_FILES += \
@@ -59,12 +59,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
+    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml 
 
 # USB
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml 
 
 # please modify to appropriate value based on tuning
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -73,11 +73,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_height=512
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.rtc_local_time=1 \
+    persist.rtc_local_time=1 
 
 # Enable MultiWindow
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.debug.multi_window=true
+
+# Set filenames_mode to cts, for heh is not available
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.crypto.volume.filenames_mode=aes-256-cts
 
 # DRM service
 PRODUCT_PROPERTY_OVERRIDES += \
