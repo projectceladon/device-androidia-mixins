@@ -73,7 +73,6 @@ $(GPTIMAGE_BIN): \
 		--table $(TARGET_DEVICE_DIR)/gpt.ini \
 		--size $(gptimage_size) \
 		--bootloader $(bootloader_bin) \
-		--bootloader2 $(bootloader_bin) \
 		--tos $(tos_bin) \
 		--multiboot $(multiboot_bin) \
 		--boot $(INSTALLED_BOOTIMAGE_TARGET) \
