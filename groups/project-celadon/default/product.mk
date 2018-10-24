@@ -72,6 +72,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_width=2048 \
     ro.hwui.text_large_cache_height=512
 
+# Set filenames_mode to cts, for heh is not available
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.crypto.volume.filenames_mode=aes-256-cts
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.rtc_local_time=1 \
 
