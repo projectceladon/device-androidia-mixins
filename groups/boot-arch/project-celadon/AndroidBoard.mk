@@ -180,4 +180,7 @@ $(BOARD_GPT_BIN): $(TARGET_DEVICE_DIR)/gpt.ini
 $(PRODUCT_OUT)/vendor.img: $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi
 $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi: $(PRODUCT_OUT)/efi/kernelflinger.efi
 	$(ACP) $(PRODUCT_OUT)/efi/kernelflinger.efi $@
+$(PRODUCT_OUT)/vendor.img: $(PRODUCT_OUT)/vendor/firmware/BIOSUPDATE.fv
+$(PRODUCT_OUT)/vendor/firmware/BIOSUPDATE.fv: $(PRODUCT_OUT)/efi/BIOSUPDATE.fv
+	$(ACP) $(PRODUCT_OUT)/efi/BIOSUPDATE.fv $@
 
