@@ -42,8 +42,6 @@ $(PRODUCT_OUT)/kernel: $(KERNEL_CONFIG) | $(ACP)
 	$(hide) $(ACP) -fp $(KERNEL_BIN) $@
 
 EXTMOD_SRC := ../../../../../..
-TARGET_EXTRA_KERNEL_MODULES := $(EXTMOD_SRC)/kernel/modules/perftools-external/soc_perf_driver/src
-TARGET_EXTRA_KERNEL_MODULES += $(EXTMOD_SRC)/kernel/modules/perftools-external/socwatch_driver
 
 ALL_EXTRA_MODULES := $(patsubst %,$(TARGET_OUT_INTERMEDIATES)/kmodule/%,$(TARGET_EXTRA_KERNEL_MODULES))
 $(ALL_EXTRA_MODULES): $(TARGET_OUT_INTERMEDIATES)/kmodule/%: $(PRODUCT_OUT)/kernel
