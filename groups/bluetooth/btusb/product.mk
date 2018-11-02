@@ -12,7 +12,7 @@ PRODUCT_PACKAGES += \
   libbt-vendor
 
 {{#ivi}}
-PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/bluetooth/overlay-car-disablehfp
+PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/bluetooth/overlay-car
 {{/ivi}}
 
 {{^ivi}}
