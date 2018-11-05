@@ -31,7 +31,7 @@ build_kernel := $(MAKE) -C $(TARGET_KERNEL_SRC) \
 
 KERNEL_CONFIG_FILE := device/intel/project-celadon/kernel_config/$(TARGET_KERNEL_CONFIG)
 
-ifeq ($(TARGET_BUILD_VARIANT), userdebug)
+ifneq ($(TARGET_BUILD_VARIANT), user)
 KERNEL_CONFIG_FILE += $(wildcard $(KERNEL_CONFIG_DIR)/debug_diffconfig)
 endif
 
