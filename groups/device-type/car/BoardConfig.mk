@@ -5,3 +5,4 @@ BOARD_SEPOLICY_DIRS += \
     device/intel/project-celadon/sepolicy/car
 
 TARGET_USES_CAR_FUTURE_FEATURES := true
+BOARD_SEPOLICY_M4DEFS += module_carservice_app=true
