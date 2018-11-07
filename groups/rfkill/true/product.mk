@@ -1,1 +1,1 @@
-PRODUCT_COPY_FILES += device/intel/common/rfkill/rfkill-init.sh:system/bin/rfkill-init.sh
+PRODUCT_COPY_FILES += $(INTEL_PATH_COMMON)/rfkill/rfkill-init.sh:vendor/bin/rfkill-init.sh
