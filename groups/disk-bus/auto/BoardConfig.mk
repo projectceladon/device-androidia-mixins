@@ -1,1 +1,1 @@
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/set_storage
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/set_storage
