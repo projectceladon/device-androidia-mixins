@@ -1,0 +1,2 @@
+[defaults]
+version = current
