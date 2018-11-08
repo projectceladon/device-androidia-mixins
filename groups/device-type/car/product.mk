@@ -6,6 +6,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.broadcastradio.xml:vendor/etc/permissions/android.hardware.broadcastradio.xml \
     frameworks/native/data/etc/android.software.activities_on_secondary_displays.xml:vendor/etc/permissions/android.software.activities_on_secondary_displays.xml
 
+# Make sure vendor car product overlays take precedence than google definition
+# under packages/services/Car/car_product/overlay/
+PRODUCT_PACKAGE_OVERLAYS += device/intel/common/device-type/overlay-car
 $(call inherit-product, packages/services/Car/car_product/build/car.mk)
 
 $(call inherit-product,frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
