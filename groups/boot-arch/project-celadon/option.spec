@@ -14,3 +14,4 @@ rpmb = false
 rpmb_simulate = false
 tos_partition = false
 usb_storage = false
+self_usb_device_mode_protocol = false

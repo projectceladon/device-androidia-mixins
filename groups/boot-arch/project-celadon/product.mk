@@ -77,3 +77,7 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.oem_unlock_supported=1
 {{/bootloader_policy}}
+
+{{#self_usb_device_mode_protocol}}
+KERNELFLINGER_SUPPORT_SELF_USB_DEVICE_MODE_PROTOCOL := {{self_usb_device_mode_protocol}}
+{{/self_usb_device_mode_protocol}}
