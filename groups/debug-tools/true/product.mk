@@ -3,4 +3,5 @@ PRODUCT_PACKAGES_DEBUG += \
     libjackpal-androidterm4 \
     peeknpoke \
     pytimechart-record \
-    lspci
+    lspci \
+    llvm-symbolizer
