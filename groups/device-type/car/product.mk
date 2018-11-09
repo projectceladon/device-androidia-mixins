@@ -6,6 +6,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.broadcastradio.xml:vendor/etc/permissions/android.hardware.broadcastradio.xml \
     frameworks/native/data/etc/android.software.activities_on_secondary_displays.xml:vendor/etc/permissions/android.software.activities_on_secondary_displays.xml
 
+# Make sure vendor car product overlays take precedence than google definition
+# under packages/services/Car/car_product/overlay/
+PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/device-type/overlay-car
 $(call inherit-product, packages/services/Car/car_product/build/car.mk)
 
 $(call inherit-product,frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
@@ -17,7 +20,11 @@ PRODUCT_PACKAGES += \
     VmsSubscriberClientSample \
 
 PRODUCT_PACKAGES += android.hardware.automotive.vehicle.intel@2.0-service \
-					android.hardware.automotive.vehicle@2.0-service \
-					android.hardware.automotive.vehicle@2.0-impl
+    android.hardware.automotive.vehicle@2.0-service \
+    android.hardware.automotive.vehicle@2.0-impl
 
 VEHICLE_HAL_PROTO_TYPE := {{vhal-proto-type}}
+{{#ioc}}
+# IOC is enabled, add slcan or cbc proto in VHAL
+VEHICLE_HAL_PROTO_TYPE += {{ioc}}
+{{/ioc}}
