@@ -15,7 +15,12 @@ endif
 {{/eng_only}}
 
 ifeq ($(MIXIN_DEBUG_LOGS),true)
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/init.logs.rc:root/init.logs.rc
+{{#treble}}
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/init.logs.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.logs.rc
+{{/treble}}
+{{^treble}}
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/init.logs.rc:root/init.logs.rc
+{{/treble}}
 PRODUCT_PACKAGES += \
 {{#logger_pack}}
     {{logger_pack}} \
@@ -31,6 +36,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.intel.logger={{logger}}
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += logd.kernel.raw_message={{klogd_raw_message}}
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.intel.logger.rot_cnt={{logger_rot_cnt}}
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.intel.logger.rot_size={{logger_rot_size}}
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/debug-logs
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/debug-logs
 BOARD_SEPOLICY_M4DEFS += module_debug_logs=true
 endif
