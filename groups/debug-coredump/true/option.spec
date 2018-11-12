@@ -1,0 +1,2 @@
+[defaults]
+treble = false
