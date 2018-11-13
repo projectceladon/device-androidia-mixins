@@ -16,10 +16,10 @@ endif
 
 ifeq ($(MIXIN_DEBUG_LOGS),true)
 {{#treble}}
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/init.logs.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.logs.rc
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/init.logs.rc:root/init.logs.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.logs.rc
 {{/treble}}
 {{^treble}}
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/init.logs.rc:root/init.logs.rc
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/init.logs.rc:root/init.logs.rc:root/init.logs.rc
 {{/treble}}
 PRODUCT_PACKAGES += \
 {{#logger_pack}}

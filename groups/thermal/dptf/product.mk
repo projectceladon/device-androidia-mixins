@@ -17,7 +17,7 @@ PRODUCT_PACKAGES += esif_ufd \
     upe_ioc \
     esif_ws \
     esif_cmp
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/dptf.dv:/vendor/etc/dptf/dv/dptf.dv
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/dptf.dv:/system/etc/dptf/dv/dptf.dv:/vendor/etc/dptf/dv/dptf.dv
 {{#thermal_lite}}
 PRODUCT_PACKAGES += thermal_lite
 {{/thermal_lite}}
