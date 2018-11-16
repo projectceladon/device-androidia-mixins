@@ -59,12 +59,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level.xml
 
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:vendor/etc/permissions/android.hardware.vulkan.compute.xml
-    
-PRODUCT_PACKAGES += \
-    vulkan.project-celadon \
-    libvulkan_intel
 {{/vulkan}}
 
 {{/gen9+}}
@@ -88,6 +82,9 @@ PRODUCT_COPY_FILES += \
 {{#vulkan}}
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:system/etc/permissions/android.hardware.vulkan.version.xml
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:vendor/etc/permissions/android.hardware.vulkan.compute.xml
 
 PRODUCT_PACKAGES += \
     vulkan.project-celadon \
