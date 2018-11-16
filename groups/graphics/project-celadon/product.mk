@@ -58,7 +58,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 {{#vulkan}}
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level.xml
-
 {{/vulkan}}
 
 {{/gen9+}}
