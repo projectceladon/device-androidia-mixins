@@ -61,6 +61,10 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:vendor/etc/permissions/android.hardware.vulkan.compute.xml
+    
+PRODUCT_PACKAGES += \
+    vulkan.project-celadon \
+    libvulkan_intel
 {{/vulkan}}
 
 {{/gen9+}}
