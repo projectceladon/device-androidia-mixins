@@ -15,8 +15,8 @@ on boot
     chown system system /system/vendor/etc/thermal-daemon/thermal-conf.xml
     restorecon_recursive /sys/class/powercap
 
-on post-fs
+on post-fs-data
     setprop persist.thermal.mode thermal-daemon
-    mkdir /data/misc/thermal-daemon 0771 system system
+    mkdir /data/vendor/thermal-daemon 0660 system system
     start thermal-daemon
 
