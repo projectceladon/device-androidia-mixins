@@ -1,7 +1,5 @@
 #TARGET_NO_RECOVERY ?= false
 
-TARGET_BOARD_PLATFORM := project-celadon
-
 ifeq ({{data_use_f2fs}},true)
 TARGET_USERIMAGES_USE_F2FS := true
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
