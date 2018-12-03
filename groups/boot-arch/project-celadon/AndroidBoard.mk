@@ -54,7 +54,8 @@ else
 FILE_NAME_TAG := $(BUILD_NUMBER)
 endif
 
-BOARD_FIRST_STAGE_LOADER := $(PRODUCT_OUT)/efi/kernelflinger.efi
+KF4UEFI := $(PRODUCT_OUT)/efi/kernelflinger.efi
+BOARD_FIRST_STAGE_LOADER := $(KF4UEFI)
 BOARD_EXTRA_EFI_MODULES :=
 
 # We stash a copy of BIOSUPDATE.fv so the FW sees it, applies the
@@ -75,6 +76,7 @@ $(bootloader_zip): \
 
 	$(hide) rm -rf $(efi_root)
 	$(hide) rm -f $@
+ifneq ($(BOOTLOADER_SLOT), true)
 	$(hide) mkdir -p $(efi_root)/capsules
 	$(hide) mkdir -p $(efi_root)/EFI/BOOT
 	$(foreach EXTRA,$(BOARD_EXTRA_EFI_MODULES), \
@@ -89,6 +91,10 @@ endif
 ifeq ($(BOARD_BOOTOPTION_FASTBOOT),true)
 	$(hide) echo "Fastboot=\\EFI\\BOOT\\$(efi_default_name);-f">> $(efi_root)/manifest.txt
 endif
+else # BOOTLOADER_SLOT == false
+	$(hide) mkdir -p $(efi_root)/EFI/INTEL/
+	$(hide) $(ACP) $(KF4UEFI) $(efi_root)/EFI/INTEL/KF4UEFI.EFI
+endif # BOOTLOADER_SLOT
 	$(hide) (cd $(efi_root) && zip -qry ../$(notdir $@) .)
 
 bootloader_info := $(intermediates)/bootloader_image_info.txt
@@ -181,3 +187,60 @@ $(PRODUCT_OUT)/vendor.img: $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi
 $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi: $(PRODUCT_OUT)/efi/kernelflinger.efi
 	$(ACP) $(PRODUCT_OUT)/efi/kernelflinger.efi $@
 
+{{#bootloader_slot_ab}}
+esp_zie := $(PRODUCT_OUT)/esp.zip
+
+esp_intermediates := $(call intermediates-dir-for,PACKAGING,esp_zip)
+esp_zip := $(esp_intermediates)/esp.zip
+$(esp_zip): esp_intermediates := $(esp_intermediates)
+$(esp_zip): esp_root := $(esp_intermediates)/root
+$(esp_zip): \
+		$(TARGET_DEVICE_DIR)/AndroidBoard.mk \
+		$(PRODUCT_OUT)/efi/kfld.efi \
+		$(BOARD_SFU_UPDATE) \
+		| $(ACP) \
+
+	$(hide) rm -rf $(esp_root)
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(esp_root)/capsules
+	$(hide) mkdir -p $(esp_root)/EFI/BOOT
+ifneq ($(BOARD_SFU_UPDATE),)
+        $(hide) $(ACP) $(BOARD_SFU_UPDATE) $(esp_root)/BIOSUPDATE.fv
+        $(hide) $(ACP) $(BOARD_SFU_UPDATE) $(esp_root)/capsules/current.fv
+endif
+	$(hide) $(ACP) $(PRODUCT_OUT)/efi/kfld.efi $(esp_root)/loader.efi
+	$(hide) $(ACP) $(PRODUCT_OUT)/efi/kfld.efi $(esp_root)/EFI/BOOT/$(efi_default_name)
+	$(hide) echo "Android-IA=\\EFI\\BOOT\\$(efi_default_name)" > $(esp_root)/manifest.txt
+ifeq ($(BOARD_BOOTOPTION_FASTBOOT),true)
+	$(hide) echo "Fastboot=\\EFI\\BOOT\\$(efi_default_name);-f">> $(esp_root)/manifest.txt
+endif
+	$(hide) (cd $(esp_root) && zip -qry ../$(notdir $@) .)
+
+
+esp_info := $(esp_intermediates)/esp_image_info.txt
+$(esp_info):
+	$(hide) mkdir -p $(dir $@)
+	$(hide) echo "size=$(BOARD_ESP_PARTITION_SIZE)" > $@
+	$(hide) echo "block_size=$(BOARD_ESP_BLOCK_SIZE)" >> $@
+
+
+esp_bin := $(PRODUCT_OUT)/esp.img
+$(esp_bin): \
+		$(esp_zip) \
+		$(BOOTLOADER_FROM_ZIP)
+
+	$(hide) $(BOOTLOADER_FROM_ZIP) \
+		--size $(BOARD_ESP_PARTITION_SIZE) \
+		--block-size $(BOARD_ESP_BLOCK_SIZE) \
+		--zipfile $(esp_zip) \
+		$@
+
+INSTALLED_RADIOIMAGE_TARGET += $(esp_bin) $(esp_info)
+
+droidcore: $(esp_bin)
+
+.PHONY: esp
+esp: $(esp_bin)
+
+$(call dist-for-goals,droidcore,$(esp_bin):$(TARGET_PRODUCT)-esp-$(FILE_NAME_TAG).img)
+{{/bootloader_slot_ab}}

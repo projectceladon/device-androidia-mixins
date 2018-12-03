@@ -6,6 +6,7 @@ assume_bios_secure_boot = false
 blpolicy_use_efi_var = true
 bootloader_len = 33
 bootloader_policy = false
+bootloader_slot_ab = true
 disk_encryption = true
 file_encryption = false
 ignore_not_applicable_reset = false
