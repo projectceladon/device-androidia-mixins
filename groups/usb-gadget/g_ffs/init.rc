@@ -42,6 +42,8 @@ on boot
     write /sys/devices/pci0000\:00/0000\:00\:15.1/dwc3.0.auto/power/control auto
     write /sys/devices/pci0000\:00/0000\:00\:15.1/dwc3.0.auto/gadget/power/control auto
     write /sys/devices/pci0000\:00/0000\:00\:15.1/dwc3.0.auto/udc/dwc3.0.auto/power/control auto
+    write /sys/class/usb_role/intel_xhci_usb_sw-role-switch/role device
+    setprop sys.usb.config $sys.usb.config
 
 on property:sys.usb.config=none && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/os_desc/use 0
