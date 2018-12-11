@@ -1,0 +1,4 @@
+include $(CLEAR_VARS)
+LOCAL_MODULE := product-partition
+INSTALLED_PRODUCTIMAGE_TARGET := $(PRODUCT_OUT)/product.img
+include $(BUILD_PHONY_PACKAGE)
