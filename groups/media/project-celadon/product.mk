@@ -29,5 +29,12 @@ PRODUCT_PACKAGES += \
     libmfx_omx_components_hw \
     libstagefrighthw
 
+
+# Enable Open source hdcp
+PRODUCT_PACKAGES += libhdcpsdk
+PRODUCT_PACKAGES += lihdcpcommon
+# hdcp daemon
+PRODUCT_PACKAGES += hdcpd
+
 PRODUCT_COPY_FILES += \
     device/intel/project-celadon/common/media/mfx_omxil_core.conf:vendor/etc/mfx_omxil_core.conf
