@@ -23,3 +23,5 @@ on post-fs
     insmod /vendor/lib/modules/kernel/drivers/media/v4l2-core/videobuf2-dma-contig.ko
     insmod /vendor/lib/modules/kernel/drivers/media/v4l2-core/videobuf2-vmalloc.ko
     insmod /vendor/lib/modules/kernel/drivers/media/usb/uvc/uvcvideo.ko
+
+    setprop media.settings.xml /vendor/etc/media_profiles.xml
