@@ -81,3 +81,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 {{#self_usb_device_mode_protocol}}
 KERNELFLINGER_SUPPORT_SELF_USB_DEVICE_MODE_PROTOCOL := {{self_usb_device_mode_protocol}}
 {{/self_usb_device_mode_protocol}}
+
+
+{{#treble}}
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/fstab:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(TARGET_PRODUCT)
+{{/treble}}
+{{^treble}}
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/fstab:root/fstab.$(TARGET_PRODUCT)
+{{/treble}}
