@@ -72,10 +72,6 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/fastboot-usb.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/recovery.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/cache.img
 {{/slot-ab}}
-{{#tos_partition}}
-{{#slot-ab}}
-{{/slot-ab}}
-{{/tos_partition}}
 
 # -- OTA RELATED DEFINES --
 # tell build system where to get the recovery.fstab.
