@@ -16,9 +16,9 @@ flash bootloader bootloader
 flash vbmeta vbmeta.img
 {{/avb}}
 flash boot boot.img
-{{#tos_partition}}
+{{#trusty}}
 flash tos tos.img
-{{/tos_partition}}
+{{/trusty}}
 flash recovery recovery.img
 flash system system.img
 {{#vendor-partition}}
@@ -33,10 +33,10 @@ flash vbmeta_b vbmeta.img
 {{/avb}}
 flash boot_a boot.img
 flash boot_b boot.img
-{{#tos_partition}}
+{{#trusty}}
 flash tos_a tos.img
 flash tos_b tos.img
-{{/tos_partition}}
+{{/trusty}}
 flash system_a system.img
 flash system_b system.img
 {{#vendor-partition}}
