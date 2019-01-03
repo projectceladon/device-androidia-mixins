@@ -1,2 +1,2 @@
 [mixinfo]
-deps = variants boot-arch
+deps = variants boot-arch trusty

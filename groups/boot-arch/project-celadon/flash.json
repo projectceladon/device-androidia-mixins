@@ -204,7 +204,7 @@
                 "timeout": 60000,
                 "tool": "fastboot"
             },
-{{#tos_partition}}
+{{#trusty}}
             {
                 "args": "flash tos ${tos}",
                 "description": "Flash tos partition",
@@ -222,7 +222,7 @@
                 "timeout": 60000,
                 "tool": "fastboot"
             },
-{{/tos_partition}}
+{{/trusty}}
             {
                 "args": "flash system ${system}",
                 "description": "Flash system partition",
@@ -348,7 +348,7 @@
                 "timeout": 60000,
                 "tool": "fastboot"
             },
-{{#tos_partition}}
+{{#trusty}}
             {
                 "args": "flash tos_a ${tos}",
                 "description": "Flash tos_a partition",
@@ -383,7 +383,7 @@
                 "timeout": 60000,
                 "tool": "fastboot"
             },
-{{/tos_partition}}
+{{/trusty}}
             {
                 "args": "flash system_a ${system}",
                 "description": "Flash system_a partition",

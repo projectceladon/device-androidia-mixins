@@ -23,6 +23,6 @@
 /dev/block/by-name/bootloader2  /bootloader2    emmc    defaults                                                    recoveryonly
 /dev/block/by-name/persistent   /persistent     emmc    defaults                                                    defaults
 /dev/block/by-name/metadata     /metadata       ext4    noatime,nosuid,nodev,errors=panic                           wait,check
-{{#tos_partition}}
+{{#trusty}}
 /dev/block/by-name/tos          /tos            emmc    defaults                                                    defaults{{#slot-ab}},slotselect{{/slot-ab}}
-{{/tos_partition}}
+{{/trusty}}
