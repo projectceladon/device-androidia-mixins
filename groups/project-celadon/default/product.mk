@@ -97,10 +97,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.input.noresample=1
 
-# set default USB configuration
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
-
 # AOSP Packages
 PRODUCT_PACKAGES += \
     Launcher3 \
