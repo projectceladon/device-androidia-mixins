@@ -1,10 +1,12 @@
-# init.rc for telephony services specific to flashless platforms using /factory partition
+# init.rc for telephony services specific to flashless platforms using /vendor/factory partition
 
+{{^slot-ab}}
 on init
 # Used as mounting point for factory partition.
 # Calibration files configuring IMEI and RF calibration will also be stored on this partition.
-    mkdir /factory 0770 system system
+    mkdir /vendor/factory 0770 system system
+{{/slot-ab}}
 
 on post-fs
-    restorecon_recursive /factory
+    restorecon_recursive /vendor/factory
     trigger post-fs-factory
