@@ -1,1 +1,1 @@
-/dev/block/by-name/factory      /factory        ext4    rw,noatime                                                  wait
+/dev/block/by-name/factory      /vendor/factory ext4    rw,noatime                                                  wait
