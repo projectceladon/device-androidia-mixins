@@ -1,2 +1,2 @@
 [mixinfo]
-deps = slot-ab avb
+deps = slot-ab avb firststage-mount
