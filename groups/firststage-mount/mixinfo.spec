@@ -1,2 +1,2 @@
 [mixinfo]
-deps = boot-arch disk-bus trusty
+deps = disk-bus avb slot-ab
