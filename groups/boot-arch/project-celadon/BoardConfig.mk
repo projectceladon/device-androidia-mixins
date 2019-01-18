@@ -33,6 +33,8 @@ BOARD_BOOTLOADER_PARTITION_SIZE ?= 62914560
 BOARD_BOOTLOADER_BLOCK_SIZE := 512
 TARGET_BOOTLOADER_BOARD_NAME := $(TARGET_DEVICE)
 
+TARGET_USES_MKE2FS := true
+
 # Kernel Flinger
 TARGET_UEFI_ARCH := x86_64
 # Kernelflinger won't check the ACPI table oem_id, oem_table_id and
