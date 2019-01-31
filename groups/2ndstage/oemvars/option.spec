@@ -1,2 +1,2 @@
 [defaults]
-magic_key_timeout = false
+magic_key_timeout = 80
