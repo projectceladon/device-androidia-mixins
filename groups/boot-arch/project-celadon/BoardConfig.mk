@@ -79,17 +79,17 @@ TARGET_RECOVERY_FSTAB ?= $(TARGET_DEVICE_DIR)/fstab.recovery
 # Used by ota_from_target_files to add platform-specific directives
 # to the OTA updater scripts
 TARGET_RELEASETOOLS_EXTENSIONS ?= device/intel/common/recovery
-{{^avb}}
+#{{^avb}}
 # Adds edify commands swap_entries and copy_partition for robust
 # update of the EFI system partition
-TARGET_RECOVERY_UPDATER_LIBS := libupdater_esp
+#TARGET_RECOVERY_UPDATER_LIBS := libupdater_esp
 # Extra libraries needed to be rolled into recovery updater
 # libgpt_static and libefivar are needed by libupdater_esp
-TARGET_RECOVERY_UPDATER_EXTRA_LIBS := libcommon_recovery libgpt_static
-ifeq ($(TARGET_SUPPORT_BOOT_OPTION),true)
-TARGET_RECOVERY_UPDATER_EXTRA_LIBS += libefivar
-endif
-{{/avb}}
+#TARGET_RECOVERY_UPDATER_EXTRA_LIBS := libcommon_recovery libgpt_static
+#ifeq ($(TARGET_SUPPORT_BOOT_OPTION),true)
+#TARGET_RECOVERY_UPDATER_EXTRA_LIBS += libefivar
+#endif
+#{{/avb}}
 # By default recovery minui expects RGBA framebuffer
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 
