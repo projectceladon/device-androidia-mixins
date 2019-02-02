@@ -29,7 +29,12 @@ endif
 
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3758096384
 
+{{^bootloader_slot_ab}}
 BOARD_BOOTLOADER_PARTITION_SIZE ?= 62914560
+{{/bootloader_slot_ab}}
+{{#bootloader_slot_ab}}
+BOARD_BOOTLOADER_PARTITION_SIZE ?= 20971520
+{{/bootloader_slot_ab}}
 BOARD_BOOTLOADER_BLOCK_SIZE := 512
 TARGET_BOOTLOADER_BOARD_NAME := $(TARGET_DEVICE)
 
@@ -66,8 +71,11 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/kernelflinger.efi
 BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/startup.nsh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/unlock_device.nsh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/efivar_oemlock
-BOARD_FLASHFILES += $(PRODUCT_OUT)/bootloader
+BOARD_FLASHFILES += $(PRODUCT_OUT)/bootloader.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/fastboot-usb.img
+{{#bootloader_slot_ab}}
+BOARD_FLASHFILES += $(PRODUCT_OUT)/esp.img
+{{/bootloader_slot_ab}}
 {{^slot-ab}}
 BOARD_FLASHFILES += $(PRODUCT_OUT)/recovery.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/cache.img
@@ -125,3 +133,15 @@ AB_OTA_POSTINSTALL_CONFIG += \
 {{#usb_storage}}
 KERNELFLINGER_SUPPORT_USB_STORAGE := true
 {{/usb_storage}}
+
+{{#bootloader_slot_ab}}
+BOOTLOADER_SLOT := true
+BOARD_ESP_PARTITION_SIZE := 31457280
+BOARD_ESP_BLOCK_SIZE := $(BOARD_BOOTLOADER_BLOCK_SIZE)
+
+{{#slot-ab}}
+{{#avb}}
+AB_OTA_PARTITIONS += bootloader
+{{/avb}}
+{{/slot-ab}}
+{{/bootloader_slot_ab}}
