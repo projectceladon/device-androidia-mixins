@@ -1,4 +1,4 @@
-BOARD_HAVE_BLUETOOTH_LINUX_PRI := true
+BOARD_HAVE_BLUETOOTH_INTEL_ICNV := true
 DEVICE_PACKAGE_OVERLAYS += device/intel/common/bluetooth/overlay-bt-pan
 BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/bluetooth/common
 
