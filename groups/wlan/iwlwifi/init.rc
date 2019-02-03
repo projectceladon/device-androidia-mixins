@@ -1,7 +1,7 @@
 on post-fs-data
-    chmod 0660 /data/misc/wifi/p2p_supplicant.conf
-	setprop wifi.interface wlan0
-	setprop wifi.direct.interface p2p0
+    setprop wifi.interface wlan0
+    setprop wifi.direct.interface p2p-dev-wlan0
+
     # create config WiFi NVM folder
     mkdir /oem_config/wlan 0770 wifi system
 {{#gpp}}
