@@ -1,7 +1,7 @@
 on post-fs-data
-    chmod 0660 /data/misc/wifi/p2p_supplicant.conf
-	setprop wifi.interface wlan0
-	setprop wifi.direct.interface p2p0
+    setprop wifi.interface wlan0
+    setprop wifi.direct.interface p2p-dev-wlan0
+
     # create config WiFi NVM folder
     mkdir /oem_config/wlan 0770 wifi system
 {{#gpp}}
@@ -57,9 +57,8 @@ service wlan_rest_nvm /system/bin/wlan_intel_restore.sh
     oneshot
 {{/gpp}}
 
-on post-fs
+on boot
     insmod /vendor/lib/modules/kernel/net/wireless/cfg80211.ko
     insmod /vendor/lib/modules/kernel/net/mac80211/mac80211.ko
     insmod /vendor/lib/modules/kernel/drivers/net/wireless/intel/iwlwifi/iwlwifi.ko
     insmod /vendor/lib/modules/kernel/drivers/net/wireless/intel/iwlwifi/mvm/iwlmvm.ko
-
