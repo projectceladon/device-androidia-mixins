@@ -1,9 +1,9 @@
 ifeq ($(MIXIN_DEBUG_LOGS),true)
 {{#treble}}
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/init.coredump.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.coredump.rc
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/init.coredump.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.coredump.rc
 {{/treble}}
 {{^treble}}
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/init.coredump.rc:root/init.coredump.rc
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/init.coredump.rc:root/init.coredump.rc
 {{/treble}}
 endif
 
