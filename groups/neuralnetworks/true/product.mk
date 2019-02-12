@@ -11,10 +11,4 @@ PRODUCT_PACKAGES += \
     libmkldnn
 
 PRODUCT_PACKAGES += \
-    libmyriadPlugin \
-    libmvnc
-
-PRODUCT_PACKAGES += \
-    hello_ncs2 \
-    graphtest_vpu \
     graphtest_cpu
