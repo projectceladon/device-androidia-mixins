@@ -1,0 +1,6 @@
+#
+# system.prop for cel_apl
+#
+
+audio.safemedia.bypass=true
+
