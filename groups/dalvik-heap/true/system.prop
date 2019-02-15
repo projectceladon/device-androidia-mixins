@@ -1,0 +1,3 @@
+{{#gencopying}}
+dalvik.vm.heap.bpssize={{{bpssize}}}m
+{{/gencopying}}

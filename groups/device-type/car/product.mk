@@ -29,3 +29,6 @@ VEHICLE_HAL_PROTO_TYPE := {{vhal-proto-type}}
 # IOC is enabled, add slcan or cbc proto in VHAL
 VEHICLE_HAL_PROTO_TYPE += {{ioc}}
 {{/ioc}}
+
+#We want to use default GC as GENCOPYING
+ART_DEFAULT_GC_TYPE?=GENCOPYING
