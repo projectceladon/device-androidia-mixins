@@ -50,13 +50,5 @@ DEVICE_PACKAGE_OVERLAYS += device/intel/common/wlan/overlay-p2p-connected-stop-s
 DEVICE_PACKAGE_OVERLAYS += device/intel/common/wlan/overlay-miracast-force-single-ch
 DEVICE_PACKAGE_OVERLAYS += device/intel/common/wlan/overlay-wifi-tethering
 
-#BOARD_SEPOLICY_DIRS += #device/intel/sepolicy/wlan/load_iwlwifi
-
-{{#gpp}}
-ifeq ($(findstring cws_manu,$(BOARD_SEPOLICY_DIRS)),)
-    BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/cws_manu
-endif
-{{/gpp}}
-
 BOARD_SEPOLICY_M4DEFS += module_iwlwifi=true
 BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/wlan/iwlwifi
