@@ -24,13 +24,6 @@ PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/android.hardware.wifi.xml:vendor/etc/permissions/android.hardware.wifi.xml \
         frameworks/native/data/etc/android.hardware.wifi.direct.xml:vendor/etc/permissions/android.hardware.wifi.direct.xml
 
-{{#gpp}}
-# Add Manufacturing tool
-PRODUCT_PACKAGES += \
-    wlan_intel_restore.sh
-{{/gpp}}
-
-
 # Wifi configuration
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WLAN_DEVICE := iwlwifi

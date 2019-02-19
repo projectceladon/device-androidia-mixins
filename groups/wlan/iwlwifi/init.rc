@@ -4,10 +4,6 @@ on post-fs-data
 
     # create config WiFi NVM folder
     mkdir /oem_config/wlan 0770 wifi system
-{{#gpp}}
-    start wlan_rest_nvm
-    wait /oem_config/wlan/iwl_nvm.bin
-{{/gpp}}
 
 on zygote-start
     # Create the directories used by the Wireless subsystem
@@ -47,15 +43,6 @@ service dhcpcd_p2p /system/bin/dhcpcd -aABKL
 service iprenew_p2p /system/bin/dhcpcd -n
     disabled
     oneshot
-
-{{#gpp}}
-service wlan_rest_nvm /system/bin/wlan_intel_restore.sh
-    class main
-    user wifi
-    group system wifi
-    disabled
-    oneshot
-{{/gpp}}
 
 on boot
     insmod /vendor/lib/modules/kernel/net/wireless/cfg80211.ko
