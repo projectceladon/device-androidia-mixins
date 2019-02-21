@@ -3,4 +3,4 @@
 #
 
 audio.safemedia.bypass=true
-
+persist.bluetooth.enablenewavrcp=false
