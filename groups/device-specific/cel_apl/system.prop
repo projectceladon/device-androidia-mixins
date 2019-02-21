@@ -4,3 +4,4 @@
 
 audio.safemedia.bypass=true
 persist.bluetooth.enablenewavrcp=false
+media.settings.xml=/vendor/etc/media_profiles.xml
