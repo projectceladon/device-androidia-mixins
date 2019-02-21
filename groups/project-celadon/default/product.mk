@@ -81,7 +81,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Set filenames_mode to cts, for heh is not available
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.crypto.volume.filenames_mode=aes-256-cts
+    ro.vendor.crypto.volume.filenames_mode=aes-256-cts
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.rtc_local_time=1 \
