@@ -5,3 +5,4 @@
 audio.safemedia.bypass=true
 persist.bluetooth.enablenewavrcp=false
 media.settings.xml=/vendor/etc/media_profiles.xml
+ro.crypto.volume.filenames_mode=aes-256-cts
