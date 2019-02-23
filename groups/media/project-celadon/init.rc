@@ -13,9 +13,6 @@ on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
-on boot
-    setprop persist.media.pfw.verbose true
-
 on post-fs
     insmod /vendor/lib/modules/kernel/drivers/media/v4l2-core/videobuf2-core.ko
     insmod /vendor/lib/modules/kernel/drivers/media/v4l2-core/videobuf2-v4l2.ko
