@@ -13,6 +13,9 @@
 {{/slot-ab}}
 {{^slot-ab}}
 /dev/block/by-name/system       /system         ext4    ro                                                          wait{{#avb}},avb{{/avb}}
+{{#avb}}
+/dev/block/by-name/vbmeta       /vbmeta         emmc    defaults                                                    defaults{{#slot-ab}},slotselect,avb{{/slot-ab}}
+{{/avb}}
 /dev/block/by-name/cache        /cache          ext4    noatime,nosuid,nodev,errors=panic                           wait,check
 /dev/block/by-name/recovery     /recovery       emmc    defaults                                                    defaults
 {{/slot-ab}}

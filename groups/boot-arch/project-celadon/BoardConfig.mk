@@ -110,19 +110,27 @@ KERNELFLINGER_USE_RPMB_SIMULATE := true
 {{/rpmb_simulate}}
 
 {{#slot-ab}}
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_vendor=true \
+    POSTINSTALL_PATH_vendor=bin/updater_ab_esp \
+    FILESYSTEM_TYPE_vendor={{system_fs}} \
+    POSTINSTALL_OPTIONAL_vendor=false
+{{/slot-ab}}
+
+{{#avb}}
+BOARD_AVB_ENABLE := true
+KERNELFLINGER_AVB_CMDLINE := true
+BOARD_VBMETAIMAGE_PARTITION_SIZE := 2097152
+BOARD_FLASHFILES += $(PRODUCT_OUT)/vbmeta.img
+{{/avb}}
+
+{{#slot-ab}}
 {{#avb}}
 AB_OTA_PARTITIONS += vbmeta
 {{#trusty}}
 AB_OTA_PARTITIONS += tos
 {{/trusty}}
 {{/avb}}
-
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_vendor=true \
-    POSTINSTALL_PATH_vendor=bin/updater_ab_esp \
-    FILESYSTEM_TYPE_vendor=ext4 \
-    POSTINSTALL_OPTIONAL_vendor=true
-{{/slot-ab}}
 
 {{#usb_storage}}
 KERNELFLINGER_SUPPORT_USB_STORAGE := true
