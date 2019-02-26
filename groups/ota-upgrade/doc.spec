@@ -1,24 +1,19 @@
 === Overview
 
-avb is used to configure avb support
+ota-upgrade is used to configure ota-upgrade support
 
---- deps
-
-    - slot-ab
 
 ==== Options
 
 --- true
-this option is used to add avb support
+this option is used to add ota-upgrade support
 
     --- parameters
 
     --- code dir
-        - external/avb/
-
 
 --- false
-this option is used to not add avb support
+this option is used to not add ota-upgrade support
 
     --- parameters
 
