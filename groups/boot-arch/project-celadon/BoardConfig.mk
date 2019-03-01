@@ -53,6 +53,7 @@ KERNELFLINGER_SSL_LIBRARY := openssl
 BOARD_KERNEL_CMDLINE += iTCO_wdt.force_no_reboot=1
 
 BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/boot-arch/project-celadon/$(TARGET_PRODUCT)
+BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/efi_fw_update
 
 # Show the "OEM unlocking" option in Android "Developer options"
 #PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/android_persistent
@@ -119,7 +120,7 @@ AB_OTA_PARTITIONS += tos
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_vendor=true \
-    POSTINSTALL_PATH_vendor=bin/updater_ab_esp \
+    POSTINSTALL_PATH_vendor=bin/update_ifwi_ab \
     FILESYSTEM_TYPE_vendor=ext4 \
     POSTINSTALL_OPTIONAL_vendor=true
 {{/slot-ab}}

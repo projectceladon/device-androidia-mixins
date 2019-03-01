@@ -6,3 +6,14 @@ service watchdogd /sbin/watchdogd
 
 on boot
     start watchdogd
+
+{{#slot-ab}}
+service efi_fw_update /vendor/bin/updater_ab_esp_static
+    class main
+    user root
+    disabled
+    oneshot
+
+on property:vendor.ota.update.fw=true
+    start efi_fw_update
+{{/slot-ab}}
