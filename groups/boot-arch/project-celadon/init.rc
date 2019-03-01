@@ -6,3 +6,14 @@ service watchdogd /sbin/watchdogd{{#watchdog_parameters}} {{{watchdog_parameters
 
 on charger
     start watchdogd
+
+{{#slot-ab}}
+service efi_fw_update /vendor/bin/updater_ab_esp_vendor
+    class main
+    user root
+    disabled
+    oneshot
+
+on property:vendor.ota.update.fw=true
+    start efi_fw_update
+{{/slot-ab}}
