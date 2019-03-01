@@ -1,2 +1,2 @@
 [mixinfo]
-deps = treble
+deps = treble disk-bus
