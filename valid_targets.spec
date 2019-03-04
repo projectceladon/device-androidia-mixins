@@ -2,6 +2,7 @@
 cel_apl:
 celadon:
 cel_kbl:
+clk:
 
 [aosp]
 aosp_arm:
