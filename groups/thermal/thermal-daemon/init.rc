@@ -18,5 +18,4 @@ on boot
 on post-fs-data
     setprop persist.thermal.mode thermal-daemon
     mkdir /data/vendor/thermal-daemon 0660 system system
-    start thermal-daemon
 
