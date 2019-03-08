@@ -20,3 +20,4 @@ on boot
     insmod /vendor/lib/modules/kernel/drivers/bluetooth/btbcm.ko
     insmod /vendor/lib/modules/kernel/drivers/bluetooth/btrtl.ko
     insmod /vendor/lib/modules/kernel/drivers/bluetooth/btusb.ko
+    insmod /vendor/lib/modules/kernel/sound/usb/btusb/btusb_sco_snd_card.ko
