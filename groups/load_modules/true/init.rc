@@ -9,6 +9,6 @@ service load_modules /vendor/bin/load_modules.sh
 on fs
 {{/firststage-mount}}
 {{#firststage-mount}}
-on early-init
+on boot
 {{/firststage-mount}}
     start load_modules
