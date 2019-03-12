@@ -32,3 +32,7 @@ VEHICLE_HAL_PROTO_TYPE += {{ioc}}
 
 #We want to use default GC as GENCOPYING
 ART_DEFAULT_GC_TYPE?=GENCOPYING
+
+# Boot animation
+PRODUCT_COPY_FILES += \
+    device/intel/project-celadon/common/bootanimations/bootanimation-193.zip:system/product/media/bootanimation.zip
