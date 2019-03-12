@@ -183,9 +183,22 @@ $(BOARD_GPT_BIN): $(TARGET_DEVICE_DIR)/gpt.ini
 	$(hide) echo GEN $(notdir $@)
 
 # Use by updater_ab_esp
-$(PRODUCT_OUT)/vendor.img: $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi
-$(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi: $(PRODUCT_OUT)/efi/kernelflinger.efi
-	$(ACP) $(PRODUCT_OUT)/efi/kernelflinger.efi $@
+{{#bootloader_slot_ab}}
+EFI_FILE := kfld.efi
+UPDATER_MOUNT_POINT := esp
+{{/bootloader_slot_ab}}
+{{^bootloader_slot_ab}}
+EFI_FILE := kernelflinger.efi
+UPDATER_MOUNT_POINT := bootloader
+{{/bootloader_slot_ab}}
+$(PRODUCT_OUT)/vendor.img: $(PRODUCT_OUT)/vendor/firmware/$(EFI_FILE)
+$(PRODUCT_OUT)/vendor/firmware/$(EFI_FILE): $(PRODUCT_OUT)/efi/$(EFI_FILE)
+	$(ACP) $(PRODUCT_OUT)/efi/$(EFI_FILE) $@
+
+make_mountpoint_dir:
+	@mkdir -p $(PRODUCT_OUT)/root/$(UPDATER_MOUNT_POINT)
+
+$(PRODUCT_OUT)/ramdisk.img: make_mountpoint_dir
 
 {{#bootloader_slot_ab}}
 esp_intermediates := $(call intermediates-dir-for,PACKAGING,esp_zip)
