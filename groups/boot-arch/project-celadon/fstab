@@ -19,7 +19,10 @@
 /dev/block/by-name/data         /data           {{^data_use_f2fs}}ext4{{/data_use_f2fs}} {{#data_use_f2fs}}f2fs{{/data_use_f2fs}}    noatime,nosuid,nodev,discard{{^data_use_f2fs}},noauto_da_alloc,errors=panic{{/data_use_f2fs}}   wait,check,formattable{{#disk_encryption}},forceencrypt=/dev/block/by-name/metadata{{/disk_encryption}}{{#trusty}}{{#file_encryption}},fileencryption=aes-256-xts:aes-256-cts{{/file_encryption}}{{/trusty}},quota,reservedsize=50m
 /dev/block/by-name/boot         /boot           emmc    defaults                                                    defaults{{#slot-ab}},slotselect{{/slot-ab}}{{#avb}},avb{{/avb}}
 /dev/block/by-name/misc         /misc           emmc    defaults                                                    defaults
-/dev/block/by-name/bootloader   /bootloader     emmc    defaults                                                    recoveryonly
+{{#bootloader_slot_ab}}
+/dev/block/by-name/esp          /esp            emmc    defaults                                                    recoveryonly
+{{/bootloader_slot_ab}}
+/dev/block/by-name/bootloader   /bootloader     emmc    defaults                                                    recoveryonly{{#bootloader_slot_ab}},slotselect{{/bootloader_slot_ab}}
 /dev/block/by-name/bootloader2  /bootloader2    emmc    defaults                                                    recoveryonly
 /dev/block/by-name/persistent   /persistent     emmc    defaults                                                    defaults
 /dev/block/by-name/metadata     /metadata       emmc    defaults                                                    defaults
