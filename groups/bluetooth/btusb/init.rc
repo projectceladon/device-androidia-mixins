@@ -12,11 +12,3 @@ service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
 service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
-
-on boot
-    insmod /vendor/lib/modules/kernel/crypto/ecdh_generic.ko
-    insmod /vendor/lib/modules/kernel/net/bluetooth/bluetooth.ko
-    insmod /vendor/lib/modules/kernel/drivers/bluetooth/btintel.ko
-    insmod /vendor/lib/modules/kernel/drivers/bluetooth/btbcm.ko
-    insmod /vendor/lib/modules/kernel/drivers/bluetooth/btrtl.ko
-    insmod /vendor/lib/modules/kernel/drivers/bluetooth/btusb.ko
