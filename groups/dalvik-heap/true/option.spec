@@ -1,2 +1,0 @@
-[defaults]
-bpssize=32
