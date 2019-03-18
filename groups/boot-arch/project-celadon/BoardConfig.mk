@@ -119,7 +119,7 @@ AB_OTA_PARTITIONS += tos
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_vendor=true \
-    POSTINSTALL_PATH_vendor=bin/updater_ab_esp \
+    POSTINSTALL_PATH_vendor=bin/update_ifwi_ab \
     FILESYSTEM_TYPE_vendor=ext4 \
     POSTINSTALL_OPTIONAL_vendor=true
 {{/slot-ab}}

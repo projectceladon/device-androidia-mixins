@@ -6,3 +6,27 @@ service watchdogd /sbin/watchdogd
 
 on boot
     start watchdogd
+
+{{#slot-ab}}
+on property:vendor.ota.update.fw=kf_and_bios
+    mount vfat /dev/block/by-name/bootloader /bootloader
+    copy /postinstall/firmware/kernelflinger.efi /bootloader/EFI/BOOT/kernelflinger_new.efi
+    copy /postinstall/firmware/BIOSUPDATE.fv /bootloader/BIOSUPDATE.fv
+    umount /bootloader
+    setprop vendor.ota.update.fw done
+
+on property:vendor.ota.update.fw=kf
+    mount vfat /dev/block/by-name/bootloader /bootloader
+    copy /postinstall/firmware/kernelflinger.efi /bootloader/EFI/BOOT/kernelflinger_new.efi
+    umount /bootloader
+    setprop vendor.ota.update.fw done
+
+on property:vendor.ota.update.fw=bios
+    mount vfat /dev/block/by-name/bootloader /bootloader
+    copy /postinstall/firmware/BIOSUPDATE.fv /bootloader/BIOSUPDATE.fv
+    umount /bootloader
+    setprop vendor.ota.update.fw done
+
+on property:vendor.ota.update.fw=finished
+    umount /bootloader
+{{/slot-ab}}
