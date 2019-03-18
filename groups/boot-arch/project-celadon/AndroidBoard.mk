@@ -181,3 +181,8 @@ $(PRODUCT_OUT)/vendor.img: $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi
 $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi: $(PRODUCT_OUT)/efi/kernelflinger.efi
 	$(ACP) $(PRODUCT_OUT)/efi/kernelflinger.efi $@
 
+make_bootloader_dir:
+	@mkdir -p $(PRODUCT_OUT)/root/bootloader
+
+$(PRODUCT_OUT)/ramdisk.img: make_bootloader_dir
+
