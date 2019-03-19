@@ -2,7 +2,7 @@ ifneq ($(TARGET_PREBUILT_KERNEL),)
 $(error TARGET_PREBUILT_KERNEL defined but AndroidIA kernels build from source)
 endif
 
-TARGET_KERNEL_SRC ?= kernel/project-celadon
+TARGET_KERNEL_SRC ?= kernel/dev
 
 TARGET_KERNEL_ARCH := x86_64
 TARGET_KERNEL_CONFIG ?= kernel_64_defconfig
