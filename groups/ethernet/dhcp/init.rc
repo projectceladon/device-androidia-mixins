@@ -14,8 +14,6 @@ service iprenew_eth0 /system/bin/dhcpcd -n
     oneshot
 
 on post-fs
-    insmod /vendor/lib/modules/kernel/drivers/pps/pps_core.ko
-    insmod /vendor/lib/modules/kernel/drivers/ptp/ptp.ko
     insmod /vendor/lib/modules/kernel/drivers/net/ethernet/intel/e1000e/e1000e.ko
 
 on post-fs
