@@ -2,8 +2,7 @@ ENABLE_NATIVEBRIDGE_64BIT := true
 
 $(call inherit-product,$(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
-include build/make/target/product/treble_common.mk
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+PRODUCT_FULL_TREBLE_OVERRIDE := true
 
 # Include GAS application.
 # Must put this calling before device.mk to make sure GAS overlay take
