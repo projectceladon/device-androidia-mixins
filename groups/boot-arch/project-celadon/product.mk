@@ -11,7 +11,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 endif
 
 {{#slot-ab}}
-PRODUCT_PACKAGES += updater_ab_esp
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/update_ifwi_ab.sh:vendor/bin/update_ifwi_ab
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/update_ifwi_ab.sh:recovery/root/vendor/bin/update_ifwi_ab
 {{/slot-ab}}
 
 {{#ignore_not_applicable_reset}}

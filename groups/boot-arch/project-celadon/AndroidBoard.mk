@@ -176,8 +176,13 @@ $(BOARD_GPT_BIN): $(TARGET_DEVICE_DIR)/gpt.ini
 	$(hide) $(GPT_INI2BIN) $< > $@
 	$(hide) echo GEN $(notdir $@)
 
-# Use by updater_ab_esp
+# Used for efi update
 $(PRODUCT_OUT)/vendor.img: $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi
 $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi: $(PRODUCT_OUT)/efi/kernelflinger.efi
 	$(ACP) $(PRODUCT_OUT)/efi/kernelflinger.efi $@
+
+make_bootloader_dir:
+	@mkdir -p $(PRODUCT_OUT)/root/bootloader
+
+$(PRODUCT_OUT)/ramdisk.img: make_bootloader_dir
 
