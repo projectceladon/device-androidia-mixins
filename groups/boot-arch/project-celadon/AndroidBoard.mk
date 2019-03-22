@@ -247,7 +247,7 @@ $(esp_bin): \
 		--zipfile $(esp_zip) \
 		$@
 
-INSTALLED_RADIOIMAGE_TARGET += $(esp_bin) $(esp_info)
+INSTALLED_RADIOIMAGE_TARGET += $(esp_bin) $(esp_info) $(esp_zip)
 
 droidcore: $(esp_bin)
 
