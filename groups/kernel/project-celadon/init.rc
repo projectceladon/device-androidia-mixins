@@ -104,3 +104,8 @@ on property:sys.boot_completed=1
 	write /sys/devices/system/cpu/cpu3/cpuidle/state7/disable 0
 
 {{/disable_cpuidle_on_boot}}
+
+{{#resume_from_disk}}
+on early-init
+	exec - root root -- /system/bin/resume_from_disk -r /dev/block/sda20
+{{/resume_from_disk}}
