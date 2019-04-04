@@ -152,6 +152,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.configstore@1.0-impl
 
+PRODUCT_PACKAGES += \
+    swap_offset \
+    image_saver \
+    suspend_to_disk \
+    resume_from_disk
+
 # Vendor Interface Manifest
 PRODUCT_COPY_FILES += \
     device/intel/project-celadon/manifest.xml:vendor/manifest.xml

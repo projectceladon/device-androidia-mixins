@@ -96,3 +96,5 @@ PRODUCT_COPY_FILES += \
 # Add the feature of FEATURE_VERIFIED_BOOT
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:vendor/etc/permissions/android.software.verified_boot.xml
+
+PRODUCT_PACKAGES += filefrag
