@@ -13,9 +13,11 @@ on init
     # otherwise the warning page maybe can't be shown.
     trigger mount-all-fs
 
+{{^treble}}
     # Since the modules are stored in /vendor, not in ram disk,
     # so need to restart ueventd after mount_all.
     trigger restart-ueventd
+{{/treble}}
 
 
 on verity-logging
