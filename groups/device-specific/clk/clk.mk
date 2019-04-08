@@ -6,11 +6,6 @@ $(call inherit-product,device/intel/project-celadon/clk/device.mk)
 include build/make/target/product/treble_common.mk
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
-# Include GMS application
-FLAG_GMS_MINIMAL := true
-FLAG_GMS_AVAILABLE := true
-$(call inherit-product-if-exists, vendor/google/gms/products/gms.mk)
-
 # Overrides
 PRODUCT_NAME := clk
 PRODUCT_BRAND := clk
