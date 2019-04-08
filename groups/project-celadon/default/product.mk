@@ -154,4 +154,4 @@ PRODUCT_PACKAGES += \
 
 # Vendor Interface Manifest
 PRODUCT_COPY_FILES += \
-    device/intel/project-celadon/manifest.xml:vendor/manifest.xml
+    $(LOCAL_PATH)/manifest.xml:vendor/manifest.xml
