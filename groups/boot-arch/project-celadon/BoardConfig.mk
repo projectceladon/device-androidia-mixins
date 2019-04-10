@@ -1,105 +1,95 @@
-#TARGET_NO_RECOVERY ?= false
+#
+# -- OTA RELATED DEFINES --
+#
 
-ifeq ({{data_use_f2fs}},true)
+# tell build system where to get the recovery.fstab.
+TARGET_RECOVERY_FSTAB ?= $(TARGET_DEVICE_DIR)/fstab.recovery
+
+# Used by ota_from_target_files to add platform-specific directives
+# to the OTA updater scripts
+TARGET_RELEASETOOLS_EXTENSIONS ?= $(INTEL_PATH_BUILD)/test
+#TARGET_RELEASETOOLS_EXTENSIONS ?= device/intel/common/recovery
+# By default recovery minui expects RGBA framebuffer
+TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
+
+
+#
+# FILESYSTEMS
+#
+
+# NOTE: These values must be kept in sync with BOARD_GPT_INI
+BOARD_BOOTIMAGE_PARTITION_SIZE ?= 31457280
+BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= $$(({{system_partition_size}} * 1024 * 1024))
+BOARD_TOSIMAGE_PARTITION_SIZE := 10485760
+BOARD_BOOTLOADER_PARTITION_SIZE ?= $$(({{bootloader_len}} * 1024 * 1024))
+BOARD_BOOTLOADER_BLOCK_SIZE := {{{bootloader_block_size}}}
+{{^slot-ab}}
+BOARD_RECOVERYIMAGE_PARTITION_SIZE ?= 31457280
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_CACHEIMAGE_PARTITION_SIZE ?= 104857600
+{{/slot-ab}}
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := {{system_fs}}
+DATA_USE_F2FS := {{data_use_f2fs}}
+
+ifeq ($(DATA_USE_F2FS), true)
 TARGET_USERIMAGES_USE_F2FS := true
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
-INTERNAL_USERIMAGES_EXT_VARIANT := f2fs
 else
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
 INTERNAL_USERIMAGES_EXT_VARIANT := ext4
 endif
 
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 576716800
-{{^slot-ab}}
-BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-{{/slot-ab}}
-BOARD_FLASH_BLOCK_SIZE := 512
 
-BOARD_BOOTIMAGE_PARTITION_SIZE := 31457280
-
-ifeq ($(SPARSE_IMG),true)
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
+
+ifeq ($(BOARD_FLASH_UFS), 1)
+BOARD_FLASH_BLOCK_SIZE = 4096
 else
-TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := squashfs
+BOARD_FLASH_BLOCK_SIZE := {{{flash_block_size}}}
 endif
 
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3758096384
+# Partition table configuration file
+#BOARD_GPT_INI ?= $(TARGET_DEVICE_DIR)/gpt.ini
 
-BOARD_BOOTLOADER_PARTITION_SIZE ?= 62914560
-BOARD_BOOTLOADER_BLOCK_SIZE := 512
 TARGET_BOOTLOADER_BOARD_NAME := $(TARGET_DEVICE)
 
-TARGET_USES_MKE2FS := true
+#
+#kernel always use primary gpt without command line option "gpt",
+#the label let kernel use the alternate GPT if primary GPT is corrupted.
+#
+BOARD_KERNEL_CMDLINE += gpt
 
-# Kernel Flinger
-TARGET_UEFI_ARCH := x86_64
-# Kernelflinger won't check the ACPI table oem_id, oem_table_id and
-# revision fields
-KERNELFLINGER_ALLOW_UNSUPPORTED_ACPI_TABLE := true
-# Allow Kernelflinger to start watchdog prior to boot the kernel
-KERNELFLINGER_USE_WATCHDOG := true
-# Tell Kernelflinger to ignore ACPI RSCI table
-KERNELFLINGER_IGNORE_RSCI := true
-#KERNELFLINGER_SSL_LIBRARY := boringssl
-KERNELFLINGER_SSL_LIBRARY := openssl
-# Specify system verity partition
-#PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/by-name/system
+#
+# Trusted Factory Reset - persistent partition
+#
+DEVICE_PACKAGE_OVERLAYS += $(INTEL_PATH_HARDWARE)/bootctrl/boot/overlay
 
-# Avoid Watchdog truggered reboot
-BOARD_KERNEL_CMDLINE += iTCO_wdt.force_no_reboot=1
-
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/boot-arch/project-celadon/$(TARGET_PRODUCT)
-
-# Show the "OEM unlocking" option in Android "Developer options"
-#PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/android_persistent
-
-# Specify file for creating final flashfiles
-# BOARD_GPT_INI ?= $(TARGET_DEVICE_DIR)/gpt.ini
+#can't use := here, as PRODUCT_OUT is not defined yet
 BOARD_GPT_BIN = $(PRODUCT_OUT)/gpt.bin
-BOARD_FLASHFILES += $(PRODUCT_OUT)/system.img
-BOARD_FLASHFILES += $(PRODUCT_OUT)/gpt.bin
-BOARD_FLASHFILES += $(PRODUCT_OUT)/boot.img
+BOARD_FLASHFILES += $(BOARD_GPT_BIN):gpt.bin
+INSTALLED_RADIOIMAGE_TARGET += $(BOARD_GPT_BIN)
+
+# We offer the possibility to flash from a USB storage device using
+# the "installer" EFI application
 BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/installer.efi
-BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/kernelflinger.efi
-BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/startup.nsh
-BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/unlock_device.nsh
-BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/efivar_oemlock
-BOARD_FLASHFILES += $(PRODUCT_OUT)/bootloader
-BOARD_FLASHFILES += $(PRODUCT_OUT)/fastboot-usb.img
-{{^slot-ab}}
-BOARD_FLASHFILES += $(PRODUCT_OUT)/recovery.img
-BOARD_FLASHFILES += $(PRODUCT_OUT)/cache.img
-{{/slot-ab}}
+#BOARD_FLASHFILES += $(INTEL_PATH_HARDWARE)/bootctrl/boot/startup.nsh
 
-# -- OTA RELATED DEFINES --
-# tell build system where to get the recovery.fstab.
-TARGET_RECOVERY_FSTAB ?= $(TARGET_DEVICE_DIR)/fstab.recovery
-# Used by ota_from_target_files to add platform-specific directives
-# to the OTA updater scripts
-TARGET_RELEASETOOLS_EXTENSIONS ?= device/intel/common/recovery
-#{{^avb}}
-# Adds edify commands swap_entries and copy_partition for robust
-# update of the EFI system partition
-#TARGET_RECOVERY_UPDATER_LIBS := libupdater_esp
-# Extra libraries needed to be rolled into recovery updater
-# libgpt_static and libefivar are needed by libupdater_esp
-#TARGET_RECOVERY_UPDATER_EXTRA_LIBS := libcommon_recovery libgpt_static
-#ifeq ($(TARGET_SUPPORT_BOOT_OPTION),true)
-#TARGET_RECOVERY_UPDATER_EXTRA_LIBS += libefivar
-#endif
-#{{/avb}}
-# By default recovery minui expects RGBA framebuffer
-TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
+{{#bootloader_policy}}
+{{#blpolicy_use_efi_var}}
+ifneq ({{bootloader_policy}},static)
+BOOTLOADER_POLICY_OEMVARS = $(PRODUCT_OUT)/bootloader_policy-oemvars.txt
+BOARD_FLASHFILES += $(BOOTLOADER_POLICY_OEMVARS):bootloader_policy-oemvars.txt
+BOARD_OEM_VARS += $(BOOTLOADER_POLICY_OEMVARS)
+endif
+{{/blpolicy_use_efi_var}}
+{{/bootloader_policy}}
 
-{{#assume_bios_secure_boot}}
-# Kernelfligner will assume the BIOS support secure boot. Not check the EFI variable SecureBoot
-# It is useful when the BIOS does not support secure boot.
-KERNELFLINGER_ASSUME_BIOS_SECURE_BOOT := true
-{{/assume_bios_secure_boot}}
+{{#run_tco_on_shutdown}}
+BOARD_KERNEL_CMDLINE += iTCO_wdt.stop_on_shutdown=0
+{{/run_tco_on_shutdown}}
+
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/boot-arch/generic
 
 {{#rpmb}}
 KERNELFLINGER_USE_RPMB := true
@@ -110,20 +100,30 @@ KERNELFLINGER_USE_RPMB_SIMULATE := true
 {{/rpmb_simulate}}
 
 {{#slot-ab}}
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_vendor=true \
+    POSTINSTALL_PATH_vendor=bin/update_ifwi_ab \
+    FILESYSTEM_TYPE_vendor={{system_fs}} \
+    POSTINSTALL_OPTIONAL_vendor=true
+{{/slot-ab}}
+
+{{#avb}}
+BOARD_AVB_ENABLE := true
+KERNELFLINGER_AVB_CMDLINE := true
+BOARD_VBMETAIMAGE_PARTITION_SIZE := 2097152
+BOARD_FLASHFILES += $(PRODUCT_OUT)/vbmeta.img
+{{/avb}}
+
+{{#slot-ab}}
 {{#avb}}
 AB_OTA_PARTITIONS += vbmeta
 {{#trusty}}
 AB_OTA_PARTITIONS += tos
 {{/trusty}}
 {{/avb}}
-
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_vendor=true \
-    POSTINSTALL_PATH_vendor=bin/update_ifwi_ab \
-    FILESYSTEM_TYPE_vendor=ext4 \
-    POSTINSTALL_OPTIONAL_vendor=true
 {{/slot-ab}}
 
 {{#usb_storage}}
 KERNELFLINGER_SUPPORT_USB_STORAGE := true
 {{/usb_storage}}
+
