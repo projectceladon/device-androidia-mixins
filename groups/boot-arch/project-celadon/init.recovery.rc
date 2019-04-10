@@ -1,4 +1,4 @@
-service watchdogd /sbin/watchdogd
+service watchdogd /sbin/watchdogd{{#watchdog_parameters}} {{{watchdog_parameters}}}{{/watchdog_parameters}}
     user root
     class core
     oneshot
@@ -6,3 +6,4 @@ service watchdogd /sbin/watchdogd
 
 on boot
     start watchdogd
+    write /proc/sys/kernel/hung_task_timeout_secs{{#hung_task_timeout_secs}} {{{hung_task_timeout_secs}}}{{/hung_task_timeout_secs}}

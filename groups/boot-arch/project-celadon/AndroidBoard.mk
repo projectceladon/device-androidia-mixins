@@ -1,36 +1,3 @@
-src_loader_file := $(PRODUCT_OUT)/efi/kernelflinger.efi
-tgt_loader_file := $(PRODUCT_OUT)/loader.efi
-
-define generate_flashfiles
-$(shell cp $(src_loader_file) $(tgt_loader_file))
-zip -qj $(1) $(2) $(tgt_loader_file)
-endef
-
-ifneq ($(BUILD_NUMBER),)
-out_flashfiles := $(PRODUCT_OUT)/$(TARGET_PRODUCT)-flashfiles-$(BUILD_NUMBER).zip
-else
-out_flashfiles := $(PRODUCT_OUT)/$(TARGET_PRODUCT).flashfiles.$(TARGET_BUILD_VARIANT).$(USER).zip
-endif
-
-
-$(PRODUCT_OUT)/efi/startup.nsh: $(TARGET_DEVICE_DIR)/{{_extra_dir}}/$(@F)
-	$(ACP) $(TARGET_DEVICE_DIR)/{{_extra_dir}}/$(@F) $@
-	sed -i '/#/d' $@
-
-$(PRODUCT_OUT)/efi/unlock_device.nsh: $(TARGET_DEVICE_DIR)/{{_extra_dir}}/$(@F)
-	$(ACP) $(TARGET_DEVICE_DIR)/{{_extra_dir}}/$(@F) $@
-	sed -i '/#/d' $@
-
-$(PRODUCT_OUT)/efi/efivar_oemlock: $(TARGET_DEVICE_DIR)/$(@F)
-	$(ACP) $(TARGET_DEVICE_DIR)/$(@F) $@
-
-$(out_flashfiles): $(BOARD_FLASHFILES) | $(ACP)
-	$(call generate_flashfiles,$@, $^)
-
-
-.PHONY: flashfiles_simple
-flashfiles_simple: $(out_flashfiles)
-
 # Rules to create bootloader zip file, a precursor to the bootloader
 # image that is stored in the target-files-package. There's also
 # metadata file which indicates how large to make the VFAT filesystem
@@ -57,6 +24,64 @@ endif
 BOARD_FIRST_STAGE_LOADER := $(PRODUCT_OUT)/efi/kernelflinger.efi
 BOARD_EXTRA_EFI_MODULES :=
 
+$(call flashfile_add_blob,capsule.fv,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/capsule.fv,,BOARD_SFU_UPDATE)
+$(call flashfile_add_blob,ifwi.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/ifwi.bin,,EFI_IFWI_BIN)
+$(call flashfile_add_blob,ifwi_dnx.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/ifwi_dnx.bin,,EFI_IFWI_DNX_BIN)
+$(call flashfile_add_blob,firmware.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/emmc.bin,,EFI_EMMC_BIN)
+$(call flashfile_add_blob,afu.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/afu.bin,,EFI_AFU_BIN)
+$(call flashfile_add_blob,dnxp_0x1.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/dnxp_0x1.bin,,DNXP_BIN)
+$(call flashfile_add_blob,cfgpart.xml,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/cfgpart.xml,,CFGPART_XML)
+$(call flashfile_add_blob,cse_spi.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/cse_spi.bin,,CSE_SPI_BIN)
+
+{{#ifwi_debug}}
+ifneq ($(TARGET_BUILD_VARIANT),user)
+# Allow to add debug ifwi file only on userdebug and eng flashfiles
+$(call flashfile_add_blob,ifwi_debug.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/debug/ifwi.bin,,EFI_IFWI_DEBUG_BIN)
+$(call flashfile_add_blob,ifwi_debug_dnx.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/debug/ifwi_dnx.bin,,EFI_IFWI_DEBUG_DNX_BIN)
+endif
+{{/ifwi_debug}}
+
+ifneq ($(EFI_IFWI_BIN),)
+$(call dist-for-goals,droidcore,$(EFI_IFWI_BIN):$(TARGET_PRODUCT)-ifwi-$(FILE_NAME_TAG).bin)
+endif
+
+ifneq ($(EFI_IFWI_DNX_BIN),)
+$(call dist-for-goals,droidcore,$(EFI_IFWI_DNX_BIN):$(TARGET_PRODUCT)-ifwi_dnx-$(FILE_NAME_TAG).bin)
+endif
+
+ifneq ($(EFI_AFU_BIN),)
+$(call dist-for-goals,droidcore,$(EFI_AFU_BIN):$(TARGET_PRODUCT)-afu-$(FILE_NAME_TAG).bin)
+endif
+
+ifneq ($(BOARD_SFU_UPDATE),)
+$(call dist-for-goals,droidcore,$(BOARD_SFU_UPDATE):$(TARGET_PRODUCT)-sfu-$(FILE_NAME_TAG).fv)
+endif
+
+ifneq ($(CALLED_FROM_SETUP),true)
+ifeq ($(wildcard $(BOARD_SFU_UPDATE)),)
+$(warning BOARD_SFU_UPDATE not found, OTA updates will not provide a firmware capsule)
+endif
+ifeq ($(wildcard $(EFI_EMMC_BIN)),)
+$(warning EFI_EMMC_BIN not found, flashfiles will not include 2nd stage EMMC firmware)
+endif
+ifeq ($(wildcard $(EFI_IFWI_BIN)),)
+$(warning EFI_IFWI_BIN not found, IFWI binary will not be provided in out/dist/)
+endif
+ifeq ($(wildcard $(EFI_AFU_BIN)),)
+$(warning EFI_AFU_BIN not found, AFU IFWI binary will not be provided in out/dist/)
+endif
+endif
+
+ifeq ($(BOARD_HAS_USB_DISK),true)
+ifeq ($(FLASHFILE_VARIANTS),)
+BOARD_USB_DISK_IMAGES = $(PRODUCT_OUT)/install-usb.img
+else
+BOARD_USB_DISK_IMAGE_PFX = $(PRODUCT_OUT)/install-usb
+$(foreach var,$(FLASHFILE_VARIANTS), \
+	$(eval BOARD_USB_DISK_IMAGES += $(BOARD_USB_DISK_IMAGE_PFX)-$(var).img))
+endif
+endif
+
 # We stash a copy of BIOSUPDATE.fv so the FW sees it, applies the
 # update, and deletes the file. Follows Google's desire to update all
 # bootloader pieces with a single "fastboot flash bootloader" command.
@@ -80,8 +105,8 @@ $(bootloader_zip): \
 	$(foreach EXTRA,$(BOARD_EXTRA_EFI_MODULES), \
 		$(hide) $(ACP) $(EXTRA) $(efi_root)/)
 ifneq ($(BOARD_SFU_UPDATE),)
-        $(hide) $(ACP) $(BOARD_SFU_UPDATE) $(efi_root)/BIOSUPDATE.fv
-        $(hide) $(ACP) $(BOARD_SFU_UPDATE) $(efi_root)/capsules/current.fv
+	$(hide) $(ACP) $(BOARD_SFU_UPDATE) $(efi_root)/BIOSUPDATE.fv
+	$(hide) $(ACP) $(BOARD_SFU_UPDATE) $(efi_root)/capsules/current.fv
 endif
 	$(hide) $(ACP) $(BOARD_FIRST_STAGE_LOADER) $(efi_root)/loader.efi
 	$(hide) $(ACP) $(BOARD_FIRST_STAGE_LOADER) $(efi_root)/EFI/BOOT/$(efi_default_name)
@@ -102,17 +127,15 @@ INSTALLED_RADIOIMAGE_TARGET += $(bootloader_zip) $(bootloader_info)
 # Rule to create $(OUT)/bootloader image, binaries within are signed with
 # testing keys
 
-BOOTLOADER_FROM_ZIP = device/intel/build/bootloader_from_zip
-
 bootloader_bin := $(PRODUCT_OUT)/bootloader
 $(bootloader_bin): \
 		$(bootloader_zip) \
 		$(IMG2SIMG) \
 		$(BOOTLOADER_ADDITIONAL_DEPS) \
-		$(BOOTLOADER_FROM_ZIP) \
+		$(INTEL_PATH_BUILD)/bootloader_from_zip \
 
-	$(hide) $(BOOTLOADER_FROM_ZIP) \
-		 --size $(BOARD_BOOTLOADER_PARTITION_SIZE) \
+	$(hide) $(INTEL_PATH_BUILD)/bootloader_from_zip \
+		--size $(BOARD_BOOTLOADER_PARTITION_SIZE) \
 		--block-size $(BOARD_BOOTLOADER_BLOCK_SIZE) \
 		$(BOOTLOADER_ADDITIONAL_ARGS) \
 		--zipfile $(bootloader_zip) \
@@ -124,13 +147,16 @@ droidcore: $(bootloader_bin)
 bootloader: $(bootloader_bin)
 $(call dist-for-goals,droidcore,$(bootloader_bin):$(TARGET_PRODUCT)-bootloader-$(FILE_NAME_TAG))
 
+$(call dist-for-goals,droidcore,$(INTEL_PATH_BUILD)/testkeys/testkeys_lockdown.txt:test-keys_efi_lockdown.txt)
+$(call dist-for-goals,droidcore,$(INTEL_PATH_BUILD)/testkeys/unlock.txt:efi_unlock.txt)
+
 fastboot_usb_bin := $(PRODUCT_OUT)/fastboot-usb.img
 $(fastboot_usb_bin): \
 		$(bootloader_zip) \
 		$(BOOTLOADER_ADDITIONAL_DEPS) \
-		$(BOOTLOADER_FROM_ZIP) \
+		$(INTEL_PATH_BUILD)/bootloader_from_zip \
 
-	$(hide) $(BOOTLOADER_FROM_ZIP) \
+	$(hide) $(INTEL_PATH_BUILD)/bootloader_from_zip \
 		$(BOOTLOADER_ADDITIONAL_ARGS) \
 		--zipfile $(bootloader_zip) \
 		--extra-size 10485760 \
@@ -146,7 +172,6 @@ fastboot-usb: $(fastboot_usb_bin)
 $(call dist-for-goals,droidcore,$(fastboot_usb_bin):$(TARGET_PRODUCT)-fastboot-usb-$(FILE_NAME_TAG).img)
 $(call dist-for-goals,droidcore,device/intel/build/testkeys/testkeys_lockdown.txt:test-keys_efi_lockdown.txt)
 $(call dist-for-goals,droidcore,device/intel/build/testkeys/unlock.txt:efi_unlock.txt)
-
 {{#bootloader_policy}}
 {{#blpolicy_use_efi_var}}
 ifeq ($(TARGET_BOOTLOADER_POLICY),$(filter $(TARGET_BOOTLOADER_POLICY),static external))
@@ -155,11 +180,11 @@ ifeq ($(TARGET_BOOTLOADER_POLICY),$(filter $(TARGET_BOOTLOADER_POLICY),static ex
 else
 # Bootloader policy values are generated based on the
 # TARGET_BOOTLOADER_POLICY value and the
-# device/intel/build/testkeys/{odm,OAK} keys.  The OEM must provide
+# $(INTEL_PATH_BUILD)/testkeys/{odm,OAK} keys.  The OEM must provide
 # its own keys.
-GEN_BLPOLICY_OEMVARS := device/intel/build/generate_blpolicy_oemvars
-TARGET_ODM_KEY_PAIR := device/intel/build/testkeys/odm
-TARGET_OAK_KEY_PAIR := device/intel/build/testkeys/OAK
+GEN_BLPOLICY_OEMVARS := $(INTEL_PATH_BUILD)/generate_blpolicy_oemvars
+TARGET_ODM_KEY_PAIR := $(INTEL_PATH_BUILD)/testkeys/odm
+TARGET_OAK_KEY_PAIR := $(INTEL_PATH_BUILD)/testkeys/OAK
 
 $(BOOTLOADER_POLICY_OEMVARS):
 	$(GEN_BLPOLICY_OEMVARS) -K $(TARGET_ODM_KEY_PAIR) \
@@ -170,12 +195,7 @@ endif
 {{/bootloader_policy}}
 
 
-GPT_INI2BIN := ./device/intel/common/gpt_bin/gpt_ini2bin.py
-
-$(BOARD_GPT_BIN): $(TARGET_DEVICE_DIR)/gpt.ini
-	$(hide) $(GPT_INI2BIN) $< > $@
-	$(hide) echo GEN $(notdir $@)
-
+{{#slot-ab}}
 # Used for efi update
 $(PRODUCT_OUT)/vendor.img: $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi
 $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi: $(PRODUCT_OUT)/efi/kernelflinger.efi
@@ -185,4 +205,4 @@ make_bootloader_dir:
 	@mkdir -p $(PRODUCT_OUT)/root/bootloader
 
 $(PRODUCT_OUT)/ramdisk.img: make_bootloader_dir
-
+{{/slot-ab}}
