@@ -1,4 +1,4 @@
-# Set default USB interface
+# Set default USB interfaces
 ifeq ($(TARGET_BUILD_VARIANT),user)
 # Enable Secure Debugging
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.adb.secure=1
