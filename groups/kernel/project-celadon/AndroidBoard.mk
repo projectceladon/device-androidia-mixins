@@ -33,6 +33,8 @@ KERNEL_CONFIG_FILE := device/intel/project-celadon/kernel_config/$(TARGET_KERNEL
 
 ifneq ($(TARGET_BUILD_VARIANT), user)
 KERNEL_CONFIG_FILE += $(wildcard $(KERNEL_CONFIG_DIR)/debug_diffconfig)
+else
+KERNEL_CONFIG_FILE += $(wildcard $(KERNEL_CONFIG_DIR)/user_debug_diffconfig)
 endif
 
 KERNEL_CONFIG := $(KERNEL_OUT)/.config
