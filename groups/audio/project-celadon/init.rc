@@ -1,3 +1,5 @@
 on boot
     insmod /vendor/lib/modules/kernel/sound/drivers/snd-dummy.ko
 
+on boot
+    setprop audio.safemedia.bypass true
