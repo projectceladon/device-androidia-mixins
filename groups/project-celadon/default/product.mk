@@ -102,6 +102,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.input.noresample=1
 
+# set default DBC configuration
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.sys.usb.adbover=dwc
+
 # AOSP Packages
 PRODUCT_PACKAGES += \
     Launcher3 \

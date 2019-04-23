@@ -97,7 +97,7 @@ on boot
     write /sys/kernel/debug/pstate_snb/setpoint 75
 
     # adb over ethernet
-    setprop service.adb.tcp.port 5555
+    # setprop service.adb.tcp.port 5555
 
 service watchdogd /sbin/watchdogd 10 30
     user root
@@ -120,3 +120,17 @@ on fs
    # Update dm-verity persistent state and set partition.*.verified
    # properties
    verity_update_state
+
+# switch adb over dwc
+on property:persist.vendor.sys.usb.adbover=dwc
+#    write /sys/bus/pci/devices/0000:00:14.0/dbc disable
+    stop adbd
+    start adbd
+
+# switch adb over dbc
+on property:persist.vendor.sys.usb.adbover=dbc
+    write /sys/bus/pci/devices/0000:00:14.0/dbc enable
+    write /sys/bus/pci/devices/0000:00:15.0/dbc enable
+    write /sys/bus/pci/devices/0000:39:00.0/dbc enable
+    stop adbd
+    start adbd
