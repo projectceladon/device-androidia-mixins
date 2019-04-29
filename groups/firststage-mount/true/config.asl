@@ -46,6 +46,13 @@ Scope(_SB)
                     Package () {"android.fstab.system.fsmgr_flags", "wait,avb"},  // May vary with platform
 {{/slot-ab}}
 {{/avb}}
+{{^slot-ab}}
+                    Package () {"android.fstab.config.compatible", "android,config"},
+                    Package () {"android.fstab.config.dev", "/dev/block/pci/pci0000:00/0000:00:{{diskbus}}/by-name/config"},  // Varies with platform
+                    Package () {"android.fstab.config.type", "ext4"},  // May vary with platform
+                    Package () {"android.fstab.config.mnt_flags", "rw"},  // May vary with platform
+                    Package () {"android.fstab.config.fsmgr_flags", "wait,check"},  // May vary with platform
+{{/slot-ab}}
                 }
             })
         }

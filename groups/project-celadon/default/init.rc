@@ -9,6 +9,13 @@ on init
     # Should wait for setup the by-name block device
     verity_load_state
 
+    mount /dev/block/by-name/vendor_a /vendor rw
+    mkdir /vendor/oem_config 0755 root root
+    mount ext4 /dev/block/by-name/config /vendor/oem_config
+    mkdir /vendor/oem_config/pm 0755 root root
+
+    exec - root root -- /system/bin/resume_from_disk -r /dev/block/sda19
+
     # If verity-logging is triggered, must mount_all after it,
     # otherwise the warning page maybe can't be shown.
     trigger mount-all-fs
