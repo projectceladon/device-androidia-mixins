@@ -14,7 +14,6 @@ TARGET_PRELINK_MODULE := false
 TARGET_NO_KERNEL ?= false
 
 KERNEL_LOGLEVEL ?= {{{loglevel}}}
-SERIAL_PARAMETER ?= console=tty0
 
 {{^slot-ab}}
 # If enable A/B, then the root should be system partition at last.
@@ -25,7 +24,7 @@ BOARD_KERNEL_CMDLINE += androidboot.hardware=$(TARGET_PRODUCT) firmware_class.pa
 
 ifneq ($(TARGET_BUILD_VARIANT),user)
 ifeq ($(SPARSE_IMG),true)
-BOARD_KERNEL_CMDLINE += $(SERIAL_PARAMETER)
+BOARD_KERNEL_CMDLINE += console=tty0 $(SERIAL_PARAMETER)
 endif
 endif
 
