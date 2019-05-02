@@ -37,11 +37,6 @@ on boot
     setprop sys.usb.configfs 1
     setprop sys.usb.controller dwc3.0.auto
 
-    # Allow auto-suspend of USB gadget devices
-    write /sys/devices/pci0000\:00/0000\:00\:15.1/power/control auto
-    write /sys/devices/pci0000\:00/0000\:00\:15.1/dwc3.0.auto/power/control auto
-    write /sys/devices/pci0000\:00/0000\:00\:15.1/dwc3.0.auto/gadget/power/control auto
-    write /sys/devices/pci0000\:00/0000\:00\:15.1/dwc3.0.auto/udc/dwc3.0.auto/power/control auto
     chown system system /sys/devices/pci0000:00/0000:00:14.0/intel_xhci_usb_sw/usb_role/intel_xhci_usb_sw-role-switch/role
     chmod 0666 /sys/devices/pci0000:00/0000:00:14.0/intel_xhci_usb_sw/usb_role/intel_xhci_usb_sw-role-switch/role
 
