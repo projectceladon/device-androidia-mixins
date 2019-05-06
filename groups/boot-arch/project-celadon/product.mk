@@ -124,6 +124,12 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/persistent
 {{#slot-ab}}
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/update_ifwi_ab.sh:vendor/bin/update_ifwi_ab
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/update_ifwi_ab.sh:recovery/root/vendor/bin/update_ifwi_ab
+{{#userdata_checkpoint}}
+{{#data_use_f2fs}}
+PRODUCT_COPY_FILES += system/extras/checkpoint_gc/checkpoint_gc.sh:vendor/bin/checkpoint_gc
+PRODUCT_COPY_FILES += system/extras/checkpoint_gc/checkpoint_gc.sh:recovery/root/vendor/bin/checkpoint_gc
+{{/data_use_f2fs}}
+{{/userdata_checkpoint}}
 {{/slot-ab}}
 
 {{#avb}}

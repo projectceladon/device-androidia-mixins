@@ -34,6 +34,7 @@ uefi_arch = x86_64
 usb_storage = false
 use_charging_applet = false
 use_power_button = false
+userdata_checkpoint = false
 verity_mode = true
 verity_warning = true
 watchdog_parameters = false

@@ -45,6 +45,7 @@ this option will select UEFI as bootloader.
         - bootloader_len: set for bootloader size
         - flash_block_size: set for BOARD_FLASH_BLOCK_SIZE
         - loader_efi_to_flash: set for fastboot boot command
+        - userdata_checkpoint: userdata checkpoint (UDC) feature for ota rollback in case of failure
 
     --- extra files
         - oemvars.txt:  "magic key detection timeout"

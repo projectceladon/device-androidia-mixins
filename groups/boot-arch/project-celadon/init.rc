@@ -4,10 +4,10 @@ on fs
     # in the fstab.
     {{#mountfstab-flag}}
 {{#treble}}
-    mount_all /vendor/etc/fstab.${ro.hardware}
+    mount_all /vendor/etc/fstab.${ro.hardware}{{#userdata_checkpoint}} --early{{/userdata_checkpoint}}
 {{/treble}}
 {{^treble}}
-    mount_all /fstab.${ro.hardware}
+    mount_all /fstab.${ro.hardware}{{#userdata_checkpoint}} --early{{/userdata_checkpoint}}
 {{/treble}}
     {{/mountfstab-flag}}
 
@@ -19,6 +19,25 @@ service watchdogd /system/bin/watchdogd{{#watchdog_parameters}} {{{watchdog_para
 
 on charger
     start watchdogd
+{{#userdata_checkpoint}}
+
+# We need vold early for metadata encryption
+on early-fs
+    start vold
+
+on late-fs
+    # Wait for keymaster
+    exec_start wait_for_keymaster
+    # Mount latemount partitions which have not been mounted with "on fs"
+    {{#mountfstab-flag}}
+{{#treble}}
+    mount_all /vendor/etc/fstab.${ro.hardware} --late
+{{/treble}}
+{{^treble}}
+    mount_all /fstab.${ro.hardware} --late
+{{/treble}}
+    {{/mountfstab-flag}}
+{{/userdata_checkpoint}}
 {{#verity_warning}}
 
 on init
