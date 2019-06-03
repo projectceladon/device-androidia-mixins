@@ -1,2 +1,3 @@
 [defaults]
-magic_key_timeout = 80
+magic_key_timeout = false
+pram_conf = false
