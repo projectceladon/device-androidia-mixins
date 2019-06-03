@@ -1,0 +1,53 @@
+{{#slot-ab}}
+
+{{#ota_pre_o_version}}
+service abl_user_cmd_slota /vendor/bin/abl-user-cmd_static -s -i m1:@0
+    class main
+    user system
+    group system drmrpc
+    seclabel u:r:drmrpc:s0
+    disabled
+    oneshot
+
+service abl_user_cmd_slotb /vendor/bin/abl-user-cmd_static -s -i m2:@0
+    class main
+    user system
+    group system drmrpc
+    seclabel u:r:drmrpc:s0
+    disabled
+    oneshot
+
+on property:ota.update.abl=a
+    start abl_user_cmd_slota
+
+on property:ota.update.abl=b
+    start abl_user_cmd_slotb
+{{/ota_pre_o_version}}
+
+{{^ota_pre_o_version}}
+{{#post_fw_update}}
+service fw_update_slota /vendor/bin/cmd_fw_update_static -s -i m1:@0
+    class main
+    user root
+    group system drmrpc
+    seclabel u:r:drmrpc:s0
+    disabled
+    oneshot
+
+service fw_update_slotb /vendor/bin/cmd_fw_update_static -s -i m2:@0
+    class main
+    user root
+    group system drmrpc
+    seclabel u:r:drmrpc:s0
+    disabled
+    oneshot
+
+on property:vendor.ota.update.fw=a
+    start fw_update_slota
+
+on property:vendor.ota.update.fw=b
+    start fw_update_slotb
+{{/post_fw_update}}
+{{/ota_pre_o_version}}
+
+{{/slot-ab}}
