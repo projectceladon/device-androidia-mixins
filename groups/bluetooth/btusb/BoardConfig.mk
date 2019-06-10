@@ -1,11 +1,9 @@
 BOARD_HAVE_BLUETOOTH_INTEL_ICNV := true
-DEVICE_PACKAGE_OVERLAYS += device/intel/common/bluetooth/overlay-bt-pan
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/bluetooth/common
-
 {{#ivi}}
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/intel/common/bluetooth/intel/car/
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(INTEL_PATH_COMMON)/bluetooth/intel/car/
 {{/ivi}}
-
 {{^ivi}}
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/intel/common/bluetooth/intel/tablet/
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(INTEL_PATH_COMMON)/bluetooth/intel/tablet/
 {{/ivi}}
+DEVICE_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/bluetooth/overlay-bt-pan
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/bluetooth/common
