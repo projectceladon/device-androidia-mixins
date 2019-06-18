@@ -19,3 +19,4 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service
 
 PRODUCT_PROPERTY_OVERRIDES += audio.safemedia.bypass=true
+PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/audio/overlay-car
