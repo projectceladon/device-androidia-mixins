@@ -9,7 +9,8 @@ $(TOS_IMAGE_TARGET):
 	@echo "making lk.bin.."
 	$(hide) (cd $(TOPDIR)trusty && $(TRUSTY_ENV_VAR) $(LOCAL_MAKE) {{{lk_project}}})
 	@echo "making tos image.."
-	$(hide) (cd $(TOPDIR)vendor/intel/fw/evmm/$(INTERNAL_PLATFORM) && $(TRUSTY_ENV_VAR) $(LOCAL_MAKE))
+	$(hide) (cp $(TRUSTY_BUILDROOT)/build-{{{lk_project}}}/lk.elf $(TOS_IMAGE_TARGET))
+	#$(hide) (cd $(TOPDIR)vendor/intel/fw/evmm/$(INTERNAL_PLATFORM) && $(TRUSTY_ENV_VAR) $(LOCAL_MAKE))
 
 #tos partition is assigned for trusty
 INSTALLED_TOS_IMAGE_TARGET := $(PRODUCT_OUT)/tos.img
