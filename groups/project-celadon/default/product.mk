@@ -5,14 +5,14 @@ PRODUCT_DIR := $(dir $(lastword $(filter-out device/common/%,$(filter device/%,$
 
 INTEL_PATH_DEVICE := device/intel/project-celadon
 INTEL_PATH_COMMON := device/intel/common
-INTEL_PATH_SEPOLICY := device/intel/project-celadon/sepolicy
+INTEL_PATH_SEPOLICY := device/intel/sepolicy
 INTEL_PATH_BUILD := device/intel/build
 INTEL_PATH_HARDWARE := hardware/intel
 INTEL_PATH_VENDOR := vendor/intel
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-DEVICE_PACKAGE_OVERLAYS += device/intel/project-celadon/common/overlay
+DEVICE_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/overlay
 
 PRODUCT_PACKAGES += $(THIRD_PARTY_APPS)
 

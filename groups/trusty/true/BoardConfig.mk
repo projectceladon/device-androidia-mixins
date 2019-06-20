@@ -8,7 +8,7 @@ BOARD_USES_KEYMASTER1 := true
 endif
 {{/enable_hw_sec}}
 
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/trusty
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/trusty
 BOARD_SEPOLICY_M4DEFS += module_trusty=true
 
 LK_PRODUCT := project-celadon_64

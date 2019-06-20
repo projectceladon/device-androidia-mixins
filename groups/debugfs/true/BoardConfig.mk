@@ -1,1 +1,1 @@
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/debugfs
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/debugfs

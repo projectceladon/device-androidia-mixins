@@ -1,2 +1,2 @@
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/thermal
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/thermal/thermal-daemon
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/thermal
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/thermal/thermal-daemon

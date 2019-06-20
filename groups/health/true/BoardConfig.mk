@@ -1,4 +1,4 @@
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/health_hal
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/health_hal
 
 DEVICE_FRAMEWORK_MANIFEST_FILE += \
 				system/libhidl/vintfdata/manifest_healthd_exclude.xml

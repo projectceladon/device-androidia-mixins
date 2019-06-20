@@ -10,9 +10,9 @@ PRODUCT_PACKAGES += libpciaccess
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:vendor/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:vendor/etc/media_codecs_google_video.xml \
-    device/intel/project-celadon/common/media/media_profiles.xml:vendor/etc/media_profiles.xml \
-    device/intel/project-celadon/common/media/media_codecs.xml:vendor/etc/media_codecs.xml \
-    device/intel/project-celadon/common/media/media_codecs_performance.xml:vendor/etc/media_codecs_performance.xml
+    $(INTEL_PATH_COMMON)/media/media_profiles.xml:vendor/etc/media_profiles.xml \
+    $(INTEL_PATH_COMMON)/media/media_codecs.xml:vendor/etc/media_codecs.xml \
+    $(INTEL_PATH_COMMON)/media/media_codecs_performance.xml:vendor/etc/media_codecs_performance.xml
 
 #Enable deep buffer for video playback
 PRODUCT_PROPERTY_OVERRIDES += media.stagefright.audio.deep=true
@@ -37,4 +37,4 @@ PRODUCT_PACKAGES += lihdcpcommon
 PRODUCT_PACKAGES += hdcpd
 
 PRODUCT_COPY_FILES += \
-    device/intel/project-celadon/common/media/mfx_omxil_core.conf:vendor/etc/mfx_omxil_core.conf
+    $(INTEL_PATH_COMMON)/media/mfx_omxil_core.conf:vendor/etc/mfx_omxil_core.conf

@@ -17,4 +17,4 @@ FIRMWARES_DIR ?= vendor/linux/firmware
 FIRMWARE_FILTERS ?= .git/% %.mk
 
 # Firmware
-$(call inherit-product,device/intel/project-celadon/common/firmware.mk)
+$(call inherit-product,$(INTEL_PATH_COMMON)/firmware.mk)

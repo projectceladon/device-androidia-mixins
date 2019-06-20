@@ -52,4 +52,4 @@ DEVICE_PACKAGE_OVERLAYS += device/intel/common/wlan/overlay-miracast-force-singl
 DEVICE_PACKAGE_OVERLAYS += device/intel/common/wlan/overlay-wifi-tethering
 
 BOARD_SEPOLICY_M4DEFS += module_iwlwifi=true
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/wlan/iwlwifi
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/wlan/iwlwifi

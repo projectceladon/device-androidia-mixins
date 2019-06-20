@@ -1,1 +1,1 @@
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/drm-default
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/drm-default
