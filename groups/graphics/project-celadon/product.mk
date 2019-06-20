@@ -9,7 +9,7 @@ PRODUCT_PACKAGES += \
     libsync
 
 PRODUCT_COPY_FILES += \
-    device/intel/project-celadon/common/graphics/drirc:system/etc/drirc
+    $(INTEL_PATH_COMMON)/graphics/drirc:system/etc/drirc
 
 {{#drmhwc}}
 # DRM HWComposer

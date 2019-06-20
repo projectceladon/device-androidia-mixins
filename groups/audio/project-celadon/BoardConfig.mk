@@ -15,4 +15,4 @@ USE_XML_AUDIO_POLICY_CONF ?= 1
 # Use configurable audio policy
 USE_CONFIGURABLE_AUDIO_POLICY ?= 1
 
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/audio/project-celadon
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/audio/project-celadon

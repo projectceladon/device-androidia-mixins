@@ -1,1 +1,1 @@
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/camera-ext/ext-camera-only
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/camera-ext/ext-camera-only

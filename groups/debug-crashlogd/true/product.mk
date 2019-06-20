@@ -9,7 +9,7 @@ endif
 
 ifeq ($(MIXIN_DEBUG_LOGS),true)
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.vendor.crashlogd.data_quota=50
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/crashlogd
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/crashlogd
 
 CRASHLOGD_LOGS_PATH := "/data/logs"
 CRASHLOGD_APLOG := true

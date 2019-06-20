@@ -30,4 +30,4 @@ endif
 
 
 BOARD_SEPOLICY_M4DEFS += module_kernel=true
-BOARD_SEPOLICY_DIRS += device/intel/project-celadon/sepolicy/kernel
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/kernel
