@@ -10,3 +10,11 @@ BOARD_FLASHFILES += $(GPTIMAGE_BIN):$(TARGET_PRODUCT).img
 ifeq ($(TARGET_USE_TRUSTY),true)
 TRUSTY_ENV_VAR += ENABLE_TRUSTY_SIMICS=true
 endif
+
+{{#compress_gptimage}}
+COMPRESS_GPTIMAGE ?= true
+{{/compress_gptimage}}
+
+ifeq ($(COMPRESS_GPTIMAGE), true)
+GPTIMAGE_GZ ?= $(GPTIMAGE_BIN).gz
+endif
