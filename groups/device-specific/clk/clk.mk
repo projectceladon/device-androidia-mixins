@@ -3,8 +3,7 @@ ENABLE_NATIVEBRIDGE_64BIT := true
 $(call inherit-product,$(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product,device/intel/project-celadon/clk/device.mk)
 
-include build/make/target/product/treble_common.mk
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+PRODUCT_FULL_TREBLE_OVERRIDE := true
 
 # Include GMS application
 FLAG_GMS_MINIMAL := true
