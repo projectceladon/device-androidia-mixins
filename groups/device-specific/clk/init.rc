@@ -1,0 +1,8 @@
+on early-init
+	# limit soc power to 8W during boot-up
+	write /sys/devices/virtual/powercap/intel-rapl/intel-rapl:0/constraint_0_power_limit_uw 8000000
+
+on property:sys.boot_completed=1
+	# recover soc power limit to 15W
+	write /sys/devices/virtual/powercap/intel-rapl/intel-rapl:0/constraint_0_power_limit_uw 15000000
+
