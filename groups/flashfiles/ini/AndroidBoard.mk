@@ -10,6 +10,10 @@ $(call add_variant_flashfiles,$(ff_intermediates))
 
 INSTALLED_RADIOIMAGE_TARGET += $(ff_config)
 
+vmlinux := $(PRODUCT_OUT)/obj/kernel/arch/x86/boot/compressed/vmlinux.bin
+$(vmlinux): kernel
+INSTALLED_RADIOIMAGE_TARGET += $(vmlinux)
+
 {{#bts}}
 # If needed, we have to generate the btsdata files.
 # BTS metadata files are to enable Intel Build Tool Suite to support flashing of devices which support scaling
