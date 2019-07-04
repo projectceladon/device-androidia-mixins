@@ -12,7 +12,6 @@ INSTALLED_RADIOIMAGE_TARGET += $(ff_config)
 
 vmlinux := $(PRODUCT_OUT)/obj/kernel/arch/x86/boot/compressed/vmlinux.bin
 $(vmlinux): kernel
-INSTALLED_RADIOIMAGE_TARGET += $(vmlinux)
 
 {{#bts}}
 # If needed, we have to generate the btsdata files.
