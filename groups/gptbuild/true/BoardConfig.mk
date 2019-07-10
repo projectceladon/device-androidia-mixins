@@ -6,7 +6,11 @@ GPTIMAGE_BIN = $(PRODUCT_OUT)/$(TARGET_PRODUCT).img
 {{#generate_craff}}
 CRAFFIMAGE_BIN = $(PRODUCT_OUT)/$(TARGET_PRODUCT).craff
 {{/generate_craff}}
+
+{{^gen_gptimage_when_pub}}
 BOARD_FLASHFILES += $(GPTIMAGE_BIN):$(TARGET_PRODUCT).img
+{{/gen_gptimage_when_pub}}
+
 ifeq ($(TARGET_USE_TRUSTY),true)
 TRUSTY_ENV_VAR += ENABLE_TRUSTY_SIMICS=true
 endif
