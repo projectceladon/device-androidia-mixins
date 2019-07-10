@@ -1,2 +1,3 @@
 [defaults]
-ivi = false
+firmware =
+ivi =
