@@ -1,0 +1,4 @@
+on post-fs
+        start cpuinfo
+service cpuinfo /vendor/bin/cpuinfo.sh
+        chmod 0777 /vendor/bin/cpuinfo.sh 
