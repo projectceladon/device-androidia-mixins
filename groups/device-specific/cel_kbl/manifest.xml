@@ -200,10 +200,10 @@
     <hal format="hidl">
         <name>android.hardware.neuralnetworks</name>
         <transport>hwbinder</transport>
-        <version>1.1</version>
+        <version>1.0</version>
         <interface>
             <name>IDevice</name>
-            <instance>CPU</instance>
+            <instance>mkldnn</instance>
         </interface>
     </hal>
     <hal format="hidl">
