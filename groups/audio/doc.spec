@@ -63,7 +63,7 @@ Audio configurations for Sofia LTE modems variants.
 	--- code dir
 		- $(TARGET_DEVICE_DIR)/audio/AndroidBoard.mk
 		- device/intel/common/mamgr
-		- device/intel/common/audio/overlay
+		- $(TARGET_DEVICE_DIR)/audio/overlay
 		- device/intel/sepolicy/audio/coe-common
 		- vendor/intel/audio/probe/audio_correlation_tool
 		- hardware/intel/audio/coe/soundtrigger
