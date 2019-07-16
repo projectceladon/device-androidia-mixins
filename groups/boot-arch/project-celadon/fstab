@@ -3,9 +3,6 @@
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
-/devices/*/usb*/*               auto            auto    defaults                                                    voldmanaged=usb:auto
-/devices/*/*sdmmc*/*            auto            auto    defaults                                                    voldmanaged=sdcard1:auto
-/devices/*/80860F14:01/mmc_*    auto            auto    defaults                                                    voldmanaged=sdcard1:auto
 
 # If enable AVB and A/B slot, then will mount system partition as / through /dev/dm-0
 {{#avb}}
