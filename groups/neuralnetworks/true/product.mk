@@ -14,3 +14,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     graphtest_cpu
 
+PRODUCT_PROPERTY_OVERRIDES += debug.nn.vlog=0
+PRODUCT_PROPERTY_OVERRIDES += debug.nn.cpuonly=0
+PRODUCT_PROPERTY_OVERRIDES += debug.nn.partition=1
