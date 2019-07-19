@@ -104,6 +104,9 @@ KERNELFLINGER_IGNORE_NOT_APPLICABLE_RESET := true
 PRODUCT_PACKAGES += \
 	slideshow \
 	verity_warning_images
+
+PRODUCT_PACKAGES += mkf2fsuserimg.sh
+
 {{/avb}}
 {{/verity_warning}}
 {{#txe_bind_root_of_trust}}
