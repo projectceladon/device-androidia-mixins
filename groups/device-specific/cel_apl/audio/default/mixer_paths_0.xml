@@ -5,9 +5,6 @@
   <ctl name="Headphone Playback Switch" value="1 1" />
   <ctl name="Speaker Playback Switch" value="0 0" />
   <ctl name="Capture Switch" value="0 0" />
-  <ctl name="Auto-Mute Mode" value="0" />
-  <ctl name="Capture Source" value="Mic" />
-
 
   <path name="speaker">
     <ctl name="Master Playback Switch" value="1" />
