@@ -643,9 +643,7 @@ function install {
 
         if [ "$PLATFORM_HARDWARE" = "server" ]; then
             ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION -v $WORK_DIR/cpu:/sys/devices/system/cpu"
-            ANDROID_CONTAINER_CMDS="$ANDROID_CONTAINER_CMDS -c $CPU_SET -m $(get_mem_node_by_cpuid $CPU_SET)"
-        else
-            ANDROID_CONTAINER_CMDS="$ANDROID_CONTAINER_CMDS -c $CPU_SET"
+            MEM_NODES=$(get_mem_node_by_cpuid $CPU_SET)
         fi
 
         if [ ! -z "$RR_SERVER_FILE" ] && [ ! -z "$(awk ''NR==$((i+1))'' $RR_SERVER_FILE)" ]; then
@@ -661,7 +659,8 @@ function install {
             ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION --net android --ip $IP --mac-address $MAC -p $(($ADB_PORT+i)):5555 -v $WORK_DIR/ipc/config/ethernet/$i:/data/misc/ethernet"
         fi
 
-        $DOCKER container create --name android$i --cpuset-cpus=$CPU_SET --privileged=true $ANDROID_CONTAINER_OPTION $ANDROID_IMAGE $ANDROID_CONTAINER_CMDS $i
+        $DOCKER container create --name android$i --cpuset-cpus=$CPU_SET --cpuset-mems=${MEM_NODES:-0} --privileged=true $ANDROID_CONTAINER_OPTION $ANDROID_IMAGE $ANDROID_CONTAINER_CMDS $i
+
     done
 }
 
