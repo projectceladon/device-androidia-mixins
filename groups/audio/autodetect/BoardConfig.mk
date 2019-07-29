@@ -1,0 +1,2 @@
+DEVICE_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/audio/overlay
+DEVICE_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/audio/overlay-no-ultrasound

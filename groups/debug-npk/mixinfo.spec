@@ -1,2 +1,2 @@
 [mixinfo]
-deps = debug-logs sepolicy pstore
+deps = sepolicy pstore

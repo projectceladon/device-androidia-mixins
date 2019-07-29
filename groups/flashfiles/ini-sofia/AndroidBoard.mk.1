@@ -1,0 +1,35 @@
+
+ff_intermediates := $(call intermediates-dir-for,PACKAGING,flashfiles)
+
+define fftf_build_opt_per_variant
+
+fftf_build_opt.$(1) := $$(ff_intermediates)/fftf_build_$(1).opt
+
+$$(fftf_build_opt.$(1)): $$(ACP)
+	$$(hide) rm -f $$(fftf_build_opt.$(1))
+	$$(eval FFTF_TARGET_TO_FILE.$(1) = \
+					FASTBOOT_IMG_DIR:$$(FASTBOOT_IMG_DIR.$(1)) \
+					FLSTOOL:$$(FLSTOOL) \
+					INTEL_PRG_FILE:$$(INTEL_PRG_FILE.$(1)) \
+					PSI_RAM_FLS:$$(PSI_RAM_FLS.$(1)) \
+					EBL_FLS:$$(EBL_FLS.$(1)) \
+					PSI_RAM_SIGNED_FLS:$$(PSI_RAM_SIGNED_FLS.$(1)) \
+					EBL_SIGNED_FLS:$$(EBL_SIGNED_FLS.$(1)) \
+					SYSTEM_FLS_SIGN_SCRIPT:$$(SYSTEM_FLS_SIGN_SCRIPT) \
+					SOC_FIRMWARE_TYPE:$$(SOC_FIRMWARE_TYPE) \
+					SECPACK_IN_SLB:$$(SECPACK_IN_SLB) \
+					)
+	$$(hide) echo "$$(FFTF_TARGET_TO_FILE.$(1))" > $$@
+
+BOARD_FLASHFILES_FIRMWARE_$(1) += $$(fftf_build_opt.$(1)):fftf_build.opt
+
+endef
+
+$(foreach variant,$(SOFIA_FIRMWARE_VARIANTS),\
+    $(eval $(call fftf_build_opt_per_variant,$(variant))))
+
+ifneq ($(words $(SOFIA_FIRMWARE_VARIANTS)),1)
+FLASHFILE_VARIANTS := $(SOFIA_FIRMWARE_VARIANTS)
+INSTALLED_RADIOIMAGE_TARGET += $(BOARD_DEVICE_MAPPING)
+endif
+

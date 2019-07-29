@@ -1,2 +1,2 @@
 [mixinfo]
-deps = debug-logs
+deps = debug-crashlogd

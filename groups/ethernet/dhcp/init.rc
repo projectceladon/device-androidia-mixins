@@ -1,27 +1,14 @@
-{{#eth-driver}}
-on boot
-	insmod ${ro.boot.moduleslocation}/{{eth-driver}}
-{{/eth-driver}}
-
 service dhcpcd_eth0 /system/bin/dhcpcd -ABDKL
-    class main
-    disabled
-    oneshot
+     class main
+     disabled
+     oneshot
 
 service iprenew_eth0 /system/bin/dhcpcd -n
-    class main
-    disabled
-    oneshot
+     class main
+     disabled
+     oneshot
 
 on post-fs
-    insmod /vendor/lib/modules/kernel/drivers/pps/pps_core.ko
-    insmod /vendor/lib/modules/kernel/drivers/ptp/ptp.ko
-    insmod /vendor/lib/modules/kernel/drivers/net/ethernet/intel/e1000e/e1000e.ko
-
-on post-fs
-    insmod /vendor/lib/modules/kernel/drivers/net/mii.ko
-    insmod /vendor/lib/modules/kernel/drivers/net/phy/libphy.ko
-    insmod /vendor/lib/modules/kernel/drivers/net/usb/usbnet.ko
-    insmod /vendor/lib/modules/kernel/drivers/net/usb/asix.ko
-    insmod /vendor/lib/modules/kernel/drivers/net/usb/r8152.ko
-    insmod /vendor/lib/modules/kernel/drivers/net/ethernet/realtek/r8169.ko
+    insmod /vendor/lib/modules/pps_core.ko
+    insmod /vendor/lib/modules/ptp.ko
+    insmod /vendor/lib/modules/e1000e.ko

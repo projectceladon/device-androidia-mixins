@@ -9,20 +9,15 @@ PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/by-name/system
 
 {{#treble}}
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fstab:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(TARGET_PRODUCT)
+	$(LOCAL_PATH)/fstab:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(TARGET_PRODUCT)
 {{/treble}}
 {{^treble}}
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/fstab:root/fstab.$(TARGET_PRODUCT)
+	$(LOCAL_PATH)/fstab:root/fstab.$(TARGET_PRODUCT)
 {{/treble}}
 
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.verified_boot.xml:vendor/etc/permissions/android.software.verified_boot.xml
-
-{{#slot-ab}}
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/update_ifwi_ab.sh:vendor/bin/update_ifwi_ab
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/update_ifwi_ab.sh:recovery/root/vendor/bin/update_ifwi_ab
-{{/slot-ab}}
 
 {{#acpi_permissive}}
 # Kernelflinger won't check the ACPI table oem_id, oem_table_id and
@@ -125,3 +120,12 @@ KERNELFLINGER_SUPPORT_SELF_USB_DEVICE_MODE_PROTOCOL := {{self_usb_device_mode_pr
 {{/self_usb_device_mode_protocol}}
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/persistent
+
+{{#slot-ab}}
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/update_ifwi_ab.sh:vendor/bin/update_ifwi_ab
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/update_ifwi_ab.sh:recovery/root/vendor/bin/update_ifwi_ab
+{{/slot-ab}}
+
+{{#avb}}
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+{{/avb}}

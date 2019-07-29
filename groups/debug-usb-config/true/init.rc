@@ -1,10 +1,5 @@
-on property:persist.debug.usb.config=dvctrace
-    setprop debug.usb.config dvctrace
+on property:persist.vendor.debug.usb.config=dvctrace
+    setprop vendor.debug.usb.config dvctrace
 
-on property:debug.usb.config=dvctrace
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/f_dvctrace/bProtocol ${persist.debug.dvc.protocol}
-    write /sys/class/android_usb/f_dvctrace/source_dev ${persist.debug.dvc.source_dev}
-    write /sys/class/android_usb/android0/functions ${sys.usb.config},dvctrace
-    write /sys/class/android_usb/android0/enable 1
-    setprop sys.usb.state  ${sys.usb.config},dvctrace
+on property:vendor.debug.usb.config=dvctrace
+    setprop sys.usb.config  ${sys.usb.config},dvctrace

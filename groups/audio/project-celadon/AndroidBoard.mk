@@ -1,3 +1,4 @@
 pfw_rebuild_settings := true
 # Target specific audio configuration files
-include $(INTEL_PATH_COMMON)/audio/AndroidBoard.mk
+include $(TARGET_DEVICE_DIR)/audio/AndroidBoard.mk
+

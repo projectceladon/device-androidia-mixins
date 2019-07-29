@@ -1,0 +1,22 @@
+[defaults]
+earlyprintk = xgold
+boot_boost = false
+memory_hole = false
+relative_sleepstates = false
+pmsuspend_debug = false
+modules_in_bootimg = false
+build_dtbs = true
+debug_modules =
+use_bcmdhd = false
+path =
+external_modules =
+extmod_platform =
+useprebuilt = true
+firmware_path = /vendor/firmware
+kdefconfig =
+camera_cos_hack = false
+binary_name = vmlinux.bin
+interactive_governor = true
+intel_pstate = false
+loglevel = 5
+user_loglevel = 2

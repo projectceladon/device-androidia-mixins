@@ -8,7 +8,7 @@ TARGET_RECOVERY_FSTAB ?= $(TARGET_DEVICE_DIR)/fstab.recovery
 # Used by ota_from_target_files to add platform-specific directives
 # to the OTA updater scripts
 TARGET_RELEASETOOLS_EXTENSIONS ?= $(INTEL_PATH_BUILD)/test
-#TARGET_RELEASETOOLS_EXTENSIONS ?= device/intel/common/recovery
+
 # By default recovery minui expects RGBA framebuffer
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 
@@ -19,7 +19,10 @@ TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 
 # NOTE: These values must be kept in sync with BOARD_GPT_INI
 BOARD_BOOTIMAGE_PARTITION_SIZE ?= 31457280
-BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= $$(({{system_partition_size}} * 1024 * 1024))
+SYSTEM_PARTITION_SIZE = $(shell echo {{system_partition_size}}*1024*1024 | bc)
+{{^dynamic-partitions}}
+BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= $(SYSTEM_PARTITION_SIZE)
+{{/dynamic-partitions}}
 BOARD_TOSIMAGE_PARTITION_SIZE := 10485760
 BOARD_BOOTLOADER_PARTITION_SIZE ?= $$(({{bootloader_len}} * 1024 * 1024))
 BOARD_BOOTLOADER_BLOCK_SIZE := {{{bootloader_block_size}}}
@@ -44,16 +47,22 @@ endif
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 
 ifeq ($(BOARD_FLASH_UFS), 1)
-BOARD_FLASH_BLOCK_SIZE = 4096
+BOARD_FLASH_BLOCK_SIZE := 4096
+else ifeq ($(BOARD_FLASH_NVME), 1)
+BOARD_FLASH_BLOCK_SIZE := 512
 else
 BOARD_FLASH_BLOCK_SIZE := {{{flash_block_size}}}
 endif
 
 # Partition table configuration file
-#BOARD_GPT_INI ?= $(TARGET_DEVICE_DIR)/gpt.ini
+BOARD_GPT_INI ?= $(TARGET_DEVICE_DIR)/gpt.ini
 
 TARGET_BOOTLOADER_BOARD_NAME := $(TARGET_DEVICE)
 
+BOARD_BOOTIMG_HEADER_VERSION := 2
+BOARD_PREBUILT_DTBIMAGE_DIR := $(TARGET_DEVICE_DIR)/acpi
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 #
 #kernel always use primary gpt without command line option "gpt",
 #the label let kernel use the alternate GPT if primary GPT is corrupted.
@@ -73,7 +82,8 @@ INSTALLED_RADIOIMAGE_TARGET += $(BOARD_GPT_BIN)
 # We offer the possibility to flash from a USB storage device using
 # the "installer" EFI application
 BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/installer.efi
-#BOARD_FLASHFILES += $(INTEL_PATH_HARDWARE)/bootctrl/boot/startup.nsh
+BOARD_FLASHFILES += $(PRODUCT_OUT)/efi/startup.nsh
+BOARD_FLASHFILES += $(PRODUCT_OUT)/bootloader.img
 
 {{#bootloader_policy}}
 {{#blpolicy_use_efi_var}}
@@ -90,6 +100,10 @@ BOARD_KERNEL_CMDLINE += iTCO_wdt.stop_on_shutdown=0
 {{/run_tco_on_shutdown}}
 
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/boot-arch/generic
+{{#slot-ab}}
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/boot-arch/slotab_ota/generic
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/boot-arch/slotab_ota/efi
+{{/slot-ab}}
 
 {{#rpmb}}
 KERNELFLINGER_USE_RPMB := true
@@ -98,6 +112,10 @@ KERNELFLINGER_USE_RPMB := true
 {{#rpmb_simulate}}
 KERNELFLINGER_USE_RPMB_SIMULATE := true
 {{/rpmb_simulate}}
+
+{{#nvme_rpmb_scan}}
+KERNELFLINGER_USE_NVME_RPMB := true
+{{/nvme_rpmb_scan}}
 
 {{#slot-ab}}
 AB_OTA_POSTINSTALL_CONFIG += \
@@ -120,10 +138,17 @@ AB_OTA_PARTITIONS += vbmeta
 {{#trusty}}
 AB_OTA_PARTITIONS += tos
 {{/trusty}}
+
+{{#bootloader_slot_ab}}
+BOOTLOADER_SLOT := true
+BOARD_ESP_PARTITION_SIZE := $$(({{esp_partition_size}} * 1024 * 1024))
+BOARD_ESP_BLOCK_SIZE := $(BOARD_BOOTLOADER_BLOCK_SIZE)
+BOARD_FLASHFILES += $(PRODUCT_OUT)/esp.img
+AB_OTA_PARTITIONS += bootloader
+{{/bootloader_slot_ab}}
 {{/avb}}
 {{/slot-ab}}
 
 {{#usb_storage}}
 KERNELFLINGER_SUPPORT_USB_STORAGE := true
 {{/usb_storage}}
-

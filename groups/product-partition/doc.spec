@@ -9,6 +9,7 @@ make it possible to use a single system image for mulitiple sofeware SKUs.
         - slot-ab
         - avb
         - firststage-mount
+        - dynamic-partitions
 
 ==== Options
 

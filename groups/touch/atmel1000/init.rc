@@ -1,0 +1,4 @@
+on post-fs
+    insmod ${ro.vendor.boot.moduleslocation}/atmel_mxt_ts.ko
+    chown system system /sys/bus/i2c/devices/i2c-ATML1000:00/power_HAL_suspend
+    chown system system /sys/bus/i2c/devices/i2c-ATML1000:01/power_HAL_suspend

@@ -26,8 +26,8 @@ $(3)/flashfiles_$(1).ini: $(2) | $(ACP)
 	$$(copy-file-to-target)
 endef
 
-# Define ROOT_VARIANTS and VARIANTS in variants-$(TARGET_PRODUCT).mk
-include $(TARGET_DEVICE_DIR)/variants-$(TARGET_PRODUCT).mk
+# Define ROOT_VARIANTS and VARIANTS in variants.mk
+include $(TARGET_DEVICE_DIR)/variants.mk
 
 # Let the user define it's variants manually if desired
 ifeq ($(FLASHFILE_VARIANTS),)

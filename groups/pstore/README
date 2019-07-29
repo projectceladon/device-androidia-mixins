@@ -1,0 +1,94 @@
+                               pstore
+                               ======
+
+pstore mixins group provides the ability to enforce kernel pstore
+backend.
+
+By default nothing is provided letting kernel to manage it. If
+multiple backend drivers are provided in kernel, the 1st to register
+to pstore will be used. Current kernel uses 'efi' as pstore backend.
+
+Otherwise, a backend could be forced by passing the pstore.backend=
+argument to the kernel cmdline.
+
+Pstore kernel documentation :
+ - Documentation/ABI/testing/pstore
+ - Documentation/ramoops.txt
+
+
+pstore group values
+===================
+
+Supported mixins values for pstore group : efi, ram, ram_dummy,
+ram_pram
+
+efi
+---
+
+'efi' backend uses efi variable to store data at panic time, it is
+reliable for this straight forward task.
+
+ram
+---
+
+'ram' (ramoops) backend allows to log continuously in RAM, with
+console and ftrace options, thus to debug issues in stabilization
+phase which do not lead to panic (hang). It requires that RAM is
+preserved across reboot and that watchdog is working properly, thus is
+not suitable for device power-on/bring-up. It requires that a device
+register itself as a ramoops pstore backend, so this option does not
+work as-is but is currently used as prerequisite for ram_dummy and
+ram_pram.
+
+ram_dummy
+---------
+
+Based on ram backend, but use a dummy device where RAM buffer is
+passed as cmdline parameters. The address and size of the buffer
+should be determined using a usable memory area from memory map, then
+ram_dummy mixin options should be adjusted to fit it. It will mark the
+area as reserved and will be used by the dummy driver.
+
+Available options
++---------------+---------+
+| Name          | Default |
++---------------+---------+
+| record_size   |    4096 |
++---------------+---------+
+| console_size  |    4096 |
++---------------+---------+
+| ftrace_size   |    4096 |
++---------------+---------+
+| dump_oops     |       1 |
++---------------+---------+
+| ecc           |       0 |
++---------------+---------+
+Defaults based on <kernel>/fs/pstore/ram.c
+
+ram_pram
+--------
+
+Based on ram backend, but use PRAM ACPI table and its driver to bind
+to a BIOS managed RAM buffer.
+
+PRAM BIOS feature is configurable through BIOS setup or PRAM_Conf EFI
+variable (GUID ecb54cd9-e5ae-4fdc-a971-e877756068f7). Accepted values
+for variable are 0, 1, 2 and 3 as ASCII string; will configure PRAM
+feature respectively as Disabled, 4 MB, 16 MB and 64 MB. This EFI
+variable could be set at flashing time by using oemvars.txt.
+
+Available options
++---------------+----------+
+| Name          |  Default |
++---------------+----------+
+| record_size   |   0x1000 |
++---------------+----------+
+| console_size  | 0x200000 |
++---------------+----------+
+| ftrace_size   |   0x2000 |
++---------------+----------+
+| dump_oops     |        1 |
++---------------+----------+
+| ecc           |        0 |
++---------------+----------+
+Defaults based on <kernel>/drivers/platform/x86/intel_pstore_pram.c

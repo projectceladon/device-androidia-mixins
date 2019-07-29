@@ -1,0 +1,27 @@
+#!/system/bin/sh
+
+{{#dynamic-partitions}}
+{{#dp_retrofit}}
+DP_PROPERTY_NAME="ro.boot.dynamic_partitions"
+DP_RETROFIT_PROPERTY_NAME="ro.boot.dynamic_partitions_retrofit"
+
+DP_PROPERTY=$(getprop ${DP_PROPERTY_NAME})
+DP_RETROFIT_PROPERTY=$(getprop ${DP_RETROFIT_PROPERTY_NAME})
+
+if [ "${DP_PROPERTY}" != "true" ] || [ "${DP_RETROFIT_PROPERTY}" != "true" ] ; then
+    echo "Error: applied non-retrofit update on build without dynamic" \
+         "partitions."
+    echo "${DP_PROPERTY_NAME}=${DP_PROPERTY}"
+    echo "${DP_RETROFIT_PROPERTY_NAME}=${DP_RETROFIT_PROPERTY}"
+    exit 1
+fi
+
+{{/dp_retrofit}}
+{{/dynamic-partitions}}
+{{#abota-fw}}
+UPDATE_IFWI_AB=/postinstall/bin/update_ifwi_ab
+if [ -f ${UPDATE_IFWI_AB} ]; then
+    source ${UPDATE_IFWI_AB}
+fi
+{{/abota-fw}}
+exit 0

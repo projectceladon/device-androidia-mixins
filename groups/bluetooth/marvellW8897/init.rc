@@ -1,0 +1,20 @@
+on post-fs-data
+    # To store BT paired info
+    mkdir /data/misc/hcid 0770 bluetooth bluetooth
+
+on boot
+   # TMP to be removed: disable power control
+   write /sys/devices/pci0000:00/0000:00:18.0/power/control on
+   insmod ${ro.vendor.boot.moduleslocation}/ecdh_generic.ko
+   insmod ${ro.vendor.boot.moduleslocation}/bluetooth.ko
+   insmod ${ro.vendor.boot.moduleslocation}/hci_uart.ko
+
+on property:vendor.bluetooth.hwcfg=start
+    start vendor.btcfg
+
+service vendor.btcfg /vendor/bin/btcfg.sh
+    user bluetooth
+    group bluetooth
+    oneshot
+    disabled
+

@@ -1,2 +1,3 @@
 [mixinfo]
-deps = trusty
+deps = ota-upgrade dynamic-partitions
+

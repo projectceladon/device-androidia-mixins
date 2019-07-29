@@ -1,0 +1,9 @@
+# Select ufo gen9 libs
+UFO_ENABLE_GEN := gen9
+
+# Use external/drm-bxt
+TARGET_USE_PRIVATE_LIBDRM := true
+LIBDRM_VER ?= bxt
+
+# Force atomic modesetting on gen9 and above
+BOARD_KERNEL_CMDLINE += i915.enable_rc6=0 drm.debug=0

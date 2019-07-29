@@ -1,0 +1,13 @@
+on charger
+    insmod ${ro.vendor.boot.moduleslocation}/cfg80211.ko
+    insmod ${ro.vendor.boot.moduleslocation}/bcmdhd_pcie.ko firmware_path=/vendor/firmware/brcm/fw_bcmdhd_4356a2_pcie.bin nvram_path=/vendor/firmware/brcm/nvram_pcie_4356_a2.cal
+
+on post-fs-data
+    start wlan_prov
+    wait /oem_config/wifi/mac.txt
+    insmod ${ro.vendor.boot.moduleslocation}/cfg80211.ko
+    insmod ${ro.vendor.boot.moduleslocation}/bcmdhd_pcie.ko firmware_path=/vendor/firmware/brcm/fw_bcmdhd_4356a2_pcie.bin nvram_path=/vendor/firmware/brcm/nvram_pcie_4356_a2.cal
+    wait /sys/class/net/wlan0/queues/rx-0/rps_cpus 1
+    write /sys/class/net/wlan0/queues/rx-0/rps_cpus F
+    write /sys/devices/pci0000:00/0000:00:1c.0/0000:01:00.0/enable 1
+    write /sys/devices/pci0000:00/0000:00:1c.0/0000:01:00.0/enable 0

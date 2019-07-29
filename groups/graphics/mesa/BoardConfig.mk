@@ -3,6 +3,11 @@ TARGET_USE_PRIVATE_LIBDRM := true
 LIBDRM_VER ?= intel
 
 BOARD_KERNEL_CMDLINE += vga=current i915.modeset=1 drm.atomic=1 i915.nuclear_pageflip=1 drm.vblankoffdelay=1 i915.fastboot=1
+{{^acrn-guest}}
+{{#enable_guc}}
+BOARD_KERNEL_CMDLINE += i915.enable_guc=2
+{{/enable_guc}}
+{{/acrn-guest}}
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 USE_INTEL_UFO_DRIVER := false
@@ -33,7 +38,7 @@ BOARD_USES_IA_HWCOMPOSER := true
 {{#minigbm}}
 BOARD_USES_MINIGBM := true
 BOARD_ENABLE_EXPLICIT_SYNC := true
-INTEL_MINIGBM := external/minigbm
+INTEL_MINIGBM := $(INTEL_PATH_HARDWARE)/external/minigbm-intel
 {{/minigbm}}
 
 {{^minigbm}}
@@ -50,14 +55,6 @@ BOARD_USES_GRALLOC1 := true
 BOARD_USES_GRALLOC1 := false
 {{/gralloc1}}
 
-{{#cursor_wa}}
-BOARD_CURSOR_WA := true
-{{/cursor_wa}}
-
-{{^cursor_wa}}
-BOARD_CURSOR_WA := false
-{{/cursor_wa}}
-
 {{#threedis_underrun_wa}}
 BOARD_THREEDIS_UNDERRUN_WA := true
 {{/threedis_underrun_wa}}
@@ -73,3 +70,5 @@ BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/graphics/mesa
 {{#mesa_acrn_sepolicy}}
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/graphics/mesa_acrn
 {{/mesa_acrn_sepolicy}}
+
+BOARD_SEPOLICY_M4DEFS += module_hwc_info_service=true

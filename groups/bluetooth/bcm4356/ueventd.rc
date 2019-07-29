@@ -1,0 +1,18 @@
+#Bluedroid uhid support
+/dev/uhid                   0660 bluetooth bluetooth
+
+{{#hsu}}
+/dev/ttyHSU0                0660 bluetooth net_bt_stack
+
+# Device needed by FM
+/dev/radio0                 0666 bluetooth bluetooth
+# Bluetooth and V4L2 FM
+/dev/brcm_bt_drv            0660 bluetooth bluetooth
+{{/hsu}}
+{{^hsu}}
+/dev/ttyS1                  0660 bluetooth bluetooth
+
+# Bluetooth rfkill nodes
+/sys/devices/*/bluetooth/hci0/rfkill* state  0660 bluetooth bluetooth
+/sys/devices/*/bluetooth/hci0/rfkill* type   0440 bluetooth bluetooth
+{{/hsu}}

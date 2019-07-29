@@ -1,2 +1,2 @@
 [mixinfo]
-deps = debug-logs sepolicy
+deps = debug-crashlogd sepolicy

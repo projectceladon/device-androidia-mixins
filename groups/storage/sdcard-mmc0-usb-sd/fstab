@@ -1,2 +1,4 @@
-*/usb*/*/host*/*/block/sd*              auto             auto    defaults                                   voldmanaged=usbdisk:auto{{#adoptableusb}},encryptable=userdata{{/adoptableusb}}
-*/mmc0/*/block/mmcblk*                  auto             auto    defaults                                   voldmanaged=sdcard1:auto{{#adoptablesd}},encryptable=userdata{{/adoptablesd}}
+*/usb*/*/host*/*/block/sd*              auto             vfat    defaults                                   voldmanaged=usbdisk:auto{{#adoptableusb}},encryptable=userdata{{/adoptableusb}}
+*/block/mmcblk0*                        auto             vfat    defaults                                   voldmanaged=sdcard1:auto,encryptable=userdata
+/dev/block/mmcblk0p1                    /sdcard          vfat    defaults                                   recoveryonly
+

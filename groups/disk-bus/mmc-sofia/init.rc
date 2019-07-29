@@ -1,0 +1,10 @@
+on init
+    # Android creates by-name disk links with the disk controller
+    # in the generated path, so that the names pulled out of the GPT
+    # can be associated with the correct disk. Create a shortcut to
+    # /dev/block/by-name so that we can use the same fstabs everywhere.
+    mkdir /dev/block 0755 root root
+    symlink /dev/block/platform/soc0/e0000000.noc/ef010000.l2_noc/e1000000.ahb_per/e2800000.emmc/by-name /dev/block/by-name
+
+    # Create symlink to access ImcPartID nvm partitions
+    symlink /dev/block/platform/soc0/e0000000.noc/ef010000.l2_noc/e1000000.ahb_per/e2800000.emmc/by-name /dev/block/platform/soc0/e0000000.noc/by-name

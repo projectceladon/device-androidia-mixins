@@ -1,4 +1,9 @@
+{{#treble}}
+import /vendor/etc/init/hw/init.crashlogd.rc
+{{/treble}}
+{{^treble}}
 import /init.crashlogd.rc
+{{/treble}}
 {{#ramdump}}
 
 on property:ro.debuggable=0 && property:ro.boot.bootreason=warm
