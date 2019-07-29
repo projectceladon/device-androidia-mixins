@@ -12,8 +12,16 @@ PRODUCT_PACKAGES += esif_ufd \
     DptfPolicyConditionalLogicLib \
     DptfPolicyCritical \
     DptfPolicyEmergencyCallMode \
-    DptfPolicyPassive \
+    DptfPolicyPassive2 \
     DptfPolicyVirtualSensor \
-    upe_java \
-    jhs
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/dptf.dv:/system/etc/dptf/dv/dptf.dv
+    upe_ioc \
+    esif_ws \
+    esif_cmp
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/dptf.dv:/vendor/etc/dptf/dv/dptf.dv
+{{#thermal_lite}}
+PRODUCT_PACKAGES += thermal_lite
+{{/thermal_lite}}
+# Thermal Hal
+PRODUCT_PACKAGES += thermal.$(TARGET_BOARD_PLATFORM) \
+                    android.hardware.thermal@1.0-service.gordon_peak \
+                    android.hardware.thermal@1.0-impl.gordon_peak

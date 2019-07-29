@@ -1,3 +1,3 @@
 [defaults]
-partition_size = 1800
+partition_size = 700
 partition_name = vendor

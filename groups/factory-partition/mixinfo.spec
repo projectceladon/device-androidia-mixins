@@ -1,2 +1,2 @@
 [mixinfo]
-deps = slot-ab vendor-partition
+deps = vendor-partition

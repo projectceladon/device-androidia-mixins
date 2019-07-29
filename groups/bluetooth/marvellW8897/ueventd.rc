@@ -1,0 +1,5 @@
+/dev/{{tty}}                                   0660 bluetooth bluetooth
+
+# Bluetooth rfkill nodes
+/sys/devices/*/hci0/rfkill* state  0660 bluetooth bluetooth
+/sys/devices/*/hci0/rfkill* type   0440 bluetooth bluetooth

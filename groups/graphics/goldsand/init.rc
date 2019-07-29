@@ -1,0 +1,13 @@
+on post-fs
+    # If android believes it is running in the emulator without support for
+    # GPU acceleration it will disable GLES2 usage in canvas allowing Android
+    # to boot to homescreen using only a software GLES1 implementation.
+
+    setprop ro.kernel.qemu.gles 0
+    setprop ro.kernel.qemu 1
+
+service setconsole /system/bin/setconsole -g
+    class main
+    user root
+    oneshot
+

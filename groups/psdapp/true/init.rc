@@ -1,0 +1,16 @@
+on  post-fs-data
+    chown vendor_psd vendor_psd /sys/firmware/acpi/tables/PSDS
+
+on property:vendor.module.psdapp.enable=1
+    start psdapp
+
+on property:vendor.module.psdapp.enable=0
+    stop psdapp
+
+service psdapp /vendor/bin/logwrapper /vendor/bin/psdapp /sys/firmware/acpi/tables/PSDS
+    user vendor_psd
+    group vendor_psd
+    class main
+    disabled
+    oneshot
+

@@ -17,3 +17,5 @@ bootloader = true
 fast_flashfiles=true
 flash_dnx_os=true
 blank_no_fw = false
+acrn-guest = false
+mfgos = false

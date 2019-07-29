@@ -1,0 +1,6 @@
+# For SoFIA devices using power HAL
+/sys/devices/soc0/e0000000.noc/e*.l2_noc/e1000000.ahb_per/e*.i2c_*/i2c-*/* power_HAL_suspend 0644 system system
+/sys/devices/soc0/e0000000.noc/e*.l2_noc/e*.ahb_per/e*.dcc power_HAL_suspend 0644 system system
+
+
+

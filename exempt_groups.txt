@@ -45,7 +45,6 @@ debug-kernel
 debug-lct
 debug-lmdump
 debug-log-watch
-debug-logs
 debug-mpm
 debug-npk
 debug-oct
@@ -114,6 +113,7 @@ media-misc
 mediaserver-radio
 memory
 memtrack
+mfgos
 midi
 mixin-check
 navigationbar
@@ -168,7 +168,6 @@ swap
 telemetry
 telephony
 telephony-config
-testos
 thermal
 touch
 tpm

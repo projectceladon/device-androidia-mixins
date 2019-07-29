@@ -8,3 +8,4 @@ endif
 # Applications which are almost certainly updated on the Play
 # store have dexpreopt disabled
 NO_PLAY_STORE_DEXPREOPT := true
+

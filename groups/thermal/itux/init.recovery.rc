@@ -1,0 +1,16 @@
+{{#thermal_lite}}
+service thermal_lite /vendor/bin/thermal_lite
+    oneshot
+    seclabel u:r:thermal_lite:s0
+
+on post-fs-data
+    start thermal_lite ROS
+{{/thermal_lite}}
+on init
+    setprop sys.powerctl.criticalshutdown 0
+
+{{#change_vbus_det_type}}
+on property:sys.powerctl.criticalshutdown=1
+    write /sys/class/misc/pmic/vbus_det_type edge
+
+{{/change_vbus_det_type}}

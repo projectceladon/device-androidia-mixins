@@ -115,3 +115,9 @@
     * Version 3.2.2
 
     * Fix double remove in same list issue
+
+2019-03-15  Chen Lin Z  <lin.z.chen@intel.com>
+
+    * Version 3.2.3
+
+    * Move file stat operation under conditional statement

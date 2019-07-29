@@ -10,10 +10,13 @@ Documents from Google (Please apply Google drive access first):
 USB/UVC Integrated Cameras: https://drive.google.com/open?id=16C0pV6kcSs08g-105uaFLHsED4WerPwO
 USB web camera support: https://drive.google.com/open?id=1-hzq2L4c5UQ2Es-cQKAn0It8m7zx-W2v (P37~P43)
 
+NOTICE: Due to Android design, external camera can't be used seperately without legacy camera, and
+so we need enable IPU(e.g. ipu4) as well if we enable this option.
+
 ==== Options
 
 --- enabled
-this option is used to enable support for external camera in build with internal cameras (CSI camera)
+this option is used to enable support for external camera in build
 
     --- parameters
 

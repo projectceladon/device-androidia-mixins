@@ -1,0 +1,20 @@
+service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
+    disabled
+    oneshot
+
+service iprenew_bt-pan /system/bin/dhcpcd -n
+    disabled
+    oneshot
+
+on property:nvm_partition=mounted
+    mkdir /nvm_fs_partition/bluetooth 0770 bluetooth system
+    restorecon_recursive /nvm_fs_partition/bluetooth
+    setprop ro.bt.bdaddr_path /nvm_fs_partition/bluetooth/bd_addr.conf
+    start init_bt_nvm
+
+service init_bt_nvm /system/vendor/bin/bt_nvm_init.sh
+    class main
+    user bluetooth
+    group system bluetooth
+    disabled
+    oneshot
