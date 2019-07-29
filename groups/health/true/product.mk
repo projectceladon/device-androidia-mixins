@@ -1,3 +1,3 @@
 PRODUCT_PACKAGES += health
-PRODUCT_PACKAGES += health.$(TARGET_BOARD_PLATFORM) \
-					android.hardware.health@2.0-service.celadon
+
+PRODUCT_PACKAGES += android.hardware.health@2.0-service.{{target}}
