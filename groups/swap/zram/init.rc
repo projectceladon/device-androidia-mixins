@@ -9,9 +9,4 @@ on boot
 
 on post-fs-data
     # Enable swaps described in the fstab
-{{#treble}}
     swapon_all /vendor/etc/fstab.${ro.hardware}
-{{/treble}}
-{{^treble}}
-    swapon_all /fstab.${ro.hardware}
-{{/treble}}

@@ -13,25 +13,21 @@ endif
 
 # (pulled from build/core/Makefile as this gets defined much later)
 # Pick a reasonable string to use to identify files.
-ifneq "" "$(filter eng.%,$(BUILD_NUMBER))"
 # BUILD_NUMBER has a timestamp in it, which means that
 # it will change every time.  Pick a stable value.
-FILE_NAME_TAG := eng.$(USER)
-else
-FILE_NAME_TAG := $(BUILD_NUMBER)
-endif
 
-BOARD_FIRST_STAGE_LOADER := $(PRODUCT_OUT)/efi/kernelflinger.efi
+KF4UEFI := $(PRODUCT_OUT)/efi/kernelflinger.efi
+BOARD_FIRST_STAGE_LOADER := $(KF4UEFI)
 BOARD_EXTRA_EFI_MODULES :=
 
-$(call flashfile_add_blob,capsule.fv,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/capsule.fv,,BOARD_SFU_UPDATE)
-$(call flashfile_add_blob,ifwi.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/ifwi.bin,,EFI_IFWI_BIN)
-$(call flashfile_add_blob,ifwi_dnx.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/ifwi_dnx.bin,,EFI_IFWI_DNX_BIN)
-$(call flashfile_add_blob,firmware.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/emmc.bin,,EFI_EMMC_BIN)
-$(call flashfile_add_blob,afu.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/afu.bin,,EFI_AFU_BIN)
-$(call flashfile_add_blob,dnxp_0x1.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/dnxp_0x1.bin,,DNXP_BIN)
-$(call flashfile_add_blob,cfgpart.xml,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/cfgpart.xml,,CFGPART_XML)
-$(call flashfile_add_blob,cse_spi.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/cse_spi.bin,,CSE_SPI_BIN)
+#$(call flashfile_add_blob,capsule.fv,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/capsule.fv,,BOARD_SFU_UPDATE)
+#$(call flashfile_add_blob,ifwi.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/ifwi.bin,,EFI_IFWI_BIN)
+#$(call flashfile_add_blob,ifwi_dnx.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/ifwi_dnx.bin,,EFI_IFWI_DNX_BIN)
+#$(call flashfile_add_blob,firmware.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/emmc.bin,,EFI_EMMC_BIN)
+#$(call flashfile_add_blob,afu.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/afu.bin,,EFI_AFU_BIN)
+#$(call flashfile_add_blob,dnxp_0x1.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/dnxp_0x1.bin,,DNXP_BIN)
+#$(call flashfile_add_blob,cfgpart.xml,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/cfgpart.xml,,CFGPART_XML)
+#$(call flashfile_add_blob,cse_spi.bin,$(INTEL_PATH_HARDWARE)/fw_capsules/{{target}}/::variant::/$(BIOS_VARIANT)/cse_spi.bin,,CSE_SPI_BIN)
 
 {{#ifwi_debug}}
 ifneq ($(TARGET_BUILD_VARIANT),user)
@@ -100,6 +96,7 @@ $(bootloader_zip): \
 
 	$(hide) rm -rf $(efi_root)
 	$(hide) rm -f $@
+ifneq ($(BOOTLOADER_SLOT), true)
 	$(hide) mkdir -p $(efi_root)/capsules
 	$(hide) mkdir -p $(efi_root)/EFI/BOOT
 	$(foreach EXTRA,$(BOARD_EXTRA_EFI_MODULES), \
@@ -111,9 +108,10 @@ endif
 	$(hide) $(ACP) $(BOARD_FIRST_STAGE_LOADER) $(efi_root)/loader.efi
 	$(hide) $(ACP) $(BOARD_FIRST_STAGE_LOADER) $(efi_root)/EFI/BOOT/$(efi_default_name)
 	$(hide) echo "Android-IA=\\EFI\\BOOT\\$(efi_default_name)" > $(efi_root)/manifest.txt
-ifeq ($(BOARD_BOOTOPTION_FASTBOOT),true)
-	$(hide) echo "Fastboot=\\EFI\\BOOT\\$(efi_default_name);-f">> $(efi_root)/manifest.txt
-endif
+else # BOOTLOADER_SLOT == false
+	$(hide) mkdir -p $(efi_root)/EFI/INTEL/
+	$(hide) $(ACP) $(KF4UEFI) $(efi_root)/EFI/INTEL/KF4UEFI.EFI
+endif # BOOTLOADER_SLOT
 	$(hide) (cd $(efi_root) && zip -qry ../$(notdir $@) .)
 
 bootloader_info := $(intermediates)/bootloader_image_info.txt
@@ -122,12 +120,16 @@ $(bootloader_info):
 	$(hide) echo "size=$(BOARD_BOOTLOADER_PARTITION_SIZE)" > $@
 	$(hide) echo "block_size=$(BOARD_BOOTLOADER_BLOCK_SIZE)" >> $@
 
-INSTALLED_RADIOIMAGE_TARGET += $(bootloader_zip) $(bootloader_info)
 
 # Rule to create $(OUT)/bootloader image, binaries within are signed with
 # testing keys
 
-bootloader_bin := $(PRODUCT_OUT)/bootloader
+bootloader_bin := $(PRODUCT_OUT)/bootloader.img
+ifeq ($(INTEL_PREBUILT),true)
+$(bootloader_bin):
+	$(hide) $(ACP) $(INTEL_PATH_PREBUILTS)/bootloader.img $@
+	@echo "Using prebuilt bootloader image from $(INTEL_PATH_PREBUILTS)"
+else # INTEL_PREBUILT
 $(bootloader_bin): \
 		$(bootloader_zip) \
 		$(IMG2SIMG) \
@@ -140,6 +142,13 @@ $(bootloader_bin): \
 		$(BOOTLOADER_ADDITIONAL_ARGS) \
 		--zipfile $(bootloader_zip) \
 		$@
+ifneq ($(INTEL_PATH_PREBUILTS_OUT),)
+	$(hide) mkdir -p $(INTEL_PATH_PREBUILTS_OUT)
+	$(hide) $(ACP) $@ $(INTEL_PATH_PREBUILTS_OUT)
+endif # INTEL_PATH_PREBUILTS_OUT
+endif # INTEL_PREBUILT
+
+INSTALLED_RADIOIMAGE_TARGET += $(bootloader_zip) $(bootloader_bin) $(bootloader_info)
 
 droidcore: $(bootloader_bin)
 
@@ -150,28 +159,6 @@ $(call dist-for-goals,droidcore,$(bootloader_bin):$(TARGET_PRODUCT)-bootloader-$
 $(call dist-for-goals,droidcore,$(INTEL_PATH_BUILD)/testkeys/testkeys_lockdown.txt:test-keys_efi_lockdown.txt)
 $(call dist-for-goals,droidcore,$(INTEL_PATH_BUILD)/testkeys/unlock.txt:efi_unlock.txt)
 
-fastboot_usb_bin := $(PRODUCT_OUT)/fastboot-usb.img
-$(fastboot_usb_bin): \
-		$(bootloader_zip) \
-		$(BOOTLOADER_ADDITIONAL_DEPS) \
-		$(INTEL_PATH_BUILD)/bootloader_from_zip \
-
-	$(hide) $(INTEL_PATH_BUILD)/bootloader_from_zip \
-		$(BOOTLOADER_ADDITIONAL_ARGS) \
-		--zipfile $(bootloader_zip) \
-		--extra-size 10485760 \
-		--bootable \
-		$@
-
-# Build when 'make' is run with no args
-droidcore: $(fastboot_usb_bin)
-
-.PHONY: fastboot-usb
-fastboot-usb: $(fastboot_usb_bin)
-
-$(call dist-for-goals,droidcore,$(fastboot_usb_bin):$(TARGET_PRODUCT)-fastboot-usb-$(FILE_NAME_TAG).img)
-$(call dist-for-goals,droidcore,device/intel/build/testkeys/testkeys_lockdown.txt:test-keys_efi_lockdown.txt)
-$(call dist-for-goals,droidcore,device/intel/build/testkeys/unlock.txt:efi_unlock.txt)
 {{#bootloader_policy}}
 {{#blpolicy_use_efi_var}}
 ifeq ($(TARGET_BOOTLOADER_POLICY),$(filter $(TARGET_BOOTLOADER_POLICY),static external))
@@ -194,7 +181,6 @@ endif
 {{/blpolicy_use_efi_var}}
 {{/bootloader_policy}}
 
-
 {{#slot-ab}}
 # Used for efi update
 $(PRODUCT_OUT)/vendor.img: $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi
@@ -205,4 +191,66 @@ make_bootloader_dir:
 	@mkdir -p $(PRODUCT_OUT)/root/bootloader
 
 $(PRODUCT_OUT)/ramdisk.img: make_bootloader_dir
+
+{{#bootloader_slot_ab}}
+esp_intermediates := $(call intermediates-dir-for,PACKAGING,esp_zip)
+esp_zip := $(esp_intermediates)/esp.zip
+$(esp_zip): esp_intermediates := $(esp_intermediates)
+$(esp_zip): esp_root := $(esp_intermediates)/root
+$(esp_zip): \
+		$(TARGET_DEVICE_DIR)/AndroidBoard.mk \
+		$(PRODUCT_OUT)/efi/kfld.efi \
+		$(BOARD_SFU_UPDATE) \
+		| $(ACP) \
+
+	$(hide) rm -rf $(esp_root)
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(esp_root)/capsules
+	$(hide) mkdir -p $(esp_root)/EFI/BOOT
+	$(hide) mkdir -p $(esp_root)/EFI/INTEL
+ifneq ($(BOARD_SFU_UPDATE),)
+        $(hide) $(ACP) $(BOARD_SFU_UPDATE) $(esp_root)/BIOSUPDATE.fv
+        $(hide) $(ACP) $(BOARD_SFU_UPDATE) $(esp_root)/capsules/current.fv
+endif
+	$(hide) $(ACP) $(PRODUCT_OUT)/efi/kfld.efi $(esp_root)/loader.efi
+	$(hide) $(ACP) $(PRODUCT_OUT)/efi/kfld.efi $(esp_root)/EFI/BOOT/$(efi_default_name)
+	$(hide) echo "Android-IA=\\EFI\\BOOT\\$(efi_default_name)" > $(esp_root)/manifest.txt
+ifeq ($(BOARD_BOOTOPTION_FASTBOOT),true)
+	$(hide) echo "Fastboot=\\EFI\\BOOT\\$(efi_default_name);-f">> $(esp_root)/manifest.txt
+endif
+	$(hide) (cd $(esp_root) && zip -qry ../$(notdir $@) .)
+
+
+esp_info := $(esp_intermediates)/esp_image_info.txt
+$(esp_info):
+	$(hide) mkdir -p $(dir $@)
+	$(hide) echo "size=$(BOARD_ESP_PARTITION_SIZE)" > $@
+	$(hide) echo "block_size=$(BOARD_ESP_BLOCK_SIZE)" >> $@
+
+
+esp_bin := $(PRODUCT_OUT)/esp.img
+$(esp_bin): \
+		$(esp_zip) \
+		$(INTEL_PATH_BUILD)/bootloader_from_zip \
+
+	$(hide) $(INTEL_PATH_BUILD)/bootloader_from_zip \
+		--size $(BOARD_ESP_PARTITION_SIZE) \
+		--block-size $(BOARD_ESP_BLOCK_SIZE) \
+		--zipfile $(esp_zip) \
+		$@
+
+INSTALLED_RADIOIMAGE_TARGET += $(esp_zip) $(esp_bin) $(esp_info)
+
+droidcore: $(esp_bin)
+
+.PHONY: esp
+esp: $(esp_bin)
+
+$(call dist-for-goals,droidcore,$(esp_bin):$(TARGET_PRODUCT)-esp-$(FILE_NAME_TAG).img)
+
+$(PRODUCT_OUT)/vendor.img: $(PRODUCT_OUT)/vendor/firmware/kfld.efi
+$(PRODUCT_OUT)/vendor/firmware/kfld.efi: $(PRODUCT_OUT)/efi/kfld.efi
+	$(ACP) $(PRODUCT_OUT)/efi/kfld.efi $@
+
+{{/bootloader_slot_ab}}
 {{/slot-ab}}

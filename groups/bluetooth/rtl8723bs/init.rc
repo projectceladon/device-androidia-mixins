@@ -3,30 +3,34 @@
 #  BLUETOOTH CONFIGURATION - REALTEK SPECIFIC
 ########################################################
 on boot
+    insmod ${ro.vendor.boot.moduleslocation}/bt_lpm.ko
+    insmod ${ro.vendor.boot.moduleslocation}/iptable_raw.ko
+    insmod ${ro.vendor.boot.moduleslocation}/ip6table_raw.ko
+    insmod ${ro.vendor.boot.moduleslocation}/6lowpan_iphc.ko
     start rfkill_bt
 
 on post-fs
-    mkdir /config/bt
-    chown system bluetooth /config/bt
-    chmod 0770 /config/bt
+    mkdir {{path_bt_nvm}}
+    chown system bluetooth {{path_bt_nvm}}
+    chmod 0770 {{path_bt_nvm}}
     start bd_prov
 
 on early-boot
-    chmod 0644 /config/bt/bd_addr.conf
-    setprop ro.bt.bdaddr_path "/config/bt/bd_addr.conf"
+    chmod 0644 {{path_bt_nvm}}/bd_addr.conf
+    setprop ro.bt.bdaddr_path "{{path_bt_nvm}}/bd_addr.conf"
 
-service rfkill_bt /system/bin/sh /rfkill_bt.sh
+service rfkill_bt /system/bin/rfkill_bt.sh
     class core
     user root
     oneshot
 
-service dhcpcd_bt-pan /system/bin/logwrapper /system/bin/dhcpcd -ABKL
+service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
     class main
     group bluetooth wifi system dhcp
     disabled
     oneshot
 
-service iprenew_bt-pan /system/bin/logwrapper /system/bin/dhcpcd -n
+service iprenew_bt-pan /system/bin/dhcpcd -n
     group bluetooth system dhcp
     disabled
     oneshot
@@ -44,19 +48,22 @@ on post-fs-data
     mkdir /data/misc/hcid 0770 bluetooth bluetooth
 
 on boot
+    insmod ${ro.vendor.boot.moduleslocation}/8250_dw.ko
+    insmod ${ro.vendor.boot.moduleslocation}/bluetooth.ko
+    insmod ${ro.vendor.boot.moduleslocation}/hci_uart.ko
     chmod 0644 /sys/kernel/debug/bluetooth/l2cap_le_max_credits
     chmod 0644 /sys/kernel/debug/bluetooth/l2cap_le_default_mps
 
 on post-fs-data
     mkdir /data/misc/dhcp 0770 dhcp system
 
-on property:bluetooth.hwcfg=start
-    start btcfg
+on property:vendor.bluetooth.hwcfg=start
+    start vendor.btcfg
 
-on property:bluetooth.hwcfg=stop
-    stop btcfg
+on property:vendor.bluetooth.hwcfg=stop
+    stop vendor.btcfg
 
-service btcfg /system/bin/hciattach -n /dev/ttyS1 rtk_h5
+service vendor.btcfg /vendor/bin/hciattach -n /dev/ttyS1 rtk_h5
     user bluetooth
     group bluetooth
     oneshot
@@ -69,4 +76,9 @@ service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
 service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
+
+on boot
+    insmod ${ro.vendor.boot.moduleslocation}/iptable_raw.ko
+    insmod ${ro.vendor.boot.moduleslocation}/ip6table_raw.ko
+    insmod ${ro.vendor.boot.moduleslocation}/6lowpan_iphc.ko
 {{/hsu}}

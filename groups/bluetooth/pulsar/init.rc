@@ -1,0 +1,54 @@
+on post-fs-data
+{{#bt_usc}}
+    chown bluetooth bluetooth /system/vendor/bin/btnvmmerge
+    chmod 0770 /system/vendor/bin/btnvmmerge
+{{/bt_usc}}
+{{#gpp}}
+    # create BT NVM folder
+    mkdir {{path_bt_nvm}} 0770 bluetooth system
+    restorecon_recursive {{path_bt_nvm}}
+{{/gpp}}
+
+on boot
+    insmod ${ro.vendor.boot.moduleslocation}/lnp_ldisc.ko
+    insmod ${ro.vendor.boot.moduleslocation}/iptable_raw.ko
+    insmod ${ro.vendor.boot.moduleslocation}/ip6table_raw.ko
+    insmod ${ro.vendor.boot.moduleslocation}/6lowpan_iphc.ko
+    setprop ro.bt.bdaddr_path {{path_bt_nvm}}/bd_addr.conf
+#FIXME: to be reenabled when libbt script is adapted for N & GSP
+    # start init_bt_nvm
+
+service init_bt_nvm /system/vendor/bin/bt_nvm_init.sh
+    class main
+    user bluetooth
+    group system bluetooth
+    disabled
+    oneshot
+
+service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
+   class main
+   group bluetooth wifi system dhcp
+   disabled
+   oneshot
+
+service iprenew_bt-pan /system/bin/dhcpcd -n
+   class main
+   group bluetooth system dhcp
+   disabled
+   oneshot
+
+#Bluetooth HFP version update to 1.6
+on post-fs-data
+    setprop ro.bluetooth.hfp.ver 1.6
+
+#Bluetooth timeout values for Simics environment
+on post-fs-data
+    setprop bluetooth.enable_timeout_ms 80000000
+    setprop bluetooth.enable_delay_ms 120000000
+    setprop bluetooth.disable_delay_ms 80000000
+    setprop bluetooth.bredr_start_delay_ms 40000000
+    setprop bluetooth.ble_start_delay_ms 20000000
+    setprop bluetooth.ble_stop_delay_ms 20000000
+    setprop bluetooth.bredr_stop_delay_ms 40000000
+    setprop bluetooth.property_op_delay_ms 20000000
+    setprop bluetooth.emu.enable 1

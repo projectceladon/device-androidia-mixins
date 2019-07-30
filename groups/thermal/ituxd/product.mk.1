@@ -1,0 +1,12 @@
+ENABLE_ITUX := true
+ITUX_ACPI_CONFIG := false
+{{#modem_zone}}
+ITUX_MODEM_CTL := true
+{{/modem_zone}}
+PRODUCT_PACKAGES += itux
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/config/thermal_sensor_config.xml:/vendor/etc/thermal_sensor_config.xml \
+    $(LOCAL_PATH)/config/thermal_throttle_config.xml:/vendor/etc/thermal_throttle_config.xml
+{{#thermal_lite}}
+PRODUCT_PACKAGES += thermal_lite
+{{/thermal_lite}}

@@ -1,2 +1,2 @@
 [mixinfo]
-deps = ota-upgrade
+deps = dynamic-partitions

@@ -1,0 +1,57 @@
+on post-fs
+    setprop persist.service.thermal 1
+    setprop persist.vendor.thermal.mode itux
+    setprop persist.thermal.shutdown.msg 1
+    setprop persist.thermal.shutdown.vibra 1
+    setprop persist.thermal.shutdown.tone 1
+    setprop persist.thermal.display.msg 1
+    setprop persist.thermal.display.vibra 1
+    setprop sys.powerctl.criticalshutdown 0
+
+    # Permissions for Thermal Management
+    chown system system /sys/class/mali/pm/max_freq_level
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/thermal_scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu1/cpufreq/thermal_scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu2/cpufreq/thermal_scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu3/cpufreq/thermal_scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thermal_scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu1/cpufreq/thermal_scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu2/cpufreq/thermal_scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu3/cpufreq/thermal_scaling_max_freq
+    chmod 0664 /sys/class/mali/pm/max_freq_level
+
+on boot
+    chown system system /sys/class/powercap/intel-rapl:0/enabled
+    chown system system /sys/class/powercap/intel-rapl:0/constraint_0_power_limit_uw
+    restorecon_recursive /sys/class/powercap
+{{#thermal_lite}}
+service thermal_lite /vendor/bin/thermal_lite
+    class charger
+    seclabel u:r:thermal_lite:s0
+{{/thermal_lite}}
+
+{{#change_vbus_det_type}}
+on property:sys.powerctl.criticalshutdown=1
+    write /sys/class/misc/pmic/vbus_det_type edge
+
+{{/change_vbus_det_type}}
+{{#reset_policy}}
+# reset thermal policy when zygote restart or stopped
+on property:init.svc.zygote=restarting
+    write /sys/devices/virtual/thermal/thermal_zone0/policy step_wise
+    write /sys/devices/virtual/thermal/thermal_zone1/policy step_wise
+    write /sys/devices/virtual/thermal/thermal_zone2/policy step_wise
+    write /sys/devices/virtual/thermal/thermal_zone3/policy step_wise
+    write /sys/devices/virtual/thermal/thermal_zone4/policy step_wise
+    write /sys/devices/virtual/thermal/thermal_zone5/policy step_wise
+    write /sys/devices/virtual/thermal/thermal_zone6/policy step_wise
+on property:init.svc.zygote=stopped
+    write /sys/devices/virtual/thermal/thermal_zone0/policy step_wise
+    write /sys/devices/virtual/thermal/thermal_zone1/policy step_wise
+    write /sys/devices/virtual/thermal/thermal_zone2/policy step_wise
+    write /sys/devices/virtual/thermal/thermal_zone3/policy step_wise
+    write /sys/devices/virtual/thermal/thermal_zone4/policy step_wise
+    write /sys/devices/virtual/thermal/thermal_zone5/policy step_wise
+    write /sys/devices/virtual/thermal/thermal_zone6/policy step_wise
+{{/reset_policy}}
+

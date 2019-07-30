@@ -1,1 +1,3 @@
-ADDITIONAL_DEFAULT_PROPERTIES += ro.sf.lcd_density=320
+PRODUCT_AAPT_CONFIG := {{product_aapt_config}}
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.sf.lcd_density=320

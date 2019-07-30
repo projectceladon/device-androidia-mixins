@@ -1,0 +1,25 @@
+on boot
+    insmod ${ro.vendor.boot.moduleslocation}/btif_drv.ko
+
+on post-fs-data
+    mkdir /data/misc/dhcp 0770 dhcp system
+
+service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
+    disabled
+    oneshot
+
+service iprenew_bt-pan /system/bin/dhcpcd -n
+    disabled
+    oneshot
+
+on property:nvm_partition=mounted
+    mkdir /nvm_fs_partition/bluetooth 0770 bluetooth system
+    restorecon_recursive /nvm_fs_partition/bluetooth
+    start init_bt_nvm
+
+service init_bt_nvm /system/vendor/bin/bt_nvm_init.sh
+    class main
+    user bluetooth
+    group system bluetooth
+    disabled
+    oneshot

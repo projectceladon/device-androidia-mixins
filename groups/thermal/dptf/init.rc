@@ -1,7 +1,7 @@
 on post-fs
-    setprop persist.thermal.mode dptf
+    setprop persist.vendor.thermal.mode dptf
 
-service esif_ufd /system/vendor/bin/esif_ufd -n
+service esif_ufd /vendor/bin/esif_ufd -n
     user system
     group system
     class main
@@ -16,4 +16,12 @@ on boot
     chown system system /sys/devices/system/cpu/intel_pstate/no_turbo
     chown system system /sys/class/powercap/intel-rapl:0/enabled
     chown system system /sys/class/powercap/intel-rapl:0/constraint_0_power_limit_uw
+    chown system system /sys/class/backlight/intel_backlight/brightness
+    chown system system /sys/class/thermal/cooling_device5/cur_state
     restorecon_recursive /sys/class/powercap
+
+{{#thermal_lite}}
+service thermal_lite /vendor/bin/thermal_lite
+    class charger
+    seclabel u:r:thermal_lite:s0
+{{/thermal_lite}}

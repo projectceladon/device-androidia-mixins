@@ -1,0 +1,75 @@
+                             debug-npk
+                             =========
+
+debug-npk group enables debug features related to North Peak.
+Particularly, this allows to redirect the android logs to
+North Peak so that they are aggregated with other platform logs.
+
+Associated service is 'ap_lognpk', which executes logcatext to
+redirect Android logs to North Peak.
+
+Debug only mixins consideration
+-------------------------------
+
+This feature is part of 'debug-*' groups, which are dedicated to debug
+and product stabilisation, thus do not target final products and user
+builds.
+
+As per build variant (eng, userdebug, user) dedicated files feature is
+not available with mixins, per option files are provided in
+'device/intel/common/debug/' folder and will be included at build time
+regarding selected option.
+
+Mixin parameters
+----------------
+
+* default_cfg: The default configuration to apply to Northpeak.
+* npk_cfg_path: Location of Northpeak config file npk.cfg.
+* console_master_range: Masters allocated for kernel console output (with
+  quotes): "<beginning> <end>"
+* console_channel_range: channels allocated for kernel console output (with
+  quotes): "<beginning> <end>"
+* user_master_range: Masters allocated for user-space output (with
+  quotes): "<beginning> <end>"
+* user_channel_range: channels allocated for user-space output (with
+  quotes): "<beginning> <end>"
+
+Logging configuration
+---------------------
+
+The North Peak configuration is triggered through properties.
+The configuration is persistent across reboots.
+
+ *) Update the current configuration
+
+Set vendor.npk.cfg.update property. Eg.
+
+    setprop vendor.npk.cfg.update pstore,sw,fw
+
+This will trigger a runtime re-configuration of the North Peak.
+The current configuration can be seen in persist.vendor.npk.cfg.
+
+The configuration value is a comma separated list starting with the output
+and followed by all sources to be enabled.
+
+    <output>,<source>[,<source>...]
+
+output:
+    pstore
+    dvc
+    pti
+source:
+    android
+    kernel
+    fw
+    sw(=android,kernel)
+
+ *) Override configuration
+
+The configuration can be forced through the kernel command line with
+    androidboot.npk.cfg=<output>,<source>[,<source>...]
+
+Note that this will set android property ro.boot.npk.cfg.
+
+Changing the configuration with vendor.npk.cfg.update will have no effect in this
+case.

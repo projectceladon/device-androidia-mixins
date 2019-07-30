@@ -1,0 +1,1 @@
+/sys/devices/pci0000:00/0000:00:*.0/intel_xhci_usb_sw/usb_role/intel_xhci_usb_sw-role-switch role 0664 system system

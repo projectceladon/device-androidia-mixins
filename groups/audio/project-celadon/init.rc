@@ -1,3 +1,2 @@
 on boot
-    insmod /vendor/lib/modules/kernel/sound/drivers/snd-dummy.ko
-
+    insmod /vendor/lib/modules/snd-dummy.ko

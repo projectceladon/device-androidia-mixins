@@ -1,7 +1,9 @@
+{{#address}}
 BOARD_KERNEL_CMDLINE += \
 	memmap={{{size}}}\$${{{address}}} \
 	ramoops.mem_address={{{address}}} \
 	ramoops.mem_size={{{size}}}
+{{/address}}
 {{#record_size}}
 BOARD_KERNEL_CMDLINE += \
 	ramoops.record_size={{{record_size}}}

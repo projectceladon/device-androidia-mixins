@@ -1,0 +1,2 @@
+TARGET_KERNEL_ARCH := i386
+

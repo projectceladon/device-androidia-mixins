@@ -9,10 +9,8 @@ PRODUCT_COPY_FILES += \
 
 # Make sure vendor car product overlays take precedence than google definition
 # under packages/services/Car/car_product/overlay/
-PRODUCT_PACKAGE_OVERLAYS += device/intel/common/device-type/overlay-car
+PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/device-type/overlay-car
 $(call inherit-product, packages/services/Car/car_product/build/car.mk)
-
-$(call inherit-product,frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
 PRODUCT_PACKAGES += \
     radio.fm.default \
@@ -20,9 +18,16 @@ PRODUCT_PACKAGES += \
     VmsPublisherClientSample \
     VmsSubscriberClientSample \
 
-PRODUCT_PACKAGES += android.hardware.automotive.vehicle.intel@2.0-service \
-    android.hardware.automotive.vehicle@2.0-service \
+{{^aosp_hal}}
+PRODUCT_PACKAGES += android.hardware.automotive.vehicle.intel@2.0-service
+{{/aosp_hal}}
+
+PRODUCT_PACKAGES += android.hardware.automotive.audiocontrol@1.0-service.intel
+
+{{#aosp_hal}}
+PRODUCT_PACKAGES += android.hardware.automotive.vehicle@2.0-service \
     android.hardware.automotive.vehicle@2.0-impl
+{{/aosp_hal}}
 
 VEHICLE_HAL_PROTO_TYPE := {{vhal-proto-type}}
 {{#ioc}}

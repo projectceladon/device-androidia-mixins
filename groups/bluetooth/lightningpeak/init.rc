@@ -1,0 +1,53 @@
+on post-fs-data
+{{#bt_usc}}
+    chown bluetooth bluetooth /system/vendor/bin/btnvmmerge
+    chmod 0770 /system/vendor/bin/btnvmmerge
+{{/bt_usc}}
+{{#gpp}}
+    # create BT NVM folder
+    mkdir {{path_bt_nvm}} 0770 bluetooth system
+    restorecon_recursive {{path_bt_nvm}}
+{{/gpp}}
+
+on boot
+    insmod ${ro.vendor.boot.moduleslocation}/iptable_raw.ko
+    insmod ${ro.vendor.boot.moduleslocation}/ip6table_raw.ko
+{{^hsu}}
+{{^usif}}
+    chmod 0660 /sys/devices/pci0000:00/0000:00:18.0/power/control
+    chown bluetooth bluetooth /sys/devices/pci0000:00/0000:00:18.0/power/control
+    # TMP: disable power control
+    write /sys/devices/pci0000:00/0000:00:18.0/power/control on
+    # by default, 8250 driver is used
+    insmod ${ro.vendor.boot.moduleslocation}/8250_dw.ko
+{{/usif}}
+{{/hsu}}
+    insmod ${ro.vendor.boot.moduleslocation}/6lowpan_iphc.ko
+    insmod ${ro.vendor.boot.moduleslocation}/lnp_ldisc.ko
+{{^gpp}}
+
+on property:nvm_partition=mounted
+    mkdir /nvm_fs_partition/bluetooth 0770 bluetooth system
+    restorecon_recursive /nvm_fs_partition/bluetooth
+{{/gpp}}
+    setprop ro.bt.bdaddr_path {{path_bt_nvm}}/bd_addr.conf
+    start init_bt_nvm
+
+service init_bt_nvm /system/vendor/bin/bt_nvm_init.sh
+    class main
+    user bluetooth
+    group system bluetooth
+    disabled
+    oneshot
+
+service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
+   class main
+   group bluetooth wifi system dhcp
+   disabled
+   oneshot
+
+service iprenew_bt-pan /system/bin/dhcpcd -n
+   class main
+   group bluetooth system dhcp
+   disabled
+   oneshot

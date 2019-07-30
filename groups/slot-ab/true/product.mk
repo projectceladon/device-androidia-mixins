@@ -15,4 +15,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.bootctrl=intel
 
 PRODUCT_PACKAGES_DEBUG += \
-	bootctl
+    bootctl
+
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/postinstall.sh:vendor/bin/postinstall
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/postinstall.sh:recovery/root/vendor/bin/postinstall

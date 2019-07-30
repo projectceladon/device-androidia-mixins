@@ -16,9 +16,6 @@ specify ttyS1 as serial port.
 --- ttyS2
 specify ttyS2 as serial port.
 
---- ttyUSB0
-specify ttyUSB0 as serial port.
-
 --- none
 empty dir.
 

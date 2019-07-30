@@ -1,0 +1,9 @@
+on boot
+    write /proc/sys/net/ipv4/tcp_limit_output_bytes 1500000
+    # Update network parameters
+    write /proc/sys/net/core/rmem_max 6291456
+    write /proc/sys/net/core/rmem_default 4194304
+
+    write /proc/sys/net/core/wmem_max 1048576
+    write /proc/sys/net/core/wmem_default 524288
+

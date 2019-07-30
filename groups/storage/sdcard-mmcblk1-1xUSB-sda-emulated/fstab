@@ -1,4 +1,4 @@
-*/block/sda*                            auto             vfat    defaults                                   voldmanaged=usbdisk:auto{{#adoptableusb}},encryptable=userdata{{/adoptableusb}}
+/devices/*/usb*/*                       auto             vfat    defaults                                   voldmanaged=usbdisk:auto{{#adoptableusb}},encryptable=userdata{{/adoptableusb}}
 */block/mmcblk1*                        auto             vfat    defaults                                   voldmanaged=sdcard1:auto{{#adoptablesd}},encryptable=userdata{{/adoptablesd}}
 /dev/block/mmcblk1p1                    /sdcard          vfat    defaults                                   recoveryonly
 

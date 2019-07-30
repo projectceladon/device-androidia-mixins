@@ -1,2 +1,2 @@
 [mixinfo]
-deps = slot-ab serialport
+deps = boot-arch
