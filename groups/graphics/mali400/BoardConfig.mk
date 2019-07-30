@@ -1,0 +1,1 @@
+BOARD_USE_MALI_GFX := true

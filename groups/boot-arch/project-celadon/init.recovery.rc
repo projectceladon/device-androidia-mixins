@@ -1,4 +1,4 @@
-service watchdogd /sbin/watchdogd{{#watchdog_parameters}} {{{watchdog_parameters}}}{{/watchdog_parameters}}
+service watchdogd /system/bin/watchdogd{{#watchdog_parameters}} {{{watchdog_parameters}}}{{/watchdog_parameters}}
     user root
     class core
     oneshot

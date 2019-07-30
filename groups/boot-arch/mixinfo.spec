@@ -1,2 +1,2 @@
 [mixinfo]
-deps = variants slot-ab avb storage config-partition vendor-partition factory-partition treble
+deps = variants slot-ab ota-upgrade avb dynamic-partitions

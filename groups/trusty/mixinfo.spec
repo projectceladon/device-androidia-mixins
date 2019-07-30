@@ -1,2 +1,2 @@
 [mixinfo]
-deps = sepolicy boot-arch avb slot-ab firststage-mount
+deps = sepolicy boot-arch device-specific

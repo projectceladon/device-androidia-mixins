@@ -1,3 +1,5 @@
 [defaults]
 vhal-proto-type=google-emulator
-ioc = false
+disable-ipu=false
+aosp_hal=false
+ioc=false

@@ -1,0 +1,1 @@
+../coe-common/BoardConfig.mk

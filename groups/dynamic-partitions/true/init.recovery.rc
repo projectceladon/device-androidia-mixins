@@ -1,0 +1,4 @@
+{{#dp_retrofit}}
+on early-fs
+    symlink /dev/block/mmcblk1p24 /dev/block/by-name/userdata
+{{/dp_retrofit}}

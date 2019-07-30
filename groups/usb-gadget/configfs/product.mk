@@ -1,0 +1,1 @@
+../g_android/product.mk

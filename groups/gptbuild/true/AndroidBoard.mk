@@ -4,6 +4,10 @@ raw_config := none
 raw_factory := none
 tos_bin := none
 multiboot_bin := none
+raw_product := none
+raw_odm := none
+raw_acpi := none
+raw_acpio := none
 
 .PHONY: none
 none: ;
@@ -24,6 +28,10 @@ ifdef INSTALLED_FACTORYIMAGE_TARGET
 raw_factory := $(INSTALLED_FACTORYIMAGE_TARGET).raw
 endif
 
+ifdef INSTALLED_PRODUCTIMAGE_TARGET
+raw_product := $(INSTALLED_PRODUCTIMAGE_TARGET).raw
+endif
+
 .PHONY: $(GPTIMAGE_BIN)
 ifeq ($(strip $(TARGET_USE_TRUSTY)),true)
 ifeq ($(strip $(TARGET_USE_MULTIBOOT)),true)
@@ -34,6 +42,28 @@ $(GPTIMAGE_BIN): tosimage
 endif
 tos_bin = $(INSTALLED_TOS_IMAGE_TARGET)
 endif
+
+{{#odm-partition}}
+ifdef INSTALLED_ODMIMAGE_TARGET
+raw_odm := $(INSTALLED_ODMIMAGE_TARGET).raw
+$(GPTIMAGE_BIN): odmimage $(SIMG2IMG)
+	$(SIMG2IMG) $(INSTALLED_ODMIMAGE_TARGET) $(INSTALLED_ODMIMAGE_TARGET).raw
+endif
+{{/odm-partition}}
+
+{{#acpi-partition}}
+ifdef INSTALLED_ACPIIMAGE_TARGET
+raw_acpi := $(INSTALLED_ACPIIMAGE_TARGET)
+$(ACRN_GPTIMAGE_BIN): acpiimage
+endif
+{{/acpi-partition}}
+
+{{#acpio-partition}}
+ifdef INSTALLED_ACPIOIMAGE_TARGET
+raw_acpio := $(INSTALLED_ACPIOIMAGE_TARGET)
+$(ACRN_GPTIMAGE_BIN): acpioimage
+endif
+{{/acpio-partition}}
 
 $(GPTIMAGE_BIN): \
 	bootloader \
@@ -49,6 +79,9 @@ $(GPTIMAGE_BIN): \
     {{#vendor-partition}}
 	vendorimage \
     {{/vendor-partition}}
+    {{#product-partition}}
+	productimage \
+    {{/product-partition}}
 	$(SIMG2IMG) \
 	$(raw_config) \
 	$(raw_factory)
@@ -66,14 +99,19 @@ $(GPTIMAGE_BIN): \
     {{#vendor-partition}}
 	$(SIMG2IMG) $(INSTALLED_VENDORIMAGE_TARGET) $(INSTALLED_VENDORIMAGE_TARGET).raw
     {{/vendor-partition}}
+    {{#product-partition}}
+	$(SIMG2IMG) $(INSTALLED_PRODUCTIMAGE_TARGET) $(INSTALLED_PRODUCTIMAGE_TARGET).raw
+    {{/product-partition}}
 
 	$(INTEL_PATH_BUILD)/create_gpt_image.py \
 		--create $@ \
 		--block $(BOARD_FLASH_BLOCK_SIZE) \
-		--table $(TARGET_DEVICE_DIR)/gpt.ini \
+		--table $(BOARD_GPT_INI) \
 		--size $(gptimage_size) \
+		{{#bootloader_slot_ab}}
+		--esp $(esp_bin) \
+		{{/bootloader_slot_ab}}
 		--bootloader $(bootloader_bin) \
-		--bootloader2 $(bootloader_bin) \
 		--tos $(tos_bin) \
 		--multiboot $(multiboot_bin) \
 		--boot $(INSTALLED_BOOTIMAGE_TARGET) \
@@ -88,6 +126,18 @@ $(GPTIMAGE_BIN): \
         {{#vendor-partition}}
 		--vendor $(INSTALLED_VENDORIMAGE_TARGET).raw \
         {{/vendor-partition}}
+        {{#product-partition}}
+		--product $(raw_product) \
+        {{/product-partition}}
+        {{#odm-partition}}
+		--odm $(raw_odm) \
+        {{/odm-partition}}
+        {{#acpi-partition}}
+		--acpi $(raw_acpi) \
+        {{/acpi-partition}}
+        {{#acpio-partition}}
+		--acpio $(raw_acpio) \
+        {{/acpio-partition}}
 		--config $(raw_config) \
 		--factory $(raw_factory)
 

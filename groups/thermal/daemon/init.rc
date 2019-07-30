@@ -1,0 +1,18 @@
+service thermal-daemon /system/bin/thermal-daemon
+    user system
+    group system
+    class main
+    socket power_hal dgram 660 system system
+
+on boot
+    chown system system /sys/devices/system/cpu/intel_pstate/max_perf_pct
+    chown system system /sys/devices/system/cpu/intel_pstate/min_perf_pct
+    chown system system /sys/devices/system/cpu/intel_pstate/no_turbo
+    chown system system /sys/class/powercap/intel-rapl:0/enabled
+    chown system system /sys/class/powercap/intel-rapl:0/constraint_0_power_limit_uw
+    restorecon_recursive /sys/class/powercap
+
+on post-fs-data
+    # daemon running directory
+    mkdir /data/thermal-daemon 0755 system system
+

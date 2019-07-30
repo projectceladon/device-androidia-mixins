@@ -1,0 +1,8 @@
+{{#thermal_lite}}
+service thermal_lite /sbin/thermal_lite
+    user system
+    seclabel u:r:thermal_lite:s0
+
+on boot
+    chown system system /sys/class/powercap/intel-rapl:0/constraint_0_power_limit_uw
+{{/thermal_lite}}

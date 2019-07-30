@@ -41,7 +41,7 @@ class Configurer:
     RULE_FN = "new_group_creation_rule.txt"
     VALID_TARGETS_FN = "valid_targets.spec"
     SCRIPT_FN = "mixin-update"
-    VERSION = "3.2.2"
+    VERSION = "3.2.3"
 
 
 class ReadTrackingDict(dict):
@@ -158,13 +158,14 @@ class FileHelper(Logger):
                 self.info("updating file: {}".format(dst_fn))
                 shutil.copy(source_file, dst_fn)
 
-        src_mode = os.stat(src_fn).st_mode
-        dst_mode = os.stat(dst_fn).st_mode
-        src_chmod = stat.S_IMODE(src_mode)
-        dst_chmod = stat.S_IMODE(dst_mode)
-        if not dry_run and src_chmod != dst_chmod:
-            self.info("chmod {} {} ".format(oct(src_chmod), dst_fn))
-            os.chmod(dst_fn,src_chmod)
+        if not dry_run:
+            src_mode = os.stat(src_fn).st_mode
+            dst_mode = os.stat(dst_fn).st_mode
+            src_chmod = stat.S_IMODE(src_mode)
+            dst_chmod = stat.S_IMODE(dst_mode)
+            if src_chmod != dst_chmod:
+                self.info("chmod {} {} ".format(oct(src_chmod), dst_fn))
+                os.chmod(dst_fn,src_chmod)
 
         if dst_fn not in self.update_file_set:
             self.update_file_set.add(dst_fn)

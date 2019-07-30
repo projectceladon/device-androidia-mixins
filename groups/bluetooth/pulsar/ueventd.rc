@@ -1,0 +1,8 @@
+#Bluedroid uhid support
+/dev/uhid                                    0660 bluetooth bluetooth
+#Bluetooth port permission
+{{{port}}}                                   0660 bluetooth audio
+{{#gpp}}
+# Bluetooth GPT factory partition block device
+/dev/block/*/*/*/by-name/bluetooth_nvm 0660 bluetooth system
+{{/gpp}}

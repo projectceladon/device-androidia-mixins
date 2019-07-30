@@ -5,6 +5,10 @@ belong to any mixins group at this time, it will be removed after all
 configurations go to right mixins group.
 
 ==== Options
+
+--- cel_apl
+it's for apl NUC target.
+
 --- false
 empty dir.
 

@@ -1,0 +1,50 @@
+                           debug-crashlogd
+                           ===============
+
+crashlogd is a daemon intended to track device state, up-time and
+crashes. Collected data is tracked in '/data/logs/history_event' file
+with one line per logged event. If level of information does not fit
+this format, a dedicated folder per event is created and tracked in
+the history_event file. Created folder contains metadata, AP logs and
+event specific files.
+
+Collected data come from different components :
+ - AP logs, from ap_logfs service (logcat to /data/logs/aplog)
+ - Android framework, mainly dropbox (/data/system/dropbox)
+ - Panic and watchdogs logs, from pstore and other drivers
+ - Modem logs and events from MMGR library
+ - Our own framework which could collect events from kernel,
+   user-space using different APIs : inotify, LCT/KCT.
+
+Produced data could be consumed by embedded tools (Phone Doctor, MPM)
+or host tools (MPTA, ACS). Those tools could upload data to crashtool
+server (http://crashtool.tl.intel.com) for post-mortem analysis.
+
+More details on crashtool wiki :
+ http://wiki.ith.intel.com/display/DRD/CrashTool
+
+Mixin parameters
+----------------
+
+* ssram_crashlog: on some platform(s), there is no BERT ACPI table,
+   but FW crashlog can be retrieved directly from SSRAM.
+   The value of that option is used to identify the platform.
+   Currently, only "broxton" platform is supported.
+* ramdump: when this option is set, on some specific conditions,
+   crashlogd will run in RAMDUMP mode, meaning that it will force a
+   reboot after having collected the kernel panic/watchdog debug data.
+   In user build, reboot is directly issued by init on defined
+   bootreason. The value of that option is used to identify the
+   platform.
+
+Debug only mixins consideration
+-------------------------------
+
+This feature is part of 'debug-*' groups, which are dedicated to debug
+and product stabilisation, thus do not target final products and user
+builds.
+
+As per build variant (eng, userdebug, user) dedicated files feature is
+not available with mixins, per option files are provided in
+'device/intel/common/debug/' folder and will be included at build time
+regarding selected option.

@@ -11,6 +11,9 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += ufo_prebuilts
 
+# i915 firmwares
+$(foreach fw,$(I915_FW),$(eval PRODUCT_PACKAGES += $(notdir $(fw))))
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/drirc:system/etc/drirc
 
@@ -31,7 +34,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
    ro.hardware.hwcomposer=$(TARGET_BOARD_PLATFORM)
 
-INTEL_HWC_CONFIG := $(INTEL_PATH_VENDOR)/external/project-celadon/hwcomposer
+INTEL_HWC_CONFIG := $(INTEL_PATH_VENDOR)/external/hwcomposer-intel
 
 ifeq ($(findstring _acrn,$(TARGET_PRODUCT)),_acrn)
 PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display_virt.ini:$(TARGET_COPY_OUT_VENDOR)/etc/hwc_display.ini
@@ -102,13 +105,3 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.vulkan=$(TARGET_BOARD_PLATFORM)
 {{/vulkan}}
-# Graphics HAL
-PRODUCT_PACKAGES += \
-   android.hardware.graphics.composer@2.1-impl \
-   android.hardware.graphics.composer@2.1-service
-
-# Gralloc HAL
-PRODUCT_PACKAGES += \
-   android.hardware.graphics.allocator@2.0-impl \
-   android.hardware.graphics.allocator@2.0-service \
-   android.hardware.graphics.mapper@2.0-impl

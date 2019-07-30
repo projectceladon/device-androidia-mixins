@@ -1,0 +1,37 @@
+                           debug-coredump
+                           ==============
+
+Coredump feature enable coredump of user-space processes except
+Android applications handled by zygote which explicitly avoid
+coredumps.
+
+Coredumps are generated under /data/logs/core/ folder.
+
+If crashlogd is enabled (debug-crashlogd mixin group), it will create
+an event and move them out in dedicated folder per coredump, tracked
+on its side, see debug-crashlogd/README for details.
+
+
+Debug only mixins consideration
+-------------------------------
+
+This feature is part of 'debug-*' groups, which are dedicated to debug
+and product stabilisation, thus do not target final products and user
+builds.
+
+As per build variant (eng, userdebug, user) dedicated files feature is
+not available with mixins, per option files are provided in
+'device/intel/common/debug/' folder and will be included at build time
+regarding selected option.
+
+Enable coredump
+------------------------------
+After coredump is enabled, there are too many tombstones, this will fill data partion full.
+the coredump data dump is disabled by default.
+To enable coredump data dump, just set variable 'data_dump' to true in mixins.spec.
+data_dump is set to false by default.
+
+eg: for gordon_peak
+add below line in /device/intel/broxton/gordon_peak/mixins.spec
+debug-coredump: true(data_dump=true)
+

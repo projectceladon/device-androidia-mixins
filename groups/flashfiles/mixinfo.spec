@@ -1,2 +1,2 @@
 [mixinfo]
-deps = variants boot-arch trusty
+deps = variants slot-ab dynamic-partitions

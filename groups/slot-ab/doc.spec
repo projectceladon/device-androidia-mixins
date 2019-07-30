@@ -2,6 +2,8 @@
 
 slotab is used to configure slotab support
 
+    --- deps
+        - dynamic-partitions
 
 ==== Options
 
@@ -11,9 +13,6 @@ this option is used to add slotab support
     --- parameters
         - system_fs: type of file system
         - nb_slot: number of slots
-        - post_fw_update: support do firmware update in postinstall
-        - boot_fw_update: support do firmware update in boot
-        - upgrade_version: type of upgrade version{o,p}
 
     --- code dir
 

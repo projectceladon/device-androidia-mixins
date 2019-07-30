@@ -1,0 +1,28 @@
+                         debug-unresponsive
+                         ==================
+
+debug-unresponsive provides support for enabling the collection of stacks
+and binder transactions when ANR/UIWDT events occur. The collection feature
+is implemented in AOSP so that the collected logs are taken as close as
+possible to the time of occurrence.
+Additionally, the group increases the size of the stored dropbox files when
+one of the above events occurs so that the newly collected data could be saved.
+
+Properties defined:
+- vendor.sys.dropbox.max_size_kb
+integer value indicating the targeted size in kB of dropbox files before
+truncating their content
+
+- vendor.sys.dump.binder_stats.uiwdt
+value of 1 indicates that binder statistics will be taken in case of a UIWDT
+
+- vendor.sys.dump.binder_stats.anr
+value of 1 indicates that binder statistics will be taken in case of a ANR
+
+
+Debug only mixins consideration
+-------------------------------
+
+This feature is part of 'debug-*' groups, which are dedicated to debug
+and product stabilisation, thus do not target final products and user
+builds.

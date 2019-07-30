@@ -1,7 +1,6 @@
 [defaults]
-arch = false
 logs_dir = /data/logs
-binder =
-btdump =
-ssram_crashlog =
 ramdump =
+logger_rot_cnt = 20
+logger_rot_size = 5000
+klogd_raw_message = false

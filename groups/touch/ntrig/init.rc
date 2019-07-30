@@ -1,0 +1,2 @@
+on boot
+    insmod ${ro.vendor.boot.moduleslocation}/i2c-hid.ko
