@@ -34,7 +34,7 @@ provdata_zip_deps += $(BTSDATA_FILES)
 ff_root := $(ff_intermediates)/root
 
 define copy-flashfile
-$(hide) $(ACP) -fp $(1) $(2)
+$(hide) $(ACP) -fpr $(1) $(2)
 
 endef
 
@@ -45,7 +45,7 @@ $(hide) rm -rf $(ff_intermediates)/root$(ff_var)
 $(hide) mkdir -p $(ff_intermediates)/root$(ff_var)
 $(foreach pair,$(BOARD_FLASHFILES$(ff_var)), \
 	$(call copy-flashfile,$(call word-colon,1,$(pair)),$(ff_intermediates)/root$(ff_var)/$(call word-colon,2,$(pair))))
-$(hide) zip -qj $(1) $(ff_intermediates)/root$(ff_var)/*
+$(hide) cd $(ff_intermediates)/root$(ff_var)/ && zip -r ../provdata.zip ./*
 endef
 
 ifneq ($(FLASHFILE_VARIANTS),)
