@@ -129,3 +129,7 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/update_ifwi_ab.sh:recovery/ro
 {{#avb}}
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 {{/avb}}
+
+{{#keybox_provision}}
+KERNELFLINGER_SUPPORT_KEYBOX_PROVISION := true
+{{/keybox_provision}}
