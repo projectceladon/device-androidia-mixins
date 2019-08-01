@@ -129,3 +129,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/persistent
 {{#keybox_provision}}
 KERNELFLINGER_SUPPORT_KEYBOX_PROVISION := true
 {{/keybox_provision}}
+
+{{#keybox_provision}}
+KERNELFLINGER_SUPPORT_KEYBOX_PROVISION := true
+{{/keybox_provision}}
