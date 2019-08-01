@@ -72,16 +72,21 @@ $(GPTIMAGE_BIN): \
 	recoveryimage \
 	cacheimage \
 	{{/slot-ab}}
-	systemimage \
 	{{#avb}}
 	vbmetaimage \
 	{{/avb}}
-    {{#vendor-partition}}
+	{{^dynamic-partitions}}
+	systemimage \
+  {{#vendor-partition}}
 	vendorimage \
-    {{/vendor-partition}}
-    {{#product-partition}}
+	{{/vendor-partition}}
+	{{#product-partition}}
 	productimage \
-    {{/product-partition}}
+	{{/product-partition}}
+	{{/dynamic-partitions}}
+	{{#dynamic-partitions}}
+	superimage \
+	{{/dynamic-partitions}}
 	$(SIMG2IMG) \
 	$(raw_config) \
 	$(raw_factory)
@@ -92,16 +97,21 @@ $(GPTIMAGE_BIN): \
 	$(hide) rm -f $(INSTALLED_CACHEIMAGE_TARGET).raw
 	{{/slot-ab}}
 
-	$(SIMG2IMG) $(INSTALLED_SYSTEMIMAGE) $(INSTALLED_SYSTEMIMAGE).raw
 	{{^slot-ab}}
 	$(SIMG2IMG) $(INSTALLED_CACHEIMAGE_TARGET) $(INSTALLED_CACHEIMAGE_TARGET).raw
 	{{/slot-ab}}
-    {{#vendor-partition}}
+	{{^dynamic-partitions}}
+	$(SIMG2IMG) $(INSTALLED_SYSTEMIMAGE) $(INSTALLED_SYSTEMIMAGE).raw
+	{{#vendor-partition}}
 	$(SIMG2IMG) $(INSTALLED_VENDORIMAGE_TARGET) $(INSTALLED_VENDORIMAGE_TARGET).raw
-    {{/vendor-partition}}
-    {{#product-partition}}
+	{{/vendor-partition}}
+	{{#product-partition}}
 	$(SIMG2IMG) $(INSTALLED_PRODUCTIMAGE_TARGET) $(INSTALLED_PRODUCTIMAGE_TARGET).raw
-    {{/product-partition}}
+	{{/product-partition}}
+	{{/dynamic-partitions}}
+	{{#dynamic-partitions}}
+	$(SIMG2IMG) $(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_TARGET).raw
+	{{/dynamic-partitions}}
 
 	$(INTEL_PATH_BUILD)/create_gpt_image.py \
 		--create $@ \
@@ -122,25 +132,29 @@ $(GPTIMAGE_BIN): \
 		{{#avb}}
 		--vbmeta $(INSTALLED_VBMETAIMAGE_TARGET) \
 		{{/avb}}
+	{{^dynamic-partitions}}
 		--system $(INSTALLED_SYSTEMIMAGE).raw \
-        {{#vendor-partition}}
+	{{#vendor-partition}}
 		--vendor $(INSTALLED_VENDORIMAGE_TARGET).raw \
-        {{/vendor-partition}}
-        {{#product-partition}}
+	{{/vendor-partition}}
+	{{#product-partition}}
 		--product $(raw_product) \
-        {{/product-partition}}
-        {{#odm-partition}}
+	{{/product-partition}}
+	{{#odm-partition}}
 		--odm $(raw_odm) \
-        {{/odm-partition}}
-        {{#acpi-partition}}
+	{{/odm-partition}}
+	{{/dynamic-partitions}}
+	{{#dynamic-partitions}}
+		--super $(INSTALLED_SUPERIMAGE_TARGET).raw \
+	{{/dynamic-partitions}}
+	{{#acpi-partition}}
 		--acpi $(raw_acpi) \
-        {{/acpi-partition}}
-        {{#acpio-partition}}
+	{{/acpi-partition}}
+	{{#acpio-partition}}
 		--acpio $(raw_acpio) \
-        {{/acpio-partition}}
+	{{/acpio-partition}}
 		--config $(raw_config) \
 		--factory $(raw_factory)
-
 
 .PHONY: gptimage
 gptimage: $(GPTIMAGE_BIN)
