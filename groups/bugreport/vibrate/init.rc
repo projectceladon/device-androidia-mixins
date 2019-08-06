@@ -1,0 +1,8 @@
+# bugreport is triggered by holding down volume down, volume up
+service bugreport /system/bin/dumpstate -d -p -B \
+        -o /data/data/com.android.shell/files/bugreports/bugreport
+    class main
+    disabled
+    oneshot
+    keycodes 114 115
+
