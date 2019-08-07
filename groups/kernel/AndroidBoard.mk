@@ -57,7 +57,7 @@ else
   EXT_MODULES := {{{external_modules}}}
   DEBUG_MODULES := {{{debug_modules}}}
   {{#cfg_path}}
-  KERNEL_CONFIG_PATH := {{cfg_path}}
+  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{cfg_path}}
   {{/cfg_path}}
   {{^cfg_path}}
   KERNEL_CONFIG_PATH := $(LOCAL_KERNEL_SRC)/arch/x86/configs
