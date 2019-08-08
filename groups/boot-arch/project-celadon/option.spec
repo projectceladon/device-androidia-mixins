@@ -20,6 +20,7 @@ hung_task_timeout_secs = 120
 ifwi_debug = false
 ignore_not_applicable_reset = false
 ignore_rsci = false
+keybox_provision = true
 mountfstab-flag = true
 nvme_rpmb_scan = false
 os_secure_boot = false

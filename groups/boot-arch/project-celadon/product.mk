@@ -135,3 +135,7 @@ PRODUCT_COPY_FILES += system/extras/checkpoint_gc/checkpoint_gc.sh:recovery/root
 {{#avb}}
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 {{/avb}}
+
+{{#keybox_provision}}
+KERNELFLINGER_SUPPORT_KEYBOX_PROVISION := true
+{{/keybox_provision}}
