@@ -1,2 +1,2 @@
 [mixinfo]
-deps = variants slot-ab dynamic-partitions
+deps = variants slot-ab dynamic-partitions boot-arch
