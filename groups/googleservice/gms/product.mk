@@ -1,0 +1,4 @@
+FLAG_GMS_AVAILABLE ?= true
+ifeq ($(FLAG_GMS_AVAILABLE),true)
+$(call inherit-product-if-exists, vendor/google/gms/products/gms.mk)
+endif
