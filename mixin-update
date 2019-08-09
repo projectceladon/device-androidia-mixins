@@ -33,7 +33,7 @@ class Configurer:
     DOC_SPEC_FN = "doc.spec"
     EXTRA_DIR = "extra_files"
     EXTRA_DIR_KEY = "_extra_dir"
-    INTERNAL_TREE = "device/intel/mixins/groups"
+    INTERNAL_TREE = ["device/intel/mixins/groups","device/intel/mixins_priv/groups"]
     INTERNAL_DEVICE_DIR = "device/intel"
     RELEASE_INFO_FN = "mixin-groups.doc"
     CHANGE_LOG_FN = "ChangeLog"
@@ -41,7 +41,7 @@ class Configurer:
     RULE_FN = "new_group_creation_rule.txt"
     VALID_TARGETS_FN = "valid_targets.spec"
     SCRIPT_FN = "mixin-update"
-    VERSION = "3.2.3"
+    VERSION = "3.3.0"
 
 
 class ReadTrackingDict(dict):
@@ -79,6 +79,11 @@ class Logger():
         else:
             self.errors_found = True
 
+def choose_mixins_group(mixins_tree, group, option):
+    if mixins_tree[group].has_key("duplicate") and mixins_tree[group]["duplicate"]["options"].has_key(option):
+        return mixins_tree[group]["duplicate"]
+    else:
+        return mixins_tree[group]
 
 class FileHelper(Logger):
     """ This class is used to process file/folder related operations."""
@@ -293,11 +298,11 @@ class Checker(Logger):
     def check_rules(self, parser):
 
         mixins_tree_dir = ""
-        if os.path.exists(parser.internal_mixins_tree_dir):
-            if parser.internal_mixins_tree_dir in Checker.checked_list:
-                self.debug("Skip as {} already checked.".format(parser.internal_mixins_tree_dir))
+        if os.path.exists(parser.internal_mixins_tree_dir[0]):
+            if parser.internal_mixins_tree_dir[0] in Checker.checked_list:
+                self.debug("Skip as {} already checked.".format(parser.internal_mixins_tree_dir[0]))
                 return
-            mixins_tree_dir = parser.internal_mixins_tree_dir
+            mixins_tree_dir = parser.internal_mixins_tree_dir[0]
             Checker.checked_list.add(mixins_tree_dir)
             mixins_tree = parser.internal_mixins_tree
         else:
@@ -615,8 +620,21 @@ class Parser(FileHelper):
         FileHelper.__init__(self, abort_on_errors, tag)
         # used by Releaser
         self.mixins_backup = ""
-        self.internal_mixins_tree_dir = Configurer.INTERNAL_TREE
-        self.internal_mixins_dir = os.path.dirname(Configurer.INTERNAL_TREE)
+        self.internal_mixins_dir = []
+        self.internal_mixins_tree_dir = []
+
+        # check the tree path exist
+        for k in Configurer.INTERNAL_TREE:
+            if os.path.exists(k):
+                self.internal_mixins_tree_dir.append(k)
+                self.internal_mixins_dir.append(os.path.dirname(k))
+
+        if len(self.internal_mixins_tree_dir) >= 2:
+            self.mixins_multiple = True
+        else:
+            self.mixins_multiple = False
+
+
         self.internal_selections = []
         self.internal_mixins_tree = {}
         self.file_map = {}
@@ -744,13 +762,16 @@ class Parser(FileHelper):
 
         groups = [i for i in os.listdir(mixins_tree_dir) if not i.startswith(".") and os.path.isdir(os.path.join(mixins_tree_dir, i))]
         for group in groups:
-            assert group not in mixins_tree
-            mixins_tree[group] = {}
+            if self.mixins_multiple and group in mixins_tree:
+                mixins_tree_group= mixins_tree[group]["duplicate"] = {}
+            else:
+                assert group not in mixins_tree
+                mixins_tree_group= mixins_tree[group] = {}
             group_dir = os.path.join(mixins_tree_dir, group)
-            mixins_tree[group]["group_dir"] = group_dir
-            mixins_tree[group]["options"] = {}
-            mixins_tree[group]["deps"] = set()
-            mixins_tree[group]["doc"] = {}
+            mixins_tree_group["group_dir"] = group_dir
+            mixins_tree_group["options"] = {}
+            mixins_tree_group["deps"] = set()
+            mixins_tree_group["doc"] = {}
 
             # Check for a mixinfo file in the root of the group directory
             # This is for metadata about the group as a whole. Its presence
@@ -763,25 +784,25 @@ class Parser(FileHelper):
                 # prior to inheriting this mixin, typically because we need the
                 # other groups to define certain variables for us
                 if cp.has_option("mixinfo", "deps"):
-                    mixins_tree[group]["deps"] = set(cp.get("mixinfo", "deps").split())
+                    mixins_tree_group["deps"] = set(cp.get("mixinfo", "deps").split())
 
-            mixins_tree[group]["doc"]["tree"] = {}
-            mixins_tree[group]["doc"]["fn"] = ""
+            mixins_tree_group["doc"]["tree"] = {}
+            mixins_tree_group["doc"]["fn"] = ""
             doc_spec_fn = os.path.join(group_dir, Configurer.DOC_SPEC_FN)
             if os.path.exists(doc_spec_fn):
-                mixins_tree[group]["doc"]["tree"] = self.read_doc_tree(doc_spec_fn)
-                mixins_tree[group]["doc"]["fn"] = doc_spec_fn
+                mixins_tree_group["doc"]["tree"] = self.read_doc_tree(doc_spec_fn)
+                mixins_tree_group["doc"]["fn"] = doc_spec_fn
 
             options = [i for i in os.listdir(group_dir) if not i.startswith(".") and os.path.isdir(os.path.join(group_dir, i))]
             for option in options:
-                assert option not in mixins_tree[group]["options"]
+                assert option not in mixins_tree[group]["options"], "option duplicate {} {}".format(group,option)
 
-                mixins_tree[group]["options"][option] = {}
+                mixins_tree_group["options"][option] = {}
                 # populated in validation function
-                mixins_tree[group]["options"][option]["extrafiles"] = []
-                mixins_tree[group]["options"][option]["devicefiles"] = []
-                mixins_tree[group]["options"][option]["file_map"] = {}
-                cur_opt = mixins_tree[group]["options"][option]
+                mixins_tree_group["options"][option]["extrafiles"] = []
+                mixins_tree_group["options"][option]["devicefiles"] = []
+                mixins_tree_group["options"][option]["file_map"] = {}
+                cur_opt = mixins_tree_group["options"][option]
 
                 opt_dir = os.path.join(group_dir, option)
                 if os.path.isdir(opt_dir):
@@ -850,7 +871,10 @@ class Parser(FileHelper):
 
 
     def _get_deps(self, mixins_tree, group, option):
-        return list(mixins_tree[group]["deps"] | mixins_tree[group]["options"][option]["deps"])
+        if self.mixins_multiple and mixins_tree[group].has_key("duplicate") and mixins_tree[group]["duplicate"]["options"].has_key(option):
+            return list(mixins_tree[group]["deps"] | mixins_tree[group][duplicate]["deps"] | mixins_tree[group]["duplicate"]["options"][option]["deps"])
+        else:
+            return list(mixins_tree[group]["deps"] | mixins_tree[group]["options"][option]["deps"])
 
     def _check_section(self, section, cp, sf):
         if not cp.has_section(section):
@@ -904,8 +928,13 @@ class Parser(FileHelper):
                 continue
 
             if option not in mixins_tree[group]["options"]:
-                self.error("unknown option {} for group {}".format(option, group))
-                continue
+                if self.mixins_multiple:
+                    if mixins_tree[group].has_key("duplicate") and not mixins_tree[group]["duplicate"]["options"].has_key(option):
+                        self.error("unknown option {} for group {}".format(option, group))
+                        continue
+                else:
+                    self.error("unknown option {} for group {}".format(option, group))
+                    continue
 
             deps = self._get_deps(mixins_tree, group, option)
             if deps:
@@ -915,7 +944,8 @@ class Parser(FileHelper):
                 if dep not in groups_seen:
                     self.error("group {} option {} requires that group {} be selected first".format(group, option, dep))
 
-            defaults = mixins_tree[group]["options"][option]["defaults"]
+            mixins_tree_group = choose_mixins_group(mixins_tree, group, option)
+            defaults = mixins_tree_group["options"][option]["defaults"]
             for k, v in defaults.iteritems():
                 if k not in params:
                     params[k] = v
@@ -923,13 +953,15 @@ class Parser(FileHelper):
             # Inherit the dependency parameters
             for dep_group, dep_option, dep_params in returned_selections:
                 if dep_group in deps:
-                    dep_params[group] = mixins_tree[group]["options"][option]["realname"]
+                    mixins_tree_group = choose_mixins_group(mixins_tree, group, option)
+                    dep_params[group] = mixins_tree_group["options"][option]["realname"]
                     self.group_deps.add(group)
                     self._coerce_boolean(dep_params)
                     for k, v in dep_params.iteritems():
                         if k not in params:
                             params[k] = v
-                    params[dep_group] = mixins_tree[dep_group]["options"][dep_option]["realname"]
+                    mixins_tree_group = choose_mixins_group(mixins_tree, dep_group, dep_option)
+                    params[dep_group] = mixins_tree_group["options"][dep_option]["realname"]
             extra_dir = os.path.join(Configurer.EXTRA_DIR, group)
             params[Configurer.EXTRA_DIR_KEY] = extra_dir
             self._coerce_boolean(params)
@@ -937,7 +969,8 @@ class Parser(FileHelper):
 
         # popuplate extrafiles & devicefiles info
         for (group, option, params) in selections:
-            cur_opt = mixins_tree[group]["options"][option]
+            mixins_tree_group = choose_mixins_group(mixins_tree, group, option)
+            cur_opt = mixins_tree_group["options"][option]
             sf = os.path.join(cur_opt["optiondir"], Configurer.FILES_SPEC_FN)
             if os.path.isfile(sf) or os.path.islink(sf):
                 cp = self.read_spec_file(sf, params=params)
@@ -959,6 +992,7 @@ class Parser(FileHelper):
         self.debug('dry_run: {}'.format(self.dry_run))
         self.debug('mixins_control: {}'.format(self.mixins_control))
         self.debug('mixins_release: {}'.format(self.mixins_release))
+        self.debug('mixins_multiple: {}'.format(self.mixins_multiple))
         self.debug('internal_mixins_tree_dir: {}'.format(self.internal_mixins_tree_dir))
         self.debug('internal_mixins_dir: {}'.format(self.internal_mixins_dir))
         self.debug('mixins_tree_dir: {}'.format(self.mixins_tree_dir))
@@ -998,16 +1032,20 @@ class Parser(FileHelper):
         else:
             self.mixins_tree_dir = self.spec_mixins_tree_dir
 
-        if os.path.exists(self.internal_mixins_tree_dir):
+        if os.path.exists(self.internal_mixins_tree_dir[0]):
             self.internal_selections = self.spec_selections[:]
-            self.internal_mixins_tree = self.read_mixins_tree(self.internal_mixins_tree_dir)
+            self.internal_mixins_tree = self.read_mixins_tree(self.internal_mixins_tree_dir[0])
+
+            if self.mixins_multiple:
+                self.internal_mixins_tree =  self.read_mixins_tree(self.internal_mixins_tree_dir[1],self.internal_mixins_tree)
+
             # After this, all default selections should be populated
             # and the selections should be sane
             self.internal_selections = self.validate_selections(self.internal_selections, self.internal_mixins_tree)
 
             # will use internal tree if no mixins release
             if not self.mixins_release:
-                self.mixins_tree_dir = Configurer.INTERNAL_TREE
+                self.mixins_tree_dir = self.internal_mixins_tree_dir[0]
                 self.mixins_tree = self.internal_mixins_tree
                 self.selections = self.internal_selections
         else:
@@ -1155,7 +1193,8 @@ class Updater(FileHelper):
             # Now check all the groups to see if they have a configuration
             # fragment to insert into the destination file
             for group, option, params in parser.selections:
-                cur_opt = parser.mixins_tree[group]["options"][option]
+                mixins_tree_group = choose_mixins_group(parser.mixins_tree, group, option)
+                cur_opt = mixins_tree_group["options"][option]
                 optdir = cur_opt["optiondir"]
                 # Any given file can have multiple fragments. We first
                 # look for <frag>.1, <frag>.2, ... <frag>.9, <frag>
@@ -1198,7 +1237,8 @@ class Updater(FileHelper):
         else:
             key = "devicefiles"
         for group, option, params in parser.selections:
-            cur_opt = parser.mixins_tree[group]["options"][option]
+            mixins_tree_group = choose_mixins_group(parser.mixins_tree, group, option)
+            cur_opt = mixins_tree_group["options"][option]
             opt_dir = cur_opt["optiondir"]
             if cur_opt[key]:
                 for fn in cur_opt[key]:
@@ -1261,7 +1301,10 @@ class Updater(FileHelper):
 
         retval = True
         self.info('processing: {}'.format(parser.spec_file))
-        self.info('mixinsdir: {}'.format(parser.mixins_tree_dir))
+        if parser.mixins_multiple:
+            self.info('mixinsdir: {}'.format(parser.internal_mixins_tree_dir))
+        else:
+            self.info('mixinsdir: {}'.format(parser.mixins_tree_dir))
 
         if not self._update_builtin_files(parser):
             retval = False
@@ -1344,6 +1387,7 @@ def main(dry_run=False, sfiles=None, warn_only=False, debug_log=False, check_ver
         if parser.mixins_control:
             checker.check_rules(parser)
         # release mixins if needed
+        assert not parser.mixins_release, "Can't support flag mixinsrel = true"
         if parser.mixins_release and os.path.exists(parser.internal_mixins_tree_dir):
             releaser.release_mixins(parser)
         # update product files
