@@ -93,7 +93,7 @@ KERNEL_MAKE_OPTIONS = \
     O=$(abspath $(LOCAL_KERNEL_PATH)) \
     ARCH=$(TARGET_KERNEL_ARCH) \
     INSTALL_MOD_PATH=$(KERNEL_INSTALL_MOD_PATH) \
-    CROSS_COMPILE="$(KERNEL_CCACHE) $(YOCTO_CROSSCOMPILE)" \
+    CROSS_COMPILE="x86_64-linux-android-" \
     CCACHE_SLOPPINESS=$(KERNEL_CCSLOP)
 
 KERNEL_MAKE_OPTIONS += \
@@ -115,7 +115,7 @@ KERNEL_DEPS := $(shell find $(LOCAL_KERNEL_SRC) \( -name *.git -prune \) -o -pri
 # and stop kernel build.
 # If a .config is already present, save it before processing
 # the check and restore it at the end
-$(CHECK_CONFIG_LOG): $(KERNEL_DEFCONFIG) $(KERNEL_DEPS) | yoctotoolchain
+$(CHECK_CONFIG_LOG): $(KERNEL_DEFCONFIG) $(KERNEL_DEPS)
 	$(hide) mkdir -p $(@D)
 	-$(hide) [[ -e $(KERNEL_CONFIG) ]] && mv -f $(KERNEL_CONFIG) $(KERNEL_CONFIG).save
 	$(hide) rm -f $(KERNEL_CONFIG).old
@@ -144,7 +144,7 @@ menuconfig xconfig gconfig: $(CHECK_CONFIG_LOG)
 	@echo $(KERNEL_DEFCONFIG) has been modified !
 	@echo ===========
 
-$(KERNEL_CONFIG): $(KERNEL_CONFIG_DEPS) | yoctotoolchain $(CHECK_CONFIG_LOG)
+$(KERNEL_CONFIG): $(KERNEL_CONFIG_DEPS) | $(CHECK_CONFIG_LOG)
 	$(hide) cat $(KERNEL_CONFIG_DEPS) > $@
 	@echo "Generating Kernel configuration, using $(KERNEL_CONFIG_DEPS)"
 	$(hide) $(MAKE) $(KERNEL_MAKE_OPTIONS) olddefconfig </dev/null
@@ -204,7 +204,7 @@ $(LOCAL_KERNEL): $(DM_VERITY_CERT)
 endif
 
 {{/slot-ab}}
-$(LOCAL_KERNEL): $(MINIGZIP) $(KERNEL_CONFIG) $(BOARD_DTB) $(KERNEL_DEPS) | yoctotoolchain
+$(LOCAL_KERNEL): $(MINIGZIP) $(KERNEL_CONFIG) $(BOARD_DTB) $(KERNEL_DEPS)
 	$(MAKE) $(KERNEL_MAKE_OPTIONS)
 	$(MAKE) $(KERNEL_MAKE_OPTIONS) modules
 	$(MAKE) $(KERNEL_MAKE_OPTIONS) INSTALL_MOD_STRIP=1 modules_install
@@ -250,7 +250,7 @@ $(foreach m,$(EXTERNAL_MODULES),$(if $(findstring .., $(m)), $(error $(m): All e
 $(foreach m,$(EXTERNAL_MODULES),$(eval $(call bld_external_module,$(m),$(subst /,_,$(m)))))
 
 {{#build_dtbs}}
-$(BOARD_DTB): yoctotoolchain $(KERNEL_CONFIG)
+$(BOARD_DTB): $(KERNEL_CONFIG)
 	$(MAKE) $(KERNEL_MAKE_OPTIONS) dtbs
 	cp $(LOCAL_KERNEL_PATH)/arch/x86/boot/dts/{{{board_dtb}}} $@
 {{/build_dtbs}}

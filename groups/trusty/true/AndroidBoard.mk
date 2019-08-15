@@ -10,11 +10,11 @@ $(LK_ELF):
 	@echo "making lk.elf.."
 	$(hide) (cd $(TOPDIR)trusty && $(TRUSTY_ENV_VAR) $(LOCAL_MAKE) {{{lk_project}}})
 
-$(EVMM_PKG): | yoctotoolchain
+$(EVMM_PKG):
 	@echo "making evmm.."
 	$(hide) (cd $(TOPDIR)$(INTEL_PATH_VENDOR)/fw/evmm && $(TRUSTY_ENV_VAR) $(LOCAL_MAKE))
 
-$(EVMM_LK_PKG): $(LK_ELF) | yoctotoolchain
+$(EVMM_LK_PKG): $(LK_ELF)
 	@echo "making evmm(packing with lk.elf).."
 	$(hide) (cd $(TOPDIR)$(INTEL_PATH_VENDOR)/fw/evmm && $(TRUSTY_ENV_VAR) $(LOCAL_MAKE))
 
