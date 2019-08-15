@@ -29,6 +29,24 @@ PRODUCT_PACKAGES += \
     libmfx_omx_components_hw \
     libstagefrighthw
 
+{{#add_sw_msdk}}
+PRODUCT_PACKAGES += \
+    libmfxsw32 \
+    libmfx_omx_components_sw
+
+ifeq ($(BOARD_USE_64BIT_USERSPACE),true)
+PRODUCT_PACKAGES += \
+    libmfxsw64
+endif
+{{/add_sw_msdk}}
+
+{{#opensource_msdk}}
+BOARD_HAVE_MEDIASDK_OPEN_SOURCE := true
+{{/opensource_msdk}}
+
+{{#opensource_msdk_omx_il}}
+BOARD_HAVE_OMX_SRC := true
+{{/opensource_msdk_omx_il}}
 
 # Enable Open source hdcp
 PRODUCT_PACKAGES += libhdcpsdk
