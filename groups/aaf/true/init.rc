@@ -1,0 +1,5 @@
+service vendor.aafd /system/vendor/bin/aafd
+    disabled
+
+on init
+    start vendor.aafd
