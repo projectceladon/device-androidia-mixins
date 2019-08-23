@@ -100,6 +100,13 @@ KERNEL_MAKE_OPTIONS += \
     EXTRA_FW="$(_EXTRA_FW_)" \
     EXTRA_FW_DIR="$(abspath $(PRODUCT_OUT)/vendor/firmware)"
 
+{{#more_modules}}
+KERNEL_MODULES_DIFFCONFIG += $(wildcard $(KERNEL_CONFIG_PATH)/modules_diffconfig)
+ifneq ($(KERNEL_MODULES_DIFFCONFIG),)
+    KERNEL_DIFFCONFIG += $(KERNEL_MODULES_DIFFCONFIG)
+endif
+{{/more_modules}}
+
 KERNEL_CONFIG_DEPS = $(strip $(KERNEL_DEFCONFIG) $(KERNEL_DIFFCONFIG))
 
 CHECK_CONFIG_SCRIPT := $(LOCAL_KERNEL_SRC)/scripts/diffconfig
