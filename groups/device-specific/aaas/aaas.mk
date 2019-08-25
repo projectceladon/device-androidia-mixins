@@ -28,6 +28,8 @@ PRODUCT_COPY_FILES += system/core/rootdir/init.zygote64_32.rc:root/init.zygote64
 
 BOARD_USE_64BIT_USERSPACE := true
 
+TARGET_GFX_INTEL := intel
+
 INTEL_PATH_DEVICE := device/intel/project-celadon
 INTEL_PATH_COMMON := device/intel/common
 INTEL_PATH_SEPOLICY := device/intel/sepolicy
