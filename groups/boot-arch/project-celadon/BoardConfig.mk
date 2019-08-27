@@ -154,5 +154,9 @@ AB_OTA_PARTITIONS += bootloader
 {{/slot-ab}}
 
 {{#usb_storage}}
-KERNELFLINGER_SUPPORT_USB_STORAGE := true
+KERNELFLINGER_SUPPORT_USB_STORAGE ?= true
 {{/usb_storage}}
+
+{{#live_boot}}
+KERNELFLINGER_SUPPORT_LIVE_BOOT ?= true
+{{/live_boot}}
