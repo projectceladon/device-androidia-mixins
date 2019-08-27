@@ -46,6 +46,8 @@ this option will select UEFI as bootloader.
         - flash_block_size: set for BOARD_FLASH_BLOCK_SIZE
         - loader_efi_to_flash: set for fastboot boot command
         - userdata_checkpoint: userdata checkpoint (UDC) feature for ota rollback in case of failure
+        - usb_storage: set for KERNELFLINGER_SUPPORT_USB_STORAGE
+        - live_boot: set for KERNELFLINGER_SUPPORT_LIVE_BOOT
 
     --- extra files
         - oemvars.txt:  "magic key detection timeout"
