@@ -21,6 +21,7 @@ BOARD_KERNEL_CMDLINE += root=/dev/ram0
 {{/slot-ab}}
 
 BOARD_KERNEL_CMDLINE += androidboot.hardware=$(TARGET_PRODUCT) firmware_class.path={{{firmware_path}}} loglevel=$(KERNEL_LOGLEVEL) loop.max_part=7
+BOARD_KERNEL_CMDLINE += intel_iommu=off
 
 ifneq ($(TARGET_BUILD_VARIANT),user)
 ifeq ($(SPARSE_IMG),true)
