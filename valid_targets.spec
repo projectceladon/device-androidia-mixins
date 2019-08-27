@@ -4,3 +4,6 @@ celadon_tablet:
 
 [broxton]
 aaas:
+
+[aic]
+multidroid_nuc:
