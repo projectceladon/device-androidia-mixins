@@ -3,3 +3,6 @@ service vendor.aafd /system/vendor/bin/aafd
 
 on init
     start vendor.aafd
+
+on fs
+    exec u:r:init:s0 -- /system/bin/logwrapper /system/bin/sh /vendor/bin/auto_detection.sh

@@ -1,2 +1,2 @@
-PRODUCT_PACKAGES += aafd
-
+PRODUCT_PACKAGES += aafd \
+                    auto_detection.sh
