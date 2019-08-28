@@ -1,4 +1,4 @@
-service thermal-daemon /system/vendor/bin/thermal-daemon --config-file /system/vendor/etc/thermal-daemon/thermal-conf.xml
+service thermal-daemon /system/vendor/bin/thermal-daemon --config-file /system/vendor/etc/thermal-daemon/thermal-conf.xml --ignore-cpuid-check
     class main
     user system
     group system
