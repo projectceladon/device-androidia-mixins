@@ -16,6 +16,7 @@ disk_encryption = true
 esp_partition_size = 30
 file_encryption = false
 flash_block_size = 512
+grub_installer = false
 hung_task_timeout_secs = 120
 ifwi_debug = false
 ignore_not_applicable_reset = false

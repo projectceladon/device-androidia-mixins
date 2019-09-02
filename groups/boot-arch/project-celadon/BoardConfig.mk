@@ -160,3 +160,7 @@ KERNELFLINGER_SUPPORT_USB_STORAGE ?= true
 {{#live_boot}}
 KERNELFLINGER_SUPPORT_LIVE_BOOT ?= true
 {{/live_boot}}
+
+{{#grub_installer}}
+ENABLE_GRUB_INSTALLER ?= true
+{{/grub_installer}}
