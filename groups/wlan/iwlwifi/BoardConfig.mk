@@ -7,6 +7,8 @@ WPA_SUPPLICANT_VERSION := VER_2_1_DEVEL
 BOARD_WLAN_DEVICE := iwlwifi
 {{/libwifi-hal}}
 
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB ?= lib_driver_cmd_intc
+
 # Enabling iwlwifi
 BOARD_USING_INTEL_IWL := true
 INTEL_IWL_MODULE_SUB_FOLDER := {{{iwl_sub_folder}}}
