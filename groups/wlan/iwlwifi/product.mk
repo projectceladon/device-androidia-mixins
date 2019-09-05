@@ -50,3 +50,5 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.wifi.softap_dualband_allow=false
 {{/softap_dualband_allow}}
+
+PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/wlan/overlay-disable_keepalive_offload
