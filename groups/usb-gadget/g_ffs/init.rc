@@ -67,6 +67,7 @@ on property:sys.usb.config=mtp && property:sys.usb.configfs=1
     symlink /config/usb_gadget/g1/functions/ffs.mtp /config/usb_gadget/g1/configs/b.1/f1
 
 on property:sys.usb.config=mtp,adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/UDC none
     write /config/usb_gadget/g1/functions/mtp.gs0/os_desc/interface.MTP/compatible_id "MTP"
     # write /config/usb_gadget/g1/os_desc/use 1
     write /config/usb_gadget/g1/idVendor 0x8087
@@ -74,6 +75,7 @@ on property:sys.usb.config=mtp,adb && property:sys.usb.configfs=1
     symlink /config/usb_gadget/g1/functions/ffs.mtp /config/usb_gadget/g1/configs/b.1/f1
     symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f2
     write /sys/power/wake_lock mylock
+    write /config/usb_gadget/g1/UDC dwc3.0.auto
 
 on property:sys.usb.config=ptp && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/functions/ptp.gs1/os_desc/interface.MTP/compatible_id "PTP"
@@ -83,6 +85,7 @@ on property:sys.usb.config=ptp && property:sys.usb.configfs=1
     symlink /config/usb_gadget/g1/functions/ffs.ptp /config/usb_gadget/g1/configs/b.1/f1
 
 on property:sys.usb.config=ptp,adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/UDC none
     write /config/usb_gadget/g1/functions/mtp.gs0/os_desc/interface.MTP/compatible_id "PTP"
     # write /config/usb_gadget/g1/os_desc/use 1
     write /config/usb_gadget/g1/idVendor 0x8087
@@ -90,6 +93,7 @@ on property:sys.usb.config=ptp,adb && property:sys.usb.configfs=1
     symlink /config/usb_gadget/g1/functions/ffs.ptp /config/usb_gadget/g1/configs/b.1/f1
     symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f2
     write /sys/power/wake_lock mylock
+    write /config/usb_gadget/g1/UDC dwc3.0.auto
 
 on property:sys.usb.config=rndis && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/idVendor 0x8087
