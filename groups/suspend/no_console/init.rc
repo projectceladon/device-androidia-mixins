@@ -1,0 +1,2 @@
+on early-init
+    write /sys/module/printk/parameters/console_suspend N
