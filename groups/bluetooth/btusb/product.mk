@@ -19,6 +19,9 @@ PRODUCT_COPY_FILES += \
     vendor/linux/firmware/intel/ibt-12-16.sfi:$(TARGET_COPY_OUT_VENDOR)/firmware/intel/ibt-12-16.sfi \
     vendor/linux/firmware/intel/ibt-hw-37.8.10-fw-22.50.19.14.f.bseq:$(TARGET_COPY_OUT_VENDOR)/firmware/intel/ibt-hw-37.8.10-fw-22.50.19.14.f.bseq
 
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/{{_extra_dir}}/bluetooth_auto_detection.sh:vendor/bin/bluetooth_auto_detection.sh
+
 PRODUCT_PROPERTY_OVERRIDES += bluetooth.rfkill=1
 
 PRODUCT_PACKAGES += \

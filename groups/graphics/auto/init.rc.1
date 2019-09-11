@@ -14,11 +14,14 @@ service coreu /system/vendor/bin/coreu
 # and once that is set up it will drop all unnecessary capabilities and
 # will not show up as a root process in the steady state.
 service hdcpd /system/vendor/bin/hdcpd
-    class main
+    disabled
     user media
     group media shell
     seclabel u:r:hdcpd:s0
 {{/coreu_msync}}
+
+on property:vendor.hwc.ready=1
+    start hdcpd
 
 on post-fs-data
     # Change ownership of pci syfs file to 'media', as hdcpd runs as 'media'
@@ -43,15 +46,3 @@ on boot
     chown media media /sys/kernel/debug/tracing/events/i915/i915_ring_wait_end/enable
     chown media media /sys/devices/pci0000:00/0000:00:02.0/drm/card0/gt_max_freq_mhz
     chown media media /sys/devices/pci0000:00/0000:00:02.0/drm/card0/gt_min_freq_mhz
-
-on property:persist.vendor.gen_gfxd.enable=1
-    start gfxd
-
-on property:persist.vendor.gen_gfxd.enable=0
-    stop gfxd
-
-service gfxd /system/vendor/bin/gfxd
-    class main
-    user root
-    group graphics
-    disabled
