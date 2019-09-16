@@ -1,0 +1,38 @@
+From b3eb9c89f5fa354ef2db8b6f326ef798b6fecf64 Mon Sep 17 00:00:00 2001
+From: swaroopb <swaroop.balan@intel.com>
+Date: Thu, 12 Sep 2019 10:35:22 +0530
+Subject: [PATCH] [CELADON]VtsHalGraphicsMapperV2_1Target module is skipped
+
+Tracked-On: OAM-85551
+Signed-off-by: swaroopb <swaroop.balan@intel.com>
+---
+ groups/device-specific/celadon_ivi/manifest.xml | 2 +-
+ groups/device-specific/celadon_ivi/product.mk   | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/groups/device-specific/celadon_ivi/manifest.xml b/groups/device-specific/celadon_ivi/manifest.xml
+index b47e3cee..07dee1a6 100644
+--- a/groups/device-specific/celadon_ivi/manifest.xml
++++ b/groups/device-specific/celadon_ivi/manifest.xml
+@@ -99,7 +99,7 @@
+     <hal format="hidl">
+         <name>android.hardware.graphics.mapper</name>
+         <transport arch="32+64">passthrough</transport>
+-        <version>2.0</version>
++        <version>2.1</version>
+         <interface>
+             <name>IMapper</name>
+             <instance>default</instance>
+diff --git a/groups/device-specific/celadon_ivi/product.mk b/groups/device-specific/celadon_ivi/product.mk
+index b7f69a86..d64fe309 100755
+--- a/groups/device-specific/celadon_ivi/product.mk
++++ b/groups/device-specific/celadon_ivi/product.mk
+@@ -22,7 +22,7 @@ PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
+                     camera.device@1.0-impl \
+                     android.hardware.camera.provider@2.4-impl \
+                     android.hardware.camera.provider@2.4-service \
+-                    android.hardware.graphics.mapper@2.0-impl \
++                    android.hardware.graphics.mapper@2.1-impl \
+                     android.hardware.graphics.allocator@2.0-impl \
+                     android.hardware.graphics.allocator@2.0-service \
+                     android.hardware.renderscript@1.0-impl \
