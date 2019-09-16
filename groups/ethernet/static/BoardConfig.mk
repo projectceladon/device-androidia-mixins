@@ -1,1 +1,2 @@
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/ethernet/common
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/ethernet/staticip
