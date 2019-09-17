@@ -1,0 +1,152 @@
+#!/usr/bin/env bash
+
+USAGE=$(cat <<- EOM
+
+Usage: aic-build [IMAGE]
+
+Docker image build script.
+
+IMAGE:
+  It should be 'android' or 'aic-manaer'. If it's omitted, both android and aic-manager
+  image will be build by default.
+
+Options:
+  -b, --build-num string     Use build number to generate image tag.
+
+Example:
+  Build both android and aic-manager images:
+    ./build -s aosp-dev
+  Build just android image:
+    ./build android
+  Build just aic-manager image:
+    ./build aic-manager
+EOM
+)
+
+while [ "$#" -gt 0  ]
+do
+    case "$1" in
+        -b|--build-num)
+            shift
+            if [ "$#" -lt 1 ]; then
+                echo "$USAGE"
+                exit -1
+            fi
+            BUILD_NUMBER=$1
+            shift
+            ;;
+        android)
+            shift
+            BUILD_ANDROID="true"
+            ;;
+        aic-manager)
+            shift
+            BUILD_AIC_MANAGER="true"
+            ;;
+        *)
+            echo "$USAGE"
+            exit 0
+            ;;
+    esac
+done
+
+# Parsing proxy variables, proxy setting will be passed to build container later.
+if [ ! -z "$http_proxy" ] || [ ! -z "$HTTP_PROXY" ]; then
+    if [ ! -z "$http_proxy" ]; then
+        proxy_str=$http_proxy
+    else
+        proxy_str=$HTTP_PROXY
+    fi
+    proxy_str=${proxy_str#http://*}
+    proxy_arr=(${proxy_str//:/ })
+    proxy_addr=${proxy_arr[0]}
+    proxy_port=${proxy_arr[1]}
+    if [[ ! $proxy_addr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+        PYTHON_SCRIPT="import socket; print(socket.gethostbyname_ex(\"$proxy_addr\")[2][0])"
+        proxy_addr=$(python -c "$PYTHON_SCRIPT")
+    fi
+    DOCKER_BUILD_HTTP_PROXY=http://$proxy_addr:$proxy_port
+fi
+if [ ! -z "$https_proxy" ] || [ ! -z "$HTTPS_PROXY" ]; then
+    if [ ! -z "$https_proxy" ]; then
+        proxy_str=$https_proxy
+    else
+        proxy_str=$HTTPS_PROXY
+    fi
+    proxy_str=${proxy_str#https://*}
+    proxy_str=${proxy_str#http://*}
+    proxy_arr=(${proxy_str//:/ })
+    proxy_addr=${proxy_arr[0]}
+    proxy_port=${proxy_arr[1]}
+    if [[ ! $proxy_addr =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+        PYTHON_SCRIPT="import socket; print(socket.gethostbyname_ex(\"$proxy_addr\")[2][0])"
+        proxy_addr=$(python -c "$PYTHON_SCRIPT")
+    fi
+    DOCKER_BUILD_HTTPS_PROXY=http://$proxy_addr:$proxy_port
+fi
+
+if [ ! -x "$(command -v docker)" ]; then
+    echo "[BUILD] docker not installed, please install it first!"
+    exit -1
+fi
+
+if [ -z "$ANDROID_PRODUCT_OUT" ]; then
+    echo "[BUILD] no out directory specified, please launch target first!"
+    exit -1
+fi
+
+if [ -z "$(docker ps 2>/dev/null)" ]; then
+    DOCKER="sudo docker"
+else
+    DOCKER="docker"
+fi
+
+if [ -z "$BUILD_ANDROID" ] && [ -z "$BUILD_AIC_MANAGER" ]; then
+    BUILD_ANDROID="true"
+    BUILD_AIC_MANAGER="true"
+fi
+
+ANDROID_WORKDIR=$ANDROID_PRODUCT_OUT/docker/android
+AIC_MANAGER_WORKDIR=$ANDROID_PRODUCT_OUT/docker/aic-manager
+ANDROID_IMAGE="android:latest"
+AIC_MANAGER_IMAGE="aic-manager:latest"
+
+if [ ! -z "$BUILD_NUMBER" ]; then
+    ANDROID_IMAGE="android:$BUILD_NUMBER-$TARGET_PRODUCT-$TARGET_BUILD_VARIANT"
+    AIC_MANAGER_IMAGE="aic-manager:$BUILD_NUMBER-$TARGET_PRODUCT-$TARGET_BUILD_VARIANT"
+    sed -ie "2i IMAGE_TAG=$BUILD_NUMBER-$TARGET_PRODUCT-$TARGET_BUILD_VARIANT" $ANDROID_PRODUCT_OUT/aic
+fi
+
+if [ "$BUILD_ANDROID" = "true" ]; then
+    if [ ! -e "$ANDROID_WORKDIR/Dockerfile" ]; then
+        echo "[BUILD] no Dockerfile!"
+        exit -1
+    fi
+    echo "[BUILD] create android docker images..."
+    $DOCKER build -t $ANDROID_IMAGE $ANDROID_WORKDIR
+    echo "[BUILD] save android docker images..."
+    $DOCKER save $ANDROID_IMAGE | gzip > $ANDROID_PRODUCT_OUT/android.tar.gz
+    $DOCKER rmi $ANDROID_IMAGE 2>/dev/null
+fi
+
+if [ "$BUILD_AIC_MANAGER" = "true" ]; then
+    if [ ! -e "$AIC_MANAGER_WORKDIR/Dockerfile" ]; then
+        echo "[BUILD] no Dockerfile!"
+        exit -1
+    fi
+    echo "[BUILD] create aic-manager docker images..."
+    BUILD_ARGS=
+    if [ -n "$BUILD_VARIANT" ]; then
+        BUILD_ARGS="$BUILD_ARGS --build-arg BUILD_VARIANT=$BUILD_VARIANT"
+    fi
+    if [ ! -z "$DOCKER_BUILD_HTTP_PROXY" ] || [ ! -z "$DOCKER_BUILD_HTTPS_PROXY" ]; then
+        BUILD_ARGS="$BUILD_ARGS --build-arg http_proxy=$DOCKER_BUILD_HTTP_PROXY --build-arg https_proxy=$DOCKER_BUILD_HTTPS_PROXY"
+    fi
+    if [ -z "$($DOCKER images ubuntu-bionic-aic:1.0 | grep ubuntu-bionic-aic)" ]; then
+        $DOCKER build -t ubuntu-bionic-aic:1.0 -f $AIC_MANAGER_WORKDIR/Dockerfile.base $BUILD_ARGS $AIC_MANAGER_WORKDIR
+    fi
+    $DOCKER build $BUILD_ARGS -t $AIC_MANAGER_IMAGE $AIC_MANAGER_WORKDIR
+    echo "[BUILD] save aic-manager docker images..."
+    $DOCKER save $AIC_MANAGER_IMAGE | gzip > $ANDROID_PRODUCT_OUT/aic-manager.tar.gz
+    $DOCKER rmi $AIC_MANAGER_IMAGE 2>/dev/null
+fi

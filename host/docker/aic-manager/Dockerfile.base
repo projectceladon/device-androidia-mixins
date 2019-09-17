@@ -1,0 +1,23 @@
+FROM ubuntu:bionic
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+# install essential modules
+RUN apt-get -q -y update \
+        && apt-get -q -y -o "DPkg::Options::=--force-confold" -o "DPkg::Options::=--force-confdef" \
+        install build-essential kmod libelf-dev libdrm-dev libegl1-mesa-dev libgles2-mesa \
+        net-tools rfkill iptables iw iproute2 hostapd dnsmasq\
+        software-properties-common curl \
+        python python-pip pkg-config libfuse-dev \
+        && rm -rf /var/lib/apt/lists/*
+
+# install docker-cli
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+RUN apt-get -q -y update \
+        && apt-get -q -y -o "DPkg::Options::=--force-confold" -o "DPkg::Options::=--force-confdef" \
+        install docker-ce-cli \
+        && rm -rf /var/lib/apt/lists/*
+
+# install python packages
+RUN pip install psutil fuse-python
