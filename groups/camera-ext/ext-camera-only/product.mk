@@ -8,5 +8,6 @@ PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-external-service \
                     android.hardware.camera.provider@2.4-impl
 
 # Only include test apps in eng or userdebug builds.
-PRODUCT_PACKAGES_DEBUG += TestingCamera \
-                          MultiCameraApp
+PRODUCT_PACKAGES_DEBUG += TestingCamera
+
+PRODUCT_PACKAGES += MultiCameraApp
