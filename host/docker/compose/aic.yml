@@ -1,0 +1,48 @@
+version: '2'
+networks:
+  android:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.100.0.0/16
+          gateway: 172.100.0.1
+services:
+  aic-manager:
+    tty: true
+    privileged: true
+    stdin_open: true
+    labels:
+      com_mwp_conf_nginx: '[]'
+      com_mwp_conf_services: '{"mDNS":false,"logger":false,"out-file":"file","eventService":false,"join_network":false,"network_host":true}'
+      com_mwp_conf_storage: '{"usb":false}'
+    restart: always
+    image: 'aic-manager:latest'
+    command: '-d drm'
+    volumes:
+      - '/lib/modules:/lib/modules:rw'
+      - '/usr/src:/usr/src:rw'
+      - './workdir/ipc:/ipc:rw'
+    network_mode: host
+  android0:
+    tty: true
+    privileged: true
+    stdin_open: true
+    labels:
+      com_mwp_conf_nginx: '[]'
+      com_mwp_conf_services: '{"mDNS":false,"logger":false,"out-file":"file","eventService":false,"join_network":true,"network_host":false}'
+      com_mwp_conf_storage: '{"usb":false}'
+    restart: always
+    image: 'android:latest'
+    command: '0'
+    ports:
+      - '5555:5555'
+    volumes:
+      - './workdir/ipc:/ipc:rw'
+      - './workdir/data0:/data:rw'
+    mac_address: 02:42:ac:64:00:00
+    networks:
+      android:
+        ipv4_address: 172.100.0.2
+    depends_on:
+      - aic-manager

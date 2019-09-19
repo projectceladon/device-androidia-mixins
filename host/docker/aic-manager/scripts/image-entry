@@ -1,0 +1,99 @@
+#!/bin/bash
+
+SYSTEM_IMAGES="system.img vendor.img oem.img product.img"
+SYSTEM_IMAGES_DIR=$(cd $(dirname $0) && pwd -P)
+SYSTEM_IMAGES_MOUNT_DIR=/media
+
+function log() {
+    echo "[$0 ($$/$PPID)] $@"
+}
+
+function mount_system_images() {
+    log $FUNCNAME
+    for img in $SYSTEM_IMAGES
+    do
+        file=$SYSTEM_IMAGES_DIR/$img
+        if [[ ! -e $file ]]
+        then
+            log "can't find $file, skip"
+            continue
+        fi
+
+        name=$(basename $img .img)
+        dest=$SYSTEM_IMAGES_MOUNT_DIR/$name
+        device=$(mount | grep "on $dest" | cut -d' ' -f1)
+        if [[ -n $device ]]
+        then
+            log "$device has already mounted on $dest, skip"
+        else
+            # --direct-io is default on, and set it as read only
+            # busybox does not support --show option, so setup first then find it
+            log "setup loop device for $file"
+            if losetup -f -r $file
+            then
+                loop=$(losetup -a | grep $file | cut -d: -f1 | tail -n1)
+                mkdir -p $dest
+                log "mount $loop to $dest"
+                mount -o ro $loop $dest
+            else
+                log "fail to setup loop device"
+                exit -1
+            fi
+        fi
+    done
+    log $FUNCNAME done
+}
+
+function umount_system_images() {
+    log $FUNCNAME
+    for img in $SYSTEM_IMAGES
+    do
+        file=$SYSTEM_IMAGES_DIR/$img
+        name=$(basename $img .img)
+        dest=$SYSTEM_IMAGES_MOUNT_DIR/$name
+        if [[ -n $(mount | grep -E "on $dest" | cut -d' ' -f1) ]]
+        then
+            log "umount $dest"
+            umount $dest
+        fi
+        loop=$(losetup -a | grep $file | cut -d: -f1)
+        for lo in $loop
+        do
+            log "detach $lo"
+            losetup -d $lo
+        done
+    done
+    log $FUNCNAME done
+}
+
+function finish {
+  log $FUNCNAME
+  umount_system_images
+  # kill all the childen
+  kill -9 $(ps -o pid= --ppid $$) 2>/dev/null
+  log $FUNCNAME done
+}
+
+function init {
+  log $FUNCNAME
+  trap '' TTOU
+  trap exit TERM INT
+  trap finish EXIT
+
+  # clean up first
+  umount_system_images
+  mount_system_images
+  log $FUNCNAME done
+}
+
+function spin {
+  log $FUNCNAME
+  while true
+  do
+    sleep infinity &
+    wait $!
+  done
+  log $FUNCNAME done
+}
+
+init && spin
