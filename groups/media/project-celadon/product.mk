@@ -10,7 +10,7 @@ PRODUCT_PACKAGES += libpciaccess
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:vendor/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:vendor/etc/media_codecs_google_video.xml \
-    device/intel/project-celadon/common/media/{{profile_file}}:vendor/etc/media_profiles.xml \
+    device/intel/project-celadon/common/media/{{profile_file}}:vendor/etc/media_profiles_V1_0.xml \
     device/intel/project-celadon/common/media/media_codecs.xml:vendor/etc/media_codecs.xml \
     device/intel/project-celadon/common/media/media_codecs_performance.xml:vendor/etc/media_codecs_performance.xml
 
