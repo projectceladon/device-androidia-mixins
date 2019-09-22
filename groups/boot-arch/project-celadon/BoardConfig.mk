@@ -1,3 +1,4 @@
+{{^use_cic}}
 #
 # -- OTA RELATED DEFINES --
 #
@@ -108,6 +109,7 @@ BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/boot-arch/generic
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/abota/generic
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/abota/efi
 {{/slot-ab}}
+{{/use_cic}}
 
 {{#rpmb}}
 KERNELFLINGER_USE_RPMB := true
@@ -117,6 +119,7 @@ KERNELFLINGER_USE_RPMB := true
 KERNELFLINGER_USE_RPMB_SIMULATE := true
 {{/rpmb_simulate}}
 
+{{^use_cic}}
 {{#nvme_rpmb_scan}}
 KERNELFLINGER_USE_NVME_RPMB := true
 {{/nvme_rpmb_scan}}
@@ -164,3 +167,4 @@ KERNELFLINGER_SUPPORT_LIVE_BOOT ?= true
 {{#grub_installer}}
 ENABLE_GRUB_INSTALLER ?= true
 {{/grub_installer}}
+{{/use_cic}}

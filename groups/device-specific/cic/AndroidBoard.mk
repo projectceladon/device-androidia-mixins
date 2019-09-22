@@ -1,5 +1,5 @@
 .PHONY: multidroid
-multidroid: droid
+multidroid: droid kf4cic-$(TARGET_BUILD_VARIANT)
 	@echo Make multidroid image...
 	$(hide) rm -rf $(PRODUCT_OUT)/docker
 	$(hide) mkdir -p $(PRODUCT_OUT)/docker/android/root
@@ -14,6 +14,7 @@ multidroid: droid
 	$(hide) cp -r $(PRODUCT_OUT)/root/* $(PRODUCT_OUT)/docker/android/root
 	$(hide) rm -f $(PRODUCT_OUT)/docker/android/root/etc
 	$(hide) cp -r $(PRODUCT_OUT)/system/etc $(PRODUCT_OUT)/docker/android/root
+	$(hide) cp -r $(PRODUCT_OUT)/efi/kf4cic.efi $(PRODUCT_OUT)/kf4cic.efi
 	$(hide) chmod -R g-w $(PRODUCT_OUT)/docker/android/root
 
 TARGET_AIC_FILE_NAME := $(TARGET_PRODUCT)-aic-$(BUILD_NUMBER_FROM_FILE).tar.gz
@@ -23,7 +24,7 @@ aic: .KATI_NINJA_POOL := console
 aic: multidroid
 	@echo Make AIC docker images...
 	$(HOST_OUT_EXECUTABLES)/aic-build -b $(BUILD_NUMBER_FROM_FILE)
-	tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic android.tar.gz aic-manager.tar.gz -C docker update
+	tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic android.tar.gz aic-manager.tar.gz kf4cic.efi -C docker update
 
 .PHONY: cic
 cic: aic

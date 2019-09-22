@@ -1,4 +1,10 @@
 TARGET_UEFI_ARCH := {{{uefi_arch}}}
+
+# Android Kernelflinger uses the OpenSSL library to support the
+# bootloader policy
+KERNELFLINGER_SSL_LIBRARY := openssl
+
+{{^use_cic}}
 BIOS_VARIANT := {{{bios_variant}}}
 
 {{^avb}}
@@ -111,9 +117,6 @@ KERNELFLINGER_TXE_BIND_ROOT_TRUST := true
 # The BIOS must support this variable to enable this feature
 KERNELFLINGER_OS_SECURE_BOOT := true
 {{/os_secure_boot}}
-# Android Kernelflinger uses the OpenSSL library to support the
-# bootloader policy
-KERNELFLINGER_SSL_LIBRARY := openssl
 
 {{#self_usb_device_mode_protocol}}
 KERNELFLINGER_SUPPORT_SELF_USB_DEVICE_MODE_PROTOCOL := {{self_usb_device_mode_protocol}}
@@ -139,3 +142,4 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 {{#keybox_provision}}
 KERNELFLINGER_SUPPORT_KEYBOX_PROVISION := true
 {{/keybox_provision}}
+{{/use_cic}}
