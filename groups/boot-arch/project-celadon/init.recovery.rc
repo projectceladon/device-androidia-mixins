@@ -1,3 +1,4 @@
+{{^use_cic}}
 service watchdogd /system/bin/watchdogd{{#watchdog_parameters}} {{{watchdog_parameters}}}{{/watchdog_parameters}}
     user root
     class core
@@ -7,3 +8,4 @@ service watchdogd /system/bin/watchdogd{{#watchdog_parameters}} {{{watchdog_para
 on boot
     start watchdogd
     write /proc/sys/kernel/hung_task_timeout_secs{{#hung_task_timeout_secs}} {{{hung_task_timeout_secs}}}{{/hung_task_timeout_secs}}
+{{/use_cic}}

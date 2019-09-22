@@ -11,6 +11,7 @@ efi_default_name := bootx64.efi
 LOADER_TYPE := linux-x86_64
 endif
 
+{{^use_cic}}
 # (pulled from build/core/Makefile as this gets defined much later)
 # Pick a reasonable string to use to identify files.
 # BUILD_NUMBER has a timestamp in it, which means that
@@ -254,3 +255,4 @@ $(PRODUCT_OUT)/vendor/firmware/kfld.efi: $(PRODUCT_OUT)/efi/kfld.efi
 
 {{/bootloader_slot_ab}}
 {{/slot-ab}}
+{{/use_cic}}

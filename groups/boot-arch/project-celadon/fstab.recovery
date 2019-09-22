@@ -1,3 +1,4 @@
+{{^use_cic}}
 # Android fstab file.
 # <src>                   <mnt_point> <type>  <mnt_flags and options>  <fs_mgr_flags>
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
@@ -35,4 +36,5 @@ system   /system  ext4 ro,barrier=1 wait{{#slot-ab}},slotselect{{/slot-ab}}{{#av
 /dev/block/by-name/bootloader2  /bootloader2    emmc    defaults                                                    recoveryonly
 /dev/block/by-name/persistent   /persistent     emmc    defaults                                                    defaults
 /dev/block/by-name/metadata     /metadata       ext4    noatime,nosuid,nodev,errors=panic                           wait,check
+{{/use_cic}}
 
