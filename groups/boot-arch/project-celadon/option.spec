@@ -26,6 +26,7 @@ live_boot = false
 mountfstab-flag = true
 nvme_rpmb_scan = false
 os_secure_boot = false
+output_log_file = false
 rpmb = false
 rpmb_simulate = false
 run_tco_on_shutdown = false
