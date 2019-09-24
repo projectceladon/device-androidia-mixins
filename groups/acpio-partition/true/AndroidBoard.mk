@@ -8,9 +8,6 @@ ifeq ($(INTEL_PREBUILT),true)
 ACPIO_SRC := $(wildcard $(INTEL_PATH_PREBUILTS)/acpio/*.aml)
 else
 ACPIO_SRC :=
-{{#firststage-mount}}
-ACPIO_SRC += $(FIRSTSTAGE_MOUNT_SSDT)
-{{/firststage-mount}}
 endif
 
 $(ACPIO_BIN): $(ACPIO_SRC) $(MKDTIMG)
