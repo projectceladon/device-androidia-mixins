@@ -25,7 +25,9 @@ ifneq ($(INTEL_PREBUILT),true)
 ifneq ($(INTEL_PATH_PREBUILTS_OUT),)
 	$(hide) mkdir -p $(INTEL_PATH_PREBUILTS_OUT)/acpio
 	@echo "Copy acpio binaries to $(INTEL_PATH_PREBUILTS_OUT)/acpio"
-	$(hide) $(ACP) $(ACPIO_SRC) $(INTEL_PATH_PREBUILTS_OUT)/acpio
+	$(hide) if [ -n "$(ACPIO_SRC)" ]; then \
+		$(ACP) $(ACPIO_SRC) $(INTEL_PATH_PREBUILTS_OUT)/acpio; \
+	fi
 endif # INTEL_PATH_PREBUILTS_OUT
 endif # INTEL_PREBUILT
 
