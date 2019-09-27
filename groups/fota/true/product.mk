@@ -1,6 +1,6 @@
 # Enable FOTA for non user builds
 PRODUCT_PACKAGES_DEBUG += AFotaApp
-
+#fota
 ifneq ($(TARGET_BUILD_VARIANT),user)
 {{#update_stream}}
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.vendor.fota.ota_stream={{update_stream}}
