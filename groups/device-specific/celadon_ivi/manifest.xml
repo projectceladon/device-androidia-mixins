@@ -273,11 +273,12 @@
     <hal format="hidl">
         <name>android.hardware.neuralnetworks</name>
         <transport>hwbinder</transport>
-        <version>1.1</version>
+        <version>1.2</version>
         <interface>
             <name>IDevice</name>
             <instance>CPU</instance>
             <instance>GPU</instance>
+            <instance>gpgppu</instance>
         </interface>
     </hal>
     <sepolicy>
