@@ -234,12 +234,16 @@ function mount_binderfs() {
     fi
     umount_binderfs
 
-    while [ -z "$(grep -e "binderfs_module" /proc/modules)" ]
-    do
-        echo "[AIC] Waiting for binderfs module installed..."
-        sleep 1
-    done
-
+    binder_kernel_config=`cat /lib/modules/$(uname -r)/build/.config 2>/dev/null | grep CONFIG_ANDROID_BINDERFS | cut -d "=" -f 2`
+    if [ "$binder_kernel_config" == "y" ];then
+        echo "Host kernel is compiled with CONFIG_ANDROID_BINDERFS=y, skip waiting for binder_linux module to be loaded..."
+    else
+        while [ -z "$(grep -e "binder_linux" /proc/modules)" ]
+        do
+            echo "[AIC] Waiting for binderfs module installed..."
+            sleep 1
+        done
+    fi
     sudo mount -t binder binder /dev/binderfs
 }
 
