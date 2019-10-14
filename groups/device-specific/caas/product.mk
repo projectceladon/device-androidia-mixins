@@ -13,8 +13,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
                     android.hardware.keymaster@3.0-service \
-                    android.hardware.wifi@1.0-service \
-                    android.hardware.bluetooth@1.0-service.vbt \
                     android.hardware.usb@1.0-impl \
                     android.hardware.usb@1.0-service \
                     android.hardware.dumpstate@1.0-impl \
@@ -27,7 +25,6 @@ PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
                     android.hardware.graphics.allocator@2.0-service \
                     android.hardware.renderscript@1.0-impl \
                     android.hardware.graphics.composer@2.1-impl \
-                    android.hardware.graphics.composer@2.1-service \
-                    libbt-vendor
+                    android.hardware.graphics.composer@2.1-service
 
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/manifest.xml:vendor/manifest.xml
