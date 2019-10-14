@@ -27,3 +27,10 @@ PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
                     libbt-vendor
 
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/manifest.xml:vendor/manifest.xml
+
+# User space hibernation/restore
+PRODUCT_PACKAGES += \
+    image_saver \
+    suspend_to_disk \
+    resume_from_disk \
+    swap_offset

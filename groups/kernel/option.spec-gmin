@@ -35,3 +35,4 @@ mlt_cfg_path =
 mlt_external_modules =
 mlt_debug_modules =
 more_modules = false
+resume_from_disk = false

@@ -10,6 +10,7 @@ on fs
     mount_all /fstab.${ro.hardware}{{#userdata_checkpoint}} --early{{/userdata_checkpoint}}
 {{/treble}}
     {{/mountfstab-flag}}
+    exec - root root -- /system/bin/resume_from_disk -r /dev/block/sda10
 
 service watchdogd /system/bin/watchdogd{{#watchdog_parameters}} {{{watchdog_parameters}}}{{/watchdog_parameters}}
     user root
