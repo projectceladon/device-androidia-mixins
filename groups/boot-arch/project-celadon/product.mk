@@ -143,3 +143,5 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 KERNELFLINGER_SUPPORT_KEYBOX_PROVISION := true
 {{/keybox_provision}}
 {{/use_cic}}
+
+PRODUCT_PACKAGES += filefrag
