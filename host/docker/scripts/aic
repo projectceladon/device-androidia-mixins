@@ -111,27 +111,6 @@ function get_cpu_set()
     echo $cpuset
 }
 
-function process_wait_tips()
-{
-    INTERVAL=0.2
-    TIPS=$1
-    TIMEOUT=$2
-
-    echo $TIPS
-    iter=0
-    while [ $iter -lt $TIMEOUT ]
-    do
-        for j in '-' '\\' '|' '/'
-        do
-            echo -ne "\033[1D$j"
-            sleep $INTERVAL
-        done
-        ((iter++))
-    done
-
-    echo "Process waiting timeout, exit....."
-}
-
 function get_socket_core_process_info()
 {
     lscpu -p >> ./tmp_$$
@@ -188,45 +167,6 @@ function get_mem_node_by_cpuid() {
     echo $mem_node_id
 }
 
-function create_fake_sys_cpu() {
-
-    # Simply create fake cpu info folder and mount the folder to android container
-    fake_cpu_path=$1
-
-    if [ -z "$fake_cpu_path" ]; then
-        echo "No fake cpu path specify, useing default path, ./workdir/cpu"
-        fake_cpu_path="$(pwd)/workdir/cpu/"
-    fi
-
-    if [ ! -d $fake_cpu_path ]; then
-        mkdir -p $fake_cpu_path
-    fi
-
-    echo "Create fake CPU information for containers under path $fake_cpu_path....."
-}
-
-function umount_fuse_folder()
-{
-    if [[ $(findmnt -M "$(pwd)/workdir/cpu") ]]; then
-        echo "Umount FUSE cpu info folder... "
-        sudo umount "$(pwd)/workdir/cpu"
-     fi
-}
-
-function increase_limits() {
-    # Increase iNotify
-    sudo su - root -c 'echo "2560" >  /proc/sys/fs/inotify/max_user_instances'
-    # Increate pid_max
-    sudo su - root -c 'echo "280224" > /proc/sys/kernel/pid_max'
-    # Increase PID cgroup pid max
-    sudo su - root -c 'echo "600000" > /sys/fs/cgroup/pids/user.slice/user-1000.slice/pids.max'
-    # Enable KSM
-    sudo su - root -c 'echo "1" > /sys/kernel/mm/ksm/run'
-    # Change KSM parameters
-    sudo su - root -c 'echo "1000" > /sys/kernel/mm/ksm/sleep_millisecs'
-    sudo su - root -c 'echo "1000" > /sys/kernel/mm/ksm/pages_to_scan'
-}
-
 function check_binderfs() {
 
     binder_kernel_config=`cat /lib/modules/$(uname -r)/build/.config 2>/dev/null | grep CONFIG_ANDROID_BINDERFS | cut -d "=" -f 2`
@@ -265,22 +205,13 @@ function setup_server_env()
       cpu_mem_node_arr[i]=0
     done
 
-    process_wait_tips "Collecting socket/core/process/memory node Info, this may take a while" 20 &
-    wait_tips_pid=$!
+    echo "Collecting socket/core/process/memory node Info, this may take a while..."
     # Gather all socket/core/process info
     get_socket_core_process_info
 
     # Gather all memory nodes information
     cpu_mem_node_arg=$(echo ${cpu_mem_node_arr[*]})
     cpu_mem_node_arr=($(get_all_cpu_mem_node $cpu_mem_node_arg))
-    kill -s PIPE $wait_tips_pid &
-
-    echo "Generate fake CPU information for containers...."
-    if [ -d $WORK_DIR/cpu ]; then
-        echo "Delete previous CPU folder!"
-        sudo rm -rf $WORK_DIR/cpu
-    fi
-    create_fake_sys_cpu $WORK_DIR/cpu
 }
 
 function install {
@@ -589,7 +520,7 @@ function install {
         fi
     fi
     if [ "$PLATFORM_HARDWARE" = "server" ]; then
-       AIC_MANAGER_CONTAINER_OPTION="$AIC_MANAGER_CONTAINER_OPTION --pid host -v $WORK_DIR/cpu:/cpu:rw,rshared"
+       AIC_MANAGER_CONTAINER_OPTION="$AIC_MANAGER_CONTAINER_OPTION --pid host -v aic_isolate_cpu:/cpu "
        AIC_MANAGER_CONTAINER_CMDS="$AIC_MANAGER_CONTAINER_CMDS -l $PLATFORM_HARDWARE"
     fi
     if [ "$CTS_ENV" = "true" ]; then
@@ -630,7 +561,7 @@ function install {
         CPU_SET=$(get_cpu_set $i $PLATFORM_HARDWARE)
 
         if [ "$PLATFORM_HARDWARE" = "server" ]; then
-            ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION -v $WORK_DIR/cpu:/sys/devices/system/cpu"
+            ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION -v aic_isolate_cpu:/sys/devices/system/cpu"
             MEM_NODES=$(get_mem_node_by_cpuid $CPU_SET)
         fi
 
@@ -689,9 +620,6 @@ function uninstall {
         echo "[AIC] rm android network driver"
         $DOCKER network rm android
     fi
-
-    # umount FUSE mount point if any
-    umount_fuse_folder
 }
 
 function start {
@@ -746,28 +674,6 @@ function start {
     check_containers
     parse_ids
 
-    # Detected if fake sys folder is needed or not
-    # If detected fake sys folder, it indicates the hardware is server and will increase host kernel limit too.
-    for cname in ${CONTAINERS[@]}
-    do
-        if $DOCKER inspect -f '{{ .Mounts }}' $cname | grep -q "\/sys\/devices\/system\/cpu";then
-            echo "Fake CPU sysfs is needed....."
-            if [ -d "$(pwd)/workdir/cpu" ];then
-                echo "Detected previous created fake CPU folders..."
-            else
-                echo "Re-generated fake CPU folders..."
-                create_fake_sys_cpu "$(pwd)/workdir/cpu" 4
-            fi
-            FUSE_CPU_INFO="yes"
-
-            echo "Increase host kernel limits..."
-            increase_limits
-
-            break
-        fi
-    done
-    # Detected ended
-
     if [ -z "$($DOCKER ps | awk '{print $NF}' | grep -w aic-manager)" ]; then
         if [ "$OS_TYPE" = "ubuntu" ]; then
             export DISPLAY=:0
@@ -785,14 +691,6 @@ function start {
         echo "[AIC] wait for ashmem driver to be installed..."
         sleep 1
     done
-
-    if [ ! -z $FUSE_CPU_INFO ]; then
-        while [ -z "$(ls ./workdir/cpu/cpu* 2> /dev/null)" ]
-        do
-            echo "[AIC] wait for fake CPU information created..."
-            sleep 1
-        done
-    fi
 
     for c in ${CONTAINERS[@]}
     do
@@ -856,8 +754,6 @@ function stop {
 
     if [ -z "$($DOCKER ps | awk '{print $NF}' | grep android)" ] && [ ! -z "$($DOCKER ps | awk '{print $NF}' | grep -w aic-manager)" ]; then
         $DOCKER stop aic-manager
-        # umount FUSE mount point if any
-        umount_fuse_folder
     fi
 }
 
