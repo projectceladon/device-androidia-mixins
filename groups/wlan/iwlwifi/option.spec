@@ -7,6 +7,5 @@ iwl_defconfig = kbl
 softap_dualband_allow = false
 iwl_sub_folder = dev
 libwifi-hal = false
-firmware =
 nvm = true
 iwl_upstream_drv = true
