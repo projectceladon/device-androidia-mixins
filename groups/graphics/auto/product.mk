@@ -19,8 +19,9 @@ PRODUCT_PACKAGES += ufo_prebuilts
 # i915 firmwares
 $(foreach fw,$(I915_FW),$(eval PRODUCT_PACKAGES += $(notdir $(fw))))
 
+# move configure files provided by intel to vendor partition
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/{{_extra_dir}}/drirc:system/etc/drirc
+    $(LOCAL_PATH)/{{_extra_dir}}/drirc:vendor/etc/drirc
 
 {{#drmhwc}}
 # DRM HWComposer
