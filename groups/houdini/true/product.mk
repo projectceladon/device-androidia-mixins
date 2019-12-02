@@ -1,6 +1,6 @@
 # Houdini support
 TARGET_SUPPORTS_64_BIT_APPS := true
-$(call inherit-product, device/intel/cic/common/houdini.mk)
+$(call inherit-product, device/intel/project-celadon/$(TARGET_PRODUCT)/houdini.mk)
 
 PRODUCT_PACKAGES += libhoudini Houdini
 PRODUCT_PROPERTY_OVERRIDES += ro.dalvik.vm.isa.arm=x86 ro.enable.native.bridge.exec=1
