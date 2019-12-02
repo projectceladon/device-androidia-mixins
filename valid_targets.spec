@@ -3,3 +3,4 @@ celadon_ivi:
 celadon_tablet:
 caas:
 cic:
+cic_dev:
