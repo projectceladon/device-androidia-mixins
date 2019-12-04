@@ -406,12 +406,6 @@ function install {
         echo "[AIC] Missing RR server config file!"
         exit -1
     fi
-    if [ "$EMULATED_INPUT" = "true" ]; then
-        MANUALLY_INPUT_CONFIG="true"
-        if [ ! -d "$WORK_DIR/ipc/config/input" ]; then
-            mkdir -p $WORK_DIR/ipc/config/input
-        fi
-    fi
     if [ "$MULTIPLE_DISPLAY_DAEMON" = "true" ]; then
         if [ "$INSTANCE_NUM" -lt 2 ]; then
             echo "$USAGE"
@@ -445,9 +439,18 @@ function install {
     # Create workdir and app direcotry first, otherwise Docker may create it with root permission
     if [ ! -e "$WORK_DIR" ]; then
         mkdir -p $WORK_DIR
+        mkdir -p $WORK_DIR/ipc
+        chmod a+rw $WORK_DIR/ipc
     fi
     if [ ! -e "$APP_DIR" ]; then
         mkdir -p $APP_DIR
+    fi
+
+    if [ "$EMULATED_INPUT" = "true" ]; then
+        MANUALLY_INPUT_CONFIG="true"
+        if [ ! -d "$WORK_DIR/ipc/config/input" ]; then
+            mkdir -p $WORK_DIR/ipc/config/input
+        fi
     fi
 
     # uninstall previous resources
