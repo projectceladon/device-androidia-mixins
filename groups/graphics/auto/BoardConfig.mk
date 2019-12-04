@@ -24,10 +24,16 @@ TARGET_HARDWARE_3D := true
 TARGET_USES_HWC2 := true
 endif
 
+{{#drmhwc}}
 BOARD_USES_DRM_HWCOMPOSER := true
+BOARD_USES_IA_HWCOMPOSER := false
 BOARD_USES_IA_PLANNER := true
+{{/drmhwc}}
 
+{{^drmhwc}}
+BOARD_USES_DRM_HWCOMPOSER := false
 BOARD_USES_IA_HWCOMPOSER := true
+{{/drmhwc}}
 
 {{#minigbm}}
 BOARD_USES_MINIGBM := true

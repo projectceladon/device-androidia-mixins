@@ -23,13 +23,16 @@ $(foreach fw,$(I915_FW),$(eval PRODUCT_PACKAGES += $(notdir $(fw))))
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/drirc:vendor/etc/drirc
 
+{{#drmhwc}}
 # DRM HWComposer
 PRODUCT_PACKAGES += \
-    hwcomposer.drm_minigbm
+    hwcomposer.drm
 
 # PRODUCT_PROPERTY_OVERRIDES += \
 #   ro.hardware.hwcomposer=drm
+{{/drmhwc}}
 
+{{^drmhwc}}
 # HWComposer IA
 PRODUCT_PACKAGES += \
     hwcomposer.$(TARGET_GFX_INTEL)
@@ -46,13 +49,14 @@ PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display.ini:$(TARGET_COPY_OUT_VEND
 PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display.kvm.ini:$(TARGET_COPY_OUT_VENDOR)/etc/hwc_display.kvm.ini
 endif
 
+{{/drmhwc}}
+
 {{#minigbm}}
 # Mini gbm
 # PRODUCT_PROPERTY_OVERRIDES += \
 #    ro.hardware.gralloc=$(TARGET_GFX_INTEL)
 
 PRODUCT_PACKAGES += \
-    gralloc.minigbm \
     gralloc.$(TARGET_GFX_INTEL)
 {{/minigbm}}
 
