@@ -1,8 +1,8 @@
 PRODUCT_PACKAGES += \
     libGLES_android \
     egl.cfg \
-    gralloc.$(TARGET_BOARD_PLATFORM) \
-    hwcomposer.$(TARGET_BOARD_PLATFORM) \
+    gralloc.intel \
+    hwcomposer.intel \
     hwcomposer.default \
     libion
 
