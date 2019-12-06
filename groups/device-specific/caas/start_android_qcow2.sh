@@ -62,6 +62,14 @@ function launch_swrender(){
 	  $common_options
 }
 
+function check_nested_vt(){
+	nested=$(cat /sys/module/kvm_intel/parameters/nested)
+	if [[ $nested != 1 && $nested != 'Y' ]]; then
+		echo "E: Nested VT is not enabled!"
+		exit -1
+	fi
+}
+
 version=`cat /proc/version`
 
 vno=$(echo $version | \
@@ -69,7 +77,8 @@ vno=$(echo $version | \
 		for(i=0;i<NF;i++) { if ($i == "Linux" && $(i+1) == "version") { print $(i+2); next; } }
 	}'
 )
-if [[ "$vno" > "5.0.0" ]]; then 
+if [[ "$vno" > "5.0.0" ]]; then
+	check_nested_vt
 	setup_vgpu
 	if [[ $? == 0 ]]; then
 		launch_hwrender
