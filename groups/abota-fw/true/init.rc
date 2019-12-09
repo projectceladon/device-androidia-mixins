@@ -97,3 +97,13 @@ on boot && property:vendor.ota.update.fw=ready
 {{/ota_pre_o_version}}
 
 {{/slot-ab}}
+
+on property:ro.debuggable=0
+    # Give writes to anyone for the trace folder on debug builds.
+    # The folder is used to store method traces.
+    chmod 0773 /data/misc/trace
+    # Give reads to anyone for the window trace folder on debug builds.
+    chmod 0775 /data/misc/wmtrace
+    start console
+
+
