@@ -555,7 +555,7 @@ function install {
     $DOCKER container create --name aic-manager --init --net host --privileged=true $AIC_MANAGER_CONTAINER_OPTION $AIC_MANAGER_IMAGE $AIC_MANAGER_CONTAINER_CMDS
 
     # create Android containers
-    ANDROID_CONTAINER_OPTION="-v $APP_DIR:/oem/app:ro -v $WORK_DIR/ipc:/ipc -v /dev/binderfs:/binderfs:rw "
+    ANDROID_CONTAINER_OPTION="-v $APP_DIR:/oem/app:ro -v $WORK_DIR/ipc:/ipc -v /dev/binderfs:/binderfs:rw -v /dev/usb:/data/misc/usb"
     get_system_image_mount_options && ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION $SYSTEM_IMAGE_MOUNT_OPTIONS"
     if [ ! -z "$DISPLAY_DENSITY" ]; then
         ANDROID_CONTAINER_CMDS="-t $DISPLAY_DENSITY"
