@@ -19,13 +19,13 @@ PRODUCT_PACKAGES += \
 
 ifeq ($(TARGET_USE_GRALLOC_VHAL), true)
 PRODUCT_COPY_FILES += \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/bin/gralloc1_test:system/vendor/bin/gralloc1_test \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/bin/test_lxc_server:system/vendor/bin/test_lxc_server \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/bin/test_lxc_client:system/vendor/bin/test_lxc_client \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/lib/hw/gralloc.intel.so:system/vendor/lib/hw/gralloc.intel.so \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/lib64/hw/gralloc.intel.so:system/vendor/lib64/hw/gralloc.intel.so \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/lib/liblxc_util.so:system/vendor/lib/liblxc_util.so \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/lib64/liblxc_util.so:system/vendor/lib64/liblxc_util.so
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/bin/gralloc1_test:system/vendor/bin/gralloc1_test \
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/bin/test_lxc_server:system/vendor/bin/test_lxc_server \
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/bin/test_lxc_client:system/vendor/bin/test_lxc_client \
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/lib/hw/gralloc.intel.so:system/vendor/lib/hw/gralloc.intel.so \
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/lib64/hw/gralloc.intel.so:system/vendor/lib64/hw/gralloc.intel.so \
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/lib/liblxc_util.so:system/vendor/lib/liblxc_util.so \
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/lib64/liblxc_util.so:system/vendor/lib64/liblxc_util.so
 endif
 
 PRODUCT_PACKAGES += \
