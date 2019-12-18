@@ -45,7 +45,7 @@ common_options="\
  -drive file=$caas_image,if=none,id=disk1 \
  -device virtio-blk-pci,drive=disk1,bootindex=1 \
  -device e1000,netdev=net0 \
- -netdev user,id=net0,hostfwd=tcp::5555-:5555 \
+ -netdev user,id=net0,hostfwd=tcp::5555-:5555,hostfwd=tcp::5554-:5554 \
  -device intel-iommu,device-iotlb=off \
  -full-screen \
  -nodefaults
