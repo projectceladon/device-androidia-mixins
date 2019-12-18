@@ -40,6 +40,16 @@ function ubu_install_qemu(){
 	cd ../
 }
 
+function ubu_build_ovmf(){
+	sudo apt install -y uuid-dev nasm acpidump iasl
+	cd $QEMU_REL/roms/edk2
+	source ./edksetup.sh
+	make -C BaseTools/
+	build -b DEBUG -t GCC5 -a X64 -p OvmfPkg/OvmfPkgX64.dsc -D NETWORK_IP4_ENABLE -D NETWORK_ENABLE  -D SECURE_BOOT_ENABLE
+	cp Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd ../../../OVMF.fd
+	cd ../../../
+}
+
 function ubu_enable_host_gvtg(){
 	if [[ ! `cat /etc/default/grub` =~ "i915.enable_gvt=1 intel_iommu=on" ]]; then
 		read -p "The grub entry in '/etc/default/grub' will be updated for enabling GVT-g, do you want to continue? [Y/n]" res
@@ -118,6 +128,7 @@ if [[ $version =~ "Ubuntu" ]]; then
 	check_network
 	ubu_changes_require
 	ubu_install_qemu
+	ubu_build_ovmf
 	ubu_enable_host_gvtg
 	get_required_scripts
 	check_kernel
