@@ -46,14 +46,14 @@ common_options="\
  -device virtio-blk-pci,drive=disk1,bootindex=1 \
  -device e1000,netdev=net0 \
  -netdev user,id=net0,hostfwd=tcp::5555-:5555,hostfwd=tcp::5554-:5554 \
- -device intel-iommu,device-iotlb=off \
+ -device intel-iommu,device-iotlb=off,caching-mode=on \
  -full-screen \
  -nodefaults
 "
 
 function launch_hwrender(){
 	qemu-system-x86_64 \
-	  -device vfio-pci,sysfsdev=$GVTg_DEV_PATH/$GVTg_VGPU_UUID,display=on,x-igd-opregion=on \
+	  -device vfio-pci-nohotplug,ramfb=on,sysfsdev=$GVTg_DEV_PATH/$GVTg_VGPU_UUID,display=on,x-igd-opregion=on \
 	  $common_options
 }
 
