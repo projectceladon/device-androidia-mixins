@@ -1,4 +1,5 @@
 PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.freeform_window_management.xml:system/etc/permissions/android.software.freeform_window_management.xml \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/vendor/etc/permissions/android.hardware.opengles.aep.xml \
 
 PRODUCT_PACKAGES += \
@@ -19,13 +20,13 @@ PRODUCT_PACKAGES += \
 
 ifeq ($(TARGET_USE_GRALLOC_VHAL), true)
 PRODUCT_COPY_FILES += \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/bin/gralloc1_test:system/vendor/bin/gralloc1_test \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/bin/test_lxc_server:system/vendor/bin/test_lxc_server \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/bin/test_lxc_client:system/vendor/bin/test_lxc_client \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/lib/hw/gralloc.intel.so:system/vendor/lib/hw/gralloc.intel.so \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/lib64/hw/gralloc.intel.so:system/vendor/lib64/hw/gralloc.intel.so \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/lib/liblxc_util.so:system/vendor/lib/liblxc_util.so \
-    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/nuc/system/vendor/lib64/liblxc_util.so:system/vendor/lib64/liblxc_util.so
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/bin/gralloc1_test:system/vendor/bin/gralloc1_test \
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/bin/test_lxc_server:system/vendor/bin/test_lxc_server \
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/bin/test_lxc_client:system/vendor/bin/test_lxc_client \
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/lib/hw/gralloc.intel.so:system/vendor/lib/hw/gralloc.intel.so \
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/lib64/hw/gralloc.intel.so:system/vendor/lib64/hw/gralloc.intel.so \
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/lib/liblxc_util.so:system/vendor/lib/liblxc_util.so \
+    $(INTEL_PATH_VENDOR_CIC_GRAPHIC)/edge/system/vendor/lib64/liblxc_util.so:system/vendor/lib64/liblxc_util.so
 endif
 
 PRODUCT_PACKAGES += \
@@ -33,7 +34,10 @@ PRODUCT_PACKAGES += \
     libdrm \
     libdrm_intel \
     libsync \
-    Browser2
+    Browser2 \
+    RemoteIME \
+    ServiceAgent \
+    auto_start_apk.sh
 
 ifeq ($(TARGET_USE_GRALLOC_VHAL), true)
 PRODUCT_PACKAGES += gralloc_imp.intel
@@ -42,15 +46,24 @@ PRODUCT_PACKAGES += gralloc.intel
 endif
 
 ifeq ($(TARGET_USE_HWCOMPOSER_VHAL), true)
-PRODUCT_PACKAGES += hwcomposer_imp.intel
+PRODUCT_COPY_FILES += \
+    vendor/intel/cic/target/graphics/edge/system/vendor/lib/hw/hwcomposer.remote.so:system/vendor/lib/hw/hwcomposer.remote.so \
+    vendor/intel/cic/target/graphics/edge/system/vendor/lib64/hw/hwcomposer.remote.so:system/vendor/lib64/hw/hwcomposer.remote.so
 else
 PRODUCT_PACKAGES += hwcomposer.intel
 endif
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.hwcomposer=intel \
     ro.hardware.gralloc=intel \
     ro.hardware.gralloc_imp=intel \
-    ro.hardware.hwcomposer_imp=intel \
-    ro.opengles.version=196610 \
+    ro.opengles.version=196610
+
+ifeq ($(TARGET_USE_HWCOMPOSER_VHAL), true)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.hwcomposer=remote
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.hwcomposer=intel
+endif
+

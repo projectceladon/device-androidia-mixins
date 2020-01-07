@@ -1,3 +1,4 @@
+{{^use_cic}}
 on fs
     # ro.boot.hardware = TARGET_PRODUCT (set in kernel command line
     # as androidboot.hardware). Mount all the filesystems as specified
@@ -57,3 +58,4 @@ on fs
 on verity-logging
     exec u:r:slideshow:s0 -- /sbin/slideshow -t 30000 -p warning/verity_red_1 warning/verity_red_2
 {{/verity_warning}}
+{{/use_cic}}
