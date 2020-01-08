@@ -6,6 +6,7 @@ import com.intel.serviceagent.IPackageManagerAgent;
 import com.intel.serviceagent.IClipboardAgent;
 import com.intel.serviceagent.IHostSettingsAgent;
 import com.intel.serviceagent.IHostSettingsListener;
+import com.intel.serviceagent.IInputMethodManagerAgent;
 
 interface IServiceAgent {
     IPackageManagerAgent getPackageManagerAgent();
@@ -13,4 +14,5 @@ interface IServiceAgent {
     IHostSettingsAgent getHostSettingsAgent();
     void addHostSettingsListener(IHostSettingsListener listener);
     void removeHostSettingsListener(IHostSettingsListener listener);
+    IInputMethodManagerAgent getInputMethodManagerAgent();
 }

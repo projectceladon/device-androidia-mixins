@@ -45,4 +45,9 @@ public class BnServiceAgent extends IServiceAgent.Stub {
         BnHostSettingsAgent agent = BnHostSettingsAgent.getHostSettingsAgent();
         agent.removeHostSettigsListener(listener);
     }
+
+    @Override
+    public IInputMethodManagerAgent getInputMethodManagerAgent() throws RemoteException {
+        return BnInputMethodManagerAgent.getInputMethodManagerAgent(mApp);
+    }
 }
