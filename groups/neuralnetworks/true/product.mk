@@ -1,7 +1,7 @@
 # neuralnetworks HAL
 PRODUCT_PACKAGES += \
-    android.hardware.neuralnetworks@1.1-generic-service \
-    android.hardware.neuralnetworks@1.1-generic-impl \
+    android.hardware.neuralnetworks@1.2-generic-service \
+    android.hardware.neuralnetworks@1.2-generic-impl \
     android.hardware.neuralnetworks@1.2-service-gpgpu
 
 PRODUCT_PACKAGES += \
@@ -9,7 +9,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libMKLDNNPlugin\
-    libmkldnn
+    libmkldnn \
+    libcpu_extension
 
 PRODUCT_PACKAGES += \
     graphtest_cpu
