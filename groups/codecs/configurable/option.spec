@@ -12,4 +12,4 @@ hw_vd_h264 = true
 hw_vd_h264_secure = false
 hw_vd_mp2 = false
 codec_perf_xen = false
-profile_file = media_profiles.xml
+4k_encoder_support = false
