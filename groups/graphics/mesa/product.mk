@@ -29,28 +29,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
 {{^drmhwc}}
 # HWComposer IA
 PRODUCT_PACKAGES += \
-    hwcomposer.$(TARGET_BOARD_PLATFORM)
+    hwcomposer.intel
 
 PRODUCT_PROPERTY_OVERRIDES += \
-   ro.hardware.hwcomposer=$(TARGET_BOARD_PLATFORM)
-
-INTEL_HWC_CONFIG := $(INTEL_PATH_VENDOR)/external/hwcomposer-intel
-
-ifeq ($(findstring _acrn,$(TARGET_PRODUCT)),_acrn)
-PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display_virt.ini:$(TARGET_COPY_OUT_VENDOR)/etc/hwc_display.ini
-else
-PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display.ini:$(TARGET_COPY_OUT_VENDOR)/etc/hwc_display.ini
-endif
+   ro.hardware.hwcomposer=intel
 
 {{/drmhwc}}
 
 {{#minigbm}}
 # Mini gbm
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.gralloc=$(TARGET_BOARD_PLATFORM)
+    ro.hardware.gralloc=intel
 
 PRODUCT_PACKAGES += \
-    gralloc.$(TARGET_BOARD_PLATFORM)
+    gralloc.intel
 {{/minigbm}}
 
 {{^minigbm}}

@@ -23,7 +23,7 @@ else # ufo packages when building from source
     PRODUCT_PACKAGES += ufo_test
 endif
 
-PRODUCT_PACKAGES += hwcomposer.$(TARGET_BOARD_PLATFORM)
+PRODUCT_PACKAGES += hwcomposer.intel
 PRODUCT_PACKAGES += libhwcservice
 PRODUCT_PROPERTY_OVERRIDES += ro.opengles.version = 196609
 
