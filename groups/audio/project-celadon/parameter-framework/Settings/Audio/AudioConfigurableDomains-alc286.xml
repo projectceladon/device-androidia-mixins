@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConfigurableDomains xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/etc/parameter-framework/Schemas/ConfigurableDomains.xsd" SystemClassName="Audio">
+  <ConfigurableDomain Name="AudioConfiguration" SequenceAware="false">
+    <Configurations>
+      <Configuration Name="Default">
+        <CompoundRule Type="All"/>
+      </Configuration>
+    </Configurations>
+    <ConfigurableElements>
+      <ConfigurableElement Path="/Audio/alc286/output/speaker/analog/volume"/>
+      <ConfigurableElement Path="/Audio/alc286/output/speaker/analog/level"/>
+      <ConfigurableElement Path="/Audio/alc286/output/speaker/switch"/>
+    </ConfigurableElements>
+    <Settings>
+      <Configuration Name="Default">
+        <ConfigurableElement Path="/Audio/alc286/output/speaker/analog/volume">
+          <IntegerParameter Name="volume">100 100</IntegerParameter>
+        </ConfigurableElement>
+        <ConfigurableElement Path="/Audio/alc286/output/speaker/analog/level">
+          <IntegerParameter Name="level">100</IntegerParameter>
+        </ConfigurableElement>
+        <ConfigurableElement Path="/Audio/alc286/output/speaker/switch">
+          <BooleanParameter Name="switch">1</BooleanParameter>
+        </ConfigurableElement>
+      </Configuration>
+    </Settings>
+  </ConfigurableDomain>
+</ConfigurableDomains>

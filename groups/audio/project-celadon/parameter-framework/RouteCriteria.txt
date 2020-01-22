@@ -1,0 +1,37 @@
+InclusiveCriterion SelectedOutputDevices    :    Earpiece         Ihf           Headset       Headphones    Sco        ScoHeadset   ScoCarkit        A2dp               A2dpHeadphones    A2dpSpeaker     AuxDigital      AnlgDockHeadset DgtlDockHeadset UsbAccessory  UsbDevice    RemoteSubmix TelephonyTx  Line          HdmiArc          Spdif     Fm              AuxLine           SpeakerSafe   Ip UsbHeadset  Bus
+InclusiveCriterion SelectedInputDevices     :    Communication    Ambient       Main          ScoHeadset    Headset    AuxDigital   VoiceCall        Back               RemoteSubmix      AnlgDockHeadset DgtlDockHeadset UsbAccessory    UsbDevice       FmTuner       TvTuner      Line         Spdif        BluetoothA2dp Loopback UsbHeadset  Bus
+InclusiveCriterion OutputFlags              :    Direct           Primary       Fast          Deep          Offload    NonBlocking  HwAvSync         Tts                Raw          Sync    Iec958NonAudio
+InclusiveCriterion InputFlags               :    Fast             HwHotword     Raw           Sync          Primary
+InclusiveCriterion InputSources             :    Default          Mic           VoiceUplink   VoiceDownlink VoiceCall  Camcorder    VoiceRecognition VoiceCommunication RemoteSubmix Unprocessed FmTuner Hotword
+InclusiveCriterion TtyDirection             :    Downlink         Uplink
+InclusiveCriterion PreProcEnabled           :    Aec              Agc           Ns            Bmf            Wnr
+InclusiveCriterion StatesChanged            :    Mode      HasModem      ModemState    ModemAudioAvailable    HacSelected    TtyDirection    BtHeadsetBandType      CsvBandType     VoIPBandType    ImsBandType    SelectedInputDevices    SelectedOutputDevices InputSources OutputFlags InputFlags ScreenState ContextAwareness FmEnabled AlwaysListening MicMuted PreProcEnabled LpalDevice BwxActivated HfpClientEnable HfpClientBandType ScreenRotation A2dpSuspended
+ExclusiveCriterion LpalDevice               :    None             Communication Ambient       Main        ScoHeadset     Headset    AuxDigital       VoiceCall          Back              RemoteSubmix    AnlgDockHeadset DgtlDockHeadset UsbAccessory    UsbDevice     FmTuner      TvTuner      Line         Spdif         BluetoothA2dp    Loopback  UsbHeadset
+ExclusiveCriterion Mode                     :    Normal           RingTone      InCsvCall     InVoipCall
+ExclusiveCriterion ModemAudioAvailable      :    False            True
+ExclusiveCriterion FmEnabled                :    False            True
+ExclusiveCriterion HacSelected              :    False            True
+ExclusiveCriterion BtHeadsetBandType        :    Unknown          NB            WB            SuperWB
+ExclusiveCriterion CsvBandType              :    Unknown          NB            WB            SuperWB
+ExclusiveCriterion VoIPBandType             :    Unknown          NB            WB            SuperWB
+ExclusiveCriterion ImsBandType              :    Unknown          NB            WB            SuperWB
+ExclusiveCriterion ContextAwareness         :    False            True
+ExclusiveCriterion AlwaysListening          :    False            True
+ExclusiveCriterion HasModem                 :    False            True
+ExclusiveCriterion ModemState               :    False            True
+ExclusiveCriterion ScreenState              :    False            True
+ExclusiveCriterion MicMuted                 :    False            True
+ExclusiveCriterion BwxActivated             :    False            True
+ExclusiveCriterion HfpClientEnable          :    False            True
+ExclusiveCriterion HfpClientBandType        :    Unknown          NB            WB            SuperWB
+ExclusiveCriterion ScreenRotation           :    0                90            180           270
+ExclusiveCriterion A2dpSuspended            :    False            True
+ExclusiveCriterion IsEAVBStream             :    False            True
+ExclusiveCriterion AuxInSelected            :    False            True
+ExclusiveCriterion HeartbeatEnabled         :    False            True
+ExclusiveCriterion AvbServiceState          :    Stopped          Starting     Ready
+ExclusiveCriterion AvbServiceSuspended      :    False            True
+InclusiveCriterion OutputDeviceAddresses    :    Media            Navigation   Hmi
+InclusiveCriterion InputDeviceAddresses     :    Mic1             Mic2
+InclusiveCriterion VehicleAudioFocus       : Music         Navigation         Voice         Call         Alarm         Notification         Unknown         SafetyAlert         CDRom         AuxAudio         SystemSound         Radio         ExternalSource
+InclusiveCriterion VehicleAudioMute       : Music         Navigation         Voice         Call         Alarm         Notification         Unknown         SafetyAlert         CDRom         AuxAudio         SystemSound         Radio         ExternalSource

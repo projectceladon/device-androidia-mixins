@@ -1,0 +1,36 @@
+ExclusiveCriterion  Mode                   :  InCsvCall         InVoipCall       Normal           RingTone           InImsCall
+InclusiveCriterion  TtyDirection           :  Downlink          Uplink
+InclusiveCriterion  RoutageState           :  Configure         Flow             Path             StreamPath        PostPath
+InclusiveCriterion  ClosingCaptureRoutes   :  EavbStream        AlwaysListening   BtIA             LowLatency       CompressedMedia  ContextAwareness  DeepMedia  FMIA                HwCodec0IA     HwCodec1IA        Media        ModemIA     Voice        BtHfp       DMicIA         AuxStream         EavbMicPair1         EavbMicPair2
+InclusiveCriterion  ClosingPlaybackRoutes  :  AlwaysListening   A2dpOffloadIA    BtIA             LowLatency       CompressedMedia  ContextAwareness  DeepMedia     HwCodec0IA     HwCodec1IA        Media        ModemIA     Voice        BtHfp        iDisp        A2dpOffloadSink  EavbMedia  EavbNavigation  EavbHmi
+InclusiveCriterion  OpenedCaptureRoutes    :  EavbStream        AlwaysListening   BtIA             LowLatency       CompressedMedia  ContextAwareness  DeepMedia  FMIA                HwCodec0IA     HwCodec1IA        Media        ModemIA     Voice        BtHfp       DMicIA         AuxStream         EavbMicPair1         EavbMicPair2
+InclusiveCriterion  OpenedPlaybackRoutes   :  AlwaysListening   A2dpOffloadIA    BtIA             LowLatency       CompressedMedia  ContextAwareness  DeepMedia     HwCodec0IA     HwCodec1IA        Media        ModemIA     Voice        BtHfp        iDisp        A2dpOffloadSink  EavbMedia  EavbNavigation  EavbHmi
+InclusiveCriterion  SelectedInputDevices    :  Communication     Ambient          Main             ScoHeadset      Headset           AuxDigital VoiceCall           Back           RemoteSubmix      AnlgDockHeadset                                                                   DgtlDockHeadset   UsbAccessory     UsbDevice        FmTuner          TvTuner           Line       Spdif               BluetoothA2dp  Loopback    Bus
+InclusiveCriterion  SelectedOutputDevices   :  Earpiece          Ihf              Headset          Headphones       Sco               ScoHeadset ScoCarkit         A2dp           A2dpHeadphones    A2dpSpeaker  AuxDigital                                                           AnlgDockHeadset   DgtlDockHeadset  UsbAccessory     UsbDevice        RemoteSubmix      TelephonyTx Line               HdmiArc        Spdif             Fm           AuxLine     SpeakerSafe   Ip  Bus
+InclusiveCriterion  InputSources            :  Camcorder         Default          Mic              None             VoiceCall         VoiceCommunication             VoiceDownlink  VoiceRecognition  VoiceUplink  RemoteSubmix Unprocessed FmTuner Hotword
+ExclusiveCriterion  BandType               :  NB                SuperWB          Unknown          WB
+ExclusiveCriterion  BtHeadsetNrEc          :  False             True
+ExclusiveCriterion  BtHeadsetBandType      :  NB                SuperWB          Unknown          WB
+ExclusiveCriterion  HacSelected            :  False             True
+ExclusiveCriterion  ScreenState            :  Off               On
+ExclusiveCriterion  BypassNonLinearPp      :  Off               On
+ExclusiveCriterion  BypassLinearPp         :  Off               On
+ExclusiveCriterion  MicMuted               :  False             True
+InclusiveCriterion  PreProcEnabled         :  Aec               Agc              Ns              Bmf              Wnr
+ExclusiveCriterion BmfCameraOrientation    :  False             True
+ExclusiveCriterion BmfCameraLocation       :  False             True
+ExclusiveCriterion BmfAudioFromSource      :  False             True
+ExclusiveCriterion BmfAudioCommentary      :  False             True
+ExclusiveCriterion  FeNsActivated          :  False             True
+ExclusiveCriterion  SlvActivated           :  False             True
+ExclusiveCriterion  BwxActivated           :  False             True
+ExclusiveCriterion PersonalEqualization    :  None              Slight          Medium           Strong
+ExclusiveCriterion ModemAudioIsSpeech      :  False             True
+ExclusiveCriterion ScreenRotation          :  0                 90              180         270
+ExclusiveCriterion A2dpSuspended           :  False             True
+ExclusiveCriterion HfpClientBandType       :  Unknown          NB            WB            SuperWB
+ExclusiveCriterion AvbServiceState         :  Stopped          Starting     Ready
+ExclusiveCriterion AvbServiceSuspended     :  False             True
+InclusiveCriterion VehicleAudioFocus       :  Music         Navigation         Voice         Call         Alarm         Notification         Unknown         SafetyAlert         CDRom         AuxAudio         SystemSound         Radio         ExternalSource
+InclusiveCriterion VehicleAudioMute        :  Music         Navigation         Voice         Call         Alarm         Notification         Unknown         SafetyAlert         CDRom         AuxAudio         SystemSound         Radio         ExternalSource
+ExclusiveCriterion SmartXDataProbing       :  False             True
