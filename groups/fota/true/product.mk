@@ -1,5 +1,5 @@
-# Enable FOTA for non user builds
-PRODUCT_PACKAGES_DEBUG += AFotaApp
+# Build FOTA into image
+PRODUCT_PACKAGES += AFotaApp
 
 ifneq ($(TARGET_BUILD_VARIANT),user)
 {{#update_stream}}
