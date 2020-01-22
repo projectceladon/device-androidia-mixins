@@ -121,3 +121,16 @@
     * Version 3.2.3
 
     * Move file stat operation under conditional statement
+
+2019-09-19 gao huadongx <huadongx.gao@intel.com>
+
+	* Version 3.3.0
+
+	* Support two mixins (mixins & mixins_priv), mixins is for pushlish groups,
+	mixins_priv is for embargo groups
+
+	* Auto check mixins & mixins_priv path
+
+	* Can't support flag mixinsrel
+
+	* The mixins_priv have high priority
