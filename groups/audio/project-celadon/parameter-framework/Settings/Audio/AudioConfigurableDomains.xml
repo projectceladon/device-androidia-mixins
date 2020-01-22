@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConfigurableDomains SystemClassName="Audio">
+  <ConfigurableDomain Name="OutputDevice.Selected" SequenceAware="false">
+    <Configurations>
+      <Configuration Name="Multimedia.Headset">
+        <CompoundRule Type="Any">
+          <SelectionCriterionRule SelectionCriterion="SelectedOutputDevices" MatchesWhen="Includes" Value="Headset"/>
+          <SelectionCriterionRule SelectionCriterion="SelectedOutputDevices" MatchesWhen="Includes" Value="Headphones"/>
+          <SelectionCriterionRule SelectionCriterion="SelectedOutputDevices" MatchesWhen="Includes" Value="Line"/>
+        </CompoundRule>
+      </Configuration>
+    </Configurations>
+    <ConfigurableElements>
+      <ConfigurableElement Path="/Audio/alc283/output/headset/volume"/>
+    </ConfigurableElements>
+    <Settings>
+      <Configuration Name="Multimedia.Headset">
+        <ConfigurableElement Path="/Audio/alc283/output/headset/volume">
+          <IntegerParameter Name="volume">50 50</IntegerParameter>
+        </ConfigurableElement>
+      </Configuration>
+    </Settings>
+  </ConfigurableDomain>
+  <ConfigurableDomain Name="InputDevice.Selected" SequenceAware="false">
+    <Configurations>
+      <Configuration Name="Multimedia.Headset">
+        <CompoundRule Type="All">
+          <SelectionCriterionRule SelectionCriterion="SelectedInputDevices" MatchesWhen="Includes" Value="Headset"/>
+        </CompoundRule>
+      </Configuration>
+    </Configurations>
+    <ConfigurableElements>
+      <ConfigurableElement Path="/Audio/alc283/input/headset/volume"/>
+    </ConfigurableElements>
+    <Settings>
+      <Configuration Name="Multimedia.Headset">
+        <ConfigurableElement Path="/Audio/alc283/input/headset/volume">
+          <IntegerParameter Name="volume">50 50</IntegerParameter>
+        </ConfigurableElement>
+      </Configuration>
+    </Settings>
+  </ConfigurableDomain>
+  <ConfigurableDomain Name="Routing.Alc283.Configure.Playback.Media.Headset" SequenceAware="false">
+    <Configurations>
+      <Configuration Name="Bind">
+        <CompoundRule Type="All">
+          <SelectionCriterionRule SelectionCriterion="RoutageState" MatchesWhen="Includes" Value="Configure"/>
+          <CompoundRule Type="All">
+            <SelectionCriterionRule SelectionCriterion="OpenedPlaybackRoutes" MatchesWhen="Includes" Value="Media"/>
+            <CompoundRule Type="Any">
+              <SelectionCriterionRule SelectionCriterion="SelectedOutputDevices" MatchesWhen="Includes" Value="Headset"/>
+              <SelectionCriterionRule SelectionCriterion="SelectedOutputDevices" MatchesWhen="Includes" Value="Headphones"/>
+              <SelectionCriterionRule SelectionCriterion="SelectedOutputDevices" MatchesWhen="Includes" Value="Line"/>
+            </CompoundRule>
+          </CompoundRule>
+        </CompoundRule>
+      </Configuration>
+      <Configuration Name="Unbind">
+        <CompoundRule Type="All">
+          <SelectionCriterionRule SelectionCriterion="RoutageState" MatchesWhen="Includes" Value="Configure"/>
+        </CompoundRule>
+      </Configuration>
+    </Configurations>
+    <ConfigurableElements>
+      <ConfigurableElement Path="/Audio/alc283/output/headset/switch"/>
+    </ConfigurableElements>
+    <Settings>
+      <Configuration Name="Bind">
+        <ConfigurableElement Path="/Audio/alc283/output/headset/switch">
+          <BooleanParameter Name="switch">1 1</BooleanParameter>
+        </ConfigurableElement>
+      </Configuration>
+      <Configuration Name="Unbind">
+        <ConfigurableElement Path="/Audio/alc283/output/headset/switch">
+          <BooleanParameter Name="switch">0 0</BooleanParameter>
+        </ConfigurableElement>
+      </Configuration>
+    </Settings>
+  </ConfigurableDomain>
+  <ConfigurableDomain Name="Routing.Alc283.Configure.Capture.Media.Headset" SequenceAware="false">
+    <Configurations>
+      <Configuration Name="Bind">
+        <CompoundRule Type="All">
+          <SelectionCriterionRule SelectionCriterion="RoutageState" MatchesWhen="Includes" Value="Configure"/>
+          <CompoundRule Type="Any">
+            <SelectionCriterionRule SelectionCriterion="OpenedCaptureRoutes" MatchesWhen="Includes" Value="Media"/>
+          </CompoundRule>
+          <SelectionCriterionRule SelectionCriterion="SelectedInputDevices" MatchesWhen="Includes" Value="Headset"/>
+        </CompoundRule>
+      </Configuration>
+      <Configuration Name="Unbind">
+        <CompoundRule Type="All">
+          <SelectionCriterionRule SelectionCriterion="RoutageState" MatchesWhen="Includes" Value="Configure"/>
+        </CompoundRule>
+      </Configuration>
+    </Configurations>
+    <ConfigurableElements>
+      <ConfigurableElement Path="/Audio/alc283/input/headset/switch"/>
+    </ConfigurableElements>
+    <Settings>
+      <Configuration Name="Bind">
+        <ConfigurableElement Path="/Audio/alc283/input/headset/switch">
+          <BooleanParameter Name="switch">1 1</BooleanParameter>
+        </ConfigurableElement>
+      </Configuration>
+      <Configuration Name="Unbind">
+        <ConfigurableElement Path="/Audio/alc283/input/headset/switch">
+          <BooleanParameter Name="switch">0 0</BooleanParameter>
+        </ConfigurableElement>
+      </Configuration>
+    </Settings>
+  </ConfigurableDomain>
+  <ConfigurableDomain Name="Routing.Hdmi.Configure.Playack.Port0" SequenceAware="false">
+    <Configurations>
+      <Configuration Name="Bind">
+        <CompoundRule Type="All">
+          <SelectionCriterionRule SelectionCriterion="RoutageState" MatchesWhen="Includes" Value="Configure"/>
+          <CompoundRule Type="All">
+            <SelectionCriterionRule SelectionCriterion="OpenedPlaybackRoutes" MatchesWhen="Includes" Value="Hdmi"/>
+            <CompoundRule Type="Any">
+              <SelectionCriterionRule SelectionCriterion="SelectedOutputDevices" MatchesWhen="Includes" Value="AuxDigital"/>
+            </CompoundRule>
+          </CompoundRule>
+        </CompoundRule>
+      </Configuration>
+      <Configuration Name="Unbind">
+        <CompoundRule Type="All">
+          <SelectionCriterionRule SelectionCriterion="RoutageState" MatchesWhen="Includes" Value="Configure"/>
+        </CompoundRule>
+      </Configuration>
+    </Configurations>
+    <ConfigurableElements>
+      <ConfigurableElement Path="/Audio/hdmi/output/port0/switch"/>
+    </ConfigurableElements>
+    <Settings>
+      <Configuration Name="Bind">
+        <ConfigurableElement Path="/Audio/hdmi/output/port0/switch">
+          <BooleanParameter Name="switch">1</BooleanParameter>
+        </ConfigurableElement>
+      </Configuration>
+      <Configuration Name="Unbind">
+        <ConfigurableElement Path="/Audio/hdmi/output/port0/switch">
+          <BooleanParameter Name="switch">0</BooleanParameter>
+        </ConfigurableElement>
+      </Configuration>
+    </Settings>
+  </ConfigurableDomain>
+</ConfigurableDomains>
