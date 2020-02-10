@@ -20,6 +20,6 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 512
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
 
-BOARD_SEPOLICY_DIRS += device/intel/cic/common/sepolicy
-BOARD_SEPOLICY_DIRS += device/intel/cic/common/sepolicy/bluetooth
-BOARD_SEPOLICY_DIRS += device/intel/cic/common/sepolicy/camera-ext
+BOARD_SEPOLICY_DIRS += device/intel/project-celadon/common/sepolicy
+BOARD_SEPOLICY_DIRS += device/intel/project-celadon/common/sepolicy/bluetooth
+BOARD_SEPOLICY_DIRS += device/intel/project-celadon/common/sepolicy/camera-ext

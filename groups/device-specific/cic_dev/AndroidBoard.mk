@@ -25,7 +25,7 @@ else
 	$(hide) ln -t $(PRODUCT_OUT)/docker/aic-manager/images $(PRODUCT_OUT)/system.img
 endif
 
-TARGET_AIC_FILE_NAME := $(TARGET_PRODUCT)-$(BUILD_NUMBER_FROM_FILE).tar.gz
+TARGET_AIC_FILE_NAME := $(TARGET_PRODUCT)-aic-$(BUILD_NUMBER).tar.gz
 
 .PHONY: addon
 addon:
@@ -33,6 +33,7 @@ ifeq ($(TARGET_PRODUCT), cic_dev)
 	@echo Make additional release binaries/files...
 	$(hide) rm -rf $(PRODUCT_OUT)/cfc $(PRODUCT_OUT)/pre-requisites  $(PRODUCT_OUT)/README-CIC  $(PRODUCT_OUT)/setup-aic
 	$(hide) cp -r $(TOP)/device/intel/project-celadon/$(TARGET_PRODUCT)/addon/* $(TOP)/vendor/intel/cic/host/cfc $(PRODUCT_OUT)/.
+	$(hide) cp $(TOP)/device/intel/project-celadon/$(TARGET_PRODUCT)/addon/cic.sh $(PRODUCT_OUT)
 else
 	@echo Nothing todo
 endif
@@ -42,12 +43,20 @@ aic: .KATI_NINJA_POOL := console
 aic: multidroid
 	@echo Make AIC docker images...
 ifneq ($(TARGET_LOOP_MOUNT_SYSTEM_IMAGES), true)
-	$(HOST_OUT_EXECUTABLES)/aic-build -b $(BUILD_NUMBER_FROM_FILE)
+	$(HOST_OUT_EXECUTABLES)/aic-build -b $(BUILD_NUMBER)
 else
-	BUILD_VARIANT=loop_mount $(HOST_OUT_EXECUTABLES)/aic-build -b $(BUILD_NUMBER_FROM_FILE)
+	BUILD_VARIANT=loop_mount $(HOST_OUT_EXECUTABLES)/aic-build -b $(BUILD_NUMBER)
 endif
 ifeq ($(TARGET_PRODUCT), cic_dev)
-	tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic android.tar.gz aic-manager.tar.gz cfc pre-requisites README-CIC setup-aic -C docker update
+	tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic android.tar.gz aic-manager.tar.gz cfc pre-requisites README-CIC cic.sh setup-aic -C docker update
+	@echo Make debian binaries...
+	$(hide) (rm -rf $(PRODUCT_OUT)/cic && mkdir -p $(PRODUCT_OUT)/cic/opt/cic && mkdir -p $(PRODUCT_OUT)/cic/etc/profile.d)
+	$(hide) (cd $(PRODUCT_OUT)/cic/opt/cic && tar xvf ../../../$(TARGET_AIC_FILE_NAME) aic android.tar.gz aic-manager.tar.gz cic.sh cfc update)
+	$(hide) mkdir -p $(PRODUCT_OUT)/cic/DEBIAN
+	$(hide) cp -r device/intel/project-celadon/$(TARGET_PRODUCT)/addon/debian/* $(PRODUCT_OUT)/cic/DEBIAN/.
+	$(hide) cp -r device/intel/project-celadon/$(TARGET_PRODUCT)/addon/pre-requisites/create_pasocket.sh $(PRODUCT_OUT)/cic/etc/profile.d
+	$(hide) dpkg -x $(PRODUCT_OUT)/cfc/cfc_0.1.0_x64.deb $(PRODUCT_OUT)/cic/.
+	$(hide) (cd $(PRODUCT_OUT)/ && dpkg-deb --build cic/)
 else
 	tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic android.tar.gz aic-manager.tar.gz -C docker update
 endif
