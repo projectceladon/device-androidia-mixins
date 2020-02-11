@@ -1,1 +1,1 @@
-/dev/block/vdb /swap swap nodev,noatime,nosuid,errors=panic wait
+../cic_dev/fstab
