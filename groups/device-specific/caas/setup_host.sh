@@ -122,6 +122,9 @@ function get_required_scripts(){
 	chmod +x start_android_qcow2.sh
 }
 
+function save_env(){
+	echo export CIV_WORK_DIR= $(pwd) >> /etc/environment
+}
 version=`cat /proc/version`
 
 if [[ $version =~ "Ubuntu" ]]; then
@@ -132,6 +135,7 @@ if [[ $version =~ "Ubuntu" ]]; then
 	ubu_enable_host_gvtg
 	get_required_scripts
 	check_kernel
+	save_env
 	ask_reboot
 elif [[ $version =~ "Clear Linux OS" ]]; then
 	check_network

@@ -18,12 +18,23 @@ function setup_vgpu(){
 	return $res
 }
 
+if [[ $1 && $1 == "--display-off" ]]
+then
+        display_type="none"
+        ramfb_state="off"
+        display_state="off"
+else
+        display_type="gtk,gl=on"
+        ramfb_state="on"
+        display_state="on"
+fi
+
 common_options="\
  -m 2048 -smp 2 -M q35 \
  -name caas-vm \
  -enable-kvm \
  -vga none \
- -display gtk,gl=on \
+ -display $display_type \
  -k en-us \
  -machine kernel_irqchip=off \
  -global PIIX4_PM.disable_s3=1 -global PIIX4_PM.disable_s4=1 \
@@ -49,19 +60,20 @@ common_options="\
  -netdev user,id=net0,hostfwd=tcp::5555-:5555,hostfwd=tcp::5554-:5554 \
  -device intel-iommu,device-iotlb=off,caching-mode=on \
  -full-screen \
+ -pidfile android_vm.pid \
  -nodefaults
 "
 
 function launch_hwrender(){
 	qemu-system-x86_64 \
-	  -device vfio-pci-nohotplug,ramfb=on,sysfsdev=$GVTg_DEV_PATH/$GVTg_VGPU_UUID,display=on,x-igd-opregion=on \
-	  $common_options
+	  -device vfio-pci-nohotplug,ramfb=$ramfb_state,sysfsdev=$GVTg_DEV_PATH/$GVTg_VGPU_UUID,display=$display_state,x-igd-opregion=on \
+	  $common_options &
 }
 
 function launch_swrender(){
 	qemu-system-x86_64 \
 	  -device qxl-vga,xres=1280,yres=720 \
-	  $common_options
+	  $common_options &
 }
 
 function check_nested_vt(){
@@ -88,6 +100,8 @@ if [[ "$vno" > "5.0.0" ]]; then
 		echo "W: Failed to create vgpu, fall to software rendering"
 		launch_swrender
 	fi
+
+	echo "Android started successfully"
 else
 	echo "E: Detected linux version $vno"
 	echo "E: Please upgrade kernel version newer than 5.0.0!"
