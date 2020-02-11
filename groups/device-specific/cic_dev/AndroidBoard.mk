@@ -29,7 +29,7 @@ TARGET_AIC_FILE_NAME := $(TARGET_PRODUCT)-aic-$(BUILD_NUMBER).tar.gz
 
 .PHONY: addon
 addon:
-ifeq ($(TARGET_PRODUCT), cic_dev)
+ifneq (,$(filter cic cic_dev,$(TARGET_PRODUCT)))
 	@echo Make additional release binaries/files...
 	$(hide) rm -rf $(PRODUCT_OUT)/cfc $(PRODUCT_OUT)/pre-requisites  $(PRODUCT_OUT)/README-CIC  $(PRODUCT_OUT)/setup-aic
 	$(hide) cp -r $(TOP)/device/intel/project-celadon/$(TARGET_PRODUCT)/addon/* $(TOP)/vendor/intel/cic/host/cfc $(PRODUCT_OUT)/.
@@ -47,7 +47,7 @@ ifneq ($(TARGET_LOOP_MOUNT_SYSTEM_IMAGES), true)
 else
 	BUILD_VARIANT=loop_mount $(HOST_OUT_EXECUTABLES)/aic-build -b $(BUILD_NUMBER)
 endif
-ifeq ($(TARGET_PRODUCT), cic_dev)
+ifneq (,$(filter cic cic_dev,$(TARGET_PRODUCT)))
 	tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic android.tar.gz aic-manager.tar.gz cfc pre-requisites README-CIC cic.sh setup-aic -C docker update
 	@echo Make debian binaries...
 	$(hide) (rm -rf $(PRODUCT_OUT)/cic && mkdir -p $(PRODUCT_OUT)/cic/opt/cic && mkdir -p $(PRODUCT_OUT)/cic/etc/profile.d)
