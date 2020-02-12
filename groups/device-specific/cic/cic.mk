@@ -31,6 +31,7 @@ INTEL_PATH_KERNEL_MODULES_CIC := kernel/modules/cic
 INTEL_PATH_VENDOR_CIC := vendor/intel/cic
 INTEL_PATH_VENDOR_CIC_GRAPHIC := $(INTEL_PATH_VENDOR_CIC)/target/graphics
 INTEL_PATH_VENDOR_CIC_HAL := $(INTEL_PATH_VENDOR_CIC)/target/hals
+INTEL_PATH_PREBUILTS_OUT = $(PRODUCT_OUT)/prebuilts
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml   \
