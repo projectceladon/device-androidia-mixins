@@ -708,6 +708,9 @@ function start {
             export DISPLAY=:0
             xhost +local:$($DOCKER inspect --format='{{ .Config.Hostname }}' aic-manager) > /dev/null 2>&1
         fi
+        sudo modprobe ashmem_module 2>/dev/null
+        sudo modprobe binder_module 2>/dev/null
+        sudo modprobe binderfs_module 2>/dev/null
         $DOCKER start aic-manager
         check_binderfs
 
