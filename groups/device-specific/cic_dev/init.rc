@@ -27,6 +27,10 @@ on early-boot
     chmod 0755 /sys/kernel/debug/tracing
 
 on init
+{{#file_encryption}}
+    chmod 0755 /device
+    chmod 0755 /device/data
+{{/file_encryption}}
     copy /dev/cpuset/cpuset.cpus /dev/cpuset/foreground/cpuset.cpus
     copy /dev/cpuset/cpuset.mems /dev/cpuset/foreground/cpuset.mems
 
