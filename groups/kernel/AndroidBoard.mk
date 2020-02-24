@@ -123,10 +123,19 @@ KERNEL_DEPS := $(shell find $(LOCAL_KERNEL_SRC) \( -name *.git -prune \) -o -pri
 # If a .config is already present, save it before processing
 # the check and restore it at the end
 $(CHECK_CONFIG_LOG): $(KERNEL_DEFCONFIG) $(KERNEL_DEPS)
+	@echo "##### KERNEL_CONFIG_PATH='$(KERNEL_CONFIG_PATH)'"
+	@echo "##### KERNEL_DEFCONFIG='$(KERNEL_DEFCONFIG)'"
+	@echo "##### KERNEL_MODULES_DIFFCONFIG='$(KERNEL_MODULES_DIFFCONFIG)'"
+	@echo "##### KERNEL_caas_DIFFCONFIG='$(KERNEL_caas_DIFFCONFIG)'"
+	@echo "##### KERNEL_APL_DIFFCONFIG='$(KERNEL_APL_DIFFCONFIG)'"
 	$(hide) mkdir -p $(@D)
 	-$(hide) [[ -e $(KERNEL_CONFIG) ]] && mv -f $(KERNEL_CONFIG) $(KERNEL_CONFIG).save
 	$(hide) rm -f $(KERNEL_CONFIG).old
 	$(hide) cat $< > $(KERNEL_CONFIG)
+	@echo "###### CONFIG_FB_EFI ..... #######"
+	@echo "KERNEL_CONFIG='$(KERNEL_CONFIG)'"
+	cat $(KERNEL_CONFIG) | grep CONFIG_FB_EFI
+	@echo "###### CONFIG_FB_EFI ..... #######"
 	$(hide) $(MAKE) $(KERNEL_MAKE_OPTIONS) olddefconfig
 	$(hide) if [[ -e  $(KERNEL_CONFIG).old ]] ; then \
 	  $(CHECK_CONFIG_SCRIPT) $(KERNEL_CONFIG).old $(KERNEL_CONFIG) > $@ ;  fi;
