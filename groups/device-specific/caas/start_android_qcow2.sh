@@ -63,7 +63,6 @@ common_options="\
  -netdev user,id=net0,hostfwd=tcp::5555-:5555,hostfwd=tcp::5554-:5554 \
  -device intel-iommu,device-iotlb=off,caching-mode=on \
  -full-screen \
- -pidfile android_vm.pid \
  -nodefaults
 "
 
@@ -72,6 +71,7 @@ function launch_hwrender(){
 	then
 		qemu-system-x86_64 \
 		-device vfio-pci-nohotplug,ramfb=$ramfb_state,sysfsdev=$GVTg_DEV_PATH/$GVTg_VGPU_UUID,display=$display_state,x-igd-opregion=on \
+		-pidfile android_vm.pid \
 		$common_options &
 		sleep 5
 		echo -n "Android started successfully and is running in background, pid of the process is:"
@@ -89,6 +89,7 @@ function launch_swrender(){
         then
 		qemu-system-x86_64 \
 		-device qxl-vga,xres=1280,yres=720 \
+		-pidfile android_vm.pid \
 		$common_options &
 		sleep 5
 		echo -n "Android started successfully and is running in background, pid of the process is:"
