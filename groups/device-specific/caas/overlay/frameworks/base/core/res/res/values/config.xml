@@ -182,6 +182,13 @@
          will prevent the system from entering a low power state until the dream ends. -->
     <bool name="config_dreamsSupported">false</bool>
 
+    <!-- The device supports freeform window management. Windows have title bars and can be moved
+	 and resized. If you set this to true, you also need to add
+	 PackageManager.FEATURE_FREEFORM_WINDOW_MANAGEMENT feature to your device specification.
+	 The duplication is necessary, because this information is used before the features are
+	 available to the system.-->
+    <bool name="config_freeformWindowManagement">true</bool>
+
     <!-- Arbitrary max 8 users. -->
     <integer name="config_multiuserMaximumUsers">8</integer>
 
