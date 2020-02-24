@@ -63,6 +63,8 @@ common_options="\
  -netdev user,id=net0,hostfwd=tcp::5555-:5555,hostfwd=tcp::5554-:5554 \
  -device intel-iommu,device-iotlb=off,caching-mode=on \
  -full-screen \
+ -fsdev local,security_model=none,id=fsdev0,path=./share_folder \
+ -device virtio-9p-pci,fsdev=fsdev0,mount_tag=hostshare \
  -nodefaults
 "
 
