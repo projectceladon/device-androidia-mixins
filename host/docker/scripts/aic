@@ -253,7 +253,7 @@ function install {
 	  -n, --instances int          Number of Android instances to be installed.
 	  -p, --work-path string       Absolute path of work directory(relative path is not supported).
 	  -a, --app-path string        Absolute path of intalled app directory
-	  -d, --display-type string    Specify display type, valid option is 'drm', 'x11', 'wld' and 'none'.
+	  -d, --display-type string    Specify display type, valid option is 'drm', 'x11', 'wld', 'ia_hwc' and 'none'.
 	  -t, --display-density string Specify display density.
 	  -u, --update                 Use docker souces in update directory to build and install a new
 	                               android image based on android.tar.gz.
@@ -347,7 +347,7 @@ function install {
                     exit -1
                 fi
                 DISPLAY_TYPE=$1
-                if [ ! "$DISPLAY_TYPE" = "drm" ] && [ ! "$DISPLAY_TYPE" = "x11" ] && [ ! "$DISPLAY_TYPE" = "wld" ] && [ ! "$DISPLAY_TYPE" = "none" ]; then
+                if [ ! "$DISPLAY_TYPE" = "drm" ] && [ ! "$DISPLAY_TYPE" = "x11" ] && [ ! "$DISPLAY_TYPE" = "wld" ] && [ ! "$DISPLAY_TYPE" = "ia_hwc" ] && [ ! "$DISPLAY_TYPE" = "none" ]; then
                     echo "$USAGE"
                     exit -1
                 fi
@@ -436,6 +436,10 @@ function install {
             echo "$USAGE"
             exit -1
         fi
+    fi
+
+    if [ "$DISPLAY_TYPE" = "ia_hwc" ]; then
+        cp -r ia_hwc/* update/
     fi
 
     AIC_MANAGER_IMAGE_FILE=aic-manager.tar.gz
