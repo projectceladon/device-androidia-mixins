@@ -1,5 +1,8 @@
 #!/bin/bash
 
+AIC_DATA_IMG=$(pwd)/workdir/aic_data.img
+AIC_VG_NAME="aic_data"
+
 function check_num {
     case $1 in
         ''|*[!0-9]*)
@@ -38,6 +41,74 @@ function check_containers {
     if [ -z "$($DOCKER ps -a | awk '{print $NF}' | grep android)" ]; then
         echo "[AIC] android container not existed, please re-install aic!"
         exit -1
+    fi
+}
+
+function check_data_img {
+    if [ -f "$AIC_DATA_IMG" ];then
+        echo "Detect previous data img..."
+    else
+        echo "Create data image..."
+        dd if=/dev/zero of=$AIC_DATA_IMG bs=2M count=2048
+    fi
+}
+
+function prepare_data_partition {
+    data_name=$1
+    # Check losetup settings
+    if [ -z "$(losetup | grep $AIC_DATA_IMG)" ]; then
+        loop_dev=`losetup -f`
+        sudo losetup $loop_dev $AIC_DATA_IMG
+    fi
+    # Check pv
+    if [ -z "$(sudo pvs | grep $AIC_VG_NAME)" ]; then
+       sudo pvcreate $loop_dev
+    fi
+    # Check VG
+    if [ -z "$(sudo vgs | grep $AIC_VG_NAME)" ]; then
+        sudo vgcreate $AIC_VG_NAME $loop_dev
+    else
+       echo "VG $AIC_VG_NAME detected..."
+        sudo vgchange -a y $AIC_VG_NAME
+    fi
+    # Check lv
+    if [ -z "$(sudo lvs | grep $data_name)" ]; then
+        sudo lvcreate -L 2G -T $AIC_VG_NAME/$data_name
+    fi
+    # make lvm node under dev
+    sudo vgscan --mknodes -v
+}
+
+function delete_data_partition {
+
+    CON_NAME=$($DOCKER ps -a | awk '{print $NF}' | grep -E 'android')
+    if [ ! -z "$CON_NAME" ]; then
+        if [ ! -z "$(sudo lvs | grep $CON_NAME)" ]; then
+            echo "[AIC] Remove LVM for container $CON_NAME..."
+            sudo lvremove -f /dev/$AIC_VG_NAME/$CON_NAME
+        fi
+    fi
+
+    if [ ! -z "$(sudo vgs | grep $AIC_VG_NAME)" ]; then
+       sudo vgremove -f /dev/$AIC_VG_NAME
+    fi
+
+    # Delete data image
+    if [ ! -z "$(losetup | grep $AIC_DATA_IMG)" ]; then
+       mounted_loop_dev=$(losetup | grep $AIC_DATA_IMG | awk '{print $1}')
+        echo "Detach mounted loop device, $mounted_loop_dev..."
+        sudo pvremove -f $mounted_loop_dev
+        sudo losetup -d $mounted_loop_dev
+    fi
+
+    if [ -d "/dev/$AIC_VG_NAME" ]; then
+        echo "Delete /dev/$AIC_VG_NAME..."
+        sudo rm -rf /dev/$AIC_VG_NAME
+    fi
+
+    if [ -f "$AIC_DATA_IMG" ]; then
+        echo "Delete data image...."
+        sudo rm -f $AIC_DATA_IMG
     fi
 }
 
@@ -264,6 +335,7 @@ function install {
 	                               to specify -s -f at the same time.
 	  -w, --multi-dis-daemon       Start multiple display daemons for every instance. It's only valid when
 	                               display-type is 'x11' or 'wld' and instances number large than 1.
+	  -g, --enable-fbe             Enable file-based encryption.
 
 	Example:
 	  Install 3 android instance and do not automatically generate input config file:
@@ -408,6 +480,10 @@ function install {
                 ;;
             -w|--multi-dis-daemon)
                 MULTIPLE_DISPLAY_DAEMON="true"
+                shift
+                ;;
+            -g|--enable-fbe)
+                ENABLE_FBE="true"
                 shift
                 ;;
             *)
@@ -558,6 +634,11 @@ function install {
     echo "[AIC] create aic-manager container..."
     $DOCKER container create --name aic-manager --init --net host --privileged=true $AIC_MANAGER_CONTAINER_OPTION $AIC_MANAGER_IMAGE $AIC_MANAGER_CONTAINER_CMDS
 
+    # Check data image file
+    if [ "$ENABLE_FBE" = "true" ]; then
+        check_data_img
+    fi
+
     # create Android containers
     ANDROID_CONTAINER_OPTION="-v $APP_DIR:/oem/app:ro -v $WORK_DIR/ipc:/ipc -v /dev/binderfs:/binderfs:rw -v /dev/usb:/data/misc/usb"
     get_system_image_mount_options && ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION $SYSTEM_IMAGE_MOUNT_OPTIONS"
@@ -583,7 +664,12 @@ function install {
         MAC=02:42:ac:64:$(printf "%02x" $(($i / 256))):$(printf "%02x" $(($i % 256)))
         IP=172.100.$((($i + 2) / 256)).$((($i + 2) % 256))
 
-        ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION_BK -v $WORK_DIR/data$i:/data"
+
+        if [ "$ENABLE_FBE" = "true" ]; then
+            ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION_BK -v /dev/$AIC_VG_NAME:/dev/$AIC_VG_NAME"
+        else
+            ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION_BK -v $WORK_DIR/data$i:/data"
+        fi
         ANDROID_CONTAINER_CMDS=$ANDROID_CONTAINER_CMDS_BK
 
         CPU_SET=$(get_cpu_set $i $PLATFORM_HARDWARE)
@@ -595,6 +681,10 @@ function install {
 
         if [ ! -z "$RR_SERVER_FILE" ] && [ ! -z "$(awk ''NR==$((i+1))'' $RR_SERVER_FILE)" ]; then
             ANDROID_CONTAINER_CMDS="$ANDROID_CONTAINER_CMDS -s $(awk ''NR==$((i+1))'' $RR_SERVER_FILE)"
+        fi
+
+        if [ "$ENABLE_FBE" = "true" ]; then
+            ANDROID_CONTAINER_CMDS="$ANDROID_CONTAINER_CMDS -f"
         fi
 
         if [ "$EMULATED_WIFI" = "true" ] && [ "$CTS_ENV" != "true" ]; then
@@ -653,6 +743,10 @@ function uninstall {
     # umount binderfs mount point if any
     umount_binderfs
 
+    if [ ! -z "$($DOCKER inspect --format='{{.Config.Cmd}}' $c | grep "\-f")" ]; then
+        # Delete data partition
+        delete_data_partition
+    fi
 }
 
 function start {
@@ -734,6 +828,9 @@ function start {
         if [[ ! $EXISTED_CONTAINERS =~ (^|[[:space:]])"$c"($|[[:space:]]) ]]; then
             echo "[AIC] $c not existed!"
         else
+            if [ ! -z "$($DOCKER inspect --format='{{.Config.Cmd}}' $c | grep "\-f")" ]; then
+                prepare_data_partition $c
+            fi
             $DOCKER start $c
 
             if [ ! -z "$WAIT_TIME" ]; then
