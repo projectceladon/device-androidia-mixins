@@ -28,3 +28,6 @@ PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
                     android.hardware.graphics.composer@2.1-service
 
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/manifest.xml:vendor/manifest.xml
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.freeform_window_management.xml:vendor/etc/permissions/android.software.freeform_window_management.xml
