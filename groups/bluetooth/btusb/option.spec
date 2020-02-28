@@ -1,3 +1,2 @@
 [defaults]
-firmware =
 ivi =
