@@ -42,8 +42,6 @@ APPS_TO_BE_REMOVED=\
 #By default, nothing to be removed, keep it like this:
 FILES_TO_BE_REMOVED=\
 "
-/system/vendor/etc/permissions/android.hardware.bluetooth.xml
-/system/vendor/etc/permissions/android.hardware.bluetooth_le.xml
 "
 
 #---------------------------
@@ -61,6 +59,30 @@ PROPERTIES=\
 "
 "
 
+#---------------------------
+# 4.Execute shell
+#---------------------------
+#Execute shell commands like this
+#    EXEC_SHELL=\
+#    "
+#    sed -i 's///g' <file>
+#    cp <file1> <file2>
+#    etc..
+#    "
+
+EXEC_SHELL=\
+"
+"
+
+if [[ $AUDIO_PT == "true" ]]; then
+EXEC_SHELL=\
+"
+$EXEC_SHELL
+cp /vendor/etc/audio_policy_configuration_pt.xml /vendor/etc/audio_policy_configuration.xml
+"
+fi
+
+#By default, nothing to be set, keep it like this:
 ############################CUSTOMIZED CONTENT############################
 
 DOCKER_FILE_PATH=update/Dockerfile
@@ -81,7 +103,7 @@ echo 'RUN ["/system/bin/sh", "-c","\' >> $DOCKER_FILE_PATH
 
 #Add the content
 for file in $files
-do   
+do
     echo "rm -rf $file && \\" >> $DOCKER_FILE_PATH
 done
 
@@ -125,6 +147,26 @@ echo "echo\"]" >> $DOCKER_FILE_PATH
 
 }
 
+
+function execute_shell {
+cmds="$1"
+
+#Add the head
+echo 'RUN ["/system/bin/sh", "-c","\' >> $DOCKER_FILE_PATH
+
+#Add the content
+while read -r c
+do
+    if [[ ! -z $c ]]; then
+        echo "$c && \\" >> $DOCKER_FILE_PATH
+    fi
+done <<<"$cmds"
+
+#Add the tail
+echo "echo\"]" >> $DOCKER_FILE_PATH
+
+}
+
 echo "===customize android -- START"
 #make sure root dir exist for Dockerfile
 mkdir -p update/root
@@ -144,4 +186,8 @@ echo -e "\n#set properties" >> $DOCKER_FILE_PATH
 set_properties "$PROPERTIES"
 echo "---Update Doeckerfile for properties -- END"
 
+echo "---Update Doeckerfile for properties -- START"
+echo -e "\n#execute shell" >> $DOCKER_FILE_PATH
+execute_shell "$EXEC_SHELL"
+echo "---Update Doeckerfile for execute shell -- END"
 echo "===customize android -- END"
