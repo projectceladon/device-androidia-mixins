@@ -10,6 +10,8 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/surround_sound_configuration_5_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/surround_sound_configuration_5_0.xml \
     $(LOCAL_PATH)/audiopolicy/config/a2dp_audio_policy_configuration.xml:system/vendor/etc/a2dp_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audiopolicy/config/audio_policy_configuration.xml:system/vendor/etc/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/audiopolicy/config/audio_policy_configuration_mt.xml:system/vendor/etc/audio_policy_configuration_mt.xml \
+    $(LOCAL_PATH)/audiopolicy/config/audio_policy_configuration_pt.xml:system/vendor/etc/audio_policy_configuration_pt.xml \
     $(LOCAL_PATH)/audiopolicy/config/usb_audio_policy_configuration.xml:system/vendor/etc/usb_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audiopolicy/config/hdmi_audio_policy_configuration.xml:system/vendor/etc/hdmi_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audiopolicy/config/mixer_paths_0.xml:system/vendor/etc/mixer_paths_0.xml \
