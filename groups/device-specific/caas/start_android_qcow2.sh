@@ -49,7 +49,6 @@ common_options="\
  -device usb-host,vendorid=0x0eef,productid=0x7200 \
  -device usb-host,vendorid=0x222a,productid=0x0141 \
  -device usb-host,vendorid=0x222a,productid=0x0088 \
- -device usb-host,vendorid=0x8087,productid=0x0a2b \
  -device usb-mouse \
  -device usb-kbd \
  -drive file=$ovmf_file,format=raw,if=pflash \
