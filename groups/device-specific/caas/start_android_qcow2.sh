@@ -67,8 +67,27 @@ common_options="\
  -device virtio-9p-pci,fsdev=fsdev0,mount_tag=hostshare \
  -nodefaults
 "
+function wifi_passthrough(){
+        if [ `find /etc/modprobe.d/ -iname vfio.conf` ]
+        then
+                echo "File exists"
+        else
+                echo "options vfio-pci ids=`lspci -nn  | grep -oP 'Network controller.*\[\K[\w:]+'`" | sudo tee -a /etc/modprobe.d/vfio.conf
+        fi
+
+
+        if [ `find /etc/modules-load.d/ -iname vfio-pci.conf` ]
+        then
+                echo "File exists"
+        else
+                echo "vfio-pci" | sudo tee -a /etc/modules-load.d/vfio-pci.conf
+        fi
+}
 
 function launch_hwrender(){
+
+	wifi_passthrough
+
 	if [[ $1 == "--display-off" ]]
 	then
 		qemu-system-x86_64 \
@@ -107,6 +126,7 @@ function launch_hwrender(){
 	else
 		qemu-system-x86_64 \
 		-device vfio-pci-nohotplug,ramfb=$ramfb_state,sysfsdev=$GVTg_DEV_PATH/$GVTg_VGPU_UUID,display=$display_state,x-igd-opregion=on \
+		-device vfio-pci,host=01:00.0 \
 		$common_options
 	fi
 }
