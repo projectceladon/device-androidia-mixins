@@ -29,3 +29,17 @@ PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
 
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/manifest.xml:vendor/manifest.xml
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/file_share.sh:$(TARGET_COPY_OUT_VENDOR)/bin/file_share.sh
+
+# To install thirdparty apk
+PRODUCT_PACKAGES += Airwatch \
+    Ingenico \
+    Teamviewer
+
+PRODUCT_COPY_FILES += $(INTEL_PATH_COMMON)/lib/x86/libchilkat.so:system/app/Airwatch/lib/x86/libchilkat.so
+PRODUCT_COPY_FILES += $(INTEL_PATH_COMMON)/lib/x86/libcoredevice.so:system/app/Airwatch/lib/x86/libcoredevice.so
+PRODUCT_COPY_FILES += $(INTEL_PATH_COMMON)/lib/x86/libcrypto.1.0.2.so:system/app/Airwatch/lib/x86/libcrypto.1.0.2.so
+PRODUCT_COPY_FILES += $(INTEL_PATH_COMMON)/lib/x86/libfips_main.so:system/app/Airwatch/lib/x86/libfips_main.so
+PRODUCT_COPY_FILES += $(INTEL_PATH_COMMON)/lib/x86/libssl.1.0.2.so:system/app/Airwatch/lib/x86/libssl.1.0.2.so
+PRODUCT_COPY_FILES += $(INTEL_PATH_COMMON)/lib/x86/libencjni.so:system/app/Airwatch/lib/x86/libencjni.so
+PRODUCT_COPY_FILES += $(INTEL_PATH_COMMON)/lib/x86/libsqlcipher.so:system/app/Airwatch/lib/x86/libsqlcipher.so
+
