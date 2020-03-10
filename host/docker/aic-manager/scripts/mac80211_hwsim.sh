@@ -2,20 +2,16 @@
 
 function install_driver
 {
-    if [ ! -f /data/mac80211_hwsim/mac80211_hwsim.ko ]; then
-        make -C /data/mac80211_hwsim
-    fi
-    if [ -f /data/mac80211_hwsim/mac80211_hwsim.ko ]; then
-        modprobe mac80211
-        insmod /data/mac80211_hwsim/mac80211_hwsim.ko radios=$RADIOS_NUM
-    else
-        echo "mac80211_hwsim driver compile failed!"
+    modprobe mac80211 && modprobe mac80211_hwsim radios=$RADIOS_NUM
+    if [ $? -ne 0 ]; then
+        echo "modprobe mac80211_hwsim or modprobe mac80211_hwsim failed!"
         exit -1
     fi
+
     # wait for a while for driver moudule loading, otherwise hostapd and dnsmasq will failed to start.
     sleep 2
     if [ ! -d "/sys/bus/platform/drivers/mac80211_hwsim/" ]; then
-        echo "mac80211_hwsim driver install failed!"
+        echo "mac80211_hwsim module install failed!"
         exit -1
     fi
 }
