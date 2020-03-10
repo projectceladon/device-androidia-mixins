@@ -54,18 +54,12 @@ BOARD_DTB := $(LOCAL_KERNEL_PATH)/{{{board_dtb}}}
 DTB ?= $(BOARD_DTB)
 {{/build_dtbs}}
 
-ifeq ($(DEV_BKC_KERNEL), true)
-  LOCAL_KERNEL_SRC := {{{dev_bkc_src_path}}}
-  KERNEL_CONFIG_PATH := {{dev_bkc_cfg_path}}
-  EXT_MODULES := {{{dev_bkc_external_modules}}}
-  DEBUG_MODULES := {{{dev_bkc_debug_modules}}}
-
-else ifeq ($(MLT_KERNEL), true)
-  LOCAL_KERNEL_SRC := {{{mlt_src_path}}}
-  KERNEL_CONFIG_PATH := {{{mlt_cfg_path}}}
-  EXT_MODULES := {{{mlt_external_modules}}}
-  DEBUG_MODULES := {{{mlt_debug_modules}}}
-
+ifeq ($(BASE_CHROMIUM_KERNEL), true)
+  LOCAL_KERNEL_SRC := {{{chromium_src_path}}}
+  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{chromium_cfg_path}}}
+else ifeq ($(BASE_YOCTO_KERNEL), true)
+  LOCAL_KERNEL_SRC := {{{yocto_src_path}}}
+  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{yocto_cfg_path}}}
 else
   LOCAL_KERNEL_SRC := {{{src_path}}}
   EXT_MODULES := {{{external_modules}}}
