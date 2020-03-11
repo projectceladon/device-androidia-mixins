@@ -80,22 +80,19 @@ function prepare_data_partition {
 }
 
 function delete_data_partition {
-
-    CON_NAME=$($DOCKER ps -a | awk '{print $NF}' | grep -E 'android')
-    if [ ! -z "$CON_NAME" ]; then
-        if [ ! -z "$(sudo lvs | grep $CON_NAME)" ]; then
-            echo "[AIC] Remove LVM for container $CON_NAME..."
-            sudo lvremove -f /dev/$AIC_VG_NAME/$CON_NAME
-        fi
+    if [ ! -z "$(sudo lvs | grep android)" ]; then
+        CON_NAME=$(sudo lvs | grep -E 'android' | awk '{print $1}')
+        echo "[AIC] Remove LVM for container ..."
+        sudo lvremove -f /dev/$AIC_VG_NAME/$CON_NAME
     fi
 
     if [ ! -z "$(sudo vgs | grep $AIC_VG_NAME)" ]; then
-       sudo vgremove -f /dev/$AIC_VG_NAME
+        sudo vgremove -f /dev/$AIC_VG_NAME
     fi
 
     # Delete data image
-    if [ ! -z "$(losetup | grep $AIC_DATA_IMG)" ]; then
-       mounted_loop_dev=$(losetup | grep $AIC_DATA_IMG | awk '{print $1}')
+    if [ ! -z "$(sudo losetup | grep $AIC_VG_NAME)" ]; then
+       mounted_loop_dev=$(losetup | grep $AIC_VG_NAME | awk '{print $1}')
         echo "Detach mounted loop device, $mounted_loop_dev..."
         sudo pvremove -f $mounted_loop_dev
         sudo losetup -d $mounted_loop_dev
@@ -751,10 +748,8 @@ function uninstall {
     # umount binderfs mount point if any
     umount_binderfs
 
-    if [ ! -z "$($DOCKER inspect --format='{{.Config.Cmd}}' $c | grep "\-f")" ]; then
-        # Delete data partition
-        delete_data_partition
-    fi
+    # Delete data partition
+    delete_data_partition
 }
 
 function start {
