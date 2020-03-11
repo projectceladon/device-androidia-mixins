@@ -4,8 +4,10 @@ multidroid: droid addon kf4cic-$(TARGET_BUILD_VARIANT)
 	$(hide) rm -rf $(PRODUCT_OUT)/docker
 	$(hide) mkdir -p $(PRODUCT_OUT)/docker/android/root
 	$(hide) cp -r $(TOP)/$(INTEL_PATH_VENDOR_CIC)/host/docker/aic-manager $(PRODUCT_OUT)/docker
-	$(hide) cp -r $(TOP)/$(INTEL_PATH_KERNEL_MODULES_CIC)/ashmem $(PRODUCT_OUT)/docker/aic-manager/data/
-	$(hide) cp -r $(TOP)/$(INTEL_PATH_KERNEL_MODULES_CIC)/binder $(PRODUCT_OUT)/docker/aic-manager/data/
+	$(hide) mkdir -p $(PRODUCT_OUT)/docker/aic-manager/data/ashmem
+	$(hide) cp -r $(TOP)/kernel/modules/cic/ashmem/* $(PRODUCT_OUT)/docker/aic-manager/data/ashmem/
+	$(hide) mkdir -p $(PRODUCT_OUT)/docker/aic-manager/data/binder
+	$(hide) cp -r $(TOP)/kernel/modules/cic/binder/* $(PRODUCT_OUT)/docker/aic-manager/data/binder/
 	$(hide) cp -r $(TOP)/$(INTEL_PATH_KERNEL_MODULES_CIC)/mac80211_hwsim $(PRODUCT_OUT)/docker/aic-manager/data/
 	$(hide) cp -r $(TOP)/$(INTEL_PATH_VENDOR_CIC)/host/docker/android $(PRODUCT_OUT)/docker
 	$(hide) cp -r $(TOP)/$(INTEL_PATH_VENDOR_CIC)/host/docker/update $(PRODUCT_OUT)/docker
