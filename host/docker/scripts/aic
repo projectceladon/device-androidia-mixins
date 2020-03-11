@@ -903,6 +903,17 @@ function start {
             fi
         fi
     done
+
+    if [[ $WLAN_PT == "true" ]] ; then
+	ANDROID_PID=$(docker inspect -f '{{.State.Pid}}' android0)
+	INTF=$(iw dev | awk '$1=="Interface"{print $2}')
+	iw phy phy0 set netns $ANDROID_PID
+	rfkill unblock all
+	nsenter -t $ANDROID_PID -n ip link set $INTF name wlan0
+	nsenter -t $ANDROID_PID -n ifconfig wlan0 up
+	nsenter -t $ANDROID_PID -n iw dev wlan0 scan
+    fi
+
 }
 
 function stop {
