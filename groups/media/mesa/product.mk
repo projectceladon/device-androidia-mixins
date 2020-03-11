@@ -11,6 +11,7 @@ PRODUCT_PACKAGES += \
 # Open source media_driver
 PRODUCT_PACKAGES += i965_drv_video
 PRODUCT_PACKAGES += libigfxcmrt
+PRODUCT_PACKAGES += libgrallocclient
 
 # Open source hdcp
 PRODUCT_PACKAGES += libhdcpsdk
@@ -42,3 +43,8 @@ BOARD_HAVE_OMX_SRC := true
 
 PRODUCT_PACKAGES += \
     libpciaccess
+
+PRODUCT_PACKAGES += \
+    libva-android \
+    libva
+

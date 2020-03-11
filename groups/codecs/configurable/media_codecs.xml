@@ -76,19 +76,6 @@ Only the three quirks included above are recognized at this point:
 
 <MediaCodecs>
     <Decoders>
-{{#hw_vd_vc1}}
-        <MediaCodec name="OMX.Intel.hw_vd.vc1" type="video/x-ms-wmv" >
-            <!-- profiles and levels:  ProfileBaseline : Level51 -->
-            <Limit name="size" min="64x64" max="3840x2160" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="blocks-per-second" range="1-972000" />
-            <Limit name="bitrate" range="1-40000000" />
-            <Feature name="adaptive-playback" />
-        </MediaCodec>
-{{/hw_vd_vc1}}
-
-{{#hw_vd_h264}}
 
         <MediaCodec name="OMX.Intel.hw_vd.h264" type="video/avc" >
             <!-- profiles and levels:  ProfileBaseline : Level51 -->
@@ -99,22 +86,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="bitrate" range="1-40000000" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_h264}}
 
-{{#hw_vd_h264_secure}}
-        <MediaCodec name="OMX.Intel.hw_vd.h264.secure" type="video/avc">
-            <!-- profiles and levels:  ProfileBaseline : Level51 -->
-            <Limit name="size" min="64x64" max="3840x2160" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="blocks-per-second" range="1-972000" />
-            <Limit name="bitrate" range="1-40000000" />
-            <Feature name="adaptive-playback" />
-            <Feature name="secure-playback" required="true" />
-        </MediaCodec>
-{{/hw_vd_h264_secure}}
-
-{{#hw_vd_vp8}}
         <MediaCodec name="OMX.Intel.hw_vd.vp8" type="video/x-vnd.on2.vp8" >
             <Limit name="size" min="64x64" max="3840x2160" />
             <Limit name="alignment" value="2x2" />
@@ -123,9 +95,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="bitrate" range="1-40000000" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_vp8}}
 
-{{#hw_vd_vp9}}
         <MediaCodec name="OMX.Intel.hw_vd.vp9" type="video/x-vnd.on2.vp9" >
             <Limit name="size" min="64x64" max="3840x2160" />
             <Limit name="alignment" value="2x2" />
@@ -134,9 +104,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="bitrate" range="1-40000000" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_vp9}}
 
-{{#hw_vd_h265}}
         <MediaCodec name="OMX.Intel.hw_vd.h265" type="video/hevc" >
             <Limit name="size" min="64x64" max="3840x2160" />
             <Limit name="alignment" value="2x2" />
@@ -145,34 +113,11 @@ Only the three quirks included above are recognized at this point:
             <Limit name="bitrate" range="1-40000000" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_h265}}
 
-{{#hw_vd_h265_secure}}
-        <MediaCodec name="OMX.Intel.hw_vd.h265.secure" type="video/hevc" >
-           <Limit name="size" min="64x64" max="3840x2160" />
-           <Limit name="alignment" value="2x2" />
-           <Limit name="block-size" value="16x16" />
-           <Limit name="blocks-per-second" range="1-972000" />
-           <Limit name="bitrate" range="1-40000000" />
-           <Feature name="adaptive-playback" />
-           <Feature name="secure-playback" required="true" />
-        </MediaCodec>
-{{/hw_vd_h265_secure}}
-
-{{#hw_vd_mp2}}
-        <MediaCodec name="OMX.Intel.hw_vd.mp2" type="video/mpeg2" >
-            <Limit name="size" min="64x64" max="3840x2160" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="blocks-per-second" range="1-972000" />
-            <Limit name="bitrate" range="1-40000000" />
-            <Feature name="adaptive-playback" />
-        </MediaCodec>
-{{/hw_vd_mp2}}
     </Decoders>
 
+
     <Encoders>
-{{#hw_ve_h264}}
         <MediaCodec name="OMX.Intel.hw_ve.h264" type="video/avc" >
             <Limit name="size" min="176x144" max="3840x2160" />
             <Limit name="alignment" value="2x2" />
@@ -180,18 +125,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="blocks-per-second" range="1-972000" />
             <Limit name="bitrate" range="1-40000000" />
         </MediaCodec>
-{{/hw_ve_h264}}
 
-{{#hw_ve_vp8}}
-        <MediaCodec name="OMX.Intel.hw_ve.vp8" type="video/x-vnd.on2.vp8" >
-            <Limit name="size" min="176x144" max="3840x2160" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="blocks-per-second" range="1-972000" />
-            <Limit name="bitrate" range="1-40000000" />
-        </MediaCodec>
-{{/hw_ve_vp8}}
-{{#hw_ve_h265}}
         <MediaCodec name="OMX.Intel.hw_ve.h265" type="video/hevc" >
             <Limit name="size" min="64x64" max="3840x2160" />
             <Limit name="alignment" value="2x2" />
@@ -199,7 +133,6 @@ Only the three quirks included above are recognized at this point:
             <Limit name="blocks-per-second" range="1-972000" />
             <Limit name="bitrate" range="1-40000000" />
         </MediaCodec>
-{{/hw_ve_h265}}
     </Encoders>
     <Include href="media_codecs_google_video.xml" />
     <Include href="media_codecs_google_audio.xml" />
