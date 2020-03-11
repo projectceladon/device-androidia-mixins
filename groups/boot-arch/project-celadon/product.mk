@@ -118,7 +118,7 @@ KERNELFLINGER_OS_SECURE_BOOT := true
 {{/os_secure_boot}}
 # Android Kernelflinger uses the OpenSSL library to support the
 # bootloader policy
-KERNELFLINGER_SSL_LIBRARY := openssl
+KERNELFLINGER_SSL_LIBRARY := boringssl
 
 {{#self_usb_device_mode_protocol}}
 KERNELFLINGER_SUPPORT_SELF_USB_DEVICE_MODE_PROTOCOL := {{self_usb_device_mode_protocol}}
