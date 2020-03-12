@@ -320,6 +320,7 @@ function install {
 	  -i, --emulated-wifi          Create and use emulated wifi device for network connection.
 	  -k, --detect-keyboard        Automaitically detect keyboard input device, this option is invalid
 	                               when -m|--manually-input-config is set.
+	  --host-dns-server            Use host's 172.100.0.1 network interface as Android's DNS server.
 	  -m, --manually-input-config  Don't generate input configre files automatically.
 	  -n, --instances int          Number of Android instances to be installed.
 	  -p, --work-path string       Absolute path of work directory(relative path is not supported).
@@ -371,6 +372,10 @@ function install {
                 ;;
             -k|--detect-keyboard)
                 DETECT_KEYBOARD="true"
+                shift
+                ;;
+            --host-dns-server)
+                HOST_DNS_SERVER="true"
                 shift
                 ;;
             -m|--manually-input-config)
@@ -647,6 +652,9 @@ function install {
     fi
     if [ ! -z "$RR_SERVER" ]; then
         ANDROID_CONTAINER_CMDS="$ANDROID_CONTAINER_CMDS -s $RR_SERVER"
+    fi
+    if [ "$HOST_DNS_SERVER" = "true" ]; then
+        ANDROID_CONTAINER_CMDS="$ANDROID_CONTAINER_CMDS -d"
     fi
     if [ "$EMULATED_INPUT" = "true" ]; then
         ANDROID_CONTAINER_CMDS="$ANDROID_CONTAINER_CMDS -e"
