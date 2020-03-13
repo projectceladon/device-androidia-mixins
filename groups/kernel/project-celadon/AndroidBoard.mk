@@ -11,6 +11,24 @@ KERNEL_CONFIG_DIR := {{{kernel_config_dir}}}
 
 KERNEL_NAME := bzImage
 
+TARGET_KERNEL_CLANG_VERSION := 6.0.2
+CLANG_PREBUILTS_PATH := $(abspath $(INTEL_PATH_DEVICE)/../../../prebuilts/clang)
+
+ifneq ($(TARGET_KERNEL_CLANG_VERSION),)
+    # Find the clang-* directory containing the specified version
+    KERNEL_CLANG_VERSION := $(shell find $(CLANG_PREBUILTS_PATH)/host/$(HOST_OS)-x86/ -name AndroidVersion.txt -exec grep -l $(TARGET_KERNEL_CLANG_VERSION) "{}" \; | sed -e 's|/AndroidVersion.txt$$||g;s|^.*/||g')
+else
+    # Only set the latest version of clang if TARGET_KERNEL_CLANG_VERSION hasn't been set by the device con        fig
+    KERNEL_CLANG_VERSION := $(shell ls -d $(CLANG_PREBUILTS_PATH)/host/$(HOST_OS)-x86/clang-* | xargs -n 1         basename | tail -1)
+endif
+TARGET_KERNEL_CLANG_PATH ?= $(CLANG_PREBUILTS_PATH)/host/$(HOST_OS)-x86/$(KERNEL_CLANG_VERSION)/bin
+KERNEL_CLANG_TRIPLE ?= CLANG_TRIPLE=x86_64-linux-gnu-
+KERNEL_CC ?= CC="$(ccache) $(TARGET_KERNEL_CLANG_PATH)/clang"
+
+#remove time_macros from ccache options, it breaks signing process
+KERNEL_CCSLOP := $(filter-out time_macros,$(subst $(comma), ,$(CCACHE_SLOPPINESS)))
+KERNEL_CCSLOP := $(subst $(space),$(comma),$(KERNEL_CCSLOP))
+
 # Set the output for the kernel build products.
 KERNEL_OUT := $(abspath $(TARGET_OUT_INTERMEDIATES)/kernel)
 KERNEL_BIN := $(KERNEL_OUT)/arch/$(TARGET_KERNEL_ARCH)/boot/$(KERNEL_NAME)
@@ -23,11 +41,14 @@ KMOD_OUT := $(shell readlink -f "$(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)")
 build_kernel := $(MAKE) -C $(TARGET_KERNEL_SRC) \
 		O=$(KERNEL_OUT) \
 		ARCH=$(TARGET_KERNEL_ARCH) \
-		CROSS_COMPILE="$(KERNEL_CROSS_COMPILE_WRAPPER)" \
 		KCFLAGS="$(KERNEL_CFLAGS)" \
 		KAFLAGS="$(KERNEL_AFLAGS)" \
 		$(if $(SHOW_COMMANDS),V=1) \
-		INSTALL_MOD_PATH=$(KMOD_OUT)
+		INSTALL_MOD_PATH=$(KMOD_OUT) \
+		CROSS_COMPILE="x86_64-linux-android-" \
+		CCACHE_SLOPPINESS=$(KERNEL_CCSLOP) \
+		$(KERNEL_CLANG_TRIPLE) \
+		$(KERNEL_CC)
 
 KERNEL_CONFIG_FILE := device/intel/project-celadon/kernel_config/$(TARGET_KERNEL_CONFIG)
 
