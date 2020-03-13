@@ -333,6 +333,8 @@ function install {
 	                               to specify -s -f at the same time.
 	  -w, --multi-dis-daemon       Start multiple display daemons for every instance. It's only valid when
 	                               display-type is 'x11' or 'wld' and instances number large than 1.
+	  -j, --multi-user             Support multi-user, with this install option, we can use "aic start -u $AIC_USER" to start
+	                               aic with user data for this user.
 	  -g, --enable-fbe             Enable file-based encryption.
 
 	Example:
@@ -488,6 +490,10 @@ function install {
                 ENABLE_FBE="true"
                 shift
                 ;;
+            -j|--multi-user)
+                MULTIPLE_USER="true"
+                shift
+                ;;
             *)
                 echo "$USAGE"
                 exit -1
@@ -514,6 +520,10 @@ function install {
             echo "$USAGE"
             exit -1
         fi
+    fi
+    if [ "$MULTIPLE_USER" = "true" ] && [ "$INSTANCE_NUM" -gt 1 ]; then
+        echo "[AIC] multi-user flag can only be used for single instance!"
+        exit -1
     fi
 
     if [ "$DISPLAY_TYPE" = "ia_hwc" ]; then
@@ -594,6 +604,13 @@ function install {
     AIC_MANAGER_CONTAINER_CMDS="-n $INSTANCE_NUM"
     if [ "$EMULATED_WIFI" = "true" ]; then
         AIC_MANAGER_CONTAINER_OPTION="$AIC_MANAGER_CONTAINER_OPTION -v /proc:/hostproc -v /var/run/docker.sock:/var/run/docker.sock"
+    fi
+    if [ "$MULTIPLE_USER" = "true" ]; then
+        AIC_MANAGER_CONTAINER_OPTION="$AIC_MANAGER_CONTAINER_OPTION -v $WORK_DIR/data-multi-user:/data-multi-user -v $WORK_DIR/data0:/data0:shared"
+        AIC_MANAGER_CONTAINER_CMDS="$AIC_MANAGER_CONTAINER_CMDS -j"
+        if [ ! -d "$WORK_DIR/data-multi-user/data" ]; then
+            mkdir -p $WORK_DIR/data-multi-user/data
+        fi
     fi
     if [ "$MANUALLY_INPUT_CONFIG" = "true" ]; then
         AIC_MANAGER_CONTAINER_CMDS="$AIC_MANAGER_CONTAINER_CMDS -m"
@@ -723,11 +740,14 @@ function uninstall {
 
     check_docker
 
+    if [ ! -z "$($DOCKER ps | awk '{print $NF}' | grep -E 'android|aic-manager')" ]; then
+        echo "[AIC] Stop containers..."
+        stop
+    fi
+
     # rm containers
     CONTAINERS=$($DOCKER ps -a | awk '{print $NF}' | grep -E 'android|aic-manager')
     if [ ! -z "$CONTAINERS" ]; then
-        echo "[AIC] Stop containers..."
-        $DOCKER stop -t0 $CONTAINERS
         echo "[AIC] rm containers..."
         $DOCKER rm $CONTAINERS
     fi
@@ -745,9 +765,6 @@ function uninstall {
         $DOCKER network rm android
     fi
 
-    # umount binderfs mount point if any
-    umount_binderfs
-
     # Delete data partition
     delete_data_partition
 }
@@ -761,6 +778,7 @@ function start {
 
 	Options:
 	  -t, --time int               Seconds to wait before start next container.
+	  -u, --user string            Start with user id for multi-user case.
 
 	Example:
 	  Start all android instances:
@@ -773,6 +791,7 @@ function start {
 
     IDS=()
     CONTAINERS=()
+    MULTI_USER_DIR=$(echo -n $($DOCKER inspect -f '{{ range .Mounts }}{{ if eq .Destination "/data-multi-user" }}{{ .Source }}{{ end }} {{ end }}' aic-manager 2>/dev/null))
     while [ "$#" -gt 0  ]
     do
         case "$1" in
@@ -785,6 +804,23 @@ function start {
                 WAIT_TIME=$1
                 if ! check_num $WAIT_TIME; then
                     echo "$USAGE"
+                    exit -1
+                fi
+                shift
+                ;;
+            -u|--user)
+                shift
+                if [ "$#" -lt 1 ]; then
+                    echo "$USAGE"
+                    exit -1
+                fi
+                if [ -z "$MULTI_USER_DIR" ]; then
+                    echo "[AIC] current aic didn't install with multi-user flag!"
+                    exit -1
+                fi
+                AIC_USER=$1
+                if [[ "$AIC_USER" =~ .*/.* ]]; then
+                    echo "[AIC] invalid user name!"
                     exit -1
                 fi
                 shift
@@ -804,6 +840,24 @@ function start {
     check_containers
     parse_ids
 
+    if [ ! -z "$AIC_USER" ]; then
+        # Stop current running containers if any
+        PRIVOUS_CONTAINERS=$($DOCKER ps | awk '{print $NF}' | grep -E 'android|aic-manager')
+        if [ ! -z "$PRIVOUS_CONTAINERS" ]; then
+            echo "[AIC] Stop previous running containers..."
+            $DOCKER stop -t0 $PRIVOUS_CONTAINERS
+        fi
+        # umount multi-user data partition if any
+        sudo umount $(dirname $MULTI_USER_DIR)/data0 2>/dev/null
+
+        rm -rf $MULTI_USER_DIR/control
+        mkdir -p $MULTI_USER_DIR/control
+        echo $AIC_USER > $MULTI_USER_DIR/control/current_user
+    elif [ ! -z "$MULTI_USER_DIR" ]; then
+        echo "[AIC] current aic install with multi-user flag, please user 'aic start -u' to launch!"
+	exit -1
+    fi
+
     if [ -z "$($DOCKER ps | awk '{print $NF}' | grep -w aic-manager)" ]; then
         if [ "$OS_TYPE" = "ubuntu" ]; then
             export DISPLAY=:0
@@ -813,8 +867,16 @@ function start {
         sudo modprobe binder_module 2>/dev/null
         sudo modprobe binderfs_module 2>/dev/null
         $DOCKER start aic-manager
+
         check_binderfs
 
+        if [ ! -z "$AIC_USER" ]; then
+            while [ -z "$(ls $MULTI_USER_DIR/control/data_ready 2>/dev/null)" ]
+            do
+                echo "[AIC] wait for preparing multi-user data partition..."
+                sleep 1
+            done
+        fi
     fi
 
     EXISTED_CONTAINERS=$($DOCKER ps -a | awk '{print $NF}' | grep android)
@@ -896,6 +958,11 @@ function stop {
     # umount binderfs mount point if any
     umount_binderfs
 
+    # umount multi-user data partition if any
+    MULTI_USER_DIR=$(echo -n $($DOCKER inspect -f '{{ range .Mounts }}{{ if eq .Destination "/data-multi-user" }}{{ .Source }}{{ end }} {{ end }}' aic-manager 2>/dev/null))
+    if [ ! -z "$MULTI_USER_DIR" ]; then
+	sudo umount $(dirname $MULTI_USER_DIR)/data0 2>/dev/null
+    fi
 }
 
 function list {
