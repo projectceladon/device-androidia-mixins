@@ -218,7 +218,7 @@ endif
 {{/camera_cos_hack}}
 
 {{#slot-ab}}
-ifeq ($(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SUPPORTS_VERITY), true)
+ifeq ($(PRODUCT_SUPPORTS_VERITY), true)
 DM_VERITY_CERT := $(LOCAL_KERNEL_PATH)/verity.x509
 $(DM_VERITY_CERT): $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VERITY_SIGNING_KEY).x509.pem $(OPENSSL)
 	$(transform-pem-cert-to-der-cert)
