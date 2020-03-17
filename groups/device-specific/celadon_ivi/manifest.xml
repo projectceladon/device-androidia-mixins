@@ -281,7 +281,4 @@
             <instance>gpgppu</instance>
         </interface>
     </hal>
-    <sepolicy>
-        <version>27.0</version>
-    </sepolicy>
 </manifest>
