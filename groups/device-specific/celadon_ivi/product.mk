@@ -26,6 +26,5 @@ PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
                     android.hardware.graphics.composer@2.3-service \
                     libbt-vendor
 
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/manifest.xml:vendor/manifest.xml
 PRODUCT_COPY_FILES += vendor/intel/utils/LICENSE:$(PRODUCT_OUT)/LICENSE
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
