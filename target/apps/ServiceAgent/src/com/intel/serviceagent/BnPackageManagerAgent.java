@@ -62,6 +62,8 @@ public class BnPackageManagerAgent extends IPackageManagerAgent.Stub {
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            if (intent == null)
+                return;
             if (intent.getAction().equals("android.intent.action.PACKAGE_ADDED")) {
                 String packageName = intent.getDataString();
                 Log.d(TAG, "安装了 :" + packageName);
@@ -155,6 +157,7 @@ public class BnPackageManagerAgent extends IPackageManagerAgent.Stub {
                     }
                     FileOutputStream fos = new FileOutputStream(f);
                     fos.write(os.toByteArray());
+                    fos.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
