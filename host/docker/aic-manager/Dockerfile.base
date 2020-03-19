@@ -21,3 +21,5 @@ RUN apt-get -q -y update \
 
 # install python packages
 RUN pip install psutil fuse-python
+
+RUN rm -rf /tmp/*

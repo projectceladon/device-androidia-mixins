@@ -1,7 +1,7 @@
 # for different build variant
 ARG BUILD_VARIANT=normal
 
-FROM ubuntu-bionic-aic:1.0 as build_base
+FROM ubuntu-bionic-aic:1.1 as build_base
 
 ARG DEBIAN_FRONTEND=noninteractive
 

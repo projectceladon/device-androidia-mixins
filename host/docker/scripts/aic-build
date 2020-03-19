@@ -142,8 +142,8 @@ if [ "$BUILD_AIC_MANAGER" = "true" ]; then
     if [ ! -z "$DOCKER_BUILD_HTTP_PROXY" ] || [ ! -z "$DOCKER_BUILD_HTTPS_PROXY" ]; then
         BUILD_ARGS="$BUILD_ARGS --build-arg http_proxy=$DOCKER_BUILD_HTTP_PROXY --build-arg https_proxy=$DOCKER_BUILD_HTTPS_PROXY"
     fi
-    if [ -z "$($DOCKER images ubuntu-bionic-aic:1.0 | grep ubuntu-bionic-aic)" ]; then
-        $DOCKER build -t ubuntu-bionic-aic:1.0 -f $AIC_MANAGER_WORKDIR/Dockerfile.base $BUILD_ARGS $AIC_MANAGER_WORKDIR
+    if [ -z "$($DOCKER images ubuntu-bionic-aic:1.1 | grep ubuntu-bionic-aic)" ]; then
+        $DOCKER build -t ubuntu-bionic-aic:1.1 -f $AIC_MANAGER_WORKDIR/Dockerfile.base $BUILD_ARGS $AIC_MANAGER_WORKDIR
     fi
     $DOCKER build $BUILD_ARGS -t $AIC_MANAGER_IMAGE $AIC_MANAGER_WORKDIR
     echo "[BUILD] save aic-manager docker images..."
