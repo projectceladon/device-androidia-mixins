@@ -161,7 +161,6 @@ public class BnPackageManagerAgent extends IPackageManagerAgent.Stub {
                     fos.write(os.toByteArray());
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
                     fos.close();
                 }
             }
