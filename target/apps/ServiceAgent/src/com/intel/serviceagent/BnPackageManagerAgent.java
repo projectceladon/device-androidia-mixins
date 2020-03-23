@@ -152,7 +152,7 @@ public class BnPackageManagerAgent extends IPackageManagerAgent.Stub {
             byte[] data = os.toByteArray();
 
             if (DEBUG) {
-                FileOutputStream fos;
+                FileOutputStream fos = null;
                 try {
                     File f = new File(mApp.getFilesDir() + "/2.png");
                     if (!f.exists()) {
@@ -162,10 +162,13 @@ public class BnPackageManagerAgent extends IPackageManagerAgent.Stub {
                     fos.write(os.toByteArray());
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
+                }
+                try {
                     if (fos != null) {
                         fos.close();
                     }
+                } catch (IOException e) {
+                    // do nothing
                 }
             }
             return data;
