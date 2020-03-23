@@ -162,7 +162,7 @@ public class BnPackageManagerAgent extends IPackageManagerAgent.Stub {
                     fos.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    fos.close();
+                    fos.close(); // clean up
                 }
             }
             return data;
