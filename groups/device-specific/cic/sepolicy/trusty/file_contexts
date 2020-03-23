@@ -1,0 +1,2 @@
+# Trusty ipc device
+/dev/trusty-ipc-dev0    u:object_r:tee_device:s0
