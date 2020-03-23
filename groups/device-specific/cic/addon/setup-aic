@@ -1,0 +1,247 @@
+#!/usr/bin/env bash
+# author: sundar.gnanasekaran@intel.com
+
+unset SECURE=$SECURE WIFI_MT=$WIFI_MT WIFI_PT=$WIFI_PT BT_MT=$BT_MT BT_PT=$BT_PT AUDIO_MT=$AUDIO_MT AUDIO_PT=$AUDIO_PT >& /dev/null
+export AIC_WORK_DIR=${PWD}
+
+USAGE="
+
+./setup-aic -s/-ns -m [audio,wifi,bt] -p [audio,wifi,bt]
+
+-s    Security enabled [Trusty]
+-ns   Non-Secure
+-m    Mediation. Select which component you like to enable mediation.
+      ex: -m audio,wifi
+-p    Pass through. Select which component you like to enable pass through.
+      ex: -p audio,bt
+-h    Usage
+
+      Note:
+      * Dont select -m and -p for same component.
+      * By default, security is disabled, and all components are mediated
+
+"
+
+#Parse arguments
+arg=$*
+
+while [[ "$#" -gt 0 ]]
+do
+    case "$1" in
+        -s|--secure)
+            if [[ $SECURE == "false" ]]; then
+                echo "Select only secure or non-secure"
+                exit -1
+            fi
+            SECURE="true"
+            shift
+            ;;
+        -ns|--no-secure)
+            if [[ $SECURE == "true" ]]; then
+                echo "Select only secure or non-secure"
+                exit -1
+            fi
+            SECURE="false"
+            shift
+            ;;
+        -p|--pass-through)
+            shift
+            if [[ "$#" -lt 1 ]]; then
+                echo "$USAGE"
+                exit -1
+            fi
+            PT=$1
+            for i in $(echo $1 | sed "s/,/ /g")
+            do
+                case $i in
+                        audio)
+                                if [[ $AUDIO_MT == "true" ]]; then
+                                    echo "Audio: Select either Mediation / passthrough"
+                                    exit -1
+                                fi
+                                AUDIO_PT=true
+                                ;;
+                        wifi)
+                                if [[ $WIFI_MT == "true" ]]; then
+                                    echo "Wifi: Select either Mediation / passthrough"
+                                    exit -1
+                                fi
+                                WIFI_PT=true
+                                ;;
+                        bt)
+                                if [[ $BT_MT == "true" ]]; then
+                                    echo "BT: Select either Mediation / passthrough"
+                                    exit -1
+                                fi
+                                BT_PT=true
+                                ;;
+                        *)
+                                echo "$USAGE"
+                                exit -1
+                                ;;
+                esac
+            done
+            shift
+            ;;
+        -m|--mediation)
+            shift
+            if [[ "$#" -lt 1 ]]; then
+                echo "$USAGE"
+                exit -1
+            fi
+            MT=$1
+            for i in $(echo $1 | sed "s/,/ /g")
+            do
+                case $i in
+                        audio)
+                                if [[ $AUDIO_PT == "true" ]]; then
+                                    echo "Audio: Select either Mediation / passthrough"
+                                    exit -1
+                                fi
+                                AUDIO_MT=true
+                                ;;
+                        wifi)
+                                if [[ $WIFI_PT == "true" ]]; then
+                                    echo "Wifi: Select either Mediation / passthrough"
+                                    exit -1
+                                fi
+                                WIFI_MT=true
+                                ;;
+                        bt)
+                                if [[ $BT_PT == "true" ]]; then
+                                    echo "BT: Select either Mediation / passthrough"
+                                    exit -1
+                                fi
+                                BT_MT=true
+                                ;;
+                        *)
+                                echo "$USAGE"
+                                exit -1
+                                ;;
+                esac
+            done
+            shift
+            ;;
+        *)
+            echo "$USAGE"
+            exit -1
+            ;;
+    esac
+done
+
+if [[ -z $SECURE ]]; then
+  SECURE="false"
+fi
+
+if [[ -z $AUDIO_MT && -z $AUDIO_PT ]]; then
+  AUDIO_MT="true"
+fi
+
+if [[ -z $WIFI_MT && -z $WIFI_PT ]]; then
+  WIFI_MT="true"
+fi
+
+if [[ -z $BT_MT && -z $BT_PT ]]; then
+  BT_MT="true"
+fi
+
+echo "SECURITY : $SECURE"
+echo "WIFI : MT $WIFI_MT | PT $WIFI_PT"
+echo "BT : MT $BT_MT | PT $BT_PT"
+echo "AUDIO : MT $AUDIO_MT | PT $AUDIO_PT"
+
+# export setup-aic configs
+export SECURE=$SECURE WIFI_MT=$WIFI_MT WIFI_PT=$WIFI_PT BT_MT=$BT_MT BT_PT=$BT_PT AUDIO_MT=$AUDIO_MT AUDIO_PT=$AUDIO_PT
+
+sudo rm -rf $AIC_WORK_DIR/workdir/data*
+#Re-create fresh Dockerfile
+echo 'FROM android_base' > $AIC_WORK_DIR/update/Dockerfile
+echo ' ' >> $AIC_WORK_DIR/update/Dockerfile
+echo 'COPY ./root/ /' >> $AIC_WORK_DIR/update/Dockerfile
+echo ' ' >> $AIC_WORK_DIR/update/Dockerfile
+
+#Install Feature set packages / modules
+./pre-requisites/setup-feature
+
+#Initiate Early-Launch
+#./pre-requisites/launch-early
+./pre-requisites/cic-service
+
+#BT Service
+if [[ $BT_MT == "true" ]]; then
+  ./pre-requisites/bt mediation
+fi
+
+if [[ $WIFI_PT == "true" && -z `grep 'WLAN_PT="true"' aic` ]]; then
+  sed -i 's/\#\!\/bin\/bash/\#\!\/bin\/bash\nWLAN_PT=\"true\"/g' aic
+else
+  sed -i '/WLAN_PT=\"true\"/d' aic
+fi
+
+#customize android (add/remove apps etc.)
+./pre-requisites/customize-android
+
+#Security settings
+./pre-requisites/secure $SECURE
+
+#Install CIC
+cd $AIC_WORK_DIR
+echo "Installing CIC -- START"
+./aic install -e -d none
+echo "Installing CIC -- DONE"
+
+#Check env path
+AIC_WORK_DIR_PATH=$AIC_WORK_DIR/workdir
+a=`grep -rn AIC_WORK_DIR /etc/environment`
+if [ -z "$a" ]; then
+	echo "export AIC_WORK_DIR=$AIC_WORK_DIR_PATH" | sudo tee -a /etc/environment
+else
+	sudo sed -i "s|export AIC_WORK_DIR.*||g" /etc/environment
+	echo "export AIC_WORK_DIR=$AIC_WORK_DIR_PATH" | sudo tee -a /etc/environment
+fi
+
+a=`grep -rn AIC_WORK_DIR $HOME/.bashrc`
+if [ -z "$a" ]; then
+	echo "export AIC_WORK_DIR=$AIC_WORK_DIR_PATH" | sudo tee -a $HOME/.bashrc
+else
+	sudo sed -i "s|export AIC_WORK_DIR.*||g" $HOME/.bashrc
+	echo "export AIC_WORK_DIR=$AIC_WORK_DIR_PATH" | sudo tee -a $HOME/.bashrc
+fi
+
+## Identify & set device serial ID
+serial=`sudo cat /sys/devices/virtual/dmi/id/board_serial`
+if [[ ! -f $AIC_WORK_DIR_PATH/data0/local.prop ]]; then
+  mkdir -p $AIC_WORK_DIR_PATH/data0
+  cd $AIC_WORK_DIR_PATH/data0 && touch local.prop
+  cd $AIC_WORK_DIR
+fi
+
+if [[ -z `grep "ro.serialno" $AIC_WORK_DIR_PATH/data0/local.prop` ]]; then
+  echo "ro.serialno=$serial" >> $AIC_WORK_DIR_PATH/data0/local.prop
+fi
+
+#set Time zone property
+localtz=$(timedatectl status |grep "Time zone")
+localtzarr=(${localtz// / })
+shorttz=${localtzarr[2]}
+if [[ -z `grep "persist.sys.timezone" $AIC_WORK_DIR_PATH/data0/local.prop` ]]; then
+  echo "persist.sys.timezone=$shorttz" >> $AIC_WORK_DIR_PATH/data0/local.prop
+fi
+
+sudo chmod 777 -R $AIC_WORK_DIR_PATH
+sudo chmod 0644 $AIC_WORK_DIR_PATH/data0/local.prop
+
+sudo systemctl enable cic
+
+#Run pactl
+if [[ $AUDIO_MT == "true" ]]; then
+  ./pre-requisites/pactl_socket $(whoami)
+fi
+if [[ $AUDIO_PT == "true" ]]; then
+  sudo rm -rf /etc/profile.d/create_pasocket.sh
+fi
+
+echo ""
+echo "Reboot required for changes to be reflected !!"
+read -p "Press Enter key to reboot: "
+sudo reboot

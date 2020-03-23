@@ -1,0 +1,4 @@
+# usb role switch service
+genfscon sysfs /devices/pci0000:00/0000:00:14.0/intel_xhci_usb_sw/usb_role/intel_xhci_usb_sw-role-switch/role	u:object_r:sysfs_usb_role_writeable:s0
+genfscon sysfs /devices/pci0000:00/0000:00:15.0/intel_xhci_usb_sw/usb_role/intel_xhci_usb_sw-role-switch/role	u:object_r:sysfs_usb_role_writeable:s0
+

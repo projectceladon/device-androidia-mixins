@@ -2,3 +2,5 @@ allow domain sysfs_app_readable:dir search;
 allow domain binderfs:chr_file rw_file_perms;
 allow domain gpu_device:dir r_dir_perms;
 allow domain binderfs:dir search;
+allow domain kernel:fd use;
+allow domain unlabeled:dir r_dir_perms;
