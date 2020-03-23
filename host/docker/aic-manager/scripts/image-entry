@@ -29,7 +29,13 @@ function mount_system_images() {
             # --direct-io is default on, and set it as read only
             # busybox does not support --show option, so setup first then find it
             log "setup loop device for $file"
-            if losetup -f -r $file
+            unused_loop=$(losetup -f)
+            loop_index=$(echo $unused_loop | tr -dc '0-9')
+            if [ ! -b $unused_loop ]; then
+                 mknod -m 660 $unused_loop b 7 $loop_index
+            fi
+
+            if losetup $unused_loop $file
             then
                 loop=$(losetup -a | grep $file | cut -d: -f1 | tail -n1)
                 mkdir -p $dest

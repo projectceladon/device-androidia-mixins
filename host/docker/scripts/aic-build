@@ -117,6 +117,10 @@ if [ ! -z "$BUILD_NUMBER" ]; then
     sed -ie "2i IMAGE_TAG=$BUILD_NUMBER-$TARGET_PRODUCT-$TARGET_BUILD_VARIANT" $ANDROID_PRODUCT_OUT/aic
 fi
 
+if [ "$BUILD_VARIANT" = "loop_mount" ]; then
+    sed -ie "2i LOOP_MOUNT_SYSTEM=true" $ANDROID_PRODUCT_OUT/aic
+fi
+
 if [ "$BUILD_ANDROID" = "true" ]; then
     if [ ! -e "$ANDROID_WORKDIR/Dockerfile" ]; then
         echo "[BUILD] no Dockerfile!"

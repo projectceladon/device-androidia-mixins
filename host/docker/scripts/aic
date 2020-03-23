@@ -888,6 +888,14 @@ function start {
         sleep 1
     done
 
+    if [ "$LOOP_MOUNT_SYSTEM" = "true" ]; then
+        while [ -z "$(ls $(pwd)/workdir/media/system 2>/dev/null)" ]
+        do
+            echo "[AIC] system image hasn't been mounted yet, wait..."
+            sleep 1
+        done
+    fi
+
     for c in ${CONTAINERS[@]}
     do
         if [[ ! $EXISTED_CONTAINERS =~ (^|[[:space:]])"$c"($|[[:space:]]) ]]; then
