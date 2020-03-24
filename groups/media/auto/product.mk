@@ -36,5 +36,9 @@ endif
 BOARD_HAVE_MEDIASDK_OPEN_SOURCE := true
 {{/opensource_msdk}}
 
+{{#opensource_msdk_omx_il}}
+BOARD_HAVE_OMX_SRC := true
+{{/opensource_msdk_omx_il}}
+
 PRODUCT_PACKAGES += \
     libpciaccess
