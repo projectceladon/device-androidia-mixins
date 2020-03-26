@@ -24,6 +24,12 @@ else
 	$(hide) cp -r $(PRODUCT_OUT)/system/etc $(PRODUCT_OUT)/docker/android/root
 	$(hide) rm -rf $(PRODUCT_OUT)/docker/aic-manager/images
 	$(hide) mkdir -p $(PRODUCT_OUT)/docker/aic-manager/images
+ifeq ($(TARGET_DM_VERITY_SUPPORT), true)
+	$(hide) rm -rf $(INSTALLED_VERITY_METADATA_IMG)
+	$(hide) python $(HOST_OUT_EXECUTABLES)/build_verity_img.py $(PRODUCT_OUT)/system.img $(INSTALLED_VERITY_METADATA_IMG)
+	$(hide) cp -r $(INSTALLED_VERITY_METADATA_IMG) $(PRODUCT_OUT)/docker/aic-manager/images
+	$(hide) cp -r $(INSTALLED_VERITY_SETUP_TOOL) $(PRODUCT_OUT)/docker/aic-manager/images
+endif
 	$(hide) ln -t $(PRODUCT_OUT)/docker/aic-manager/images $(PRODUCT_OUT)/system.img
 endif
 
