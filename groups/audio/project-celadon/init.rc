@@ -1,3 +1,2 @@
 on boot
     insmod /vendor/lib/modules/snd-dummy.ko
-    setprop ro.config.media_vol_default 8
