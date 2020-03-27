@@ -8,7 +8,19 @@ echo '
 RUN ["/system/bin/sh", "-c","\
 rm -rf /system/vendor/etc/permissions/android.hardware.bluetooth.xml && \
 rm -rf /system/vendor/etc/permissions/android.hardware.bluetooth_le.xml && \
+rm -rf /system/etc/permissions/tablet_core_hardware.xml && \
+mv /system/etc/permissions/tablet_core_hardware_without_bt.xml \
+   /system/etc/permissions/tablet_core_hardware.xml && \
 echo"]
 ' >> $AIC_WORK_DIR/update/Dockerfile
 
+else
+
+echo '
+RUN ["/system/bin/sh", "-c","\
+rm -rf /system/etc/permissions/tablet_core_hardware_without_bt.xml && \
+echo"]
+' >>$AIC_WORK_DIR/update/Dockerfile
+
 fi
+
