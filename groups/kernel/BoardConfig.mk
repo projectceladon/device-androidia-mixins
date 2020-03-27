@@ -44,5 +44,9 @@ BOARD_KERNEL_CMDLINE += \
        intel_pstate=passive
 {{/schedutil}}
 
+BOARD_KERNEL_CMDLINE += \
+        acpi.debug_level=0xffffffff \
+        acpi.debug_layer=0xffffffff
+
 BOARD_SEPOLICY_M4DEFS += module_kernel=true
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/kernel
