@@ -26,5 +26,6 @@ marvellW8897 is used to initialize the marvell driver, also configure the blueto
         - device/intel/common/bluetooth/
         - system/bt/
         - vendor/intel/hardware/interfaces/bluetooth/
+        - hardware/intel/libbt-vendor-intel/
         - kernel/bxt/drivers/bluetooth/
         - vendor/intel/fw/marvell

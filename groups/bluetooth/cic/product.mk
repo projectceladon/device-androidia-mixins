@@ -10,7 +10,8 @@ endif
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
+    frameworks/native/data/etc/tablet_core_hardware_without_bt.xml:$(TARGET_COPY_OUT)/system/etc/permissions/tablet_core_hardware_without_bt.xml
 
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-service.vbt \
