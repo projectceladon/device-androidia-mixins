@@ -159,3 +159,4 @@ PRODUCT_PACKAGES += \
 # Vendor Interface Manifest
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/manifest.xml:vendor/manifest.xml
+PRODUCT_COPY_FILES += vendor/intel/utils/LICENSE:$(PRODUCT_OUT)/LICENSE
