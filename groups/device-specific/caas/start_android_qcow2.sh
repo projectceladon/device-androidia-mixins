@@ -34,6 +34,38 @@ else
         display_state="on"
 fi
 
+DP_OFF="false"
+USB_ADB="false"
+WIFI_PT="false"
+
+
+for each in $@
+do
+	case $each in
+		--display-off)
+			DP_OFF="true"
+			;;
+		--usb-adb)
+			USB_ADB="true"
+			echo device > /sys/class/usb_role/intel_xhci_usb_sw-role-switch/role
+			echo 0000:00:14.1 > /sys/bus/pci/devices/0000\:00\:14.1/driver/unbind
+			modprobe vfio-pci
+			echo 8086 9d30 > /sys/bus/pci/drivers/vfio-pci/new_id
+			;;
+		--wifi-passthrough)
+			WIFI_PT="true"
+			rfkill unblock all
+			PCI_ID=`lspci -D -nn  | grep -oP '([\w:[\w.]+) Network controller' | awk '{print $1}'`
+			echo $PCI_ID > /sys/bus/pci/devices/`echo $PCI_ID | sed 's/:/\\:/g'`/driver/unbind
+			modprobe vfio-pci
+			DEVICE_ID=`lspci -nn  | grep -oP 'Network controller.*\[\K[\w:]+'`
+			echo $DEVICE_ID | sed 's/:/\ /g' > /sys/bus/pci/drivers/vfio-pci/new_id
+			;;
+	esac
+
+	echo DP_OFF: $DP_OFF USB_ADB: $USB_ADB WIFI_PT: $WIFI_PT
+done
+
 smbios_serialno=$(dmidecode -t 2 | grep -i serial | awk '{print $3}')
 
 
@@ -73,65 +105,37 @@ common_options="\
  -smbios "type=2,serial=$smbios_serialno"
  -nodefaults
 "
-function wifi_passthrough(){
-        if [ `find /etc/modprobe.d/ -iname vfio.conf` ]
-        then
-                echo "File exists"
-        else
-                echo "options vfio-pci ids=`lspci -nn  | grep -oP 'Network controller.*\[\K[\w:]+'`" | sudo tee -a /etc/modprobe.d/vfio.conf
-        fi
-
-
-        if [ `find /etc/modules-load.d/ -iname vfio-pci.conf` ]
-        then
-                echo "File exists"
-        else
-                echo "vfio-pci" | sudo tee -a /etc/modules-load.d/vfio-pci.conf
-        fi
-}
 
 function launch_hwrender(){
 
-	wifi_passthrough
-
-	if [[ $1 == "--display-off" ]]
+	VM_OPTIONS="-device vfio-pci-nohotplug,ramfb=$ramfb_state,sysfsdev=$GVTg_DEV_PATH/$GVTg_VGPU_UUID,display=$display_state,x-igd-opregion=on"
+	if [ $DP_OFF = "true" ]
 	then
-		qemu-system-x86_64 \
-		-device vfio-pci-nohotplug,ramfb=$ramfb_state,sysfsdev=$GVTg_DEV_PATH/$GVTg_VGPU_UUID,display=$display_state,x-igd-opregion=on \
-		-pidfile android_vm.pid \
-		$common_options &
-		sleep 5
-		echo -n "Android started successfully and is running in background, pid of the process is:"
-		cat android_vm.pid
-		echo -ne '\n'
-	elif [[ ($1 == "--display-off") && ($2 == "--usb-adb") ]]
+		VM_OPTIONS="$VM_OPTIONS -pidfile android_vm.pid"
+	fi
+	if [ $USB_ADB = "true" ]
 	then
-		echo device > /sys/class/usb_role/intel_xhci_usb_sw-role-switch/role
-		echo 0000:00:14.1 > /sys/bus/pci/devices/0000\:00\:14.1/driver/unbind
-		modprobe vfio-pci
-		echo 8086 9d30 > /sys/bus/pci/drivers/vfio-pci/new_id
-		qemu-system-x86_64 \
-                -device vfio-pci-nohotplug,ramfb=$ramfb_state,sysfsdev=$GVTg_DEV_PATH/$GVTg_VGPU_UUID,display=$display_state,x-igd-opregion=on \
-		-device vfio-pci,host=00:14.1,id=dwc3,addr=0x14,x-no-kvm-intx=on \
-                $common_options &
-                sleep 5
-                echo -n "Android started successfully and is running in background, pid of the process is:"
-                cat android_vm.pid
-	elif [[ $1 == "--usb-adb" ]]
+		VM_OPTIONS="$VM_OPTIONS -device vfio-pci,host=00:14.1,id=dwc3,addr=0x14,x-no-kvm-intx=on"
+	fi
+	if [ $WIFI_PT = "true" ]
 	then
-		echo device > /sys/class/usb_role/intel_xhci_usb_sw-role-switch/role
-		echo 0000:00:14.1 > /sys/bus/pci/devices/0000\:00\:14.1/driver/unbind
-		modprobe vfio-pci
-		echo 8086 9d30 > /sys/bus/pci/drivers/vfio-pci/new_id
-		qemu-system-x86_64 \
-		-device vfio-pci-nohotplug,ramfb=$ramfb_state,sysfsdev=$GVTg_DEV_PATH/$GVTg_VGPU_UUID,display=$display_state,x-igd-opregion=on \
-		-device vfio-pci,host=00:14.1,id=dwc3,addr=0x14,x-no-kvm-intx=on \
-		$common_options
+		 VM_OPTIONS="$VM_OPTIONS -device vfio-pci,host=`lspci -nn  | grep -oP '([\w:[\w.]+) Network controller' | awk '{print $1}'`"
+	fi
+	if [ $DP_OFF = "true" ]
+	then
+		VM_OPTIONS="$VM_OPTIONS $common_options &"
 	else
-		qemu-system-x86_64 \
-		-device vfio-pci-nohotplug,ramfb=$ramfb_state,sysfsdev=$GVTg_DEV_PATH/$GVTg_VGPU_UUID,display=$display_state,x-igd-opregion=on \
-		-device vfio-pci,host=01:00.0 \
-		$common_options
+		VM_OPTIONS="$VM_OPTIONS $common_options"
+	fi
+
+
+	qemu-system-x86_64 $VM_OPTIONS
+
+	sleep 5
+	echo -n "Android started successfully and is running in background, pid of the process is:"
+	if [ $DP_OFF = "true" ]
+	then
+		cat android_vm.pid
 	fi
 }
 
