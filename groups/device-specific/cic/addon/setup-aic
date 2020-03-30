@@ -4,6 +4,8 @@
 unset SECURE=$SECURE WIFI_MT=$WIFI_MT WIFI_PT=$WIFI_PT BT_MT=$BT_MT BT_PT=$BT_PT AUDIO_MT=$AUDIO_MT AUDIO_PT=$AUDIO_PT >& /dev/null
 export AIC_WORK_DIR=${PWD}
 
+rm -f $AIC_WORK_DIR/update/customize-android && touch $AIC_WORK_DIR/update/customize-android && chmod 777 $AIC_WORK_DIR/update/customize-android
+
 USAGE="
 
 ./setup-aic -s/-ns -m [audio,wifi,bt] -p [audio,wifi,bt]
@@ -158,6 +160,7 @@ sudo rm -rf $AIC_WORK_DIR/workdir/data*
 echo 'FROM android_base' > $AIC_WORK_DIR/update/Dockerfile
 echo ' ' >> $AIC_WORK_DIR/update/Dockerfile
 echo 'COPY ./root/ /' >> $AIC_WORK_DIR/update/Dockerfile
+echo 'COPY ./customize-android /' >> $AIC_WORK_DIR/update/Dockerfile
 echo ' ' >> $AIC_WORK_DIR/update/Dockerfile
 
 #Install Feature set packages / modules
@@ -187,8 +190,30 @@ fi
 #Install CIC
 cd $AIC_WORK_DIR
 echo "Installing CIC -- START"
-./aic install -e -d none
+if [[ $SECURE == "false" ]]; then
+  ./aic install -e -u -d none
+else
+  ./aic install -e -d none
+fi
 echo "Installing CIC -- DONE"
+
+#Update sepolicy mode
+a=`grep GRUB_CMDLINE_LINUX /etc/default/grub | grep -i 'androidboot.selinux=permissive'`
+b=`grep GRUB_CMDLINE_LINUX /etc/default/grub | grep -i 'androidboot.selinux=enforcing'`
+
+if [[ $SECURE == "true" ]]; then
+  if [ ! -z "$a" ]; then
+    sudo sed -i 's/androidboot.selinux=permissive//g' /etc/default/grub
+  fi
+fi
+if [[ $SECURE == "false" ]]; then
+  if [[ -z "$a" && -z "$b" ]]; then
+    echo 'GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX androidboot.selinux=permissive"' | sudo tee -a /etc/default/grub
+  fi
+  if [ ! -z "$b" ]; then
+    sudo sed -i 's/androidboot.selinux=enforcing/androidboot.selinux=permissive/g' /etc/default/grub
+  fi
+fi
 
 #Check env path
 AIC_WORK_DIR_PATH=$AIC_WORK_DIR/workdir
@@ -241,6 +266,7 @@ if [[ $AUDIO_PT == "true" ]]; then
   sudo rm -rf /etc/profile.d/create_pasocket.sh
 fi
 
+sudo update-grub
 echo ""
 echo "Reboot required for changes to be reflected !!"
 read -p "Press Enter key to reboot: "
