@@ -10,6 +10,7 @@ on early-boot
 service storageproxyd /vendor/bin/storageproxyd -d /dev/trusty-ipc-dev0 -p /data/vendor/securestorage -r /dev/rpmb0
     user system
     group system
+    oneshot
 {{/enable_storage_proxyd}}
 {{/enable_hw_sec}}
 
