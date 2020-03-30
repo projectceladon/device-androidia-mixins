@@ -1,0 +1,4 @@
+include $(CLEAR_VARS)
+LOCAL_MODULE := odm-partition
+INSTALLED_ODMIMAGE_TARGET := $(PRODUCT_OUT)/odm.img
+include $(BUILD_PHONY_PACKAGE)
