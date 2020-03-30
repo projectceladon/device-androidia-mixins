@@ -85,7 +85,7 @@ fi
 #By default, nothing to be set, keep it like this:
 ############################CUSTOMIZED CONTENT############################
 
-DOCKER_FILE_PATH=update/Dockerfile
+DOCKER_FILE_PATH=update/customize-android
 
 function remove_files {
 files=$1
@@ -98,17 +98,11 @@ else
    return
 fi
 
-#Add the head
-echo 'RUN ["/system/bin/sh", "-c","\' >> $DOCKER_FILE_PATH
-
 #Add the content
 for file in $files
 do
-    echo "rm -rf $file && \\" >> $DOCKER_FILE_PATH
+    echo "rm -rf $file " >> $DOCKER_FILE_PATH
 done
-
-#Add the tail
-echo "echo\"]" >> $DOCKER_FILE_PATH
 
 }
 
@@ -123,27 +117,21 @@ else
    return
 fi
 
-#Add the head
-echo 'RUN ["/system/bin/sh", "-c","\' >> $DOCKER_FILE_PATH
-
 #Add the content
 for p in $properties
 do
     key=`echo $p | cut -d '=' -f 1`
 #remove the old if existed. DO NOT indent EOF
 cat >> $DOCKER_FILE_PATH << EOF
-sed -i \"s|$key=.*||g\" /system/build.prop && \\
+sed -i \"s|$key=.*||g\" /system/build.prop
 EOF
 
 #append the new. DO NOT indent EOF
 cat >> $DOCKER_FILE_PATH << EOF
-echo \"$p\" | tee -a /system/build.prop && \\
+echo \"$p\" | tee -a /system/build.prop
 EOF
 
 done
-
-#Add the tail
-echo "echo\"]" >> $DOCKER_FILE_PATH
 
 }
 
@@ -151,19 +139,13 @@ echo "echo\"]" >> $DOCKER_FILE_PATH
 function execute_shell {
 cmds="$1"
 
-#Add the head
-echo 'RUN ["/system/bin/sh", "-c","\' >> $DOCKER_FILE_PATH
-
 #Add the content
 while read -r c
 do
     if [[ ! -z $c ]]; then
-        echo "$c && \\" >> $DOCKER_FILE_PATH
+        echo "$c " >> $DOCKER_FILE_PATH
     fi
 done <<<"$cmds"
-
-#Add the tail
-echo "echo\"]" >> $DOCKER_FILE_PATH
 
 }
 
