@@ -3,12 +3,12 @@
 
 if [[ $1 == "mediation" ]]; then
 
-## Remove trusty from android
+## Remove BT from android
 echo '
-RUN ["/system/bin/sh", "-c","\
-rm -rf /system/vendor/etc/permissions/android.hardware.bluetooth.xml && \
-rm -rf /system/vendor/etc/permissions/android.hardware.bluetooth_le.xml && \
-echo"]
-' >> $AIC_WORK_DIR/update/Dockerfile
+#Remove BT
+rm -rf /system/vendor/etc/permissions/android.hardware.bluetooth.xml
+rm -rf /system/vendor/etc/permissions/android.hardware.bluetooth_le.xml
+
+' >> $AIC_WORK_DIR/update/customize-android
 
 fi
