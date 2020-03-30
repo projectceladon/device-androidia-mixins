@@ -83,6 +83,9 @@ $(GPTIMAGE_BIN): \
 	{{#product-partition}}
 	productimage \
 	{{/product-partition}}
+	{{#odm-partition}}
+	odmimage \
+	{{/odm-partition}}
 	{{/dynamic-partitions}}
 	{{#dynamic-partitions}}
 	superimage \
@@ -108,6 +111,9 @@ $(GPTIMAGE_BIN): \
 	{{#product-partition}}
 	$(SIMG2IMG) $(INSTALLED_PRODUCTIMAGE_TARGET) $(INSTALLED_PRODUCTIMAGE_TARGET).raw
 	{{/product-partition}}
+	{{#odm-partition}}
+	$(SIMG2IMG) $(INSTALLED_ODMIMAGE_TARGET) $(INSTALLED_ODMIMAGE_TARGET).raw
+	{{/odm-partition}}
 	{{/dynamic-partitions}}
 	{{#dynamic-partitions}}
 	$(SIMG2IMG) $(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_TARGET).raw
