@@ -9,3 +9,5 @@
 # Docker will remove the /etc link and create a directory to override some files
 # such as /etc/hosts, /etc/hostname, etc.
 /etc(/.*)?                  u:object_r:system_file:s0
+
+/(vendor|system/vendor)/bin/hw/android\.hardware\.health@2\.0-service\.intel         u:object_r:hal_health_default_exec:s0
