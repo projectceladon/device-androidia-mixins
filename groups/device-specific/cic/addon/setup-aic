@@ -16,6 +16,7 @@ USAGE="
       ex: -m audio,wifi
 -p    Pass through. Select which component you like to enable pass through.
       ex: -p audio,bt
+-j    Support multi-users, with this installation option, we need to use \"aic start -u \$AIC_USER\" to start AIC
 -h    Usage
 
       Note:
@@ -124,6 +125,10 @@ do
             done
             shift
             ;;
+        -j|--multi-user)
+            MULTIPLE_USER="true"
+            shift
+            ;;
         *)
             echo "$USAGE"
             exit -1
@@ -187,14 +192,18 @@ fi
 #Security settings
 ./pre-requisites/secure $SECURE
 
+AIC_INSTALL_AUGUMENTS="-e -d none"
+if [[ $MULTIPLE_USER == "true" ]]; then
+AIC_INSTALL_AUGUMENTS="$AIC_INSTALL_AUGUMENTS -j"
+fi
+if [[ $SECURE == "false" ]]; then
+AIC_INSTALL_AUGUMENTS="$AIC_INSTALL_AUGUMENTS -u"
+fi
+
 #Install CIC
 cd $AIC_WORK_DIR
 echo "Installing CIC -- START"
-if [[ $SECURE == "false" ]]; then
-  ./aic install -e -u -d none
-else
-  ./aic install -e -d none
-fi
+./aic install $AIC_INSTALL_AUGUMENTS
 echo "Installing CIC -- DONE"
 
 #Update sepolicy mode
@@ -255,6 +264,10 @@ fi
 
 sudo chmod 777 -R $AIC_WORK_DIR_PATH
 sudo chmod 0644 $AIC_WORK_DIR_PATH/data0/local.prop
+
+if [[ $MULTIPLE_USER == "true" ]]; then
+  sudo cp pre-requisites/cic_user_notify.sh /etc/profile.d/.
+fi
 
 sudo systemctl enable cic
 
