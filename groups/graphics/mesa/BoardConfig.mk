@@ -3,6 +3,7 @@ TARGET_USE_PRIVATE_LIBDRM := true
 LIBDRM_VER ?= intel
 
 BOARD_KERNEL_CMDLINE += vga=current i915.modeset=1 drm.atomic=1 i915.nuclear_pageflip=1 drm.vblankoffdelay=1 i915.fastboot=1
+BOARD_KERNEL_CMDLINE += i915.avail_planes_per_pipe=0x070F00 i915.enable_hangcheck=0 i915.enable_guc_loading=0 i915.enable_guc_submission=0 i915.enable_guc=0 intel_iommu=off nohpet tsc=reliable
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 USE_INTEL_UFO_DRIVER := false
