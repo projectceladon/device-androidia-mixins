@@ -41,6 +41,11 @@ if [[ $security == "true" ]]; then
     if [[ ! -z $b && ! -z $c ]]; then
         sudo cp $AIC_WORK_DIR/kf4cic.efi /boot/efi/EFI/ubuntu/shimx64.efi
     fi
+
+    if ! grep -q "cpu_init_udelay=10000" /etc/default/grub; then
+        #Force kernel to delay 10ms between assert and de-assert of APIC INIT when start APs
+        sudo sed -i "s/GRUB_CMDLINE_LINUX=\"/GRUB_CMDLINE_LINUX=\"cpu_init_udelay=10000 /g" /etc/default/grub
+    fi
 fi
 
 ### If trusty is disabled
@@ -75,4 +80,7 @@ rm -rf /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     if [[ (-z $a) && ! (-z $c) ]]; then
         sudo mv /boot/efi/EFI/ubuntu/loaderx64.efi /boot/efi/EFI/ubuntu/shimx64.efi
     fi
+
+    ## Remove cpu_init_udelay=10000 from ubuntu
+    sudo sed -i "s/cpu_init_udelay=10000//g" /etc/default/grub
 fi
