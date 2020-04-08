@@ -21,6 +21,9 @@ on post-fs
     setprop ro.vendor.iio.magn.x.opt_scale    -1
     setprop ro.vendor.iio.magn.z.opt_scale    -1
 
+    #Disable bluetooth for GSI solution
+    pm disable com.android.bluetooth
+
 on boot
     write /sys/class/gpio/export 444
     write /sys/class/gpio/gpio444/direction out
