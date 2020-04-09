@@ -48,9 +48,9 @@ fi
 if [[ $security == "" || $security == "false" ]]; then
 
 ## Remove trusty from android
-echo '
+echo "
 #Disable trusty
-sed -i 's/trusty//g' /system/build.prop
+sed -i \"/trusty/d\" /system/build.prop
 rm -rf /vendor/lib/hw/gatekeeper.trusty.so
 rm -rf /vendor/lib/hw/keystore.trusty.so
 rm -rf /vendor/lib/libtrusty.so
@@ -63,8 +63,11 @@ rm -rf /vendor/lib/hw/android.hardware.gatekeeper@1.0-impl.so
 rm -rf /vendor/lib64/hw/gatekeeper.trusty.so
 rm -rf /vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl.so
 rm -rf /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
+rm -rf /vendor/bin/storageproxyd
+sed -i \"/gatekeeper/{n;d}\" /system/vendor/manifest.xml
+sed -i \"/gatekeeper/a\        <transport arch=\\\"32+64\\\">passthrough</transport>\"  /system/vendor/manifest.xml
 
-' >> $AIC_WORK_DIR/update/customize-android
+" >> $AIC_WORK_DIR/update/customize-android
 
     ## Remove KF and tos from ubuntu
     sudo rm -rf /boot/efi/EFI/ubuntu/tos.img
