@@ -1,0 +1,3 @@
+# HwBinder IPC from client to server, and callbacks
+# refer to system/sepolicy/public/hal_gatekeeper.te
+binder_call(gatekeeperd, hal_gatekeeper)

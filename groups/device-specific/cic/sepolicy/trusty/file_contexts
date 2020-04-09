@@ -1,2 +1,8 @@
 # Trusty ipc device
 /dev/trusty-ipc-dev0    u:object_r:tee_device:s0
+# Trusty rpmb device
+/dev/rpmb[01]           u:object_r:tee_device:s0
+
+(/system)?/vendor/bin/storageproxyd   u:object_r:tee_exec:s0
+/data/vendor/securestorage(/.*)?      u:object_r:tee_data_file:s0
+/dev/block/(pci|platform|vbd)(/.*)?/.*/by-name/teedata   u:object_r:tee_device:s0
