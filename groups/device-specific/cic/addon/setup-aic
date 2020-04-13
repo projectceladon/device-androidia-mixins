@@ -169,6 +169,7 @@ echo ' ' >> $AIC_WORK_DIR/update/Dockerfile
 #Initiate Early-Launch
 #./pre-requisites/launch-early
 ./pre-requisites/cic-service
+./pre-requisites/cic-monitor-service
 
 #BT Service
 if [[ $BT_MT == "true" ]]; then
@@ -257,6 +258,7 @@ sudo chmod 777 -R $AIC_WORK_DIR_PATH
 sudo chmod 0644 $AIC_WORK_DIR_PATH/data0/local.prop
 
 sudo systemctl enable cic
+sudo systemctl enable cic-monitor
 
 #Run pactl
 if [[ $AUDIO_MT == "true" ]]; then
