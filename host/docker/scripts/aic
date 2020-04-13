@@ -918,8 +918,6 @@ function start {
 	iw phy phy0 set netns $ANDROID_PID
 	rfkill unblock all
 	nsenter -t $ANDROID_PID -n ip link set $INTF name wlan0
-	nsenter -t $ANDROID_PID -n ifconfig wlan0 up
-	nsenter -t $ANDROID_PID -n iw dev wlan0 scan
     fi
 
 }
