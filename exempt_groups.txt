@@ -48,7 +48,6 @@ debug-log-watch
 debug-mpm
 debug-npk
 debug-oct
-debug-phonedoctor
 debug-tools
 debug-unresponsive
 debug-usb-config
