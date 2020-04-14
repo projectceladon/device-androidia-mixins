@@ -23,13 +23,6 @@ do
 done
 }
 
-
-snd_load=`lsmod | grep -i snd_dummy`
-
-if [[ -z $snd_load ]]; then
-  /sbin/modprobe snd-dummy
-fi
-
 if [ "$1" == "start" ] && [ -d "workdir/data-multi-user/data" ]; then
     start_until_user_login
 else

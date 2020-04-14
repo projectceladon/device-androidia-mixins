@@ -276,6 +276,7 @@ sudo systemctl enable cic-monitor
 #Run pactl
 if [[ $AUDIO_MT == "true" ]]; then
   ./pre-requisites/pactl_socket $(whoami)
+  ./sof_audio/configure_sof.sh "install" $AIC_WORK_DIR
 fi
 if [[ $AUDIO_PT == "true" ]]; then
   sudo rm -rf /etc/profile.d/create_pasocket.sh
