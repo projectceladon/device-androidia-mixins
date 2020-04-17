@@ -165,7 +165,6 @@ sudo rm -rf $AIC_WORK_DIR/workdir/data*
 echo 'FROM android_base' > $AIC_WORK_DIR/update/Dockerfile
 echo ' ' >> $AIC_WORK_DIR/update/Dockerfile
 echo 'COPY ./root/ /' >> $AIC_WORK_DIR/update/Dockerfile
-echo 'COPY ./customize-android /' >> $AIC_WORK_DIR/update/Dockerfile
 echo ' ' >> $AIC_WORK_DIR/update/Dockerfile
 
 #Install Feature set packages / modules
@@ -198,6 +197,7 @@ if [[ $MULTIPLE_USER == "true" ]]; then
 AIC_INSTALL_AUGUMENTS="$AIC_INSTALL_AUGUMENTS -j"
 fi
 if [[ $SECURE == "false" ]]; then
+cp $AIC_WORK_DIR/update/customize-android $AIC_WORK_DIR/update/root/customize-android
 AIC_INSTALL_AUGUMENTS="$AIC_INSTALL_AUGUMENTS -u"
 fi
 
