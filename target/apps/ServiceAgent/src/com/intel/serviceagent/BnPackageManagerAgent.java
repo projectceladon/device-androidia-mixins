@@ -64,9 +64,8 @@ public class BnPackageManagerAgent extends IPackageManagerAgent.Stub {
         public void onReceive(Context context, Intent intent) {
             if (intent == null)
                 return;
-            if (intent.getAction() == null)
-                return;
-            if (intent.getAction().equals("android.intent.action.PACKAGE_ADDED")) {
+            final String a = intent.getAction();
+            if ("android.intent.action.PACKAGE_ADDED".equals(a)) {
                 String packageName = intent.getDataString();
                 Log.d(TAG, "安装了 :" + packageName);
                 if (mInstallerListener != null) {
@@ -77,7 +76,7 @@ public class BnPackageManagerAgent extends IPackageManagerAgent.Stub {
                     }
                 }
             }
-            if (intent.getAction().equals("android.intent.action.PACKAGE_REMOVED")) {
+            if ("android.intent.action.PACKAGE_REMOVED".equals(a)) {
                 String packageName = intent.getDataString();
                 Log.d(TAG, "卸载了 :" + packageName);
                 if (mInstallerListener != null) {
