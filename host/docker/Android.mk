@@ -10,3 +10,14 @@ LOCAL_MODULE_SUFFIX :=
 LOCAL_IS_HOST_MODULE := true
 LOCAL_BUILT_MODULE_STEM := $(notdir $(LOCAL_SRC_FILES))
 include $(BUILD_PREBUILT)
+
+# verity img build script
+include $(CLEAR_VARS)
+LOCAL_MODULE := build_verity_img.py
+LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := scripts/build_verity_img.py
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_MODULE_SUFFIX :=
+LOCAL_IS_HOST_MODULE := true
+LOCAL_BUILT_MODULE_STEM := $(notdir $(LOCAL_SRC_FILES))
+include $(BUILD_PREBUILT)

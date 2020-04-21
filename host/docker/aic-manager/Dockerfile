@@ -49,7 +49,7 @@ FROM build_normal as build_loop_mount
 
 ONBUILD COPY images /images
 ONBUILD COPY scripts/image-entry /images/entry
-
+RUN apt-get -q -y update && apt-get -q -y install cryptsetup-bin
 
 FROM build_${BUILD_VARIANT}
 ARG BUILD_VARIANT

@@ -600,7 +600,7 @@ function install {
     fi
 
     # create aic-manager container
-    AIC_MANAGER_CONTAINER_OPTION="-v /lib/modules:/lib/modules -v /usr/src:/usr/src -v $WORK_DIR/ipc:/ipc -v $WORK_DIR/media:/media:shared"
+    AIC_MANAGER_CONTAINER_OPTION="-v /lib/modules:/lib/modules -v /dev/mapper:/dev/mapper -v /usr/src:/usr/src -v $WORK_DIR/ipc:/ipc -v $WORK_DIR/media:/media:shared"
     AIC_MANAGER_CONTAINER_CMDS="-n $INSTANCE_NUM"
     if [ "$EMULATED_WIFI" = "true" ]; then
         AIC_MANAGER_CONTAINER_OPTION="$AIC_MANAGER_CONTAINER_OPTION -v /proc:/hostproc -v /var/run/docker.sock:/var/run/docker.sock"
