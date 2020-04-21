@@ -212,7 +212,6 @@ a=`grep GRUB_CMDLINE_LINUX /etc/default/grub | grep -i 'androidboot.selinux=perm
 b=`grep GRUB_CMDLINE_LINUX /etc/default/grub | grep -i 'androidboot.selinux=enforcing'`
 
 VERITY_METADATA_IMG=$AIC_WORK_DIR/verity_metadata
-VERITY_SETUP_TOOL=$AIC_WORK_DIR/cic_veritysetup
 
 if [[ $SECURE == "true" ]]; then
   if [ ! -z "$a" ]; then
