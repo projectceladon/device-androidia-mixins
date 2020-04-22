@@ -27,6 +27,10 @@ PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG := normal large xlarge mdpi hdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 
+{{#dm_verity}}
+TARGET_DM_VERITY_SUPPORT := true
+{{/dm_verity}}
+
 INTEL_PATH_DEVICE_CIC := device/intel/project-celadon/$(TARGET_PRODUCT)
 INTEL_PATH_KERNEL_MODULES_CIC := kernel/modules/cic
 INTEL_PATH_VENDOR_CIC := vendor/intel/cic

@@ -211,9 +211,23 @@ echo "Installing CIC -- DONE"
 a=`grep GRUB_CMDLINE_LINUX /etc/default/grub | grep -i 'androidboot.selinux=permissive'`
 b=`grep GRUB_CMDLINE_LINUX /etc/default/grub | grep -i 'androidboot.selinux=enforcing'`
 
+VERITY_METADATA_IMG=$AIC_WORK_DIR/verity_metadata
+VERITY_TMP_HASHTREE=$AIC_WORK_DIR/system_hashtree
 if [[ $SECURE == "true" ]]; then
   if [ ! -z "$a" ]; then
     sudo sed -i 's/androidboot.selinux=permissive//g' /etc/default/grub
+  fi
+
+  #Copying the verity metadata images
+  if [[ -f $VERITY_METADATA_IMG ]]; then
+    roothash_size=$(od -N4 -An -td $VERITY_METADATA_IMG |tr -d '  \n' |awk '{print $0}')
+    hash_tree_size=$(od -N4 -j$(($roothash_size+4)) -An -td $VERITY_METADATA_IMG |tr -d ' \n' |awk '{print $0}')
+
+    sudo dd if=$VERITY_METADATA_IMG of=$VERITY_TMP_HASHTREE bs=1 count=$hash_tree_size skip=$(($roothash_size+4+4)) conv=notrunc
+    echo "copying the verity metadta to aic-manager"
+    sudo docker cp $VERITY_TMP_HASHTREE aic-manager:/images
+    sudo docker cp $VERITY_METADATA_IMG aic-manager:/images
+    sudo rm -rf $VERITY_TMP_HASHTREE
   fi
 fi
 if [[ $SECURE == "false" ]]; then
