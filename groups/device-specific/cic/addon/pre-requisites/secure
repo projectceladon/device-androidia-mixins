@@ -8,6 +8,10 @@ teedata=`sudo parted -l | grep -i teedata`
 trusty_host=`dmesg | grep trusty`
 tos_img=`dmesg | grep trusty | grep 'error -22'`
 trusty_init=`dmesg | grep trusty | grep 'initializ'`
+tos_dev=`sudo blkid | grep "\"tos\"" | awk '{print $1}' | tr -d ':'`
+vbmeta_dev=`sudo blkid | grep "\"vbmeta\"" | awk '{print $1}' | tr -d ':'`
+tos_dev_sec_num=`sudo fdisk -l | grep $tos_dev | awk '{print $4}'`
+vbmeta_dev_sec_num=`sudo fdisk -l | grep $vbmeta_dev | awk '{print $4}'`
 
 
 ### If trusty is enabled
@@ -24,6 +28,38 @@ if [[ $trusty_host == "" && $security == "true" ]]; then
     echo "Trusty not enabled in kernel"
     echo "Please install trusty drivers in host kernel"
     echo "security : $security"
+fi
+
+## flash tos and vbmeta to partitions
+if [[ $security == "true" ]]; then
+    if [[ -z $tos_dev || -z $vbmeta_dev ]]; then
+        echo "Partition /tos[10MB] and /vbmeta[1MB] should be present"
+        echo "Please create them"
+        exit -1
+    else
+        tos_img_size=`du -b $AIC_WORK_DIR/tos.img | awk '{print $1}'`
+        vbmeta_img_size=`du -b $AIC_WORK_DIR/vbmeta.img | awk '{print $1}'`
+
+        if [[ $tos_img_size -gt `expr $tos_dev_sec_num\*512` ]]; then
+            echo "error: tos image size is bigger than tos partition size"
+            exit -1
+        fi
+
+        if [[ $vbmeta_img_size -gt `expr $vbmeta_dev_sec_num\*512` ]]; then
+            echo "error: vbmeta image size is bigger than vbmeta partition size"
+            exit -1
+        fi
+
+        tos_blk_count=`expr ${tos_img_size} / 512`
+        vbmeta_blk_count=`expr $vbmeta_img_size / 512`
+
+        echo "flash tos and vbmeta to partitions"
+        sudo dd if=/dev/zero of=${vbmeta_dev} bs=512 count=$vbmeta_dev_sec_num
+        sudo dd if=/dev/zero of=${tos_dev} bs=512 count=$tos_dev_sec_num
+
+        sudo dd if=$AIC_WORK_DIR/vbmeta.img of=${vbmeta_dev} bs=512 count=$vbmeta_blk_count
+        sudo dd if=$AIC_WORK_DIR/tos.img of=${tos_dev} bs=512 count=$tos_blk_count
+    fi
 fi
 
 ## copy KF and tos to ubuntu
