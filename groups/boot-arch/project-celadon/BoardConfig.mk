@@ -1,3 +1,6 @@
+BOARD_BOOTIMAGE_PARTITION_SIZE ?= 31457280
+BOARD_TOSIMAGE_PARTITION_SIZE := 10485760
+
 {{^use_cic}}
 #
 # -- OTA RELATED DEFINES --
@@ -19,12 +22,10 @@ TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 #
 
 # NOTE: These values must be kept in sync with BOARD_GPT_INI
-BOARD_BOOTIMAGE_PARTITION_SIZE ?= 31457280
 SYSTEM_PARTITION_SIZE = $(shell echo {{system_partition_size}}*1024*1024 | bc)
 {{^dynamic-partitions}}
 BOARD_SYSTEMIMAGE_PARTITION_SIZE ?= $(SYSTEM_PARTITION_SIZE)
 {{/dynamic-partitions}}
-BOARD_TOSIMAGE_PARTITION_SIZE := 10485760
 BOARD_BOOTLOADER_PARTITION_SIZE ?= $$(({{bootloader_len}} * 1024 * 1024))
 BOARD_BOOTLOADER_BLOCK_SIZE := {{{bootloader_block_size}}}
 {{^slot-ab}}
