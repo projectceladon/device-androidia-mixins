@@ -1,5 +1,0 @@
-allow hal_graphics_composer_default sysfs_app_readable:file r_file_perms;
-allow hal_graphics_composer_default rootfs:sock_file create_file_perms;
-allow hal_graphics_composer_default rootfs:dir create_dir_perms;
-allow hal_graphics_composer_default kernel:unix_stream_socket connectto;
-allow hal_graphics_composer_default debugfs:file r_file_perms;

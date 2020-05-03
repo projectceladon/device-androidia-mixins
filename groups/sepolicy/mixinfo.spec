@@ -1,0 +1,2 @@
+[mixinfo]
+deps = loop-mount

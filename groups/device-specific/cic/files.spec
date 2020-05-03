@@ -8,4 +8,3 @@ manifest.xml:
 overlay:
 sdcard:
 wifi:
-sepolicy:
