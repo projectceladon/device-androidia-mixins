@@ -1,1 +1,7 @@
+ifeq ($(FLAG_SEPOLICY_AVAILABLE), true)
 TARGET_LOOP_MOUNT_SYSTEM_IMAGES := true
+$(warning LOOP_MOUNT_SYSTEM_IMAGE is true!!!!)
+else
+TARGET_LOOP_MOUNT_SYSTEM_IMAGES := false
+$(warning LOOP_MOUNT_SYSTEM_IMAGE is false!!!!)
+endif
