@@ -34,6 +34,7 @@ PRODUCT_PACKAGES += \
     libdrm \
     libdrm_intel \
     libsync \
+    libmd \
     Browser2 \
     RemoteIME \
     ServiceAgent \
