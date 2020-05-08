@@ -1,4 +1,4 @@
-TARGET_BOARD_PLATFORM := broxton
+TARGET_BOARD_PLATFORM := celadon
 
 # Tinyalsa
 PRODUCT_PACKAGES_DEBUG += \
