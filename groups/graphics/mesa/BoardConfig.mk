@@ -73,3 +73,6 @@ BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/graphics/mesa
 {{#mesa_acrn_sepolicy}}
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/graphics/mesa_acrn
 {{/mesa_acrn_sepolicy}}
+
+# Defines Intel library for GPU accelerated Renderscript:
+OVERRIDE_RS_DRIVER := libRSDriverIntel.so
