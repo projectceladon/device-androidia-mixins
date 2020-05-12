@@ -1,1 +1,4 @@
 allow hal_audio_default audio_data_file:dir search;
+allow hal_audio_default audio_data_file:sock_file write;
+allow hal_audio_default kernel:unix_stream_socket connectto;
+allow hal_audio_default shell_exec:file { open read execute };
