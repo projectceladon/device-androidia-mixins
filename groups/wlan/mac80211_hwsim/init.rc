@@ -1,7 +1,7 @@
 on boot
     setprop wifi.interface wlan0
     # enable fake battery state, details in system/core/healthd/BatteryMonitor.cpp
-    setprop ro.boot.fake_battery 1
+    # setprop ro.boot.fake_battery 1
 
     # Disable rild
     setprop ro.radio.noril yes
