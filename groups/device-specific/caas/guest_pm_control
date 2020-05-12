@@ -57,7 +57,7 @@ def main():
     while True:
         try:
             # Pull the VM shutdown and reboot event from QEMU QMP Server
-            resp = qemu.pull_event()
+            resp = qemu.pull_event(wait=True)
             if resp != None:
                 for val in resp.values():
                     if val == "SHUTDOWN" or val == "RESET":
