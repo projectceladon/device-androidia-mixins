@@ -358,7 +358,12 @@ function install {
         case "$1" in
             -c|--cts)
                 CTS_ENV="true"
+                SUPPORT_RESTART="true"
                 EMULATED_WIFI="true"
+                shift
+                ;;
+            -r|--restart)
+                SUPPORT_RESTART="true"
                 shift
                 ;;
             -e|--emulated-input)
@@ -646,7 +651,7 @@ function install {
        AIC_MANAGER_CONTAINER_OPTION="$AIC_MANAGER_CONTAINER_OPTION --pid host -v aic_isolate_cpu:/cpu "
        AIC_MANAGER_CONTAINER_CMDS="$AIC_MANAGER_CONTAINER_CMDS -l $PLATFORM_HARDWARE"
     fi
-    if [ "$CTS_ENV" = "true" ]; then
+    if [ "$SUPPORT_RESTART" = "true" ]; then
         AIC_MANAGER_CONTAINER_OPTION="$AIC_MANAGER_CONTAINER_OPTION --restart unless-stopped"
     fi
 
@@ -712,9 +717,10 @@ function install {
         if [ "$EMULATED_WIFI" = "true" ] && [ "$CTS_ENV" != "true" ]; then
             ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION -v $WORK_DIR/ipc/config/wifi/$i:/data/misc/wifi"
         fi
-        if [ "$CTS_ENV" = "true" ]; then
+        if [ "$SUPPORT_RESTART" = "true" ]; then
             ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION --restart unless-stopped --ulimit memlock=16777216"
-        else
+        fi
+        if [ "$CTS_ENV" != "true" ]; then
             ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION --net android --ip $IP --mac-address $MAC -p $(($ADB_PORT+i)):5555"
         fi
 
