@@ -190,15 +190,11 @@ fi
 ./pre-requisites/customize-android
 
 #Security settings
-./pre-requisites/secure $SECURE
+#./pre-requisites/secure $SECURE
 
 AIC_INSTALL_AUGUMENTS="-e -d none"
 if [[ $MULTIPLE_USER == "true" ]]; then
 AIC_INSTALL_AUGUMENTS="$AIC_INSTALL_AUGUMENTS -j"
-fi
-if [[ $SECURE == "false" ]]; then
-cp $AIC_WORK_DIR/update/customize-android $AIC_WORK_DIR/update/root/customize-android
-AIC_INSTALL_AUGUMENTS="$AIC_INSTALL_AUGUMENTS -u"
 fi
 
 #Install CIC

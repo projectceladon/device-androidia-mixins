@@ -3,69 +3,8 @@
 
 security=$1
 
-## Check trusty status
-teedata=`sudo parted -l | grep -i teedata`
-trusty_host=`dmesg | grep trusty`
-tos_img=`dmesg | grep trusty | grep 'error -22'`
-trusty_init=`dmesg | grep trusty | grep 'initializ'`
-tos_dev=`sudo blkid | grep "\"tos\"" | awk '{print $1}' | tr -d ':'`
-vbmeta_dev=`sudo blkid | grep "\"vbmeta\"" | awk '{print $1}' | tr -d ':'`
-tos_dev_sec_num=`sudo fdisk -l | grep $tos_dev | awk '{print $4}'`
-vbmeta_dev_sec_num=`sudo fdisk -l | grep $vbmeta_dev | awk '{print $4}'`
-
-
-### If trusty is enabled
-
-## Check if /teedata is present
-if [[ -z $teedata && $security == "true" ]]; then
-    echo "Partition /teedata not present"
-    echo "Please create one"
-    exit -1
-fi
-
-## check if trusty drivers are enabled
-if [[ $trusty_host == "" && $security == "true" ]]; then
-    echo "Trusty not enabled in kernel"
-    echo "Please install trusty drivers in host kernel"
-    echo "security : $security"
-fi
-
-## flash tos and vbmeta to partitions
-if [[ $security == "true" ]]; then
-    if [[ -z $tos_dev || -z $vbmeta_dev ]]; then
-        echo "Partition /tos[10MB] and /vbmeta[1MB] should be present"
-        echo "Please create them"
-        exit -1
-    else
-        tos_img_size=`du -b $AIC_WORK_DIR/tos.img | awk '{print $1}'`
-        vbmeta_img_size=`du -b $AIC_WORK_DIR/vbmeta.img | awk '{print $1}'`
-
-        if [[ $tos_img_size -gt `expr $tos_dev_sec_num\*512` ]]; then
-            echo "error: tos image size is bigger than tos partition size"
-            exit -1
-        fi
-
-        if [[ $vbmeta_img_size -gt `expr $vbmeta_dev_sec_num\*512` ]]; then
-            echo "error: vbmeta image size is bigger than vbmeta partition size"
-            exit -1
-        fi
-
-        tos_blk_count=`expr ${tos_img_size} / 512`
-        vbmeta_blk_count=`expr $vbmeta_img_size / 512`
-
-        echo "flash tos and vbmeta to partitions"
-        sudo dd if=/dev/zero of=${vbmeta_dev} bs=512 count=$vbmeta_dev_sec_num
-        sudo dd if=/dev/zero of=${tos_dev} bs=512 count=$tos_dev_sec_num
-
-        sudo dd if=$AIC_WORK_DIR/vbmeta.img of=${vbmeta_dev} bs=512 count=$vbmeta_blk_count
-        sudo dd if=$AIC_WORK_DIR/tos.img of=${tos_dev} bs=512 count=$tos_blk_count
-    fi
-fi
-
 ## copy KF and tos to ubuntu
 if [[ $security == "true" ]]; then
-    echo "Copying trusty"
-    sudo cp $AIC_WORK_DIR/tos.img /boot/efi/EFI/ubuntu/.
 
     a=`sudo grep -irnsH 'microsoft corporation' /boot/efi/EFI/ubuntu/shimx64.efi`
     b=`sudo grep -irnsH 'android@android' /boot/efi/EFI/ubuntu/shimx64.efi`
@@ -78,40 +17,12 @@ if [[ $security == "true" ]]; then
         sudo cp $AIC_WORK_DIR/kf4cic.efi /boot/efi/EFI/ubuntu/shimx64.efi
     fi
 
-    if ! grep -q "cpu_init_udelay=10000" /etc/default/grub; then
-        #Force kernel to delay 10ms between assert and de-assert of APIC INIT when start APs
-        sudo sed -i "s/GRUB_CMDLINE_LINUX=\"/GRUB_CMDLINE_LINUX=\"cpu_init_udelay=10000 /g" /etc/default/grub
-    fi
 fi
 
 ### If trusty is disabled
 
 if [[ $security == "" || $security == "false" ]]; then
 
-## Remove trusty from android
-echo "
-#Disable trusty
-sed -i \"/trusty/d\" /system/build.prop
-rm -rf /vendor/lib/hw/gatekeeper.trusty.so
-rm -rf /vendor/lib/hw/keystore.trusty.so
-rm -rf /vendor/lib/libtrusty.so
-rm -rf /vendor/lib64/hw/gatekeeper.trusty.so
-rm -rf /vendor/lib64/hw/keystore.trusty.so
-rm -rf /vendor/lib64/libtrusty.so
-rm -rf /vendor/etc/init/android.hardware.gatekeeper@1.0-service.rc
-rm -rf /vendor/lib/hw/gatekeeper.trusty.so
-rm -rf /vendor/lib/hw/android.hardware.gatekeeper@1.0-impl.so
-rm -rf /vendor/lib64/hw/gatekeeper.trusty.so
-rm -rf /vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl.so
-rm -rf /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
-rm -rf /vendor/bin/storageproxyd
-sed -i \"/gatekeeper/{n;d}\" /system/vendor/manifest.xml
-sed -i \"/gatekeeper/a\        <transport arch=\\\"32+64\\\">passthrough</transport>\"  /system/vendor/manifest.xml
-
-" >> $AIC_WORK_DIR/update/customize-android
-
-    ## Remove KF and tos from ubuntu
-    sudo rm -rf /boot/efi/EFI/ubuntu/tos.img
 
     a=`sudo grep -irnsH 'microsoft corporation' /boot/efi/EFI/ubuntu/shimx64.efi`
     b=`sudo grep -irnsH 'android@android' /boot/efi/EFI/ubuntu/shimx64.efi`
