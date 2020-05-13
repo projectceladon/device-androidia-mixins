@@ -1,1 +1,4 @@
-../cic_dev/option.spec
+[defaults]
+file_encryption = false
+gk_force_passthrough = false
+dm_verity = false
