@@ -15,6 +15,10 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/start_flash_usb.sh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/auto_switch_pt_usb_vms.sh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/findall.py
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_host.sh
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/configure_sof.sh
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/blacklist-dsp.conf
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/guest_pm_control
+
 
 
 # for USB OTG WA
