@@ -1,1 +1,0 @@
-type sysfs_usb_role_writeable, fs_type, sysfs_type;
