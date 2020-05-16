@@ -1,1 +1,0 @@
-allow ueventd kernel:fd use;

@@ -1,5 +1,4 @@
 [devicefiles]
-addon:
 cic.mk:
 system.prop:
 android-removed-permissions.xml:
@@ -8,4 +7,3 @@ manifest.xml:
 overlay:
 sdcard:
 wifi:
-sepolicy:

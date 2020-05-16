@@ -1,2 +1,0 @@
-allow ueventd bluetooth_efs_file:dir search;
-allow ueventd bluetooth_efs_file:file { read getattr open };

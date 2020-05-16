@@ -24,9 +24,6 @@ else
 	$(hide) cp -r $(PRODUCT_OUT)/system/etc $(PRODUCT_OUT)/docker/android/root
 	$(hide) rm -rf $(PRODUCT_OUT)/docker/aic-manager/images
 	$(hide) mkdir -p $(PRODUCT_OUT)/docker/aic-manager/images
-ifeq ($(TARGET_DM_VERITY_SUPPORT), true)
-	$(hide) python $(HOST_OUT_EXECUTABLES)/build_verity_img.py $(PRODUCT_OUT)/system.img $(PRODUCT_OUT)/verity_metadata
-endif
 	$(hide) ln -t $(PRODUCT_OUT)/docker/aic-manager/images $(PRODUCT_OUT)/system.img
 endif
 
@@ -44,12 +41,6 @@ else
 	@echo Nothing todo
 endif
 
-ifeq ($(BOARD_AVB_ENABLE),true)
-VBMETA_IMG := vbmeta.img
-else
-VBMETA_IMG :=
-endif
-
 .PHONY: aic
 aic: .KATI_NINJA_POOL := console
 aic: multidroid
@@ -60,7 +51,7 @@ else
 	BUILD_VARIANT=loop_mount $(HOST_OUT_EXECUTABLES)/aic-build -b $(BUILD_NUMBER)
 endif
 ifneq (,$(filter cic cic_dev,$(TARGET_PRODUCT)))
-	tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic android.tar.gz aic-manager.tar.gz cfc ia_hwc pre-requisites sof_audio README-CIC INFO cic.sh setup-aic $(VBMETA_IMG) kf4cic.efi verity_metadata -C docker update
+	tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic android.tar.gz aic-manager.tar.gz cfc ia_hwc pre-requisites sof_audio README-CIC INFO cic.sh setup-aic kf4cic.efi -C docker update
 	@echo Make debian binaries...
 	$(hide) (rm -rf $(PRODUCT_OUT)/cic && mkdir -p $(PRODUCT_OUT)/cic/opt/cic && mkdir -p $(PRODUCT_OUT)/cic/etc/profile.d)
 	$(hide) (cd $(PRODUCT_OUT)/cic/opt/cic && tar xvf ../../../$(TARGET_AIC_FILE_NAME) aic android.tar.gz aic-manager.tar.gz INFO cic.sh cfc update)

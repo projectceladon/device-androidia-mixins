@@ -29,6 +29,7 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 INTEL_PATH_DEVICE_CIC := device/intel/project-celadon/cic_dev
 INTEL_PATH_KERNEL_MODULES_CIC := kernel/modules/cic
 INTEL_PATH_VENDOR_CIC := vendor/intel/cic
+INTEL_PATH_SEPOLICY := device/intel/project-celadon/sepolicy
 INTEL_PATH_VENDOR_CIC_GRAPHIC := $(INTEL_PATH_VENDOR_CIC)/target/graphics
 INTEL_PATH_VENDOR_CIC_HAL := $(INTEL_PATH_VENDOR_CIC)/target/hals
 
