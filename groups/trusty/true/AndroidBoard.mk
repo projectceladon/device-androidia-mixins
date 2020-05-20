@@ -6,9 +6,7 @@ LOCAL_MAKE := make
 # Build the evmm_pkg.bin and lk.bin
 .PHONY: $(TOS_IMAGE_TARGET)
 $(TOS_IMAGE_TARGET):
-	@echo "making lk.bin.."
-	$(hide) (cd $(TOPDIR)trusty && $(TRUSTY_ENV_VAR) $(LOCAL_MAKE) {{{lk_project}}})
-	@echo "making tos image.."
+	@echo "making tos image with Trusty relase binary.."
 	$(hide) (cd $(TOPDIR)vendor/intel/fw/evmm/$(INTERNAL_PLATFORM) && $(TRUSTY_ENV_VAR) $(LOCAL_MAKE))
 
 #tos partition is assigned for trusty
