@@ -192,7 +192,7 @@ fi
 #Security settings
 ./pre-requisites/secure $SECURE
 
-AIC_INSTALL_ARGUMENTS="-e -d none -r"
+AIC_INSTALL_ARGUMENTS="-e -d none"
 if [[ $MULTIPLE_USER == "true" ]]; then
 AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -j"
 fi
