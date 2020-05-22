@@ -142,6 +142,7 @@ common_eth_mediation="\
  -chardev socket,id=charserial0,path=./kernel-console,server,nowait \
  -device isa-serial,chardev=charserial0,id=serial0 \
  -drive file=$caas_image,if=none,id=disk1 \
+ -drive file=/dev/mmcblk0p1,format=raw,id=sdcard0 \
  -device virtio-blk-pci,drive=disk1,bootindex=1 \
  -device vhost-vsock-pci,id=vhost-vsock-pci0,guest-cid=3 \
  -device intel-iommu,device-iotlb=off,caching-mode=on \
