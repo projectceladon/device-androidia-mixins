@@ -191,6 +191,20 @@ Only the three quirks included above are recognized at this point:
             <Limit name="bitrate" range="1-40000000" />
         </MediaCodec>
 {{/hw_ve_vp8}}
+
+<!-- 
+use BASE_YOCTO_KERNEL as a w/a flag for hw_ve_vp9
+-->
+{{#BASE_YOCTO_KERNEL}}
+        <MediaCodec name="OMX.Intel.hw_ve.vp9" type="video/x-vnd.on2.vp9" >
+            <Limit name="size" min="176x144" max="3840x2160" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="blocks-per-second" range="1-972000" />
+            <Limit name="bitrate" range="1-40000000" />
+        </MediaCodec>
+{{/BASE_YOCTO_KERNEL}}
+
 {{#hw_ve_h265}}
         <MediaCodec name="OMX.Intel.hw_ve.h265" type="video/hevc" >
             <Limit name="size" min="64x64" max="3840x2160" />
