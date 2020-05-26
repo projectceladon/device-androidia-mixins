@@ -17,6 +17,7 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/findall.py
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_host.sh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/sof_audio/configure_sof.sh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/sof_audio/blacklist-dsp.conf
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_audio_host.sh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/guest_pm_control
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/intel-thermal-conf.xml
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/thermald.service
