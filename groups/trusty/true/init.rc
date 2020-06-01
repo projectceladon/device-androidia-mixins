@@ -7,9 +7,17 @@ on post-fs-data
 on early-boot
     start storageproxyd
 
-service storageproxyd /vendor/bin/storageproxyd -d /dev/trusty-ipc-dev0 -p /data/vendor/securestorage -r /dev/rpmb0
+service storageproxyd /vendor/bin/storageproxyd -d /dev/trusty-ipc-dev0 -p /data/vendor/securestorage -r /dev/vport0p1 -t virt
     user system
     group system
+
+on boot
+    start keyboxd
+
+service keyboxd /vendor/bin/keybox_provisioning -d /dev/trusty-ipc-dev0 -p /dev/block/by-name/teedata
+    user system
+    group system
+    oneshot
 {{/enable_storage_proxyd}}
 {{/enable_hw_sec}}
 
@@ -17,3 +25,4 @@ on post-fs
     wait_for_prop vendor.modules.trusty.ready true
     # Update device node r/w attribute
     chmod 666 /dev/trusty-ipc-dev0
+    chmod 666 /dev/vport0p1
