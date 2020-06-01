@@ -8,6 +8,11 @@ BOARD_KERNEL_CMDLINE += vga=current i915.modeset=1 drm.atomic=1 i915.nuclear_pag
 BOARD_KERNEL_CMDLINE += i915.enable_guc=2
 {{/enable_guc}}
 {{/acrn-guest}}
+
+ifeq ($(BASE_YOCTO_KERNEL),true)
+BOARD_KERNEL_CMDLINE += i915.enable_guc=2
+endif
+
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 USE_INTEL_UFO_DRIVER := false
