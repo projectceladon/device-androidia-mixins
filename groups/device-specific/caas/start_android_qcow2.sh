@@ -291,8 +291,10 @@ function setup_audio(){
                 common_options=${common_audio_mediation}${common_options}
         else
 		modprobe vfio-pci
-		AUDIOController=`sudo sh -c "lspci -D -nn| grep -i 'audio '  | grep -i '1f'"`
-		AUDIOControllerId=${AUDIOController:0:13}
+                AUDIOController=`sudo sh -c "lspci -D -nn| grep -i 'audio'"`
+                AUDIOControllerId=${AUDIOController:8:2}
+                AUDIOControllerGroup=`sudo sh -c "lspci -D -nn| grep -i 'audio '  | grep -i 'AUDIOControllerId'"`
+		AUDIOControllerId=${AUDIOControllerGroup:0:13}
 		AUDIOControllerId=`echo $AUDIOControllerId | awk '{gsub(/^\s+|\s+$/, "");print}'`
 		iommu_group_devices=`sudo sh -c "ls /sys/bus/pci/devices/${AUDIOControllerId}/iommu_group/devices/"`
 		str=`echo $iommu_group_devices | sed -e 's/\s\+/,/g'`
