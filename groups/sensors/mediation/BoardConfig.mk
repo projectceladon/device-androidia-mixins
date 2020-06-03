@@ -1,0 +1,1 @@
+USE_SENSOR_MEDIATION_HAL := true
