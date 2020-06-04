@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # author: sundar.gnanasekaran@intel.com
 
-audio_ipc="$AIC_WORK_DIR/ipc/config/audio"
+audio_ipc="$AIC_WORK_DIR/audio"
 
 
 if [[ ! -f "$audio_ipc/cic_pulseaudio_out.socket" && ! -f $audio_ipc/cic_pulseaudio_in.socket ]]; then
