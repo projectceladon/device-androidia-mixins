@@ -1,6 +1,7 @@
 === Overview
 
-ais is a mixin group to provide the installation script for secure cic.
+ais : adaptive install scripts, enables user(s) to switch between secure / non-secure,
+and mediation / pass through [for wifi / bt / audio] during installation.
 
 ==== Options
 

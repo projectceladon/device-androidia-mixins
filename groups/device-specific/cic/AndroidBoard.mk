@@ -63,7 +63,7 @@ ifneq (,$(filter cic cic_dev,$(TARGET_PRODUCT)))
 	tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic android.tar.gz aic-manager.tar.gz cfc ia_hwc pre-requisites sof_audio README-CIC INFO cic.sh setup-aic $(VBMETA_IMG) kf4cic.efi verity_metadata -C docker update
 	@echo Make debian binaries...
 	$(hide) (rm -rf $(PRODUCT_OUT)/cic && mkdir -p $(PRODUCT_OUT)/cic/opt/cic && mkdir -p $(PRODUCT_OUT)/cic/etc/profile.d)
-	$(hide) (cd $(PRODUCT_OUT)/cic/opt/cic && tar xvf ../../../$(TARGET_AIC_FILE_NAME) aic android.tar.gz aic-manager.tar.gz INFO cic.sh cfc update)
+	$(hide) (cd $(PRODUCT_OUT)/cic/opt/cic && tar xvf ../../../$(TARGET_AIC_FILE_NAME) aic android.tar.gz aic-manager.tar.gz pre-requisites setup-aic INFO cic.sh cfc update)
 	$(hide) mkdir -p $(PRODUCT_OUT)/cic/DEBIAN
 	$(hide) cp -r device/intel/project-celadon/$(TARGET_PRODUCT)/addon/debian/* $(PRODUCT_OUT)/cic/DEBIAN/.
 	$(hide) cp -r device/intel/project-celadon/$(TARGET_PRODUCT)/addon/pre-requisites/create_pasocket.sh $(PRODUCT_OUT)/cic/etc/profile.d

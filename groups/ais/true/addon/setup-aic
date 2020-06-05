@@ -168,7 +168,9 @@ echo 'COPY ./root/ /' >> $AIC_WORK_DIR/update/Dockerfile
 echo ' ' >> $AIC_WORK_DIR/update/Dockerfile
 
 #Install Feature set packages / modules
-./pre-requisites/setup-feature
+if [[ -z $DEBIAN ]]; then
+  ./pre-requisites/setup-feature
+fi
 
 #Initiate Early-Launch
 #./pre-requisites/launch-early
@@ -300,5 +302,8 @@ fi
 sudo update-grub
 echo ""
 echo "Reboot required for changes to be reflected !!"
-read -p "Press Enter key to reboot: "
-sudo reboot
+
+if [[ -z $DEBIAN ]]; then
+  read -p "Press Enter key to reboot: "
+  sudo reboot
+fi
