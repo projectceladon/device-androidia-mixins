@@ -48,3 +48,11 @@ on init
 
 on fs
     mount_all /fstab.${ro.hardware}
+
+{{#file_encryption}}
+on post-fs-data
+    copy /ipc/config/ethernet/ipconfig.txt /data/misc/ethernet/ipconfig.txt
+    chown system system /data/misc/ethernet/ipconfig.txt
+    chmod 0644 /data/misc/ethernet/ipconfig.txt
+    copy /ipc/config/local.prop /data/local.prop
+{{/file_encryption}}
