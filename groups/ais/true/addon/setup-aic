@@ -198,6 +198,9 @@ AIC_INSTALL_ARGUMENTS="-e -d none"
 if [[ $MULTIPLE_USER == "true" ]]; then
 AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -j"
 fi
+if [[ $SECURE == "true" ]]; then
+AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -g"
+fi
 
 if [[ $SECURE == "false" ]]; then
 cp $AIC_WORK_DIR/update/customize-android $AIC_WORK_DIR/update/root/customize-android
