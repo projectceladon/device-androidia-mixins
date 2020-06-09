@@ -724,7 +724,7 @@ function install {
             ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION --net android --ip $IP --mac-address $MAC -p $(($ADB_PORT+i)):5555"
         fi
 
-        ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION -v $WORK_DIR/audio:/data/misc/audio"
+        ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION -v $WORK_DIR/audio:/ipc/config/audio"
         $DOCKER container create --name android$i --cpuset-cpus=$CPU_SET --cpuset-mems=${MEM_NODES:-0} --privileged=true $ANDROID_CONTAINER_OPTION $ANDROID_IMAGE $ANDROID_CONTAINER_CMDS $i
 
     done
