@@ -139,7 +139,7 @@ common_sd_emmc="\
  -drive file=$SDEMMC_DEV_PATH,format=raw,id=sdcard0 \
 "
  common_options="\
- -m 2048 -smp 2 -M q35 \
+ -m 4096 -smp 2 -M q35 \
  -name caas-vm \
  -enable-kvm \
  -vga none \
