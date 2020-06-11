@@ -102,12 +102,12 @@ function ubu_build_ovmf_gvtd(){
 }
 
 function ubu_enable_host_gvtg(){
-	if [[ ! `cat /etc/default/grub` =~ "i915.enable_gvt=1 intel_iommu=on" ]]; then
+	if [[ ! `cat /etc/default/grub` =~ "i915.enable_gvt=1 intel_iommu=on intel_iommu=igfx_off" ]]; then
 		read -p "The grub entry in '/etc/default/grub' will be updated for enabling GVT-g, do you want to continue? [Y/n]" res
 		if [ x$res = xn ]; then
 			exit 0
 		fi
-		sed -i "s/GRUB_CMDLINE_LINUX=\"/GRUB_CMDLINE_LINUX=\"i915.enable_gvt=1 intel_iommu=on /g" /etc/default/grub
+		sed -i "s/GRUB_CMDLINE_LINUX=\"/GRUB_CMDLINE_LINUX=\"i915.enable_gvt=1 intel_iommu=on intel_iommu=igfx_off /g" /etc/default/grub
 		update-grub
 
 		echo -e "\nkvmgt\nvfio-iommu-type1\nvfio-mdev\n" >> /etc/initramfs-tools/modules
