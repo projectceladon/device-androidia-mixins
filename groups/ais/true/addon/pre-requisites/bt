@@ -6,8 +6,20 @@ if [[ $1 == "mediation" ]]; then
 ## Remove BT from android
 echo '
 #Remove BT
-rm -rf /system/vendor/etc/permissions/android.hardware.bluetooth.xml
-rm -rf /system/vendor/etc/permissions/android.hardware.bluetooth_le.xml
+#rm -rf /system/vendor/etc/permissions/android.hardware.bluetooth.xml
+#rm -rf /system/vendor/etc/permissions/android.hardware.bluetooth_le.xml
+
+' >> $AIC_WORK_DIR/update/customize-android
+
+fi
+
+if [[ $1 == "passthrough" ]]; then
+
+## Remove BT from android
+echo '
+#Enable BT
+mv /system/vendor/etc/permissions/android.hardware.bluetooth.xml_ /system/vendor/etc/permissions/android.hardware.bluetooth.xml
+mv /system/vendor/etc/permissions/android.hardware.bluetooth_le.xml_ /system/vendor/etc/permissions/android.hardware.bluetooth_le.xml
 
 ' >> $AIC_WORK_DIR/update/customize-android
 
