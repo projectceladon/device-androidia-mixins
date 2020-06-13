@@ -181,6 +181,9 @@ fi
 if [[ $BT_MT == "true" ]]; then
   ./pre-requisites/bt mediation
 fi
+if [[ $BT_PT == "true" ]]; then
+  ./pre-requisites/bt passthrough
+fi
 
 if [[ $WIFI_PT == "true" && -z `grep 'WLAN_PT="true"' aic` ]]; then
   sed -i 's/\#\!\/bin\/bash/\#\!\/bin\/bash\nWLAN_PT=\"true\"/g' aic
