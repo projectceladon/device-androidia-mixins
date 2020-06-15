@@ -23,19 +23,19 @@ $(foreach fw,$(I915_FW),$(eval PRODUCT_PACKAGES += $(notdir $(fw))))
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/drirc:vendor/etc/drirc
 
-# DRM HWComposer
+ifeq ($(QEMU_VIRTIO), true)
 PRODUCT_PACKAGES += \
     hwcomposer.drm_minigbm
 
-# PRODUCT_PROPERTY_OVERRIDES += \
-#   ro.hardware.hwcomposer=drm
-
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.hardware.hwcomposer=drm_minigbm
+else
 # HWComposer IA
 PRODUCT_PACKAGES += \
     hwcomposer.$(TARGET_GFX_INTEL)
 
-# PRODUCT_PROPERTY_OVERRIDES += \
-#   ro.hardware.hwcomposer=$(TARGET_GFX_INTEL)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.hwcomposer=$(TARGET_GFX_INTEL)
 
 INTEL_HWC_CONFIG := $(INTEL_PATH_VENDOR)/external/hwcomposer-intel
 
@@ -45,25 +45,22 @@ else
 PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display.ini:$(TARGET_COPY_OUT_VENDOR)/etc/hwc_display.ini
 PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display.kvm.ini:$(TARGET_COPY_OUT_VENDOR)/etc/hwc_display.kvm.ini
 endif
+endif
 
-{{#minigbm}}
-# Mini gbm
-# PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.hardware.gralloc=$(TARGET_GFX_INTEL)
-
-PRODUCT_PACKAGES += \
-    gralloc.minigbm \
-    gralloc.$(TARGET_GFX_INTEL)
-{{/minigbm}}
-
-{{^minigbm}}
+ifeq ($(QEMU_VIRTIO), true)
 #Gralloc
-# PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.hardware.gralloc=drm
+PRODUCT_PACKAGES += \
+    gralloc.minigbm
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.gralloc=minigbm
+else
+# Mini gbm
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.gralloc=$(TARGET_GFX_INTEL)
 
 PRODUCT_PACKAGES += \
-    gralloc.drm
-{{/minigbm}}
+    gralloc.$(TARGET_GFX_INTEL)
+endif
 
 {{^gen9+}}
 # GLES version. We cannot enable Android
