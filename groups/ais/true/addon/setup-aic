@@ -200,11 +200,23 @@ AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -j"
 fi
 
 if [[ $SECURE == "false" ]]; then
-cp $AIC_WORK_DIR/update/customize-android $AIC_WORK_DIR/update/root/customize-android
-AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -u"
+  cp $AIC_WORK_DIR/update/customize-android $AIC_WORK_DIR/update/root/customize-android
+  AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -u"
 else
-# Enable FBE for secure installation
-AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -g"
+  # Enable FBE for secure installation
+  AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -g"
+
+  # lvm2 and thin-provisioning-tools are required by FBE
+  if [ ! -x "$(command -v pvcreate)" ]; then
+      echo "The lvm2 tool seems not installed, will install for you..."
+      sudo apt --assume-yes install lvm2
+  fi
+
+  if [ ! -x "$(command -v thin_check)" ]; then
+      echo "The thin-provisioning-tools seems not installed, will install for you..."
+      sudo apt --assume-yes install thin-provisioning-tools
+  fi
+
 fi
 
 #Install CIC
