@@ -54,7 +54,7 @@ on boot
     write /config/usb_gadget/g1/configs/b.1/MaxPower 500
     symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
     setprop sys.usb.configfs 1
-    setprop sys.usb.controller "dwc3.0.auto"
+    setprop sys.usb.controller "dwc3.1.auto"
     write /sys/class/usb_role/intel_xhci_usb_sw-role-switch/role device
 
 on property:sys.usb.config=none && property:sys.usb.configfs=1
@@ -94,14 +94,14 @@ on property:sys.usb.config=uvc && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "uvc_adb"
     symlink /config/usb_gadget/g1/functions/uvc.usb0 /config/usb_gadget/g1/configs/b.1/f2
     chmod 666 /dev/video0
-    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
+    write /config/usb_gadget/g1/UDC "dwc3.1.auto"
 
 on property:sys.usb.config=adb && property:sys.usb.configfs=1
     symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f1
     mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
     write /config/usb_gadget/g1/idVendor 0x8087
     write /config/usb_gadget/g1/idProduct 0x09ef
-    setprop sys.usb.controller dwc3.0.auto
+    setprop sys.usb.controller dwc3.1.auto
     stop adbd
     start adbd
 
@@ -132,18 +132,18 @@ on property:sys.usb.config=accessory,audio_source,adb && property:sys.usb.config
 on property:sys.usb.config=ncm && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "ncm"
     symlink /config/usb_gadget/g1/functions/ncm.gs6 /config/usb_gadget/g1/configs/b.1/f1
-    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
+    write /config/usb_gadget/g1/UDC "dwc3.1.auto"
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=acm && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "acm"
     symlink /config/usb_gadget/g1/functions/acm.gs7 /config/usb_gadget/g1/configs/b.1/f1
-    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
+    write /config/usb_gadget/g1/UDC "dwc3.1.auto"
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=ncm,acm && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "ncm_acm"
     symlink /config/usb_gadget/g1/functions/ncm.gs6 /config/usb_gadget/g1/configs/b.1/f1
     symlink /config/usb_gadget/g1/functions/acm.gs7 /config/usb_gadget/g1/configs/b.1/f2
-    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
+    write /config/usb_gadget/g1/UDC "dwc3.1.auto"
     setprop sys.usb.state ${sys.usb.config}
