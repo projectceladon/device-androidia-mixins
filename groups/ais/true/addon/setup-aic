@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # author: sundar.gnanasekaran@intel.com
 
-unset SECURE=$SECURE WIFI_MT=$WIFI_MT WIFI_PT=$WIFI_PT BT_MT=$BT_MT BT_PT=$BT_PT AUDIO_MT=$AUDIO_MT AUDIO_PT=$AUDIO_PT >& /dev/null
+unset SECURE=$SECURE WIFI_MT=$WIFI_MT WIFI_PT=$WIFI_PT BT_MT=$BT_MT BT_PT=$BT_PT AUDIO_MT=$AUDIO_MT AUDIO_PT=$AUDIO_PT CENTOS=$CENTOS DISPLAY=$DISPLAY >& /dev/null
 export AIC_WORK_DIR=${PWD}
 
 rm -f $AIC_WORK_DIR/update/customize-android && touch $AIC_WORK_DIR/update/customize-android && chmod 777 $AIC_WORK_DIR/update/customize-android
 
 USAGE="
 
-./setup-aic -s/-ns -m [audio,wifi,bt] -p [audio,wifi,bt]
+./setup-aic -s/-ns -m [audio,wifi,bt] -p [audio,wifi,bt] -c x11/drm
 
 -s    Security enabled [Trusty]
 -ns   Non-Secure
@@ -18,10 +18,12 @@ USAGE="
       ex: -p audio,bt
 -j    Support multi-users, with this installation option, we need to use \"aic start -u \$AIC_USER\" to start AIC
 -h    Usage
+-c    For cent OS. Select display x11 / drm. Default its 'x11'.
 
       Note:
       * Dont select -m and -p for same component.
-      * By default, security is disabled, and all components are mediated
+      * By default, security is disabled, and all components are mediated.
+      * For -c, there will be no cic/monitor service && no cfc installation.
 
 "
 
@@ -84,6 +86,19 @@ do
                                 ;;
                 esac
             done
+            shift
+            ;;
+        -c|--centos)
+            shift
+            if [[ $1 == "drm" || $1 == "x11" ]]; then
+                DISPLAY="$1"
+            elif [[ $1 == "" ]]; then
+                DISPLAY="x11"
+            else
+                echo "$USAGE"
+                exit -1
+            fi
+            CENTOS=true
             shift
             ;;
         -m|--mediation)
@@ -168,14 +183,16 @@ echo 'COPY ./root/ /' >> $AIC_WORK_DIR/update/Dockerfile
 echo ' ' >> $AIC_WORK_DIR/update/Dockerfile
 
 #Install Feature set packages / modules
-if [[ -z $DEBIAN ]]; then
+if [[ -z $DEBIAN && -z $CENTOS ]]; then
   ./pre-requisites/setup-feature
 fi
 
 #Initiate Early-Launch
-#./pre-requisites/launch-early
-./pre-requisites/cic-service
-./pre-requisites/cic-monitor-service
+if [[ -z $CENTOS ]]; then
+    #./pre-requisites/launch-early
+    ./pre-requisites/cic-service
+    ./pre-requisites/cic-monitor-service
+fi
 
 #BT Service
 if [[ $BT_MT == "true" ]]; then
@@ -192,9 +209,16 @@ fi
 ./pre-requisites/customize-android
 
 #Security settings
-./pre-requisites/secure $SECURE
+if [[ -z $CENTOS ]]; then
+    ./pre-requisites/secure $SECURE
+fi
 
-AIC_INSTALL_ARGUMENTS="-e -d none"
+if [[ $CENTOS == "true" ]]; then
+    AIC_INSTALL_ARGUMENTS="-e -d $DISPLAY"
+else
+    AIC_INSTALL_ARGUMENTS="-e -d none"
+fi
+
 if [[ $MULTIPLE_USER == "true" ]]; then
 AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -j"
 fi
@@ -248,7 +272,7 @@ if [[ $SECURE == "true" ]]; then
     sudo rm -rf $VERITY_TMP_HASHTREE
   fi
 fi
-if [[ $SECURE == "false" ]]; then
+if [[ $SECURE == "false" && -z $CENTOS ]]; then
   if [[ -z "$a" && -z "$b" ]]; then
     echo 'GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX androidboot.selinux=permissive"' | sudo tee -a /etc/default/grub
   fi
@@ -307,8 +331,10 @@ if [[ $MULTIPLE_USER == "true" ]]; then
   sudo cp pre-requisites/cic_user_notify.sh /etc/profile.d/.
 fi
 
-sudo systemctl enable cic
-sudo systemctl enable cic-monitor
+if [[ -z $CENTOS ]]; then
+    sudo systemctl enable cic
+    sudo systemctl enable cic-monitor
+fi
 
 #Run pactl
 if [[ $AUDIO_MT == "true" ]]; then
@@ -321,9 +347,12 @@ fi
 
 sudo update-grub
 echo ""
-echo "Reboot required for changes to be reflected !!"
 
-if [[ -z $DEBIAN ]]; then
-  read -p "Press Enter key to reboot: "
+if [[ -z $DEBIAN && -z $CENTOS ]]; then
+  read -p "Press Enter key to reboot.."
   sudo reboot
+elif [[ $CENTOS == "true" ]]; then
+  echo "Please do './aic start' now to launch android.."
+else
+  echo "Reboot required for changes to be reflected.."
 fi
