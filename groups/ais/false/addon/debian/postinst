@@ -169,7 +169,7 @@ function install_cic() {
 }
 
 function pactl_socket() {
-  audio_ipc="$AIC_WORK_DIR_PATH/ipc/config/audio"
+  audio_ipc="$AIC_WORK_DIR_PATH/audio"
   pactl_default_pa="/etc/pulse/default.pa"
 
   mkdir -p $audio_ipc
