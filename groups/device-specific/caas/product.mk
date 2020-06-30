@@ -46,3 +46,7 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/thermald.service:$(PRODUCT_OUT)/scripts/ther
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/qmp_events_handler.sh:$(PRODUCT_OUT)/scripts/qmp_events_handler.sh
 PRODUCT_COPY_FILES += device/intel/civ/host/backend/battery/bin/batsys:$(PRODUCT_OUT)/scripts/batsys
 PRODUCT_COPY_FILES += device/intel/civ/host/backend/thermal/bin/thermsys:$(PRODUCT_OUT)/scripts/thermsys
+	
+PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := --compiler-filter=speed 
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := --compiler-filter=speed
+PRODUCT_DEX_PREOPT_BOOT_FLAGS := --compiler-filter=speed
