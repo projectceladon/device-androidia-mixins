@@ -50,6 +50,12 @@ else
 VBMETA_IMG :=
 endif
 
+ifeq ($(TARGET_CIC_KEYMASTER_SUPPORT),true)
+CIC_KEYMASTER_IMG := cickeymasterd
+else
+CIC_KEYMASTER_IMG :=
+endif
+
 .PHONY: aic
 aic: .KATI_NINJA_POOL := console
 aic: multidroid
@@ -60,7 +66,7 @@ else
 	BUILD_VARIANT=loop_mount $(HOST_OUT_EXECUTABLES)/aic-build -b $(BUILD_NUMBER)
 endif
 ifneq (,$(filter cic cic_dev,$(TARGET_PRODUCT)))
-	tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic android.tar.gz aic-manager.tar.gz cfc ia_hwc pre-requisites sof_audio README-CIC INFO cic.sh setup-aic $(VBMETA_IMG) kf4cic.efi verity_metadata -C docker update
+	tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic android.tar.gz aic-manager.tar.gz cfc ia_hwc pre-requisites sof_audio README-CIC INFO cic.sh setup-aic $(VBMETA_IMG) $(CIC_KEYMASTER_IMG) kf4cic.efi verity_metadata -C docker update
 	@echo Make debian binaries...
 	$(hide) (rm -rf $(PRODUCT_OUT)/cic && mkdir -p $(PRODUCT_OUT)/cic/opt/cic && mkdir -p $(PRODUCT_OUT)/cic/etc/profile.d)
 	$(hide) (cd $(PRODUCT_OUT)/cic/opt/cic && tar xvf ../../../$(TARGET_AIC_FILE_NAME) aic android.tar.gz aic-manager.tar.gz pre-requisites setup-aic INFO cic.sh cfc update)
