@@ -176,6 +176,7 @@ fi
 #./pre-requisites/launch-early
 ./pre-requisites/cic-service
 ./pre-requisites/cic-monitor-service
+./pre-requisites/cickeymaster-service
 
 #BT Service
 if [[ $BT_MT == "true" ]]; then
@@ -309,6 +310,7 @@ fi
 
 sudo systemctl enable cic
 sudo systemctl enable cic-monitor
+sudo systemctl enable cickeymaster
 
 #Run pactl
 if [[ $AUDIO_MT == "true" ]]; then

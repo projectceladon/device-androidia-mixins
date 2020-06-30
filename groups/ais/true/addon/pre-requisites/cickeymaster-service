@@ -1,0 +1,21 @@
+#!/bin/sh
+
+sudo touch /lib/systemd/system/cickeymaster.service
+
+echo "Adding CicKeymaster Service"
+cat << EOF | sudo tee /lib/systemd/system/cickeymaster.service
+[Unit]
+Description="CicKeymaster Service"
+
+[Service]
+Type=simple
+Restart=on-failure
+ExecStart=/AIC_WORK_DIR/cickeymasterd
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo sed -i "s|/AIC_WORK_DIR|$AIC_WORK_DIR|g" /lib/systemd/system/cickeymaster.service
