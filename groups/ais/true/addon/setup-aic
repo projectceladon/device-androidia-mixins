@@ -214,7 +214,7 @@ if [[ -z $CENTOS ]]; then
 fi
 
 if [[ $CENTOS == "true" ]]; then
-    AIC_INSTALL_ARGUMENTS="-e -d $DISPLAY"
+    AIC_INSTALL_ARGUMENTS="-d $DISPLAY"
 else
     AIC_INSTALL_ARGUMENTS="-e -d none"
 fi
