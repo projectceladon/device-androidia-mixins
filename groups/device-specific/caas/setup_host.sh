@@ -18,7 +18,7 @@ function ubu_changes_require(){
 function ubu_install_qemu(){
 	apt purge -y "qemu*"
 	apt autoremove -y
-	apt install -y git libfdt-dev libpixman-1-dev libssl-dev vim socat libsdl2-dev libspice-server-dev autoconf libtool xtightvncviewer tightvncserver x11vnc uuid-runtime uuid uml-utilities bridge-utils python-dev liblzma-dev libc6-dev libegl1-mesa-dev libepoxy-dev libdrm-dev libgbm-dev libaio-dev libusb-1.0.0-dev libgtk-3-dev bison libcap-dev libattr1-dev flex libvirglrenderer-dev
+	apt install -y git libfdt-dev libpixman-1-dev libssl-dev vim socat libsdl2-dev libspice-server-dev autoconf libtool xtightvncviewer tightvncserver x11vnc uuid-runtime uuid uml-utilities bridge-utils python-dev liblzma-dev libc6-dev libegl1-mesa-dev libepoxy-dev libdrm-dev libgbm-dev libaio-dev libusb-1.0-0-dev libgtk-3-dev bison libcap-dev libattr1-dev flex libvirglrenderer-dev qemu-utils qemu-kvm
 
 	wget https://download.qemu.org/$QEMU_REL.tar.xz -P $CIV_WORK_DIR
 	tar -xf $CIV_WORK_DIR/$QEMU_REL.tar.xz
@@ -47,7 +47,7 @@ function ubu_install_qemu(){
 function ubu_install_qemu_gvtd(){
 	apt purge -y "qemu*"
 	apt autoremove -y
-	apt install -y git python-dev libfdt-dev libpixman-1-dev libssl-dev vim socat libsdl2-dev libspice-server-dev autoconf libtool uml-utilities xtightvncviewer tightvncserver x11vnc uuid-runtime uuid uml-utilities bridge-utils python-dev liblzma-dev libc6-dev libegl1-mesa-dev libepoxy-dev libdrm-dev libgbm-dev libaio-dev libusb-1.0.0-dev libgtk-3-dev bison libcap-dev libattr1-dev flex gcc g++ flex pkg-config python-pip libpulse-dev uuid-runtime uuid libgl1-mesa-dri
+	apt install -y git python-dev libfdt-dev libpixman-1-dev libssl-dev vim socat libsdl2-dev libspice-server-dev autoconf libtool uml-utilities xtightvncviewer tightvncserver x11vnc uuid-runtime uuid uml-utilities bridge-utils python-dev liblzma-dev libc6-dev libegl1-mesa-dev libepoxy-dev libdrm-dev libgbm-dev libaio-dev libusb-1.0-0-dev libgtk-3-dev bison libcap-dev libattr1-dev flex gcc g++ flex pkg-config python-pip libpulse-dev uuid-runtime uuid libgl1-mesa-dri
 	wget https://download.qemu.org/$QEMU_REL.tar.xz -P $CIV_WORK_DIR
 	tar -xf $CIV_WORK_DIR/$QEMU_REL.tar.xz
 	cd $CIV_WORK_DIR/$QEMU_REL/
