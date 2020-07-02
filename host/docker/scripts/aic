@@ -49,7 +49,7 @@ function check_data_img {
         echo "Detect previous data img..."
     else
         echo "Create data image..."
-        dd if=/dev/zero of=$AIC_DATA_IMG bs=2M count=2048
+        dd if=/dev/zero of=$AIC_DATA_IMG bs=2M count=5120
     fi
 }
 
@@ -73,7 +73,7 @@ function prepare_data_partition {
     fi
     # Check lv
     if [ -z "$(sudo lvs | grep $data_name)" ]; then
-        sudo lvcreate -L 2G -T $AIC_VG_NAME/$data_name
+        sudo lvcreate -L 8G -T $AIC_VG_NAME/$data_name
     fi
     # make lvm node under dev
     sudo vgscan --mknodes -v
