@@ -336,6 +336,8 @@ function install {
 	  -j, --multi-user             Support multi-user, with this install option, we can use "aic start -u $AIC_USER" to start
 	                               aic with user data for this user.
 	  -g, --enable-fbe             Enable file-based encryption.
+	  -y, --no-root-user           Let processes running as root user transfer to system user and drop unneeded
+	                               capabilities for them.
 
 	Example:
 	  Install 3 android instance and do not automatically generate input config file:
@@ -497,6 +499,10 @@ function install {
                 ;;
             -j|--multi-user)
                 MULTIPLE_USER="true"
+                shift
+                ;;
+            -y|--no-root-user)
+                NO_ROOT_USER="true"
                 shift
                 ;;
             *)
@@ -680,6 +686,9 @@ function install {
     fi
     if [ "$MULTIPLE_DISPLAY_DAEMON" = "true" ]; then
         ANDROID_CONTAINER_CMDS="$ANDROID_CONTAINER_CMDS -w"
+    fi
+    if [ "$NO_ROOT_USER" = "true" ]; then
+        ANDROID_CONTAINER_CMDS="$ANDROID_CONTAINER_CMDS -y"
     fi
 
     echo "[AIC] create android container..."
