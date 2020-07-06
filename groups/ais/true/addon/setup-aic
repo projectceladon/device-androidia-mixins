@@ -344,6 +344,7 @@ fi
 if [[ $AUDIO_PT == "true" ]]; then
   sudo rm -rf /etc/profile.d/create_pasocket.sh
 fi
+sudo ./pre-requisites/setup_audio_host.sh
 
 sudo update-grub
 echo ""
