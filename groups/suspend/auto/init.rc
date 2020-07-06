@@ -1,0 +1,2 @@
+on property:vendor.allow.suspend=false
+    write /sys/power/wake_lock nosleeptillbrooklyn

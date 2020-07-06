@@ -2,6 +2,8 @@
 
 work_dir=$PWD
 scripts_dir=$work_dir/scripts
+share_dir=$work_dir/share_folder
+civ_config=$share_dir/civ_config
 
 caas_image=$work_dir/android.qcow2
 qmp_log=$work_dir/qmp_event.log
@@ -29,6 +31,22 @@ RPMB_SOCK=${work_dir}/rpmb_sock
 RPMB_INIT_KEY="ea df 64 44 ea 65 5d 1c 87 27 d4 20 71 0d 53 42 dd 73 a3 38 63 e1 d7 94 c3 72 a6 ea e0 64 64 e6"
 RPMB_DEV_PID=
 
+rm -rf $civ_config
+touch $civ_config
+
+for i in $@
+do
+    if [[ $i == "--allow-suspend" ]]; then
+        echo "suspend:true" >> $civ_config
+		SUSPEND=true
+		break
+    fi
+done
+
+if [[ $SUSPEND != "true" ]]; then
+    echo "suspend:false" >> $civ_config
+fi
+
 function network_setup(){
 	#setup unprivileged ICMP on the host for ping to work on guest side.
 	sysctl -w net.ipv4.ping_group_range='0 2147483647'
@@ -45,6 +63,7 @@ function setup_vgpu(){
 }
 
 function setup_gvtd(){
+    echo "gpu-type:gvtd" >> $civ_config
 	res=0
 	if [ ! -d $GVTg_DEV_PATH/$GVTg_VGPU_UUID ]; then
 		echo "Unbinding GPU to the host and binding dedicated GPU to the guest..."
@@ -59,6 +78,7 @@ function setup_gvtd(){
 }
 
 function setup_virtio_gpu(){
+    echo "gpu-type:virtio" >> $civ_config
 	echo "Launching Virtio GPU..."
 	virglrender_version=`/usr/bin/pkg-config --modversion virglrenderer`
 	echo "Host libvirglrenderer version is ${virglrender_version}"
@@ -442,6 +462,9 @@ function cleanup_rpmb_sock(){
 }
 
 function launch_hwrender(){
+
+    echo "gpu-type:gvtg" >> $civ_config
+
 	if [ $WIFI_PT = "true" ]
 	then
 		rfkill unblock all

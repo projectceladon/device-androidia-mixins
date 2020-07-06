@@ -1,0 +1,10 @@
+auto_hal() {
+config="/mnt/share/civ_config"
+
+gpu=`grep -i gpu-type $config | cut -d ':' -f2`
+setprop vendor.gpu.type $gpu
+
+suspend=`grep -i suspend $config | cut -d ':' -f2`
+setprop vendor.allow.suspend $suspend
+}
+auto_hal&
