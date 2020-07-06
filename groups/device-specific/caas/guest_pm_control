@@ -65,14 +65,14 @@ def main():
                             print("VM is rebooting")
                             print("Reason: guest reset request")
                             cmdCommand = "reboot"
-                            time.sleep(3)
+                            time.sleep(2)
                             process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
                             break
                         elif "host-qmp-system-reset" in json.dumps(resp["data"]):
                             print("VM is rebooting")
                             print("Reason: Reboot triggered by host")
                             cmdCommand = "reboot"
-                            time.sleep(3)
+                            time.sleep(2)
                             process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
                             break
                         elif "host-qmp-quit" in json.dumps(resp["data"]):
@@ -91,13 +91,13 @@ def main():
                             print("VM is getting Shutdown")
                             print("Reason: An error prevents further use of guest and results in shutdown")
                         cmdCommand = "shutdown -h now"
-                        time.sleep(3)
+                        time.sleep(2)
                         process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
                     elif val == "SUSPEND":
                         # Put the host in to sleep state
                         cmdCommand = "systemctl suspend"
                         process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
-                        time.sleep(1)
+                        time.sleep(0.75)
                         # Send power button event to wake the android
                         cmdCommand = "./scripts/sendkey --vm 0 --power 0"
                         process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
