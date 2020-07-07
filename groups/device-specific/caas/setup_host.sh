@@ -150,7 +150,7 @@ function ubu_enable_host_gvtg(){
 
 function ubu_enable_host_gvtd(){
 	systemctl set-default multi-user.target
-	if [[ ! `cat /etc/default/grub` =~ "intel_iommu=on i915.force=probe=* " ]]; then
+	if [[ ! `cat /etc/default/grub` =~ "intel_iommu=on i915.force_probe=* " ]]; then
 		read -p "The grub entry in '/etc/default/grub' will be updated for enabling GVT-d, do you want to continue? [Y/n]" res
 		if [ x$res = xn ]; then
 			exit 0
