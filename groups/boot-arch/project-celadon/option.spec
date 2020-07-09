@@ -43,3 +43,4 @@ verity_warning = true
 watchdog_parameters = false
 mfgos = false
 use_cic = false
+high_security = false

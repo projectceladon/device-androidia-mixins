@@ -119,6 +119,10 @@ KERNELFLINGER_USE_RPMB := true
 KERNELFLINGER_USE_RPMB_SIMULATE := true
 {{/rpmb_simulate}}
 
+{{#high_security}}
+KERNELFLINGER_USE_DEDICATED_DATA_PARTITION := true
+{{/high_security}}
+
 {{^use_cic}}
 {{#nvme_rpmb_scan}}
 KERNELFLINGER_USE_NVME_RPMB := true
