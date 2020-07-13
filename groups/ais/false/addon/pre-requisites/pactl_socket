@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # author: sundar.gnanasekaran@intel.com
 
-audio_ipc="$AIC_WORK_DIR/workdir/ipc/config/audio"
+audio_ipc="$AIC_WORK_DIR/workdir/audio"
 pactl_default_pa="/etc/pulse/default.pa"
 
 mkdir -p $audio_ipc

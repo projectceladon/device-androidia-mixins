@@ -64,6 +64,7 @@ sudo systemctl enable cic
 
 #Run pactl
 ./pre-requisites/pactl_socket $(whoami)
+sudo ./pre-requisites/setup_audio_host.sh
 
 echo ""
 echo "Reboot required for changes to be reflected !!"
