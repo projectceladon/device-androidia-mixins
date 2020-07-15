@@ -54,3 +54,5 @@ endif
 
 BOARD_SEPOLICY_M4DEFS += module_kernel=true
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/kernel
+BOARD_KERNEL_CMDLINE += \
+      video=hyperv_fb:1920x1080
