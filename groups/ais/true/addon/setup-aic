@@ -227,6 +227,8 @@ if [[ $SECURE == "false" ]]; then
   cp $AIC_WORK_DIR/update/customize-android $AIC_WORK_DIR/update/root/customize-android
   AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -u"
 else
+  # under secure mode, let root processes run as system user
+  AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -y"
   # Enable FBE for secure installation
   AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -g"
 
