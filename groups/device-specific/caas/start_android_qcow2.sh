@@ -176,6 +176,9 @@ common_options="\
  -drive file=$ovmf_file,format=raw,if=pflash \
  -chardev socket,id=charserial0,path=./kernel-console,server,nowait \
  -device isa-serial,chardev=charserial0,id=serial0 \
+ -chardev socket,id=chrtpm,path=$work_dir/myvtpm0/swtpm-sock \
+ -tpmdev emulator,id=tpm0,chardev=chrtpm \
+ -device tpm-crb,tpmdev=tpm0 \
  -drive file=$caas_image,if=none,id=disk1 \
  -device virtio-blk-pci,drive=disk1,bootindex=1 \
  -device vhost-vsock-pci,id=vhost-vsock-pci0,guest-cid=3 \
@@ -644,6 +647,12 @@ function check_nested_vt(){
 	fi
 }
 
+function swtpm_setup(){
+	#start software Trusted Platform Module
+	mkdir -p $work_dir/myvtpm0
+	swtpm socket --tpmstate dir=$work_dir/myvtpm0 --tpm2 --ctrl type=unixio,path=$work_dir/myvtpm0/swtpm-sock &
+}
+
 version=`cat /proc/version`
 
 vno=$(echo $version | \
@@ -662,6 +671,7 @@ if [[ "$vno" > "5.0.0" ]]; then
 		setup_vgpu
 	fi
 	network_setup
+	swtpm_setup
 
 	rm -rf $qmp_log
 	$qmp_handler &

@@ -33,6 +33,11 @@ else
 	display_type="gtk,gl=on"
 fi
 
+#start software Trusted Platform Module
+work_dir=$PWD
+mkdir -p $work_dir/myvtpm0
+swtpm socket --tpmstate dir=$work_dir/myvtpm0 --tpm2 --ctrl type=unixio,path=$work_dir/myvtpm0/swtpm-sock &
+
 qemu-system-x86_64 \
   -m 2048 -smp 2 -M q35 \
   -name caas-vm \
@@ -52,5 +57,8 @@ qemu-system-x86_64 \
   -no-reboot \
   -display $display_type \
   -boot menu=on,splash-time=5000,strict=on \
+  -chardev socket,id=chrtpm,path=./myvtpm0/swtpm-sock \
+  -tpmdev emulator,id=tpm0,chardev=chrtpm \
+  -device tpm-crb,tpmdev=tpm0 \
 
 echo "Flashing is completed"
