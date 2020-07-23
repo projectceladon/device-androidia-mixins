@@ -1,3 +1,4 @@
+AUTO_IN += $(TARGET_DEVICE_DIR)/{{_extra_dir}}/auto_hal.in
 include $(CLEAR_VARS)
 LOCAL_MODULE := auto_detection.sh
 LOCAL_PROPRIETARY_MODULE := true
