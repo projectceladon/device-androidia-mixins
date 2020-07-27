@@ -2,6 +2,7 @@
 
 AIC_DATA_IMG=$(pwd)/workdir/aic_data.img
 AIC_VG_NAME="aic_data"
+FIRST_START=0
 
 function check_num {
     case $1 in
@@ -45,30 +46,44 @@ function check_containers {
 }
 
 function check_data_img {
-    if [ -f "$AIC_DATA_IMG" ];then
+    if [ $# -ne 1 ];then
+        echo "[AIC] Wrong arg num for check_data_img"
+        exit -1
+    fi
+
+    if [ -f "${AIC_DATA_IMG}_${1}" ];then
         echo "Detect previous data img..."
     else
-        echo "Create data image..."
-        dd if=/dev/zero of=$AIC_DATA_IMG bs=2M count=5120
+        echo "Create data image $1..."
+        dd if=/dev/zero of=${AIC_DATA_IMG}_${1} bs=2M count=5120
     fi
 }
 
 function prepare_data_partition {
     data_name=$1
+    index=$(echo $data_name | tr -dc '0-9')
+    aic_data_img=${AIC_DATA_IMG}_${index}
     # Check losetup settings
-    if [ -z "$(losetup | grep $AIC_DATA_IMG)" ]; then
+    if [ -z "$(losetup 2>/dev/null | grep $aic_data_img)" ]; then
         loop_dev=`losetup -f`
-        sudo losetup $loop_dev $AIC_DATA_IMG
+        sudo losetup $loop_dev $aic_data_img
+        # need to sleep some time here, or pvs may not get the right result
+        sleep 0.3
+    else
+        loop_dev=$(losetup | grep $aic_data_img | awk '{print $1}')
     fi
     # Check pv
-    if [ -z "$(sudo pvs | grep $AIC_VG_NAME)" ]; then
+    if [ -z "$(sudo pvs 2>/dev/null | grep $loop_dev)" ]; then
        sudo pvcreate $loop_dev
     fi
     # Check VG
     if [ -z "$(sudo vgs | grep $AIC_VG_NAME)" ]; then
         sudo vgcreate $AIC_VG_NAME $loop_dev
+        FIRST_START=1
+    elif [ $FIRST_START -eq 1 ]; then
+        sudo vgextend $AIC_VG_NAME $loop_dev
     else
-       echo "VG $AIC_VG_NAME detected..."
+        echo "VG $AIC_VG_NAME detected..."
         sudo vgchange -a y $AIC_VG_NAME
     fi
     # Check lv
@@ -83,29 +98,36 @@ function delete_data_partition {
     if [ ! -z "$(sudo lvs | grep android)" ]; then
         CON_NAME=$(sudo lvs | grep -E 'android' | awk '{print $1}')
         echo "[AIC] Remove LVM for container ..."
-        sudo lvremove -f /dev/$AIC_VG_NAME/$CON_NAME
+        arr=($(echo $CON_NAME | tr ' ' "\n"))
+        for i in "${!arr[@]}"
+        do
+            sudo lvremove -f /dev/$AIC_VG_NAME/${arr[$i]}
+        done
     fi
 
     if [ ! -z "$(sudo vgs | grep $AIC_VG_NAME)" ]; then
+        echo "[AIC] Remove VG for container ..."
         sudo vgremove -f /dev/$AIC_VG_NAME
     fi
 
-    # Delete data image
     if [ ! -z "$(sudo losetup | grep $AIC_VG_NAME)" ]; then
-       mounted_loop_dev=$(losetup | grep $AIC_VG_NAME | awk '{print $1}')
-        echo "Detach mounted loop device, $mounted_loop_dev..."
-        sudo pvremove -f $mounted_loop_dev
-        sudo losetup -d $mounted_loop_dev
+        mounted_loop_dev=$(losetup | grep $AIC_VG_NAME | awk '{print $1}')
+        dev_arr=($(echo $mounted_loop_dev | tr ' ' "\n"))
+        for i in "${!dev_arr[@]}"
+        do
+            echo "Detach mounted loop device, ${dev_arr[$i]}..."
+            sudo pvremove -f ${dev_arr[$i]}
+            sudo losetup -d ${dev_arr[$i]}
+            if [ -f "${AIC_DATA_IMG}_$i" ]; then
+                echo "Delete data image ${AIC_DATA_IMG}_$i...."
+                sudo rm -f ${AIC_DATA_IMG}_$i
+            fi
+        done
     fi
 
     if [ -d "/dev/$AIC_VG_NAME" ]; then
         echo "Delete /dev/$AIC_VG_NAME..."
         sudo rm -rf /dev/$AIC_VG_NAME
-    fi
-
-    if [ -f "$AIC_DATA_IMG" ]; then
-        echo "Delete data image...."
-        sudo rm -f $AIC_DATA_IMG
     fi
 }
 
@@ -664,11 +686,6 @@ function install {
     echo "[AIC] create aic-manager container..."
     $DOCKER container create --name aic-manager --init --net host --privileged=true $AIC_MANAGER_CONTAINER_OPTION $AIC_MANAGER_IMAGE $AIC_MANAGER_CONTAINER_CMDS
 
-    # Check data image file
-    if [ "$ENABLE_FBE" = "true" ]; then
-        check_data_img
-    fi
-
     # create Android containers
     ANDROID_CONTAINER_OPTION="-v $APP_DIR:/oem/app:ro -v $WORK_DIR/ipc:/ipc -v /dev/binderfs:/binderfs:rw -v /dev/usb:/data/misc/usb"
     get_system_image_mount_options && ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION $SYSTEM_IMAGE_MOUNT_OPTIONS"
@@ -700,8 +717,10 @@ function install {
         MAC=02:42:ac:64:$(printf "%02x" $(($i / 256))):$(printf "%02x" $(($i % 256)))
         IP=172.100.$((($i + 2) / 256)).$((($i + 2) % 256))
 
-
         if [ "$ENABLE_FBE" = "true" ]; then
+            # Check data image file
+            check_data_img $i
+            ANDROID_CONTAINER_CMDS="$ANDROID_CONTAINER_CMDS -i $i"
             ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION_BK -v /dev/$AIC_VG_NAME:/dev/$AIC_VG_NAME"
         else
             ANDROID_CONTAINER_OPTION="$ANDROID_CONTAINER_OPTION_BK -v $WORK_DIR/data$i:/data"
