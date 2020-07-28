@@ -18,7 +18,7 @@ function enableHeadset {
 function setMicGain {
         echo "set alsa mic gain to $1%"
         `PULSE_SERVER=$pa_server PULSE_COOKIE=$pa_cookie $mic_gain_cmd $1%`
-        `PULSE_SERVER=$pa_server PULSE_COOKIE=$pa_cookie $audio_volume 30%`
+        `PULSE_SERVER=$pa_server PULSE_COOKIE=$pa_cookie $audio_volume 60%`
 }
 
 cpu_family=$(getCpuInfo 'family:')
