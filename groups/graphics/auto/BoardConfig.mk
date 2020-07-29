@@ -10,20 +10,21 @@ BOARD_KERNEL_CMDLINE += i915.enable_guc=2
 {{/acrn-guest}}
 
 ifeq ($(BASE_YOCTO_KERNEL),true)
-BOARD_KERNEL_CMDLINE += i915.enable_guc=2
+#BOARD_KERNEL_CMDLINE += i915.enable_guc=2
+BOARD_KERNEL_CMDLINE += i915.force_probe=*
 endif
 
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 USE_INTEL_UFO_DRIVER := false
-BOARD_GPU_DRIVERS := i965 virgl
+BOARD_GPU_DRIVERS := i965 virgl iris
 BOARD_USE_CUSTOMIZED_MESA := true
 
 # System's VSYNC phase offsets in nanoseconds
 VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 3000000
 
-BOARD_GPU_DRIVERS ?= i965 swrast virgl
+BOARD_GPU_DRIVERS ?= i965 swrast virgl iris
 ifneq ($(strip $(BOARD_GPU_DRIVERS)),)
 TARGET_HARDWARE_3D := true
 TARGET_USES_HWC2 := true
