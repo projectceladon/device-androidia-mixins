@@ -26,8 +26,6 @@ PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
                     android.hardware.renderscript@1.0-impl \
                     android.hardware.graphics.composer@2.1-impl \
                     android.hardware.graphics.composer@2.1-service \
-                    batsys \
-                    thermsys \
                     vinput-manager \
                     sendkey
 
@@ -48,8 +46,6 @@ PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/setup_host.sh:$(P
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/guest_time_keeping.sh:$(PRODUCT_OUT)/scripts/guest_time_keeping.sh
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/start_flash_usb.sh:$(PRODUCT_OUT)/scripts/start_flash_usb.sh
 PRODUCT_COPY_FILES += vendor/intel/fw/trusty-release-binaries/rpmb_dev:$(PRODUCT_OUT)/scripts/rpmb_dev
-PRODUCT_COPY_FILES += device/intel/civ/host/backend/battery/bin/batsys:$(PRODUCT_OUT)/scripts/batsys
-PRODUCT_COPY_FILES += device/intel/civ/host/backend/thermal/bin/thermsys:$(PRODUCT_OUT)/scripts/thermsys
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/wakeup.py:$(PRODUCT_OUT)/scripts/wakeup.py
 PRODUCT_COPY_FILES += device/intel/civ/host/virtual-input-manager/bin/sendkey:$(PRODUCT_OUT)/scripts/sendkey
 PRODUCT_COPY_FILES += device/intel/civ/host/virtual-input-manager/bin/vinput-manager:$(PRODUCT_OUT)/scripts/vinput-manager
