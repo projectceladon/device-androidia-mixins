@@ -283,6 +283,8 @@ function setup_ethernet(){
 		fi
 		common_options=${common_eth_mediation}${common_options}
 	else
+		if [[ $iommu_group == *"Audio"* ]]
+			common_audio_mediation=""
 		modprobe vfio-pci
 		EthBusId=${EthController:0:13}
 		EthBusId=`echo $EthBusId| awk '{gsub(/^\s+|\s+$/, "");print}'`
@@ -479,9 +481,9 @@ function launch_hwrender(){
 		WIFI_VFIO_OPTIONS="-device vfio-pci,host=`lspci -nn  | grep -oP '([\w:[\w.]+) Network controller' | awk '{print $1}'`"
 	fi
 	setup_sdcard
+	setup_audio
 	setup_ethernet
 	setup_usb_vfio_passthrough setup
-	setup_audio
 	setup_vsock_host_utilities
 	setup_rpmb
 
@@ -558,9 +560,9 @@ function launch_hwrender_gvtd(){
 		WIFI_VFIO_OPTIONS="-device vfio-pci,host=`lspci -nn  | grep -oP '([\w:[\w.]+) Network controller' | awk '{print $1}'`"
 	fi
 	setup_sdcard
+	setup_audio
 	setup_ethernet
 	setup_usb_vfio_passthrough setup
-	setup_audio
 	setup_vsock_host_utilities
 	setup_rpmb
 	common_options=${common_options/-display $display_type /}
@@ -599,9 +601,9 @@ function launch_virtio_gpu(){
 		WIFI_VFIO_OPTIONS="-device vfio-pci,host=`lspci -nn  | grep -oP '([\w:[\w.]+) Network controller' | awk '{print $1}'`"
 	fi
 	setup_sdcard
+	setup_audio
 	setup_ethernet
 	setup_usb_vfio_passthrough setup
-	setup_audio
 	setup_vsock_host_utilities
 	setup_rpmb
 	qemu-system-x86_64 \
@@ -630,9 +632,9 @@ function launch_swrender(){
 		WIFI_VFIO_OPTIONS="-device vfio-pci,host=`lspci -nn  | grep -oP '([\w:[\w.]+) Network controller' | awk '{print $1}'`"
 	fi
 	setup_sdcard
+	setup_audio
 	setup_ethernet
 	setup_usb_vfio_passthrough setup
-	setup_audio
 	setup_vsock_host_utilities
 	setup_rpmb
 	if [[ $1 == "--display-off" ]]
