@@ -10,6 +10,7 @@ PRODUCT_PACKAGES += \
 
 # Open source media_driver
 PRODUCT_PACKAGES += i965_drv_video
+PRODUCT_PACKAGES += libgmm_umd
 PRODUCT_PACKAGES += libigfxcmrt
 
 # Open source hdcp

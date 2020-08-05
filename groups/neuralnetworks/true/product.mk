@@ -9,7 +9,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libMKLDNNPlugin\
-    libmkldnn
+    libmkldnn \
+    libmkldnn \
+    libclDNNPlugin \
+    libclDNN64
 
 PRODUCT_PACKAGES += \
     graphtest_cpu

@@ -1,7 +1,13 @@
 # Mesa
 PRODUCT_PACKAGES += \
     libGLES_mesa \
-    libGLES_android
+    libGLES_android \
+    libigdrcl \
+    libOpenCL \
+    libcommon_clang \
+    libigc \
+    libigdfcl
+
 
 PRODUCT_PACKAGES += \
     libdrm \
