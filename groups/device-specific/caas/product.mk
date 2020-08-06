@@ -53,3 +53,4 @@ PRODUCT_COPY_FILES += device/intel/civ/host/backend/thermal/bin/thermsys:$(PRODU
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/wakeup.py:$(PRODUCT_OUT)/scripts/wakeup.py
 PRODUCT_COPY_FILES += device/intel/civ/host/virtual-input-manager/bin/sendkey:$(PRODUCT_OUT)/scripts/sendkey
 PRODUCT_COPY_FILES += device/intel/civ/host/virtual-input-manager/bin/vinput-manager:$(PRODUCT_OUT)/scripts/vinput-manager
+PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
