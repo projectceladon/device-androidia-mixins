@@ -229,8 +229,12 @@ if [[ $SECURE == "false" ]]; then
 else
   # under secure mode, let root processes run as system user
   AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -y"
-  # Enable FBE for secure installation
-  AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -g"
+
+  # FBE and multi user feature is conflict, can only support one of them
+  if [[ $MULTIPLE_USER == "false" ]]; then
+    # Enable FBE for secure installation
+    AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -g"
+  fi
 
   # lvm2 and thin-provisioning-tools are required by FBE
   if [ ! -x "$(command -v pvcreate)" ]; then
