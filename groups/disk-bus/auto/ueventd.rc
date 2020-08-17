@@ -1,1 +1,1 @@
-/dev/block/pci/pci0000:00/0000:00:*/by-name/persistent   0660 system system
+/dev/block/sda/sda11  0660 system system
