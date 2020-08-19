@@ -1,0 +1,7 @@
+on early-init
+    mkdir /sys/kernel/config    0660 root root
+    mount configfs none /sys/kernel/config
+
+on post-fs
+    chown system system /sys/kernel/config/iio
+    chown system system /sys/kernel/config/iio/triggers

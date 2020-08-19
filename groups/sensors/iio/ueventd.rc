@@ -1,0 +1,2 @@
+/dev/iio:device*              0660   system     system
+/sys/bus/iio/devices*         0660   system     system
