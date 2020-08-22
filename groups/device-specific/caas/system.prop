@@ -10,3 +10,4 @@ ro.board.platform=celadon
 audio.safemedia.bypass=true
 debug.nn.cpuonly=0
 camera.disable_treble=false
+ro.crypto.volume.filenames_mode=aes-256-cts
