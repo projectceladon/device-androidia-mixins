@@ -72,3 +72,4 @@ BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/graphics/mesa_acrn
 
 BOARD_SEPOLICY_M4DEFS += module_hwc_info_service=true
 
+BOARD_KERNEL_CMDLINE += video=hyperv_fb:1280x720
