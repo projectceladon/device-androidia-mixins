@@ -26,6 +26,7 @@ PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
                     android.hardware.renderscript@1.0-impl \
                     android.hardware.graphics.composer@2.1-impl \
                     android.hardware.graphics.composer@2.1-service \
+                    mkf2fsuserimg.sh \
                     batsys \
                     thermsys \
                     vinput-manager \
