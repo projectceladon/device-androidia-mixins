@@ -1,2 +1,172 @@
 /dev/iio:device*              0660   system     system
 /sys/bus/iio/devices*         0660   system     system
+
+#####################################################
+# Software triggers
+#####################################################
+/sys/devices/trigger*    sampling_frequency    0660   system  system
+
+#####################################################
+# Common attributes
+#####################################################
+/sys/devices/pci*/*/*/*/*/iio:device* name                             0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* mounting_matrix                  0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* trigger/current_trigger          0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* buffer/enable                    0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* buffer/length                    0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* sampling_frequency               0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* sampling_frequency_available     0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_timestamp_en    0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_timestamp_index 0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_timestamp_type  0660    system  system
+
+#####################################################
+# Power attributes
+#####################################################
+/sys/devices/pci*/*/*/*/*/iio:device* power/async                     0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* power/autosuspend_delay_ms      0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* power/control                   0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* power/runtime_active_kids       0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* power/runtime_active_time       0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* power/runtime_enabled           0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* power/runtime_status            0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* power/runtime_suspended_time    0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* power/runtime_usage             0660    system  system
+
+#####################################################
+# Accelerometer
+#####################################################
+/sys/devices/pci*/*/*/*/*/iio:device* in_accel_hysteresis         0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_accel_offset             0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_accel_sampling_frequency 0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_accel_scale              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_accel_x_raw              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_accel_y_raw              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_accel_z_raw              0660    system  system
+
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_accel_x_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_accel_x_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_accel_x_type  0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_accel_y_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_accel_y_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_accel_y_type  0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_accel_z_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_accel_z_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_accel_z_type  0660   system  system
+
+#####################################################
+# Gyroscope
+#####################################################
+/sys/devices/pci*/*/*/*/*/iio:device* in_anglvel_hysteresis         0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_anglvel_offset             0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_anglvel_sampling_frequency 0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_anglvel_scale              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_anglvel_x_raw              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_anglvel_y_raw              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_anglvel_z_raw              0660    system  system
+
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_anglvel_x_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_anglvel_x_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_anglvel_x_type  0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_anglvel_y_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_anglvel_y_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_anglvel_y_type  0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_anglvel_z_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_anglvel_z_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_anglvel_z_type  0660   system  system
+
+#####################################################
+# Magnetometer
+#####################################################
+/sys/devices/pci*/*/*/*/*/iio:device* in_magn_hysteresis         0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_magn_offset             0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_magn_sampling_frequency 0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_magn_scale              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_magn_x_raw              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_magn_y_raw              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_magn_z_raw              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_rot_hysteresis          0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_rot_offset              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_rot_sampling_frequency  0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_rot_scale               0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_rot_from_north_magnetic_tilt_comp_raw 0660    system  system
+
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_magn_x_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_magn_x_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_magn_x_type  0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_magn_y_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_magn_y_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_magn_y_type  0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_magn_z_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_magn_z_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_magn_z_type  0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_rot_from_north_magnetic_tilt_comp_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_rot_from_north_magnetic_tilt_comp_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_rot_from_north_magnetic_tilt_comp_type  0660   system  system
+
+#####################################################
+# Light
+#####################################################
+/sys/devices/pci*/*/*/*/*/iio:device* in_illuminance_hysteresis         0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_illuminance_offset             0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_illuminance_raw                0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_illuminance_sampling_frequency 0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_illuminance_scale              0660    system  system
+
+/sys/devices/pci*/*/*/*/*/iio:device* in_intensity_both_raw           0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_intensity_hysteresis         0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_intensity_offset             0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_intensity_sampling_frequency 0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_intensity_scale              0660    system  system
+
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_illuminance_en        0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_illuminance_index     0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_illuminance_type      0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_intensity_both_en     0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_intensity_both_index  0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_intensity_both_type   0660   system  system
+
+#####################################################
+# Inclinometer
+#####################################################
+/sys/devices/pci*/*/*/*/*/iio:device* in_incli_hysteresis         0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_incli_sampling_frequency 0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_incli_offset             0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_incli_scale              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_incli_x_raw              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_incli_y_raw              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_incli_z_raw              0660    system  system
+
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_incli_x_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_incli_x_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_incli_x_type  0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_incli_y_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_incli_y_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_incli_y_type  0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_incli_z_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_incli_z_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_incli_z_type  0660   system  system
+
+/sys/devices/pci*/*/*/*/*/iio:device* in_gravity_hysteresis         0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_gravity_sampling_frequency 0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_gravity_offset             0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_gravity_scale              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_gravity_x_raw              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_gravity_y_raw              0660    system  system
+/sys/devices/pci*/*/*/*/*/iio:device* in_gravity_z_raw              0660    system  system
+
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_gravity_x_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_gravity_x_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_gravity_x_type  0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_gravity_y_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_gravity_y_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_gravity_y_type  0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_gravity_z_en    0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_gravity_z_index 0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_gravity_z_type  0660   system  system
+
+/sys/devices/pci*/*/*/*/*/iio:device* in_rot_quaternion_raw            0660   system  system
+
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_rot_quaternion_en        0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_rot_quaternion_index     0660   system  system
+/sys/devices/pci*/*/*/*/*/iio:device* scan_elements/in_rot_quaternion_type      0660   system  system
