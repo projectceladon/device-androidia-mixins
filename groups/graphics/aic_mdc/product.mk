@@ -37,8 +37,7 @@ PRODUCT_PACKAGES += \
     libmd \
     Browser2 \
     RemoteIME \
-    ServiceAgent \
-    auto_start_apk.sh
+    ServiceAgent
 
 ifeq ($(TARGET_USE_GRALLOC_VHAL), true)
 PRODUCT_PACKAGES += gralloc_imp.intel
