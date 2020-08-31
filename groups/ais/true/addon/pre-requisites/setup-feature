@@ -5,5 +5,9 @@ echo "Installing packages from feature/ -- START"
 sudo dpkg -i $AIC_WORK_DIR/cfc/*.deb
 echo "Installing packages from feature/ -- DONE"
 
-#Grant permission for cfc.desktop
-sudo chown $(whoami):$(whoami) /home/$(whoami)/Desktop/cfc.desktop
+if [[ "$(whoami)" != "root" ]]; then
+    #Copy cfc.desktop
+    sudo cp /usr/share/applications/cfc.desktop /home/$(whoami)/Desktop/.
+    #Grant permission for cfc.desktop
+    sudo chown $(whoami):$(whoami) /home/$(whoami)/Desktop/cfc.desktop
+fi
