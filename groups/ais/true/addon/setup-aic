@@ -231,7 +231,7 @@ else
   AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -y"
 
   # FBE and multi user feature is conflict, can only support one of them
-  if [[ $MULTIPLE_USER == "false" ]]; then
+  if [[ ! $MULTIPLE_USER == "true" ]]; then
     # Enable FBE for secure installation
     AIC_INSTALL_ARGUMENTS="$AIC_INSTALL_ARGUMENTS -g"
   fi
