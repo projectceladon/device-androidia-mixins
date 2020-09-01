@@ -1,3 +1,3 @@
 PRODUCT_PACKAGES += health
 
-PRODUCT_PACKAGES += android.hardware.health@2.0-service.intel
+PRODUCT_PACKAGES += android.hardware.health@2.1-service
