@@ -12,7 +12,7 @@ on fs
     {{/mountfstab-flag}}
 
 service watchdogd /system/bin/watchdogd{{#watchdog_parameters}} {{{watchdog_parameters}}}{{/watchdog_parameters}}
-    user root
+    user system
     class core
     oneshot
     seclabel u:r:watchdogd:s0
