@@ -1,12 +1,16 @@
 service dhcpcd_eth0 /system/bin/dhcpcd -ABDKL
-     class main
-     disabled
-     oneshot
+    class main
+    user system
+    group system dhcp inet
+    disabled
+    oneshot
 
 service iprenew_eth0 /system/bin/dhcpcd -n
-     class main
-     disabled
-     oneshot
+    class main
+    user system
+    group system dhcp inet
+    disabled
+    oneshot
 
 on post-fs
     insmod /vendor/lib/modules/pps_core.ko
