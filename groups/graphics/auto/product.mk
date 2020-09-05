@@ -3,12 +3,7 @@ PRODUCT_PACKAGES += \
     libGLESv1_CM_swiftshader \
     libGLESv2_swiftshader \
     libGLES_mesa \
-    libGLES_android \
-    libigdrcl \
-    libOpenCL \
-    libcommon_clang \
-    libigc \
-    libigdfcl
+    libGLES_android
 
 PRODUCT_PACKAGES += \
     libdrm \
