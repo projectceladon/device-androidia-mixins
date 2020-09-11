@@ -56,6 +56,7 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/thermald.service:$(PRODUCT_OUT)/scripts/ther
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/skucfg/tasmania/ssdt.dsl:$(PRODUCT_OUT)/scripts/skucfg/tasmania/ssdt.dsl
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/skucfg/tasmania/virtio_gpio.map:$(PRODUCT_OUT)/scripts/skucfg/tasmania/virtio_gpio.map
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/skucfg/tasmania/virtio_i2c.map:$(PRODUCT_OUT)/scripts/skucfg/tasmania/virtio_i2c.map
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/guest_rtc_monitor:$(PRODUCT_OUT)/scripts/guest_rtc_monitor
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/start_civ.sh:$(PRODUCT_OUT)/scripts/start_civ.sh
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/setup_host.sh:$(PRODUCT_OUT)/scripts/setup_host.sh
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/guest_time_keeping.sh:$(PRODUCT_OUT)/scripts/guest_time_keeping.sh

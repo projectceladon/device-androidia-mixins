@@ -19,6 +19,7 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_host.sh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/skucfg/tasmania/ssdt.dsl
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/skucfg/tasmania/virtio_gpio.map
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/skucfg/tasmania/virtio_i2c.map
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/guest_rtc_monitor
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/sof_audio/configure_sof.sh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/sof_audio/blacklist-dsp.conf
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_audio_host.sh
