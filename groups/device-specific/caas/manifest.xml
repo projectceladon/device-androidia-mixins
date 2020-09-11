@@ -1,5 +1,5 @@
 {{^ota-update}}
-<manifest version="1.0" type="device" target-level="3">
+<manifest version="1.0" type="device" target-level="4">
 {{/ota-update}}
 {{#ota-update}}
 <manifest version="1.0" type="device">
@@ -108,7 +108,7 @@
     <hal format="hidl">
         <name>android.hardware.graphics.mapper</name>
         <transport arch="32+64">passthrough</transport>
-        <version>2.0</version>
+        <version>2.1</version>
         <interface>
             <name>IMapper</name>
             <instance>default</instance>
