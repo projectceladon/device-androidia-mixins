@@ -7,5 +7,4 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += dalvik.vm.dex2oat-flags={{{flags}}}
 PRODUCT_PACKAGES_TESTS += \
     art-run-tests \
     libarttest \
-    libnativebridgetest \
-    libart-gtest
+    libnativebridgetest 
