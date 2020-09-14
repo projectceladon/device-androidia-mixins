@@ -25,6 +25,60 @@ DefinitionBlock (
             }
         }
 
+        Device (I2C0) {
+            Name (_ADR, 0x00130000)
+            Name (_DDN, "VirtIO I2C Controller")
+            Name (_UID, "VirtIO I2C Controller 0")
+            Name (_STA, 0x0F)
+            Device (NFC0) {
+                Name (_ADR, Zero)  // _ADR: Address
+                Name (_HID, EisaId ("NXP1002"))  // _HID: Hardware ID
+                Name (_CID, "NXP1002")  // _CID: Compatible ID
+                Name (_DDN, "NXP NFC")  // _DDN: DOS Device Name
+                Name (_UID, One)  // _UID: Unique ID
+                Method (_STA, 0, NotSerialized) {
+                    Return (0x0F)
+                }
+                Method (_CRS, 0, Serialized) {
+                    Name (SBUF, ResourceTemplate () {
+                        I2cSerialBusV2 (0x0008, ControllerInitiated, 0x00061A80,
+                            AddressingMode7Bit, "\\_SB.PCI0.I2C0",
+                            0x00, ResourceConsumer, _Y55, Exclusive,
+                            )
+                        GpioInt (Edge, ActiveHigh, ExclusiveAndWake, PullDefault, 0x0000,
+                            "\\_SB.PCI0.GPI0", 0x00, ResourceConsumer, ,
+                            )
+                            {
+                                0x0001
+                            }
+                        GpioIo (Exclusive, PullDefault, 0x0000, 0x0000, IoRestrictionOutputOnly,
+                            "\\_SB.PCI0.GPI0", 0x00, ResourceConsumer, ,
+                            )
+                            {
+                                0x0002
+                            }
+                        GpioIo (Exclusive, PullDefault, 0x0000, 0x0000, IoRestrictionOutputOnly,
+                            "\\_SB.PCI0.GPI0", 0x00, ResourceConsumer, ,
+                            )
+                            {
+                                0x0003
+                            }
+                    })
+                    CreateWordField (SBUF, \_SB.PCI0.I2C0.NFC0._CRS._Y55._ADR, NADR)
+                    CreateDWordField (SBUF, \_SB.PCI0.I2C0.NFC0._CRS._Y55._SPE, NSPD)
+                    //CreateWordField (SBUF, 0x38, NFCA)
+                    //CreateWordField (SBUF, 0x60, NFCB)
+                    //CreateWordField (SBUF, 0x88, NFCC)
+                    NADR = 0x08
+                    NSPD = 0x00061A80
+                    //NFCA = 0x0000
+                    //NFCB = 0x0001
+                    //NFCC = 0x0002
+                    Return (SBUF)
+                }
+            }
+        }
+
         Device (I2C1) {
             Name (_ADR, 0x00150001)
             Device (NFC1) {
@@ -32,7 +86,7 @@ DefinitionBlock (
                 Name (_HID, EisaId ("NXP1002"))  // _HID: Hardware ID
                 Name (_CID, "NXP1002")  // _CID: Compatible ID
                 Name (_DDN, "NXP NFC")  // _DDN: DOS Device Name
-                Name (_UID, One)  // _UID: Unique ID
+                Name (_UID, 0x02)  // _UID: Unique ID
                 Method (_STA, 0, NotSerialized) {
                     Return (0x0F)
                 }

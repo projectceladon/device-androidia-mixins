@@ -1,0 +1,6 @@
+# address of host i2c controller, must match DSDT/SSDT
+0000:00:15.1
+# address of host i2c device (i.e. NFC device), must match DSDT/SSDT
+0x29
+# devfn in guest, must match DSDT/SSDT
+0x13.0
