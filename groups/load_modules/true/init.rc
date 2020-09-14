@@ -1,14 +1,8 @@
 service load_modules /vendor/bin/load_modules.sh
-    user 5200
-    group shell
+    user system
+    group system shell
     capabilities SYS_MODULE MKNOD
-    oneshot
     disabled
 
-{{^firststage-mount}}
-on fs
-{{/firststage-mount}}
-{{#firststage-mount}}
-on early-init
-{{/firststage-mount}}
+on init
     start load_modules
