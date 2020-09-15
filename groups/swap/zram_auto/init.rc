@@ -6,6 +6,10 @@ on boot
    # Avoid evicting pages and use zram disk
     write /proc/sys/vm/swappiness 100
 {{/swappiness}}
+{{#disk_based_swap}}
+   # Enable disk_based_swap on Chromium kernels
+    write /proc/sys/vm/disk_based_swap 1
+{{/disk_based_swap}}
 
 on post-fs
     exec - system system -- /vendor/bin/check_lowmem.sh
