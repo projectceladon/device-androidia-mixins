@@ -1,4 +1,4 @@
-TARGET_BOARD_PLATFORM := celadon
+TARGET_BOARD_PLATFORM := intel
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.recovery.rc:root/init.recovery.$(TARGET_PRODUCT).rc \
