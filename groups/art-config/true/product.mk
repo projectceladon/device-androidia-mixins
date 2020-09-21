@@ -8,4 +8,4 @@ PRODUCT_PACKAGES_TESTS += \
     art-run-tests \
     libarttest \
     libnativebridgetest \
-    libart-gtest
+    libart-gtest.com.android.art.testing
