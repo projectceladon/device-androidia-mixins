@@ -37,10 +37,7 @@ PRODUCT_PACKAGES += \
 
 # HWComposer IA
 PRODUCT_PACKAGES += \
-    hwcomposer.$(TARGET_GFX_INTEL)
-
-# PRODUCT_PROPERTY_OVERRIDES += \
-#   ro.hardware.hwcomposer=$(TARGET_GFX_INTEL)
+    hwcomposer.$(TARGET_BOARD_PLATFORM)
 
 INTEL_HWC_CONFIG := $(INTEL_PATH_VENDOR)/external/hwcomposer-intel
 
@@ -53,12 +50,10 @@ endif
 
 {{#minigbm}}
 # Mini gbm
-# PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.hardware.gralloc=$(TARGET_GFX_INTEL)
 
 PRODUCT_PACKAGES += \
     gralloc.minigbm \
-    gralloc.$(TARGET_GFX_INTEL)
+    gralloc.$(TARGET_BOARD_PLATFORM)
 {{/minigbm}}
 
 {{^minigbm}}
