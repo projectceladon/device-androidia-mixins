@@ -32,12 +32,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     hwcomposer.drm_minigbm
 
-# PRODUCT_PROPERTY_OVERRIDES += \
-#   ro.hardware.hwcomposer=drm
-
 # HWComposer IA
 PRODUCT_PACKAGES += \
-    hwcomposer.$(TARGET_BOARD_PLATFORM)
+    hwcomposer.$(TARGET_GFX_INTEL)
 
 INTEL_HWC_CONFIG := $(INTEL_PATH_VENDOR)/external/hwcomposer-intel
 
@@ -53,14 +50,12 @@ endif
 
 PRODUCT_PACKAGES += \
     gralloc.minigbm \
-    gralloc.$(TARGET_BOARD_PLATFORM)
+    gralloc.$(TARGET_GFX_INTEL)
 {{/minigbm}}
 
 {{^minigbm}}
-#Gralloc
-# PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.hardware.gralloc=drm
 
+#Gralloc
 PRODUCT_PACKAGES += \
     gralloc.drm
 {{/minigbm}}
