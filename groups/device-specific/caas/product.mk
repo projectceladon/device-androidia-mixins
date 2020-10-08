@@ -30,6 +30,11 @@ PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
 PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.useautofastjni=true
 
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.device_admin.xml:vendor/etc/permissions/android.software.device_admin.xml \
+    frameworks/native/data/etc/android.software.managed_users.xml:vendor/etc/permissions/android.software.managed_users.xml \
+    frameworks/native/data/etc/android.software.secure_lock_screen.xml:vendor/etc/permissions/android.software.secure_lock_screen.xml
+
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/file_share.sh:$(TARGET_COPY_OUT_VENDOR)/bin/file_share.sh
 PRODUCT_COPY_FILES += vendor/intel/utils/LICENSE:$(PRODUCT_OUT)/LICENSE
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/auto_switch_pt_usb_vms.sh:$(PRODUCT_OUT)/scripts/auto_switch_pt_usb_vms.sh
