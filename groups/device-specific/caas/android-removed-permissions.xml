@@ -21,4 +21,11 @@
     <unavailable-feature name="android.hardware.sensor.gyroscope" />
     <unavailable-feature name="android.hardware.sensor.light" />
     <unavailable-feature name="android.hardware.sensor.ambient_temperature" />
+    <unavailable-feature name="cn.google.services" />
+    <unavailable-feature name="android.hardware.type.television" />
+    <unavailable-feature name="android.hardware.type.watch" />
+    <unavailable-feature name="android.hardware.type.automotive" />
+    <unavailable-feature name="android.hardware.telephony" />
+    <unavailable-feature name="android.hardware.nfc" />
+    <unavailable-feature name="android.software.leanback" />
 </permissions>
