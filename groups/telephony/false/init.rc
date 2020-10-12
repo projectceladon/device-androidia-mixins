@@ -1,0 +1,3 @@
+on boot
+    # Disable rild
+    setprop ro.radio.noril yes
