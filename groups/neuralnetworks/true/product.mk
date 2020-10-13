@@ -11,3 +11,5 @@ PRODUCT_PACKAGES += \
     libMKLDNNPlugin \
     libinference_engine_preproc \
     libinference_engine_ir_reader
+
+PRODUCT_PROPERTY_OVERRIDES += vendor.nn.hal.ngraph=true
