@@ -3,6 +3,11 @@ TARGET_UEFI_ARCH := {{{uefi_arch}}}
 # Android Kernelflinger uses the OpenSSL library to support the
 # bootloader policy
 KERNELFLINGER_SSL_LIBRARY := boringssl
+# Enable updating of APEXes
+ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
+# Enable userspace reboot
+ $(call inherit-product, $(SRC_TARGET_DIR)/product/userspace_reboot.mk)
 
 {{^use_cic}}
 BIOS_VARIANT := {{{bios_variant}}}
