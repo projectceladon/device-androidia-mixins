@@ -1,3 +1,4 @@
+#! /bin/bash
 QMP_SOCK=$1
 TARGET=$2
 SCRIPTS_DIR=$3
@@ -13,7 +14,7 @@ fi
 chmod +x $QMP_BIN
 modprobe -r hp-wmi
 
-exec acpi_listen | while IFS= exec read -r line;
+exec acpi_listen | while IFS= read -r line;
 do
 line=$(echo "$line" | grep $TARGET)
 if [ "$line" ]; then
