@@ -51,25 +51,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.gatekeeper</name>
-        {{#trusty}}
-        {{^gk_force_passthrough}}
-        <transport>hwbinder</transport>
-        {{/gk_force_passthrough}}
-        {{#gk_force_passthrough}}
-        <transport arch="32+64">passthrough</transport>
-        {{/gk_force_passthrough}}
-        {{/trusty}}
-        {{^trusty}}
-        <transport arch="32+64">passthrough</transport>
-        {{/trusty}}
-        <version>1.0</version>
-        <interface>
-            <name>IGatekeeper</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.light</name>
         <transport>hwbinder</transport>
         <version>2.0</version>
