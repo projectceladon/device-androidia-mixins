@@ -22,15 +22,11 @@ PRODUCT_FULL_TREBLE_OVERRIDE := true
 {{^treble}}
 PRODUCT_FULL_TREBLE_OVERRIDE := false
 {{/treble}}
-
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote64_32
 PRODUCT_COPY_FILES += system/core/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc \
-    $(LOCAL_PATH)/android-removed-permissions.xml:system/etc/permissions/android-removed-permissions.xml
-
+    $(LOCAL_PATH)/android-removed-permissions.xml:vendor/etc/permissions/android-removed-permissions.xml
 BOARD_USE_64BIT_USERSPACE := true
-
 TARGET_GFX_INTEL := intel
-
 INTEL_PATH_DEVICE := device/intel/project-celadon
 INTEL_PATH_COMMON := device/intel/common
 INTEL_PATH_SEPOLICY := device/intel/sepolicy
