@@ -8,7 +8,7 @@ endif
 BOARD_USES_TRUSTY := true
 BOARD_USES_KEYMASTER1 := true
 {{/enable_hw_sec}}
-BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/trusty
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/trusty/enabled
 BOARD_SEPOLICY_M4DEFS += module_trusty=true
 
 TRUSTY_BUILDROOT = $(PWD)/$(PRODUCT_OUT)/obj/trusty/
