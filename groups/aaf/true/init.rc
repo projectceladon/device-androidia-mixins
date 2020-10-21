@@ -1,4 +1,4 @@
-service vendor.aafd /system/vendor/bin/aafd
+service vendor.aafd /vendor/bin/aafd
     user system
     group system
     capabilities NET_ADMIN NET_BIND_SERVICE NET_RAW SYS_MODULE SYS_ADMIN
@@ -7,10 +7,19 @@ service vendor.aafd /system/vendor/bin/aafd
 on init
     start vendor.aafd
 
+service vendor.auto_detection /vendor/bin/auto_detection.sh
+    user system
+    group system shell
+    capabilities SYS_MODULE
+    oneshot
+    disabled
+
+on init
+    start vendor.auto_detection
+
 on fs
-    mkdir /mnt/share
-    mount 9p aaf /mnt/share
-    exec - system system -- /vendor/bin/logwrapper /vendor/bin/sh /vendor/bin/auto_detection.sh
     setprop ro.hardware.egl ${vendor.egl.set}
     setprop ro.hardware.hwcomposer ${vendor.hwcomposer.set}
     setprop ro.hardware.gralloc ${vendor.gralloc.set}
+    mkdir /mnt/share
+    mount 9p aaf /mnt/share
