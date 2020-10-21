@@ -1,0 +1,2 @@
+on post-fs-data 
+    exec - system system -- /vendor/bin/sh /vendor/bin/checkavx.sh
