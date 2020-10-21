@@ -224,6 +224,15 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <hal format="hidl">
+       <name>android.hardware.neuralnetworks</name>
+       <transport>hwbinder</transport>
+       <version>1.2</version>
+       <interface>
+           <name>IDevice</name>
+           <instance>CPU</instance>
+       </interface>
+    </hal>
     <kernel target-level="5"/>
     <sepolicy>
         <version>30.0</version>
