@@ -1,7 +1,15 @@
-on post-fs-data
+on property:sys.boot_completed=1
     chmod 0660 /data/misc/wifi/p2p_supplicant.conf
     setprop wifi.interface wlan0
     setprop wifi.direct.interface p2p-dev-wlan0
+
+on property:sys.boot_completed=1
+    insmod /vendor/lib/modules/compat.ko
+    insmod /vendor/lib/modules/cfg80211.ko
+    insmod /vendor/lib/modules/mac80211.ko
+    insmod /vendor/lib/modules/iwlwifi.ko d0i3_disable=1
+    insmod /vendor/lib/modules/iwlmvm.ko power_scheme=1
+
 
 on zygote-start
     # Create the directories used by the Wireless subsystem
