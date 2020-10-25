@@ -124,6 +124,17 @@ KERNELFLINGER_SUPPORT_SELF_USB_DEVICE_MODE_PROTOCOL := {{self_usb_device_mode_pr
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/persistent
 
+{{#fsverity}}
+# Enable fs-verity
+PRODUCT_PROPERTY_OVERRIDES += ro.apk_verity.mode=2
+{{/fsverity}}
+
+{{#metadata_encryption}}
+# Enable metadata encryption
+PRODUCT_PROPERTY_OVERRIDES += \
+	   ro.crypto.dm_default_key.options_format.version=2
+{{/metadata_encryption}}
+
 {{#slot-ab}}
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/update_ifwi_ab.sh:vendor/bin/update_ifwi_ab
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/update_ifwi_ab.sh:recovery/root/vendor/bin/update_ifwi_ab

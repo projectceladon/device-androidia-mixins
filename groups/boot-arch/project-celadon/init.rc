@@ -4,10 +4,10 @@ on fs
     # in the fstab.
     {{#mountfstab-flag}}
 {{#treble}}
-    mount_all /vendor/etc/fstab.${ro.hardware}{{#userdata_checkpoint}} --early{{/userdata_checkpoint}}
+    mount_all /vendor/etc/fstab.${ro.hardware}{{#metadata_encryption}} --early{{/metadata_encryption}}
 {{/treble}}
 {{^treble}}
-    mount_all /fstab.${ro.hardware}{{#userdata_checkpoint}} --early{{/userdata_checkpoint}}
+    mount_all /fstab.${ro.hardware}{{#metadata_encryption}} --early{{/metadata_encryption}}
 {{/treble}}
     {{/mountfstab-flag}}
 
@@ -19,7 +19,7 @@ service watchdogd /system/bin/watchdogd{{#watchdog_parameters}} {{{watchdog_para
 
 on charger
     start watchdogd
-{{#userdata_checkpoint}}
+{{#metadata_encryption}}
 
 # We need vold early for metadata encryption
 on early-fs
@@ -37,7 +37,7 @@ on late-fs
     mount_all /fstab.${ro.hardware} --late
 {{/treble}}
     {{/mountfstab-flag}}
-{{/userdata_checkpoint}}
+{{/metadata_encryption}}
 {{#verity_warning}}
 
 on init
