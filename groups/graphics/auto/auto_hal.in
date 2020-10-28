@@ -7,10 +7,10 @@ case "$(cat /proc/fb)" in
                 setprop vendor.hwcomposer.edid.all 0
                 case "$(cat /sys/class/dmi/id/chassis_vendor | head -1)" in
                         QEMU)
-                                setprop ro.graphics.hwcomposer.kvm true
+                                setprop ro.vendor.hwcomposer.kvm true
                                 ;;
                         *)
-                                setprop ro.graphics.hwcomposer.kvm false
+                                setprop ro.vendor.hwcomposer.kvm false
                                 ;;
                 esac
                 ;;
@@ -21,10 +21,10 @@ case "$(cat /proc/fb)" in
                 setprop vendor.hwcomposer.edid.all 0
 	        case "$(cat /sys/class/dmi/id/chassis_vendor | head -1)" in
                         QEMU)
-                                setprop ro.graphics.hwcomposer.kvm true
+                                setprop ro.vendor.hwcomposer.kvm true
                                 ;;
                         *)
-                                setprop ro.graphics.hwcomposer.kvm false
+                                setprop ro.vendor.hwcomposer.kvm false
                                 ;;
                 esac
                 ;;
@@ -43,7 +43,7 @@ case "$(cat /proc/fb)" in
                 setprop vendor.egl.set swiftshader
                 setprop vendor.hwcomposer.set default
                 setprop vendor.gralloc.set default
-                setprop ro.graphics.hwcomposer.kvm false
+                setprop ro.vendor.hwcomposer.kvm false
                 ;;
 esac
 }
