@@ -14,7 +14,7 @@ service storageproxyd /vendor/bin/storageproxyd -d /dev/trusty-ipc-dev0 -p /data
 on boot
     start keyboxd
 
-service keyboxd /vendor/bin/keybox_provisioning -d /dev/trusty-ipc-dev0 -p /dev/block/by-name/teedata
+service keyboxd /vendor/bin/keybox_provisioning -d /dev/trusty-ipc-dev0 -p /dev/block/by-name/teedata -v 5392
     user system
     group system
     oneshot
