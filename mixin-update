@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
-import ConfigParser
+from six.moves import configparser
 import sys
 import os
 import re
@@ -110,14 +110,14 @@ class FileHelper(Logger):
     def render_file_content(self, fn, params):
         """ return a rendered file"""
         if not os.path.splitext(fn)[1] in Configurer.RENDER_BLACK_LIST:
-            with open(fn) as sfile:
+            with open(fn,'rb') as sfile:
                 # Avoid read large non-text file as it'll cost much time
                 sfile.seek(-1, 2)
                 c = sfile.read(1)
-                if c == '\n':
+                if c == b'\n':
                     sfile.seek(0, 0)
                     src_contents = sfile.read()
-                    if "{{" in src_contents:
+                    if b"{{" in src_contents:
                         try:
                             slines = pystache.render(src_contents, params)
                         except pystache.context.KeyNotFoundError as e:
@@ -182,7 +182,7 @@ class FileHelper(Logger):
             with open(dst_fn) as dfile:
                 orig_dlines = dfile.readlines()
 
-        if cmp(orig_dlines, dlines) != 0:
+        if ((orig_dlines > dlines) - (orig_dlines < dlines)) != 0:
             if dry_run:
                 self.warning("{} is out of date".format(dst_fn))
                 retval = False
@@ -686,7 +686,7 @@ class Parser(FileHelper):
         definitions. If a ConfigParser is supplied as an argument, it will
         be augmented with the new data"""
         if not cp:
-            cp = ConfigParser.SafeConfigParser()
+            cp = configparser.SafeConfigParser()
             cp.optionxform = str
 
         spec_file = sf
@@ -916,7 +916,7 @@ class Parser(FileHelper):
                     self.error("group {} option {} requires that group {} be selected first".format(group, option, dep))
 
             defaults = mixins_tree[group]["options"][option]["defaults"]
-            for k, v in defaults.iteritems():
+            for k, v in defaults.items():
                 if k not in params:
                     params[k] = v
 
@@ -926,7 +926,7 @@ class Parser(FileHelper):
                     dep_params[group] = mixins_tree[group]["options"][option]["realname"]
                     self.group_deps.add(group)
                     self._coerce_boolean(dep_params)
-                    for k, v in dep_params.iteritems():
+                    for k, v in dep_params.items():
                         if k not in params:
                             params[k] = v
                     params[dep_group] = mixins_tree[dep_group]["options"][dep_option]["realname"]
@@ -1322,11 +1322,11 @@ def main(dry_run=False, sfiles=None, warn_only=False, debug_log=False, check_ver
     logging.basicConfig(format='%(name)s: %(message)s', level=log_level)
 
     if check_version:
-        print "Mixins {}".format(Configurer.VERSION)
+        print ("Mixins {}".format(Configurer.VERSION))
         return ret
 
     if check_target:
-        print get_valid_spec_files_and_targets()[1]
+        print (get_valid_spec_files_and_targets()[1])
         return ret
 
     if not sfiles:
@@ -1354,15 +1354,15 @@ def main(dry_run=False, sfiles=None, warn_only=False, debug_log=False, check_ver
             policy_errors_found = True
 
     if out_of_sync:
-        print "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-        print "+ WARN: Product configurations are out of sync                          +"
-        print "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+        print ("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        print ("+ WARN: Product configurations are out of sync                          +")
+        print ("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         ret = 3
 
     if policy_errors_found:
-        print "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-        print "+ WARN: Some spec files have policy issues                              +"
-        print "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+        print ("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        print ("+ WARN: Some spec files have policy issues                              +")
+        print ("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         ret = 2
 
     return ret
