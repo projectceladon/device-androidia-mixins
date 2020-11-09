@@ -60,6 +60,7 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/guest_rtc_monitor:$(PRODUCT_OUT)/sc
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/wmi-qmp:$(PRODUCT_OUT)/scripts/wmi-qmp
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/wmi-listen.sh:$(PRODUCT_OUT)/scripts/wmi-listen.sh
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/secure_erase_daemon:$(PRODUCT_OUT)/scripts/secure_erase_daemon
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/prebuilt/keybox_provisiond:$(PRODUCT_OUT)/scripts/keybox_provisiond
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/start_civ.sh:$(PRODUCT_OUT)/scripts/start_civ.sh
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/setup_host.sh:$(PRODUCT_OUT)/scripts/setup_host.sh
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/guest_time_keeping.sh:$(PRODUCT_OUT)/scripts/guest_time_keeping.sh
