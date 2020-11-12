@@ -10,6 +10,7 @@ case "$(cat /proc/fb)" in
                 ;;
         *)
                 echo "software codec"
+                setprop debug.stagefright.ccodec 0
                 setprop vendor.intel.video.codec software
                 ;;
 esac
