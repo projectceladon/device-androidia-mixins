@@ -30,4 +30,6 @@ chromium_src_path =
 chromium_cfg_path =
 yocto_src_path =
 yocto_cfg_path =
+mainline_src_path =
+mainline_cfg_path =
 more_modules = false
