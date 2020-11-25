@@ -17,11 +17,13 @@
   </path>
 
   <path name="main-mic">
+    <ctl name="Capture Source" value="0" />
     <ctl name="Capture Switch" value="1 1" />
     <ctl name="Capture Volume" value="63 63" />
   </path>
 
   <path name="headset-mic">
+    <ctl name="Capture Source" value="1" />
     <ctl name="Capture Switch" value="1 1" />
     <ctl name="Capture Volume" value="63 63" />
   </path>
