@@ -16,7 +16,7 @@ PRODUCT_PACKAGES += \
        sound_trigger.primary.$(TARGET_BOARD_PLATFORM)
 
 # Audio Primary HAL
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
        audio.primary.$(TARGET_BOARD_PLATFORM)
 
 # Extended Audio HALs
@@ -52,6 +52,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_volumes.xml:vendor/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/audio/default/policy/default_volume_tables.xml:vendor/etc/default_volume_tables.xml \
     $(LOCAL_PATH)/audio/default/effect/audio_effects.xml:vendor/etc/audio_effects.xml
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio/default/audio.primary.celadon.so:vendor/lib/hw/audio.primary.celadon.so
+
 ifeq ($(BASE_YOCTO_KERNEL), true)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/mixer_paths_ehl.xml:vendor/etc/mixer_paths_0.xml \
