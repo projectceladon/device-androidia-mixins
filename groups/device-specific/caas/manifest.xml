@@ -50,7 +50,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
+    <!--<hal format="hidl">
         <name>android.hardware.light</name>
         <transport>hwbinder</transport>
         <version>2.0</version>
@@ -58,7 +58,7 @@
             <name>ILight</name>
             <instance>default</instance>
         </interface>
-    </hal>
+    </hal>-->
     <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport>hwbinder</transport>
