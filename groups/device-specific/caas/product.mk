@@ -13,6 +13,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ueventd.rc:root/ueventd.$(TARGET_PRODUCT).rc \
 {{/treble}}
 
+PRODUCT_PACKAGES += vndservicemanager
+
 PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
                     android.hardware.keymaster@3.0-service \
                     android.hardware.usb@1.0-impl \
