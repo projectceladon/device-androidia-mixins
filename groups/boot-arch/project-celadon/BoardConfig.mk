@@ -47,10 +47,10 @@ BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
 INTERNAL_USERIMAGES_EXT_VARIANT := ext4
 endif
 
-{{#metadata_encryption}}
+{{#userdata_checkpoint}}
 BOARD_USES_METADATA_PARTITION := true
 BOARD_ROOT_EXTRA_FOLDERS += metadata
-{{/metadata_encryption}}
+{{/userdata_checkpoint}}
 
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 
