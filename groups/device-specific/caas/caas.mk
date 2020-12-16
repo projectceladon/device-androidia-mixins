@@ -24,7 +24,8 @@ PRODUCT_FULL_TREBLE_OVERRIDE := false
 {{/treble}}
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote64_32
-PRODUCT_COPY_FILES += system/core/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc
+PRODUCT_COPY_FILES += system/core/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc \
+    $(LOCAL_PATH)/android-removed-permissions.xml:system/etc/permissions/android-removed-permissions.xml
 
 BOARD_USE_64BIT_USERSPACE := true
 
