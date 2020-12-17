@@ -1,2 +1,4 @@
 /dev/block/sdb1                         /udiskb          vfat    defaults                                   voldmanaged=udiskb:auto
 /dev/block/sda1                    /sdcard          vfat    defaults                                   voldmanaged=sdcard:auto
+/dev/block/vdb                     /udiska          vfat    defaults                                   voldmanaged=udiskb:auto
+
