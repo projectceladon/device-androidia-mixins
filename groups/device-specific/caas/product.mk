@@ -38,6 +38,11 @@ PRODUCT_PROPERTY_OVERRIDES += external_storage.projid.enabled=0
 PRODUCT_FS_CASEFOLD := 0
 PRODUCT_PROPERTY_OVERRIDES += external_storage.casefold.enabled=0
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.crypto.volume.metadata.method=dm-default-key \
+    ro.crypto.dm_default_key.options_format.version=2 \
+    ro.crypto.volume.options=::v2
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_admin.xml:vendor/etc/permissions/android.software.device_admin.xml \
     frameworks/native/data/etc/android.software.managed_users.xml:vendor/etc/permissions/android.software.managed_users.xml \
