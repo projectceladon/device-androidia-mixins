@@ -5,7 +5,7 @@ Description=Thermal Daemon Service
 Type=dbus
 SuccessExitStatus=1
 BusName=org.freedesktop.thermald
-ExecStart=/usr/sbin/thermald --config-file=/etc/thermald/intel-thermal-conf.xml --no-daemon --dbus-enable
+ExecStart=/usr/sbin/thermald --no-daemon --dbus-enable
 
 [Install]
 WantedBy=multi-user.target
