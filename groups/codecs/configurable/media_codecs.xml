@@ -211,7 +211,6 @@ Only the three quirks included above are recognized at this point:
         </MediaCodec>
 {{/hw_ve_h265}}
     </Encoders>
-    <Include href="media_codecs_google_video.xml" />
     <Include href="media_codecs_google_audio.xml" />
     <Settings>
         <Setting name="max-video-encoder-input-buffers" value="9" />
