@@ -1,2 +1,6 @@
 on boot
     insmod /vendor/lib/modules/snd-dummy.ko
+
+on property:sys.boot_completed=1 && property:ro.vendor.hdmi.audio=tgl
+    stop audioserver
+    start audioserver
