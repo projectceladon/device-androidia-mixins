@@ -30,6 +30,7 @@ PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
 
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
 PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.useautofastjni=true
+PRODUCT_PRODUCT_PROPERTIES += persist.adb.tcp.port=5555
 
 PRODUCT_FS_CASEFOLD := 0
 PRODUCT_PROPERTY_OVERRIDES += external_storage.casefold.enabled=0
