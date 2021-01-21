@@ -170,4 +170,9 @@ KERNELFLINGER_SUPPORT_LIVE_BOOT ?= true
 {{#grub_installer}}
 ENABLE_GRUB_INSTALLER ?= true
 {{/grub_installer}}
+
+{{#no_xdci}}
+KERNELFLINGER_XDCI_DISABLED ?= true
+{{/no_xdci}}
 {{/use_cic}}
+
