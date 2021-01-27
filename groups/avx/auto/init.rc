@@ -1,4 +1,2 @@
 on post-fs-data
     exec - system system -- /vendor/bin/checkavx.sh
-    setprop dalvik.vm.isa.x86.variant ${vendor.dalvik.vm.isa.x86.variant}
-    setprop dalvik.vm.isa.x86_64.variant ${vendor.dalvik.vm.isa.x86_64.variant}
