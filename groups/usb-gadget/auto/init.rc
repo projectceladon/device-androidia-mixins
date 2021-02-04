@@ -46,7 +46,7 @@ on boot
     symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
     mkdir /dev/usb-ffs 0775 shell shell
     mkdir /dev/usb-ffs/adb 0770 shell shell
-    mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
+    exec - root root -- /vendor/bin/logwrapper /vendor/bin/sh /vendor/bin/ffs_mount.sh
     setprop sys.usb.configfs 1
     setprop sys.usb.controller ${vendor.usb.controller}
 
