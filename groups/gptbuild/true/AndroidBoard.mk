@@ -159,9 +159,6 @@ $(GPTIMAGE_BIN): \
 	{{#acpio-partition}}
 		--acpio $(raw_acpio) \
 	{{/acpio-partition}}
-	{{#vendor-boot}}
-		--vendor_boot $(INSTALLED_VENDOR_BOOTIMAGE_TARGET) \
-	{{/vendor-boot}}
 		--config $(raw_config) \
 		--factory $(raw_factory)
 
