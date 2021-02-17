@@ -1,6 +1,8 @@
 TARGET_BOARD_PLATFORM := celadon
 
+ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_REQUIRES_INSECURE_EXECMEM_FOR_SWIFTSHADER := true
+endif
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.recovery.rc:root/init.recovery.$(TARGET_PRODUCT).rc \
