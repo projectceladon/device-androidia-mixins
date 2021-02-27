@@ -110,9 +110,9 @@ KERNEL_MAKE_OPTIONS += \
     EXTRA_FW="$(_EXTRA_FW_)" \
     EXTRA_FW_DIR="$(abspath $(PRODUCT_OUT)/vendor/firmware)"
 
-KERNEL_MAKE_OPTIONS += \
-    LLVM=1 \
-    HOSTLDFLAGS=-fuse-ld=lld \
+#KERNEL_MAKE_OPTIONS += \
+#    LLVM=1 \
+#    HOSTLDFLAGS=-fuse-ld=lld \
 
 {{#more_modules}}
 KERNEL_MODULES_DIFFCONFIG += $(wildcard $(KERNEL_CONFIG_PATH)/modules_diffconfig)
