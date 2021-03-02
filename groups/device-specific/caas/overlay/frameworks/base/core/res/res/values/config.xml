@@ -197,4 +197,8 @@
         <item>bugreport</item>
         <item>users</item>
     </string-array>
+    <!-- Names of packages that should not be suspended when personal use is blocked by policy. -->
+    <string-array name="config_packagesExemptFromSuspension" translatable="false">
+        <item>com.google.android.apps.wellbeing</item>
+    </string-array>
 </resources>
