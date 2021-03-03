@@ -44,7 +44,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     hwcomposer.$(TARGET_GFX_INTEL)
 
+# VHal
+PRODUCT_PACKAGES += \
+    hwcomposer.remote
+
 INTEL_HWC_CONFIG := $(INTEL_PATH_VENDOR)/external/hwcomposer-intel
+
+REMOTE_HWC_CONFIG := $(INTEL_PATH_VENDOR)/external/cic-graphic-vhal
 
 ifeq ($(findstring _acrn,$(TARGET_PRODUCT)),_acrn)
 PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display_virt.ini:$(TARGET_COPY_OUT_VENDOR)/etc/hwc_display.ini
@@ -52,6 +58,9 @@ else
 PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display.ini:$(TARGET_COPY_OUT_VENDOR)/etc/hwc_display.ini
 PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display.kvm.ini:$(TARGET_COPY_OUT_VENDOR)/etc/hwc_display.kvm.ini
 endif
+
+PRODUCT_COPY_FILES += $(REMOTE_HWC_CONFIG)/display_settings.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display_settings.xml
+PRODUCT_COPY_FILES += $(REMOTE_HWC_CONFIG)/input-port-associations.xml:$(TARGET_COPY_OUT_VENDOR)/etc/input-port-associations.xml
 
 {{#minigbm}}
 # Mini gbm
