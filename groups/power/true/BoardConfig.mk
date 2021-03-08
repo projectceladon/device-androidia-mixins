@@ -11,4 +11,4 @@ HAS_THD := true
 {{/has_thd}}
 
 BOARD_SEPOLICY_M4DEFS += module_power=true
-BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/power
+#BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/power
