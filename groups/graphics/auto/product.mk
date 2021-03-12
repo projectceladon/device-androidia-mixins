@@ -57,7 +57,6 @@ endif
 # Mini gbm
 
 PRODUCT_PACKAGES += \
-    gralloc.minigbm \
     gralloc.$(TARGET_GFX_INTEL)
 {{/minigbm}}
 
