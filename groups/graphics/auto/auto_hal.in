@@ -14,13 +14,13 @@ case "$(cat /proc/fb)" in
                 ;;
         *virtiodrmfb)
                 echo "virtio-gpu"
-                setprop vendor.hwcomposer.set drm_minigbm
-                setprop vendor.gralloc.set minigbm
+                setprop vendor.hwcomposer.set default
+                setprop vendor.gralloc.set default
                 ;;
 	*virtio_gpudrmfb)
                 echo "virtio-gpu"
-                setprop vendor.hwcomposer.set drm_minigbm
-                setprop vendor.gralloc.set minigbm
+                setprop vendor.hwcomposer.set default
+                setprop vendor.gralloc.set default
                 ;;
         *)
                 echo "sw rendering"
