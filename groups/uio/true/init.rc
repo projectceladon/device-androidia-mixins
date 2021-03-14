@@ -1,0 +1,4 @@
+#For UIO device
+on post-fs
+    chmod 0660 /dev/uio0
+    chown system system /dev/uio0
