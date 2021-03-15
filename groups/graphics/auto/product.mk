@@ -66,7 +66,6 @@ PRODUCT_COPY_FILES += $(REMOTE_HWC_CONFIG)/input-port-associations.xml:$(TARGET_
 # Mini gbm
 
 PRODUCT_PACKAGES += \
-    gralloc.minigbm \
     gralloc.$(TARGET_GFX_INTEL)
 {{/minigbm}}
 
