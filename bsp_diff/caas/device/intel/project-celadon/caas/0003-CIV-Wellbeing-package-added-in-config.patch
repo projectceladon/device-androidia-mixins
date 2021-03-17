@@ -1,0 +1,30 @@
+From abd7988773e7804ad04bcc7825a2950d2b4427ed Mon Sep 17 00:00:00 2001
+From: vdanix <vishwanathx.dani@intel.com>
+Date: Wed, 17 Mar 2021 13:17:12 +0530
+Subject: [PATCH] [CIV] Wellbeing package added in config
+
+Fix for following GTS Test
+
+1)GtsWellbeingTestCases
+    testDigitalWellbeingIsExemptFromSuspension
+
+Change-Id: I24429e1539624bd5c2dbedb3cb4609e0d304be94
+Tracked-On: OAM-96457
+Signed-off-by: vdanix <vishwanathx.dani@intel.com>
+
+diff --git a/groups/device-specific/caas/overlay/frameworks/base/core/res/res/values/config.xml b/groups/device-specific/caas/overlay/frameworks/base/core/res/res/values/config.xml
+index 6095f5e..2327d56 100644
+--- a/groups/device-specific/caas/overlay/frameworks/base/core/res/res/values/config.xml
++++ b/groups/device-specific/caas/overlay/frameworks/base/core/res/res/values/config.xml
+@@ -197,4 +197,8 @@
+         <item>bugreport</item>
+         <item>users</item>
+     </string-array>
++    <!-- Names of packages that should not be suspended when personal use is blocked by policy. -->
++    <string-array name="config_packagesExemptFromSuspension" translatable="false">
++        <item>com.google.android.apps.wellbeing</item>
++    </string-array>
+ </resources>
+--
+2.31.0
+
