@@ -1,5 +1,11 @@
 update_graphics() {
 case "$(cat /proc/fb)" in
+        *i915)
+                echo "intel"
+                setprop vendor.hwcomposer.set intel
+                setprop vendor.gralloc.set intel
+                setprop vendor.hwcomposer.edid.all 0
+                ;;
         *i915drmfb)
                 echo "intel"
                 setprop vendor.hwcomposer.set intel
