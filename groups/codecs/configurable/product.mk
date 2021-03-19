@@ -9,7 +9,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/mfx_omxil_core_vp9.conf:vendor/etc/mfx_omxil_core.conf
 else
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs.xml:vendor/etc/media_codecs.xml \
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_{{gpu}}.xml:vendor/etc/media_codecs.xml \
     $(LOCAL_PATH)/{{_extra_dir}}/mfx_omxil_core.conf:vendor/etc/mfx_omxil_core.conf
 endif
 
