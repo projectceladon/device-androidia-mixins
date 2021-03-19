@@ -18,6 +18,7 @@ this option is used to select the platform and supported codec list
         - hw_vd_h265:   select hw accelerated h.265 decoder
         - hw_vd_h265_secure:    select hw accelerated h.265 secure decoder
         - hw_ve_vp8:    select hw accelerated vp8 encoder
+        - hw_ve_vp9:    select hw accelerated vp9 encoder
         - hw_ve_h265:   select hw accelerated h.265 encoder
         - hw_ve_h264:   select hw accelerated h.264 encoder
         - hw_vd_h264:   select hw accelerated h.264 decoder
