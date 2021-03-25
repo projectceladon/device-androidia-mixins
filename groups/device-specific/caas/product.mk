@@ -64,3 +64,4 @@ PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/LG_B1_Client:$(PR
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/lg_example.sh:$(PRODUCT_OUT)/scripts/lg_example.sh
 PRODUCT_COPY_FILES += vendor/intel/utils/bsp_diff/common/vendor/intel/external/hwcomposer-intel/vendor/lib64/hw/hwcomposer.remote.so:vendor/lib64/hw/hwcomposer.remote.so
 PRODUCT_COPY_FILES += vendor/intel/utils/bsp_diff/common/vendor/intel/external/hwcomposer-intel/vendor/lib/hw/hwcomposer.remote.so:vendor/lib/hw/hwcomposer.remote.so
+PRODUCT_PACKAGES += PenguinPeakUtils
