@@ -134,7 +134,6 @@ power_profile
 prc-compatibility
 product-partition
 production-signing
-psdapp
 pstore
 ptest
 public-libraries
