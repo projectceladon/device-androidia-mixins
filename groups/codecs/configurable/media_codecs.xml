@@ -79,7 +79,7 @@ Only the three quirks included above are recognized at this point:
 {{#hw_vd_vc1}}
         <MediaCodec name="OMX.Intel.hw_vd.vc1" type="video/x-ms-wmv" >
             <!-- profiles and levels:  ProfileBaseline : Level51 -->
-            <Limit name="size" min="64x64" max="3840x2160" />
+            <Limit name="size" min="64x64" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
             <Limit name="blocks-per-second" range="1-972000" />
@@ -143,7 +143,7 @@ Only the three quirks included above are recognized at this point:
 
 {{#hw_vd_h265}}
         <MediaCodec name="OMX.Intel.hw_vd.h265" type="video/hevc" >
-            <Limit name="size" min="64x64" max="3840x2160" />
+            <Limit name="size" min="64x64" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
             <Limit name="blocks-per-second" range="1-972000" />
@@ -155,7 +155,7 @@ Only the three quirks included above are recognized at this point:
 
 {{#hw_vd_h265_secure}}
         <MediaCodec name="OMX.Intel.hw_vd.h265.secure" type="video/hevc" >
-           <Limit name="size" min="64x64" max="3840x2160" />
+           <Limit name="size" min="64x64" max="8192x8192" />
            <Limit name="alignment" value="2x2" />
            <Limit name="block-size" value="16x16" />
            <Limit name="blocks-per-second" range="1-972000" />
