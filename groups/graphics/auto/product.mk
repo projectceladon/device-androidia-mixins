@@ -44,6 +44,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     hwcomposer.$(TARGET_GFX_INTEL)
 
+PRODUCT_PACKAGES += \
+    hwcomposer.remote
+
 INTEL_HWC_CONFIG := $(INTEL_PATH_VENDOR)/external/hwcomposer-intel
 
 ifeq ($(findstring _acrn,$(TARGET_PRODUCT)),_acrn)
