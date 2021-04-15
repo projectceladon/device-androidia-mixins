@@ -60,6 +60,9 @@ ifeq ($(BASE_CHROMIUM_KERNEL), true)
 else ifeq ($(BASE_YOCTO_KERNEL), true)
   LOCAL_KERNEL_SRC := {{{yocto_src_path}}}
   KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{yocto_cfg_path}}}
+else ifeq ($(BASE_LTS2020_ANDROID_KERNEL), true)
+  LOCAL_KERNEL_SRC := {{{lts2020_android_src_path}}}
+  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{lts2020_android_cfg_path}}}
 else
   LOCAL_KERNEL_SRC := {{{src_path}}}
   EXT_MODULES := {{{external_modules}}}
