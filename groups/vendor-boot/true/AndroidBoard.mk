@@ -1,5 +1,5 @@
-BOARD_PREBUILT_VENDOR_BOOT_DIR := $(TARGET_DEVICE_DIR)/vendor-boot-ramdisk
-INTERNAL_VENDOR_RAMDISK_TARGET := $(call intermediates-dir-for,PACKAGING,vendor-boot)/vendor-ramdisk.cpio.gz
+BOARD_PREBUILT_VENDOR_BOOT_DIR := $(TARGET_DEVICE_DIR)/vendor_boot-ramdisk
+INTERNAL_VENDOR_RAMDISK_TARGET := $(call intermediates-dir-for,PACKAGING,vendor_boot)/vendor_ramdisk.cpio.gz
 
 .PHONY: vendor_boot_prebuilt
 vendor_boot_prebuilt:
