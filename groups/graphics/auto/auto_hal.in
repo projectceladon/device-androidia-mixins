@@ -15,11 +15,13 @@ case "$(cat /proc/fb)" in
         *virtiodrmfb)
                 echo "virtio-gpu"
                 setprop vendor.hwcomposer.set remote
+                setprop sys.display.size 540x960
                 setprop vendor.gralloc.set intel
                 ;;
 	*virtio_gpudrmfb)
                 echo "virtio-gpu"
                 setprop vendor.hwcomposer.set remote
+                setprop sys.display.size 540x960
                 setprop vendor.gralloc.set intel
                 ;;
         *)
