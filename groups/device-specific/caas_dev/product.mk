@@ -44,3 +44,7 @@ PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/guest_time_keepin
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/start_flash_usb.sh:$(PRODUCT_OUT)/scripts/start_flash_usb.sh
 PRODUCT_COPY_FILES += vendor/intel/fw/trusty-release-binaries/rpmb_dev:$(PRODUCT_OUT)/scripts/rpmb_dev
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/wakeup.py:$(PRODUCT_OUT)/scripts/wakeup.py
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/camera_sharing_bin/IntelCameraService:$(PRODUCT_OUT)/scripts/IntelCameraService
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/camera_sharing_bin/0001-Netlink-sync.patch:$(PRODUCT_OUT)/scripts/0001-Netlink-sync.patch
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/camera_sharing_bin/stream:$(PRODUCT_OUT)/scripts/stream
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/camera_sharing_bin/libvhal-client.so:$(PRODUCT_OUT)/scripts/libvhal-client.so
