@@ -26,7 +26,6 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/rpmb_dev
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_lg_client.sh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/LG_B1_Client
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/lg_example.sh
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/ffmpeg_script.sh
 
 # for USB OTG WA
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/bxt_usb

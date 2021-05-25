@@ -50,4 +50,3 @@ PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/lg_example.sh:$(P
 PRODUCT_COPY_FILES += vendor/intel/utils/bsp_diff/common/vendor/intel/external/hwcomposer-intel/vendor/lib64/hw/hwcomposer.remote.so:vendor/lib64/hw/hwcomposer.remote.so
 PRODUCT_COPY_FILES += vendor/intel/utils/bsp_diff/common/vendor/intel/external/hwcomposer-intel/vendor/lib/hw/hwcomposer.remote.so:vendor/lib/hw/hwcomposer.remote.so
 PRODUCT_PACKAGES += PenguinPeakUtils
-PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/ffmpeg_script.sh:$(PRODUCT_OUT)/scripts/ffmpeg_script.sh
