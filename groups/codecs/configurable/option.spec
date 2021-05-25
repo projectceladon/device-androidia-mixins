@@ -9,6 +9,7 @@ hw_ve_vp8 = false
 hw_ve_vp9 = false
 hw_ve_h265 = false
 hw_ve_h264 = true
+sw_vd_h264 = false
 hw_vd_h264 = true
 hw_vd_h264_secure = false
 hw_vd_mp2 = false
