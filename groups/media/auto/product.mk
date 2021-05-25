@@ -30,6 +30,7 @@ ifeq ($(BOARD_USE_64BIT_USERSPACE),true)
 PRODUCT_PACKAGES += \
     libmfxsw64
 endif
+BOARD_HAVE_MEDIASDK_SRC := true
 {{/add_sw_msdk}}
 
 {{#opensource_msdk}}
