@@ -10,6 +10,14 @@ on early-boot
 service storageproxyd /vendor/bin/storageproxyd -d /dev/trusty-ipc-dev0 -p /data/vendor/securestorage -r /dev/vport0p1 -t virt
     user system
     group system
+
+on boot
+    start keyboxd
+
+service keyboxd /vendor/bin/keybox_provisioning -d /dev/trusty-ipc-dev0 -p /dev/block/by-name/teedata
+    user system
+    group system
+    oneshot
 {{/enable_storage_proxyd}}
 {{/enable_hw_sec}}
 

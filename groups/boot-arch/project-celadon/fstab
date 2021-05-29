@@ -20,7 +20,7 @@ system   /system  ext4 ro,barrier=1 wait{{#slot-ab}},slotselect{{/slot-ab}}{{#av
 {{^slot-ab}}
 /dev/block/by-name/cache        /cache          ext4    noatime,nosuid,nodev,errors=panic                           wait,check
 {{/slot-ab}}
-/dev/block/by-name/{{#dynamic-partitions}}user{{/dynamic-partitions}}data         /data           {{^data_use_f2fs}}ext4{{/data_use_f2fs}}{{#data_use_f2fs}}f2fs{{/data_use_f2fs}}    noatime,nosuid,nodev{{^data_use_f2fs}},noauto_da_alloc,errors=panic{{/data_use_f2fs}}   wait,check,formattable{{#disk_encryption}},forceencrypt=/dev/block/by-name/metadata{{/disk_encryption}}{{#trusty}}{{#file_encryption}},fileencryption=aes-256-xts:aes-256-cts{{/file_encryption}}{{/trusty}},quota,reservedsize=50m{{#userdata_checkpoint}},latemount{{^data_use_f2fs}},checkpoint=block{{/data_use_f2fs}}{{#data_use_f2fs}},checkpoint=fs{{/data_use_f2fs}}{{/userdata_checkpoint}}
+/dev/block/by-name/{{#dynamic-partitions}}user{{/dynamic-partitions}}data         /data           {{^data_use_f2fs}}ext4{{/data_use_f2fs}}{{#data_use_f2fs}}f2fs{{/data_use_f2fs}}    noatime,nosuid,nodev{{^data_use_f2fs}},noauto_da_alloc,errors=panic{{/data_use_f2fs}}   wait,check,formattable{{#disk_encryption}},forceencrypt=/dev/block/by-name/metadata{{/disk_encryption}}{{#trusty}}{{#file_encryption}},fileencryption=aes-256-xts:aes-256-cts{{/file_encryption}}{{/trusty}},quota,reservedsize=50m{{#fsverity}},fsverity{{/fsverity}}{{#metadata_encryption}},latemount,keydirectory=/metadata/vold/metadata_encryption{{#userdata_checkpoint}}{{^data_use_f2fs}},checkpoint=block{{/data_use_f2fs}}{{#data_use_f2fs}},checkpoint=fs{{/data_use_f2fs}}{{/userdata_checkpoint}}{{/metadata_encryption}}
 /dev/block/by-name/boot         /boot           emmc    defaults                                                    defaults{{#slot-ab}},slotselect{{#avb}},avb{{/avb}}{{/slot-ab}}
 {{^slot-ab}}
 /dev/block/by-name/recovery     /recovery       emmc    defaults                                                    defaults
@@ -35,6 +35,6 @@ system   /system  ext4 ro,barrier=1 wait{{#slot-ab}},slotselect{{/slot-ab}}{{#av
 /dev/block/by-name/bootloader   /bootloader     emmc    defaults                                                    recoveryonly{{#bootloader_slot_ab}},slotselect{{/bootloader_slot_ab}}
 /dev/block/by-name/bootloader2  /bootloader2    emmc    defaults                                                    recoveryonly
 /dev/block/by-name/persistent   /persistent     emmc    defaults                                                    defaults
-/dev/block/by-name/metadata     /metadata       ext4    noatime,nosuid,nodev,errors=panic{{#userdata_checkpoint}},discard{{/userdata_checkpoint}}                           wait,check,formattable,first_stage_mount
+/dev/block/by-name/metadata     /metadata       ext4    noatime,nosuid,nodev,errors=panic{{#metadata_encryption}},discard{{/metadata_encryption}}                           wait,check,formattable,first_stage_mount
 {{/use_cic}}
 

@@ -35,6 +35,9 @@ BOARD_CACHEIMAGE_PARTITION_SIZE ?= 104857600
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := {{system_fs}}
 DATA_USE_F2FS := {{data_use_f2fs}}
 
+#fastbootd over ethernet support
+TARGET_RECOVERY_UI_LIB:=librecovery_ui_ethernet
+
 ifeq ($(DATA_USE_F2FS), true)
 TARGET_USERIMAGES_USE_F2FS := true
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
@@ -44,10 +47,10 @@ BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
 INTERNAL_USERIMAGES_EXT_VARIANT := ext4
 endif
 
-{{#userdata_checkpoint}}
+{{#metadata_encryption}}
 BOARD_USES_METADATA_PARTITION := true
 BOARD_ROOT_EXTRA_FOLDERS += metadata
-{{/userdata_checkpoint}}
+{{/metadata_encryption}}
 
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 

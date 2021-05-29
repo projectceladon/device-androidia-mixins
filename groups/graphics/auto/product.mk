@@ -21,6 +21,14 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += ufo_prebuilts
 
+#Surface Flinger related Properties
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.max_frame_buffer_acquired_buffers=3
+
+# System's VSYNC phase offsets in nanoseconds
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.vsync_event_phase_offset_ns=7500000
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.vsync_sf_event_phase_offset_ns=3000000
+
 # i915 firmwares
 $(foreach fw,$(I915_FW),$(eval PRODUCT_PACKAGES += $(notdir $(fw))))
 
@@ -32,15 +40,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     hwcomposer.drm_minigbm
 
-# PRODUCT_PROPERTY_OVERRIDES += \
-#   ro.hardware.hwcomposer=drm
-
 # HWComposer IA
 PRODUCT_PACKAGES += \
     hwcomposer.$(TARGET_GFX_INTEL)
-
-# PRODUCT_PROPERTY_OVERRIDES += \
-#   ro.hardware.hwcomposer=$(TARGET_GFX_INTEL)
 
 INTEL_HWC_CONFIG := $(INTEL_PATH_VENDOR)/external/hwcomposer-intel
 
@@ -53,19 +55,14 @@ endif
 
 {{#minigbm}}
 # Mini gbm
-# PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.hardware.gralloc=$(TARGET_GFX_INTEL)
 
 PRODUCT_PACKAGES += \
-    gralloc.minigbm \
     gralloc.$(TARGET_GFX_INTEL)
 {{/minigbm}}
 
 {{^minigbm}}
-#Gralloc
-# PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.hardware.gralloc=drm
 
+#Gralloc
 PRODUCT_PACKAGES += \
     gralloc.drm
 {{/minigbm}}
@@ -105,6 +102,9 @@ PRODUCT_COPY_FILES += \
 {{#vulkan}}
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:vendor/etc/permissions/android.hardware.vulkan.version.xml
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.vulkan.deqp.level-2020-03-01.xml:vendor/etc/permissions/android.software.vulkan.deqp.level.xml
 
 PRODUCT_PACKAGES += \
     vulkan.$(TARGET_BOARD_PLATFORM) \

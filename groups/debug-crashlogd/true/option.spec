@@ -1,4 +1,4 @@
 [defaults]
-logs_dir = /data/logs
+logs_dir = /data/vendor/logs
 ramdump =
 logger_rot_cnt = 100

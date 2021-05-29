@@ -1,50 +1,33 @@
-auto_hal() {
+update_graphics() {
 case "$(cat /proc/fb)" in
         *i915drmfb)
                 echo "intel"
                 setprop vendor.hwcomposer.set intel
                 setprop vendor.gralloc.set intel
                 setprop vendor.hwcomposer.edid.all 0
-                case "$(cat /sys/class/dmi/id/chassis_vendor | head -1)" in
-                        QEMU)
-                                setprop ro.graphics.hwcomposer.kvm true
-                                ;;
-                        *)
-                                setprop ro.graphics.hwcomposer.kvm false
-                                ;;
-                esac
                 ;;
         *inteldrmfb)
                 echo "intel"
                 setprop vendor.hwcomposer.set intel
                 setprop vendor.gralloc.set intel
                 setprop vendor.hwcomposer.edid.all 0
-	        case "$(cat /sys/class/dmi/id/chassis_vendor | head -1)" in
-                        QEMU)
-                                setprop ro.graphics.hwcomposer.kvm true
-                                ;;
-                        *)
-                                setprop ro.graphics.hwcomposer.kvm false
-                                ;;
-                esac
                 ;;
         *virtiodrmfb)
                 echo "virtio-gpu"
                 setprop vendor.hwcomposer.set drm_minigbm
-                setprop vendor.gralloc.set minigbm
+                setprop vendor.gralloc.set intel
                 ;;
 	*virtio_gpudrmfb)
                 echo "virtio-gpu"
                 setprop vendor.hwcomposer.set drm_minigbm
-                setprop vendor.gralloc.set minigbm
+                setprop vendor.gralloc.set intel
                 ;;
         *)
                 echo "sw rendering"
-                setprop vendor.egl.set swiftshader
-                setprop vendor.hwcomposer.set default
-                setprop vendor.gralloc.set default
-                setprop ro.graphics.hwcomposer.kvm false
+                setprop vendor.egl.set softpipe
+                setprop vendor.hwcomposer.set drm_minigbm
+                setprop vendor.gralloc.set intel
                 ;;
 esac
 }
-auto_hal&
+update_graphics
