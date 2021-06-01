@@ -11,6 +11,8 @@ PRODUCT_PACKAGES += \
     libigdfcl
 
 PRODUCT_PACKAGES += \
+    ServiceAgent \
+    pm_agent_client \
     libdrm \
     libdrm_intel \
     libsync \

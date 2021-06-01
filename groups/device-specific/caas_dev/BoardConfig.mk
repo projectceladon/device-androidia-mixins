@@ -11,6 +11,7 @@ BOARD_KERNEL_CMDLINE += \
 
 BOARD_FLASHFILES += ${TARGET_DEVICE_DIR}/bldr_utils.img:bldr_utils.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/LICENSE
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/cfc-0.1.0-x64.deb
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/start_civ.sh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/start_flash_usb.sh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/auto_switch_pt_usb_vms.sh
