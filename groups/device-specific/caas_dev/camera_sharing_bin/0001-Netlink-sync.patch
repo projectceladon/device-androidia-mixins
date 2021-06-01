@@ -1,0 +1,201 @@
+From 68fe44c6753b4ffa75a43ad07fa29d36cf93c90a Mon Sep 17 00:00:00 2001
+From: Neo Fang <neo.fang@intel.com>
+Date: Tue, 25 May 2021 15:27:24 +0800
+Subject: [PATCH] Netlink sync
+
+Add netlink send/receive in v4l2loopback_open and v4l2loopback_close functions.
+When an app tries to open v4l2loopback device node, v4l2loopback_open/close will broadcast
+this message thru netlink and wait 750ms for the response.
+In design, IntelCameraService(userspace service) will fetch the netlink message and
+sendback the response after handled.
+---
+ v4l2loopback.c | 109 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 109 insertions(+)
+
+diff --git a/v4l2loopback.c b/v4l2loopback.c
+index 2e63751..fb6cbf1 100644
+--- a/v4l2loopback.c
++++ b/v4l2loopback.c
+@@ -36,6 +36,11 @@
+ #endif
+ #include <media/v4l2-event.h>
+ 
++#include <linux/netlink.h>
++#include <linux/skbuff.h>
++#include <net/sock.h>
++#include <linux/completion.h>
++
+ #include <linux/miscdevice.h>
+ #include "v4l2loopback.h"
+ 
+@@ -63,6 +68,9 @@ MODULE_AUTHOR("Vasily Levin, "
+ 	      "et al.");
+ MODULE_LICENSE("GPL");
+ 
++struct sock *nl_sk = NULL;
++#define MYMGRP 22
++
+ /*
+  * helpers
+  */
+@@ -458,6 +466,76 @@ struct v4l2l_format {
+ #define FORMAT_FLAGS_PLANAR 0x01
+ #define FORMAT_FLAGS_COMPRESSED 0x02
+ 
++
++DECLARE_COMPLETION(SyncCompl);
++
++void nl_recv_msg(struct sk_buff *skb) {
++    struct nlmsghdr *nlh = nlmsg_hdr(skb);
++    dprintk(KERN_INFO "Netlink received msg from userspace echo:%s\n", (char *)nlmsg_data(nlh));
++    complete(&SyncCompl);
++}
++
++void nl_send_msg(char *msg) {
++    struct sk_buff *skb_out;
++    struct nlmsghdr *nlh;
++    int res;
++    int msg_size;
++
++	char send_msg[48];
++	unsigned long timeout;
++	unsigned long ret_compl;
++
++	dprintk(KERN_ALERT "THREAD NAME = %s\n", current->comm);
++	if (strncmp(current->comm, "IntelCameraService", strlen(current->comm)) == 0) {
++		return;
++	}
++	memset(send_msg, 0, sizeof(send_msg));
++	sprintf(send_msg, "%d&%s&%s", current->pid, current->comm, msg);
++    msg_size = strlen(send_msg) + 1;
++
++    skb_out = nlmsg_new(
++        NLMSG_ALIGN(msg_size), // @payload: size of the message payload
++        GFP_NOWAIT             // @flags: the type of memory to allocate.
++    );
++    if (!skb_out) {
++        printk(KERN_ERR "Failed to allocate new skb\n");
++        return;
++    }
++
++    nlh = nlmsg_put(
++        skb_out,    // @skb: socket buffer to store message in
++        0,          // @portid: netlink PORTID of requesting application
++        0,          // @seq: sequence number of message
++        NLMSG_DONE, // @type: message type
++        msg_size,   // @payload: length of message payload
++        0           // @flags: message flags
++    );
++
++    memcpy(nlmsg_data(nlh), send_msg, msg_size);
++    res = nlmsg_multicast(
++            nl_sk,     // @sk: netlink socket to spread messages to
++            skb_out,   // @skb: netlink message as socket buffer
++            0,         // @portid: own netlink portid to avoid sending to yourself
++            MYMGRP,    // @group: multicast group id
++            GFP_NOWAIT // @flags: allocation flags
++    );
++	//msleep(500);
++
++    if (res < 0) {
++        printk(KERN_INFO "Error while sending to user: %d\n", res);
++    } else {
++		dprintk(KERN_INFO "Netlink sent msg to userspace :%s %d\n", send_msg, msg_size);
++		timeout = msecs_to_jiffies(3000);
++		ret_compl = wait_for_completion_timeout(&SyncCompl, timeout);
++		if (ret_compl == 0) {
++			dprintk(KERN_INFO "wait_for_completion_timeout timeout.");
++		} 
++		dprintk(KERN_INFO "wait_for_completion_timeout done %lu, %lu", ret_compl, timeout);
++		
++	}
++
++}
++
+ #include "v4l2loopback_formats.h"
+ 
+ static const unsigned int FORMATS = ARRAY_SIZE(formats);
+@@ -1978,14 +2056,26 @@ static unsigned int v4l2_loopback_poll(struct file *file,
+ 	return ret_mask;
+ }
+ 
++#define PROMPT_OPEN "open&"
++#define PROMPT_CLOSE "close&"
++#define PROMPT_READ "read&"
++#define PROMPT_WRITE "write&"
++
+ /* do not want to limit device opens, it can be as many readers as user want,
+  * writers are limited by means of setting writer field */
+ static int v4l2_loopback_open(struct file *file)
+ {
+ 	struct v4l2_loopback_device *dev;
+ 	struct v4l2_loopback_opener *opener;
++	char msg[128];
+ 	MARK();
+ 	dev = v4l2loopback_getdevice(file);
++
++	memset(msg, 0, sizeof(msg));
++	strcpy(msg, PROMPT_OPEN);
++	strcpy(msg + strlen(PROMPT_OPEN), dev->card_label);
++	nl_send_msg(msg);
++
+ 	if (dev->open_count.counter >= dev->max_openers)
+ 		return -EBUSY;
+ 	/* kfree on close */
+@@ -2020,6 +2110,7 @@ static int v4l2_loopback_close(struct file *file)
+ 	struct v4l2_loopback_opener *opener;
+ 	struct v4l2_loopback_device *dev;
+ 	int iswriter = 0;
++	char msg[128];
+ 	MARK();
+ 
+ 	opener = fh_to_opener(file->private_data);
+@@ -2042,6 +2133,12 @@ static int v4l2_loopback_close(struct file *file)
+ 	if (iswriter) {
+ 		dev->ready_for_output = 1;
+ 	}
++
++	memset(msg, 0, sizeof(msg));
++	strcpy(msg, PROMPT_CLOSE);
++	strcpy(msg + strlen(PROMPT_CLOSE), dev->card_label);
++	nl_send_msg(msg);
++
+ 	MARK();
+ 	return 0;
+ }
+@@ -2772,6 +2869,9 @@ static int __init v4l2loopback_init_module(void)
+ {
+ 	int err;
+ 	int i;
++	struct netlink_kernel_cfg cfg = {
++           .input = nl_recv_msg,
++    };
+ 	MARK();
+ 
+ 	err = misc_register(&v4l2loopback_misc);
+@@ -2856,6 +2956,13 @@ static int __init v4l2loopback_init_module(void)
+ 	       (V4L2LOOPBACK_VERSION_CODE      ) & 0xff);
+ 	// clang-format on
+ 
++    printk(KERN_INFO "Init NetLink of V4l2Loopback\n");
++    nl_sk = netlink_kernel_create(&init_net, NETLINK_USERSOCK, &cfg);
++    if (!nl_sk) {
++        printk(KERN_ALERT "Error creating socket.\n");
++        goto error;
++    }
++
+ 	return 0;
+ error:
+ 	misc_deregister(&v4l2loopback_misc);
+@@ -2866,6 +2973,8 @@ error:
+ static void v4l2loopback_cleanup_module(void)
+ {
+ 	MARK();
++	netlink_kernel_release(nl_sk);
++
+ 	/* unregister the device -> it deletes /dev/video* */
+ 	free_devices();
+ 	/* and get rid of /dev/v4l2loopback */
+-- 
+2.25.1
+
