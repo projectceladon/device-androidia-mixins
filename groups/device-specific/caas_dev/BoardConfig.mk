@@ -23,6 +23,9 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/guest_pm_control
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/intel-thermal-conf.xml
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/thermald.service
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/rpmb_dev
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_lg_client.sh
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/LG_B1_Client
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/lg_example.sh
 
 # for USB OTG WA
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/bxt_usb

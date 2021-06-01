@@ -24,7 +24,7 @@ function setMicGain {
 cpu_family=$(getCpuInfo 'family:')
 cpu_model=$(getCpuInfo 'Model:')
 #Additional handling for CML NUC
-if [[ ($cpu_family = 6) && ($cpu_model = 166) ]]; then
+if [[ ($cpu_family = 6) && (($cpu_model = 166) || ($cpu_model = 140)) ]]; then
         echo "CML NUC detected"
         if [[ $1 == "setMicGain" ]]; then
                 setMicGain 15
