@@ -24,6 +24,12 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/intel-thermal-conf.xml
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/thermald.service
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/rpmb_dev
 
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/stream
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/libvhal-client.so
+
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/IntelCameraService
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/0001-Netlink-sync.patch
+
 # for USB OTG WA
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/bxt_usb
 
