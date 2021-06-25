@@ -16,3 +16,8 @@ on post-fs
     insmod /vendor/lib/modules/pps_core.ko
     insmod /vendor/lib/modules/ptp.ko
     insmod /vendor/lib/modules/e1000e.ko
+    insmod /vendor/lib/modules/marvell.ko
+    insmod /vendor/lib/modules/phylink.ko
+    insmod /vendor/lib/modules/stmmac.ko
+    insmod /vendor/lib/modules/stmmac-pci.ko
+
