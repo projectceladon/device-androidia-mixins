@@ -51,6 +51,7 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/sof_audio/configure_sof.sh:$(PRODUCT_OUT)/sc
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/setup_audio_host.sh:$(PRODUCT_OUT)/scripts/setup_audio_host.sh
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/sof_audio/blacklist-dsp.conf:$(PRODUCT_OUT)/scripts/sof_audio/blacklist-dsp.conf
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/guest_pm_control:$(PRODUCT_OUT)/scripts/guest_pm_control
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/is-screen-on:$(PRODUCT_OUT)/scripts/is-screen-on
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/intel-thermal-conf.xml:$(PRODUCT_OUT)/scripts/intel-thermal-conf.xml
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/thermald.service:$(PRODUCT_OUT)/scripts/thermald.service
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/start_civ.sh:$(PRODUCT_OUT)/scripts/start_civ.sh
