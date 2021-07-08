@@ -2,7 +2,7 @@
 celadon_ivi:
 celadon_tablet:
 caas:
-caas_var:
+caas_cfc:
 cic:
 
 [dev]
