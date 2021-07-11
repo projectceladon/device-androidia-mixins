@@ -6,6 +6,9 @@ value_model=`grep -i model /proc/cpuinfo | cut -d ':' -f2 | head -n 1`
 if [ $value_model == 166 ]; then
     setprop ro.vendor.media.target_variant "_gen9"
     setprop ro.vendor.media.target_variant_platform "_cml"
+elif [ $value_model == 150 ]; then
+    setprop ro.vendor.media.target_variant "_gen11"
+    setprop ro.vendor.media.target_variant_platform "_ehl"
 elif [ $value_model == 141 ]; then
     setprop ro.vendor.media.target_variant "_gen12"
     setprop ro.vendor.media.target_variant_platform "_tgl"
