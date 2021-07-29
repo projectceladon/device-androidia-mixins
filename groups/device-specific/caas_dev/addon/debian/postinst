@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+echo "post installation"
+cd /opt
+DIR="/opt/RELEASE_DEB"
+if [ ! -d $DIR ]; then
+mkdir -p $DIR
+else
+sudo rm -rf $DIR
+mkdir -p $DIR
+fi
+cd $DIR
+echo $DIR
+mv /RELEASE_DEB/caas*-flashfiles-*.zip $DIR
+mv /RELEASE_DEB/scripts $DIR
+cd $DIR
+echo "cp OVMF to $DIR"
+if [ ! -f /usr/share/qemu/OVMF.fd ]; then
+echo "cannot find OVMF.fd"
+exit 0
+else
+sudo cp /usr/share/qemu/OVMF.fd  $DIR
+fi
+if [ ! -d /opt/lg  ];then
+sudo mkdir /opt/lg
+elif [ ! -d /opt/lg/bin  ];then
+sudo mkdir /opt/lg/bin
+else
+echo "File already exists"
+fi
+sudo cp $DIR/scripts/LG_B1_Client /opt/lg/bin
+echo "<<<WILL START FLASH IMAGE, IT MAY TAKE 5~10 MINUTES!>>>"
+sudo -E $DIR/scripts/start_flash_usb.sh $DIR/caas*-flashfiles-*.zip --display-off
+sudo rm -rf $DIR/flashfiles_decompress/ $DIR/flash.vfat
