@@ -1,0 +1,14 @@
+on boot && property:vendor.aaf.mounted=1
+    start civ_powerctl
+    start civ_applauncher
+
+on property:sys.boot_completed=1 && property:vendor.aaf.mounted=1
+    exec - system system -- /system/bin/civ_startup_notify
+
+service civ_powerctl /system/bin/civ_powerctl
+    user system
+    group system
+
+service civ_applauncher /system/bin/civ_applauncher
+    user system
+    group system
