@@ -8,6 +8,10 @@ case "$(cat /proc/fb)" in
                 echo "intel"
                 setprop vendor.intel.video.codec hardware
                 ;;
+        *i915)
+                echo "intel"
+                setprop vendor.intel.video.codec hardware
+                ;;
         *)
                 echo "software codec"
                 setprop vendor.intel.video.codec software
