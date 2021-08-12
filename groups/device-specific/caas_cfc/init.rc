@@ -52,3 +52,7 @@ on post-fs
     chown system system /dev/uio2
     chmod 0660 /dev/uio3
     chown system system /dev/uio3
+
+#For OMX
+on post-fs-data
+    setprop debug.stagefright.ccodec 0

@@ -13,6 +13,7 @@ sw_vd_h264 = false
 hw_vd_h264 = true
 hw_vd_h264_secure = false
 hw_vd_mp2 = false
+sw_omx_video = false
 codec_perf_xen = false
 profile_file = media_profiles.xml
 gpu = gen12
