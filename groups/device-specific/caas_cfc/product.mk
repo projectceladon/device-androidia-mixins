@@ -18,6 +18,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += vndservicemanager \
                     hwcomposer.remote
 
+PRODUCT_PACKAGES += \
+    ServiceAgent \
+    pm_agent_client
+
 PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
                     android.hardware.keymaster@3.0-service \
                     android.hardware.usb@1.0-impl \
@@ -38,6 +42,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.crypto.volume.metadata.method=dm-default-key \
     ro.crypto.dm_default_key.options_format.version=2 \
     ro.crypto.volume.options=::v2
+
+PRODUCT_COPY_FILES += vendor/intel/app_icon_manager/host/bins/cfc-0.1.0-x64.deb:$(PRODUCT_OUT)/scripts/cfc-0.1.0-x64.deb
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_admin.xml:vendor/etc/permissions/android.software.device_admin.xml \
