@@ -11,3 +11,4 @@ audio.safemedia.bypass=true
 debug.nn.cpuonly=0
 camera.disable_treble=false
 ro.incremental.enable=yes
+ro.config.media_vol_default=15
