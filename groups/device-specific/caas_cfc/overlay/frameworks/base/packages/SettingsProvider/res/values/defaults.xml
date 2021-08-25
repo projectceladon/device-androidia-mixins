@@ -21,6 +21,9 @@
     <!-- Default for Settings.Secure.WAKE_GESTURE_ENABLED -->
     <bool name="def_wake_gesture_enabled">false</bool>
 
+    <!-- Disable lock screen -->
+    <bool name="def_lockscreen_disabled">true</bool>
+
     <!-- Keep screen on at all times by default -->
     <bool name="def_stay_on_while_plugged_in">true</bool>
 
