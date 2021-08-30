@@ -3,6 +3,11 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:vendor/etc/media_codecs_google_audio.xml \
     $(LOCAL_PATH)/{{_extra_dir}}/{{profile_file}}:vendor/etc/media_profiles_V1_0.xml
 
+{{#sw_omx_video}}
+PRODUCT_COPY_FILES += \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:vendor/etc/media_codecs_google_video.xml
+{{/sw_omx_video}}
+
 ifeq ($(BASE_YOCTO_KERNEL),true)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_vp9.xml:vendor/etc/media_codecs.xml \

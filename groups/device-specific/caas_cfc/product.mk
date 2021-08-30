@@ -15,7 +15,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ueventd.rc:root/ueventd.$(TARGET_PRODUCT).rc \
 {{/treble}}
 
-PRODUCT_PACKAGES += vndservicemanager
+PRODUCT_PACKAGES += vndservicemanager \
+                    hwcomposer.remote
+
+PRODUCT_PACKAGES += \
+    ServiceAgent \
+    pm_agent_client
 
 PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
                     android.hardware.keymaster@3.0-service \
@@ -38,6 +43,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.crypto.dm_default_key.options_format.version=2 \
     ro.crypto.volume.options=::v2
 
+PRODUCT_COPY_FILES += vendor/intel/app_icon_manager/host/bins/cfc-0.1.0-x64.deb:$(PRODUCT_OUT)/scripts/cfc-0.1.0-x64.deb
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_admin.xml:vendor/etc/permissions/android.software.device_admin.xml \
     frameworks/native/data/etc/android.software.managed_users.xml:vendor/etc/permissions/android.software.managed_users.xml \
@@ -59,3 +66,4 @@ PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/guest_time_keepin
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/start_flash_usb.sh:$(PRODUCT_OUT)/scripts/start_flash_usb.sh
 PRODUCT_COPY_FILES += vendor/intel/fw/trusty-release-binaries/rpmb_dev:$(PRODUCT_OUT)/scripts/rpmb_dev
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/wakeup.py:$(PRODUCT_OUT)/scripts/wakeup.py
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/cfc_example.sh:$(PRODUCT_OUT)/scripts/cfc_example.sh

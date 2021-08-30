@@ -16,6 +16,9 @@ this option will enable aaf daemon.
     --- code dir
         - vendor/intel/external/project-celadon/aaf
 
+--- cfc
+this option is specific for caas_cfc target
+
 --- false
 this option will disable aaf.
 
