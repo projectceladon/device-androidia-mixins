@@ -13,3 +13,4 @@ camera.disable_treble=false
 ro.incremental.enable=yes
 ro.adb.secure=0
 persist.sys.usb.config=adb
+ro.config.media_vol_default=15
