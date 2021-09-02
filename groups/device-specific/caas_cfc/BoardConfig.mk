@@ -35,6 +35,9 @@ BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/i915_async
 # for service agent
 PRODUCT_PRIVATE_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/service_agent/private
 
+#for clipboard agent
+PRODUCT_PRIVATE_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/clipboard_agent/private
+
 #add vendor property
 BOARD_SEPOLICY_DIRS += device/intel/sepolicy/vendor/
 
