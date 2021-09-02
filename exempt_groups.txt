@@ -93,6 +93,7 @@ ims
 intel_prop
 ioc
 ipcs
+ipp
 ipp_libz
 jack
 jpeg-turbo
