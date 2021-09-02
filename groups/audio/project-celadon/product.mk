@@ -58,7 +58,10 @@ else
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/mixer_paths_0.xml:vendor/etc/mixer_paths_0.xml
 endif
-
+#TODO:need to remove once we have dynamic HDMI routing is working for BM 
+ifeq ($(BASE_LTS2020_YOCTO_KERNEL), true)
+PRODUCT_PROPERTY_OVERRIDES += ro.vendor.hdmi.audio=BM
+endif
 #fallback
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/fallback/audio_policy_configuration_generic.xml:system/etc/audio_policy_configuration.xml \
