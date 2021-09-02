@@ -58,7 +58,9 @@ else
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/mixer_paths_0.xml:vendor/etc/mixer_paths_0.xml
 endif
-
+ifeq ($(BUILD_BM), true)
+PRODUCT_PROPERTY_OVERRIDES += ro.vendor.hdmi.audio=bm
+endif
 #fallback
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/fallback/audio_policy_configuration_generic.xml:system/etc/audio_policy_configuration.xml \

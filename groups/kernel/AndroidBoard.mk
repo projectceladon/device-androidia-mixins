@@ -61,6 +61,7 @@ else ifeq ($(BASE_YOCTO_KERNEL), true)
   LOCAL_KERNEL_SRC := {{{yocto_src_path}}}
   KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{yocto_cfg_path}}}
 else ifeq ($(BASE_LTS2020_YOCTO_KERNEL), true)
+  BUILD_BM := true
   LOCAL_KERNEL_SRC := {{{lts2020_yocto_src_path}}}
   KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{lts2020_yocto_cfg_path}}}
 else
