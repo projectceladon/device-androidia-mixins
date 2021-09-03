@@ -19,6 +19,7 @@ vinput-manager:
 	cd device/intel/civ/host/virtual-input-manager && $(LOCAL_MAKE)
 	cp device/intel/civ/host/virtual-input-manager/vinput-manager $(PRODUCT_OUT)/scripts/
 	cp device/intel/civ/host/virtual-input-manager/sendkey $(PRODUCT_OUT)/scripts/
+	cp device/intel/civ/host/virtual-input-manager/lg-input-manager $(PRODUCT_OUT)/scripts/
 
 .PHONY: em-host-utilities
 em-host-utilities:
