@@ -26,7 +26,7 @@ TARGET_USE_PRIVATE_LIBDRM := false
 endif
 
 BOARD_USE_MESA := true
-BOARD_GPU_DRIVERS := i965
+BOARD_GPU_DRIVERS := i965 iris
 BOARD_USES_MINIGBM := true
 INTEL_MINIGBM := external/minigbm-intel
 BOARD_USES_GRALLOC1 := true
