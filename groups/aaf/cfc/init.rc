@@ -2,6 +2,9 @@ on fs
     mkdir /mnt/share
     mount 9p aaf /mnt/share
     exec - system system -- /vendor/bin/logwrapper /vendor/bin/sh /vendor/bin/auto_detection.sh
+    mkdir /mnt/share/WeXin
+    mkdir /storage/emulated/0/Pictures/PIC
+    mount --bind /mnt/share/WeXin /storage/emulated/0/Pictures/PIC
     setprop ro.hardware.hwcomposer remote
     setprop sys.display.size 540x960
     setprop ro.hardware.gralloc ${vendor.gralloc.set}
