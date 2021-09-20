@@ -69,3 +69,4 @@ PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/start_flash_usb.s
 PRODUCT_COPY_FILES += vendor/intel/fw/trusty-release-binaries/rpmb_dev:$(PRODUCT_OUT)/scripts/rpmb_dev
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/wakeup.py:$(PRODUCT_OUT)/scripts/wakeup.py
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/cfc_example.sh:$(PRODUCT_OUT)/scripts/cfc_example.sh
+PRODUCT_COPY_FILES += device/intel/civ/host/virtual-input-manager/input-port-associations.xml:vendor/etc/input-port-associations.xml
