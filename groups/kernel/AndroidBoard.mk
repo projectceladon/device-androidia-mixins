@@ -63,6 +63,9 @@ else ifeq ($(BASE_YOCTO_KERNEL), true)
 else ifeq ($(BASE_LTS2020_YOCTO_KERNEL), true)
   LOCAL_KERNEL_SRC := {{{lts2020_yocto_src_path}}}
   KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{lts2020_yocto_cfg_path}}}
+else ifeq ($(BASE_LTS2020_CHROMIUM_KERNEL), true)
+  LOCAL_KERNEL_SRC := {{{lts2020_chromium_src_path}}}
+  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{lts2020_chromium_cfg_path}}}
 else
   LOCAL_KERNEL_SRC := {{{src_path}}}
   EXT_MODULES := {{{external_modules}}}
