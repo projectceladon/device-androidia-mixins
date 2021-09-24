@@ -1,5 +1,5 @@
 {{^ota-update}}
-<manifest version="1.0" type="device" target-level="5">
+<manifest version="1.0" type="device" target-level="6">
 {{/ota-update}}
 {{#ota-update}}
 <manifest version="1.0" type="device">
