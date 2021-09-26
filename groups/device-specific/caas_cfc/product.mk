@@ -70,3 +70,4 @@ PRODUCT_COPY_FILES += vendor/intel/fw/trusty-release-binaries/rpmb_dev:$(PRODUCT
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/wakeup.py:$(PRODUCT_OUT)/scripts/wakeup.py
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/cfc_example.sh:$(PRODUCT_OUT)/scripts/cfc_example.sh
 PRODUCT_COPY_FILES += device/intel/civ/host/virtual-input-manager/input-port-associations.xml:vendor/etc/input-port-associations.xml
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/mount_share.sh:$(TARGET_COPY_OUT_VENDOR)/bin/mount_share.sh
