@@ -41,6 +41,9 @@ PRODUCT_PRIVATE_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/clipboard_agent/private
 #add vendor property
 BOARD_SEPOLICY_DIRS += device/intel/sepolicy/vendor/
 
+#add share folder property
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/virt-share/
+
 TARGET_USES_HWC2 := true
 BOARD_USES_GENERIC_AUDIO := false
 
