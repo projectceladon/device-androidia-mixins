@@ -1,7 +1,7 @@
 # Houdini support
 TARGET_SUPPORTS_64_BIT_APPS := true
 
-PRODUCT_PACKAGES += libhoudini Houdini
+PRODUCT_PACKAGES += libhoudini houdini
 PRODUCT_PROPERTY_OVERRIDES += ro.dalvik.vm.isa.arm=x86 ro.enable.native.bridge.exec=1
 
 ENABLE_NATIVEBRIDGE_64BIT := false
