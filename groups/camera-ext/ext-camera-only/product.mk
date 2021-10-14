@@ -23,4 +23,4 @@ PRODUCT_PROPERTY_OVERRIDES += ro.vendor.remote.sf.fake_camera ="both" \
 # Only include test apps in eng or userdebug builds.
 #PRODUCT_PACKAGES_DEBUG += TestingCamera
 
-#PRODUCT_PACKAGES += MultiCameraApp
+PRODUCT_PACKAGES += MultiCameraApp
