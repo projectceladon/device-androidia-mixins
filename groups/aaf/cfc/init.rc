@@ -1,0 +1,10 @@
+on fs
+    mkdir /mnt/share
+    mount 9p aaf /mnt/share
+    exec - system system -- /vendor/bin/logwrapper /vendor/bin/sh /vendor/bin/auto_detection.sh
+    setprop ro.hardware.hwcomposer remote
+    setprop vendor.sys.display.size 540x960
+    setprop ro.hardware.gralloc ${vendor.gralloc.set}
+    setprop ro.power.fixed_performance_scale_factor ${vendor.power.fixed_performance_scale_factor}
+    setprop ro.media.xml_variant.codecs ${ro.vendor.media.target_variant}
+    setprop ro.media.xml_variant.codecs_performance ${ro.vendor.media.target_variant_platform}

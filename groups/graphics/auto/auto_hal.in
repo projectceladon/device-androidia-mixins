@@ -1,14 +1,20 @@
 update_graphics() {
 case "$(cat /proc/fb)" in
+        *i915)
+                echo "intel"
+                setprop vendor.hwcomposer.set drm_minigbm
+                setprop vendor.gralloc.set intel
+                setprop vendor.hwcomposer.edid.all 0
+                ;;
         *i915drmfb)
                 echo "intel"
-                setprop vendor.hwcomposer.set intel
+                setprop vendor.hwcomposer.set drm_minigbm
                 setprop vendor.gralloc.set intel
                 setprop vendor.hwcomposer.edid.all 0
                 ;;
         *inteldrmfb)
                 echo "intel"
-                setprop vendor.hwcomposer.set intel
+                setprop vendor.hwcomposer.set drm_minigbm
                 setprop vendor.gralloc.set intel
                 setprop vendor.hwcomposer.edid.all 0
                 ;;
@@ -21,6 +27,9 @@ case "$(cat /proc/fb)" in
                 echo "virtio-gpu"
                 setprop vendor.hwcomposer.set drm_minigbm
                 setprop vendor.gralloc.set intel
+                if [ "$(cat /sys/kernel/debug/dri/0/virtio-gpu-features |grep virgl |awk '{print $3}')" = "no" ];then
+                        setprop vendor.gles.set softpipe
+                fi
                 ;;
         *)
                 echo "sw rendering"

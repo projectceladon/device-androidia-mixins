@@ -22,7 +22,7 @@ kernel: $(PRODUCT_OUT)/kernel
 
 else
 
-TARGET_KERNEL_CLANG_VERSION := r412851
+TARGET_KERNEL_CLANG_VERSION := r416183b1
 CLANG_PREBUILTS_PATH := $(abspath $(INTEL_PATH_DEVICE)/../../../prebuilts/clang)
 
 ifneq ($(TARGET_KERNEL_CLANG_VERSION),)
@@ -57,9 +57,12 @@ DTB ?= $(BOARD_DTB)
 ifeq ($(BASE_CHROMIUM_KERNEL), true)
   LOCAL_KERNEL_SRC := {{{chromium_src_path}}}
   KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{chromium_cfg_path}}}
-else ifeq ($(BASE_YOCTO_KERNEL), true)
-  LOCAL_KERNEL_SRC := {{{yocto_src_path}}}
-  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{yocto_cfg_path}}}
+else ifeq ($(BASE_LTS2020_YOCTO_KERNEL), true)
+  LOCAL_KERNEL_SRC := {{{lts2020_yocto_src_path}}}
+  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{lts2020_yocto_cfg_path}}}
+else ifeq ($(BASE_LTS2020_CHROMIUM_KERNEL), true)
+  LOCAL_KERNEL_SRC := {{{lts2020_chromium_src_path}}}
+  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{lts2020_chromium_cfg_path}}}
 else
   LOCAL_KERNEL_SRC := {{{src_path}}}
   EXT_MODULES := {{{external_modules}}}
