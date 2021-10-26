@@ -25,7 +25,4 @@
     <!-- Width of the navigation bar when it is placed vertically on the screen -->
     <dimen name="navigation_bar_width">0dp</dimen>
 
-    <!-- Height of the status bar -->
-    <dimen name="status_bar_height">1dp</dimen>
-
 </resources>
