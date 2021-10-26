@@ -19,6 +19,7 @@ import os
 import time
 import glob
 import subprocess
+import signal
 from sys import argv,exit
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../qemu-4.2.0/python'))
@@ -61,8 +62,9 @@ def wakeup(qemu_hdl):
 
 def main():
 
-    if len(argv) != 2:
-        print(' <unix-socket> argument is not provided')
+    if len(argv) != 3:
+        print(' Proper argument not provided')
+        print(' 1. qmp-socket   2. path to sendkey library')
         exit(1)
 
     rtc_wakeup_device = detect_rtc_wakeup_src()
@@ -99,6 +101,7 @@ def main():
                             print("Reason: guest reset request")
                             cmdCommand = "reboot"
                             time.sleep(3)
+                            signal.signal(signal.SIGTERM, signal.SIG_IGN)
                             process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
                             break
                         elif "host-qmp-system-reset" in json.dumps(resp["data"]):
@@ -106,6 +109,7 @@ def main():
                             print("Reason: Reboot triggered by host")
                             cmdCommand = "reboot"
                             time.sleep(3)
+                            signal.signal(signal.SIGTERM, signal.SIG_IGN)
                             process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
                             break
                         elif "host-qmp-quit" in json.dumps(resp["data"]):
@@ -124,6 +128,7 @@ def main():
                             print("VM is getting Shutdown")
                             print("Reason: An error prevents further use of guest and results in shutdown")
                         cmdCommand = "shutdown -h now"
+                        signal.signal(signal.SIGTERM, signal.SIG_IGN)
                         time.sleep(3)
                         process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
                     elif val == "SUSPEND":
@@ -161,7 +166,7 @@ def main():
                     elif val == "WAKEUP":
                         if rtc_wakeup == 0:
                             time.sleep(1)
-                            cmdCommand = "./scripts/sendkey --vm 0 --power 0"
+                            cmdCommand = " ".join([argv[2], "--vm 0 --power 0"])
                             process = subprocess.call(cmdCommand.split(), stdout=subprocess.PIPE)
 
         except KeyboardInterrupt:
