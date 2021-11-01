@@ -1,25 +1,12 @@
 {{#enable_hw_sec}}
 
-KM_VERSION := {{{keymaster_version}}}
-
-ifeq ($(KM_VERSION),2)
-PRODUCT_PACKAGES += \
-	keystore.trusty
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.hardware.keystore=trusty
-endif
-
-ifeq ($(KM_VERSION),1)
-PRODUCT_PACKAGES += \
-	keystore.${TARGET_BOARD_PLATFORM}
-endif
-
 PRODUCT_PACKAGES += \
 	libtrusty \
 	storageproxyd \
 	libinteltrustystorage \
 	libinteltrustystorageinterface \
 	android.hardware.gatekeeper@1.0-service.trusty \
+	android.hardware.security.keymint-service.trusty \
 	keybox_provisioning \
 
 PRODUCT_PACKAGES_DEBUG += \
@@ -30,4 +17,9 @@ PRODUCT_PACKAGES_DEBUG += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.hardware.gatekeeper=trusty \
+	ro.hardware.keystore=trusty
+
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:vendor/etc/permissions/android.hardware.keystore.app_attest_key.xml
+
 {{/enable_hw_sec}}
