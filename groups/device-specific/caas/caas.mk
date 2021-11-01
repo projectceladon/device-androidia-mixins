@@ -40,6 +40,9 @@ INTEL_PATH_PREKERNEL := device/intel/prebuilt_kernel
 INTEL_PATH_PREBUILTS := vendor/intel/prebuilts
 INTEL_PATH_PREBUILTS_OUT = $(PRODUCT_OUT)/prebuilts
 
+# Set Vendor SPL to match platform
+VENDOR_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
+
 # refer board_config_mk definition in build/make/core/envsetup.mk file to get TARGET_DEVICE
 _board_config_mk := $(shell find $(dir $(current_product_makefile)) -maxdepth 2 -name BoardConfig.mk)
 #TARGET_DEVICE_DIR := $(shell dirname $(_board_config_mk))
