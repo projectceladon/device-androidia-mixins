@@ -18,7 +18,7 @@
 
   <path name="main-mic">
     <ctl name="Capture Switch" value="1 1" />
-    <ctl name="Capture Volume" value="63 63" />
+    <ctl name="Capture Volume" value="74 74" />
     <ctl name="Capture Source" value="Internal Mic" />
   </path>
 
