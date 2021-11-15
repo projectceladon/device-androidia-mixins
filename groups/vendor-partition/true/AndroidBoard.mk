@@ -17,4 +17,14 @@ $(RECOVERY_VENDOR_LINKS):
 	$(hide) touch $(dir $@)$(PRV_TARGET)
 	$(hide) ln -sf $(PRV_TARGET) $@
 
-ALL_DEFAULT_INSTALLED_MODULES += $(RECOVERY_VENDOR_LINKS)
+RECOVERY_VENDOR_BINARIES := $(PRODUCT_OUT)/recovery/root/vendor/bin/sh
+
+$(RECOVERY_VENDOR_BINARIES):  $(RECOVERY_VENDOR_LINKS)
+	$(hide) if [[ -e $(PRODUCT_OUT)/recovery/root/vendor/bin/toolbox_static ]] ; then \
+			rm $(PRODUCT_OUT)/recovery/root/vendor/bin/toolbox_static ; \
+		fi ;
+	$(hide) cp $(INTEL_PATH_TARGET_DEVICE)/${TARGET_PRODUCT}/{{_extra_dir}}/sh_recovery $(PRODUCT_OUT)/recovery/root/vendor/bin/sh
+	$(hide) cp $(INTEL_PATH_TARGET_DEVICE)/${TARGET_PRODUCT}/{{_extra_dir}}/toolbox_recovery $(PRODUCT_OUT)/recovery/root/vendor/bin/toolbox_static
+
+ALL_DEFAULT_INSTALLED_MODULES += \
+       $(RECOVERY_VENDOR_BINARIES)
