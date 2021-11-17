@@ -14,10 +14,6 @@ trusty is used to enable/disable VMM based TEE solution.
 this option will enable VMM based TEE.
 
     --- parameters
-        - lk_core_num: specify the core number which LK is running on.
-        - lk_project: specify the LK project name
-        - enable_hw_sec: specify whether to use hardware-backed KM/GK/SS.
-        - enable_storage_proxyd: specify whether to start storageproxyd service when kernel boot up.
         - ref_target: the refernece target
 
     --- code dir

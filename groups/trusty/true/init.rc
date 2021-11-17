@@ -1,9 +1,7 @@
-{{#enable_hw_sec}}
 on post-fs-data
     mkdir /data/vendor/securestorage 0700 system system
     chmod 666 /dev/rpmb0
 
-{{#enable_storage_proxyd}}
 on early-boot
     start storageproxyd
 
@@ -18,8 +16,6 @@ service keyboxd /vendor/bin/keybox_provisioning -d /dev/trusty-ipc-dev0 -p /dev/
     user system
     group system
     oneshot
-{{/enable_storage_proxyd}}
-{{/enable_hw_sec}}
 
 on post-fs
     wait_for_prop vendor.modules.trusty.ready true

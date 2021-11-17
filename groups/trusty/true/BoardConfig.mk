@@ -4,10 +4,8 @@ ifneq (, $(filter abl sbl, {{boot-arch}}))
 TARGET_USE_MULTIBOOT := true
 endif
 
-{{#enable_hw_sec}}
 BOARD_USES_TRUSTY := true
 BOARD_USES_KEYMASTER1 := true
-{{/enable_hw_sec}}
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/trusty/enabled
 BOARD_SEPOLICY_M4DEFS += module_trusty=true
 
