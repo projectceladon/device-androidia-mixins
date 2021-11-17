@@ -1,4 +1,3 @@
-{{#enable_hw_sec}}
 
 PRODUCT_PACKAGES += \
 	libtrusty \
@@ -22,4 +21,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:vendor/etc/permissions/android.hardware.keystore.app_attest_key.xml
 
-{{/enable_hw_sec}}
