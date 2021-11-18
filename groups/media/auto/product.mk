@@ -33,6 +33,18 @@ endif
 BOARD_HAVE_MEDIASDK_SRC := true
 {{/add_sw_msdk}}
 
+{{#enable_msdk_c2}}
+PRODUCT_PACKAGES += \
+    libmfx_c2_components_hw
+{{/enable_msdk_c2}}
+
+{{#use_onevpl}}
+PRODUCT_PACKAGES += \
+    libvpl \
+    libmfx-gen
+USE_ONEVPL := true
+{{/use_onevpl}}
+
 {{#opensource_msdk}}
 BOARD_HAVE_MEDIASDK_OPEN_SOURCE := true
 {{/opensource_msdk}}
