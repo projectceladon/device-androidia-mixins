@@ -1,3 +1,8 @@
 # start kernel in permissive mode, this way we don't
 # need 'setenforce 0' from init.rc files
-BOARD_KERNEL_CMDLINE += enforcing=0 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += enforcing=0
+ifeq ($(BOOTCONFIG_ENABLE), true)
+BOARD_BOOTCONFIG += androidboot.selinux=permissive
+else
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+endif
