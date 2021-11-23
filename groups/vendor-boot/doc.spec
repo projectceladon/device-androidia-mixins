@@ -10,6 +10,7 @@ this option is used to configure of adding vendor_boot partition
     --- parameters
         - partition_size: specify partition size
         - partition_name: specify partition name
+        - bootconfig_enable: support bootconfig feature
 
 --- false
 this option is used to configure of no need vendor_boot partition
