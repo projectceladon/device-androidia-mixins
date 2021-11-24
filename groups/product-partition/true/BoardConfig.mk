@@ -10,3 +10,4 @@ TARGET_USE_PRODUCT := true
 {{#slot-ab}}
 AB_OTA_PARTITIONS += product
 {{/slot-ab}}
+BOARD_EXT4_SHARE_DUP_BLOCKS := true
