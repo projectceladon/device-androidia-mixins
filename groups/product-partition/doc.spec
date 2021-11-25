@@ -7,7 +7,6 @@ make it possible to use a single system image for mulitiple sofeware SKUs.
     --- dpes
         - boot-arch
         - slot-ab
-        - avb
         - firststage-mount
         - dynamic-partitions
 

@@ -7,7 +7,6 @@ boot-arch is used to select bootloader and specify system main fstab.
     - variants
     - slot-ab
     - ota-upgrade
-    - avb
     - firststage-mount
     - dynamic-partitions
 

@@ -1,4 +1,6 @@
 {{^use_cic}}
+BOARD_AVB_ENABLE := true
+
 #
 # -- OTA RELATED DEFINES --
 #
@@ -140,15 +142,12 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_OPTIONAL_vendor=true
 {{/slot-ab}}
 
-{{#avb}}
 BOARD_AVB_ENABLE := true
 KERNELFLINGER_AVB_CMDLINE := true
 BOARD_VBMETAIMAGE_PARTITION_SIZE := 2097152
 BOARD_FLASHFILES += $(PRODUCT_OUT)/vbmeta.img
-{{/avb}}
 
 {{#slot-ab}}
-{{#avb}}
 AB_OTA_PARTITIONS += vbmeta
 {{#trusty}}
 AB_OTA_PARTITIONS += tos
@@ -161,7 +160,6 @@ BOARD_ESP_BLOCK_SIZE := $(BOARD_BOOTLOADER_BLOCK_SIZE)
 BOARD_FLASHFILES += $(PRODUCT_OUT)/esp.img
 AB_OTA_PARTITIONS += bootloader
 {{/bootloader_slot_ab}}
-{{/avb}}
 {{/slot-ab}}
 
 {{#usb_storage}}

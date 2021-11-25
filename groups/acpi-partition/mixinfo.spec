@@ -1,2 +1,2 @@
 [mixinfo]
-deps = boot-arch slot-ab avb firststage-mount
+deps = boot-arch slot-ab firststage-mount

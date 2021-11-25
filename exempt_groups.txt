@@ -10,7 +10,6 @@ app-config
 art-config
 audio
 autodetect
-avb
 aware
 bluetooth
 boot-arch

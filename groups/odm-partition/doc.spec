@@ -7,7 +7,6 @@ make it possible to use a single vendor image for mulitiple hardware SKUs.
     --- dpes
         - boot-arch
         - slot-ab
-        - avb
         - firststage-mount
 
 ==== Options
