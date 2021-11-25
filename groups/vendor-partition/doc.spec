@@ -5,7 +5,6 @@ vendor-partition is used to add new partition named vendor.
     --- dpes
         - boot-arch
         - slot-ab
-        - avb
         - firststage-mount
         - dynamic-partitions
 

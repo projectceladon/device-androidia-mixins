@@ -1,2 +1,2 @@
 [mixinfo]
-deps = boot-arch slot-ab avb firststage-mount dynamic-partitions
+deps = boot-arch slot-ab firststage-mount dynamic-partitions

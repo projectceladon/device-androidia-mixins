@@ -6,7 +6,6 @@ Using a sepatate /acpi partition to contain DSDT.
     --- dpes
         - boot-arch
         - slot-ab
-        - avb
         - firststage-mount
 
 ==== Options

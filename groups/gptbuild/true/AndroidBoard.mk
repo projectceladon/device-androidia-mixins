@@ -72,9 +72,7 @@ $(GPTIMAGE_BIN): \
 	recoveryimage \
 	cacheimage \
 	{{/slot-ab}}
-	{{#avb}}
 	vbmetaimage \
-	{{/avb}}
 	{{^dynamic-partitions}}
 	systemimage \
 	{{#vendor-partition}}
@@ -135,9 +133,7 @@ $(GPTIMAGE_BIN): \
 		--recovery $(INSTALLED_RECOVERYIMAGE_TARGET) \
 		--cache $(INSTALLED_CACHEIMAGE_TARGET).raw \
 		{{/slot-ab}}
-		{{#avb}}
 		--vbmeta $(INSTALLED_VBMETAIMAGE_TARGET) \
-		{{/avb}}
 	{{^dynamic-partitions}}
 		--system $(INSTALLED_SYSTEMIMAGE).raw \
 	{{#vendor-partition}}

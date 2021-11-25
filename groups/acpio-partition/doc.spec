@@ -6,7 +6,6 @@ Using a sepatate /acpio partition to contain SSDT.
     --- dpes
         - boot-arch
         - slot-ab
-        - avb
         - firststage-mount
 
 ==== Options

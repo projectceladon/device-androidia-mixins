@@ -1,2 +1,2 @@
 [mixinfo]
-deps = variants slot-ab ota-upgrade avb dynamic-partitions
+deps = variants slot-ab ota-upgrade dynamic-partitions

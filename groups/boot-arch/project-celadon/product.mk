@@ -7,12 +7,6 @@ KERNELFLINGER_SSL_LIBRARY := boringssl
 {{^use_cic}}
 BIOS_VARIANT := {{{bios_variant}}}
 
-{{^avb}}
-$(call inherit-product,build/target/product/verity.mk)
-
-PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/by-name/system
-{{/avb}}
-
 {{#treble}}
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/fstab:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(TARGET_PRODUCT)
@@ -101,11 +95,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 KERNELFLINGER_IGNORE_NOT_APPLICABLE_RESET := true
 {{/ignore_not_applicable_reset}}
 {{#verity_warning}}
-{{^avb}}
-PRODUCT_PACKAGES += \
-	slideshow \
-	verity_warning_images
-{{/avb}}
 {{/verity_warning}}
 {{#txe_bind_root_of_trust}}
 # It makes kernelflinger bind the device state to the root of trust
@@ -146,9 +135,7 @@ PRODUCT_COPY_FILES += system/extras/checkpoint_gc/checkpoint_gc.sh:recovery/root
 {{/userdata_checkpoint}}
 {{/slot-ab}}
 
-{{#avb}}
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
-{{/avb}}
 
 {{#keybox_provision}}
 KERNELFLINGER_SUPPORT_KEYBOX_PROVISION := true
