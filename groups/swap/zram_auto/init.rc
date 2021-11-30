@@ -4,7 +4,7 @@ on boot
     write /proc/sys/vm/page-cluster 0
 {{#swappiness}}
    # Avoid evicting pages and use zram disk
-    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/swappiness 10
 {{/swappiness}}
 {{#disk_based_swap}}
    # Enable disk_based_swap on Chromium kernels
@@ -14,6 +14,6 @@ on boot
 on post-fs
     exec - system system -- /vendor/bin/check_lowmem.sh
 
-on property:vendor.low_ram=1
+on property:vendor.le_4g_ram=1
     # Enable swaps described in the fstab
     swapon_all /vendor/etc/fstab.${ro.hardware}
