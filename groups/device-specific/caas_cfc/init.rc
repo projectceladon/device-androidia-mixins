@@ -56,3 +56,20 @@ on post-fs
 #For OMX
 on post-fs-data
     setprop debug.stagefright.ccodec 0
+
+on boot
+    start mount_share
+
+service mount_share /vendor/bin/mount_share.sh
+    user system
+    group system
+    disabled
+    oneshot
+
+on property:vendor.intel.mount_share=1
+    mount 9p Download9p /data/media/0/Download mode=0777
+    mount none /data/media/0/Download /mnt/user/0/emulated/0/Download bind
+    mkdir /storage/emulated/0/Download/WeChat 0777
+    mount 9p Pictures9p /data/media/0/Pictures mode=0777
+    mount none /data/media/0/Pictures /mnt/user/0/emulated/0/Pictures bind
+    mkdir /storage/emulated/0/Pictures/WeChat 0777
