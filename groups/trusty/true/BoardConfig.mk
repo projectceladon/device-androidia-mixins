@@ -36,5 +36,19 @@ endif
 #to guarantee the cpu_up success.
 BOARD_KERNEL_CMDLINE += cpu_init_udelay=10
 
+ifeq ($(BOOTCONFIG_ENABLE), true)
+BOARD_BOOTCONFIG += androidboot.brand=$(subst $(space),$(comma),$(PRODUCT_BRAND))
+BOARD_BOOTCONFIG += androidboot.device=$(subst $(space),$(comma),$(PRODUCT_DEVICE))
+BOARD_BOOTCONFIG += androidboot.model=$(subst $(space),$(comma),$(PRODUCT_MODEL))
+BOARD_BOOTCONFIG += androidboot.manufacturer=$(subst $(space),$(comma),$(PRODUCT_MANUFACTURER))
+BOARD_BOOTCONFIG += androidboot.name=$(subst $(space),$(comma),$(PRODUCT_NAME))
+else
+BOARD_KERNEL_CMDLINE += androidboot.brand=$(subst $(space),$(comma),$(PRODUCT_BRAND))
+BOARD_KERNEL_CMDLINE += androidboot.device=$(subst $(space),$(comma),$(PRODUCT_DEVICE))
+BOARD_KERNEL_CMDLINE += androidboot.model=$(subst $(space),$(comma),$(PRODUCT_MODEL))
+BOARD_KERNEL_CMDLINE += androidboot.manufacturer=$(subst $(space),$(comma),$(PRODUCT_MANUFACTURER))
+BOARD_KERNEL_CMDLINE += androidboot.name=$(subst $(space),$(comma),$(PRODUCT_NAME))
+endif
+
 #TOS_PREBUILT := $(PWD)/$(INTEL_PATH_VENDOR)/fw/evmm/tos.img
 #EVMM_PREBUILT := $(PWD)/$(INTEL_PATH_VENDOR)/fw/evmm/multiboot.img
