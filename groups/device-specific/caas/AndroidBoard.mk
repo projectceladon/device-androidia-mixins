@@ -26,5 +26,10 @@ em-host-utilities:
 	cd device/intel/civ/host/backend/thermal/vm_thermal_utility && $(LOCAL_MAKE)
 	cp device/intel/civ/host/backend/thermal/vm_thermal_utility/thermsys $(PRODUCT_OUT)/scripts/
 
+.PHONY: rtc-monitor
+rtc-monitor:
+	cd device/intel/civ/host/rtc-monitor && $(LOCAL_MAKE)
+	cp device/intel/civ/host/rtc-monitor/guest_rtc_monitor $(PRODUCT_OUT)/scripts/
+
 .PHONY: host-pkg
-host-pkg: em-host-utilities vinput-manager
+host-pkg: em-host-utilities vinput-manager rtc-monitor
