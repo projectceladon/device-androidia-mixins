@@ -6,7 +6,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += bluetooth.rfkill=1
 
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-service.vbt \
+    android.hardware.bluetooth@1.1-service.vbt \
     libbt-vendor \
 
 {{#ivi}}
