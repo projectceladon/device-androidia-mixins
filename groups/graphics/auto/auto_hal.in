@@ -23,13 +23,17 @@ case "$(cat /proc/fb)" in
                 setprop vendor.hwcomposer.set drm_minigbm
                 setprop vendor.gralloc.set intel
                 ;;
-	*virtio_gpudrmfb)
+        *virtio_gpudrmfb)
                 echo "virtio-gpu"
                 setprop vendor.hwcomposer.set drm_minigbm
                 setprop vendor.gralloc.set intel
-                if [ "$(cat /sys/kernel/debug/dri/0/virtio-gpu-features |grep virgl |awk '{print $3}')" = "no" ];then
-                        setprop vendor.gles.set softpipe
-                fi
+                setprop vendor.gles.set softpipe
+                ;;
+        *virtio_gpu)
+                echo "virtio-gpu"
+                setprop vendor.hwcomposer.set drm_minigbm
+                setprop vendor.gralloc.set intel
+                setprop vendor.gles.set softpipe
                 ;;
         *)
                 echo "sw rendering"
