@@ -1,7 +1,7 @@
 # neuralnetworks HAL
 PRODUCT_PACKAGES += \
-    android.hardware.neuralnetworks@1.2-generic-service \
-    android.hardware.neuralnetworks@1.2-generic-impl \
+    android.hardware.neuralnetworks@1.3-generic-service \
+    android.hardware.neuralnetworks@1.3-generic-impl \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/plugins.xml:vendor/etc/openvino/plugins.xml \
