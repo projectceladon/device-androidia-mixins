@@ -14,6 +14,15 @@ PRODUCT_COPY_FILES += \
 {{#slot-ab}}
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/fstab:$(PRODUCT_OUT)/recovery/root/first_stage_ramdisk/fstab.$(TARGET_PRODUCT)
+{{#virtual_ab}}
+$(call inherit-product, \
+    $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+{{#virtual_ab_compression}}
+$(call inherit-product, \
+    $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+PRODUCT_PACKAGES += snapuserd_ramdisk
+{{/virtual_ab_compression}}
+{{/virtual_ab}}
 {{/slot-ab}}
 
 {{#super_img_in_flashzip}}

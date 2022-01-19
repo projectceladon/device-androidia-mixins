@@ -8,7 +8,13 @@ BOARD_SUPER_PARTITION_SIZE := $(shell echo {{super_partition_size}}*1024*1024 | 
 BOARD_GROUP_SYS_SIZE = $(shell echo "$(BOARD_SUPER_PARTITION_SIZE) - {{overhead_size}}*1024*1024" | bc)
 {{/slot-ab}}
 {{#slot-ab}}
+{{^virtual_ab}}
 BOARD_GROUP_SYS_SIZE = $(shell echo "$(BOARD_SUPER_PARTITION_SIZE) / 2 - {{overhead_size}}*1024*1024" | bc)
+{{/virtual_ab}}
+{{#virtual_ab}}
+BOARD_GROUP_SYS_SIZE = $(shell echo "$(BOARD_SUPER_PARTITION_SIZE) - {{overhead_size}}*1024*1024" | bc)
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/virtual_ab
+{{/virtual_ab}}
 {{/slot-ab}}
 {{/dp_retrofit}}
 
