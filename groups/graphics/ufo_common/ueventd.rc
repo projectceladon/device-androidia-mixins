@@ -1,5 +1,0 @@
-# Graphics nodes
-/dev/dri/controlD64           0660   root       graphics
-
-/dev/sw_sync                  0660   system     mediadrm
-
