@@ -31,8 +31,8 @@ BOARD_USES_IA_PLANNER := true
 {{/drmhwc}}
 
 {{^drmhwc}}
-BOARD_USES_DRM_HWCOMPOSER := false
-BOARD_USES_IA_HWCOMPOSER := true
+BOARD_USES_DRM_HWCOMPOSER := true
+BOARD_USES_IA_HWCOMPOSER := false
 {{/drmhwc}}
 
 {{#minigbm}}
