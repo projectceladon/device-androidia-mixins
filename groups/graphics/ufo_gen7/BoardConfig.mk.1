@@ -1,0 +1,10 @@
+# Select ufo gen7 libs
+UFO_ENABLE_GEN := gen7
+
+# HWC will be built from prebuilts for BYT derived platforms
+INTEL_HWC_FROM_PREBUILTS := true
+
+# Defines Intel library for GPU accelerated Renderscript:
+OVERRIDE_RS_DRIVER := libRSDriver_intel7.so
+
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/graphics/ufo_gen7

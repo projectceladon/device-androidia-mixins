@@ -41,7 +41,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.drm_minigbm
 
 # HWComposer IA
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     hwcomposer.$(TARGET_GFX_INTEL)
 
 INTEL_HWC_CONFIG := $(INTEL_PATH_VENDOR)/external/hwcomposer-intel
