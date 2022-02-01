@@ -10,4 +10,3 @@ ro.board.platform=celadon
 audio.safemedia.bypass=true
 debug.nn.cpuonly=0
 camera.disable_treble=false
-ro.incremental.enable=yes
