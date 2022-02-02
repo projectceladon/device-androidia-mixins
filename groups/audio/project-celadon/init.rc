@@ -1,5 +1,32 @@
-on boot
+on fs
     insmod /vendor/lib/modules/snd-dummy.ko
+    insmod /vendor/lib/modules/snd-sof.ko
+    insmod /vendor/lib/modules/snd-sof-xtensa-dsp.ko
+    insmod /vendor/lib/modules/snd-sof-pci.ko
+    insmod /vendor/lib/modules/snd-sof-intel-ipc.ko
+    insmod /vendor/lib/modules/snd-sof-acpi.ko
+    insmod /vendor/lib/modules/snd-hda-ext-core.ko
+    insmod /vendor/lib/modules/snd-sof-intel-hda.ko
+    insmod /vendor/lib/modules/snd-soc-hdac-hda.ko
+    insmod /vendor/lib/modules/snd-sof-intel-hda-common.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-tgl.ko
+    insmod /vendor/lib/modules/snd-mixer-oss.ko
+    insmod /vendor/lib/modules/snd-seq.ko
+    insmod /vendor/lib/modules/snd-soc-dmic.ko
+    insmod /vendor/lib/modules/snd-soc-hdac-hdmi.ko
+    insmod /vendor/lib/modules/snd-soc-intel-hda-dsp-common.ko
+    insmod /vendor/lib/modules/snd-soc-skl_hda_dsp.ko
+    insmod /vendor/lib/modules/snd-soc-sst-dsp.ko
+    insmod /vendor/lib/modules/snd-soc-sst-ipc.ko
+    insmod /vendor/lib/modules/snd-sof-acpi-intel-bdw.ko
+    insmod /vendor/lib/modules/snd-sof-acpi-intel-byt.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-apl.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-cnl.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-icl.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-tng.ko
+    insmod /vendor/lib/modules/snd-usb-hiface.ko
+    insmod /vendor/lib/modules/snd-seq-midi-event.ko
+    insmod /vendor/lib/modules/snd-seq-midi.ko
 
 on property:sys.boot_completed=1 && property:ro.vendor.hdmi.audio=tgl
     stop audioserver
