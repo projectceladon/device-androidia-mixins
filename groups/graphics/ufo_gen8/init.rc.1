@@ -1,7 +1,0 @@
-# Allow the Gfx PCI device(0000:02:00) to go into D0ix states through runtime pm
-on boot
-	write /sys/devices/pci0000\:00/0000\:00\:02.0/power/control auto
-
-on charger
-    write /sys/devices/pci0000\:00/0000\:00\:02.0/power/control auto
-

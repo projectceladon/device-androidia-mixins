@@ -40,19 +40,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     hwcomposer.drm_minigbm
 
-# HWComposer IA
-PRODUCT_PACKAGES += \
-    hwcomposer.$(TARGET_GFX_INTEL)
-
-INTEL_HWC_CONFIG := $(INTEL_PATH_VENDOR)/external/hwcomposer-intel
-
-ifeq ($(findstring _acrn,$(TARGET_PRODUCT)),_acrn)
-PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display_virt.ini:$(TARGET_COPY_OUT_VENDOR)/etc/hwc_display.ini
-else
-PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display.ini:$(TARGET_COPY_OUT_VENDOR)/etc/hwc_display.ini
-PRODUCT_COPY_FILES += $(INTEL_HWC_CONFIG)/hwc_display.kvm.ini:$(TARGET_COPY_OUT_VENDOR)/etc/hwc_display.kvm.ini
-endif
-
 {{#minigbm}}
 # Mini gbm
 
