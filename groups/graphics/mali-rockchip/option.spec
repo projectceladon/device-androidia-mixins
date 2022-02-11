@@ -1,1 +1,0 @@
-../mali-common/option.spec

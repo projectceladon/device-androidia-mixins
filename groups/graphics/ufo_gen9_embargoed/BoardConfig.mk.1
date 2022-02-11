@@ -1,9 +1,0 @@
-# Select ufo gen9 libs
-UFO_ENABLE_GEN := gen9_embargoed
-
-# Use external/drm-dev
-TARGET_USE_PRIVATE_LIBDRM := true
-LIBDRM_VER ?= dev
-
-# Force atomic modesetting on gen9 and above
-BOARD_KERNEL_CMDLINE += drm.atomic=1 i915.nuclear_pageflip=1 i915.enable_rc6=1
