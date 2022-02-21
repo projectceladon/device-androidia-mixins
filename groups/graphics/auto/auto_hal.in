@@ -33,7 +33,7 @@ case "$(cat /proc/fb)" in
                 ;;
         *)
                 echo "sw rendering"
-                setprop vendor.egl.set softpipe
+                setprop vendor.egl.set swiftshader
                 setprop vendor.hwcomposer.set drm_minigbm
                 setprop vendor.gralloc.set intel
                 ;;
