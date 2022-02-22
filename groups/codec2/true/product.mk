@@ -2,9 +2,12 @@
 
 {{#enable_msdk_c2}}
 PRODUCT_COPY_FILES += \
-    vendor/intel/mediasdk_c2/c2_store/data/mfx_c2_store.conf:vendor/etc/mfx_c2_store.conf \
-    vendor/intel/mediasdk_c2/c2_store/data/media_codecs_c2.xml:vendor/etc/media_codecs_c2.xml \
-    vendor/intel/mediasdk_c2/c2_store/data/media_codecs_intel_c2_video.xml:vendor/etc/media_codecs_intel_c2_video.xml
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_c2_{{platform}}.xml:vendor/etc/media_codecs_performance_c2.xml \
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_c2_tgl.xml:vendor/etc/media_codecs_performance_tgl.xml \
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_c2_adl.xml:vendor/etc/media_codecs_performance_adl.xml \
+    $(LOCAL_PATH)/{{_extra_dir}}/mfx_c2_store.conf:vendor/etc/mfx_c2_store.conf \
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_c2.xml:vendor/etc/media_codecs_c2.xml \
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_intel_c2_video.xml:vendor/etc/media_codecs_intel_c2_video.xml
 
 PRODUCT_PACKAGES += \
     libmfx_c2_components_hw \
