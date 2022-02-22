@@ -27,6 +27,7 @@ charger
 charger-usb
 chrome
 codecs
+codec2
 compatibility-enhancement
 compiler
 config-partition
