@@ -1,4 +1,4 @@
-on post-fs
+on early-boot
     insmod /vendor/lib/modules/ecc.ko
     insmod /vendor/lib/modules/ecdh_generic.ko
     insmod /vendor/lib/modules/bluetooth.ko
