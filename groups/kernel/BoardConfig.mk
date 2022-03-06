@@ -60,6 +60,9 @@ BOARD_KERNEL_CMDLINE += \
 BOARD_KERNEL_CMDLINE += \
       snd-hda-intel.model=dell-headset-multi
 
+BOARD_KERNEL_CMDLINE += \
+      snd-intel-dspcfg.dsp_driver=3
+
 ifeq ($(BASE_YOCTO_KERNEL), true)
 BOARD_KERNEL_CMDLINE += \
       snd-intel-dspcfg.dsp_driver=1
