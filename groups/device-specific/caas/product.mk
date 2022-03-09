@@ -17,9 +17,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += vndservicemanager
 
-PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
-                    android.hardware.keymaster@3.0-service \
-                    android.hardware.usb@1.0-impl \
+PRODUCT_PACKAGES += android.hardware.usb@1.0-impl \
                     android.hardware.usb@1.0-service \
                     camera.device@1.0-impl \
                     android.hardware.camera.provider@2.4-impl \
