@@ -1,45 +1,36 @@
 update_graphics() {
 case "$(cat /proc/fb)" in
-        *i915)
-                echo "intel"
-                setprop vendor.hwcomposer.set drm_minigbm
-                setprop vendor.gralloc.set intel
-                setprop vendor.hwcomposer.edid.all 0
+        *i915*)
+                echo "i915 rendering"
+                setprop vendor.egl.set mesa
+                setprop vendor.vulkan.set celadon
                 ;;
-        *i915drmfb)
-                echo "intel"
-                setprop vendor.hwcomposer.set drm_minigbm
-                setprop vendor.gralloc.set intel
-                setprop vendor.hwcomposer.edid.all 0
+        *intel*)
+                echo "intel rendering"
+                setprop vendor.egl.set mesa
+                setprop vendor.vulkan.set celadon
                 ;;
-        *inteldrmfb)
-                echo "intel"
-                setprop vendor.hwcomposer.set drm_minigbm
-                setprop vendor.gralloc.set intel
-                setprop vendor.hwcomposer.edid.all 0
-                ;;
-        *virtiodrmfb)
-                echo "virtio-gpu"
-                setprop vendor.hwcomposer.set drm_minigbm
-                setprop vendor.gralloc.set intel
-                ;;
-        *virtio_gpudrmfb)
-                echo "virtio-gpu"
-                setprop vendor.hwcomposer.set drm_minigbm
-                setprop vendor.gralloc.set intel
-                setprop vendor.gles.set softpipe
-                ;;
-        *virtio_gpu)
-                echo "virtio-gpu"
-                setprop vendor.hwcomposer.set drm_minigbm
-                setprop vendor.gralloc.set intel
-                setprop vendor.gles.set softpipe
+	*virtio*)
+                if [ "$(cat /sys/kernel/debug/dri/0/name |awk '{print $1}')" = "i915" ];then
+                        echo "sriov rendering"
+                        setprop vendor.egl.set mesa
+                        setprop vendor.vulkan.set celadon
+                else
+                        if [ "$(cat /sys/kernel/debug/dri/0/virtio-gpu-features |grep virgl |awk '{print $3}')" = "no" ];then
+                                echo "swiftshader rendering"
+                                setprop vendor.egl.set swiftshader
+                                setprop vendor.vulkan.set pastel
+                        else
+                                echo "virtio rendering"
+                                setprop vendor.egl.set mesa
+                                setprop vendor.vulkan.set pastel
+                        fi
+                fi
                 ;;
         *)
                 echo "sw rendering"
                 setprop vendor.egl.set swiftshader
-                setprop vendor.hwcomposer.set drm_minigbm
-                setprop vendor.gralloc.set intel
+                setprop vendor.vulkan.set pastel
                 ;;
 esac
 }
