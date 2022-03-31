@@ -15,7 +15,6 @@ endif
 
 ifeq ($(BASE_LTS2020_YOCTO_KERNEL),true)
 BOARD_KERNEL_CMDLINE += i915.enable_guc=1
-BOARD_KERNEL_CMDLINE += i915.disable_display=1
 endif
 
 USE_OPENGL_RENDERER := true
