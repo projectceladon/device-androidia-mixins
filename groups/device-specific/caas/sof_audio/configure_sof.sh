@@ -44,6 +44,7 @@ function setupSof {
 
 function restore {
     cd $SOF_WORK_DIR
+    rm -rf sof-bin
     sudo rm -rf $LIB_FW
     sudo rm -rf $LIB_TPLG
     if [ -d "sof_bkp" ]; then
@@ -52,9 +53,8 @@ function restore {
     if [ -d "sof-tplg_bkp" ]; then
         sudo mv "sof-tplg_bkp" $LIB_TPLG
     fi
-    if [ -f "blacklist_hda_bkp" ]; then
-        sudo mv "blacklist_hda_bkp" $BLACKLIST_HDA_CONF
-    fi
+    cd ..
+    rm -rf  $SOF_WORK_DIR
     sed -i 's/options snd-intel-dspcfg dsp_driver=3/options snd-intel-dspcfg dsp_driver=1/g' $ALSA_CONF
 }
 
