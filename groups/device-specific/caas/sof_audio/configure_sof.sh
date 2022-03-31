@@ -3,7 +3,6 @@ SOFBIN_TPLGS="sof-bin/lib/firmware/intel/sof-tplg-v1.4.2/"
 SOFBIN_FWS="sof-bin/lib/firmware/intel/sof/v1.4.2/"
 LIB_TPLG="/lib/firmware/intel/sof-tplg/"
 LIB_FW="/lib/firmware/intel/sof/"
-BLACKLIST_HDA_CONF="/etc/modprobe.d/blacklist-dsp.conf"
 SOF_WORK_DIR="$2/sof_audio"
 USAGE="Usage : configure_sof.sh install/uninstall WorkingDir"
 
@@ -17,11 +16,6 @@ function setupSof {
     if [ -d "$LIB_TPLG" ]; then
         if [ ! -d "sof-tplg_bkp" ]; then
             sudo mv $LIB_TPLG "sof-tplg_bkp"
-        fi
-    fi
-    if [ -f "$BLACKLIST_HDA_CONF" ]; then
-        if [ ! -f "blacklist_hda_bkp" ]; then
-            sudo mv $BLACKLIST_HDA_CONF "blacklist_hda_bkp"
         fi
     fi
     sudo mkdir $LIB_FW
@@ -38,22 +32,18 @@ function setupSof {
     sudo cp "${SOFBIN_TPLGS}sof-hda-generic.tplg" $LIB_TPLG
     sudo cp "${SOFBIN_FWS}intel-signed/sof-cnl-v1.4.2.ri" "${LIB_FW}sof-cml.ri"
     sudo cp "${SOFBIN_FWS}intel-signed/sof-cnl-v1.4.2.ri" "${LIB_FW}sof-cnl.ri"
-    #sudo cp "blacklist-dsp.conf" $BLACKLIST_HDA_CONF
 }
 
 function restore {
     cd $SOF_WORK_DIR
+    rm -rf sof-bin
     sudo rm -rf $LIB_FW
     sudo rm -rf $LIB_TPLG
-    sudo rm $BLACKLIST_HDA_CONF
     if [ -d "sof_bkp" ]; then
         sudo mv "sof_bkp" $LIB_FW
     fi
     if [ -d "sof-tplg_bkp" ]; then
         sudo mv "sof-tplg_bkp" $LIB_TPLG
-    fi
-    if [ -f "blacklist_hda_bkp" ]; then
-        sudo mv "blacklist_hda_bkp" $BLACKLIST_HDA_CONF
     fi
 }
 
