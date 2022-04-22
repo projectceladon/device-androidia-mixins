@@ -7,6 +7,7 @@ BOARD_KERNEL_CMDLINE += \
 	i915.hpd_sense_invert=0x7 \
 	intel_iommu=off \
 	i915.enable_pvmmio=0 \
+	reboot=a,e,p,t,f \
 	loop.max_part=7
 
 BOARD_FLASHFILES += ${TARGET_DEVICE_DIR}/bldr_utils.img:bldr_utils.img
