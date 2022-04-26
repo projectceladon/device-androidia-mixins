@@ -1,20 +1,25 @@
 update_codec() {
 case "$(cat /proc/fb)" in
         *i915drmfb)
-                echo "intel"
+                echo "Intel"
                 setprop vendor.intel.video.codec hardware
                 ;;
         *inteldrmfb)
-                echo "intel"
+                echo "Intel"
                 setprop vendor.intel.video.codec hardware
                 ;;
         *i915)
-                echo "intel"
+                echo "Intel"
                 setprop vendor.intel.video.codec hardware
                 ;;
         *)
-                echo "software codec"
-                setprop vendor.intel.video.codec software
+                if [ "$(cat /sys/kernel/debug/dri/0/i915_sriov_info |grep virtualization |awk '{print $2}')" = "enabled" ];then
+                       echo "Intel SRIOV"
+                       setprop vendor.intel.video.codec hardware
+                else
+                       echo "software codec"
+                       setprop vendor.intel.video.codec software
+                fi
                 ;;
 esac
 }
