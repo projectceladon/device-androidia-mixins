@@ -14,7 +14,7 @@ from qemu import qmp
 
 def main():
     timeout_start = time.time()
-    qemu = qmp.QEMUMonitorProtocol("../qmp-vinput-sock")
+    qemu = qmp.QEMUMonitorProtocol("/tmp/qmp-vinput-sock")
     while True:
         try:
             qemu.connect(negotiate=True)
@@ -23,8 +23,6 @@ def main():
             print('Didn\'t get QMP greeting message from QEMU QMP server')
         except qmp.QMPCapabilitiesError:
             print('Could not negotiate capabilities with QEMU QMP server')
-        except qemu.error:
-            print
 
         if time.time() >= timeout + timeout_start:
             print("connection timeout error")
