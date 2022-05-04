@@ -172,7 +172,7 @@ def main():
                     elif val == "WAKEUP":
                         if rtc_wakeup == 0:
                             time.sleep(1)
-                            cmdCommand = " ".join([argv[2], "--vm 0 --power 0"])
+                            cmdCommand = "./sendkey --vm 0 --power 0"
                             process = subprocess.call(cmdCommand.split(), stdout=subprocess.PIPE)
 
         except KeyboardInterrupt:
