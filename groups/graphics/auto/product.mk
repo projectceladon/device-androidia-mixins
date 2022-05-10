@@ -40,16 +40,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     hwcomposer.drm_minigbm
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.hwcomposer=drm_minigbm
-
 {{#minigbm}}
 # Mini gbm
+
 PRODUCT_PACKAGES += \
     gralloc.$(TARGET_GFX_INTEL)
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.gralloc=$(TARGET_GFX_INTEL)
 {{/minigbm}}
 
 {{^minigbm}}
@@ -100,5 +95,8 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     vulkan.$(TARGET_BOARD_PLATFORM) \
-    vulkan.pastel
+    libvulkan_intel
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.vulkan=$(TARGET_BOARD_PLATFORM)
 {{/vulkan}}
