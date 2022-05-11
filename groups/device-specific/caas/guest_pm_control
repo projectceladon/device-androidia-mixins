@@ -92,6 +92,8 @@ def main():
             print('Could not negotiate capabilities with QEMU QMP server')
         except qmp.QMPTimeoutError:
             print('Connection Timeout Error')
+        except OSError:
+            print
         else:
             print("connected to QEMU QMP server")
             break
