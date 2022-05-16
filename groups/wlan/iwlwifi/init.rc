@@ -7,10 +7,10 @@ on early-boot
 {{^iwl_upstream_drv}}
     insmod /vendor/lib/modules/compat.ko
 {{/iwl_upstream_drv}} 
-    insmod /vendor/lib/modules/cfg80211.ko
-    insmod /vendor/lib/modules/iwl7000_mac80211.ko
-    insmod /vendor/lib/modules/iwlwifi.ko
-    insmod /vendor/lib/modules/iwlmvm.ko power_scheme=1
+    chmod 0750 /system/bin/module_load.sh
+    service module_load /system/bin/module_load.sh
+    user root
+    oneshot
 
 on zygote-start
     # Create the directories used by the Wireless subsystem
