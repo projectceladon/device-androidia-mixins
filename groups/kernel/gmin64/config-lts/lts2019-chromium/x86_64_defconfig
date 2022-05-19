@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86_64 5.4.142 Kernel Configuration
+# Linux/x86_64 5.4.150 Kernel Configuration
 #
 
 #
@@ -1396,7 +1396,6 @@ CONFIG_BT_LE=y
 # CONFIG_BT_LEDS is not set
 # CONFIG_BT_SELFTEST is not set
 # CONFIG_BT_FEATURE_DEBUG is not set
-# CONFIG_BT_FEATURE_QUALITY_REPORT is not set
 # CONFIG_BT_MSFTEXT is not set
 
 #
@@ -2287,6 +2286,7 @@ CONFIG_USB_SIERRA_NET=y
 # CONFIG_USB_VL600 is not set
 # CONFIG_USB_NET_CH9200 is not set
 # CONFIG_USB_NET_AQC111 is not set
+# CONFIG_USB_RTL8153_ECM is not set
 CONFIG_WLAN=y
 # CONFIG_WIRELESS_WDS is not set
 CONFIG_WLAN_VENDOR_ADMTEK=y
