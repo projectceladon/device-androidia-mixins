@@ -1,16 +1,11 @@
 
 PRODUCT_PACKAGES += \
 	libtrusty \
-	storageproxyd \
-	libinteltrustystorage \
-	libinteltrustystorageinterface \
 	android.hardware.gatekeeper@1.0-service.trusty \
 	android.hardware.security.keymint-service.trusty \
-	keybox_provisioning \
 	RemoteProvisioner
 
 PRODUCT_PACKAGES_DEBUG += \
-	intel-secure-storage-unit-test \
 	gatekeeper-unit-tests \
 	libscrypt_static \
 	scrypt_test \

@@ -1,2 +1,1 @@
-/dev/block/p*/*/*/by-name/teedata      0660 system system
 /dev/trusty-ipc-dev0                   0666 root root
