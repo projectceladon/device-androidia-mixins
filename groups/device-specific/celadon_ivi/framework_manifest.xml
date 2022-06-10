@@ -1,8 +1,8 @@
 {{^ota-update}}
-<manifest version="1.0" type="device" target-level="6">
+<manifest version="1.0" type="framework">
 {{/ota-update}}
 {{#ota-update}}
-<manifest version="1.0" type="device">
+<manifest version="1.0" type="framework">
 {{/ota-update}}
     <hal format="aidl">
         <name>android.hardware.security.keymint</name>
@@ -53,6 +53,15 @@
         </interface>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.gatekeeper</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IGatekeeper</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport>hwbinder</transport>
         <version>7.0</version>
@@ -67,6 +76,15 @@
         <version>7.0</version>
         <interface>
             <name>IEffectsFactory</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.broadcastradio</name>
+        <transport>hwbinder</transport>
+        <version>1.1</version>
+        <interface>
+            <name>IBroadcastRadioFactory</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -99,15 +117,32 @@
         </interface>
     </hal>
     <hal format="hidl">
-       <name>android.hardware.bluetooth</name>
-       <transport>hwbinder</transport>
-       <version>1.0</version>
-       <interface>
-           <name>IBluetoothHci</name>
-           <instance>default</instance>
-       </interface>
-   </hal>
-
+        <name>android.hardware.wifi.supplicant</name>
+        <transport>hwbinder</transport>
+        <version>1.3</version>
+        <interface>
+            <name>ISupplicant</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.wifi</name>
+        <transport>hwbinder</transport>
+        <version>1.5</version>
+        <interface>
+            <name>IWifi</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.wifi.hostapd</name>
+        <transport>hwbinder</transport>
+        <version>1.2</version>
+        <interface>
+            <name>IHostapd</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
     <hal format="hidl">
         <name>android.hardware.media.omx</name>
         <transport>hwbinder</transport>
@@ -128,13 +163,21 @@
         <fqname>@1.4::IDrmFactory/clearkey</fqname>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.usb</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IUsb</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.camera.provider</name>
         <transport>hwbinder</transport>
         <version>2.4</version>
         <interface>
             <name>ICameraProvider</name>
             <instance>external/0</instance>
-            <instance>legacy/0</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -155,8 +198,5 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <kernel target-level="5"/>
-    <sepolicy>
-        <version>31.0</version>
-    </sepolicy>
+
 </manifest>

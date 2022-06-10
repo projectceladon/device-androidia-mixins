@@ -1,7 +1,12 @@
 <resources>
 
-    <bool name="config_voice_capable">true</bool>
-    <!-- Enables built-in SIP phone capability -->
+    <!-- Disables built-in voice call capability -->
+    <bool name="config_voice_capable">false</bool>
+    <!-- Disables built-in SMS phone capability -->
+    <bool name="config_sms_capable">false</bool>
+    <!-- Disables built-in Data phone capability -->
+    <bool name="config_mobile_data_capable">false</bool>
+    <!-- Disables built-in SIP phone capability -->
     <bool name="config_built_in_sip_phone">false</bool>
 
     <!-- This string array should be overridden by the device to present a list of radio
@@ -180,10 +185,7 @@
          Consider setting this resource to false or disabling dreams by default when a
          doze component is specified below since dreaming will supercede dozing and
          will prevent the system from entering a low power state until the dream ends. -->
-    <bool name="config_dreamsSupported">false</bool>
-
-    <!-- Configuration Bluetooth PBAP PCE profile for automotive -->
-    <bool name="enable_pbap_pce_profile">true</bool>
+    <bool name="config_dreamsSupported">true</bool>
 
     <!-- Arbitrary max 8 users. -->
     <integer name="config_multiuserMaximumUsers">8</integer>
