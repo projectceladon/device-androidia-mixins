@@ -2,7 +2,7 @@
 
 {{#enable_msdk_c2}}
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_c2_{{platform}}.xml:vendor/etc/media_codecs_performance_c2.xml \
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_c2_adl.xml:vendor/etc/media_codecs_performance_c2.xml \
     $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_c2_tgl.xml:vendor/etc/media_codecs_performance_tgl.xml \
     $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_c2_adl.xml:vendor/etc/media_codecs_performance_adl.xml \
     $(LOCAL_PATH)/{{_extra_dir}}/mfx_c2_store.conf:vendor/etc/mfx_c2_store.conf \
