@@ -1,5 +1,4 @@
 [extrafiles]
-media_codecs_performance_c2_{{platform}}.xml: "Media codec2.0 performance file for specific platform"
 media_codecs_performance_c2_tgl.xml: "Media codec2.0 performance file for tigerlake"
 media_codecs_performance_c2_adl.xml: "Media codec2.0 performance file for alderlake"
 mfx_c2_store.conf: "MSDK configuration for video codec2.0"
