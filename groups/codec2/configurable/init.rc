@@ -2,3 +2,4 @@ on post-fs
     chmod 0664 /dev/ion
     chown system system /dev/ion
     setprop debug.stagefright.ccodec 4
+    setprop debug.stagefright.c2-poolmask 0xf50000

@@ -1,4 +1,17 @@
 <compatibility-matrix version="1.0" type="device">
+    <hal format="hidl" optional="true">
+        <name>android.hardware.media.c2</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+              <name>IComponentStore</name>
+              <instance>default</instance>
+        </interface>
+        <interface>
+              <name>IConfigurable</name>
+              <instance>default</instance>
+        </interface>
+    </hal>
     <hal format="hidl" optional="false">
         <name>android.frameworks.displayservice</name>
         <version>1.0</version>
