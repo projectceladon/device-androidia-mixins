@@ -54,8 +54,8 @@ on post-fs
     chown system system /dev/uio3
 
 #For OMX
-on post-fs-data
-    setprop debug.stagefright.ccodec 0
+#on post-fs-data
+#    setprop debug.stagefright.ccodec 0
 
 on boot
     start mount_share
