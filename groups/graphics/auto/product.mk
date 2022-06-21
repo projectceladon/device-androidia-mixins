@@ -2,7 +2,6 @@ PRODUCT_PACKAGES += \
     libEGL_swiftshader \
     libGLESv1_CM_swiftshader \
     libGLESv2_swiftshader \
-    libGLES_mesa \
     libGLES_android \
     libigdrcl \
     libOpenCL \
@@ -10,11 +9,28 @@ PRODUCT_PACKAGES += \
     libigc \
     libigdfcl
 
+#Gallium drivers since mesa 22.0.3
+PRODUCT_PACKAGES += \
+    libEGL_mesa \
+    libGLESv1_CM_mesa \
+    libGLESv2_mesa \
+    libgallium_dri \
+    libglapi
+#Vulkan driver since mesa 22.0.3
+PRODUCT_PACKAGES += \
+    vulkan.intel
+
+#Keep legacy mesa driver for compatibility
+PRODUCT_PACKAGES += \
+    libGLES_mesa
+
 PRODUCT_PACKAGES += \
     libdrm \
     libdrm_intel \
-    libsync \
-    libmd
+    libsync
+#   libmd
+#Epic mdapi was deprecated for TGL and ADL platform
+#So disable libmd and leave mdapi compiling issue with mesa 22.0.3
 
 PRODUCT_PACKAGES += \
     gralloc.default

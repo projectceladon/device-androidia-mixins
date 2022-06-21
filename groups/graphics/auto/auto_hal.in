@@ -3,18 +3,18 @@ case "$(cat /proc/fb)" in
         *i915*)
                 echo "i915 rendering"
                 setprop vendor.egl.set mesa
-                setprop vendor.vulkan.set celadon
+                setprop vendor.vulkan.set intel
                 ;;
         *intel*)
                 echo "intel rendering"
                 setprop vendor.egl.set mesa
-                setprop vendor.vulkan.set celadon
+                setprop vendor.vulkan.set intel
                 ;;
 	*virtio*)
                 if [ "$(cat /sys/kernel/debug/dri/0/name |awk '{print $1}')" = "i915" ];then
                         echo "sriov rendering"
                         setprop vendor.egl.set mesa
-                        setprop vendor.vulkan.set celadon
+                        setprop vendor.vulkan.set intel
                 else
                         if [ "$(cat /sys/kernel/debug/dri/0/virtio-gpu-features |grep virgl |awk '{print $3}')" = "no" ];then
                                 echo "swiftshader rendering"
