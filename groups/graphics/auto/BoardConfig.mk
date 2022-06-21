@@ -22,6 +22,11 @@ USE_INTEL_UFO_DRIVER := false
 BOARD_GPU_DRIVERS := i965 swrast virgl iris
 BOARD_USE_CUSTOMIZED_MESA := true
 
+#For mesa cross compiling with meson build system
+BOARD_MESA3D_USES_MESON_BUILD := true
+BOARD_MESA3D_GALLIUM_DRIVERS := virgl iris
+BOARD_MESA3D_VULKAN_DRIVERS := intel
+
 BOARD_GPU_DRIVERS ?= i965 swrast virgl iris
 ifneq ($(strip $(BOARD_GPU_DRIVERS)),)
 TARGET_HARDWARE_3D := true
