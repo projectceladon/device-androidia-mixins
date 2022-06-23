@@ -9,6 +9,9 @@ if [ $value_model == 166 ]; then
 elif [ $value_model == 141 ]; then
     setprop ro.vendor.media.target_variant "_gen12"
     setprop ro.vendor.media.target_variant_platform "_tgl"
+elif [ $value_model == 151 ]; then
+    setprop ro.vendor.media.target_variant "_gen12"
+    setprop ro.vendor.media.target_variant_platform "_adl"
 elif [ $value_model == 154 ]; then
     setprop ro.vendor.media.target_variant "_gen12"
     setprop ro.vendor.media.target_variant_platform "_adl"
