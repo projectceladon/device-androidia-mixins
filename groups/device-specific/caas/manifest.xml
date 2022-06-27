@@ -156,6 +156,6 @@
         </interface>
     </hal>
     <sepolicy>
-        <version>31.0</version>
+        <version>33.0</version>
     </sepolicy>
 </manifest>
