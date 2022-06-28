@@ -33,14 +33,10 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
+    <hal format="aidl">
         <name>android.hardware.health</name>
-        <transport>hwbinder</transport>
-        <version>2.1</version>
-        <interface>
-            <name>IHealth</name>
-            <instance>default</instance>
-        </interface>
+        <version>1</version>
+        <fqname>IHealth/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.thermal</name>
