@@ -198,5 +198,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-
+    <vendor-ndk>
+        <version>31</version>
+    </vendor-ndk>
 </manifest>
