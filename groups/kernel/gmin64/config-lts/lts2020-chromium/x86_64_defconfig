@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86_64 5.10.101 Kernel Configuration
+# Linux/x86_64 5.10.118 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="Android (7485623, based on r416183b1) clang version 12.0.7 (https://android.googlesource.com/toolchain/llvm-project c935d99d7cf2016289302412d708641d52d2f7ee)"
 CONFIG_GCC_VERSION=0
@@ -597,7 +597,6 @@ CONFIG_X86_SYSFB=y
 # Binary Emulations
 #
 CONFIG_IA32_EMULATION=y
-# CONFIG_X86_X32 is not set
 CONFIG_COMPAT_32=y
 CONFIG_COMPAT=y
 CONFIG_COMPAT_FOR_U64_ALIGNMENT=y
@@ -934,8 +933,12 @@ CONFIG_SPECULATIVE_PAGE_FAULT=y
 # CONFIG_GUP_BENCHMARK is not set
 # CONFIG_READ_ONLY_THP_FOR_FS is not set
 CONFIG_ARCH_HAS_PTE_SPECIAL=y
-# CONFIG_LOW_MEM_NOTIFY is not set
-# CONFIG_LRU_GEN is not set
+
+#
+# Data Access Monitoring
+#
+# CONFIG_DAMON is not set
+# end of Data Access Monitoring
 # end of Memory Management options
 
 CONFIG_NET=y
@@ -2450,7 +2453,6 @@ CONFIG_IWL7000_VENDOR_CMDS=y
 # CONFIG_FUJITSU_ES is not set
 CONFIG_NET_FAILOVER=y
 # CONFIG_ISDN is not set
-# CONFIG_NVM is not set
 
 #
 # Input device support
@@ -4314,6 +4316,8 @@ CONFIG_SND_HDA_HWDEP=y
 CONFIG_SND_HDA_RECONFIG=y
 # CONFIG_SND_HDA_INPUT_BEEP is not set
 CONFIG_SND_HDA_PATCH_LOADER=y
+# CONFIG_SND_HDA_SCODEC_CS35L41_I2C is not set
+# CONFIG_SND_HDA_SCODEC_CS35L41_SPI is not set
 CONFIG_SND_HDA_CODEC_REALTEK=m
 # CONFIG_SND_HDA_CODEC_ANALOG is not set
 # CONFIG_SND_HDA_CODEC_SIGMATEL is not set
@@ -4368,8 +4372,6 @@ CONFIG_SND_SOC_ACPI=m
 # CONFIG_SND_ATMEL_SOC is not set
 # CONFIG_SND_BCM63XX_I2S_WHISTLER is not set
 # CONFIG_SND_DESIGNWARE_I2S is not set
-
-#
 # SoC Audio for Freescale CPUs
 #
 
@@ -4786,8 +4788,10 @@ CONFIG_USB_HIDDEV=y
 #
 # I2C HID support
 #
-# CONFIG_I2C_HID_ACPI is not set
+CONFIG_I2C_HID_ACPI=y
 # end of I2C HID support
+
+CONFIG_I2C_HID_CORE=y
 
 #
 # Intel ISH HID support
@@ -6235,7 +6239,8 @@ CONFIG_ANDROID_BINDER_DEVICES="binder,hwbinder,vndbinder"
 # CONFIG_ANDROID_BINDER_IPC_SELFTEST is not set
 # CONFIG_ANDROID_DEBUG_SYMBOLS is not set
 # CONFIG_ANDROID_VENDOR_HOOKS is not set
-CONFIG_ANDROID_STRUCT_PADDING=y
+CONFIG_ANDROID_KABI_RESERVE=y
+CONFIG_ANDROID_VENDOR_OEM_DATA=y
 # end of Android
 
 # CONFIG_LIBNVDIMM is not set
