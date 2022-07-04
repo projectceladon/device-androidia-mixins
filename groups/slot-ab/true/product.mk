@@ -8,7 +8,8 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-impl-intel \
     android.hardware.boot@1.2-impl-intel.recovery \
     android.hardware.boot@1.2-service \
-    bootctrl.intel
+    bootctrl.intel \
+    bootctrl.intel.recovery
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.bootctrl=intel
