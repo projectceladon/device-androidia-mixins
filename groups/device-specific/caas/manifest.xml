@@ -155,7 +155,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <kernel target-level="5"/>
     <sepolicy>
         <version>31.0</version>
     </sepolicy>
