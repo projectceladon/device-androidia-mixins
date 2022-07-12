@@ -32,6 +32,9 @@ BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/bxt_usb
 # i915_async
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/i915_async
 
+#for clipboard agent
+PRODUCT_PRIVATE_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/clipboard_agent/private
+
 #add vendor property
 BOARD_SEPOLICY_DIRS += device/intel/sepolicy/vendor/
 
