@@ -48,6 +48,6 @@
         </interface>
     </hal>
     <vendor-ndk>
-        <version>31</version>
+        <version>33</version>
     </vendor-ndk>
 </compatibility-matrix>

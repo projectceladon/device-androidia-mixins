@@ -193,4 +193,7 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <vendor-ndk>
+        <version>33</version>
+    </vendor-ndk>
 </manifest>
