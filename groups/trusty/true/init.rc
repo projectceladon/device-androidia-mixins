@@ -1,22 +1,30 @@
 on post-fs-data
-    mkdir /data/vendor/securestorage 0700 system system
-    chmod 666 /dev/rpmb0
+    mkdir /data/vendor/securestorage
+    chown root system /data/vendor/securestorage
+    chmod 0770 /data/vendor/securestorage
+    rm /data/vendor/securestorage/rpmb_sock
 
 on early-fs
+    rm /data/vendor/securestorage/rpmb_sock
+    start rpmb_mock_init
+    start rpmb_mock
     start storageproxyd
 
-service storageproxyd /vendor/bin/storageproxyd -d /dev/trusty-ipc-dev0 -p /data/vendor/securestorage -r /dev/vport0p1 -t virt
+service storageproxyd /vendor/bin/storageproxyd -d /dev/trusty-ipc-dev0 -r /data/vendor/securestorage/rpmb_sock -p /data/vendor/securestorage -t sock
+    class main
+    disabled
+    user root
+
+service rpmb_mock_init /vendor/bin/rpmb_dev --dev /data/vendor/securestorage/RPMB_DATA --init --size 2048
+    disabled
     user system
     group system
 
-on boot
-    start keyboxd
-
-service keyboxd /vendor/bin/keybox_provisioning -d /dev/trusty-ipc-dev0 -p /dev/block/by-name/teedata
+service rpmb_mock /vendor/bin/rpmb_dev --dev /data/vendor/securestorage/RPMB_DATA --sock /data/vendor/securestorage/rpmb_sock
+    class main
+    disabled
     user system
     group system
-    oneshot
 
 on post-fs
     wait_for_prop vendor.modules.trusty.ready true
-    chmod 666 /dev/vport0p1

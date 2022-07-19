@@ -2,6 +2,7 @@
 PRODUCT_PACKAGES += \
 	libtrusty \
 	storageproxyd \
+	rpmb_dev \
 	libinteltrustystorage \
 	libinteltrustystorageinterface \
 	android.hardware.gatekeeper@1.0-service.trusty \
