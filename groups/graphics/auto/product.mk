@@ -59,6 +59,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.hwcomposer=drm_minigbm
 
+# DRM nonblock commit
+PRODUCT_PROPERTY_OVERRIDES += \
+    drm.nonblock_commit.on=1
+
 {{#minigbm}}
 # Mini gbm
 PRODUCT_PACKAGES += \
