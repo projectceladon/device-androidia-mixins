@@ -9,3 +9,4 @@ on fs
     setprop ro.power.fixed_performance_scale_factor ${vendor.power.fixed_performance_scale_factor}
     setprop ro.media.xml_variant.codecs ${ro.vendor.media.target_variant}
     setprop ro.media.xml_variant.codecs_performance ${ro.vendor.media.target_variant_platform}
+    setprop ro.drm.nonblock_commit.on ${vendor.nonblock_commit.set}
