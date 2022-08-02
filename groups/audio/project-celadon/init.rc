@@ -78,6 +78,9 @@ on post-fs && property:vendor.intel.enable.audio=sof-hda
     insmod /vendor/lib/modules/snd-seq-midi.ko
 
 on boot
+    insmod /vendor/lib/modules/snd.ko
+    insmod /vendor/lib/modules/snd-timer.ko
+    insmod /vendor/lib/modules/snd-pcm.ko
     insmod /vendor/lib/modules/snd-dummy.ko
 
 on property:sys.boot_completed=1 && property:ro.vendor.hdmi.audio=tgl
