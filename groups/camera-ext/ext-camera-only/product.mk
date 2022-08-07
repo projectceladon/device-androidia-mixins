@@ -5,13 +5,13 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/external_camera_config.xml:vendor/etc/external_camera_config.xml
 
 
-# External camera service
-PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-external-service \
-                    android.hardware.camera.provider@2.4-service_64 \
-                    android.hardware.camera.provider@2.4-impl
-#VHAL camera
-PRODUCT_PACKAGES += camera.$(TARGET_BOARD_PLATFORM) \
-                    camera.$(TARGET_BOARD_PLATFORM).jpeg
+## External camera service
+#PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-external-service \
+#                    android.hardware.camera.provider@2.4-service_64 \
+#                    android.hardware.camera.provider@2.4-impl
+##VHAL camera
+#PRODUCT_PACKAGES += camera.$(TARGET_BOARD_PLATFORM) \
+#                    camera.$(TARGET_BOARD_PLATFORM).jpeg
 
 PRODUCT_PROPERTY_OVERRIDES += ro.vendor.remote.sf.fake_camera ="both" \
                               ro.vendor.camera.in_frame_format.h264=false \
