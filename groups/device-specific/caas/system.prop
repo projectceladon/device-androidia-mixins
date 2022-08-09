@@ -11,3 +11,34 @@ audio.safemedia.bypass=true
 debug.nn.cpuonly=0
 camera.disable_treble=false
 ro.incremental.enable=yes
+
+# override system properties, one line for each: key=val
+# remove unneeded services for framework optimization
+enable.binder_calls_stats=false
+enable.consumer_ir=false
+enable.contexthub=false
+enable.country_detector=false
+enable.cpuinfo=false
+enable.dbinfo=false
+enable.device_identifiers=false
+enable.devicestoragemonitor=false
+enable.diskstats=false
+enable.DockObserver=false
+enable.gfxinfo=false
+enable.graphicsstats=false
+enable.hardware_properties=false
+enable.imms=false
+enable.ipsec=false
+enable.meminfo=false
+enable.network_watchlist=false
+enable.pinner=false
+enable.recovery=false
+enable.serial=false
+enable.servicediscovery=false
+enable.soundtrigger=false
+enable.system_update=false
+enable.telecom=false
+enable.update_lock=false
+enable.vibrator=false
+enable.voiceinteraction=false
+
