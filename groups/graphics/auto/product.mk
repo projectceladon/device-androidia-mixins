@@ -64,8 +64,21 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     gralloc.$(TARGET_GFX_INTEL)
 
+PRODUCT_PACKAGES += \
+    tinput \
+    vinput \
+    LauncherEx \
+    gralloc.tencent \
+    libGLESv1_CM_tencent \
+    lib_renderControl_enc \
+    libEGL_tencent \
+    libGLESv2_enc \
+    libOpenglSystemCommon \
+    libGLESv2_tencent \
+    libGLESv1_enc
+
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.gralloc=default
+    ro.hardware.gralloc=tencent
 {{/minigbm}}
 
 {{^minigbm}}

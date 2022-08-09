@@ -29,10 +29,10 @@ case "$(cat /proc/fb)" in
                 ;;
         *)
                 echo "sw rendering"
-                setprop vendor.egl.set swiftshader
-                setprop vendor.vulkan.set pastel
+                setprop vendor.egl.set tencent
+                #setprop vendor.vulkan.set pastel
                 setprop vendor.hwcomposer.set default
-                setprop vendor.gralloc.set default
+                setprop vendor.gralloc.set tencet
                 ;;
 esac
 }
