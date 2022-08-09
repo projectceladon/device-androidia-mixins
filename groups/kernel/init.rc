@@ -48,6 +48,8 @@ on boot
 	chown system system /sys/devices/system/cpu/intel_pstate/max_perf_pct
 	chmod 0660 /sys/devices/system/cpu/intel_pstate/max_perf_pct
 	write /sys/kernel/debug/pstate_snb/setpoint 75
+	chmod 0666 /dev/virtpipe-render
+	chmod 0666 /dev/virtpipe-common
 
 {{/intel_pstate}}
 

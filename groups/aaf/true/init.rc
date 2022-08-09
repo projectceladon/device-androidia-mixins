@@ -6,6 +6,7 @@ on fs
     setprop ro.hardware.gralloc ${vendor.gralloc.set}
     setprop ro.hardware.egl ${vendor.egl.set}
     setprop ro.hardware.vulkan ${vendor.vulkan.set}
+    setprop debug.renderengine.backend threaded
     setprop ro.power.fixed_performance_scale_factor ${vendor.power.fixed_performance_scale_factor}
     setprop ro.media.xml_variant.codecs ${ro.vendor.media.target_variant}
     setprop ro.media.xml_variant.codecs_performance ${ro.vendor.media.target_variant_platform}
