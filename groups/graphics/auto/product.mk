@@ -54,10 +54,11 @@ PRODUCT_COPY_FILES += \
 
 # DRM HWComposer
 PRODUCT_PACKAGES += \
-    hwcomposer.drm_minigbm
+    hwcomposer.drm_minigbm \
+    hwcomposer.ranchu
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.hwcomposer=default
+    ro.hardware.hwcomposer=ranchu
 
 {{#minigbm}}
 # Mini gbm
@@ -69,16 +70,16 @@ PRODUCT_PACKAGES += \
     vinput \
     LauncherEx \
     gralloc.tencent \
-    libGLESv1_CM_tencent \
+    libGLESv1_CM_emulation \
     lib_renderControl_enc \
-    libEGL_tencent \
+    libEGL_emulation \
     libGLESv2_enc \
     libOpenglSystemCommon \
-    libGLESv2_tencent \
+    libGLESv2_emulation \
     libGLESv1_enc
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.gralloc=tencent
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.hardware.gralloc=tencent
 {{/minigbm}}
 
 {{^minigbm}}
@@ -129,5 +130,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     vulkan.$(TARGET_BOARD_PLATFORM) \
-    vulkan.pastel
+    vulkan.pastel \
+    vulkan.ranchu
 {{/vulkan}}
