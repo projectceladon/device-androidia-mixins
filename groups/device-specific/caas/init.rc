@@ -47,3 +47,7 @@ on post-fs
     insmod /vendor/lib/modules/vboxguest.ko
     insmod /vendor/lib/modules/vboxsf.ko
 
+# # edwardhung
+on property:sys.boot_completed=1
+    start vinput
+
