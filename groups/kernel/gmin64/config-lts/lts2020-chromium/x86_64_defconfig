@@ -7207,3 +7207,8 @@ CONFIG_RUNTIME_TESTING_MENU=y
 # CONFIG_MEMTEST is not set
 # end of Kernel Testing and Coverage
 # end of Kernel hacking
+
+CONFIG_VBOX=y
+CONFIG_VBOX_GUEST=m
+CONFIG_VBOX_SF=m
+CONFIG_VBOX_VIDEO=n

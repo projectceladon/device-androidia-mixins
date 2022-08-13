@@ -41,3 +41,9 @@ on post-fs
     insmod /vendor/lib/modules/asix.ko
     insmod /vendor/lib/modules/r8152.ko
     insmod /vendor/lib/modules/r8169.ko
+
+# Add by edwardhung
+on post-fs
+    insmod /vendor/lib/modules/vboxguest.ko
+    insmod /vendor/lib/modules/vboxsf.ko
+
