@@ -78,8 +78,8 @@ PRODUCT_PACKAGES += \
     libGLESv2_emulation \
     libGLESv1_enc
 
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.hardware.gralloc=tencent
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.gralloc=tencent
 {{/minigbm}}
 
 {{^minigbm}}

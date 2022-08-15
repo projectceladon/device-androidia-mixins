@@ -32,7 +32,7 @@ case "$(cat /proc/fb)" in
                 setprop vendor.egl.set emulation
                 setprop vendor.vulkan.set ranchu
                 setprop vendor.hwcomposer.set ranchu
-                #setprop vendor.gralloc.set tencet
+                setprop vendor.gralloc.set tencent
                 ;;
 esac
 }
