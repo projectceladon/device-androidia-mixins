@@ -62,3 +62,6 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/wakeup.py:$(PRODUCT_OUT)/scripts/wakeup.py
 
 PRODUCT_COPY_FILES += device/tencent/vinput/androVM_Virtual_Input.kl:system/usr/keylayout/androVM_Virtual_Input.kl
 PRODUCT_COPY_FILES += device/tencent/vinput/androVM_Virtual_Input.idc:system/usr/idc/androVM_Virtual_Input.idc
+
+PRODUCT_PRODUCT_PROPERTIES += ro.llk.enable=false
+
