@@ -1,12 +1,12 @@
 {{^ota-update}}
-<manifest version="1.0" type="device" target-level="6">
+<manifest version="1.0" type="device" target-level="7">
 {{/ota-update}}
 {{#ota-update}}
 <manifest version="1.0" type="device">
 {{/ota-update}}
     <hal format="aidl">
         <name>android.hardware.security.keymint</name>
-        <version>1</version>
+        <version>2</version>
         <interface>
             <name>IKeyMintDevice</name>
             <instance>default</instance>
@@ -14,6 +14,7 @@
     </hal>
     <hal format="aidl">
         <name>android.hardware.security.keymint</name>
+        <version>2</version>
         <interface>
             <name>IRemotelyProvisionedComponent</name>
             <instance>default</instance>
@@ -33,14 +34,10 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
+    <hal format="aidl">
         <name>android.hardware.health</name>
-        <transport>hwbinder</transport>
-        <version>2.1</version>
-        <interface>
-            <name>IHealth</name>
-            <instance>default</instance>
-        </interface>
+        <version>1</version>
+        <fqname>IHealth/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.thermal</name>
@@ -55,7 +52,7 @@
     <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport>hwbinder</transport>
-        <version>7.0</version>
+        <version>7.1</version>
         <interface>
             <name>IDevicesFactory</name>
             <instance>default</instance>
@@ -155,8 +152,17 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <kernel target-level="5"/>
+    <hal format="hidl">
+        <name>android.hardware.sensors</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ISensors</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <!--<kernel target-level="5"/>-->
     <sepolicy>
-        <version>31.0</version>
+        <version>33.0</version>
     </sepolicy>
 </manifest>
