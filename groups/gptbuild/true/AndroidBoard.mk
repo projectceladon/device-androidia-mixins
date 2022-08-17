@@ -163,3 +163,21 @@ $(GPTIMAGE_BIN): \
 
 .PHONY: gptimage
 gptimage: $(GPTIMAGE_BIN)
+
+VIRTUAL_BOX_MANAGER_SYSTEM_DISK_PTIONS := --uuid "{aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab}"
+VIRTUAL_BOX_MANAGER := device/tencent/tools/vbox-img
+INSTALLED_ANDROID_IMAGE_SYSTEM_TARGET := $(PRODUCT_OUT)/caas.img
+INSTALLED_VBOX_SYSTEM_DISK_IMAGE_TARGET := $(PRODUCT_OUT)/caas.vdi
+$(INSTALLED_VBOX_SYSTEM_DISK_IMAGE_TARGET): $(INSTALLED_ANDROID_IMAGE_SYSTEM_TARGET)
+	$(hide) rm -f $@
+	$(hide) $(VIRTUAL_BOX_MANAGER) \
+		convert --srcfilename $^\
+		--dstfilename $@ \
+		--srcformat RAW --dstformat VDI
+	$(hide) $(VIRTUAL_BOX_MANAGER) \
+		setuuid --filename $@ \
+		$(VIRTUAL_BOX_MANAGER_SYSTEM_DISK_PTIONS)
+	@echo "Done with VirtualBox bootable system-disk image -[ $@ ]-"
+
+.PHONY: gptimage_vdi
+gptimage_vdi: $(INSTALLED_VBOX_SYSTEM_DISK_IMAGE_TARGET)
