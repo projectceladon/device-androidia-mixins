@@ -69,6 +69,7 @@ PRODUCT_PACKAGES += \
     TencentIME \
     vinput \
     LauncherEx \
+    androws-prop \
     gralloc.tencent \
     libGLESv1_CM_emulation \
     lib_renderControl_enc \
