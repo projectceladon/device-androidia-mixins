@@ -67,7 +67,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     TencentIME \
-    vinput \
+    tencent_virtual_input \
     LauncherEx \
     androws-prop \
     gralloc.tencent \

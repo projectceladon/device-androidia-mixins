@@ -54,7 +54,7 @@ on post-fs
 # Add by edwardhung
 on property:sys.boot_completed=1
     start tencent_init
-    start vinput
+    start tencent_virtual_input
 
 # Add by edwardhung
 service tencent_init /vendor/bin/init.tencent.sh
