@@ -23,8 +23,8 @@ PRODUCT_PACKAGES += android.hardware.automotive.vehicle.intel@2.0-service
 PRODUCT_PACKAGES += android.hardware.automotive.audiocontrol@1.0-service.intel
 
 {{#aosp_hal}}
-PRODUCT_PACKAGES += android.hardware.automotive.vehicle@2.0-service \
-    android.hardware.automotive.vehicle@2.0-impl
+PRODUCT_PACKAGES += android.hardware.automotive.vehicle@2.0-default-service \
+    android.hardware.automotive.vehicle@2.0-default-impl
 {{/aosp_hal}}
 
 VEHICLE_HAL_PROTO_TYPE := {{vhal-proto-type}}
@@ -32,3 +32,5 @@ VEHICLE_HAL_PROTO_TYPE := {{vhal-proto-type}}
 # IOC is enabled, add slcan or cbc proto in VHAL
 VEHICLE_HAL_PROTO_TYPE += {{ioc}}
 {{/ioc}}
+
+PRODUCT_PROPERTY_OVERRIDES += telephony.active_modems.max_count=2
