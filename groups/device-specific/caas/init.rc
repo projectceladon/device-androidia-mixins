@@ -42,7 +42,7 @@ on post-fs
     insmod /vendor/lib/modules/r8152.ko
     insmod /vendor/lib/modules/r8169.ko
 
-on boot
+on post-fs
     chmod 0666 /dev/vboxguest
     chmod 0666 /dev/vboxuser
 
