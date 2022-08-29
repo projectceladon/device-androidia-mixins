@@ -60,8 +60,8 @@ PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/start_flash_usb.s
 PRODUCT_COPY_FILES += vendor/intel/fw/trusty-release-binaries/rpmb_dev:$(PRODUCT_OUT)/scripts/rpmb_dev
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/wakeup.py:$(PRODUCT_OUT)/scripts/wakeup.py
 
-PRODUCT_COPY_FILES += device/tencent/vinput/androVM_Virtual_Input.kl:system/usr/keylayout/androVM_Virtual_Input.kl
-PRODUCT_COPY_FILES += device/tencent/vinput/androVM_Virtual_Input.idc:system/usr/idc/androVM_Virtual_Input.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/androVM_Virtual_Input.kl:system/usr/keylayout/Vendor_1234_Product_0001.kl
+PRODUCT_COPY_FILES += device/tencent/vinput/androVM_Virtual_Input.idc:system/usr/idc/Vendor_1234_Product_0001.idc
 PRODUCT_COPY_FILES += device/tencent/root/init.tencent.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.tencent.sh
 
 PRODUCT_PRODUCT_PROPERTIES += ro.llk.enable=false
