@@ -1,5 +1,11 @@
 <resources>
 
+    <!-- Whether the geolocation time zone detection feature is enabled. Setting this to false means
+         the feature cannot be used. Setting this to true means system server components can be
+         tested and location time zone detection may be used if other configuration allows (see
+         location time zone provider configuration settings below). -->
+    <bool name="config_enableGeolocationTimeZoneDetection" translatable="false">false</bool>
+
     <!-- Disables built-in voice call capability -->
     <bool name="config_voice_capable">false</bool>
     <!-- Disables built-in SMS phone capability -->
