@@ -4,7 +4,7 @@ on init
     export INTEL_DEBUG heur32
 
 on post-fs-data
-   #setprop debug.sf.nobootanimation 1
+   setprop debug.sf.nobootanimation 1
    mkdir /data/system 0770 system system
 
 on boot
