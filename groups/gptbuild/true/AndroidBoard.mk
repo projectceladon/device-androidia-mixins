@@ -164,7 +164,7 @@ $(GPTIMAGE_BIN): \
 .PHONY: gptimage
 gptimage: $(GPTIMAGE_BIN)
 
-VIRTUAL_BOX_MANAGER_SYSTEM_DISK_PTIONS := --uuid "{aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab}"
+VIRTUAL_BOX_MANAGER_SYSTEM_DISK_PTIONS := --uuid "{b7bcc4dc-6e34-4b9f-ad81-9a94a6e75d3d}"
 VIRTUAL_BOX_MANAGER := device/tencent/tools/vbox-img
 INSTALLED_ANDROID_IMAGE_SYSTEM_TARGET := $(PRODUCT_OUT)/caas.img
 INSTALLED_VBOX_SYSTEM_DISK_IMAGE_TARGET := $(PRODUCT_OUT)/caas.vdi
