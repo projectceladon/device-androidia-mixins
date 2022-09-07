@@ -1,1 +1,1 @@
-DEVICE_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/device-type/overlay-tablet
+DEVICE_PACKAGE_OVERLAYS += device/google/cuttlefish/shared/tv/overlay
