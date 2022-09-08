@@ -9,6 +9,7 @@ PRODUCT_PACKAGES += \
     libmfx_omx_components_hw
 {{/enable_msdk_omx}}
 
+{{#include_msdk_libs}}
 # MediaSDK library
 PRODUCT_PACKAGES += \
     libmfxhw32
@@ -17,6 +18,7 @@ ifeq ($(BOARD_USE_64BIT_USERSPACE),true)
 PRODUCT_PACKAGES += \
     libmfxhw64
 endif
+{{/include_msdk_libs}}
 
 {{#add_sw_msdk}}
 PRODUCT_PACKAGES += \
@@ -38,9 +40,11 @@ BOARD_HAVE_MEDIASDK_OPEN_SOURCE := true
 BOARD_HAVE_OMX_SRC := true
 {{/opensource_msdk_omx_il}}
 
+{{#include_msdk_libs}}
 # Open source media_driver
 PRODUCT_PACKAGES += i965_drv_video
 PRODUCT_PACKAGES += libigfxcmrt
+{{/include_msdk_libs}}
 
 # Open source hdcp
 PRODUCT_PACKAGES += libhdcpsdk
