@@ -68,7 +68,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     TencentIME \
     tencent_virtual_input \
-    LauncherEx \
+    TencentLauncher \
     androws-prop \
     gralloc.tencent \
     libGLESv1_CM_emulation \
