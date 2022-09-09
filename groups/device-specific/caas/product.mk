@@ -66,3 +66,6 @@ PRODUCT_COPY_FILES += device/tencent/root/init.tencent.sh:$(TARGET_COPY_OUT_VEND
 
 PRODUCT_PRODUCT_PROPERTIES += ro.llk.enable=false
 
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.locale=zh-Hans-CN
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.timezone=Asia/Shanghai
+
