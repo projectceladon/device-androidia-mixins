@@ -69,3 +69,7 @@ PRODUCT_PRODUCT_PROPERTIES += ro.llk.enable=false
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.locale=zh-Hans-CN
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.timezone=Asia/Shanghai
 
+PRODUCT_PROPERTY_OVERRIDES += ro.config.alarm_vol_default=7
+PRODUCT_PROPERTY_OVERRIDES += ro.config.system_vol_default=7
+PRODUCT_PROPERTY_OVERRIDES += ro.config.media_vol_default=15
+
