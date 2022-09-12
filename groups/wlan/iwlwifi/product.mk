@@ -7,7 +7,8 @@ PRODUCT_PACKAGES += \
     wpa_cli \
     iw \
     TetheringConfigOverlay \
-    TetheringConfigOverlayGsi
+    TetheringConfigOverlayGsi \
+    ServiceConnectivityResourcesConfigOverlay
 
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service
