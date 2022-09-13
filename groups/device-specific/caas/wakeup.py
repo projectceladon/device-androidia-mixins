@@ -8,7 +8,7 @@ from sys import argv,exit
 
 timeout = 60
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '../qemu-6.0.0/python'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../qemu-7.0.0/python'))
 
 from qemu import qmp
 
