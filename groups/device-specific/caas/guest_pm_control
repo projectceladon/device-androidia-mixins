@@ -22,7 +22,7 @@ import subprocess
 import signal
 from sys import argv,exit
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '../qemu-6.0.0/python'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../qemu-7.0.0/python'))
 from qemu import qmp
 
 rtc_wakeup = 0
