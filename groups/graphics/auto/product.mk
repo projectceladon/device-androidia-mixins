@@ -76,7 +76,8 @@ PRODUCT_PACKAGES += \
     libGLESv2_enc \
     libOpenglSystemCommon \
     libGLESv2_emulation \
-    libGLESv1_enc
+    libGLESv1_enc \
+    MultiDisplayProvider
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.gralloc=tencent
