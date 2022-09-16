@@ -3341,6 +3341,7 @@ CONFIG_PROC_THERMAL_MMIO_RAPL=y
 #
 # Trusty driver
 #
+{{#trusty_driver}}
 CONFIG_TRUSTY=y
 # CONFIG_TRUSTY_IRQ is not set
 CONFIG_TRUSTY_LOG=y
@@ -3351,6 +3352,10 @@ CONFIG_TRUSTY_VIRTIO_IPC=y
 # CONFIG_TRUSTY_CRASH_IS_PANIC is not set
 CONFIG_TRUSTY_X86_64=y
 CONFIG_TRUSTY_BACKUP_TIMER=y
+{{/trusty_driver}}
+{{^trusty_driver}}
+# CONFIG_TRUSTY is not set
+{{/trusty_driver}}
 # end of Trusty driver
 
 CONFIG_WATCHDOG=y

@@ -33,3 +33,4 @@ lts2020_yocto_cfg_path =
 lts2020_chromium_src_path =
 lts2020_chromium_cfg_path =
 more_modules = false
+trusty_driver = true
