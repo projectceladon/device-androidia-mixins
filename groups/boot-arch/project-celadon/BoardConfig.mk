@@ -179,3 +179,5 @@ KERNELFLINGER_SUPPORT_LIVE_BOOT ?= true
 ENABLE_GRUB_INSTALLER ?= true
 {{/grub_installer}}
 {{/use_cic}}
+
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/soc
