@@ -141,3 +141,5 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
 KERNELFLINGER_SUPPORT_KEYBOX_PROVISION := true
 {{/keybox_provision}}
 {{/use_cic}}
+
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/set_soc_prop.sh:vendor/bin/set_soc_prop.sh
