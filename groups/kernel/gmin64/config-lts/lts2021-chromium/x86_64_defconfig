@@ -3354,6 +3354,7 @@ CONFIG_PROC_THERMAL_MMIO_RAPL=y
 
 # CONFIG_GENERIC_ADC_THERMAL is not set
 
+{{#trusty_driver}}
 #
 # Trusty driver
 #
@@ -3369,6 +3370,7 @@ CONFIG_TRUSTY_VIRTIO_IPC=y
 CONFIG_TRUSTY_X86_64=y
 CONFIG_TRUSTY_BACKUP_TIMER=y
 # end of Trusty driver
+{{/trusty_driver}}
 
 CONFIG_WATCHDOG=y
 CONFIG_WATCHDOG_CORE=y
