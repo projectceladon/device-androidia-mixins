@@ -41,3 +41,7 @@ on post-fs
     insmod /vendor/lib/modules/asix.ko
     insmod /vendor/lib/modules/r8152.ko
     insmod /vendor/lib/modules/r8169.ko
+
+on post-fs-data
+    exec - system system -- /vendor/bin/set_soc_prop.sh
+    setprop ro.soc.model ${vendor.cpu.model_name}
