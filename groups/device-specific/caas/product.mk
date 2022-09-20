@@ -65,6 +65,7 @@ PRODUCT_COPY_FILES += device/tencent/vinput/androVM_Virtual_Input.idc:system/usr
 PRODUCT_COPY_FILES += device/tencent/root/init.tencent.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.tencent.sh
 
 PRODUCT_PRODUCT_PROPERTIES += ro.llk.enable=false
+PRODUCT_PRODUCT_PROPERTIES += vendor.thermal.enable=0
 
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.locale=zh-Hans-CN
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.timezone=Asia/Shanghai

@@ -8,4 +8,4 @@ case "$(cat /sys/class/dmi/id/chassis_vendor | head -1)" in
 		;;
 esac
 }
-update_thermal
+# update_thermal
