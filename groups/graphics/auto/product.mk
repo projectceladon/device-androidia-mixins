@@ -66,7 +66,7 @@ PRODUCT_PACKAGES += \
     gralloc.$(TARGET_GFX_INTEL)
 
 PRODUCT_PACKAGES += \
-    tinput \
+    TencentIME \
     vinput \
     LauncherEx \
     gralloc.tencent \
