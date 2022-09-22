@@ -32,14 +32,14 @@
                      samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
 
             <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                     samplingRates="32000,44100,48000"/>
+                     samplingRates="32000 44100 48000"/>
         </devicePort>
         <devicePort tagName="HDMI_2" type="AUDIO_DEVICE_OUT_HDMI" role="sink">
             <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                      samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
 
             <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                     samplingRates="32000,44100,48000"/>
+                     samplingRates="32000 44100 48000"/>
         </devicePort>
  
     </devicePorts>
