@@ -117,4 +117,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     vulkan.$(TARGET_BOARD_PLATFORM) \
     vulkan.pastel
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.opengles.deqp.level-2020-03-01.xml:vendor/etc/permissions/android.software.opengles.deqp.level.xml
 {{/vulkan}}
