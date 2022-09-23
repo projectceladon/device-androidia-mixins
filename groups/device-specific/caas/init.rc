@@ -57,6 +57,8 @@ on post-fs-data
 
 # Add by edwardhung
 on property:sys.boot_completed=1
+    setprop logd.logpersistd.size 5
+    setprop sys.tencent.logpersistd.enable true
     start tencent_virtual_input
 
 # Add by edwardhung
