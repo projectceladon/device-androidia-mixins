@@ -172,8 +172,8 @@ def main():
                     elif val == "WAKEUP":
                         if rtc_wakeup == 0:
                             time.sleep(1)
-                            cmdCommand = "./sendkey --vm 0 --power 0"
-                            process = subprocess.call(cmdCommand.split(), stdout=subprocess.PIPE)
+                            # send power button event using sendkey binary
+                            process = subprocess.run([argv[2], '--vm', '0', '--power', '0'])
 
         except KeyboardInterrupt:
             print('interrupted!')
