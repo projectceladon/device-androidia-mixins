@@ -4,6 +4,15 @@
 {{#ota-update}}
 <manifest version="1.0" type="framework">
 {{/ota-update}}
+    <hal format="hidl">
+        <name>android.hardware.atrace</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IAtraceDevice</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
     <hal format="aidl">
         <name>android.hardware.security.keymint</name>
         <version>1</version>
