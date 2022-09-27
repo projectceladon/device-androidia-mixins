@@ -26,6 +26,9 @@ PRODUCT_PACKAGES += android.hardware.usb@1.0-impl \
                     android.hardware.renderscript@1.0-impl \
                     android.hardware.graphics.composer@2.4-service
 
+PRODUCT_PACKAGES += \
+    LatinIMEGoogleTvPrebuilt \
+    TvSampleLeanbackLauncher
 
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
 PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.useautofastjni=true
