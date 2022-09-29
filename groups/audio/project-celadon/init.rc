@@ -1,10 +1,4 @@
 on post-fs && property:vendor.intel.enable.audio=legacy-hda
-    insmod /vendor/lib/modules/snd.ko
-    insmod /vendor/lib/modules/snd-timer.ko
-    insmod /vendor/lib/modules/snd-pcm.ko
-    insmod /vendor/lib/modules/snd-hwdep.ko
-    insmod /vendor/lib/modules/snd-seq-device.ko
-    insmod /vendor/lib/modules/snd-rawmidi.ko
     insmod /vendor/lib/modules/snd-compress.ko
     insmod /vendor/lib/modules/snd-hrtimer.ko
     insmod /vendor/lib/modules/snd-ctl-led.ko
@@ -14,24 +8,14 @@ on post-fs && property:vendor.intel.enable.audio=legacy-hda
     insmod /vendor/lib/modules/snd-intel-dspcfg.ko dsp_driver=1
     insmod /vendor/lib/modules/snd-hda-intel.ko
     insmod /vendor/lib/modules/snd-hda-codec-realtek.ko
-    insmod  /vendor/lib/modules/snd-hda-codec-hdmi.ko
-    insmod  /vendor/lib/modules/snd-intel-sdw-acpi.ko
+    insmod /vendor/lib/modules/snd-hda-codec-hdmi.ko
+    insmod /vendor/lib/modules/snd-intel-sdw-acpi.ko
     insmod /vendor/lib/modules/snd-soc-core.ko
     insmod /vendor/lib/modules/snd-soc-acpi.ko
     insmod /vendor/lib/modules/snd-soc-acpi-intel-match.ko
-    insmod /vendor/lib/modules/usb_f_midi.ko
-    insmod /vendor/lib/modules/usb_f_audio_source.ko
     insmod /vendor/lib/modules/usblp.ko
-    insmod /vendor/lib/modules/snd-usbmidi-lib.ko
-    insmod /vendor/lib/modules/snd-usb-audio.ko
 
 on post-fs && property:vendor.intel.enable.audio=sof-hda
-    insmod /vendor/lib/modules/snd.ko
-    insmod /vendor/lib/modules/snd-timer.ko
-    insmod /vendor/lib/modules/snd-pcm.ko
-    insmod /vendor/lib/modules/snd-hwdep.ko
-    insmod /vendor/lib/modules/snd-seq-device.ko
-    insmod /vendor/lib/modules/snd-rawmidi.ko
     insmod /vendor/lib/modules/snd-compress.ko
     insmod /vendor/lib/modules/snd-hrtimer.ko
     insmod /vendor/lib/modules/snd-ctl-led.ko
@@ -41,16 +25,12 @@ on post-fs && property:vendor.intel.enable.audio=sof-hda
     insmod /vendor/lib/modules/snd-intel-dspcfg.ko dsp_driver=3
     insmod /vendor/lib/modules/snd-hda-intel.ko
     insmod /vendor/lib/modules/snd-hda-codec-realtek.ko
-    insmod  /vendor/lib/modules/snd-hda-codec-hdmi.ko
-    insmod  /vendor/lib/modules/snd-intel-sdw-acpi.ko
+    insmod /vendor/lib/modules/snd-hda-codec-hdmi.ko
+    insmod /vendor/lib/modules/snd-intel-sdw-acpi.ko
     insmod /vendor/lib/modules/snd-soc-core.ko
     insmod /vendor/lib/modules/snd-soc-acpi.ko
     insmod /vendor/lib/modules/snd-soc-acpi-intel-match.ko
-    insmod /vendor/lib/modules/usb_f_midi.ko
-    insmod /vendor/lib/modules/usb_f_audio_source.ko
     insmod /vendor/lib/modules/usblp.ko
-    insmod /vendor/lib/modules/snd-usbmidi-lib.ko
-    insmod /vendor/lib/modules/snd-usb-audio.ko
     insmod /vendor/lib/modules/snd-sof.ko
     insmod /vendor/lib/modules/snd-sof-xtensa-dsp.ko
     insmod /vendor/lib/modules/snd-sof-pci.ko
