@@ -46,3 +46,4 @@ watchdog_parameters = false
 mfgos = false
 use_cic = false
 multi_user_support = false
+nobarrier=false
