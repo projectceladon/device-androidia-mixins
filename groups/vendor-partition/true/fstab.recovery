@@ -5,5 +5,5 @@
 /dev/block/by-name/{{partition_name}}       /vendor         {{system_fs}}    ro                                         wait{{#slot-ab}},slotselect{{/slot-ab}}
 {{/dynamic-partitions}}
 {{#dynamic-partitions}}
-vendor   /vendor  ext4 ro,barrier=1 wait{{#slot-ab}},slotselect{{/slot-ab}},logical,first_stage_mount
+vendor   /vendor  {{system_fs}} ro{{#system_fs_ext4}},barrier=1{{/system_fs_ext4}} wait{{#slot-ab}},slotselect{{/slot-ab}},logical,first_stage_mount
 {{/dynamic-partitions}}
