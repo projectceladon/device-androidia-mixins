@@ -51,9 +51,12 @@ on post-fs
     insmod /vendor/lib/modules/vboxguest.ko
     insmod /vendor/lib/modules/vboxsf.ko
 
+# /data has flag latemount and mount while late-fs
+on post-fs-data
+    start tencent_init
+
 # Add by edwardhung
 on property:sys.boot_completed=1
-    start tencent_init
     start tencent_virtual_input
 
 # Add by edwardhung
