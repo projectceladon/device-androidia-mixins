@@ -108,7 +108,7 @@ def main():
                             cmdCommand = "reboot"
                             signal.signal(signal.SIGTERM, signal.SIG_IGN)
                             time.sleep(3)
-                            process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
+                            process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE, shell=True)
                             break
                         elif "host-qmp-system-reset" in json.dumps(resp["data"]):
                             print("VM is rebooting")
@@ -116,7 +116,7 @@ def main():
                             cmdCommand = "reboot"
                             signal.signal(signal.SIGTERM, signal.SIG_IGN)
                             time.sleep(3)
-                            process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
+                            process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE, shell=True)
                             break
                         elif "host-qmp-quit" in json.dumps(resp["data"]):
                             print("VM is getting Shutdown")
@@ -136,7 +136,7 @@ def main():
                         cmdCommand = "shutdown -h now"
                         signal.signal(signal.SIGTERM, signal.SIG_IGN)
                         time.sleep(3)
-                        process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE)
+                        process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE, shell=True)
                     elif val == "SUSPEND":
 
                         # Read the previous RTC wakeup count
