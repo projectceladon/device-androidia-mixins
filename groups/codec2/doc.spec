@@ -22,5 +22,11 @@ this option is used to disable support for external camera in build
 
     --- code dir
 
+--- configurable
+this option is used to select the platform and supported codec list
+
+    --- parameters
+        - virtio_video:    select v4l2-codec2 as codec2.0 plugin
+
 --- default
 when not explicitly selected in mixin spec file, the default option will be used.
