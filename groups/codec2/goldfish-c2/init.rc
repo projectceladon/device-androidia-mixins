@@ -1,0 +1,6 @@
+on post-fs
+    chmod 0664 /dev/ion
+    chown system system /dev/ion
+    setprop ro.boot.qemu.hwcodec.avcdec 2
+    setprop ro.boot.qemu.hwcodec.vpxdec 2
+    setprop ro.boot.qemu.hwcodec.hevcdec 2

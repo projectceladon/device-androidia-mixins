@@ -24,3 +24,11 @@ this option is used to disable support for external camera in build
 
 --- default
 when not explicitly selected in mixin spec file, the default option will be used.
+
+--- goldfish-c2
+this option is used to enable Goldfish c2 codecs in build
+
+    --parameters
+
+    -- code dir
+    - device/generic/goldfish-opengl/system/codecs/c2
