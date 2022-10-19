@@ -62,6 +62,8 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/wakeup.py:$(PRODUCT_OUT)/scripts/wakeup.py
 
 PRODUCT_COPY_FILES += device/tencent/vinput/androVM_Virtual_Input.kl:system/usr/keylayout/Vendor_1234_Product_0001.kl
 PRODUCT_COPY_FILES += device/tencent/vinput/androVM_Virtual_Input.idc:system/usr/idc/Vendor_1234_Product_0001.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5678_Product_0002.idc:system/usr/idc/Vendor_5678_Product_0002.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5678_Product_0002.idc:system/usr/idc/Vendor_5679_Product_0003.idc
 PRODUCT_COPY_FILES += device/tencent/root/init.tencent.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.tencent.sh
 
 PRODUCT_PRODUCT_PROPERTIES += ro.llk.enable=false
