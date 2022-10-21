@@ -34,5 +34,6 @@ system   /system  ext4 ro,barrier=1 wait{{#slot-ab}},slotselect{{/slot-ab}},avb_
 /dev/block/by-name/bootloader2  /bootloader2    emmc    defaults                                                    recoveryonly
 /dev/block/by-name/persistent   /persistent     emmc    defaults                                                    defaults
 /dev/block/by-name/metadata     /metadata       ext4    noatime,nosuid,nodev,errors=panic                           wait,check
+/dev/block/by-name/share_data   /mnt/share_data ext4    noatime,nosuid,nodev,noauto_da_alloc,errors=panic           wait,check,formattable
 {{/use_cic}}
 
