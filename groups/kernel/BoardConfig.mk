@@ -57,9 +57,6 @@ BOARD_KERNEL_CMDLINE += \
        intel_pstate=passive
 {{/schedutil}}
 
-BOARD_KERNEL_CMDLINE += \
-      snd-hda-intel.model=dell-headset-multi
-
 ifeq ($(BASE_YOCTO_KERNEL), true)
 BOARD_KERNEL_CMDLINE += \
       snd-intel-dspcfg.dsp_driver=1
