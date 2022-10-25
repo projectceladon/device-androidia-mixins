@@ -60,10 +60,28 @@ PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/start_flash_usb.s
 PRODUCT_COPY_FILES += vendor/intel/fw/trusty-release-binaries/rpmb_dev:$(PRODUCT_OUT)/scripts/rpmb_dev
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/wakeup.py:$(PRODUCT_OUT)/scripts/wakeup.py
 
-PRODUCT_COPY_FILES += device/tencent/vinput/androVM_Virtual_Input.kl:system/usr/keylayout/Vendor_1234_Product_0001.kl
-PRODUCT_COPY_FILES += device/tencent/vinput/androVM_Virtual_Input.idc:system/usr/idc/Vendor_1234_Product_0001.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_1234_Product_0001.kl:system/usr/keylayout/Vendor_1234_Product_0001.kl
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_1234_Product_0001.kl:system/usr/keylayout/Vendor_5678_Product_0002.kl
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_1234_Product_0001.kl:system/usr/keylayout/Vendor_5679_Product_0003.kl
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_1234_Product_0001.kl:system/usr/keylayout/Vendor_5680_Product_0004.kl
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_1234_Product_0001.kl:system/usr/keylayout/Vendor_5681_Product_0005.kl
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_1234_Product_0001.kl:system/usr/keylayout/Vendor_5682_Product_0006.kl
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_1234_Product_0001.kl:system/usr/keylayout/Vendor_5683_Product_0007.kl
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_1234_Product_0001.kl:system/usr/keylayout/Vendor_5684_Product_0008.kl
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_1234_Product_0001.kl:system/usr/keylayout/Vendor_5685_Product_0009.kl
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_1234_Product_0001.kl:system/usr/keylayout/Vendor_5686_Product_0010.kl
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_1234_Product_0001.kl:system/usr/keylayout/Vendor_5687_Product_0011.kl
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_1234_Product_0001.idc:system/usr/idc/Vendor_1234_Product_0001.idc
 PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5678_Product_0002.idc:system/usr/idc/Vendor_5678_Product_0002.idc
-PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5678_Product_0002.idc:system/usr/idc/Vendor_5679_Product_0003.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5679_Product_0003.idc:system/usr/idc/Vendor_5679_Product_0003.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5680_Product_0004.idc:system/usr/idc/Vendor_5680_Product_0004.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5681_Product_0005.idc:system/usr/idc/Vendor_5681_Product_0005.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5682_Product_0006.idc:system/usr/idc/Vendor_5682_Product_0006.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5683_Product_0007.idc:system/usr/idc/Vendor_5683_Product_0007.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5684_Product_0008.idc:system/usr/idc/Vendor_5684_Product_0008.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5685_Product_0009.idc:system/usr/idc/Vendor_5685_Product_0009.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5686_Product_0010.idc:system/usr/idc/Vendor_5686_Product_0010.idc
+PRODUCT_COPY_FILES += device/tencent/vinput/Vendor_5687_Product_0011.idc:system/usr/idc/Vendor_5687_Product_0011.idc
 PRODUCT_COPY_FILES += device/tencent/root/init.tencent.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.tencent.sh
 
 PRODUCT_PRODUCT_PROPERTIES += ro.llk.enable=false
