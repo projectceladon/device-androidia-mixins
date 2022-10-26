@@ -1,3 +1,5 @@
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/system_ext/private
+
 {{#enable_msdk_omx}}
 INTEL_STAGEFRIGHT := true
 
