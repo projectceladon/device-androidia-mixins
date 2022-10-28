@@ -133,7 +133,7 @@ def main():
                         elif "host-error" in json.dumps(resp["data"]):
                             print("VM is getting Shutdown")
                             print("Reason: An error prevents further use of guest and results in shutdown")
-                        cmdCommand = "shutdown -h now"
+                        cmdCommand = "poweroff -p -f"
                         signal.signal(signal.SIGTERM, signal.SIG_IGN)
                         time.sleep(3)
                         process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE, shell=True)
