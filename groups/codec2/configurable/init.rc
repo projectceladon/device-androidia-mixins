@@ -1,0 +1,4 @@
+on post-fs
+    chmod 0664 /dev/ion
+    chown system system /dev/ion
+    setprop debug.stagefright.ccodec 3
