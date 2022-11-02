@@ -27,4 +27,4 @@ PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl \
                     android.hardware.graphics.composer@2.1-service \
                     libbt-vendor
 
-PRODUCT_COPY_FILES += vendor/intel/utils/license-file-for-tarball:$(PRODUCT_OUT)/LICENSE
+PRODUCT_COPY_FILES += vendor/intel/utils/bsp_diff/file_for_flashfile:$(PRODUCT_OUT)/LICENSE
