@@ -1,6 +1,6 @@
 #!/bin/bash
-SOFBIN_TPLGS="sof-bin/v2.0.x/sof-tplg/"
-SOFBIN_FWS="sof-bin/v2.0.x/sof/"
+SOFBIN_TPLGS="sof-bin/v2.2.x/sof-tplg/"
+SOFBIN_FWS="sof-bin/v2.2.x/sof/"
 LIB_TPLG="/lib/firmware/intel/sof-tplg/"
 LIB_FW="/lib/firmware/intel/sof/"
 SOF_WORK_DIR="$2/sof_audio"
@@ -29,7 +29,7 @@ function setupSof {
     sudo mkdir $LIB_TPLG
 
     rm -rf sof-bin
-    git clone https://github.com/thesofproject/sof-bin -b v2.0
+    git clone https://github.com/thesofproject/sof-bin -b v2.2
     if [ ! -d "sof-bin" ]; then
         echo "Failed to download "
         exit -1
