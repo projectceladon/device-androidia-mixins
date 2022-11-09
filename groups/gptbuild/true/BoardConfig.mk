@@ -7,7 +7,7 @@ GPTIMAGE_BIN = $(PRODUCT_OUT)/$(TARGET_PRODUCT).img
 CRAFFIMAGE_BIN = $(PRODUCT_OUT)/$(TARGET_PRODUCT).craff
 {{/generate_craff}}
 
-{{#gen_gptimage_when_pub}}
+{{^gen_gptimage_when_pub}}
 BOARD_FLASHFILES += $(GPTIMAGE_BIN):$(TARGET_PRODUCT).img
 {{/gen_gptimage_when_pub}}
 
