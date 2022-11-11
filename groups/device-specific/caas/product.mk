@@ -76,3 +76,12 @@ PRODUCT_PROPERTY_OVERRIDES += ro.config.alarm_vol_default=7
 PRODUCT_PROPERTY_OVERRIDES += ro.config.system_vol_default=7
 PRODUCT_PROPERTY_OVERRIDES += ro.config.media_vol_default=15
 
+############### tencent gps module ###########################
+PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-impl \
+    android.hardware.gnss@1.0-service \
+    gps.tencent
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.gps=tencent
+
