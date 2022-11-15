@@ -9,10 +9,6 @@ BOARD_KERNEL_CMDLINE += i915.enable_guc=2
 {{/enable_guc}}
 {{/acrn-guest}}
 
-ifeq ($(BASE_YOCTO_KERNEL),true)
-BOARD_KERNEL_CMDLINE += i915.enable_guc=2
-endif
-
 ifeq ($(BASE_LTS2020_YOCTO_KERNEL),true)
 BOARD_KERNEL_CMDLINE += i915.enable_guc=1
 endif
