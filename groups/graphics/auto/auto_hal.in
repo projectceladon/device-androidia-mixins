@@ -11,12 +11,12 @@ case "$(cat /proc/fb)" in
                 setprop vendor.vulkan.set intel
                 ;;
 	*virtio*)
-                if [ "$(cat /sys/kernel/debug/dri/0/name |awk '{print $1}')" = "i915" ];then
+                if [ "$(cat /sys/bus/pci/devices/0000:00:02.0/vendor)" = "0x8086" ];then
                         echo "sriov rendering"
                         setprop vendor.egl.set mesa
                         setprop vendor.vulkan.set intel
                 else
-                        if [ "$(cat /sys/kernel/debug/dri/0/virtio-gpu-features |grep virgl |awk '{print $3}')" = "no" ];then
+                        if [ "$(cat /sys/module/virtio_gpu/parameters/is_virgl_3d)" = "N" ];then
                                 echo "swiftshader rendering"
                                 setprop vendor.egl.set swiftshader
                                 setprop vendor.vulkan.set pastel
