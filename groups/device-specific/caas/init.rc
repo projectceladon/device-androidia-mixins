@@ -8,6 +8,9 @@ on boot
     write /sys/devices/platform/INT33BB:00/power/control on
     write /sys/devices/pci0000\:00/0000\:00\:15.0/power/control auto
 
+# Update dm-verity state and set partition.*.verified properties.
+    verity_update_state
+
 on post-fs
     #Accelerometer: X & Z inverted
     setprop ro.vendor.iio.accel.x.opt_scale    -1
