@@ -103,3 +103,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.gps=tencent
 
+############### something about root #########################
+# su => txperm
+PRODUCT_PACKAGES += txperm
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.debuggable=0 \
+    persist.sys.usb.config=adb \
+    ro.build.selinux=1
+
