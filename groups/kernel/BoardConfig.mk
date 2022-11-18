@@ -62,11 +62,10 @@ BOARD_KERNEL_CMDLINE += \
       snd-intel-dspcfg.dsp_driver=1
 endif
 
-ifeq ($(BASE_LTS2020_YOCTO_KERNEL), true)
 BOARD_KERNEL_CMDLINE += \
       clearcpuid=517 \
-      mce=no_lmce
-endif
+      mce=no_lmce \
+      mce=ignore_ce
 
 BOARD_SEPOLICY_M4DEFS += module_kernel=true
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/kernel
