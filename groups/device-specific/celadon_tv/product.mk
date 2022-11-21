@@ -28,7 +28,12 @@ PRODUCT_PACKAGES += android.hardware.usb@1.0-impl \
 
 PRODUCT_PACKAGES += \
     LatinIMEGoogleTvPrebuilt \
-    TvSampleLeanbackLauncher
+    TvSampleLeanbackLauncher \
+    FrameworkPackageStubs \
+    TvProvision \
+    SettingsIntelligence \
+    SystemUI \
+    TvSettings
 
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
 PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.useautofastjni=true
