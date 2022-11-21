@@ -1,0 +1,9 @@
+on post-fs
+    insmod /vendor/lib/modules/v4l2-async.ko
+    insmod /vendor/lib/modules/v4l2-fwnode.ko
+    insmod /vendor/lib/modules/videobuf2-dma-contig.ko
+    insmod /vendor/lib/modules/hkrcam.ko
+    insmod /vendor/lib/modules/intel-ipu6.ko
+    insmod /vendor/lib/modules/ti960.ko
+    insmod /vendor/lib/modules/isx031.ko
+    insmod /vendor/lib/modules/intel-ipu6-isys.ko
