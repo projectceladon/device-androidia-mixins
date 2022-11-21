@@ -189,6 +189,75 @@ Only the three quirks included above are recognized at this point:
             <Feature name="adaptive-playback" />
         </MediaCodec>
 {{/hw_vd_mp2}}
+{{#enable_msdk_c2}}
+        <MediaCodec name="c2.intel.avc.decoder" type="video/avc">
+            <!-- profiles and levels:  ProfileHigh : Level52 -->
+            <Limit name="size" min="64x64" max="4096x4096" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-32768" /> <!-- max 4096x2048 equivalent -->
+            <Limit name="blocks-per-second" range="1-1966080" />
+            <Limit name="bitrate" range="1-48000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+            <Feature name="adaptive-playback" />
+        </MediaCodec>
+
+        <MediaCodec name="c2.intel.hevc.decoder" type="video/hevc">
+            <!-- profiles and levels:  ProfileMain : MainTierLevel51 -->
+            <Limit name="size" min="64x64" max="8192x8192" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="8x8" />
+            <Limit name="block-count" range="1-196608" /> <!-- max 4096x3072 -->
+            <Limit name="blocks-per-second" range="1-2000000" />
+            <Limit name="bitrate" range="1-10000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+            <Feature name="adaptive-playback" />
+        </MediaCodec>
+
+        <MediaCodec name="c2.intel.vp9.decoder" type="video/x-vnd.on2.vp9">
+            <Limit name="size" min="64x64" max="8192x8192" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-16384" />
+            <Limit name="blocks-per-second" range="1-500000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+            <Feature name="adaptive-playback" />
+        </MediaCodec>
+
+        <MediaCodec name="c2.intel.vp8.decoder" type="video/x-vnd.on2.vp8">
+            <Limit name="size" min="64x64" max="4096x4096" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-16384" />
+            <Limit name="blocks-per-second" range="1-500000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+            <Feature name="adaptive-playback" />
+        </MediaCodec>
+
+        <MediaCodec name="c2.intel.mp2.decoder" type="video/mpeg2">
+            <Limit name="size" min="64x64" max="2048x2048" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-16384" />
+            <Limit name="blocks-per-second" range="1-500000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-1920x1080" value="30" />
+            <Feature name="adaptive-playback" />
+        </MediaCodec>
+
+        <MediaCodec name="c2.intel.av1.decoder" type="video/av01">
+            <Limit name="size" min="64x64" max="4096x4096" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-16384" />
+            <Limit name="blocks-per-second" range="1-500000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+            <Feature name="adaptive-playback" />
+        </MediaCodec>
+{{/enable_msdk_c2}}
     </Decoders>
 
     <Encoders>
@@ -231,6 +300,37 @@ Only the three quirks included above are recognized at this point:
             <Limit name="performance-point-3840x2160" value="30" />
         </MediaCodec>
 {{/hw_ve_h265}}
+
+{{#enable_msdk_c2}}
+        <MediaCodec name="c2.intel.avc.encoder" type="video/avc">
+            <Limit name="size" min="176x144" max="4096x4096" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-8192" /> <!-- max 2048x1024 -->
+            <Limit name="blocks-per-second" range="1-245760" />
+            <Limit name="bitrate" range="1-12000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+        </MediaCodec>
+
+        <MediaCodec name="c2.intel.hevc.encoder" type="video/hevc" >
+            <Limit name="size" min="176x144" max="8192x8192" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="blocks-per-second" range="1-972000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+        </MediaCodec>
+
+        <MediaCodec name="c2.intel.vp9.encoder" type="video/x-vnd.on2.vp9" >
+            <Limit name="size" min="128x96" max="8192x8192" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-245760" />
+            <Limit name="blocks-per-second" range="1-972000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+        </MediaCodec>
+{{/enable_msdk_c2}}
     </Encoders>
 {{#sw_omx_video}}
     <Include href="media_codecs_google_video.xml" />
