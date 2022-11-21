@@ -1,4 +1,5 @@
 [defaults]
+enable_msdk_c2 = false
 hw_vd_vc1 = false
 hw_vd_vp9 = false
 hw_vd_vp8 = false

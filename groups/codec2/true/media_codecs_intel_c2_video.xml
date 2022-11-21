@@ -112,8 +112,6 @@ and updated to vendor media codecs.
             <Limit name="blocks-per-second" range="1-245760" />
             <Limit name="bitrate" range="1-12000000" />
             <Limit name="performance-point-3840x2160" value="30" />
-            <!--Feature name="intra-refresh" /-->
-            <Diagnostics dumpOutput="false" />
         </MediaCodec>
 {{/hw_ve_h264}}
 
