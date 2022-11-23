@@ -105,7 +105,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ############### something about root #########################
 # su => txperm
-PRODUCT_PACKAGES += txperm
+PRODUCT_PACKAGES += txperm \
+    txpermClient \
+    txpermDaemon
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.debuggable=0 \
