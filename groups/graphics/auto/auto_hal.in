@@ -11,7 +11,7 @@ case "$(cat /proc/fb)" in
                 setprop vendor.vulkan.set intel
                 ;;
 	*virtio*)
-                if [ "$(cat /sys/bus/pci/devices/0000:00:02.0/vendor)" = "0x8086" ];then
+                if [ -d "/sys/class/drm/card0/engine" ];then
                         echo "sriov rendering"
                         setprop vendor.egl.set mesa
                         setprop vendor.vulkan.set intel
