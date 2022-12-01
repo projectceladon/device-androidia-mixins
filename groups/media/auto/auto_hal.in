@@ -13,7 +13,7 @@ case "$(cat /proc/fb)" in
                 setprop vendor.intel.video.codec hardware
                 ;;
         *)
-                if [ "$(cat /sys/kernel/debug/dri/0/i915_sriov_info |grep virtualization |awk '{print $2}')" = "enabled" ];then
+                if [ -d "/sys/class/drm/card0/engine" ];then
                        echo "Intel SRIOV"
                        setprop vendor.intel.video.codec hardware
                 else
