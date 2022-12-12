@@ -165,10 +165,9 @@
         <fqname>@1.4::ICryptoFactory/clearkey</fqname>
         <fqname>@1.4::IDrmFactory/clearkey</fqname>
     </hal>
-    <hal format="hidl">
+    <hal format="aidl">
         <name>android.hardware.usb</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
+        <version>1</version>
         <interface>
             <name>IUsb</name>
             <instance>default</instance>

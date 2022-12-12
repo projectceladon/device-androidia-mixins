@@ -20,8 +20,7 @@ PRODUCT_PACKAGES += vndservicemanager
 PRODUCT_PACKAGES += ClipboardAgent
 
 PRODUCT_PACKAGES +=  \
-                    android.hardware.usb@1.0-impl \
-                    android.hardware.usb@1.0-service \
+                    android.hardware.usb-service.example \
                     camera.device@1.0-impl \
                     android.hardware.camera.provider@2.4-impl \
                     android.hardware.graphics.mapper@4.0-impl.minigbm \
