@@ -29,7 +29,8 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_{{platform}}.xml:vendor/etc/media_codecs_performance.xml \
     $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_cml.xml:vendor/etc/media_codecs_performance_cml.xml \
-    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_tgl.xml:vendor/etc/media_codecs_performance_tgl.xml
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_tgl.xml:vendor/etc/media_codecs_performance_tgl.xml \
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_adl.xml:vendor/etc/media_codecs_performance_adl.xml
 {{/hw_omx_video}}
 {{/codec_perf_xen}}
 
