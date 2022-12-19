@@ -1,0 +1,87 @@
+import /init.houdini.rc
+import /init.${ro.hardware}.usb.rc
+
+import /vendor/etc/init/hw/init.logs.rc
+import /vendor/etc/init/hw/init.crashlogd.rc
+
+on early-init
+
+    # Create symbol link for binder device
+    chmod 0666 /dev/binderfs/binder
+    symlink /dev/binderfs/binder /dev/binder
+
+    chmod 0666 /dev/binderfs/vndbinder
+    symlink /dev/binderfs/vndbinder /dev/vndbinder
+
+    chmod 0666 /dev/binderfs/hwbinder
+    symlink /dev/binderfs/hwbinder /dev/hwbinder
+
+    # Mount debugfs and make it writable so that debuggerd can
+    # create stack traces, required with newer kernels
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
+
+    # Mount cgroup mount point for cpu accounting
+    mount cgroup none /acct nodev noexec nosuid cpu,cpuacct
+    mkdir /acct/uid
+
+on early-boot
+    # Needed by surfaceflinger to enable it to open trace_marker
+    # on start without file permissions error.
+    chmod 0222 /sys/kernel/debug/tracing/trace_marker
+    # tracefs is mounted after 1st access to it
+    chmod 0755 /sys/kernel/debug/tracing
+
+on init
+    copy /dev/cpuset/cpuset.cpus /dev/cpuset/foreground/cpuset.cpus
+    copy /dev/cpuset/cpuset.mems /dev/cpuset/foreground/cpuset.mems
+
+    copy /dev/cpuset/cpuset.cpus /dev/cpuset/background/cpuset.cpus
+    copy /dev/cpuset/cpuset.mems /dev/cpuset/background/cpuset.mems
+
+    copy /dev/cpuset/cpuset.cpus /dev/cpuset/system-background/cpuset.cpus
+    copy /dev/cpuset/cpuset.mems /dev/cpuset/system-background/cpuset.mems
+
+    copy /dev/cpuset/cpuset.cpus /dev/cpuset/restricted/cpuset.cpus
+    copy /dev/cpuset/cpuset.mems /dev/cpuset/restricted/cpuset.mems
+
+    copy /dev/cpuset/cpuset.cpus /dev/cpuset/top-app/cpuset.cpus
+    copy /dev/cpuset/cpuset.mems /dev/cpuset/top-app/cpuset.mems
+
+on fs
+    mount_all /fstab.${ro.hardware}
+#on property:ro.boot.container.id=0
+#    start display-daemon3
+
+
+
+#service display-daemon2 /system/bin/display-daemon2
+#    class core
+#    oneshot
+
+on boot
+    setprop wifi.interface wlan0
+    # enable fake battery state, details in system/core/healthd/BatteryMonitor.cpp
+    setprop ro.boot.fake_battery 1
+#    start delRedundantInput
+
+    # Disable rild
+    setprop ro.radio.noril yes
+    stop ril-daemon
+
+service delRedundantInput /system/bin/delRedundantInput.sh
+    user system
+    group system
+    oneshot
+
+#on property:sys.boot_completed=1
+#    start delRedundantInput
+
+#on property:sys.mouse_plugin=1
+#    start delRedundantInput
+
+service wpa_supplicant /vendor/bin/hw/wpa_supplicant -Dnl80211 -iwlan0 -c/vendor/etc/wifi/wpa_supplicant.conf -g@android:wpa_wlan0
+    socket wpa_wlan0 dgram 660 wifi wifi
+    group system wifi inet
+    oneshot
+    disabled

@@ -1,0 +1,15 @@
+import /init.base.rc
+
+#on early-boot
+#    class_start icr_service
+
+#service icr_service /system/bin/icr_encoder
+#    class icr_service
+#    user root
+#    group root
+
+on boot
+    setprop debug.egl.printFPS  60
+    setprop ro.sf.disable_triple_buffer 1
+    write /proc/sys/kernel/ns_pid_max 32768
+    chmod 0777 /ipc
