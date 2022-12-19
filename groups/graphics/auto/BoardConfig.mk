@@ -9,6 +9,10 @@ BOARD_KERNEL_CMDLINE += i915.enable_guc=1
 {{/enable_guc}}
 {{/acrn-guest}}
 
+ifeq ($(BASE_LINUX_INTEL_LTS2021_KERNEL),true)
+BOARD_KERNEL_CMDLINE += i915.enable_guc=1
+endif
+
 USE_OPENGL_RENDERER := true
 USE_INTEL_UFO_DRIVER := false
 BOARD_GPU_DRIVERS := i965 swrast virgl iris
