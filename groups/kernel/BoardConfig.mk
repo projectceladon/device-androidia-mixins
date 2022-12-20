@@ -63,6 +63,9 @@ BOARD_KERNEL_CMDLINE += \
 ifeq ($(BASE_YOCTO_KERNEL), true)
 BOARD_KERNEL_CMDLINE += \
       snd-intel-dspcfg.dsp_driver=1
+else ifeq ($(BASE_LTS2020_YOCTO_KERNEL), true)
+BOARD_KERNEL_CMDLINE += \
+      mce=no_lmce
 endif
 
 BOARD_KERNEL_CMDLINE += \
