@@ -94,14 +94,14 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.graphics.composer</name>
-        <transport>hwbinder</transport>
-        <version>2.4</version>
+    <hal format="aidl">
+        <name>android.hardware.graphics.composer3</name>
+        <version>1</version>
         <interface>
             <name>IComposer</name>
             <instance>default</instance>
         </interface>
+        <fqname>IComposer/default</fqname>
     </hal>
     <hal format="hidl">
        <name>android.hardware.bluetooth</name>
