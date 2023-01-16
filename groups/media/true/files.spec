@@ -1,0 +1,2 @@
+[extrafiles]
+mediacodec.policy:

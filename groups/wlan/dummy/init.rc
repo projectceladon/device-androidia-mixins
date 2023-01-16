@@ -1,0 +1,8 @@
+on boot
+    setprop wifi.interface wlan0
+
+service wpa_supplicant /vendor/bin/hw/wpa_supplicant -Dnl80211 -iwlan0 -c/vendor/etc/wifi/wpa_supplicant.conf -g@android:wpa_wlan0
+    socket wpa_wlan0 dgram 660 wifi wifi
+    group system wifi inet
+    oneshot
+    disabled

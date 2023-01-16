@@ -1,0 +1,64 @@
+on early-init
+
+    # Create symbol link for binder device
+    chmod 0666 /dev/binderfs/binder
+    symlink /dev/binderfs/binder /dev/binder
+
+    chmod 0666 /dev/binderfs/vndbinder
+    symlink /dev/binderfs/vndbinder /dev/vndbinder
+
+    chmod 0666 /dev/binderfs/hwbinder
+    symlink /dev/binderfs/hwbinder /dev/hwbinder
+
+    # Mount debugfs and make it writable so that debuggerd can
+    # create stack traces, required with newer kernels
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
+
+    # Mount cgroup mount point for cpu accounting
+    mount cgroup none /acct nodev noexec nosuid cpu,cpuacct
+    mkdir /acct/uid
+
+on early-boot
+    # Needed by surfaceflinger to enable it to open trace_marker
+    # on start without file permissions error.
+    chmod 0222 /sys/kernel/debug/tracing/trace_marker
+    # tracefs is mounted after 1st access to it
+    chmod 0755 /sys/kernel/debug/tracing
+
+on init
+    copy /dev/cpuset/cpuset.cpus /dev/cpuset/foreground/cpuset.cpus
+    copy /dev/cpuset/cpuset.mems /dev/cpuset/foreground/cpuset.mems
+
+    copy /dev/cpuset/cpuset.cpus /dev/cpuset/background/cpuset.cpus
+    copy /dev/cpuset/cpuset.mems /dev/cpuset/background/cpuset.mems
+
+    copy /dev/cpuset/cpuset.cpus /dev/cpuset/system-background/cpuset.cpus
+    copy /dev/cpuset/cpuset.mems /dev/cpuset/system-background/cpuset.mems
+
+    copy /dev/cpuset/cpuset.cpus /dev/cpuset/restricted/cpuset.cpus
+    copy /dev/cpuset/cpuset.mems /dev/cpuset/restricted/cpuset.mems
+
+    copy /dev/cpuset/cpuset.cpus /dev/cpuset/top-app/cpuset.cpus
+    copy /dev/cpuset/cpuset.mems /dev/cpuset/top-app/cpuset.mems
+
+on fs
+    mount_all /fstab.${ro.hardware}
+
+on boot
+    # enable fake battery state, details in system/core/healthd/BatteryMonitor.cpp
+    setprop ro.boot.fake_battery 1
+
+    # Disable rild
+    setprop ro.radio.noril yes
+    stop ril-daemon
+    write /proc/sys/kernel/ns_pid_max 32768
+    chmod 0777 /ipc
+
+on boot && property:ro.boot.icr.internal=1
+    class_start icr_service
+
+service icr_encode_service_intel /system/vendor/bin/hw/icr_encoder ${ro.container.id} -streaming -res ${ro.boot.icr.res.x}x${ro.boot.icr.res.y} -fr ${ro.config.media_fps} -url ${sys.icr.media_url} -plugin ${ro.config.icr.plugin} -lowpower -quality 4 -ratectrl ${ro.config.media_rc_mode} -b 3.3M -maxrate 6.6M -hwc_sock /ipc/hwc-sock -tcae 0 -renderfps_enc ${ro.boot.icr.rfps.enc}
+    class icr_service
+    user root
+    group root

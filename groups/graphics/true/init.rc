@@ -1,0 +1,4 @@
+on boot
+    setprop debug.egl.printFPS  60
+    setprop ro.sf.disable_triple_buffer 1
+
