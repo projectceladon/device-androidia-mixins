@@ -38,6 +38,12 @@ on late-fs
 {{/treble}}
     {{/mountfstab-flag}}
 {{/metadata_encryption}}
+
+on fs
+   # Update dm-verity persistent state and set partition.*.verified
+   # properties
+   verity_update_state
+
 {{#verity_warning}}
 
 on init
@@ -48,11 +54,6 @@ on init
 on early-boot
      chmod 0440 /sys/firmware/dmi/entries/148-0/raw
      chmod 0440 /sys/firmware/dmi/entries/0-0/raw
-
-on fs
-   # Update dm-verity persistent state and set partition.*.verified
-   # properties
-   verity_update_state
 
 on verity-logging
     exec u:r:slideshow:s0 -- /sbin/slideshow -t 30000 -p warning/verity_red_1 warning/verity_red_2
