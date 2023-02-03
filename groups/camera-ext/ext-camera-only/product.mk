@@ -26,3 +26,4 @@ PRODUCT_PROPERTY_OVERRIDES += ro.vendor.remote.sf.fake_camera ="both" \
 #PRODUCT_PACKAGES_DEBUG += TestingCamera
 
 PRODUCT_PACKAGES += MultiCameraApp
+PRODUCT_PACKAGES += avmapp
