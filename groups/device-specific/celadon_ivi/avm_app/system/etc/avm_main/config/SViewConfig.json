@@ -1,0 +1,1079 @@
+#-i calib.png  -c SViewConfig.json -f SViewTune.camera -L SViewCam4LensOTP.txt --show
+#D:\SurroundView\customers\Main
+{
+    #0: enable filling the gap due to sampling out-of-image in left+right view
+    #1: reserve gap
+    #2-4: y,u,v for wheel track color [0-255]
+    #5: centered line start y
+    #6: enable limiting red line
+    "CUSTOM_PARAMS": [1, 4, 120, 204, 42,-234,1,0,0,0,  0,0,0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0,0,0,  0,0],
+    "forceCarOverlay": "3d", #"3d", #"2d", #"none", #"default" #"only_2d"
+    #there are several implementations to the way effect of lights are rendered
+    #Lights_1/2 differ in the mathematical formulas used for the effect of lights
+    #Texture - lights are not rendered, instead use a separate texture to mimic shadows/reflections etc.
+    "SHADER_TYPE" : "Lights_1", #valid options are Lights_1, Lights_2, Texture
+
+    #8155 QNX workaround (no reference counting of EGL context): Normally AVM creates its own EGL context and distroy it on finish.
+    #Set to true to disable this and leave the EGL context init/deinit to the integration layer.
+    "eglDisableInternalInitialization" = false,
+    "YUVRangeExplicit": false,
+    "YUVRange": "601full",
+	"disableACC": true,
+
+    "SHADER_CACHE": { #during initialization, save/load precompiled shaders to/from files in Path
+        "Load": false,
+        "Save": false,
+        "Path": "",
+    }
+    
+    "UNDER_CAR": {
+        # What to render under the car model:
+        # 0: don't draw anything - leave the car parts visible in the cameras as they are.
+        # 1: reflect the near-car scene under the car and fade to black - see shadow_depth_rel
+        # 2: draw a rectangle texture, with overall transparency controlled during TC animation
+        # 3: draw rectangle texture, between the texture and the under car rectangle, fill with TC image
+        # 4: draw underCar image even when TC enabled and car is transparent. Use for steering adjustment with underCar_rect.mmp
+        "DRAW_UNDER_CAR": 3,
+        
+        #RGB image, It determines: under-car gray level, blending with stitched image, blending with averaged surrounding color.
+        #Green: gray level inder car (GRAY)
+        #Blue: blends GRAY with averaged surrounding color - AVG
+        #Red: bends with the stitched image (used for curwing the corners and avoiding jaggy borders)
+        #out_color = red*(blue*GRAY + (1.0-blue)*AVG) + (1-red)*STITCHED
+        "FILE_UNDER_CAR": "/system/etc/underCar_padded.ppm", # path to under car texture file
+        "FILE_UNDER_CAR_KEY": "/system/etc/underCar_TC.ppm", # path to under car file for TC - without white brackets
+
+        "UNDER_CAR_MINX": -107, #under car image margins in world coordinates, in cm
+        "UNDER_CAR_MAXX":  107, #under car image margins in world coordinates, in cm
+        "UNDER_CAR_MINY": -280, #under car image margins in world coordinates, in cm
+        "UNDER_CAR_MAXY":  280, #under car image margins in world coordinates, in cm
+
+        # Extend undercar geometry to cover front wheel camera occlusions
+        "STEERING_EXTEND": {
+            #      | width[0] @ thres[0]
+            #      |  | width[1] @ thres[1]
+            #  ____ __  _ front[1] @ thres[1]
+            #  ____|__| _ front[0] @ thres[0]
+            # |    |  | _ length[0]
+            # 0    0 /
+            # |    |/   _ length[1]
+            # 0    0
+            # |____|
+
+            "ENABLE": true,
+            "LENGTH": [80, 200], # transition length from car front (world coordinates in cm)
+            "WIDTH": [0, 25], # widen wheel arches from first to second value according to steering (world coordinates in cm)
+            "FRONT": [0, 0], # extend front of car according to steering (world coordinates in cm)
+            "STEERING_THRESHOLD": [0, 500], # interpolate extention region with steering (steering rotation in degrees ~= 0-500)
+            "SMOOTH": true # transition zone geometry linear or smooth
+        }
+    },
+    "CAR2D_CACHE_PATH": "", # Path to car2d cache files: car2d_*.pam
+
+    "fisheyeResolution":[1920, 1080],
+
+    #Map the cameras to input frame.
+    #If "...." order, Those are indices of FBLR cameras respectively in the input frame, from left to right 
+    #if "::" order the input frame positions are ordered ab/cd. Use, 'a','b','c','d' letters in the places of FLBR.
+    "INPUT_MAP":
+    {
+        "Front":[0, 1, 0], # frameId, Row, Col
+        "Left": [0, 0, 0],
+        "Back": [0, 3, 0],
+        "Right":[0, 2, 0],
+    },
+    "DEBUG_DUMP":
+    {
+        "debugDumpFrame":-1,
+        "debugDumpPath":"/data/local/tmp/dump/" #"/data/local/tmp/dump/"
+    },
+    "RENDER_WATERMARK_STATIC":true, # true-watermark at bottom right corner, false-watermark moving across screen
+    "RENDER_MSAA" : 4,
+
+    "CAR_MODEL3D":
+    {
+        "renderModel":true,
+        "scale": 1.0,   #for underCar_widened.ppm: 3D model scale
+        "scale2dx": 1.0, #for underCar_widened.ppm: 2D model wide-scale
+        "scale2dy": 1.0,
+
+        # If world aspect is different from 3d model aspect, car might appear squashed/stretched
+        "CAR3D_MINX": -98, # x is 0.85 from margins
+        "CAR3D_MAXX":  98,
+        "CAR3D_MINY": -272,
+        "CAR3D_MAXY":  260,
+
+        "modelFilename": "/system/etc/avm_main/config/intel.fbx",
+
+        "MaterialBody0":"",
+        "MaterialBody1":"",
+        "MaterialBody2":"",
+        "MaterialBody3":"",
+
+        "MaterialBlinkerFL":"",
+        "MaterialBlinkerFR":"",
+        "MaterialBlinkerBL":"",
+        "MaterialBlinkerBR":"",
+        "MaterialBrakelightL":"",
+        "MaterialBrakelightR":"",
+        "MaterialReverselightL":"",
+        "MaterialReverselightR":"",
+        "MaterialHighBeamLightL":"",
+        "MaterialHighBeamLightR":"",
+        "MaterialLowBeamLightL":"",
+        "MaterialLowBeamLightR":"",
+        "MaterialClearenceFL" : "",
+        "MaterialClearenceFR" : "",
+        "MaterialClearenceBL" : "",
+        "MaterialClearenceBR" : "",
+        "MaterialFogFL": "",
+        "MaterialFogFR": "",
+
+        "MeshWheelFL":"",
+        "MeshWheelFR":"",
+        "MeshWheelBL":"",
+        "MeshWheelBR":"",
+        "MeshBrakeCaliperFL":"",
+        "MeshBrakeCaliperFR":"",
+        "MeshDoorFL":"",
+        "MeshDoorFR":"",
+        "MeshDoorBL":"",
+        "MeshDoorBR":"",
+        "MeshDoorFront":"",
+        "MeshDoorBack":"",
+        "MeshMirrorLeft":"",
+        "MeshMirrorRight":"",
+
+        "MeshWheelAxisTurning": [0, 1, 0],
+        "MeshWheelAxisMoving": [1, 0, 0],
+
+        "MeshDoorLRAxis": [0, 1, 0],
+        "MeshDoorFBAxis": [-1, 0, 0],
+        "MeshMirrorAxis": [0, 1, 0],
+
+        "rotation": [90, 180, 0],
+
+        # Light Setup
+        "lightsOrientationInitTop": false,  #flag for top view lights
+        "lightsOrientationInitArb": false, #flag for arbitrary view lights
+        #if lightsOrientationInit = true cameras are initialized as angles
+        #if lightsOrientationInit = false, "angles" are coordinates as hardcoded in the shader sent by TS.
+        "lightsTopView": [
+            {
+                "angles": [1.0, -0.8, -0.2],
+                "ambient": 0.0,
+                "light_strength": 0.01,
+                "specular": 0.001,
+            },
+            {
+                "angles": [-1.0, -0.8, -0.2],
+                "ambient": 0.0,
+                "light_strength": 0.01,
+                "specular": 0.001,
+            },
+            {
+                "angles": [2.0, 0.4, -0.1],
+                "ambient": 0.0,
+                "light_strength": 0.01,
+                "specular": 0.001,
+            },
+            {
+                "angles": [-2.0, 0.4, -0.1],
+                "ambient": 0.0,
+                "light_strength": 0.01,
+                "specular": 0.001,
+            },
+            {
+                "angles": [0.0, 0.5, -1.0],
+                "ambient": 0.0,
+                "light_strength": 0.53,
+                "specular": 0.032,
+            },
+            {
+                "angles": [0.0, -2.0, -0.6],
+                "ambient": 0.0,
+                "light_strength": 0.0,
+                "specular": 0.1,
+            },
+        ],
+        "lightsArbitrary": [
+            {
+                "angles": [1.0, -0.8, -0.2],
+                "ambient": 0.0,
+                "light_strength": 0.01,
+                "specular": 0.001,
+            },
+            {
+                "angles": [-1.0, -0.8, -0.2],
+                "ambient": 0.0,
+                "light_strength": 0.01,
+                "specular": 0.001,
+            },
+            {
+                "angles": [2.0, 0.4, -0.1],
+                "ambient": 0.0,
+                "light_strength": 0.01,
+                "specular": 0.001,
+            },
+            {
+                "angles": [-2.0, 0.4, -0.1],
+                "ambient": 0.0,
+                "light_strength": 0.01,
+                "specular": 0.001,
+            },
+            {
+                "angles": [0.0, 0.5, -1.0],
+                "ambient": 0.0,
+                "light_strength": 0.53,
+                "specular": 0.032,
+            },
+            {
+                "angles": [0.0, -2.0, -0.6],
+                "ambient": 0.0,
+                "light_strength": 0.0,
+                "specular": 0.1,
+            },
+        ],
+    },
+
+    "CAR_SPEED_MULTIPLIER_FWD": 1.0,
+    "CAR_SPEED_MULTIPLIER_BWD": 1.0,
+    #Car opacity when translarent car chasis
+    "CAR_OPACITY_2D": 0.2,
+    "CAR_OPACITY_3D": 0.2,
+
+    #minimum under car image opacity
+    "UC_OPACITY_2D": 0.0,
+    "UC_OPACITY_3D": 0.0,
+    
+    #if true we want to pass through zero in order to get from positive to negative speeds
+    #i.e. it is not possible to have speed +1 km/h on one frame and -1 km/h on the next
+    #in this case the second speed will be corrected to 1 km/h
+    #if false speed reading is taken directly from interface layer
+    "CORRECT_SPEED_READINGS" : false,
+
+    "CAR_STEERING":
+    {
+        "MIN_STEERING_ANGLE":0.0174532925199,
+        "STEERING_HYST" : 2.0, #steering hysteresis threshold used for pgl generation
+        "WHEEL_BACK_LEFT":[  -83.5, -142.5],  #from NioCarInfo.xlsx
+        "WHEEL_BACK_RIGHT":[  83.5, -142.5],
+        "WHEEL_FRONT_LEFT":[ -83.5,  163.5],
+        "WHEEL_FRONT_RIGHT":[ 83.5,  163.5]
+        #both luts calibrated on data from issue #1005 (note 20)
+        #steering lut based on right turning radius
+        "STEERING_ANGLE": [-9.5993, -8.9994, -8.3994, -7.7994, -7.1995, -6.5995, -5.9996, -5.3996, -4.7997, -4.1997, -3.5997, -2.9998, -2.3998, -1.7999, -1.1999, -0.6000, 0.0000, 0.6000, 1.1999, 1.7999, 2.3998, 2.9998, 3.5997, 4.1997, 4.7997, 5.3996, 5.9996, 6.5995, 7.1995, 7.7994, 8.3994, 8.9994, 9.5993],
+        "WHEEL_ANGLE": [ -0.6578, -0.6063, -0.5563, -0.5092, -0.4644, -0.4211, -0.3793, -0.3386, -0.2989, -0.2600, -0.2217, -0.1840, -0.1467, -0.1097, -0.0730, -0.0365, 0.0000, 0.0365, 0.0730, 0.1097, 0.1467, 0.1840, 0.2217, 0.2600, 0.2989, 0.3386, 0.3793, 0.4211, 0.4644, 0.5092, 0.5563, 0.6063, 0.6578],        
+        
+        #speed multiplier versus STEERING_ANGLE - for fine adjusting transparent car
+        #based on video #1005 - TC-20211029.mp4 (parabolla fixed s.t. maximum discrepancy when wheel ang = 0 + multiplier 1 when wh. ang is maximal)
+
+        "SPEED_MUL_ADJ": [ 1.116, 1.100, 1.086, 1.073, 1.064, 1.055, 1.045, 1.035, 1.028, 1.021, 1.015, 1.010, 1.006, 1.004, 1.002, 1.000, 1.000, 1.000, 1.002, 1.004, 1.006, 1.010, 1.015, 1.021, 1.028, 1.035, 1.045, 1.055, 1.064, 1.073, 1.086, 1.100, 1.116 ],        
+
+        #speed multiplier versus speed - for fine adjusting transparent car
+        "SPEED_READING":[-20.0, -15.00, -10.00, -5.00, 0.00, 5.00, 10.00, 15.00, 20.00],
+	"SPEED2SPEED_MUL_ADJ":[1.02, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02, 1.02]
+    },
+
+    #Free view settings.
+    "SYNT_CAM":
+    {
+        "MAXFOV":2.0943951023931953,         #maximum output camera diagonal field of view in radians
+        "MINFOV":0.17453292519943295,        #fall-back(in radians) if diagonal field of view parameter is set to a non-positive number
+        #DISTANCE and DIRECTION_POINT_Z can be overwritten by the ones in VIES.AREA_ID_3D_FREE_MODE if calling svm_3rdparty_set_arbitrary_view(). 
+        "OPTICAL_AXIS_DISTANCE":600,         #distance from car center to synthetic camera
+        "OPTICAL_AXIS_DIRECTION_POINT_Z": 50 #30  #synthetic camera looks at a point at this height above the origin (car center on the ground)
+    },
+    #Factory Calib
+    "FACTORY":
+    {
+        "TRACK_ERROR_EXPECTED":1,  #not used
+        "MATCH_HOMO_RANGE":[[0.2,0.2,1.0E+10],[0.2,0.2,1.0E+10],[0.1,0.1,0.1]], #not used
+        "CORNERS_CM_PER_PIX":2, #ratio between centimeters on the ground and size of corner images in pixels
+        "HOMO_ENOUGH_INLIERS_RATIO":0.7,  #not used
+        "ABS_POS_WEIGHT":0.1,      #weight of abs pos error of markers, '1-this' is the weight of match error
+        "RANGE_TRANS_XY": 10,  #acceptable range of cameras deviation of horizontal translation, cm
+        "RANGE_TRANS_Z": 10,   #acceptable range of cameras deviation of vertical translation, cm
+        "RANGE_DEGREES": 4,    #acceptable range of camera deviation rotation, degrees
+        "RANGE_FOV_MULT": 0.1, #acceptable range of fov multiplier = 1 +/- this value
+        #markers are written in world coordinates (sitting in the car: +X is right, +Y front, +Z up)
+        #1st: array of Xs, the Ys, then each marker type
+        #It is good all the markers in a corner to be of same type since during detection, the marker types are not considered, i.e. one marker types may be detected as other of the ones existing in the corner.
+        #Looking at the korner images (car front is to the right) markers types are:
+        #   0    1     2      3    4     5     6      7      8     9
+        #  █░    ░█    █░    ░█    ██    ░░    ██    ░░     ░█    █░
+        #  ░█    █░    ██    ░░    █░    ░█    ░█    █░     ██    ░░
+        #Avoid using corner markers (type>1): they have strong response on edges.
+        "MARKERS_FL":[ 
+            [-150.0,-200.0,-250.0,-150.0,-200.0,-250.0,-150.0,-200.0 ] ,
+            [255.0,255.0,255.0,305.0,305.0,305.0,355.0,355.0 ] ,
+            [1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0 ] 
+        ], 
+        "MARKERS_FL_CNT": 8,
+        
+        "MARKERS_BL":[ 
+            [-150.0,-200.0,-150.0,-200.0,-250.0,-150.0,-200.0,-250.0 ] ,
+            [-395.0,-395.0,-345.0,-345.0,-345.0,-295.0,-295.0,-295.0 ] ,
+            [0.0,1.0,1.0,0.0,1.0,0.0,1.0,0.0 ] 
+        ], 
+        "MARKERS_BL_CNT": 8,
+        
+        "MARKERS_BR": [ 
+            [150.0,200.0,150.0,200.0,250.0,150.0,200.0,250.0 ] ,
+            [-395.0,-395.0,-345.0,-345.0,-345.0,-295.0,-295.0,-295.0 ] ,
+            [0.0,1.0,1.0,0.0,1.0,0.0,1.0,0.0 ] 
+        ], 
+        "MARKERS_BR_CNT": 8,
+        
+        "MARKERS_FR": [ 
+            [150.0,200.0,250.0,150.0,200.0,250.0,150.0,200.0 ] ,
+            [255.0,255.0,255.0,305.0,305.0,305.0,355.0,355.0 ] ,
+            [1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0 ] 
+        ], 
+        "MARKERS_FR_CNT": 8,
+        
+        "MARKERS_F": [ 
+            [-30.0,0.0,30.0,-30.0,0.0,30.0,-30.0,0.0,30.0,-30.0,0.0,30.0 ] ,
+            [341.0,341.0,341.0,371.0,371.0,371.0,401.0,401.0,401.0,431.0,431.0,431.0 ] ,
+            [0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0 ] 
+        ], 
+        "MARKERS_F_CNT": 12,
+        
+        "MARKERS_L": [ 
+            [-150.0,-200.0,-250.0,-150.0,-200.0,-250.0,-150.0,-200.0,-250.0,-150.0,-200.0,-250.0,-150.0,-200.0,-250.0,-150.0,-200.0,-250.0,-150.0,-200.0,-250.0,-150.0,-200.0,-250.0,-150.0,-200.0,-250.0,-150.0,-200.0,-250.0 ], 
+            [-245.0,-245.0,-245.0,-195.0,-195.0,-195.0,-145.0,-145.0,-145.0,-95.0,-95.0,-95.0,-45.0,-45.0,-45.0,5.0,5.0,5.0,55.0,55.0,55.0,105.0,105.0,105.0,155.0,155.0,155.0,205.0,205.0,205.0 ] ,
+            [1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0 ] 
+        ], 
+        "MARKERS_L_CNT": 30,
+        
+        "MARKERS_B": [ 
+            [-30.0,0.0,30.0,-30.0,0.0,30.0,-30.0,0.0,30.0,-30.0,0.0,30.0 ] ,
+            [-341.0,-341.0,-341.0,-371.0,-371.0,-371.0,-401.0,-401.0,-401.0,-431.0,-431.0,-431.0 ] ,
+            [0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0 ] 
+        ], 
+        "MARKERS_B_CNT": 12,
+        
+        "MARKERS_R": [ 
+            [150.0,200.0,250.0,150.0,200.0,250.0,150.0,200.0,250.0,150.0,200.0,250.0,150.0,200.0,250.0,150.0,200.0,250.0,150.0,200.0,250.0,150.0,200.0,250.0,150.0,200.0,250.0,150.0,200.0,250.0 ] ,
+            [-245.0,-245.0,-245.0,-195.0,-195.0,-195.0,-145.0,-145.0,-145.0,-95.0,-95.0,-95.0,-45.0,-45.0,-45.0,5.0,5.0,5.0,55.0,55.0,55.0,105.0,105.0,105.0,155.0,155.0,155.0,205.0,205.0,205.0 ] ,
+            [1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0 ] 
+        ], 
+        "MARKERS_R_CNT": 30,
+            
+		
+        //parameter used to control how big the corner images are for
+        //marker detection
+        "CORNERS_CM_PER_PIX": 2,
+        
+        //4 chessboard markers on ground in each corner. If not existing, set size to 0
+        //corners of car (seen by 2 cams)  | corners in front of each camera (only seen by one cam)
+        "MARKER_SIZE_CM":[60,60,60,60,60,60,40,40],
+        
+        //whether the markers for each camera are detected at the same time
+        //or the corner image is separated in patches (depends on the design of the chart)
+        "CONT_TRACKING": [0, 1, 0, 1],  // F, L, B, R ordering
+
+        //sizes for each marker grid
+        //if continious only the middle is used
+        //otherwise as in the comment below
+        "MARKER_GRID_SIZE": [ 
+            [ [3, 3],  [3, 4], [3, 3] ], //FL, F, FR
+            [ [0, 0], [3, 16], [0, 0] ], //BL, L, FL
+            [ [3, 3],  [3, 4], [3, 3] ], //BL, B, BR
+            [ [0, 0], [3, 16], [0, 0] ] //BR, R, FR
+        ],
+        //at most how far away from the original marker grid index
+        //we expect to detect a specific marker
+        "EXPECTED_GRID_DEVIATION" : 3, 
+    },
+
+    "GROUND_EST":
+    {
+        "FEATURES":
+        {
+            "METHOD":"segments",   #only segments maintained in C-version
+            "NOISE_SIGMA":1,       #not used currently
+            "QUALITY":0.03,        #not used
+            "FTR_SEGMENTS_X":12,   #X direction on ground, Y direction in images
+            "FTR_SEGMENTS_Y":12,   #Y direction on ground, X direction in images
+            "DOWNSAMPLE_WIDTH":64, #not used
+            "SEARCH_RANGE_X":80,   #search range on ground left-right direction, cm
+            "SEARCH_RANGE_Y":80,   #search range on ground front-back, cm
+            "TRACK_KERN_SIZE_X":30,# tracking kernel on ground, across car, in cm
+            "TRACK_KERN_SIZE_Y":60,# tracking kernel on ground, along car, in cm
+            "MAX_MATCH_ERR":0.7,   #if a feature match error >this, it is considered unreliable error range is 0..2
+            "PARAB_WINDOW_RAD":2,
+            "MIN_TRACK_PARABOLOID_A":0,
+            "MAX_TRACK_PARABOLOID_AB_RATIO":4,
+            "GOOD_TRACK_ERR_SLOPE":0.5,         #steeper match surfaces are considered equally good
+            "MAX_OPTIM_POINTS_PER_CORNER":1000  #track gather points in a corner untill this many good ones are gathered
+        },
+        "TRACK_ERROR_EXPECTED":1,                      #adjusts the inliers criteria, more: larger error is acceptable
+        "OLD_CAMS_REGULARIZATION_SPEED_THRS": [2,5], //speed thresholds to swicth between REGULARIZATION_WEIGHT for stopped and moving car
+        "OLD_CAMS_REGULARIZATION_WEIGHT_CORNERS": [0.3, 0.05], #GPE filter strength per corner. Increase to make the GPE smoothes, but slowler-responsive
+        "NEIB_CAMS_ANG_REGUL_WEIGHT":10,               #GPE12: pull the result to GPE3 by this strength
+        "CORN_IMGS_WIDTH":92,     #width of the ground part of the corner images for tracking
+
+        "OPTIM_MODE":"gpe_off",    #gpe_off, gpe12, gpe3, gpe_mask
+        #allowed ranges to change the camera params by GPE
+        "RANGE_TRANS_XY" : 5,  #not used
+        "RANGE_TRANS_Z" : 10,  #cm
+        "RANGE_DEGREES" : 1    #degrees
+    },
+    #parameters of car speed estimation, based on tracking the corner images
+    "CAR_MOTION":
+    {
+        "SEARCH_RANGE_X":60,     #left/right on ground [cm], front/end on corner images
+        "SEARCH_RANGE_Y":120,    #front/end on ground [cm], left/right on corner images
+        "MAX_MATCH_ERR":0.5,     #if corner match error >this, it is considered unreliable error range is 0..2
+        "PARAB_WINDOW_RAD":2,
+        "GOOD_TRACK_ERR_SLOPE":0.5,
+        "MIN_TRACK_PARABOLOID_A":0,
+        "MAX_TRACK_PARABOLOID_AB_RATIO":4,
+        "MAX_SPEED_CHANGE":1,    #max frame-to-frame speed change, km/h. More is considered fake
+        "CAR_SPEED_FILTER_MAX_K":0.333  #temporal filter strength for car-speed estimation
+    },
+    "GUIDELINE_PARAMS":
+    {
+        # Configuration of filled wheel tracks - these are thick coloured lines
+        # semi-transparent lines with margins. Both the filling and the margin
+        # have the same color given by WT_COL. The lines' transparency is given
+        # by WT_TRANSPARENCY for the filling and WT_TRANSPARENCY_MARGIN for the
+        # margin. There are separate configurations for the top view and for the
+        # limiting lines, as for other line styles.
+        # all measures are in cm on ground
+        "WT_W": 21.0,               # width of wheel track line
+        "WT_W_TOP": 21.0,           # width of wheel track line in top view
+        "WT_W_3D": 21.0,           # width of wheel track line in 3D views
+        "WT_MARGIN_W": 2.0,         # width of wheel track margin
+        "WT_MARGIN_W_TOP": 4.0,     # width of wheel track margin in top view
+        "WT_MARGIN_W_3D": 2.0,         # width of wheel track margin
+        "WT_OFFSET": 0.0,           # wheel track line offset w.r.t. wheel position; (should equal wheelwidth/2)
+        "WT_MARGIN_COL": [255.0, 128.0, 128.0], # wheel track color (YUV)
+        "WT_COL" : [255.0, 128.0, 128.0],
+        "WT_CURVES": 1,             # wheel track line curves as car turns
+
+        "LIM_W": 4.0,               # width of limiting line
+        "LIM_W_TOP": 4.0,           # width of limiting line in top view
+        "LIM_W_3D": 4.0,               # width of limiting line
+        "LIM_OFFSET": 32.0,         # limiting line offset w.r.t. wheel position; (car margin - wheel pos to start from the car margin)
+        "LIM_COL": [255.0, 128.0, 128.0], # limiting line color (YUV)
+        "LIM_CURVES": 1,            # limiting line curves as car turns
+        # limiting lines both start in front/behind the car (1) or
+        # limiting lines start from outermost point of the car (0)
+        "LIM_FIXED_START": 0,
+        "LIM_FIXED_START_TOP": 0,
+        "LIM_FIXED_START_3D": 0,
+
+
+        "LINE_LENGTH_FRONT": 500.0,  # PGL length in non-top views
+        "LINE_LENGTH_REAR": 200.0,   # PGL length in non-top views
+        "LINE_LENGTH_TOP": 500.0,    # PGL length in top view
+        "LINE_LENGTH_FRONT_3D": 500.0,  # PGL length in 3D views
+        "LINE_LENGTH_REAR_3D": 200.0,   # PGL length in 3D views
+        "DIST_MARKS": [-1000.0, -1000.0, -1000.0, -1000.0], # auxiliary line distance marks; -1000 to disable
+
+        # transparency look-up tables
+        # FROM must always fix keypoints from 0 to 1 - these describe the line length
+        # MIDDLE are the transparency values in the center of the line which correspond to the keypoints in FROM
+        # EDGE are the transparency values on the edge of the line which correspond to the keypoints in FROM
+        # MIDDLE and FROM range from 0 to 1 where 0 is transparent and 1 is solid
+        "WT_TRANSPARENCY": {
+            "FROM":     [0.0, 0.98, 1.0],
+            "MIDDLE":   [0.4, 0.4, 0.0],
+            "EDGE":     [0.0, 0.0, 0.0]
+        },
+        "WT_TRANSPARENCY_MARGIN": {
+            "FROM":     [0.0, 0.98, 1.0],
+            "MIDDLE":   [0.8, 0.8, 0.0],
+            "EDGE":     [0.0, 0.0, 0.0]
+        },
+        "LIM_TRANSPARENCY": {
+            "FROM":     [0.0, 0.5, 0.98, 1.0],
+            "MIDDLE":   [1.0, 0.9, 0.5, 0.0],
+            "EDGE":     [0.0, 0.1, 0.0, 0.0]
+        },
+        "LIM_TRANSPARENCY_2D_TOP": {
+            "FROM":     [0.0, 0.2, 0.7, 1.0],
+            "MIDDLE":   [0.0, 1.0, 1.0, 0.0],
+            "EDGE":     [0.0, 0.1, 0.1, 0.0]
+        }
+    },
+    #parameters of transparent car
+    "TRASPARENT_CAR":
+    {
+        "showTC": true,
+        #key frame resolution - the bigger, the less blurred transparent car, but the worse performance
+        "GO_OPAQUE_AFTER_CARSTOP_TIME":120,
+        "KEY_FRAME_WIDTH": 1024,
+        #thresholds for saving a new key frame. Max car center movement along and across the car, in cm, which guarantee the whole under-car area is visible in the old key frame.
+        "MAX_ALONG_KEY_FRAME" :50,
+        "MAX_ACROSS_KEY_FRAME":30,
+        "THRESHOLD_DIST" : 0.1, #distance (in cm) the car needs to traverse for TC to be enabled (if 0, algorithm uses car length in y, instead)
+        "THRESHOLD_SPEED": 0.0, #speed (in km/h) below which transparent car starts to become opaque again
+
+        #"SWEEP_OPACITY_MASK_ENABLED" : false, # when true, the part of the car that has already swept the ground becomes transparent 
+        #resolution of the mask responsible for the line by line transparency
+        #"SWEEP_OPACITY_MASK_WIDTH" : 1048, 
+        #"SWEEP_OPACITY_MASK_HEIGHT" : 864,
+        #region around the car, used for smooth blending ot TC and minimize TC stripes caused by slight shades around the car
+        "OUTER_REGION_FB": 100, #region front/back
+        "OUTER_REGION_LR": 150, #region left/right !!! must be >2*WORLD.WHEELS_EXTEND_LR
+        "TC_BLEND_ZONE_UNDER_CAR" : true, #TC blend transition under the car: more visible transition, but hidden under by the semi-transparent car
+        "SHADE_DETECTION_ENB": true,     #enable car shade detection and avoid propagating it under car. !!! needs enough OUTER_REGION
+    },
+    "SONAR":
+    {
+        #width of the 2d sonar contour
+        "CONTOUR_WIDTH": 1.9, # overlay width
+        #colors (RGB) of sonar lines based on distances (distances defined in the field below)
+        "CONTOUR_CLOSE":[224, 37, 37 ], # red
+        "CONTOUR_MID":  [246, 185, 36], # yellow
+        "CONTOUR_FAR":  [84, 190, 47 ], # green
+
+        #width of the halo(semi-transparent extension of the PGL)
+        "BAND_WIDTH": 75.0,
+        #colors of sonar 3d walls based on distances (distances defined in the field below)
+        "BAND_CLOSE":  [238, 63, 42], # red
+        "BAND_MID":    [248, 163, 29], # yellow
+        "BAND_FAR":    [108, 203, 75], # green, displayed only for front and rear sonars
+
+        #distance criterion for processing sonar readings
+        "DISTANCES": [10, 40, 80, 150], # valid, close, mid, far (cm)
+        #the entries are as follows (ordered closest to farthest from the car)
+        #first entry: opacity just before the start of contour
+        #second/third entry: opacity in the beggining/end of contour
+        #fourth/fifth entry: opacity in the beggining/end of band (halo)
+        #all intermediate values are interpolated linearly
+        "BAND_OPACITY": [0, 1.0, 1.0, 0.8, 0.0],
+        
+        "SONAR_NUM": 18, #number of sonars for the system
+        #postions of the sonars in space (only xy coordinates)
+        "POSITIONS" : [
+                    [86.0000, 210.0000],
+                    [66.0000, 238.0000],
+                    [0.0000, 255.0000],
+                    [-67.0000, 236.0000],
+                    [-84.0000, 208.0000],
+                    [-87.0000, 146.0000],
+                    [-87.0000, 66.0000],
+                    [-87.0000, -10.0000],
+                    [-87.0000, -88.0000],
+                    [-84.0000, -205.0000],
+                    [-67.0000, -240.0000],
+                    [0.0000, -255.0000],
+                    [69.0000, -243.0000],
+                    [86.0000, -210.0000],
+                    [87.0000, -88.0000],
+                    [89.0000, -11.0000],
+                    [87.0000, 68.0000],
+                    [87.0000, 148.0000]
+            ],
+        #vectors where each sonar is pointed (does not need to be normalized)
+        "DIRECTIONS" : [
+            [0.9858, 0.1680],
+            [0.6019, 0.7986],
+            [0.0000, 1.0000],
+            [-0.6019, 0.7986],
+            [-0.9858, 0.1680],
+            [-1.0000, 0.0000],
+            [-1.0000, 0.0000],
+            [-1.0000, 0.0000],
+            [-1.0000, 0.0000],
+            [-0.9858, -0.1680],
+            [-0.6019, -0.7986],
+            [0.0000, -1.0000],
+            [0.6019, -0.7986],
+            [0.9858, -0.1680],
+            [1.0000, 0.0000],
+            [1.0000, 0.0000],
+            [1.0000, 0.0000],
+            [1.0000, 0.0000]
+        ]
+    },
+    "SEAM":
+    {
+        "HR_SEAM_WIDTH_TOP": 20,
+        "HR_SEAM_WIDTH_3D": 60,
+        #seam level 1: HR_SEAM_WIDTH[0] at SPEED_TO_ANG_SPEED[0] linearly interpolated to HR_SEAM_WIDTH[1] at SPEED_TO_ANG_SPEED[1], HR_SEAM_WIDTH is clamped otherwise
+        #seam level 2: only HR_SEAM_WIDTH[0] is used
+        #Seam adaptiveness width around the basic seam vector when moving car. When static car this is the whole corner.
+        #Relative to corner images width. "START" is at the car corner, "END" is at the seam end.
+        "MASK_START_WIDTH": 0.1,
+        "MASK_END_WIDTH":   0.3,
+        "MIN_FROM_EDGE":0,    #fix the seam this pixels far from car corner
+        #seam vector angle versus speed: speed<SPEED_TO_ANG_SPEED[0]: ang=SPEED_TO_ANG_ANG[0]; speed>SPEED[1]: ang=ANG[1]; linear interp between.
+        #'0 deg' means from car corner to left/right, 90deg: to front/back
+        "SPEED_TO_ANG_SPEED":[1.5,3],  
+        "SPEED_TO_ANG_ANG":[30,60],
+        "SPEED_TO_ANG_SPEED_3D":[1.5,3],  
+        "SPEED_TO_ANG_ANG_3D":[30,60],
+        #seam angle depending on steering. When the car turns left, the left seam should move to smaller angle (left-right)
+        #to give the diver more visibility, and to guarantee in 3D view that the road we are turning in to, is visible only
+        #from the front camera (otherwise annoying road duplication apperas)
+        "STEER_TO_ANG_STEER":[100, 400],//[1.5,3],  
+        "STEER_TO_ANG_ANG":  [65,30],
+        "STEER_TO_ANG_STEER_3D":[100, 400],//[1.5,3],  
+        "STEER_TO_ANG_ANG_3D":  [65,30],
+        #fixed seam angles, degrees:
+        #if seam level 0, fixed seams for front/rear corners when driving FW/BW: [front-FW, rear-FW, front-BW, rear-BW]
+        #if seam level 2 : [seam ang default, seam ang when sonar, distance threashold, max seam ang change per frame]
+        "SEAM_ANGLE_FIXED_TOP": [75, 30,  90, 1], // for seam level 0: [75.0, 75.0, 75.0, 45.0],
+        "SEAM_ANGLE_FIXED_3D":  [90, 0, 170, 1], // for seam level 0: [75.0, 75.0, 75.0, 45.0],
+        #SEAM_LEVEL = 0: fixed seam, 1:angle depends on speed and steering, 2: like 1, but front seams try looking more front to maximize side cameras usage. 3: like 1, but when stopped car, sonars determine the seam angle.
+        "SEAM_LEVEL" : 2,
+	    "SEAM_LEVEL_3D" : 2,
+        #whether to use adaptive seam around the seam angle determined by SEAM_LEVEL
+        "USE_ADAPTIVE_SEAM" : false,
+        "SEAM_VEC_WEIGHT" : 0.1,  # 1-stitck_strength to the seam vector
+        "OLD_SEAM_WEIGHT" : 0.3,   # 1-stitck_strength to the previous-frame seam
+        "OLD_SEAM_JUMP_TRESHOLD" : 0.012, #how many pixels difference is condsidered a "big jump" (as a fraction of total corner size)
+        "OLD_SEAM_DECAY_MS" : 2000, #how quickly the jump regularization decays
+    },
+    #car borders in cm. Must be set to minimum which avoids seeing parts of the car in the stitched images
+    #To adjust it, set "forceCarOverlay": "none", "DRAW_UNDER_CAR": 1, If building from source, set showGroundEdge = true. If parts of the car are
+    #seen in the stitched ima, those are well visible now. Adjust CAR_MARGINS with 1cm accuracy untill those disapper. Then extend the car by 2cm
+    #to have some reserve for all cars.
+    "CAR_MARGINS": #NioCarInfo.xlsx
+    {
+        "MINX":-105,
+        "MAXX":105,
+        "MINY":-232,
+        "MAXY": 217,
+
+        #positions of bumpers in world coordinates (used for pgl generation)
+        "FRONT_LEFT_BUMPER" :  [-92,  239],
+        "FRONT_RIGHT_BUMPER" : [ 92,  239],
+        "BACK_LEFT_BUMPER" :   [-92, -252],
+        "BACK_RIGHT_BUMPER" :  [ 92, -252],
+
+        // #positions of mirrors (set to positions of bumper to not affect pgl generation)
+        "MIRROR_LEFT" : [-92,  239],
+        "MIRROR_RIGHT": [-92,  239],
+    },
+    # bowl definition:
+    #coordinate sustem is defined as:
+    #origin is on the ground below the center of the car. The center is defined by the CAR_MARGINS
+    #Sitting in the driver's seat: +X is to the right, +Y is in front, +Z is above
+    #CAR_CNT_X/Y define number of vertexes evenly covering the CAR_MARGINS rectangle - MUST be ODD!
+    #There is no bowl for top-view - it is flat. The vertexes positions are defined as follows 
+    #(see DynamicBowl_worldGrid.xlsx, sheet "dynamicWall demo" for visual explanation):
+    #Under the car: uniform grid with CAR_CNT_X/ CAR_CNT_Y vertexes, covering the car rectangle on the ground (CAR_MARGINS).
+    #Then, GND_XLUT and YLUT determine the vertexes spacing to the left/right and to the front/back of the car respectively.
+    #Overall grid size is CAR_CNT_X + 2*( GND_XLUT-1), similarly for Y. "-1" because the 1st number in all LUTs is on the
+    #ground (i.e. on the car rectangle in this case)
+    #This way, we can define uneven grid on the ground: �the further from the car, the larger cells. This saves processing
+    #time� ACC time is proportional to grid size. In dynamic bowl, there are 2 ACCs, so their time becomes vital.
+    #3D views, default (far) walls:
+    #Remove the last "size(ZLUT)-1" numbers of GND_XLUT and GND_YLUT. The remainder is the ground rectangle of the bowl
+    #(formerly defined by GND_COUNT_X/Y). Then add the walls, defined by XLUT_FAR and ZLUT. Hence, the grid size and the
+    #ground vertexes are same as for the top-view. The index in XLUT/ZLUT where the wall starts is defined by WALL_START_IND.
+    #Hence, the maximum distance to the walls can be found after putting XLUT_FAR in the end of GND_XLUT and taking this index.
+    #I.e. max_wall_dist = GND_XLUT[GND_XLUT.size - XLUT_FAR.size + WALL_START_IND]
+    #3D views, close walls:
+    #Close walls are defined by dedicated XLUT - XLUT_CLOSE_FB,_LR for FB and LR walls. When the wall should be closer than 60cm,
+    #XLUT_CLOSE.. is used. Between 60cm and 
+    "WORLD":
+    {
+        "CAR_CNT_X": 15,           #  14.57142857 cm/cell
+        "CAR_CNT_Y": 39,           #  14.15789474 cm/cell
+
+        # bowl LUT
+        # The function f(XLUT_FAR) = ZLUT describes the way in which the bowl curves upwards after the ground edge
+        # LUT size should equal   1 + (ALL_CNT_X - GROUND_CNT_X)/2
+        "GND_XLUT": [0, 18, 38, 58, 79, 102, 125, 150, 177, 205, 234, 266, 300, 336, 375, 416, 461, 510, 562, 619, 682, 750, 825, 909, 1001], //24 elements
+        "GND_YLUT": [0, 19, 39, 60, 82, 105, 129, 154, 181, 209, 238, 269, 302, 336, 373, 412, 453, 497, 544, 595, 649, 707, 770, 838, 912, 992, 1081, 1177, 1284, 1403, 1536, 1684, 1853, 2046, 2267], //34 elements
+
+        
+        //bowl LUTs
+        "XLUT_FAR": [0, 80,150,195,230,260,280,290,296,302,308,314,320], //wall-to-end = 90cm
+        "ZLUT":     [0, 10, 35, 65,105,155,200,250,300,350,400,450,500],
+        "XLUT_CLOSE_LR": [0,30,60,80,107,140,170,203,236,269,302,335,368 ],//slope 1.5
+        "XLUT_CLOSE_FB": [0,21,40,52, 61, 67, 73, 79, 85, 91, 98,104,110], //slope x8
+        #WALL_START_IND is an index in XLUTs, which tell where the wall position is - the knee point of the XLUT/ZLUT curvature. It is same for all XLUTs.
+        "WALL_START_IND": 2,
+
+        //bowl for Single-camera views
+	"SINGLE_VIEW_SPHERE_RADIUS_FB" : 1000, //radius front,back
+	"SINGLE_VIEW_SPHERE_RADIUS_LR" : 1000, //radius left,right - set smaller than FB to improve the view of close side poles or columns (in garages)
+        //The ellipsoid is around the synthetic camera center. It is cut by the ground plain for more natural look of the ground and to guaranee PGLs and
+        //image are consistent
+        //Cutting the spere (ellipsoid) by the ground plain creates ugly braking on vertical poles. Create a smooth curvature by shrinking/stretching
+        //the sphere by SINGLE_VIEW_Z2SCALE multipliers accordng to Z. The startin distance on the ground is  sqrt(cam_z^2 - SPHERE_RADIUS^2*Z2SCALE[0]^2),
+        //The middle of Z2SCALE corresponds to camera Z (horizontal rays, keep SCALE=1). Upper half if for rays above the horizon - usually SCALE>1.
+        //to -cam_z and must be such that the scaled ray to end exactly on the ground - the value depends on the synt cam height
+        //Use SingCamBowl_Z2SCALE.xlsx for easy bowl visualization and design
+        "SINGLE_VIEW_Z2SCALE" : [0.5104, 0.5729, 0.651, 0.7292, 0.8073, 0.875, 0.9479, 0.9844, 1, 1, 1, 1, 1, 1, 1, 1 ],
+        //"SINGLE_VIEW_Z2SCALE" : [0.3, 0.34, 0.39, 0.45, 0.53, 0.63, 0.74, 0.86, 1, 1.15, 1.3, 1.45, 1.6, 1.75, 1.9, 2.05], //3
+        
+        //When turning, wheels become visible in the top-view, they propagate under-car with TC and affect BCC.
+        //Below parameters controll moving of vertices outside the turning tires - in cm
+        "WHEELS_EXTEND_LR":25, //!!! must be < TRASPARENT_CAR.OUTER_REGION_LR/2
+        //steering angle corresponding to each entry in 0 and WHEELS_EXTEND_LR, [deg]
+        "WHEELS_EXTEND_STEERING_ANG": [100,400],
+        "WHEELS_EXTEND_Y_FRONT": 60,  //extend in front of car edge - >0 if turned tires in side cams are visible in front of the car edge
+        "WHEELS_EXTEND_Y_REAR": 100,  //extend befind the car front edge - ther rear end of wheels
+    },
+    "DYNAMIC_BOWL":
+    {
+        "enable_": true,
+        "WALLS_HYSTERESIS":  30,  //bowl wall will change if didtsnace change more than this, cm
+        "SIDE_WALLS_AVG_K": 0.2,  //side sonars may change often when car drive along close cars. Smooth it .
+        "WALLS_UPDATE_K": 0.03,   //bowl walls change smoothness [0..1) bigger: more rapid change.
+        "SIDE_OBJECT_LEN_MIN": 250, //side bowl-walls get close when long enouhg side object is detected while passding by it. [cm]
+    },
+    "STITCH":
+    {
+        "LR_SAMPLE_DIAM":5,
+        "SIGMADIF_BOX_RADIUS":2,
+        "DIF_SIGMA_EDENOM":200,
+        "MAXCOLDIF":1e9,
+
+        "DIF_W_BASE" : 0.0,
+        "DIF_W_SEAM" : 0.0
+
+    },
+   "LIGHT_SPRITES":
+    {
+        "renderLightSpritesMode":3, # 0 - no, 1 - over car, 2 - under car (halo), 3 - both
+        "lightSpriteConfig":
+        [ # car2DSizeMin  car2DSizeAdd car2DColor RGBA
+                {
+			"car2DSizeMin": [[ 9.0, 9.0 ], [ 9.0, 9.0 ] ], 
+			"car2DSizeAdd":	[[ 30.0, 30.0 ], [ 1.0, 1.0 ]], 
+			"car2DColor":	[[ 1, 0.7, 0.15, 0.4 ], [ 0.97, 0.88, 0.29, 0.75 ]]
+		},	# lightSpriteBlinker
+		{
+			"car2DSizeMin": [[ 9.0, 9.0 ], [ 9.0, 9.0 ] ], 
+			"car2DSizeAdd":	[[ 30.0, 30.0 ], [ 1.0, 1.0 ]], 
+			"car2DColor":	[[ 0.95, 0.85, 0.60, 0.3 ], [ 0.95, 0.80, 0.50, 0.75 ]],	
+		},	# lightSpriteHead
+		{
+			"car2DSizeMin": [[ 9.0, 9.0 ], [ 9.0, 9.0 ] ], 
+			"car2DSizeAdd":	[[ 30.0, 30.0 ], [ 1.0, 1.0 ]], 
+			"car2DColor":	[[ 0.80, 0.20, 0.20, 0.3 ], [ 0.80, 0.20, 0.20, 0.75 ]],	
+		},	# lightSpriteTail
+		{
+			"car2DSizeMin": [[ 9.0, 9.0 ], [ 9.0, 9.0 ] ], 
+			"car2DSizeAdd":	[[ 30.0, 30.0 ], [ 1.0, 1.0 ]], 
+			"car2DColor":	[[ 0.90, 0.20, 0.10, 0.3 ], [ 0.90, 0.20, 0.10, 0.75 ]],	
+		},	# lightSpriteBrake
+		{
+			"car2DSizeMin": [[ 9.0, 9.0 ], [ 9.0, 9.0 ] ], 
+			"car2DSizeAdd":	[[ 30.0, 30.0 ], [ 1.0, 1.0 ]], 
+			"car2DColor":	[[ 0.99, 0.99, 0.99, 0.3 ], [ 0.99, 0.99, 0.99, 0.75 ]]	
+		}]	# lightSpriteReverse
+    },
+    
+#"Views" are the different componenls that constitute the output frame. Views IDs, their posions and sizes comprise the "layout" of the output frame
+#Each view is an image as if seen by an imaginary (synthetic, output) camera of acertain type somewhere in space.
+#Each output camera position, orientation and FOV is defined below. 
+#GLOBAL_POSITION is in cm, origin is at car center. Sitting in the car, +X is Right, +Y is in ahead, +Z is upwards
+#ORIENT_EULER are Euler angles around x,y,z axes, in degrees. Rotate the camera first by X,the Y,Z and it will coincide with the world coord system
+#Camera coords are: Looking in the image, +X is right, +Y is downwards, +Z is ahead, along the optical axis.
+#FOV is the diagonal field of view in degrees
+#RES is the resolution in pixels of this view. It is just tentative, the actual resolution of the view is commanded to svm_3rdparty_set_content_layout()
+#FC: optical center of synthetic camera in relative coordinates(0..1). If missing it is defaulted to 0.5,0.5. Changing this shiftes the output view.
+#ENABLE_GREYOUT: if true we grey out a camera if a door/trunk is open
+#DEWARP_STRENGTH: float (0.0 - 1.0) how strongly is the camera dewarped. 1 corresponds to a fully dewarped view. 0 corresponds to cropped input image
+#Available camera types are:
+#    "SINGLE_, _CROPPED": only a single camera is used - defined in INPUT_CAM_IDX (0:front, 1:left, 2:back, 3:right
+#INPUT_CAM_CROPPED, ..._REAR,  : cropped version of input image, GLOBAL_POSITION, ORIENT_EULER does not matter
+#SINGLE_CAM_FIXED, ..._REAR,   : GLOBAL_POSITION should be close to the input camera position to avoid visible distortions.
+#    "SURROUND_": output view is stitched from all necessary cameras
+#SURROUND_CAM_FIXED, ..._TOP,  : Any fixed view. _TOP for top-view
+#SURROUND_CAM_ARBITRARY        : output camera position, orientation and FOV are determined by the inverface - fov, plane_xy, z_axis, zoom
+#_FIXED: the cam pos can not be changed via SRV interface
+#_REAR: the output image can be mirrored via the interface    
+
+#Use factory calibrated cameras for all single camera views. 
+#if true, the ground objects and PGLs will not move in output view when car gets loaded, but the bumper will move.
+#if false the bumper will not move when the car gets loaded, but the ground objects and the PGLs will move.
+    "USE_FACTORY_CALIBRATED_FOR_VIEW_GENERATION": false,
+    
+    "VIEWS" :
+    [   
+        {
+        "NAME" : "AREA_ID_2D_TOP_VIEW",
+        "TYPE" : "SURROUND_CAM_FIXED_TOP",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [0, 0, 10000],
+        "ORIENT_EULER" : [180, 0, 0],
+        "FOV" : 8.59101,
+        "RES" : [468, 720],
+        "ENABLE_GREYOUT" : true, 
+        }
+        , {
+        "NAME" : "AREA_ID_3D_TOP_VIEW_REAR_RIGHT",
+        "TYPE" : "SURROUND_CAM_FIXED",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [398.678, -398.678, 350.001],
+        "ORIENT_EULER" : [125, 0, 315],
+        "FOV" : 80,
+        "RES" : [950,720],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_3D_TOP_VIEW_REAR_LEFT",
+        "TYPE" : "SURROUND_CAM_FIXED",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [-398.678, -398.678, 350.001],
+        "ORIENT_EULER" : [125, 0, 45],
+        "FOV" : 80,
+        "RES" : [950,720],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_3D_TOP_VIEW_FRONT_RIGHT",
+        "TYPE" : "SURROUND_CAM_FIXED",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [398.678, 398.678, 350.001],
+        "ORIENT_EULER" : [125, 0, 225],
+        "FOV" : 80,
+        "RES" : [950,720],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_3D_TOP_VIEW_FRONT_LEFT",
+        "TYPE" : "SURROUND_CAM_FIXED",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [-398.678, 398.678, 350.001],
+        "ORIENT_EULER" : [125, 0, 135],
+        "FOV" : 80,
+        "RES" : [950,720],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_3D_TOP_VIEW_RIGHT",
+        "TYPE" : "SURROUND_CAM_FIXED",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [563.816, 0, 350.001],
+        "ORIENT_EULER" : [125, 0, 270],
+        "FOV" : 80,
+        "RES" : [950,720],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_3D_TOP_VIEW_FRONT",
+        "TYPE" : "SURROUND_CAM_FIXED",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [0, 563.816, 350.001],
+        "ORIENT_EULER" : [125, 0, 180],
+        "FOV" : 78,
+        "RES" : [950,720],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_3D_TOP_VIEW_LEFT",
+        "TYPE" : "SURROUND_CAM_FIXED",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [-563.816, 0, 350.001],
+        "ORIENT_EULER" : [125, 0, 90],
+        "FOV" : 80,
+        "RES" : [950,720],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_3D_TOP_VIEW_REAR",
+        "TYPE" : "SURROUND_CAM_FIXED",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [0, -563.816, 350.001],
+        "ORIENT_EULER" : [125, 0, 0],
+        "FOV" : 80,
+        "RES" : [950,720],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_3D_FREE_MODE",
+        "TYPE" : "SURROUND_CAM_ARBITRARY",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [0, -563.816, 500.212],
+        "ORIENT_EULER" : [125, 0, 0],
+        "FOV" : 10,
+        "RES" : [1728, 838],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_2D_LEFT_FRONT",
+        "TYPE" : "SINGLE_CAM_TETHERED",
+        "INPUT_CAM_IDX" : 1,
+        "GLOBAL_POSITION" : [0, 0, 0],
+        "ORIENT_EULER" : [135, 0, -5],
+        "FOV" : 100,
+        "RES" : [470, 720],
+        "FC" : [0.90, 0.5],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_2D_RIGHT_FRONT",
+        "TYPE" : "SINGLE_CAM_TETHERED",
+        "INPUT_CAM_IDX" : 3,
+        "GLOBAL_POSITION" : [0, 0, 0],
+        "ORIENT_EULER" : [135, 2, 0],
+        "FOV" : 100,
+        "RES" : [470, 720],
+        "FC" : [0.15, 0.5],
+        "ENABLE_GREYOUT" : true,
+        }
+		        , {
+        "NAME" : "AREA_ID_2D_LEFT_BACK",
+        "TYPE" : "SINGLE_CAM_TETHERED_REAR",
+        "INPUT_CAM_IDX" : 1,
+        "GLOBAL_POSITION" : [13, 0, 0],
+        "ORIENT_EULER" : [125, 2, 190],
+        "FOV" : 100,
+        "RES" : [650, 880],
+        "FC" : [0.25, 0.5],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_2D_RIGHT_BACK",
+        "TYPE" : "SINGLE_CAM_TETHERED_REAR",
+        "INPUT_CAM_IDX" : 3,
+        "GLOBAL_POSITION" : [2, 0, -50],
+        "ORIENT_EULER" : [125, -2, 173],
+        "FOV" : 100,
+        "RES" : [650, 880],
+        "FC" : [0.75, 0.5],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_2D_FRONT",
+        "TYPE" : "SINGLE_CAM_FIXED",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [ -2.27, 190.20, 58.76],
+        "ORIENT_EULER" : [101, 0.5, 0],
+        "FC": [0.50, 0.80],
+        "FOV" : 110,
+        "RES" : [1280, 880],
+        "ENABLE_GREYOUT" : true,
+        "PGL_CUTOFF": 1.0,
+        }
+        , {
+        "NAME" : "AREA_ID_2D_REAR",
+        "TYPE" : "SINGLE_CAM_FIXED_REAR",
+        "INPUT_CAM_IDX" : 2,
+        "GLOBAL_POSITION" : [ 0, -165, 92],
+        "ORIENT_EULER" : [93, 1, 178],
+        "FC": [0.50, 0.50],
+        "FOV" : 110,
+        "RES" : [950, 720],
+        "ENABLE_GREYOUT" : true,
+        "PGL_CUTOFF": 1.0,
+        }
+        , {
+        "NAME" : "AREA_ID_2D_FRONT_TOP",
+        "TYPE" : "SURROUND_CAM_FIXED_TOP",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [0, 308, 666],
+        "ORIENT_EULER" : [180, 0, 0],
+        "FOV" : 59.033,
+        "RES" : [950, 720],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_2D_REAR_TOP",
+        "TYPE" : "SURROUND_CAM_FIXED_TOP",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [0, -308, 666],
+        "ORIENT_EULER" : [180, 0, 0],
+        "FOV" : 59.033,
+        "RES" : [950, 720],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_2D_FULL_TOP_VIEW",
+        "TYPE" : "SURROUND_CAM_FIXED_TOP",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [0, 0, 10000],
+        "ORIENT_EULER" : [180, 0, -90],
+        "FOV" : 10.0,
+        "RES" : [1420, 720]
+        }
+        , {
+        "NAME" : "AREA_ID_CALIBRATION_VIEW",
+        "TYPE" : "SURROUND_CAM_FIXED_TOP",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [0, 0, 10000],
+        "ORIENT_EULER" : [180, 0, -90],
+        "FOV" : 10,
+        "RES" : [988.32, 720],
+        "ENABLE_GREYOUT" : true,
+        }
+        , { #left equirectangular camera
+        "NAME" : "AREA_ID_RESERVED_VIEW1",
+        "TYPE" : "SINGLE_CAM_FIXED",
+        "INPUT_CAM_IDX" : 1,
+        "GLOBAL_POSITION" : [-88, -0, 250], #cam pos:[-88, 82, 85],
+        "ORIENT_EULER" : [180, 0, 0],
+        "FOV" : 122,
+        "FC" : [1.1, 0.50],
+        "RES" : [864, 838],
+        "ENABLE_GREYOUT" : true,
+        }
+        , { #right equirectangular camera
+        "NAME" : "AREA_ID_RESERVED_VIEW2",
+        "TYPE" : "SINGLE_CAM_FIXED",
+        "INPUT_CAM_IDX" : 3,
+        "GLOBAL_POSITION" : [ 95, 0, 250], #cam pos:[ 88, 82,85],
+        "ORIENT_EULER" : [180, 0, 0],
+        "FOV" : 122,
+        "FC" : [-0.1, 0.50],
+        "RES" : [864, 838],
+        "ENABLE_GREYOUT" : true,
+        }
+        , {
+        "NAME" : "AREA_ID_2D_FRONT_WIDE",  #front full frame
+        "TYPE" : "INPUT_CAM_CROPPED",
+        "INPUT_CAM_IDX" : 0,
+        "GLOBAL_POSITION" : [-0.20, 249.23,  35.59], #not relevant for _CROPPED view
+        "ORIENT_EULER" : [93.755,  -2.094,   0.228],    #not relevant for _CROPPED view
+        "FOV" : 200,  #not relevant for _CROPPED view
+        "RES" : [1920, 1020], # crop region
+        "FC": [0.5,  0.5],
+        "ENABLE_GREYOUT" : true,
+        "DEWARP_STRENGTH": 0.0,
+        }
+        , {
+        "NAME" : "AREA_ID_2D_REAR_WIDE", #rear full frame
+        "TYPE" : "INPUT_CAM_CROPPED",
+        "INPUT_CAM_IDX" : 2,
+        "GLOBAL_POSITION" : [-0.20, -249.26,  87.63], #not relevant for _CROPPED view
+        "ORIENT_EULER" : [110.470,  -0.279, -179.217],    #not relevant for _CROPPED view
+        "FOV" : 200,  #not relevant for _CROPPED view
+        "RES" : [1920, 1020], # crop region
+        "FC": [0.5,  0.5],
+        "ENABLE_GREYOUT" : true,
+        "DEWARP_STRENGTH": 0.0,
+        }
+        , {
+        "NAME" : "AREA_ID_RESERVED_VIEW3",  #left full frame
+        "TYPE" : "INPUT_CAM_CROPPED",
+        "INPUT_CAM_IDX" : 1,
+        "GLOBAL_POSITION" : [-108.64,  76.40,  99.94 ], #not relevant for _CROPPED view
+        "ORIENT_EULER" : [117.374,  -0.939, -89.537],    #not relevant for _CROPPED view
+        "FOV" : 200,  #not relevant for _CROPPED view
+        "RES" : [1920, 1020], # crop region
+        "FC": [0.5,  0.5],
+        "ENABLE_GREYOUT" : false,
+        "DEWARP_STRENGTH": 0.0,
+        }
+        , {
+        "NAME" : "AREA_ID_RESERVED_VIEW4",  #right full frame
+        "TYPE" : "INPUT_CAM_CROPPED",
+        "INPUT_CAM_IDX" : 3,
+        "GLOBAL_POSITION" : [108.69,  72.28,  98.38], #not relevant for _CROPPED view
+        "ORIENT_EULER" : [117.706,   1.361,  88.990],    #not relevant for _CROPPED view
+        "FOV" : 200,  #not relevant for _CROPPED view
+        "RES" : [1920, 1020], # crop region
+        "FC": [0.5,  0.5],
+        "ENABLE_GREYOUT" : false,
+        "DEWARP_STRENGTH": 0.0,
+        }
+        
+    ],
+    "CAM_INVALIDATE_LEVEL" : 2, # 0 - never, 1- mirrors, 2 - doors and mirros
+    "INVALID_CAM_COLOR" : [0.0, 0.0, 0.0], #color(RGB) with which the scene is filled if a cam is invalid
+    "INVALIDATE_CAM_MAX_STEP" : 30.0, #[ms] the maximum change of color and scene blending between two frames
+    "INVALIDATE_CAM_TOT_TIME" : 30.0, #[ms] the total time to complete fading in/out animation (if no frame goes over MAX_STEP)
+}
