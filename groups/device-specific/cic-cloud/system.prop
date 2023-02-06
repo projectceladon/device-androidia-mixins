@@ -13,7 +13,6 @@ qemu.hw.mainkeys=0
 enable.accessiblity=true
 
 debug.stagefright.c2-poolmask=0x80000
-debug.codec.use.omx=true
 
 persist.sys.disable_rescue=true
 ro.product.first_api_level=30
