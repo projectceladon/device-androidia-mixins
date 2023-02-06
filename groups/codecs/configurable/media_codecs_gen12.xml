@@ -195,9 +195,9 @@ Only the three quirks included above are recognized at this point:
             <Limit name="size" min="64x64" max="4096x4096" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
-            <Limit name="block-count" range="1-32768" /> <!-- max 4096x2048 equivalent -->
+            <Limit name="block-count" range="1-65536" /> <!-- max 4096x4096 equivalent -->
             <Limit name="blocks-per-second" range="1-1966080" />
-            <Limit name="bitrate" range="1-48000000" />
+            <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
@@ -207,9 +207,9 @@ Only the three quirks included above are recognized at this point:
             <Limit name="size" min="64x64" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="8x8" />
-            <Limit name="block-count" range="1-196608" /> <!-- max 4096x3072 -->
-            <Limit name="blocks-per-second" range="1-2000000" />
-            <Limit name="bitrate" range="1-10000000" />
+            <Limit name="block-count" range="1-1048576" /> <!-- max 8192x8192 -->
+            <Limit name="blocks-per-second" range="1-31457280" />
+            <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
@@ -218,8 +218,8 @@ Only the three quirks included above are recognized at this point:
             <Limit name="size" min="64x64" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
-            <Limit name="block-count" range="1-16384" />
-            <Limit name="blocks-per-second" range="1-500000" />
+            <Limit name="block-count" range="1-262144" />
+            <Limit name="blocks-per-second" range="1-7864320" />
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
             <Feature name="adaptive-playback" />
@@ -229,7 +229,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="size" min="64x64" max="4096x4096" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
-            <Limit name="block-count" range="1-16384" />
+            <Limit name="block-count" range="1-131072" />
             <Limit name="blocks-per-second" range="1-500000" />
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
@@ -303,6 +303,7 @@ Only the three quirks included above are recognized at this point:
 
 {{#enable_msdk_c2}}
         <MediaCodec name="c2.intel.avc.encoder" type="video/avc">
+            <!-- profiles and levels:  ProfileBaseline : Level41 -->
             <Limit name="size" min="176x144" max="4096x4096" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
