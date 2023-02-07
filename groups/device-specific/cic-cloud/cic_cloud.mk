@@ -8,4 +8,4 @@ PRODUCT_AAPT_PREF_CONFIG := mdpi
 PRODUCT_NAME := cic_cloud
 PRODUCT_DEVICE := cic_cloud
 PRODUCT_BRAND := Intel
-PRODUCT_MODEL := CIC container image on cloud device
+PRODUCT_MODEL := ICS3A on cloud
