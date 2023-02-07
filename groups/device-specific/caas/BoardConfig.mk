@@ -22,6 +22,7 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/cam_sharing/virtualcamera.service
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_cam_sharing.sh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_audio_host.sh
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/guest_pm_control
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/guest_rtc_monitor
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/intel-thermal-conf.xml
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/thermald.service
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/rpmb_dev
