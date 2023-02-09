@@ -69,6 +69,14 @@ BOARD_KERNEL_CMDLINE += \
 endif
 
 BOARD_KERNEL_CMDLINE += \
+      snd_intel_dspcfg.dsp_driver=4 \
+      snd_soc_core.dyndbg==pmf \
+      snd_hda_core.dyndbg==pmf \
+      snd_hda_ext_core.dyndbg==pmf \
+      snd_hda_codec.dyndbg==pmf \
+      modprobe.blacklist=snd_hda_intel
+
+BOARD_KERNEL_CMDLINE += \
       clearcpuid=517 \
       mce=no_lmce \
       mce=ignore_ce
