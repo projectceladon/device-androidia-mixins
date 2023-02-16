@@ -19,6 +19,9 @@ PRODUCT_PACKAGES += vndservicemanager
 
 PRODUCT_PACKAGES += ClipboardAgent
 
+PRODUCT_PACKAGES += androidx.window.extensions \
+		    androidx.window.sidecar
+
 PRODUCT_PACKAGES +=  \
                     android.hardware.usb-service.example \
                     camera.device@1.0-impl \
