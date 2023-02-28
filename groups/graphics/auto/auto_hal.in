@@ -17,8 +17,8 @@ case "$(cat /proc/fb)" in
                         setprop vendor.vulkan.set intel
                 else
                         if [ "$(cat /sys/kernel/debug/dri/0/virtio-gpu-features |grep virgl |awk '{print $3}')" = "no" ];then
-                                echo "swiftshader rendering"
-                                setprop vendor.egl.set swiftshader
+                                echo "angle rendering"
+                                setprop vendor.egl.set angle
                                 setprop vendor.vulkan.set pastel
                         else
                                 echo "virtio rendering"
@@ -29,7 +29,7 @@ case "$(cat /proc/fb)" in
                 ;;
         *)
                 echo "sw rendering"
-                setprop vendor.egl.set swiftshader
+                setprop vendor.egl.set angle
                 setprop vendor.vulkan.set pastel
                 ;;
 esac
