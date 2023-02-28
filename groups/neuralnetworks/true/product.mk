@@ -8,8 +8,8 @@ PRODUCT_COPY_FILES += \
 
 
 PRODUCT_PACKAGES += \
-    libMKLDNNPlugin \
-    libinference_engine_preproc \
-    libinference_engine_ir_reader
+    libopenvino \
+    libopenvino_intel_cpu_plugin \
+    libopenvino_ir_frontend
 
 PRODUCT_PROPERTY_OVERRIDES += vendor.nn.hal.ngraph=true
