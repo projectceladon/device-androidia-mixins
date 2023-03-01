@@ -4,7 +4,7 @@
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 {{#dynamic-partitions}}
-system   /system  {{system_fs}} ro{{#system_fs_ext4}},barrier=1{{/system_fs_ext4}} wait{{#slot-ab}},slotselect{{/slot-ab}},avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey,avb=vbmeta,logical,first_stage_mount
+system   /system  ext4 ro,barrier=1 wait{{#slot-ab}},slotselect{{/slot-ab}},avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey,avb=vbmeta,logical,first_stage_mount
 {{/dynamic-partitions}}
 {{^dynamic-partitions}}
 /dev/block/by-name/system               /{{^slot-ab}}system{{/slot-ab}}         {{system_fs}}    ro                 wait,avb{{#slot-ab}},slotselect{{/slot-ab}}
@@ -14,7 +14,7 @@ system   /system  {{system_fs}} ro{{#system_fs_ext4}},barrier=1{{/system_fs_ext4
 /dev/block/by-name/cache        /cache          ext4    noatime,nosuid,nodev,errors=panic                           wait,check
 {{/slot-ab}}
 {{#multi_user_support}}
-/dev/block/vdb         /data           {{^data_use_f2fs}}ext4{{/data_use_f2fs}}{{#data_use_f2fs}}f2fs{{/data_use_f2fs}}     noatime,nosuid,nodev{{^data_use_f2fs}},noauto_da_alloc,errors=panic{{/data_use_f2fs}}   wait,check,formattable{{#disk_encryption}},forceencrypt=/dev/block/by-name/metadata{{/disk_encryption}}{{#file_encryption}},fileencryption=aes-256-xts:aes-256-cts{{/file_encryption}}
+/dev/block/sdb         /data           {{^data_use_f2fs}}ext4{{/data_use_f2fs}}{{#data_use_f2fs}}f2fs{{/data_use_f2fs}}     noatime,nosuid,nodev{{^data_use_f2fs}},noauto_da_alloc,errors=panic{{/data_use_f2fs}}   wait,check,formattable{{#disk_encryption}},forceencrypt=/dev/block/by-name/metadata{{/disk_encryption}}{{#file_encryption}},fileencryption=aes-256-xts:aes-256-cts{{/file_encryption}}
 {{/multi_user_support}}
 {{^multi_user_support}}
 /dev/block/by-name/{{#dynamic-partitions}}user{{/dynamic-partitions}}data         /data           {{^data_use_f2fs}}ext4{{/data_use_f2fs}}{{#data_use_f2fs}}f2fs{{/data_use_f2fs}}     noatime,nosuid,nodev{{^data_use_f2fs}},noauto_da_alloc,errors=panic{{/data_use_f2fs}}   wait,check,formattable{{#disk_encryption}},forceencrypt=/dev/block/by-name/metadata{{/disk_encryption}}{{#file_encryption}},fileencryption=aes-256-xts:aes-256-cts{{/file_encryption}}
