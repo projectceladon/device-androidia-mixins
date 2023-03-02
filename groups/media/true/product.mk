@@ -6,14 +6,22 @@ PRODUCT_COPY_FILES += \
 USE_ONEVPL := true
 
 PRODUCT_PACKAGES += \
-    libvpl \
-    libmfx-gen \
     i965_drv_video \
+    libva-android \
+    libva
+
+{{#enable_msdk_omx}}
+PRODUCT_PACKAGES += \
     libmfxhw32 \
     libmfxhw64 \
     libmfx_omx_core \
     libmfx_omx_components_hw \
     libstagefrighthw \
-    libva-android \
-    libva
+{{/enable_msdk_omx}}
 
+{{#use_onevpl}}
+USE_ONEVPL := true
+PRODUCT_PACKAGES += \
+    libvpl \
+    libmfx-gen \
+{{/use_onevpl}}
