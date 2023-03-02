@@ -1,11 +1,15 @@
+{{#enable_msdk_omx}}
 INTEL_STAGEFRIGHT := true
 USE_MEDIASDK := true
 BOARD_HAVE_MEDIASDK_OPEN_SOURCE := true
-ENABLE_MAX_NUM_REORDER_FRAMES_OUTPUT := false
 BOARD_HAVE_OMX_SRC := true
+{{/enable_msdk_omx}}
 
+{{#use_onevpl}}
+ENABLE_MAX_NUM_REORDER_FRAMES_OUTPUT := false
 # OneVPL integration
 USE_ONEVPL := true
+{{/use_onevpl}}
 
 BUILD_BROKEN_USES_BUILD_HOST_STATIC_LIBRARY := true
 BUILD_BROKEN_USES_BUILD_HOST_SHARED_LIBRARY := true
