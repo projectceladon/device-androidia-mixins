@@ -31,6 +31,8 @@ case "$(cat /proc/fb)" in
                 echo "sw rendering"
                 setprop vendor.egl.set angle
                 setprop vendor.vulkan.set pastel
+                setprop vendor.hwcomposer.set default
+                setprop vendor.gralloc.set default
                 ;;
 esac
 }

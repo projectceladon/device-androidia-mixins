@@ -54,7 +54,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.drm_minigbm
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.hwcomposer=drm_minigbm
+    ro.hardware.hwcomposer=default
 
 {{#minigbm}}
 # Mini gbm
@@ -62,7 +62,7 @@ PRODUCT_PACKAGES += \
     gralloc.$(TARGET_GFX_INTEL)
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.gralloc=$(TARGET_GFX_INTEL)
+    ro.hardware.gralloc=default
 {{/minigbm}}
 
 {{^minigbm}}
