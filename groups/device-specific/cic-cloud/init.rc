@@ -60,5 +60,5 @@ on boot && property:ro.boot.icr.internal=1
 
 service icr_encode_service_intel /system/vendor/bin/hw/icr_encoder ${ro.container.id} -streaming -res ${ro.boot.icr.res.x}x${ro.boot.icr.res.y} -fr ${ro.config.media_fps} -url ${sys.icr.media_url} -plugin ${ro.config.icr.plugin} -lowpower -quality 4 -ratectrl ${ro.config.media_rc_mode} -b 3.3M -maxrate 6.6M -hwc_sock /ipc/hwc-sock -tcae 0 -renderfps_enc ${ro.boot.icr.rfps.enc}
     class icr_service
-    user root
-    group root
+    user system
+    group system
