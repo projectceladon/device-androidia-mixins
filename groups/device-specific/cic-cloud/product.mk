@@ -168,7 +168,6 @@ ifeq ($(TARGET_USE_ICR), true)
 PRODUCT_PACKAGES += \
     icr_encoder \
     libirr_encoder \
-    libicr_alloc \
     libsock_utilss \
     libvhal-client
 endif
