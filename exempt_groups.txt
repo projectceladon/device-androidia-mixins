@@ -4,7 +4,6 @@ aap
 acrn-guest
 activity
 allow-missing-dependencies
-aosp_carrier-config
 aosp_dualsim-config
 app-config
 art-config
