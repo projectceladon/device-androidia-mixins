@@ -40,6 +40,9 @@ INTEL_PATH_PREKERNEL := device/intel/prebuilt_kernel
 INTEL_PATH_PREBUILTS := vendor/intel/prebuilts
 INTEL_PATH_PREBUILTS_OUT = $(PRODUCT_OUT)/prebuilts
 
+# Set Vendor SPL to match platform
+VENDOR_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
+
 # refer board_config_mk definition in build/make/core/envsetup.mk file to get TARGET_DEVICE
 _board_config_mk := $(shell find $(dir $(current_product_makefile)) -maxdepth 2 -name BoardConfig.mk)
 #TARGET_DEVICE_DIR := $(shell dirname $(_board_config_mk))
@@ -58,9 +61,17 @@ PRODUCT_LOCALES := en_US en_IN fr_FR it_IT es_ES et_EE de_DE nl_NL cs_CZ pl_PL j
 PRODUCT_AAPT_CONFIG := normal large mdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.soc.manufacturer=$(PRODUCT_MANUFACTURER)
+
 PRODUCT_RESTRICT_VENDOR_FILES := false
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_SET_DEBUGFS_RESTRICTIONS := false
+else
+PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
+endif
 {{^ota-update}}
-PRODUCT_SHIPPING_API_LEVEL := 30
+PRODUCT_SHIPPING_API_LEVEL := 31
 PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := true
 {{/ota-update}}
 {{#ota-update}}

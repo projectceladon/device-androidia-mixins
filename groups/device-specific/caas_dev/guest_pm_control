@@ -22,7 +22,7 @@ import subprocess
 import signal
 from sys import argv,exit
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '../qemu-4.2.0/python'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../qemu-6.0.0/python'))
 from qemu import qmp
 
 rtc_wakeup = 0
@@ -62,13 +62,21 @@ def wakeup(qemu_hdl):
 
 def main():
 
-    if len(argv) != 3:
+    if len(argv) > 3:
         print(' Proper argument not provided')
         print(' 1. qmp-socket   2. path to sendkey library')
         exit(1)
 
     rtc_wakeup_device = detect_rtc_wakeup_src()
 
+    # check if qmp unix socket is created.
+    while True:
+        if os.path.exists(sys.argv[1]):
+            break
+    # even after checking the unix socket creation, we see failure when it try
+    # to connect to this unix socket. To avoid this failure delay of 2 second
+    # has been kept. With this delay there is no connection failure.
+    time.sleep(2)
     qemu = qmp.QEMUMonitorProtocol(argv[1])
 
     # Make a connection to QMP server. Break while loop only when the connection is made.
@@ -81,8 +89,6 @@ def main():
             print('Didn\'t get QMP greeting message from QEMU QMP server')
         except qmp.QMPCapabilitiesError:
             print('Could not negotiate capabilities with QEMU QMP server')
-        except qemu.error:
-            print
         except qmp.QMPTimeoutError:
             print('Connection Timeout Error')
         else:
@@ -166,7 +172,7 @@ def main():
                     elif val == "WAKEUP":
                         if rtc_wakeup == 0:
                             time.sleep(1)
-                            cmdCommand = " ".join([argv[2], "--vm 0 --power 0"])
+                            cmdCommand = "./sendkey --vm 0 --power 0"
                             process = subprocess.call(cmdCommand.split(), stdout=subprocess.PIPE)
 
         except KeyboardInterrupt:
