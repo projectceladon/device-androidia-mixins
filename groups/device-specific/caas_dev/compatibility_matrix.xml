@@ -8,14 +8,6 @@
         </interface>
     </hal>
     <hal format="hidl" optional="false">
-        <name>android.frameworks.schedulerservice</name>
-        <version>1.0</version>
-        <interface>
-            <name>ISchedulingPolicyService</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="false">
         <name>android.frameworks.sensorservice</name>
         <version>1.0</version>
         <interface>
@@ -63,4 +55,7 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <vendor-ndk>
+        <version>31</version>
+    </vendor-ndk>
 </compatibility-matrix>
