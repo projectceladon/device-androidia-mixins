@@ -135,7 +135,6 @@ def main():
                             print("Reason: An error prevents further use of guest and results in shutdown")
                         cmdCommand = "poweroff -p -f"
                         signal.signal(signal.SIGTERM, signal.SIG_IGN)
-                        time.sleep(3)
                         process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE, shell=True)
                     elif val == "SUSPEND":
 
