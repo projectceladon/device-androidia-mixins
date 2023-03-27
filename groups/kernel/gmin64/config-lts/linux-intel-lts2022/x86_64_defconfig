@@ -3843,6 +3843,11 @@ CONFIG_V4L_PLATFORM_DRIVERS=y
 # CONFIG_V4L_MEM2MEM_DRIVERS is not set
 
 #
+# VirtIO media platform drivers
+#
+CONFIG_VIDEO_VIRTIO_CAMERA=y
+
+#
 # Allegro DVT media platform drivers
 #
 
