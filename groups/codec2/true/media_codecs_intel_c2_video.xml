@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (C) 2014 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!-- The contents of this file was copied
+from AOSP frameworks/av/media/libstagefright/data/media_codecs_google_c2_video.xml
+and updated to vendor media codecs.
+-->
+
+<!--
+    Max block-count = maxHeight / block-size(height) * maxWidth / block-size(W)
+    Max blocks-per-second = Max block-count * frames-per-second
+-->
+
+<Included>
+    <Decoders>
+{{#hw_vd_h264}}
+	<MediaCodec name="c2.intel.avc.decoder" type="video/avc">
+            <!-- profiles and levels:  ProfileHigh : Level52 -->
+            <Limit name="size" min="64x64" max="4096x4096" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-65536" /> <!-- max 4096x4096 equivalent -->
+            <Limit name="blocks-per-second" range="1-1966080" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+            <Feature name="adaptive-playback" />
+	</MediaCodec>
+{{/hw_vd_h264}}
+
+{{#hw_vd_h265}}
+	<MediaCodec name="c2.intel.hevc.decoder" type="video/hevc">
+            <!-- profiles and levels:  ProfileMain : MainTierLevel51 -->
+            <Limit name="size" min="64x64" max="8192x8192" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="8x8" />
+            <Limit name="block-count" range="1-1048576" /> <!-- max 8192x8192 -->
+            <Limit name="blocks-per-second" range="1-31457280" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+            <Feature name="adaptive-playback" />
+	</MediaCodec>
+{{/hw_vd_h265}}
+
+{{#hw_vd_vp9}}
+	<MediaCodec name="c2.intel.vp9.decoder" type="video/x-vnd.on2.vp9">
+            <Limit name="size" min="64x64" max="8192x8192" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-262144" />
+            <Limit name="blocks-per-second" range="1-7864320" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+	    <Feature name="adaptive-playback" />
+	</MediaCodec>
+{{/hw_vd_vp9}}
+
+{{#hw_vd_vp8}}
+	<MediaCodec name="c2.intel.vp8.decoder" type="video/x-vnd.on2.vp8">
+            <Limit name="size" min="64x64" max="4096x4096" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-131072" />
+            <Limit name="blocks-per-second" range="1-500000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+            <Feature name="adaptive-playback" />
+	</MediaCodec>
+{{/hw_vd_vp8}}
+
+{{#hw_vd_mp2}}
+	<MediaCodec name="c2.intel.mp2.decoder" type="video/mpeg2">
+            <Limit name="size" min="64x64" max="2048x2048" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-16384" />
+            <Limit name="blocks-per-second" range="1-500000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-1920x1080" value="30" />
+            <Feature name="adaptive-playback" />
+	</MediaCodec>
+{{/hw_vd_mp2}}
+
+{{#hw_vd_av1}}
+	<MediaCodec name="c2.intel.av1.decoder" type="video/av01">
+            <Limit name="size" min="64x64" max="4096x4096" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-16384" />
+            <Limit name="blocks-per-second" range="1-500000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+            <Feature name="adaptive-playback" />
+	</MediaCodec>
+{{/hw_vd_av1}}
+    </Decoders>
+
+    <Encoders>
+{{#hw_ve_h264}}
+	<MediaCodec name="c2.intel.avc.encoder" type="video/avc">
+            <!-- profiles and levels:  ProfileBaseline : Level41 -->
+            <Limit name="size" min="176x144" max="4096x4096" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-8192" /> <!-- max 2048x1024 -->
+            <Limit name="blocks-per-second" range="1-245760" />
+            <Limit name="bitrate" range="1-12000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+        </MediaCodec>
+{{/hw_ve_h264}}
+
+{{#hw_ve_h265}}
+	<MediaCodec name="c2.intel.hevc.encoder" type="video/hevc" >
+            <Limit name="size" min="176x144" max="8192x8192" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="blocks-per-second" range="1-972000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+	</MediaCodec>
+{{/hw_ve_h265}}
+
+{{#hw_ve_vp9}}
+	<MediaCodec name="c2.intel.vp9.encoder" type="video/x-vnd.on2.vp9" >
+            <Limit name="size" min="128x96" max="8192x8192" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-245760" />
+            <Limit name="blocks-per-second" range="1-972000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+	</MediaCodec>
+{{/hw_ve_vp9}}
+    </Encoders>
+</Included>
