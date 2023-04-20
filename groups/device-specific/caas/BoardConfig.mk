@@ -24,6 +24,9 @@ BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/guest_pm_control
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/intel-thermal-conf.xml
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/thermald.service
 BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/rpmb_dev
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/ai_raw_tensor.sh
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_ai_dispatcher.sh
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/Security.md
 
 # for USB OTG WA
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/bxt_usb
