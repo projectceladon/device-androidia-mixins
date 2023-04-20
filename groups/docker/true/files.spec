@@ -1,0 +1,12 @@
+[extrafiles]
+lic_install.sh: "LIC image and container install wrapper script"
+docker_manager: "docker management daemon"
+containerd: "containerd runtime binary"
+containerd-shim-runc-v2: "runc v2 shim interface binary for containerd"
+docker: "docker cli tool"
+dockerd: "docker engine binary"
+runc: "runc runtime binary"
+99-ignore-keyboard.rules: "Input configurations for Weston of keyboard"
+99-ignore-mouse.rules: "Input configurations for Weston of mouse"
+config.toml: "contaierd config file"
+daemon.json: "docker config file"
