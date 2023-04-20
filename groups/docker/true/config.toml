@@ -1,0 +1,16 @@
+root = "/data/docker/var/lib/containerd"
+state = "/data/docker/run/containerd"
+imports = ["/data/docker/etc/containerd/runtime_*.toml", "./debug.toml"]
+
+[grpc]
+  address = "/data/docker/run/containerd/containerd.sock"
+
+[debug]
+  address = "/data/docker/run/containerd/debug.sock"
+
+[plugins]
+  [plugins.opt]
+    path = "/data/docker/opt"
+  [plugins.cri.cni]
+    bin_dir = "/data/docker/opt/cni/bin"
+    conf_dir = "/data/docker/etc/cni/net.d"
