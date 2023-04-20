@@ -12,4 +12,8 @@ PRODUCT_PACKAGES += \
     libopenvino_intel_cpu_plugin \
     libopenvino_ir_frontend
 
+{{#vsock-remote-infer}}
+PRODUCT_PROPERTY_OVERRIDES += vendor.nn.hal.grpc_ip_port=vsock:2:50059
+{{/vsock-remote-infer}}
+
 PRODUCT_PROPERTY_OVERRIDES += vendor.nn.hal.ngraph=true
