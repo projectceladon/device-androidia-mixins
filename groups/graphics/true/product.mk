@@ -12,9 +12,8 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.3-service.clearkey \
     android.hardware.graphics.composer@2.3-service \
-    android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.allocator@2.0-impl \
-    android.hardware.graphics.mapper@2.0-impl
+    android.hardware.graphics.mapper@4.0-impl.minigbm \
+    android.hardware.graphics.allocator@4.0-service.minigbm
 
 PRODUCT_PACKAGES += \
     vulkan.intel \
