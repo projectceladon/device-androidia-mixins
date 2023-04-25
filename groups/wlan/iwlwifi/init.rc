@@ -8,6 +8,9 @@ on early-boot
     insmod /vendor/lib/modules/compat.ko
 {{/iwl_upstream_drv}} 
     insmod /vendor/lib/modules/cfg80211.ko
+{{^iwl_7000_drv}}
+    insmod /vendor/lib/modules/mac80211.ko
+{{/iwl_7000_drv}}
     insmod /vendor/lib/modules/iwl7000_mac80211.ko
     insmod /vendor/lib/modules/iwlwifi.ko
     insmod /vendor/lib/modules/iwlmvm.ko power_scheme=1

@@ -10,3 +10,4 @@ libwifi-hal = false
 firmware =
 nvm = true
 iwl_upstream_drv = true
+iwl_7000_drv = false
