@@ -4,7 +4,7 @@ endif
 
 # Sensors HAL modules
 PRODUCT_PACKAGES += \
-	android.hardware.sensors@2.0-service.intel
+	android.hardware.sensors@aidl-service.intel
 
 {{#enable_sensor_list}}
 PRODUCT_COPY_FILES += \
