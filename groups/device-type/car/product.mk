@@ -20,6 +20,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += android.hardware.automotive.vehicle.intel@2.0-service
 {{/aosp_hal}}
 
+PRODUCT_PACKAGES += android.hardware.automotive.evs@1.1-sample
+PRODUCT_PACKAGES += android.frameworks.automotive.display@1.0-service
+PRODUCT_PACKAGES += evs_app
+
 PRODUCT_PACKAGES += android.hardware.automotive.audiocontrol@1.0-service.intel
 
 {{#aosp_hal}}
