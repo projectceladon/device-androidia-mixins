@@ -7202,7 +7202,7 @@ CONFIG_DEBUG_LIST=y
 # CONFIG_BUG_ON_DATA_CORRUPTION is not set
 # end of Debug kernel data structures
 
-CONFIG_DEBUG_CREDENTIALS=y
+# CONFIG_DEBUG_CREDENTIALS is not set
 
 #
 # RCU Debugging
