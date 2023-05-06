@@ -100,10 +100,9 @@ EOF
   fi
 
   if [[ ! -z "$(docker ps -a | tail -n +2 | awk '{print $NF}' | grep -w steam)" ]]; then
-    msg "Delete existed steam container..."
+    msg "Stop and rm existed steam container(Keep the image as it will be used in 'docker create')..."
     docker stop steam >/dev/null 2>&1
     docker rm steam >/dev/null 2>&1
-    docker rmi steam >/dev/null 2>&1
   fi
 
   msg "create steam container with $backend backend..."
