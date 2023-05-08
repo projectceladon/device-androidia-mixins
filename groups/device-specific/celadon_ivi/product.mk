@@ -61,3 +61,11 @@ PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/guest_time_keepin
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager/scripts/start_flash_usb.sh:$(PRODUCT_OUT)/scripts/start_flash_usb.sh
 PRODUCT_COPY_FILES += vendor/intel/fw/trusty-release-binaries/rpmb_dev:$(PRODUCT_OUT)/scripts/rpmb_dev
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/wakeup.py:$(PRODUCT_OUT)/scripts/wakeup.py
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapstartsize?=32m \
+    dalvik.vm.heapgrowthlimit?=256m \
+    dalvik.vm.heapsize?=512m \
+    dalvik.vm.heaptargetutilization?=0.5 \
+    dalvik.vm.heapminfree?=32m \
+    dalvik.vm.heapmaxfree?=64m
