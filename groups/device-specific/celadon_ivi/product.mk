@@ -15,6 +15,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ueventd.rc:root/ueventd.$(TARGET_PRODUCT).rc \
 {{/treble}}
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/display_settings.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display_settings.xml
+
 PRODUCT_PACKAGES += MultiDisplaySecondaryHomeTestLauncher
 
 PRODUCT_PACKAGES += vndservicemanager
