@@ -9,7 +9,7 @@ multidroid: droid
 	$(hide) cp -r $(TOP)/kernel/modules/cic/binder $(PRODUCT_OUT)/docker/aic-manager/data/
 	$(hide) cp -r $(TOP)/vendor/intel/cic/host/docker/android $(PRODUCT_OUT)/docker
 	$(hide) cp -r $(TOP)/vendor/intel/cic/host/docker/update $(PRODUCT_OUT)/docker
-	$(hide) cp -r $(TOP)/vendor/intel/cic/host/k8s/client/AIC-release-v0.37-ab30254.apk $(PRODUCT_OUT)
+	$(hide) cp -r $(TOP)/vendor/intel/cic/host/k8s/client/AIC-release-v0.38-c1f590d2.apk $(PRODUCT_OUT)
 	$(hide) chmod -R g-w $(PRODUCT_OUT)/docker/update
 	$(hide) cp -r $(TOP)/vendor/intel/cic/host/k8s/image/manage-android $(PRODUCT_OUT)/docker
 	$(hide) cp -r $(TOP)/vendor/intel/cic/host/k8s/image/streamer $(PRODUCT_OUT)/docker
@@ -69,9 +69,9 @@ else
 endif
 
 ifneq ($(TARGET_BUILD_AIC_MANAGER_DOCKER), true)
-	DOCKER_HOST=$(DOCKER_HOST) tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic aic-app AIC-release-v0.37-ab30254.apk android.tar.gz aic-build -C docker update aic-manager
+	DOCKER_HOST=$(DOCKER_HOST) tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic aic-app AIC-release-v0.38-c1f590d2.apk android.tar.gz aic-build -C docker update aic-manager
 else
-	DOCKER_HOST=$(DOCKER_HOST) tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic aic-app AIC-release-v0.37-ab30254.apk android.tar.gz aic-manager.tar.gz -C docker update
+	DOCKER_HOST=$(DOCKER_HOST) tar cvzf $(PRODUCT_OUT)/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT) aic aic-app AIC-release-v0.38-c1f590d2.apk android.tar.gz aic-manager.tar.gz -C docker update
 endif
 
 .PHONY: k8s
@@ -88,13 +88,13 @@ esc: cic
 	$(hide) rm -rf $(PRODUCT_OUT)/esc-release
 	$(hide) mkdir -p $(PRODUCT_OUT)/esc-release/release $(PRODUCT_OUT)/esc-release/image/update
 	$(hide) cp -r $(PRODUCT_OUT)/release/tool $(PRODUCT_OUT)/release/coturn $(PRODUCT_OUT)/release/coordinator $(PRODUCT_OUT)/release/k8s  $(PRODUCT_OUT)/release/owt-server-p2p $(PRODUCT_OUT)/release/dg2-streamer $(PRODUCT_OUT)/release/icr $(PRODUCT_OUT)/release/webrtc-front-end $(PRODUCT_OUT)/esc-release/release/.
-	$(hide) cp -r $(PRODUCT_OUT)/aic $(PRODUCT_OUT)/aic-app $(PRODUCT_OUT)/AIC-release-v0.37-ab30254.apk $(PRODUCT_OUT)/aic-manager.tar.gz $(PRODUCT_OUT)/android.tar.gz $(PRODUCT_OUT)/cpuAllocate $(PRODUCT_OUT)/esc-release/image/.
+	$(hide) cp -r $(PRODUCT_OUT)/aic $(PRODUCT_OUT)/aic-app $(PRODUCT_OUT)/AIC-release-v0.38-c1f590d2.apk $(PRODUCT_OUT)/aic-manager.tar.gz $(PRODUCT_OUT)/android.tar.gz $(PRODUCT_OUT)/cpuAllocate $(PRODUCT_OUT)/esc-release/image/.
 	$(hide) cp -r $(PRODUCT_OUT)/docker/update/pkg.d/106-dg2-drivers/root $(PRODUCT_OUT)/esc-release/image/update/.
 	$(hide) cp -r $(PRODUCT_OUT)/docker/update/Dockerfile $(PRODUCT_OUT)/docker/update/core $(PRODUCT_OUT)/docker/update/default.prop $(PRODUCT_OUT)/docker/update/env-var $(PRODUCT_OUT)/docker/update/post-update $(PRODUCT_OUT)/docker/update/pre-update $(PRODUCT_OUT)/docker/update/system.prop $(PRODUCT_OUT)/docker/update/to-del.list $(PRODUCT_OUT)/docker/update/to-mod.list $(PRODUCT_OUT)/esc-release/image/update/.
 	$(hide) cat $(PRODUCT_OUT)/docker/update/pkg.d/700-config-for-test/system.prop >> $(PRODUCT_OUT)/esc-release/image/update/system.prop
 	$(hide) cat $(PRODUCT_OUT)/docker/update/pkg.d/106-dg2-drivers/system.prop >> $(PRODUCT_OUT)/esc-release/image/update/system.prop
 	$(hide) cat $(PRODUCT_OUT)/docker/update/pkg.d/104-esc-internal-config/system.prop >> $(PRODUCT_OUT)/esc-release/image/update/system.prop
-	$(hide) tar cvzf $(PRODUCT_OUT)/esc-release/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT)/esc-release/image aic aic-app AIC-release-v0.37-ab30254.apk aic-manager.tar.gz android.tar.gz cpuAllocate update
+	$(hide) tar cvzf $(PRODUCT_OUT)/esc-release/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT)/esc-release/image aic aic-app AIC-release-v0.38-c1f590d2.apk aic-manager.tar.gz android.tar.gz cpuAllocate update
 	$(hide) tar cvzf $(PRODUCT_OUT)/$(TARGET_ESC_FILE_NAME) -C $(PRODUCT_OUT)/esc-release release $(TARGET_AIC_FILE_NAME)
 
 PUB_SYSTEM_SYMBOLS := symbols.tar.gz
