@@ -112,7 +112,7 @@ EOF
   elif [ $backend == "headless" ]; then
     rm -rf -v /data/docker/image/workdir/ipc
     mkdir -p -v /data/docker/image/workdir/ipc
-    docker create -ti --privileged --network=host -e http_proxy=$http_proxy -e https_proxy=$https_proxy -e BACKEND=$backend -e CONTAINER_ID=0 -e DEVICE=$device -e K8S_ENV_DISPLAY_RESOLUTION_X=$width -e K8S_ENV_DISPLAY_RESOLUTION_Y=$height -v /dev/binder:/dev/binder -v /data/docker/sys/class/power_supply:/sys/class/power_supply -v /data/docker/config/99-ignore-mouse.rules:/etc/udev/rules.d/99-ignore-mouse.rules -v /data/docker/config/99-ignore-keyboard.rules:/etc/udev/rules.d/99-ignore-keyboard.rules -v /data/vendor/neuralnetworks/:/home/wid/.ipc/ -v /data/docker/steam:/home/wid/.steam -v /data/docker/image/workdir/ipc:/workdir/ipc --shm-size 8G --name steam steam
+    docker create -ti --privileged --network=host -e http_proxy=$http_proxy -e https_proxy=$https_proxy -e BACKEND=$backend -e CONTAINER_ID=0 -e DEVICE=$device -e K8S_ENV_DISPLAY_RESOLUTION_X=$width -e K8S_ENV_DISPLAY_RESOLUTION_Y=$height -v /dev/binder:/dev/binder -v /data/docker/sys/class/power_supply:/sys/class/power_supply -v /data/docker/config/99-ignore-mouse.rules:/etc/udev/rules.d/99-ignore-mouse.rules -v /data/docker/config/99-ignore-keyboard.rules:/etc/udev/rules.d/99-ignore-keyboard.rules -v /data/vendor/neuralnetworks/:/home/wid/.ipc/ -v /data/docker/steam:/home/wid/.steam -v /data/docker/image/workdir/ipc:/workdir/ipc --shm-size 8G --ulimit nofile=524288:524288 --name steam steam
   fi
   msg "Done!"
 }
