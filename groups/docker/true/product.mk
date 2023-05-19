@@ -16,7 +16,9 @@ PRODUCT_PACKAGES += sumClientInAndroid \
     multiplyClientInAndroid \
     subtractServiceApplicationInAndroid \
     SharedBufferServiceInAndroid \
-    SharedBufferClientInAndroid
+    SharedBufferClientInAndroid \
+    Steam \
+    Genshin
 
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.nn.hal.grpc_socket_path=/data/vendor/neuralnetworks/ai.socket
