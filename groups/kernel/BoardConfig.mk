@@ -42,6 +42,20 @@ BOARD_KERNEL_CMDLINE += \
 BOARD_KERNEL_CMDLINE += \
         memmap=4M\$$0x5c400000
 {{/memory_hole}}
+
+ifneq ($(TARGET_BUILD_VARIANT),user)
+BOARD_KERNEL_CMDLINE += \
+        memmap=4M\$$0x100000000
+BOARD_KERNEL_CMDLINE += \
+        ramoops.mem_address=0x100000000
+BOARD_KERNEL_CMDLINE += \
+        ramoops.mem_size=0x400000
+BOARD_KERNEL_CMDLINE += \
+        ramoops.console_size=0x200000
+BOARD_KERNEL_CMDLINE += \
+        ramoops.dump_oops=1
+endif
+
 {{#interactive_governor}}
 BOARD_KERNEL_CMDLINE += \
 	intel_pstate=disable
