@@ -7,10 +7,4 @@ if [ $value_model == 140 ]; then
     setprop ro.vendor.hdmi.audio "tgl"
 fi
 }
-check_for_audio(){
-GUEST_AAF_CONFIG="/mnt/share/mixins.spec"
-value=`grep -i audio-type mnt/share/mixins.spec |cut -d ':' -f2`
-setprop vendor.intel.enable.audio $value
-}
 update_audio
-check_for_audio

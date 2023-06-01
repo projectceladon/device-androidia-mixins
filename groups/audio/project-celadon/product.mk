@@ -32,6 +32,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@7.0-impl \
     android.hardware.audio@7.0-impl \
+    android.hardware.automotive.audiocontrol-service.example \
     android.hardware.audio@2.0-service
 
 #Audio policy engine configuration files
@@ -41,6 +42,7 @@ PRODUCT_COPY_FILES += \
 # Vendor audio configuration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration.xml:vendor/etc/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/audio/default/policy/car_audio_configuration.xml:vendor/etc/car_audio_configuration.xml \
     $(LOCAL_PATH)/audio/default/policy/a2dp_audio_policy_configuration.xml:vendor/etc/a2dp_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/default/policy/r_submix_audio_policy_configuration.xml:vendor/etc/r_submix_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/default/policy/usb_audio_policy_configuration.xml:vendor/etc/usb_audio_policy_configuration.xml \
@@ -63,6 +65,7 @@ endif
 #fallback
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/fallback/audio_policy_configuration_generic.xml:system/etc/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/audio/default/policy/fallback/car_audio_configuration.xml:system/etc/car_audio_configuration.xml \
     $(LOCAL_PATH)/audio/default/policy/fallback/primary_audio_policy_configuration.xml:system/etc/primary_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/default/policy/fallback/r_submix_audio_policy_configuration.xml:system/etc/r_submix_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/default/policy/fallback/audio_policy_volumes.xml:system/etc/audio_policy_volumes.xml \
@@ -71,4 +74,4 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES += audio.safemedia.bypass=true
 
-PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/audio/overlay-car-legacy
+#PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/audio/overlay-car-legacy
