@@ -1,0 +1,110 @@
+{{^ivi}}
+on post-fs && property:vendor.intel.enable.audio=legacy-hda
+    insmod /vendor/lib/modules/snd-dummy.ko
+    insmod /vendor/lib/modules/snd-compress.ko
+    insmod /vendor/lib/modules/snd-hrtimer.ko
+    insmod /vendor/lib/modules/snd-ctl-led.ko
+    insmod /vendor/lib/modules/snd-hda-core.ko
+    insmod /vendor/lib/modules/snd-hda-codec.ko
+    insmod /vendor/lib/modules/snd-hda-codec-generic.ko
+    insmod /vendor/lib/modules/snd-intel-dspcfg.ko dsp_driver=1
+    insmod /vendor/lib/modules/snd-hda-intel.ko
+    insmod /vendor/lib/modules/snd-hda-codec-realtek.ko
+    insmod /vendor/lib/modules/snd-hda-codec-hdmi.ko
+    insmod /vendor/lib/modules/snd-intel-sdw-acpi.ko
+    insmod /vendor/lib/modules/snd-soc-core.ko
+    insmod /vendor/lib/modules/snd-soc-acpi.ko
+    insmod /vendor/lib/modules/snd-soc-acpi-intel-match.ko
+    insmod /vendor/lib/modules/usblp.ko
+
+on post-fs && property:vendor.intel.enable.audio=sof-hda
+    insmod /vendor/lib/modules/snd-dummy.ko
+    insmod /vendor/lib/modules/snd-compress.ko
+    insmod /vendor/lib/modules/snd-hrtimer.ko
+    insmod /vendor/lib/modules/snd-ctl-led.ko
+    insmod /vendor/lib/modules/snd-hda-core.ko
+    insmod /vendor/lib/modules/snd-hda-codec.ko
+    insmod /vendor/lib/modules/snd-hda-codec-generic.ko
+    insmod /vendor/lib/modules/snd-intel-dspcfg.ko dsp_driver=3
+    insmod /vendor/lib/modules/snd-hda-intel.ko
+    insmod /vendor/lib/modules/snd-hda-codec-realtek.ko
+    insmod /vendor/lib/modules/snd-hda-codec-hdmi.ko
+    insmod /vendor/lib/modules/snd-intel-sdw-acpi.ko
+    insmod /vendor/lib/modules/snd-soc-core.ko
+    insmod /vendor/lib/modules/snd-soc-acpi.ko
+    insmod /vendor/lib/modules/snd-soc-acpi-intel-match.ko
+    insmod /vendor/lib/modules/usblp.ko
+    insmod /vendor/lib/modules/snd-sof.ko
+    insmod /vendor/lib/modules/snd-sof-xtensa-dsp.ko
+    insmod /vendor/lib/modules/snd-sof-pci.ko
+    insmod /vendor/lib/modules/snd-sof-intel-ipc.ko
+    insmod /vendor/lib/modules/snd-sof-acpi.ko
+    insmod /vendor/lib/modules/snd-hda-ext-core.ko
+    insmod /vendor/lib/modules/snd-sof-intel-hda.ko
+    insmod /vendor/lib/modules/snd-soc-hdac-hda.ko
+    insmod /vendor/lib/modules/snd-sof-intel-hda-common.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-tgl.ko
+    insmod /vendor/lib/modules/snd-mixer-oss.ko
+    insmod /vendor/lib/modules/snd-seq.ko
+    insmod /vendor/lib/modules/snd-soc-dmic.ko
+    insmod /vendor/lib/modules/snd-soc-hdac-hdmi.ko
+    insmod /vendor/lib/modules/snd-soc-intel-hda-dsp-common.ko
+    insmod /vendor/lib/modules/snd-soc-skl_hda_dsp.ko
+    insmod /vendor/lib/modules/snd-soc-sst-dsp.ko
+    insmod /vendor/lib/modules/snd-soc-sst-ipc.ko
+    insmod /vendor/lib/modules/snd-sof-acpi-intel-bdw.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-apl.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-cnl.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-icl.ko
+    insmod /vendor/lib/modules/snd-usb-hiface.ko
+    insmod /vendor/lib/modules/snd-seq-midi-event.ko
+    insmod /vendor/lib/modules/snd-seq-midi.ko
+{{/ivi}}
+
+{{#ivi}}
+on early-boot
+    insmod /vendor/lib/modules/snd-dummy.ko
+    insmod /vendor/lib/modules/snd-soc-da7219.ko
+    insmod /vendor/lib/modules/snd-soc-ssm4567.ko
+    insmod /vendor/lib/modules/snd-soc-rl6231.ko
+    insmod /vendor/lib/modules/snd-soc-rl6347a.ko
+    insmod /vendor/lib/modules/snd-soc-rt5640.ko
+    insmod /vendor/lib/modules/snd-soc-rt5663.ko
+    insmod /vendor/lib/modules/snd-soc-rt5682.ko
+    insmod /vendor/lib/modules/snd-soc-rt5682-i2c.ko
+    insmod /vendor/lib/modules/snd-soc-tdf8532.ko
+    insmod /vendor/lib/modules/snd-soc-rt298.ko
+    insmod /vendor/lib/modules/snd-soc-rt274.ko
+    insmod /vendor/lib/modules/snd-soc-rt286.ko
+    insmod /vendor/lib/modules/snd-soc-rt1308.ko
+    insmod /vendor/lib/modules/snd-soc-max98357a.ko
+    insmod /vendor/lib/modules/snd-soc-max98373.ko
+    insmod /vendor/lib/modules/snd-soc-max98927.ko
+    insmod /vendor/lib/modules/snd-soc-avs-tdf8532.ko
+    insmod /vendor/lib/modules/snd-soc-avs-ssm4567.ko
+    insmod /vendor/lib/modules/snd-soc-avs-rt5682.ko
+    insmod /vendor/lib/modules/snd-soc-avs-rt5663.ko
+    insmod /vendor/lib/modules/snd-soc-avs-rt5640.ko
+    insmod /vendor/lib/modules/snd-soc-avs-rt1308.ko
+    insmod /vendor/lib/modules/snd-soc-avs-rt298.ko
+    insmod /vendor/lib/modules/snd-soc-avs-rt286.ko
+    insmod /vendor/lib/modules/snd-soc-avs-rt274.ko
+    insmod /vendor/lib/modules/snd-soc-avs-nau8825.ko
+    insmod /vendor/lib/modules/snd-soc-avs-max98373.ko
+    insmod /vendor/lib/modules/snd-soc-avs-max98357a.ko
+    insmod /vendor/lib/modules/snd-soc-avs-max98927.ko
+    insmod /vendor/lib/modules/snd-soc-avs-i2s-test.ko
+    insmod /vendor/lib/modules/snd-soc-avs-dmic.ko
+    insmod /vendor/lib/modules/snd-soc-avs-da7219.ko
+    insmod /vendor/lib/modules/snd-hda-ext-core.ko
+    insmod /vendor/lib/modules/snd-soc-hda-codec.ko
+    insmod /vendor/lib/modules/snd-soc-avs-hdaudio.ko
+    insmod /vendor/lib/modules/snd-soc-avs.ko ignore_fw_version=1
+    insmod /vendor/lib/modules/snd-soc-avs-probe.ko
+    insmod /vendor/lib/modules/snd-soc-hdac-hda.ko
+    insmod /vendor/lib/modules/snd-soc-hdac-hdmi.ko
+{{/ivi}}
+
+on property:sys.boot_completed=1 && property:ro.vendor.hdmi.audio=tgl
+    stop audioserver
+    start audioserver
