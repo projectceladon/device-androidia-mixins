@@ -79,6 +79,7 @@ $(foreach var,$(FLASHFILE_VARIANTS), \
 endif
 endif
 
+{{^fw_sbl}}
 # We stash a copy of BIOSUPDATE.fv so the FW sees it, applies the
 # update, and deletes the file. Follows Google's desire to update all
 # bootloader pieces with a single "fastboot flash bootloader" command.
@@ -153,13 +154,112 @@ INSTALLED_RADIOIMAGE_TARGET += $(bootloader_zip) $(bootloader_bin) $(bootloader_
 
 droidcore: $(bootloader_bin)
 
-.PHONY: bootloader
 bootloader: $(bootloader_bin)
 $(call dist-for-goals,droidcore,$(bootloader_bin):$(TARGET_PRODUCT)-bootloader-$(FILE_NAME_TAG))
 
 $(call dist-for-goals,droidcore,$(INTEL_PATH_BUILD)/testkeys/testkeys_lockdown.txt:test-keys_efi_lockdown.txt)
 $(call dist-for-goals,droidcore,$(INTEL_PATH_BUILD)/testkeys/unlock.txt:efi_unlock.txt)
+{{/fw_sbl}}
 
+{{#fw_sbl}}
+
+bootloader_bin := $(PRODUCT_OUT)/bootloader
+BOARD_BOOTLOADER_DEFAULT_IMG := $(PRODUCT_OUT)/bootloader.img
+BOARD_BOOTLOADER_DIR := $(PRODUCT_OUT)/sbl
+BOARD_BOOTLOADER_IASIMAGE := $(BOARD_BOOTLOADER_DIR)/kf4sbl.sbl
+BOARD_BOOTLOADER_VAR_IMG := $(BOARD_BOOTLOADER_DIR)/bootloader.img
+
+BOARD_FLASHFILES += $(BOARD_BOOTLOADER_DEFAULT_IMG):bootloader
+
+$(BOARD_BOOTLOADER_DIR):
+	$(hide) rm -rf $(BOARD_BOOTLOADER_DIR)
+	$(hide) mkdir -p $(BOARD_BOOTLOADER_DIR)
+
+intermediates := $(call intermediates-dir-for,PACKAGING,bootloader_zip)
+bootloader_zip := $(intermediates)/bootloader.zip
+$(bootloader_zip): intermediates := $(intermediates)
+$(bootloader_zip): efi_root := $(intermediates)/root
+$(bootloader_zip): \
+		$(TARGET_DEVICE_DIR)/AndroidBoard.mk \
+		$(BOARD_EXTRA_EFI_MODULES) \
+		kf4sbl-$(TARGET_BUILD_VARIANT) \
+		$(BOARD_SFU_UPDATE) \
+		| $(ACP) \
+
+	$(hide) rm -rf $(efi_root)
+	$(hide) rm -f $@
+ifneq ($(BOOTLOADER_SLOT), true)
+	$(hide) mkdir -p $(efi_root)/capsules
+	$(hide) mkdir -p $(efi_root)/EFI/BOOT
+	$(hide) mkdir -p $(efi_root)/boot
+	$(foreach EXTRA,$(BOARD_EXTRA_EFI_MODULES), \
+		$(hide) $(ACP) $(EXTRA) $(efi_root)/)
+ifneq ($(BOARD_SFU_UPDATE),)
+	$(hide) $(ACP) $(BOARD_SFU_UPDATE) $(efi_root)/BIOSUPDATE.fv
+	$(hide) $(ACP) $(BOARD_SFU_UPDATE) $(efi_root)/capsules/current.fv
+endif
+	$(hide) echo "Android-IA=\\EFI\\BOOT\\$(efi_default_name)" > $(efi_root)/manifest.txt
+else # BOOTLOADER_SLOT == false
+	$(hide) mkdir -p $(efi_root)/EFI/INTEL/
+endif # BOOTLOADER_SLOT
+	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_os $(efi_root)/boot
+	$(hide) $(ACP) $(PRODUCT_OUT)/efi/installer.efi $(efi_root)/EFI/BOOT/bootx64.efi
+	$(hide) $(ACP) $(PRODUCT_OUT)/efi/installer.efi $(efi_root)/EFI/BOOT/bootia32.efi
+	$(hide) (cd $(efi_root) && zip -qry ../$(notdir $@) .)
+
+bootloader_info := $(intermediates)/bootloader_image_info.txt
+$(bootloader_info):
+	$(hide) mkdir -p $(dir $@)
+	$(hide) echo "size=$(BOARD_BOOTLOADER_PARTITION_SIZE)" > $@
+	$(hide) echo "block_size=$(BOARD_BOOTLOADER_BLOCK_SIZE)" >> $@
+
+ifeq ($(INTEL_PREBUILT),true)
+bootloader:
+	$(hide) $(ACP) $(INTEL_PATH_PREBUILTS)/bootloader.img $(PRODUCT_OUT)
+	@echo "Using prebuilt bootloader image from $(INTEL_PATH_PREBUILTS)"
+else # INTEL_PREBUILT
+define generate_bootloader_var
+rm -f $(BOARD_BOOTLOADER_VAR_IMG)
+
+cnt=`expr $(BOARD_BOOTLOADER_PARTITION_SIZE) / $(BOARD_BOOTLOADER_BLOCK_SIZE) `;\
+dd of=$(BOARD_BOOTLOADER_VAR_IMG) if=/dev/zero bs=$(BOARD_BOOTLOADER_BLOCK_SIZE) count=$${cnt};\
+ls -l $(BOARD_BOOTLOADER_VAR_IMG)
+$(hide)mkdosfs -F32 -n ANDROIDIA $(BOARD_BOOTLOADER_VAR_IMG);
+$(hide)mmd -i $(BOARD_BOOTLOADER_VAR_IMG) ::capsules;
+$(hide)mmd -i $(BOARD_BOOTLOADER_VAR_IMG) ::EFI;
+$(hide)mmd -i $(BOARD_BOOTLOADER_VAR_IMG) ::EFI/BOOT;
+$(hide)mmd -i $(BOARD_BOOTLOADER_VAR_IMG) ::boot;
+$(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/sbl_os ::boot/sbl_os;
+$(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/efi/installer.efi ::EFI/BOOT/bootx64.efi;
+
+cp $(BOARD_BOOTLOADER_VAR_IMG) $(BOARD_BOOTLOADER_DEFAULT_IMG)
+cp $(BOARD_BOOTLOADER_VAR_IMG) $(bootloader_bin)
+echo "Bootloader image successfully generated $(BOARD_BOOTLOADER_VAR_IMG)"
+endef
+
+fastboot_image: fb4sbl-$(TARGET_BUILD_VARIANT)
+
+bootloader: $(BOARD_BOOTLOADER_DIR) kf4sbl-$(TARGET_BUILD_VARIANT)
+	$(call generate_bootloader_var)
+
+ifneq ($(INTEL_PATH_PREBUILTS_OUT),)
+	$(hide) mkdir -p $(INTEL_PATH_PREBUILTS_OUT)
+	$(hide) $(ACP) $(BOARD_BOOTLOADER_DEFAULT_IMG) $(INTEL_PATH_PREBUILTS_OUT)
+endif # INTEL_PATH_PREBUILTS_OUT
+endif # INTEL_PREBUILT
+
+$(BOARD_BOOTLOADER_DEFAULT_IMG): bootloader
+	@echo "Generate default bootloader: $@ finished."
+droidcore: bootloader
+
+INSTALLED_RADIOIMAGE_TARGET += $(bootloader_zip) $(BOARD_BOOTLOADER_DEFAULT_IMG) $(bootloader_info)
+
+$(bootloader_bin): bootloader
+
+{{/fw_sbl}}
+
+
+.PHONY: bootloader
 {{#bootloader_policy}}
 {{#blpolicy_use_efi_var}}
 ifeq ($(TARGET_BOOTLOADER_POLICY),$(filter $(TARGET_BOOTLOADER_POLICY),static external))
@@ -184,9 +284,11 @@ endif
 
 {{#slot-ab}}
 # Used for efi update
+{{^fw_sbl}}
 $(PRODUCT_OUT)/vendor.img: $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi
 $(PRODUCT_OUT)/vendor/firmware/kernelflinger.efi: $(PRODUCT_OUT)/efi/kernelflinger.efi
 	$(ACP) $(PRODUCT_OUT)/efi/kernelflinger.efi $@
+{{/fw_sbl}}
 
 make_bootloader_dir:
 	@mkdir -p $(PRODUCT_OUT)/root/bootloader
