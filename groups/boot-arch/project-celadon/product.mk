@@ -1,4 +1,10 @@
+{{#fw_sbl}}
+TARGET_UEFI_ARCH := i386
+{{/fw_sbl}}
+
+{{^fw_sbl}}
 TARGET_UEFI_ARCH := {{{uefi_arch}}}
+{{/fw_sbl}}
 
 # Android Kernelflinger uses the OpenSSL library to support the
 # bootloader policy
@@ -108,7 +114,12 @@ KERNELFLINGER_OS_SECURE_BOOT := true
 {{/os_secure_boot}}
 
 {{#self_usb_device_mode_protocol}}
+{{#fw_sbl}}
+KERNELFLINGER_SUPPORT_SELF_USB_DEVICE_MODE_PROTOCOL := false
+{{/fw_sbl}}
+{{^fw_sbl}}
 KERNELFLINGER_SUPPORT_SELF_USB_DEVICE_MODE_PROTOCOL := {{self_usb_device_mode_protocol}}
+{{/fw_sbl}}
 {{/self_usb_device_mode_protocol}}
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/persistent
@@ -141,5 +152,34 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 KERNELFLINGER_SUPPORT_KEYBOX_PROVISION := true
 {{/keybox_provision}}
 {{/use_cic}}
+{{#fw_sbl}}
+TARGET_NO_DEVICE_UNLOCK := false
+TARGET_IAFW_ARCH := i386
+
+# Libpayload configuration for ABL
+LIBPAYLOAD_BASE_ADDRESS := 0x12800000
+LIBPAYLOAD_HEAP_SIZE := 125829120
+LIBPAYLOAD_STACK_SIZE := 1048576
+
+LIBEFIWRAPPER_DRIVERS := dw3 lpmemmap lprtc acpi cf9 abl heci lifecycle nvme
+
+CAPSULE_SOURCE := sbl
+
+# Disable Kernelflinger UI support
+KERNELFLINGER_USE_UI := false
+# Support boot from osloader
+KERNELFLINGER_SUPPORT_NON_EFI_BOOT := true
+KERNELFLINGER_SECURITY_PLATFORM := sbl
+# Disable kernelflinger debug print to save boot time
+KERNELFLINGER_DISABLE_DEBUG_PRINT := false
+KERNELFLINGER_DISABLE_EFI_MEMMAP := true
+
+ABL_OS_KERNEL_KEY ?= $(INTEL_PATH_BUILD)/testkeys/xbl_default
+
+{{#use_ec_uart}}
+EFIWRAPPER_USE_EC_UART := true
+{{/use_ec_uart}}
+
+{{/fw_sbl}}
 
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/set_soc_prop.sh:vendor/bin/set_soc_prop.sh
