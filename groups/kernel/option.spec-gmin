@@ -6,6 +6,7 @@ boot_boost = false
 relative_sleepstates = false
 memory_hole = false
 pmsuspend_debug = false
+pmsilent_mode =
 modules_in_bootimg = false
 build_dtbs = false
 use_bcmdhd = true
