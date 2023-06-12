@@ -32,7 +32,7 @@ endif
 {{#minigbm}}
 BOARD_USES_MINIGBM := true
 BOARD_ENABLE_EXPLICIT_SYNC := true
-INTEL_MINIGBM := $(INTEL_PATH_HARDWARE)/external/minigbm-intel
+INTEL_MINIGBM := $(INTEL_PATH_HARDWARE)/external/minigbm
 {{/minigbm}}
 
 {{^minigbm}}

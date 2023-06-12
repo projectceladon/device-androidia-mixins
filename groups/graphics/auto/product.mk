@@ -59,7 +59,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 {{#minigbm}}
 # Mini gbm
 PRODUCT_PACKAGES += \
-    gralloc.$(TARGET_GFX_INTEL)
+    gralloc.$(TARGET_GFX_INTEL) \
+    libminigbm_gralloc_intel
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.gralloc=$(TARGET_GFX_INTEL)
