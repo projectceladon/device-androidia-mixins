@@ -4,7 +4,7 @@ PRODUCT_PACKAGES += \
 	storageproxyd \
 	libinteltrustystorage \
 	libinteltrustystorageinterface \
-	android.hardware.gatekeeper@1.0-service.trusty \
+	android.hardware.gatekeeper-service.trusty \
 	android.hardware.security.keymint-service.trusty \
 	keybox_provisioning \
 	RemoteProvisioner
