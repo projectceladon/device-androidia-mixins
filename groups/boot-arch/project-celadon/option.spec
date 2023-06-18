@@ -46,3 +46,7 @@ watchdog_parameters = false
 mfgos = false
 use_cic = false
 multi_user_support = false
+fw_sbl = false
+x64 = false
+use_ec_uart = false
+ifwi_variant = release
