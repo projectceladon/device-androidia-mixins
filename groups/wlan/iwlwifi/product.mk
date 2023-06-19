@@ -10,7 +10,7 @@ PRODUCT_PACKAGES += \
     TetheringConfigOverlayGsi
 
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service
+    android.hardware.wifi-service
 
 #copy iwlwifi wpa config files
 PRODUCT_COPY_FILES += \
