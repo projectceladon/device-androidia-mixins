@@ -1,0 +1,36 @@
+on early-boot
+    copy /sys/devices/cpu_core/cpus /dev/cpuset/foreground/cpus
+    copy /sys/devices/cpu_atom/cpus /dev/cpuset/background/cpus
+    copy /sys/devices/cpu_atom/cpus /dev/cpuset/system-background/cpus
+    copy /sys/devices/cpu_core/cpus /dev/cpuset/top-app/cpus
+    copy /sys/devices/cpu_core/cpus /dev/cpuset/foreground/boost/cpus
+
+
+on init
+   mkdir /dev/cpuctl/cpu_core
+   mkdir /dev/cpuctl/cpu_atom
+
+   copy /sys/devices/cpu_core/cpus /dev/cpuctl/cpu_core/cpus
+   copy /sys/devices/cpu_atom/cpus /dev/cpuctl/cpu_atom/cpus
+   copy /dev/cpuset/mems /dev/cpuctl/cpu_core/mems
+   copy /dev/cpuset/mems /dev/cpuctl/cpu_atom/mems
+   chown system system /dev/cpuctl/cpu_core
+   chown system system /dev/cpuctl/cpu_atom
+   chown system system /dev/cpuctl/cpu_core/tasks
+   chown system system /dev/cpuctl/cpu_atom/tasks
+   chmod 0664 /dev/cpuctl/cpu_core/tasks
+   chmod 0664 /dev/cpuctl/cpu_atom/tasks
+
+   mkdir /dev/cpuset/cpu_core
+   mkdir /dev/cpuset/cpu_atom
+
+   copy /sys/devices/cpu_core/cpus /dev/cpuset/cpu_core/cpus
+   copy /sys/devices/cpu_atom/cpus /dev/cpuset/cpu_atom/cpus
+   copy /dev/cpuset/mems /dev/cpuset/cpu_core/mems
+   copy /dev/cpuset/mems /dev/cpuset/cpu_atom/mems
+   chown system system /dev/cpuset/cpu_core
+   chown system system /dev/cpuset/cpu_atom
+   chown system system /dev/cpuset/cpu_core/tasks
+   chown system system /dev/cpuset/cpu_atom/tasks
+   chmod 0664 /dev/cpuset/cpu_core/tasks
+   chmod 0664 /dev/cpuset/cpu_atom/tasks
