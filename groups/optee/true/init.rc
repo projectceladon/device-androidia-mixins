@@ -1,0 +1,17 @@
+on post-fs-data
+    mkdir /data/vendor/tee 0770 system system
+
+on post-fs
+    chmod 666 /dev/tee0
+    chmod 666 /dev/teepriv0
+    start tee-supplicantd
+
+service tee-supplicantd /vendor/bin/tee-supplicant
+    class main
+    user root
+    group root
+    disabled
+
+on late-fs
+    exec_start wait_for_keymaster_optee
+
