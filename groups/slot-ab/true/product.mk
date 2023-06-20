@@ -5,9 +5,9 @@ PRODUCT_PACKAGES += \
     libavb \
     update_engine_sideload \
     avbctl \
-    android.hardware.boot@1.2-impl-intel \
-    android.hardware.boot@1.2-impl-intel.recovery \
-    android.hardware.boot@1.2-service \
+    android.hardware.boot-service.intel \
+    android.hardware.boot-service.intel_recovery \
+    android.hardware.boot-service \
     bootctrl.intel \
     bootctrl.intel.recovery
 
