@@ -1,9 +1,9 @@
 on early-boot
-    copy /sys/devices/cpu_core/cpus /dev/cpuset/foreground/cpus
-    copy /sys/devices/cpu_atom/cpus /dev/cpuset/background/cpus
-    copy /sys/devices/cpu_atom/cpus /dev/cpuset/system-background/cpus
-    copy /sys/devices/cpu_core/cpus /dev/cpuset/top-app/cpus
-    copy /sys/devices/cpu_core/cpus /dev/cpuset/foreground/boost/cpus
+   copy /sys/devices/cpu_core/cpus /dev/cpuset/foreground/cpus
+   copy /sys/devices/cpu_atom/cpus /dev/cpuset/background/cpus
+   copy /sys/devices/cpu_atom/cpus /dev/cpuset/system-background/cpus
+   copy /sys/devices/cpu_core/cpus /dev/cpuset/top-app/cpus
+   copy /sys/devices/cpu_core/cpus /dev/cpuset/foreground/boost/cpus
 
 
 on init
