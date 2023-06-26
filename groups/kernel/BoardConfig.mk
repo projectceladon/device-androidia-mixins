@@ -9,15 +9,7 @@ else
   TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{src_path}}}/kernel-headers
 endif
 
-ifneq ($(TARGET_BUILD_VARIANT),user)
-KERNEL_LOGLEVEL ?= {{{loglevel}}}
-else
-KERNEL_LOGLEVEL ?= {{{user_loglevel}}}
-endif
-
-ifeq ($(TARGET_BUILD_VARIANT),user)
-BOARD_KERNEL_CMDLINE += console=tty0
-endif
+KERNEL_LOGLEVEL ?= 7
 
 BOARD_KERNEL_CMDLINE += \
         loglevel=$(KERNEL_LOGLEVEL) \
