@@ -118,7 +118,7 @@
         </interface>
     </hal>
     <!--<kernel target-level="5"/>-->
-    <sepolicy>
+    <!--<sepolicy>
         <version>33.0</version>
-    </sepolicy>
+    </sepolicy>-->
 </manifest>
