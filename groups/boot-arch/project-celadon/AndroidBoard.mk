@@ -168,8 +168,11 @@ BOARD_BOOTLOADER_DEFAULT_IMG := $(PRODUCT_OUT)/bootloader.img
 BOARD_BOOTLOADER_DIR := $(PRODUCT_OUT)/sbl
 BOARD_BOOTLOADER_IASIMAGE := $(BOARD_BOOTLOADER_DIR)/kf4sbl.sbl
 BOARD_BOOTLOADER_VAR_IMG := $(BOARD_BOOTLOADER_DIR)/bootloader.img
-
 BOARD_FLASHFILES += $(BOARD_BOOTLOADER_DEFAULT_IMG):bootloader
+
+PREBUILT_INSTALLER := hardware/intel/kernelflinger/prebuilt/board/RPL_IVI/installer.efi
+PREBUILT_KERNELFLINGER := hardware/intel/kernelflinger/prebuilt/board/RPL_IVI/kernelflinger.efi
+INSTALLER_EFI := $(PRODUCT_OUT)/efi/installer.efi
 
 $(BOARD_BOOTLOADER_DIR):
 	$(hide) rm -rf $(BOARD_BOOTLOADER_DIR)
@@ -184,6 +187,7 @@ $(bootloader_zip): \
 		$(BOARD_EXTRA_EFI_MODULES) \
 		kf4sbl-$(TARGET_BUILD_VARIANT) \
 		$(BOARD_SFU_UPDATE) \
+		$(INSTALLER_EFI) \
 		| $(ACP) \
 
 	$(hide) rm -rf $(efi_root)
@@ -203,8 +207,8 @@ else # BOOTLOADER_SLOT == false
 	$(hide) mkdir -p $(efi_root)/EFI/INTEL/
 endif # BOOTLOADER_SLOT
 	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_os $(efi_root)/boot
-	$(hide) $(ACP) $(PRODUCT_OUT)/efi/installer.efi $(efi_root)/EFI/BOOT/bootx64.efi
-	$(hide) $(ACP) $(PRODUCT_OUT)/efi/installer.efi $(efi_root)/EFI/BOOT/bootia32.efi
+	$(hide) $(ACP) $(TOP)/$(PREBUILT_KERNELFLINGER) $(efi_root)/EFI/BOOT/bootx64.efi
+	$(hide) $(ACP) $(TOP)/$(PREBUILT_KERNELFLINGER) $(efi_root)/EFI/BOOT/bootia32.efi
 	$(hide) (cd $(efi_root) && zip -qry ../$(notdir $@) .)
 
 bootloader_info := $(intermediates)/bootloader_image_info.txt
@@ -218,9 +222,9 @@ bootloader:
 	$(hide) $(ACP) $(INTEL_PATH_PREBUILTS)/bootloader.img $(PRODUCT_OUT)
 	@echo "Using prebuilt bootloader image from $(INTEL_PATH_PREBUILTS)"
 else # INTEL_PREBUILT
+
 define generate_bootloader_var
 rm -f $(BOARD_BOOTLOADER_VAR_IMG)
-
 cnt=`expr $(BOARD_BOOTLOADER_PARTITION_SIZE) / $(BOARD_BOOTLOADER_BLOCK_SIZE) `;\
 dd of=$(BOARD_BOOTLOADER_VAR_IMG) if=/dev/zero bs=$(BOARD_BOOTLOADER_BLOCK_SIZE) count=$${cnt};\
 ls -l $(BOARD_BOOTLOADER_VAR_IMG)
@@ -230,8 +234,7 @@ $(hide)mmd -i $(BOARD_BOOTLOADER_VAR_IMG) ::EFI;
 $(hide)mmd -i $(BOARD_BOOTLOADER_VAR_IMG) ::EFI/BOOT;
 $(hide)mmd -i $(BOARD_BOOTLOADER_VAR_IMG) ::boot;
 $(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/sbl_os ::boot/sbl_os;
-$(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/efi/installer.efi ::EFI/BOOT/bootx64.efi;
-
+$(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(TOP)/$(PREBUILT_KERNELFLINGER) ::EFI/BOOT/bootx64.efi;
 cp $(BOARD_BOOTLOADER_VAR_IMG) $(BOARD_BOOTLOADER_DEFAULT_IMG)
 cp $(BOARD_BOOTLOADER_VAR_IMG) $(bootloader_bin)
 echo "Bootloader image successfully generated $(BOARD_BOOTLOADER_VAR_IMG)"
@@ -255,6 +258,11 @@ droidcore: bootloader
 INSTALLED_RADIOIMAGE_TARGET += $(bootloader_zip) $(BOARD_BOOTLOADER_DEFAULT_IMG) $(bootloader_info)
 
 $(bootloader_bin): bootloader
+
+$(INSTALLER_EFI):
+	@echo "Using prebuild installer image for SBL"
+	mkdir -p $(PRODUCT_OUT)/efi/
+	$(ACP) -r $(TOP)/$(PREBUILT_INSTALLER) $@
 
 {{/fw_sbl}}
 
