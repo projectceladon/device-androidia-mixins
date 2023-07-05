@@ -1,0 +1,8 @@
+update_wlan() {
+
+GUEST_AAF_CONFIG="/mnt/share/mixins.spec"
+
+value=`grep -i wifi_iwl7000 $GUEST_AAF_CONFIG | cut -d ':' -f2`
+setprop vendor.intel.wifi_iwl7000 $value
+}
+update_wlan
