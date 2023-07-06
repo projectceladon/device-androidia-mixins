@@ -116,6 +116,7 @@ memtrack
 mfgos
 midi
 mixin-check
+multi-passenger
 navigationbar
 net
 neuralnetworks
