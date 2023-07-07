@@ -15,7 +15,9 @@ PRODUCT_PACKAGES += \
     libGLESv1_CM_mesa \
     libGLESv2_mesa \
     libgallium_dri \
-    libglapi
+    libglapi \
+    libpps-producer \
+    pps-producer
 #Vulkan driver since mesa 22.0.3
 PRODUCT_PACKAGES += \
     vulkan.intel
