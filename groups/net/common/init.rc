@@ -5,3 +5,10 @@ on boot
     write /proc/sys/net/core/rmem_max 6291456
     write /proc/sys/net/core/wmem_max 4194304
 
+on early-boot
+{{#stmicro_mac}}
+    insmod /vendor/lib/modules/phylink.ko
+    insmod /vendor/lib/modules/pcs_xpcs.ko
+    insmod /vendor/lib/modules/stmmac.ko
+    insmod /vendor/lib/modules/dwmac_intel.ko
+{{/stmicro_mac}}
