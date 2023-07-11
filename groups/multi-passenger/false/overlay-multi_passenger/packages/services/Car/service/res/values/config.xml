@@ -24,6 +24,6 @@
     <!--  Configuration to enable usage of dynamic audio routing. If this is set to false,
           dynamic audio routing is disabled and audio works in legacy mode. It may be useful
           during initial development where audio hal does not support bus based addressing yet. -->
-    <bool name="audioUseDynamicRouting">false</bool>
+    <bool name="audioUseDynamicRouting">true</bool>
 </resources>
 
