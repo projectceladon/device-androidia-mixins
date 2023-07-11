@@ -41,3 +41,8 @@ on post-fs
     insmod /vendor/lib/modules/asix.ko
     insmod /vendor/lib/modules/r8152.ko
     insmod /vendor/lib/modules/r8169.ko
+
+    insmod /vendor/lib/modules/tpm.ko
+    insmod /vendor/lib/modules/tpm_tis_core.ko
+    insmod /vendor/lib/modules/tpm_crb.ko
+    insmod /vendor/lib/modules/tpm_tis.ko
