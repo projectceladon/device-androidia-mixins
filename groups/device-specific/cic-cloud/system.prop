@@ -16,3 +16,4 @@ persist.sys.disable_rescue=true
 ro.product.first_api_level=30
 
 ro.logd.kernel=false
+debug.stagefright.c2-poolmask=0x80000
