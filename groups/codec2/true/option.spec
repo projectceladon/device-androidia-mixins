@@ -10,3 +10,4 @@ hw_ve_vp8 = false
 hw_ve_vp9 = false
 hw_ve_h265 = true
 hw_ve_h264 = true
+enable_hw=true
