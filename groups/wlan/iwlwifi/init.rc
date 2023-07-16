@@ -11,6 +11,10 @@ on early-boot
 {{^iwl_7000_drv}}
     insmod /vendor/lib/modules/mac80211.ko
 {{/iwl_7000_drv}}
+{{^iwl_7000_drv}}
+    insmod /vendor/lib/modules/mei.ko
+    insmod /vendor/lib/modules/iwlmei.ko
+{{/iwl_7000_drv}}
 {{#iwl_7000_drv}}
     insmod /vendor/lib/modules/iwl7000_mac80211.ko
 {{/iwl_7000_drv}}
