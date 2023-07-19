@@ -22,10 +22,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
 
-# sdcard
-PRODUCT_COPY_FILES += \
-    out/target/product/$(TARGET_PRODUCT)/system/bin/sdcard-fuse:system/bin/sdcard
-
 # disable ununsed service
 PRODUCT_PROPERTY_OVERRIDES += config.disable_systemtextclassifier=true
 PRODUCT_PROPERTY_OVERRIDES += config.disable_otadexopt=true
@@ -77,9 +73,6 @@ PRODUCT_PACKAGES += \
 # after moving to /vendor/lib/
 PRODUCT_PACKAGES += \
     vndk-sp
-
-PRODUCT_PACKAGES += \
-    sdcard-fuse
 
 # deploy prebuilt apps
 PRODUCT_PACKAGES += \
