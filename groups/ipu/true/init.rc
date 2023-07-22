@@ -6,4 +6,7 @@ on post-fs
     insmod /vendor/lib/modules/intel-ipu6.ko
     insmod /vendor/lib/modules/ti960.ko
     insmod /vendor/lib/modules/isx031.ko
+	insmod /vendor/lib/modules/max9295a_dummy.ko
+	insmod /vendor/lib/modules/max96717f_dummy.ko
+	insmod /vendor/lib/modules/max96722.ko
     insmod /vendor/lib/modules/intel-ipu6-isys.ko
