@@ -37,7 +37,9 @@ PRODUCT_PRODUCT_PROPERTIES += persist.adb.tcp.port=5555
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.crypto.volume.metadata.method=dm-default-key \
     ro.crypto.dm_default_key.options_format.version=2 \
-    ro.crypto.volume.options=::v2
+    ro.crypto.volume.options=::v2 \
+    ro.product.brand=SAMSUNG \
+    ro.product.board=SM-G988N
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_admin.xml:vendor/etc/permissions/android.software.device_admin.xml \
