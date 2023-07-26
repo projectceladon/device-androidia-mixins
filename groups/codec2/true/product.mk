@@ -7,7 +7,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_c2_adl.xml:vendor/etc/media_codecs_performance_adl.xml \
     $(LOCAL_PATH)/{{_extra_dir}}/mfx_c2_store.conf:vendor/etc/mfx_c2_store.conf \
     $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_c2.xml:vendor/etc/media_codecs_c2.xml \
-    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_intel_c2_video.xml:vendor/etc/media_codecs_intel_c2_video.xml
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_intel_c2_video.xml:vendor/etc/media_codecs_intel_c2_video.xml \
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_c2_{{gpu}}.xml:vendor/etc/media_codecs.xml
 
 PRODUCT_PACKAGES += \
     libmfx_c2_components_hw \
