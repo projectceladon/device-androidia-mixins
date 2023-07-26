@@ -6,6 +6,7 @@ mfx_c2_store_gen13.conf: "MSDK video codec2.0 configuration for meteorlake and D
 media_codecs.xml: "Specific configuration for audio and video codec2.0"
 media_codecs_gen13.xml: "Specific codec2.0 configuration for Intel meteorlake and DG2"
 media_codecs_intel_c2_video.xml: "Specific configuration for intel video codec2.0"
+media_codecs_c2_gen12.xml: "Specific configuration for intel gen12 codec2.0"
 media_codecs_intel_c2_video_gen13.xml: "Specific intel video codec2.0 configuration for meteorlake and DG2"
 media_profiles_1080p.xml: "Media profile file with 1080p support"
 media_profiles_caas.xml: "Media profile file with 1080p support"
