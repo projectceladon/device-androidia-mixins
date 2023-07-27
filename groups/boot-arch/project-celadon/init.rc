@@ -26,8 +26,6 @@ on early-fs
     start vold
 
 on late-fs
-    # Wait for keymaster
-    exec_start wait_for_keymaster
     # Mount latemount partitions which have not been mounted with "on fs"
     {{#mountfstab-flag}}
 {{#treble}}
