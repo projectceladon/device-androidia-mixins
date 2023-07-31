@@ -97,8 +97,8 @@ and updated to vendor media codecs.
 {{/hw_vd_mp2}}
 
 {{#hw_vd_av1}}
-        <MediaCodec name="c2.intel.av1.decoder" type="video/av01">
-            <Limit name="size" min="64x64" max="4096x4096" />
+	<MediaCodec name="c2.intel.av1.decoder" type="video/av01">
+            <Limit name="size" min="64x64" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
             <Limit name="block-count" range="1-16384" />
