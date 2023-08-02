@@ -71,7 +71,9 @@ endif
 BOARD_KERNEL_CMDLINE += \
       clearcpuid=517 \
       mce=no_lmce \
-      mce=ignore_ce
+      mce=ignore_ce \
+      kmemleak=on \
+      kfence.mode=1
 
 BOARD_SEPOLICY_M4DEFS += module_kernel=true
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/kernel
