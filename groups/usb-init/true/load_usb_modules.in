@@ -6,4 +6,4 @@ load_usb_modules() {
     insmod $modules/dwc3-pci.ko
     setprop sys.usb.config $(getprop sys.usb.config)
 }
-load_usb_modules&
+load_usb_modules
