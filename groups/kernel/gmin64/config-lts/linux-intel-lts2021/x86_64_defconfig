@@ -7585,3 +7585,10 @@ CONFIG_ARCH_USE_MEMTEST=y
 # CONFIG_MEMTEST is not set
 # end of Kernel Testing and Coverage
 # end of Kernel hacking
+#
+# socwatch driver
+#
+# CONFIG_INTEL_SOCPERF is not set
+# CONFIG_INTEL_SOCWATCH is not set
+# end of socwatch driver
+#
