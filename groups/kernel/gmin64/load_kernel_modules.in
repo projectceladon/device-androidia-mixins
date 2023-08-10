@@ -3,3 +3,11 @@ load_kernel_modules() {
     insmod $modules/brd.ko rd_nr=16 rd_size=16384
 }
 load_kernel_modules
+
+{{#vbox_mods_version}}
+load_vbox_modules() {
+    insmod $modules/vboxguest.ko
+    insmod $modules/vboxsf.ko
+}
+load_vbox_modules
+{{/vbox_mods_version}}
