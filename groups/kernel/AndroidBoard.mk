@@ -298,6 +298,22 @@ endef
 $(foreach v,$(BOARD_DTB_VARIANTS),$(eval $(call board_dtb_per_variant,$(v))))
 {{/build_dtbs}}
 
+{{#vbox_mods_version}}
+VBOX_ADDITIONS_PATH := ../../vendor/intel/external/VBoxGuestAdditions
+VBOX_MODS_SRC_PATH := $(VBOX_ADDITIONS_PATH)/{{{vbox_mods_version}}}
+VBOX_MODS_OBJ_PATH := $(LOCAL_KERNEL_PATH)/$(VBOX_ADDITIONS_PATH)/{{{vbox_mods_version}}}
+VBOX_MODS_TARGET := $(LOCAL_KERNEL_PATH)/build_VBoxGuestAdditions_{{{vbox_mods_version}}}
+
+$(VBOX_MODS_TARGET): $(LOCAL_KERNEL)
+	@echo BUILDING $(VBOX_MODS_SRC_PATH)
+	$(hide) mkdir -p $(VBOX_MODS_OBJ_PATH)
+	$(hide) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_OPTIONS) M=$(VBOX_MODS_SRC_PATH) V=1 modules
+	$(hide) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_OPTIONS) M=$(VBOX_MODS_SRC_PATH) INSTALL_MOD_STRIP=1 modules_install
+	@touch $@
+
+$(LOCAL_KERNEL_PATH)/copy_modules: $(VBOX_MODS_TARGET)
+{{/vbox_mods_version}}
+
 # Add a kernel target, so "make kernel" will build the kernel
 .PHONY: kernel
 kernel: $(LOCAL_KERNEL_PATH)/copy_modules $(PRODUCT_OUT)/kernel
