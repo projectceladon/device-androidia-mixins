@@ -16,13 +16,15 @@ case "$(cat /proc/fb)" in
                         setprop vendor.egl.set mesa
                         setprop vendor.vulkan.set intel
                 else
+                        echo "/sys/kernel/debug/dri/0/virtio-gpu-features:"
+                        cat /sys/kernel/debug/dri/0/virtio-gpu-features
                         if [ "$(cat /sys/kernel/debug/dri/0/virtio-gpu-features |grep virgl |awk '{print $3}')" = "no" ];then
                                 echo "angle rendering"
                                 setprop vendor.egl.set angle
                                 setprop vendor.vulkan.set pastel
                         else
                                 echo "virtio rendering"
-                                setprop vendor.egl.set mesa
+                                setprop vendor.egl.set angle
                                 setprop vendor.vulkan.set pastel
                         fi
                 fi
