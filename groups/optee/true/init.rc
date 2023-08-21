@@ -1,0 +1,17 @@
+on post-fs
+    chmod 666 /dev/tee0
+    chmod 666 /dev/teepriv0
+
+    chown system system /persist
+    chmod 0771 /persist
+    restorecon /persist
+    mkdir /persist/tee 0770 shell shell
+    restorecon_recursive /persist/tee
+
+    start tee-supplicantd
+
+service tee-supplicantd /vendor/bin/tee-supplicant
+    class main
+    user root
+    group root
+    disabled
