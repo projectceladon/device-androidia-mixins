@@ -12,16 +12,11 @@ multidroid: droid
 	$(hide) cp -r $(TOP)/vendor/intel/cic/host/k8s/client/AIC-release-v0.38-c1f590d2.apk $(PRODUCT_OUT)
 	$(hide) chmod -R g-w $(PRODUCT_OUT)/docker/update
 	$(hide) cp -r $(TOP)/vendor/intel/cic/host/k8s/image/manage-android $(PRODUCT_OUT)/docker
-	$(hide) cp -r $(TOP)/vendor/intel/cic/host/k8s/image/streamer $(PRODUCT_OUT)/docker
 	$(hide) cp -r $(TOP)/vendor/intel/external/project-celadon/cloud-streaming $(PRODUCT_OUT)/docker/ga
 	$(hide) cp $(TOP)/vendor/intel/cic/host/docker/scripts/aic $(PRODUCT_OUT)
 	$(hide) cp $(TOP)/vendor/intel/cic/host/docker/scripts/aic-app $(PRODUCT_OUT)
 	$(hide) cp $(HOST_OUT_EXECUTABLES)/aic-build $(PRODUCT_OUT)
-ifeq ($(shell which docker-init),)
-	$(hide) cp  vendor/intel/tools/aic/internal_tools/docker/docker-init $(PRODUCT_OUT)/docker/aic-manager/
-else
-	$(hide) cp `which docker-init` $(PRODUCT_OUT)/docker/aic-manager/
-endif
+	$(hide) cp /usr/libexec/docker/docker-init $(PRODUCT_OUT)/docker/aic-manager/
 
 ifneq ($(TARGET_LOOP_MOUNT_SYSTEM_IMAGES), true)
 	$(hide) cp -r $(PRODUCT_OUT)/system $(PRODUCT_OUT)/docker/android/root
@@ -91,9 +86,7 @@ esc: cic
 	$(hide) cp -r $(PRODUCT_OUT)/aic $(PRODUCT_OUT)/aic-app $(PRODUCT_OUT)/AIC-release-v0.38-c1f590d2.apk $(PRODUCT_OUT)/aic-manager.tar.gz $(PRODUCT_OUT)/android.tar.gz $(PRODUCT_OUT)/cpuAllocate $(PRODUCT_OUT)/esc-release/image/.
 	$(hide) cp -r $(PRODUCT_OUT)/docker/update/pkg.d/106-dg2-drivers/root $(PRODUCT_OUT)/esc-release/image/update/.
 	$(hide) cp -r $(PRODUCT_OUT)/docker/update/Dockerfile $(PRODUCT_OUT)/docker/update/core $(PRODUCT_OUT)/docker/update/default.prop $(PRODUCT_OUT)/docker/update/env-var $(PRODUCT_OUT)/docker/update/post-update $(PRODUCT_OUT)/docker/update/pre-update $(PRODUCT_OUT)/docker/update/system.prop $(PRODUCT_OUT)/docker/update/to-del.list $(PRODUCT_OUT)/docker/update/to-mod.list $(PRODUCT_OUT)/esc-release/image/update/.
-	$(hide) cat $(PRODUCT_OUT)/docker/update/pkg.d/700-config-for-test/system.prop >> $(PRODUCT_OUT)/esc-release/image/update/system.prop
 	$(hide) cat $(PRODUCT_OUT)/docker/update/pkg.d/106-dg2-drivers/system.prop >> $(PRODUCT_OUT)/esc-release/image/update/system.prop
-	$(hide) cat $(PRODUCT_OUT)/docker/update/pkg.d/104-esc-internal-config/system.prop >> $(PRODUCT_OUT)/esc-release/image/update/system.prop
 	$(hide) tar cvzf $(PRODUCT_OUT)/esc-release/$(TARGET_AIC_FILE_NAME) -C $(PRODUCT_OUT)/esc-release/image aic aic-app AIC-release-v0.38-c1f590d2.apk aic-manager.tar.gz android.tar.gz cpuAllocate update
 	$(hide) tar cvzf $(PRODUCT_OUT)/$(TARGET_ESC_FILE_NAME) -C $(PRODUCT_OUT)/esc-release release $(TARGET_AIC_FILE_NAME)
 
