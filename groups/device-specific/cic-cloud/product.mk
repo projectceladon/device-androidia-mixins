@@ -52,12 +52,7 @@ PRODUCT_HOST_PACKAGES += \
     aic-build \
     aic-publish \
     bios.bin \
-    vgabios-cirrus.bin \
-    docker \
-    cpio \
-    container-diff \
-    dock-delta \
-    dock-extract
+    vgabios-cirrus.bin
 
 # Device modules
 PRODUCT_PACKAGES += \
