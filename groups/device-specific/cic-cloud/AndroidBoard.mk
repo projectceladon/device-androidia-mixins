@@ -58,9 +58,9 @@ aic: .KATI_NINJA_POOL := console
 aic: multidroid
 	@echo Make AIC docker images...
 ifneq ($(TARGET_LOOP_MOUNT_SYSTEM_IMAGES), true)
-	DOCKER_HOST=$(DOCKER_HOST) $(HOST_OUT_EXECUTABLES)/aic-build -b $(FILE_NAME_TAG)
+	DOCKER_HOST=$(DOCKER_HOST) $(HOST_OUT_EXECUTABLES)/aic-build android -b $(FILE_NAME_TAG)
 else
-	DOCKER_HOST=$(DOCKER_HOST) BUILD_VARIANT=loop_mount $(HOST_OUT_EXECUTABLES)/aic-build -b $(FILE_NAME_TAG)
+	DOCKER_HOST=$(DOCKER_HOST) BUILD_VARIANT=loop_mount $(HOST_OUT_EXECUTABLES)/aic-build android -b $(FILE_NAME_TAG)
 endif
 
 ifneq ($(TARGET_BUILD_AIC_MANAGER_DOCKER), true)
