@@ -3872,6 +3872,10 @@ CONFIG_V4L_PLATFORM_DRIVERS=y
 # CONFIG_VIDEO_ASPEED is not set
 # CONFIG_V4L_MEM2MEM_DRIVERS is not set
 # CONFIG_V4L_TEST_DRIVERS is not set
+#
+# VirtIO media platform drivers
+#
+CONFIG_VIDEO_VIRTIO_CAMERA=m
 # end of Media drivers
 
 #
