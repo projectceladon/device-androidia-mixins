@@ -23,7 +23,7 @@ case "$(cat /proc/fb)" in
                         else
                                 echo "virtio rendering"
                                 setprop vendor.egl.set mesa
-                                setprop vendor.vulkan.set intel
+                                setprop vendor.vulkan.set pastel
                         fi
                 fi
                 ;;
