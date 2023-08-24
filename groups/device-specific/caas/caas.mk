@@ -66,6 +66,10 @@ PRODUCT_AAPT_CONFIG := normal large mdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 PRODUCT_VENDOR_PROPERTIES += \
+    graphics.gpu.profiler.support=true
+
+
+PRODUCT_VENDOR_PROPERTIES += \
     ro.soc.manufacturer=$(PRODUCT_MANUFACTURER)
 
 PRODUCT_RESTRICT_VENDOR_FILES := false
