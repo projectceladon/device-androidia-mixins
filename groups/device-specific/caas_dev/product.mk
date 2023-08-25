@@ -26,8 +26,8 @@ PRODUCT_PACKAGES +=  \
                     android.hardware.usb-service.example \
                     camera.device@1.0-impl \
                     android.hardware.camera.provider@2.4-impl \
-                    android.hardware.graphics.mapper@4.0-impl.minigbm \
-                    android.hardware.graphics.allocator@4.0-service.minigbm \
+                    android.hardware.graphics.mapper@4.0-impl.minigbm_intel \
+                    android.hardware.graphics.allocator@4.0-service.minigbm_intel \
                     android.hardware.renderscript@1.0-impl \
                     android.hardware.graphics.composer@2.4-service \
                     android.hardware.identity \

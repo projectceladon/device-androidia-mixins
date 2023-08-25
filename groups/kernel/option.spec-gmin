@@ -30,4 +30,6 @@ lts2021_chromium_src_path =
 lts2021_chromium_cfg_path =
 linux_intel_lts2021_src_path =
 linux_intel_lts2021_cfg_path =
+lts2022_chromium_src_path =
+lts2022_chromium_cfg_path =
 more_modules = false
