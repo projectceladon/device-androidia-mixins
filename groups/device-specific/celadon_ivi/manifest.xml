@@ -157,6 +157,6 @@
     </hal>
     <kernel target-level="5"/>
     <sepolicy>
-        <version>31.0</version>
+        <version>32.0</version>
     </sepolicy>
 </manifest>

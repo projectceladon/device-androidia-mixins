@@ -199,6 +199,6 @@
         </interface>
     </hal>
     <vendor-ndk>
-        <version>31</version>
+        <version>32</version>
     </vendor-ndk>
 </manifest>
