@@ -1,0 +1,4 @@
+ACTION=="add|change", KERNEL=="event[0-9]*", \
+   ENV{ID_VENDOR_ID}=="03f0", \
+   ENV{ID_MODEL_ID}=="0324", \
+   ENV{LIBINPUT_IGNORE_DEVICE}="1"

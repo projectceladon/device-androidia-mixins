@@ -33,6 +33,13 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <hal format="aidl">
+       <name>android.hardware.automotive.audiocontrol</name>
+       <interface>
+           <name>IAudioControl</name>
+           <instance>default</instance>
+       </interface>
+    </hal>
     <hal format="hidl">
         <name>android.hardware.health</name>
         <transport>hwbinder</transport>

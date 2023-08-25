@@ -1,4 +1,5 @@
 on fs
+    mkdir 0776 /mnt/share_data system system
     # ro.boot.hardware = TARGET_PRODUCT (set in kernel command line
     # as androidboot.hardware). Mount all the filesystems as specified
     # in the fstab.
