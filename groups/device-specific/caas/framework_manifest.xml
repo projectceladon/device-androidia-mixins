@@ -103,15 +103,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.graphics.composer</name>
-        <transport>hwbinder</transport>
-        <version>2.4</version>
-        <interface>
-            <name>IComposer</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.media.omx</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -160,7 +151,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <!--vendor-ndk>
-        <version>33</version>
-    </vendor-ndk-->
+    <vendor-ndk>
+        <version>34</version>
+    </vendor-ndk>
 </manifest>
