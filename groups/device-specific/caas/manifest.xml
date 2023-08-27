@@ -1,5 +1,5 @@
 {{^ota-update}}
-<manifest version="1.0" type="device" target-level="7">
+<manifest version="1.0" type="device" target-level="8">
 {{/ota-update}}
 {{#ota-update}}
 <manifest version="1.0" type="device">
@@ -95,15 +95,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.graphics.composer</name>
-        <transport>hwbinder</transport>
-        <version>2.4</version>
-        <interface>
-            <name>IComposer</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
        <name>android.hardware.bluetooth</name>
        <transport>hwbinder</transport>
        <version>1.0</version>
@@ -168,7 +159,4 @@
         </interface>
     </hal>
     <!--<kernel target-level="5"/>-->
-    <sepolicy>
-        <version>33.0</version>
-    </sepolicy>
 </manifest>
