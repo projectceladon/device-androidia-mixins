@@ -39,7 +39,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <!--vendor-ndk>
-        <version>33</version>
-    </vendor-ndk-->
+    <vendor-ndk>
+        <version>34</version>
+    </vendor-ndk>
 </compatibility-matrix>
