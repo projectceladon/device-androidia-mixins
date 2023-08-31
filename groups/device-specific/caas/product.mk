@@ -32,6 +32,7 @@ PRODUCT_PACKAGES +=  \
                     android.hardware.identity \
                     android.hardware.identity-service.example \
                     android.hardware.graphics.composer3-service.intel \
+		    android.hardware.media.omx@1.0-service
 
 
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
