@@ -16,6 +16,7 @@
 
 <ExternalCamera>
     <Provider>
+        <CameraIdOffset>0</CameraIdOffset>
         <ignore> <!-- Internal video devices to be ignored by external camera HAL -->
         </ignore>
     </Provider>
