@@ -10,7 +10,6 @@ on boot
     chown system system /sys/devices/system/cpu/intel_pstate/no_turbo
     chown system system /sys/class/powercap/intel-rapl:0/enabled
     chown system system /sys/class/powercap/intel-rapl:0/constraint_0_power_limit_uw
-    chown system system /sys/class/thermal/cooling_device0/cur_state
     chown system system /sys/class/dmi/id/product_uuid
     chown system system /sys/class/dmi/id/product_name
     chown system system /system/vendor/etc/
