@@ -99,7 +99,7 @@ on early-boot
     insmod /vendor/lib/modules/snd-hda-ext-core.ko
     insmod /vendor/lib/modules/snd-soc-hda-codec.ko
     insmod /vendor/lib/modules/snd-soc-avs-hdaudio.ko
-    insmod /vendor/lib/modules/snd-soc-avs.ko ignore_fw_version=1
+    insmod /vendor/lib/modules/snd-soc-avs.ko dyndbg==pmf i2s_test=1 ignore_fw_version=1
     insmod /vendor/lib/modules/snd-soc-avs-probe.ko
     insmod /vendor/lib/modules/snd-soc-hdac-hda.ko
     insmod /vendor/lib/modules/snd-soc-hdac-hdmi.ko
