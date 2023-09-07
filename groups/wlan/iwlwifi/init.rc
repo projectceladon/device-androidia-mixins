@@ -52,3 +52,12 @@ service iprenew_p2p /system/bin/dhcpcd -n
     group wifi system dhcp inet
     disabled
     oneshot
+
+service apcreate /system/bin/iw phy phy0 interface add wlan1 type __ap
+    user root
+    group root shell
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1
+    start apcreate
