@@ -181,3 +181,10 @@ EFIWRAPPER_USE_EC_UART := true
 {{/fw_sbl}}
 
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/set_soc_prop.sh:vendor/bin/set_soc_prop.sh
+
+{{#acrn}}
+ACRN_HV := true
+{{/acrn}}
+{{^acrn}}
+ACRN_HV := false
+{{/acrn}}

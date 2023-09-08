@@ -206,8 +206,13 @@ endif
 else # BOOTLOADER_SLOT == false
 	$(hide) mkdir -p $(efi_root)/EFI/INTEL/
 endif # BOOTLOADER_SLOT
-	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_os $(efi_root)/boot
-	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_fb $(efi_root)/boot
+{{#acrn}}
+	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_acrn $(efi_root)/boot/sbl_os
+	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_bm $(efi_root)/boot/sbl_bm
+{{/acrn}}
+{{^acrn}}
+	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_bm $(efi_root)/boot/sbl_os
+{{/acrn}}
 	$(hide) $(ACP) $(TOP)/$(PREBUILT_KERNELFLINGER) $(efi_root)/EFI/BOOT/bootx64.efi
 	$(hide) $(ACP) $(TOP)/$(PREBUILT_KERNELFLINGER) $(efi_root)/EFI/BOOT/bootia32.efi
 	$(hide) (cd $(efi_root) && zip -qry ../$(notdir $@) .)
@@ -234,8 +239,13 @@ $(hide)mmd -i $(BOARD_BOOTLOADER_VAR_IMG) ::capsules;
 $(hide)mmd -i $(BOARD_BOOTLOADER_VAR_IMG) ::EFI;
 $(hide)mmd -i $(BOARD_BOOTLOADER_VAR_IMG) ::EFI/BOOT;
 $(hide)mmd -i $(BOARD_BOOTLOADER_VAR_IMG) ::boot;
-$(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/sbl_os ::boot/sbl_os;
-$(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/sbl_fb ::boot/sbl_fb;
+{{#acrn}}
+$(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/sbl_acrn ::boot/sbl_os;
+$(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/sbl_bm ::boot/sbl_bm;
+{{/acrn}}
+{{^acrn}}
+$(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/sbl_bm ::boot/sbl_os;
+{{/acrn}}
 $(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(TOP)/$(PREBUILT_KERNELFLINGER) ::EFI/BOOT/bootx64.efi;
 cp $(BOARD_BOOTLOADER_VAR_IMG) $(BOARD_BOOTLOADER_DEFAULT_IMG)
 cp $(BOARD_BOOTLOADER_VAR_IMG) $(bootloader_bin)
