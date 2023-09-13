@@ -1230,7 +1230,7 @@ class Updater(FileHelper):
         if len(files):
             for f in files:
                 fn = os.path.join(path, f)
-                if os.path.isdir(fn):
+                if os.path.isdir(fn) and ".git" not in fn:
                     self._delete_folder_recursively_if_empty(fn)
         # if folder empty, delete it
         files = os.listdir(path)
@@ -1244,7 +1244,7 @@ class Updater(FileHelper):
         local_file_tree = set()
         for root, dirs, files in os.walk(parser.product_dir):
             # Exclude mixins folder
-            if files and "mixins" not in root:
+            if files and "mixins" not in root and ".git" not in root:
                 for f in files:
                     fn = os.path.join(root, f)
                     local_file_tree.add(fn)
