@@ -5,6 +5,23 @@ service docker_manager /vendor/bin/docker_manager
     setenv XDG_RUNTIME_DIR /data/vendor/docker/tmp
     disabled
 
+service android_audioplayback_service /system/bin/android_audioplayback_service
+    class core
+    user system
+    group system
+    disabled
+
+service android_audiorecord_service /system/bin/android_audiorecord_service
+    class core
+    user system
+    group system
+    disabled
+
 on property:sys.boot_completed=1
     start docker_manager
 
+on property:sys.boot_completed=1
+    start android_audioplayback_service
+
+on property:sys.boot_completed=1
+    start android_audiorecord_service

@@ -26,7 +26,11 @@ PRODUCT_PACKAGES += sumClientInAndroid \
     liblic-genshin \
     liblic-steam \
     liblic-proxy \
-    ContainerManager
+    ContainerManager \
+    libstreamingbindersdk \
+    libaaudiosdk \
+    android_audioplayback_service \
+    android_audiorecord_service
 
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.nn.hal.grpc_socket_path=/data/vendor/neuralnetworks/ai.socket \
