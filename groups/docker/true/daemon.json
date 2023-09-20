@@ -1,0 +1,12 @@
+{
+    "data-root": "/data/vendor/docker/lib/docker",
+    "exec-root": "/data/vendor/docker/run/docker",
+    "pidfile": "/data/vendor/docker/run/docker.pid",
+    "hosts": [
+        "unix:///data/vendor/docker/run/docker.sock"
+    ],
+    "storage-driver": "overlay2",
+   	"insecure-registries": [
+		"localhost:5000"
+	]
+}

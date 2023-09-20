@@ -1,0 +1,10 @@
+service docker_manager /vendor/bin/docker_manager
+    group root shell
+    user root
+    class main
+    setenv XDG_RUNTIME_DIR /data/vendor/docker/tmp
+    disabled
+
+on property:sys.boot_completed=1
+    start docker_manager
+
