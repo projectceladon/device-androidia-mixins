@@ -11,3 +11,23 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/99-ignore-mouse.rules:/vendor/etc/docker/config/99-ignore-mouse.rules \
     $(LOCAL_PATH)/{{_extra_dir}}/config.toml:/vendor/etc/docker/etc/containerd/config.toml \
     $(LOCAL_PATH)/{{_extra_dir}}/daemon.json:/vendor/etc/docker/etc/docker/daemon.json
+
+PRODUCT_PACKAGES += sumClientInAndroid \
+    multiplyServiceInAndroid \
+    multiplyClientInAndroid \
+    subtractServiceApplicationInAndroid \
+    SharedBufferServiceInAndroid \
+    SharedBufferClientInAndroid \
+    Steam \
+    Genshin \
+    Epic \
+    LIC \
+    liblic-epic \
+    liblic-genshin \
+    liblic-steam \
+    liblic-proxy \
+    ContainerManager
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.nn.hal.grpc_socket_path=/data/vendor/neuralnetworks/ai.socket \
+    persist.vendor.lic.device=/dev/dri/renderD129
