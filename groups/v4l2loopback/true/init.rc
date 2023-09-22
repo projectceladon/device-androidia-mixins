@@ -1,0 +1,2 @@
+on post-fs
+    insmod /vendor/lib/modules/v4l2loopback.ko devices=1 video_nr=50 card_label="LicCam" exclusive_caps=1 broadcast=1 nlgroup=22

@@ -214,7 +214,7 @@ $(LOCAL_KERNEL_PATH)/copy_modules: $(LOCAL_KERNEL)
 {{#camera_cos_hack}}
 ifeq ($(KERNEL_MODULES_ROOT),vendor/lib/modules)
 	$(hide) mkdir -p $(PRODUCT_OUT)/root/vendor/lib/modules/
-	$(hide) for f in atomisp-css2401a0_v21.ko videobuf-core.ko videobuf-vmalloc.ko; do \
+	$(hide) for f in atomisp-css2401a0_v21.ko videobuf-core.ko videobuf-vmalloc.ko; v4l2loopback.ko; do \
 		find $(LOCAL_KERNEL_PATH)/lib/modules/ -name $$f -exec cp {} $(PRODUCT_OUT)/root/vendor/lib/modules/ \; ;\
 		done
 
