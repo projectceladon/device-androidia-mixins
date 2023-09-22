@@ -63,5 +63,8 @@ BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/graphics/mesa
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/graphics/mesa_acrn
 {{/mesa_acrn_sepolicy}}
 
+#Add app_render_setting_property folder to BOARD_SEPOLICY_DIRS
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/app_render_setting_property
+
 BOARD_SEPOLICY_M4DEFS += module_hwc_info_service=true
 
