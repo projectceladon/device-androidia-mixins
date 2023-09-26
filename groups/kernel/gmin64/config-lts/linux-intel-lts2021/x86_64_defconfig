@@ -1955,6 +1955,7 @@ CONFIG_INTEL_MEI_PXP=m
 # CONFIG_PVPANIC is not set
 CONFIG_GPIO_ASM_28XX=m
 # CONFIG_INTEL_GNA is not set
+CONFIG_INTEL_EC=y
 # end of Misc devices
 
 #
