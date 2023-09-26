@@ -53,6 +53,7 @@ function build() {
   local ai_build="false"
   local full_ai_build="false"
   local magic=intel
+  local mesa="true"
 
   local help=$(
     cat <<EOF
@@ -62,11 +63,12 @@ Usage: $SELF build [-a <ai-tools>]
   -a <ai-build>:      enable ai build, default: $ai_build
   -A <full_ai-build>: enable full ai build, default: $full_ai_build
   -m <magic>:         Magic. Default: $magic
+  -M <mesa>:          Mesa. Default: $mesa
   -h:                 print the usage message
 EOF
   )
 
-  while getopts 'aAm:h' opt; do
+  while getopts 'aAm:M:h' opt; do
     case $opt in
     a)
       ai_build="true"
@@ -77,6 +79,9 @@ EOF
       ;;
     m)
       magic=$OPTARG
+      ;;
+    M)
+      mesa=$OPTARG
       ;;
     h)
       echo "$help" && exit
@@ -103,8 +108,8 @@ EOF
   fi
 
   msg "build gamecore docker"
-  cat /vendor/etc/docker/gamecore.tar | docker build - --network=host --build-arg MAGIC=$magic --build-arg http_proxy=$http_proxy --build-arg https_proxy=$https_proxy --build-arg no_proxy=localhost -t liccore --target liccore
-  cat /vendor/etc/docker/gamecore.tar | docker build - --network=host --build-arg MAGIC=$magic --build-arg http_proxy=$http_proxy --build-arg https_proxy=$https_proxy --build-arg no_proxy=localhost -t gamecore
+  cat /vendor/etc/docker/gamecore.tar | docker build - --network=host --build-arg MAGIC=$magic --build-arg MESA=$mesa --build-arg http_proxy=$http_proxy --build-arg https_proxy=$https_proxy --build-arg no_proxy=localhost -t liccore --target liccore
+  cat /vendor/etc/docker/gamecore.tar | docker build - --network=host --build-arg MAGIC=$magic --build-arg MESA=$mesa --build-arg http_proxy=$http_proxy --build-arg https_proxy=$https_proxy --build-arg no_proxy=localhost -t gamecore
 
   if [ $ai_build == "true" ]; then
     msg "building aicore container with Intel tensorflow extension for GPU"
