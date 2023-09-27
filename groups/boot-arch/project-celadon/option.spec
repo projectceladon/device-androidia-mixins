@@ -51,3 +51,4 @@ x64 = false
 use_ec_uart = false
 ifwi_variant = release
 acrn = false
+trusty = false
