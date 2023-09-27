@@ -1,6 +1,6 @@
 === Overview
 
-trusty is used to enable/disable VMM based TEE solution.
+The mixin of tee is used to enable/disable one of TEE solution(trusty/optee/false).
 
 --- deps
 
@@ -10,8 +10,8 @@ trusty is used to enable/disable VMM based TEE solution.
 
 ==== Options
 
---- true
-this option will enable VMM based TEE.
+--- trusty
+This option will enable Trusty based TEE.
 
     --- parameters
         - ref_target: the refernece target
@@ -31,8 +31,19 @@ this option will enable VMM based TEE.
         - hardware/intel/kernelflinger/libqltipc
         - kernel/bxt/drivers/trusty
 
+--- optee
+This option will enable the OP-Tee based TEE.
+    --- parameters
+
+    --- code dir
+        - vendor/intel/optee/optee_apps
+        - vendor/intel/optee/optee_client
+        - vendor/intel/optee/optee_test
+        - vendor/intel/optee/optee_os
+ 
+
 --- false
-this option will disable VMM based TEE.
+this option will disable TEE.
 
 --- default
 when not explicitly selected in mixin spec file, the default option will be used.
