@@ -11,7 +11,9 @@ PRODUCT_PACKAGES += \
 
 # MediaSDK library
 PRODUCT_PACKAGES += \
-    libmfxhw32
+    libmfxhw32 \
+    sample_encode \
+    sample_decode
 
 ifeq ($(BOARD_USE_64BIT_USERSPACE),true)
 PRODUCT_PACKAGES += \
