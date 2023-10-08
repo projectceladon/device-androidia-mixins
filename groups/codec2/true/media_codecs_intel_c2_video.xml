@@ -133,7 +133,7 @@ and updated to vendor media codecs.
 {{/hw_ve_h265}}
 
 {{#hw_ve_vp9}}
-	<MediaCodec name="c2.intel.vp9.encoder" type="video/x-vnd.on2.vp9" >
+	<!--MediaCodec name="c2.intel.vp9.encoder" type="video/x-vnd.on2.vp9" >
             <Limit name="size" min="128x96" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
@@ -141,7 +141,7 @@ and updated to vendor media codecs.
             <Limit name="blocks-per-second" range="1-972000" />
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
-	</MediaCodec>
+	</MediaCodec-->
 {{/hw_ve_vp9}}
     </Encoders>
 </Included>
