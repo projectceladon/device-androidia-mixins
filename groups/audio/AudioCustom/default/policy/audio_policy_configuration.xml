@@ -56,9 +56,6 @@
                 <item>bus2_voice_command_out</item>
                 <item>bus3_call_ring_out</item>
                 <item>bus4_call_out</item>
-                <item>bus5_alarm_out</item>
-                <item>bus6_notification_out</item>
-                <item>bus7_system_sound_out</item>
                 <!-- names with _audio_zone_# are used for defined an emulator rear seat audio zone
                      where each number # is the zone id number -->
                 <item>bus100_audio_zone_1</item>
@@ -94,21 +91,6 @@
                              channelMasks="AUDIO_CHANNEL_OUT_7POINT1POINT4"/>
                 </mixPort>
                 <mixPort name="mixport_bus4_call_out" role="source">
-                    <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                             samplingRates="48000"
-                             channelMasks="AUDIO_CHANNEL_OUT_7POINT1POINT4"/>
-                </mixPort>
-                <mixPort name="mixport_bus5_alarm_out" role="source">
-                    <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                             samplingRates="48000"
-                             channelMasks="AUDIO_CHANNEL_OUT_7POINT1POINT4"/>
-                </mixPort>
-                <mixPort name="mixport_bus6_notification_out" role="source">
-                    <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                             samplingRates="48000"
-                             channelMasks="AUDIO_CHANNEL_OUT_7POINT1POINT4"/>
-                </mixPort>
-                <mixPort name="mixport_bus7_system_sound_out" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                              samplingRates="48000"
                              channelMasks="AUDIO_CHANNEL_OUT_7POINT1POINT4"/>
@@ -195,36 +177,6 @@
                               defaultValueMB="0" stepValueMB="100"/>
                     </gains>
                 </devicePort>
-                <devicePort tagName="bus5_alarm_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                            address="bus5_alarm_out">
-                    <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_7POINT1POINT4"/>
-                    <gains>
-                        <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                              minValueMB="-3200" maxValueMB="600"
-                              defaultValueMB="0" stepValueMB="100"/>
-                    </gains>
-                </devicePort>
-                <devicePort tagName="bus6_notification_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                            address="bus6_notification_out">
-                    <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_7POINT1POINT4"/>
-                    <gains>
-                        <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                              minValueMB="-3200" maxValueMB="600"
-                              defaultValueMB="0" stepValueMB="100"/>
-                    </gains>
-                </devicePort>
-                <devicePort tagName="bus7_system_sound_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                            address="bus7_system_sound_out">
-                    <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_7POINT1POINT4"/>
-                    <gains>
-                        <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                              minValueMB="-3200" maxValueMB="600"
-                              defaultValueMB="0" stepValueMB="100"/>
-                    </gains>
-                </devicePort>
                 <devicePort tagName="bus100_audio_zone_1" role="sink" type="AUDIO_DEVICE_OUT_BUS"
                             address="bus100_audio_zone_1">
                     <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
@@ -301,11 +253,6 @@
                        sources="mixport_bus2_voice_command_out"/>
                 <route type="mix" sink="bus3_call_ring_out" sources="mixport_bus3_call_ring_out"/>
                 <route type="mix" sink="bus4_call_out" sources="mixport_bus4_call_out"/>
-                <route type="mix" sink="bus5_alarm_out" sources="mixport_bus5_alarm_out"/>
-                <route type="mix" sink="bus6_notification_out"
-                       sources="mixport_bus6_notification_out"/>
-                <route type="mix" sink="bus7_system_sound_out"
-                       sources="mixport_bus7_system_sound_out"/>
                 <route type="mix" sink="bus100_audio_zone_1" sources="mixport_bus100_audio_zone_1"/>
                 <route type="mix" sink="bus200_audio_zone_2" sources="mixport_bus200_audio_zone_2"/>
                 <route type="mix" sink="primary input"

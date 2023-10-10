@@ -28,10 +28,13 @@
                 <group>
                     <device address="bus0_media_out">
                         <context context="music"/>
+                        <context context="alarm"/>
                         <context context="announcement"/>
-                    </device>
-                    <device address="bus6_notification_out">
                         <context context="notification"/>
+                        <context context="system_sound"/>
+                        <context context="emergency"/>
+                        <context context="safety"/>
+                        <context context="vehicle_status"/>
                     </device>
                 </group>
                 <group>
@@ -50,18 +53,7 @@
                         <context context="call_ring"/>
                     </device>
                 </group>
-                <group>
-                    <device address="bus5_alarm_out">
-                        <context context="alarm"/>
-                    </device>
-                    <device address="bus7_system_sound_out">
-                        <context context="system_sound"/>
-                        <context context="emergency"/>
-                        <context context="safety"/>
-                        <context context="vehicle_status"/>
-                    </device>
-                </group>
-	        </volumeGroups>
+            </volumeGroups>
         </zone>
     </zones>
 </carAudioConfiguration>
