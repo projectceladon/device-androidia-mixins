@@ -209,6 +209,7 @@ endif # BOOTLOADER_SLOT
 {{#acrn}}
 	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_acrn $(efi_root)/boot/sbl_os
 	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_bm $(efi_root)/boot/sbl_bm
+	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_mod_kf $(efi_root)/kf.sbl
 {{/acrn}}
 {{^acrn}}
 	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_bm $(efi_root)/boot/sbl_os
@@ -242,6 +243,7 @@ $(hide)mmd -i $(BOARD_BOOTLOADER_VAR_IMG) ::boot;
 {{#acrn}}
 $(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/sbl_acrn ::boot/sbl_os;
 $(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/sbl_bm ::boot/sbl_bm;
+$(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/sbl_mod_kf ::kf.sbl;
 {{/acrn}}
 {{^acrn}}
 $(hide)mcopy -Q -i $(BOARD_BOOTLOADER_VAR_IMG) $(PRODUCT_OUT)/sbl_bm ::boot/sbl_os;
@@ -276,6 +278,67 @@ $(INSTALLER_EFI):
 	mkdir -p $(PRODUCT_OUT)/efi/
 	$(ACP) -r $(TOP)/$(PREBUILT_INSTALLER) $@
 
+{{#acrn}}
+BOARD_MULTIBOOT_IMG := $(PRODUCT_OUT)/multiboot.img
+BOARD_TEE_IMG := $(PRODUCT_OUT)/tee.img
+BOARD_FLASHFILES += $(BOARD_MULTIBOOT_IMG)
+BOARD_FLASHFILES += $(BOARD_TEE_IMG)
+
+multiboot_zip := $(intermediates)/multiboot.zip
+tee_zip := $(intermediates)/tee.zip
+
+$(multiboot_zip): mb_root := $(intermediates)/multiboot
+$(multiboot_zip): $(bootloader_zip)
+	$(hide) rm -rf $(mb_root)
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(mb_root)
+	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_mod_acrn $(mb_root)/acrn.sbl
+	$(hide) (cd $(mb_root) && zip -qry ../$(notdir $@) .)
+
+$(tee_zip): tee_root := $(intermediates)/tee
+$(tee_zip): $(bootloader_zip)
+	$(hide) rm -rf $(tee_root)
+	$(hide) rm -f $@
+	$(hide) mkdir -p $(tee_root)
+# Reserved for tee sbl container
+	$(hide) touch $(tee_root)/tee.sbl
+	$(hide) (cd $(tee_root) && zip -qry ../$(notdir $@) .)
+
+define generate_multiboot_img
+rm -f $(BOARD_MULTIBOOT_IMG)
+dd of=$(BOARD_MULTIBOOT_IMG) if=/dev/zero bs=1M count=33;
+ls -l $(BOARD_MULTIBOOT_IMG)
+$(hide)mkdosfs -F32 $(BOARD_MULTIBOOT_IMG);
+$(hide)mcopy -Q -i $(BOARD_MULTIBOOT_IMG) $(PRODUCT_OUT)/sbl_mod_acrn ::acrn.sbl;
+echo "Multiboot image successfully generated $(BOARD_MULTIBOOT_IMG)"
+endef
+
+define generate_tee_img
+rm -f $(BOARD_TEE_IMG)
+dd of=$(BOARD_TEE_IMG) if=/dev/zero bs=1M count=33;
+ls -l $(BOARD_TEE_IMG)
+$(hide)mkdosfs -F32 $(BOARD_TEE_IMG);
+echo "TEE image successfully generated $(BOARD_TEE_IMG)"
+endef
+
+multiboot: bootloader
+	$(call generate_multiboot_img)
+
+tee: bootloader
+	$(call generate_tee_img)
+
+$(BOARD_MULTIBOOT_IMG): multiboot
+	@echo "Generate multiboot image: $@ finished."
+
+$(BOARD_TEE_IMG): tee
+	@echo "Generate TEE image: $@ finished."
+
+droidcore: multiboot
+droidcore: tee
+
+INSTALLED_RADIOIMAGE_TARGET += $(multiboot_zip) $(BOARD_MULTIBOOT_IMG) $(tee_zip) $(BOARD_TEE_IMG)
+
+{{/acrn}}
 {{/fw_sbl}}
 
 
