@@ -168,6 +168,7 @@ AB_OTA_PARTITIONS += vbmeta
 AB_OTA_PARTITIONS += tos
 {{/trusty}}
 
+{{^fw_sbl}}
 {{#bootloader_slot_ab}}
 BOOTLOADER_SLOT := true
 BOARD_ESP_PARTITION_SIZE := $$(({{esp_partition_size}} * 1024 * 1024))
@@ -175,6 +176,10 @@ BOARD_ESP_BLOCK_SIZE := $(BOARD_BOOTLOADER_BLOCK_SIZE)
 BOARD_FLASHFILES += $(PRODUCT_OUT)/esp.img
 AB_OTA_PARTITIONS += bootloader
 {{/bootloader_slot_ab}}
+{{/fw_sbl}}
+{{#fw_sbl}}
+AB_OTA_PARTITIONS += bootloader
+{{/fw_sbl}}
 {{/slot-ab}}
 
 {{#usb_storage}}
