@@ -22,8 +22,9 @@ import subprocess
 import signal
 from sys import argv,exit
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '../qemu-7.0.0/python'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../qemu-7.2.3/python'))
 from qemu import qmp
+from qemu.qmp.legacy import QEMUMonitorProtocol
 
 rtc_wakeup = 0
 current_rtc_wakeup_count = 0
