@@ -4,6 +4,12 @@ on post-fs-data
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
 
+on post-fs-data
+   mkdir /data/docker 0776 system system
+   umount /mnt/share_data
+   rm /mnt/share_data
+   mount ext4 /dev/block/by-name/share_data /data/docker nosuid nodev noatime
+
 on boot
     write /sys/devices/platform/INT33BB:00/power/control on
     write /sys/devices/pci0000\:00/0000\:00\:15.0/power/control auto
