@@ -9,9 +9,14 @@ on post-fs
     restorecon_recursive /persist/tee
 
     start tee-supplicantd
+    start vendor.keymaster-3-0-optee
 
 service tee-supplicantd /vendor/bin/tee-supplicant
     class main
     user root
     group root
     disabled
+
+on late-fs
+    exec_start wait_for_keymaster_optee
+

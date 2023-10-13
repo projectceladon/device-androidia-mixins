@@ -3,6 +3,17 @@ PRODUCT_PACKAGES += \
 	libteec \
 	tee-supplicant
 
+# optee keymaster
+PRODUCT_PACKAGES += \
+	android.hardware.keymaster@3.0-service.optee \
+	wait_for_keymaster_optee
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.hardware.keystore=optee
+
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:vendor/etc/permissions/android.hardware.keystore.app_attest_key.xml
+
 ifeq ($(TARGET_BUILD_VARIANT),userdebug)
 # optee_test and TA
 PRODUCT_PACKAGES += xtest
