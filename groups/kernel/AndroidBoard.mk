@@ -22,7 +22,7 @@ kernel: $(PRODUCT_OUT)/kernel
 
 else
 
-TARGET_KERNEL_CLANG_VERSION := r450784d
+TARGET_KERNEL_CLANG_VERSION := r487747c
 CLANG_PREBUILTS_PATH := $(abspath $(INTEL_PATH_DEVICE)/../../../prebuilts/clang)
 
 ifneq ($(TARGET_KERNEL_CLANG_VERSION),)
@@ -225,15 +225,6 @@ $(PRODUCT_OUT)/ramdisk.img: $(LOCAL_KERNEL_PATH)/copy_modules
 endif
 {{/camera_cos_hack}}
 
-{{#slot-ab}}
-ifeq ($(PRODUCT_SUPPORTS_VERITY), true)
-DM_VERITY_CERT := $(LOCAL_KERNEL_PATH)/verity.x509
-$(DM_VERITY_CERT): $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VERITY_SIGNING_KEY).x509.pem $(OPENSSL)
-	$(transform-pem-cert-to-der-cert)
-$(LOCAL_KERNEL): $(DM_VERITY_CERT)
-endif
-
-{{/slot-ab}}
 $(LOCAL_KERNEL): $(MINIGZIP) $(KERNEL_CONFIG) $(BOARD_DTB) $(KERNEL_DEPS)
 	$(KERNEL_MAKE_CMD) $(KERNEL_MAKE_OPTIONS)
 	$(KERNEL_MAKE_CMD) $(KERNEL_MAKE_OPTIONS) modules
