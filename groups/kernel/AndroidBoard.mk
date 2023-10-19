@@ -22,7 +22,7 @@ kernel: $(PRODUCT_OUT)/kernel
 
 else
 
-TARGET_KERNEL_CLANG_VERSION := r450784d
+TARGET_KERNEL_CLANG_VERSION := r487747c
 CLANG_PREBUILTS_PATH := $(abspath $(INTEL_PATH_DEVICE)/../../../prebuilts/clang)
 
 ifneq ($(TARGET_KERNEL_CLANG_VERSION),)
@@ -60,6 +60,9 @@ ifeq ($(BASE_LTS2021_CHROMIUM_KERNEL), true)
 else ifeq ($(BASE_LINUX_INTEL_LTS2021_KERNEL), true)
   LOCAL_KERNEL_SRC := {{{linux_intel_lts2021_src_path}}}
   KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{linux_intel_lts2021_cfg_path}}}
+else ifeq ($(BASE_LTS2022_CHROMIUM_KERNEL), true)
+  LOCAL_KERNEL_SRC := {{{lts2022_chromium_src_path}}}
+  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{lts2022_chromium_cfg_path}}}
 else
   LOCAL_KERNEL_SRC := {{{src_path}}}
   EXT_MODULES := {{{external_modules}}}
@@ -225,15 +228,6 @@ $(PRODUCT_OUT)/ramdisk.img: $(LOCAL_KERNEL_PATH)/copy_modules
 endif
 {{/camera_cos_hack}}
 
-{{#slot-ab}}
-ifeq ($(PRODUCT_SUPPORTS_VERITY), true)
-DM_VERITY_CERT := $(LOCAL_KERNEL_PATH)/verity.x509
-$(DM_VERITY_CERT): $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_VERITY_SIGNING_KEY).x509.pem $(OPENSSL)
-	$(transform-pem-cert-to-der-cert)
-$(LOCAL_KERNEL): $(DM_VERITY_CERT)
-endif
-
-{{/slot-ab}}
 $(LOCAL_KERNEL): $(MINIGZIP) $(KERNEL_CONFIG) $(BOARD_DTB) $(KERNEL_DEPS)
 	$(KERNEL_MAKE_CMD) $(KERNEL_MAKE_OPTIONS)
 	$(KERNEL_MAKE_CMD) $(KERNEL_MAKE_OPTIONS) modules
