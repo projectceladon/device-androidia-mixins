@@ -123,7 +123,7 @@ and updated to vendor media codecs.
 
 {{#hw_ve_h265}}
 	<MediaCodec name="c2.intel.hevc.encoder" type="video/hevc" >
-            <Limit name="size" min="176x144" max="8192x8192" />
+            <Limit name="size" min="176x144" max="4096x4096" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
             <Limit name="blocks-per-second" range="1-972000" />
