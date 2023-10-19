@@ -103,6 +103,7 @@ EOF
       msg "wait for dockerd to terminated..."
       sleep 1
     done
+    export XDG_RUNTIME_DIR=/data/vendor/docker/tmp
     dockerd --iptables=false &
     sleep 20
   fi
@@ -203,13 +204,13 @@ EOF
   msg "create gamecore container with $backend backend..."
   create_opts="-ti --network=host -e http_proxy=$http_proxy -e https_proxy=$https_proxy -v /dev/binder:/dev/binder -v /data/vendor/docker/sys/class/power_supply:/sys/class/power_supply -v /data/vendor/docker/config/99-ignore-mouse.rules:/etc/udev/rules.d/99-ignore-mouse.rules -v /data/vendor/docker/config/99-ignore-keyboard.rules:/etc/udev/rules.d/99-ignore-keyboard.rules --shm-size 8G --memory=$memory_size"
   if [ $backend == "drm" ]; then
-    create_opts="$create_opts --privileged --user root -v /data/vendor/docker/steam:/home/wid/.steam --name gamecore --hostname gamecore"
+    create_opts="$create_opts --privileged --user root -v /data/vendor/docker/steam:/home/wid/.steam -v /data/vendor/docker/xdg_config:/home/wid/xdg_config -v /data/vendor/docker/Games:/home/wid/Games --name gamecore --hostname gamecore"
     docker create $create_opts gamecore
   elif [ $backend == "headless" ]; then
     rm -rf -v /data/vendor/docker/image/workdir/ipc
     mkdir -p -v /data/vendor/docker/image/workdir/ipc
     create_opts="$create_opts -e BACKEND=$backend -e DEVICE=$device -e K8S_ENV_DISPLAY_RESOLUTION_X=$width -e K8S_ENV_DISPLAY_RESOLUTION_Y=$height -e HEADLESS=true -v /data/vendor/docker/image/workdir/ipc:/workdir/ipc --ulimit nofile=524288:524288"
-    create_opts="$create_opts -v /data/vendor/docker/steam:/home/wid/.steam -e CONTAINER_ID=1 --name gamecore --hostname gamecore"
+    create_opts="$create_opts -v /data/vendor/docker/steam:/home/wid/.steam -v /data/vendor/docker/xdg_config:/home/wid/xdg_config -v /data/vendor/docker/Games:/home/wid/Games -e CONTAINER_ID=1 --name gamecore --hostname gamecore"
     if [ $privileged == "true" ]; then
       docker create $create_opts --privileged gamecore
     else
