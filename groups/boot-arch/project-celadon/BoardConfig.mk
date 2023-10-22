@@ -191,3 +191,5 @@ ENABLE_GRUB_INSTALLER ?= true
 {{/use_cic}}
 
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/soc
+
+PRODUCT_DEFAULT_DEV_CERTIFICATE := build/make/target/product/security/releasekey
