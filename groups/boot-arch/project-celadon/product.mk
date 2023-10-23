@@ -188,3 +188,5 @@ ACRN_HV := true
 {{^acrn}}
 ACRN_HV := false
 {{/acrn}}
+
+TEE := {{{tee}}}
