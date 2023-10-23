@@ -164,14 +164,9 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
+    <hal format="aidl">
         <name>android.hardware.camera.provider</name>
-        <transport>hwbinder</transport>
-        <version>2.4</version>
-        <interface>
-            <name>ICameraProvider</name>
-            <instance>external/0</instance>
-        </interface>
+	<fqname>ICameraProvider/external/0</fqname>
     </hal>
     <!--hal format="hidl">
         <name>android.hardware.boot</name>

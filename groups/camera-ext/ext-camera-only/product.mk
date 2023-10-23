@@ -6,9 +6,8 @@ PRODUCT_COPY_FILES += \
 
 
 # External camera service
-PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-external-service \
-                    android.hardware.camera.provider@2.4-service_64 \
-                    android.hardware.camera.provider@2.4-impl
+PRODUCT_PACKAGES += android.hardware.camera.provider-V1-external-service \
+                    android.hardware.camera.provider-V1-external-impl
 #VHAL camera
 PRODUCT_PACKAGES += camera.$(TARGET_BOARD_PLATFORM) \
                     camera.$(TARGET_BOARD_PLATFORM).jpeg
