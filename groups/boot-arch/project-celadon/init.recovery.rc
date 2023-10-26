@@ -5,6 +5,11 @@ service watchdogd /system/bin/watchdogd{{#watchdog_parameters}} {{{watchdog_para
     oneshot
     seclabel u:r:watchdogd:s0
 
+service console /system/bin/sh
+    console
+    seclabel u:r:su:s0
+    setenv HOSTNAME console
+
 on boot
     start watchdogd
     write /proc/sys/kernel/hung_task_timeout_secs{{#hung_task_timeout_secs}} {{{hung_task_timeout_secs}}}{{/hung_task_timeout_secs}}
