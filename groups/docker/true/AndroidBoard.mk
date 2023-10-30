@@ -13,3 +13,12 @@ ifneq ($(wildcard $(TOP)/vendor/intel/weston-in-docker/aicore),)
 	@tar --exclude .git -cf $(PRODUCT_OUT)/vendor/etc/docker/aicore.tar -C $(TOP)/vendor/intel/weston-in-docker/aicore .
 endif
 $(PRODUCT_OUT)/vendor.img: $(LIC_IMAGE_SOURCE)
+
+LCG_IMAGE_SOURCE := $(PRODUCT_OUT)/vendor/etc/docker/wic.tar.gz
+$(LCG_IMAGE_SOURCE):
+	@mkdir -p $(PRODUCT_OUT)/vendor/etc/docker
+ifneq ($(wildcard $(TOP)/vendor/intel/weston-in-docker/wic.tar.gz),)
+	@cp $(TOP)/vendor/intel/weston-in-docker/wic.tar.gz $(PRODUCT_OUT)/vendor/etc/docker/wic.tar.gz
+endif
+$(PRODUCT_OUT)/vendor.img: $(LCG_IMAGE_SOURCE)
+
