@@ -43,3 +43,7 @@ bluetooth.profile.pan.panu.enabled=true
 bluetooth.profile.pbap.server.enabled=true
 bluetooth.profile.ccp.server.enabled=true
 bluetooth.profile.vcp.controller.enabled=true
+ro.build.product=caas
+ro.hardware=caas
+ro.product.device=caas
+ro.product.name=caas
