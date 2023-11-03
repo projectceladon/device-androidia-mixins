@@ -27,6 +27,7 @@ class Configurer:
     TEMPLATE_GROUPS = ["template-simple", "template-complex"]
     PRODUCT_SPEC_FN = "mixins.spec"
     SPEC_SUFFIX = ".spec"
+    ANDROID_PRODUCTS_MK = "AndroidProducts.mk"
     GROUP_SPEC_FN = "mixinfo.spec"
     OPTION_SPEC_FN = "option.spec"
     FILES_SPEC_FN = "files.spec"
@@ -1250,7 +1251,7 @@ class Updater(FileHelper):
         delta = local_file_tree - self.update_file_set
         for f in delta:
             # exclude mixins spec file
-            if not f.endswith(Configurer.SPEC_SUFFIX):
+            if not f.endswith(Configurer.SPEC_SUFFIX) and not f.find(Configurer.ANDROID_PRODUCTS_MK):
                 self.info("removing unused file {}".format(f))
                 os.remove(f)
 
