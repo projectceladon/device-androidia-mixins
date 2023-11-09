@@ -22,3 +22,7 @@ on post-fs-data
 
 on property:sys.boot_completed=1 && property:vendor.thermal.enable=1
     start thermal-daemon
+
+on property:persist.vendor.thermal.daemon.supported=0
+    stop thermal-daemon
+
