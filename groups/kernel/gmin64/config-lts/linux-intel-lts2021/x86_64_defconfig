@@ -483,7 +483,6 @@ CONFIG_PM_DEBUG=y
 CONFIG_PM_ADVANCED_DEBUG=y
 # CONFIG_PM_TEST_SUSPEND is not set
 CONFIG_PM_SLEEP_DEBUG=y
-CONFIG_PM_SILENTMODE=y
 # CONFIG_DPM_WATCHDOG is not set
 CONFIG_PM_TRACE=y
 CONFIG_PM_TRACE_RTC=y
@@ -7585,10 +7584,3 @@ CONFIG_ARCH_USE_MEMTEST=y
 # CONFIG_MEMTEST is not set
 # end of Kernel Testing and Coverage
 # end of Kernel hacking
-#
-# socwatch driver
-#
-# CONFIG_INTEL_SOCPERF is not set
-# CONFIG_INTEL_SOCWATCH is not set
-# end of socwatch driver
-#
