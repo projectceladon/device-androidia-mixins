@@ -1,6 +1,7 @@
-*/usb*/*/host*/*/block/sdb*              auto             vfat    defaults                                   voldmanaged=usbdisk:auto{{#adoptableusb}},encryptable=userdata{{/adoptableusb}}
-*/usb*/*/host*/*/block/sdc*              auto             vfat    defaults                                   voldmanaged=usbdisk:auto{{#adoptableusb}},encryptable=userdata{{/adoptableusb}}
-*/usb*/*/host*/*/block/sdd*              auto             vfat    defaults                                   voldmanaged=usbdisk:auto{{#adoptableusb}},encryptable=userdata{{/adoptableusb}}
+*/usb*/*/host*/*/block/sda*              auto             auto    defaults                                   voldmanaged=usbdisk1:auto{{#adoptableusb}},encryptable=userdata{{/adoptableusb}}
+*/usb*/*/host*/*/block/sdb*              auto             auto    defaults                                   voldmanaged=usbdisk2:auto{{#adoptableusb}},encryptable=userdata{{/adoptableusb}}
+*/usb*/*/host*/*/block/sdc*              auto             auto    defaults                                   voldmanaged=usbdisk3:auto{{#adoptableusb}},encryptable=userdata{{/adoptableusb}}
+*/usb*/*/host*/*/block/sdd*              auto             auto    defaults                                   voldmanaged=usbdisk4:auto{{#adoptableusb}},encryptable=userdata{{/adoptableusb}}
 */block/sda*                        auto            auto    defaults                                   voldmanaged=sdcard1:auto,encryptable=userdata
 /dev/block/sda1                    /sdcard          vfat    defaults                                   recoveryonly
 
