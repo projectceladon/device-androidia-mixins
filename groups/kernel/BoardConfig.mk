@@ -39,12 +39,6 @@ BOARD_KERNEL_CMDLINE += \
         pm_suspend_debug=1
 {{/pmsuspend_debug}}
 
-{{#pmsilent_mode}}
-BOARD_KERNEL_CMDLINE += \
-        silentmode={{pmsilent_mode}}
-{{/pmsilent_mode}}
-
-
 {{#memory_hole}}
 BOARD_KERNEL_CMDLINE += \
         memmap=4M\$$0x5c400000
