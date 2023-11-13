@@ -30,10 +30,8 @@ system   /system  ext4 ro,barrier=1 wait{{#slot-ab}},slotselect{{/slot-ab}},avb_
 {{#bootloader_slot_ab}}
 /dev/block/by-name/esp          /esp            emmc    defaults                                                    recoveryonly
 {{/bootloader_slot_ab}}
-/dev/block/by-name/bootloader   /bootloader     emmc    defaults                                                    recoveryonly{{^fw_sbl}}{{#bootloader_slot_ab}},slotselect{{/bootloader_slot_ab}}{{/fw_sbl}}
-{{^fw_sbl}}
+/dev/block/by-name/bootloader   /bootloader     emmc    defaults                                                    recoveryonly{{#bootloader_slot_ab}},slotselect{{/bootloader_slot_ab}}
 /dev/block/by-name/bootloader2  /bootloader2    emmc    defaults                                                    recoveryonly
-{{/fw_sbl}}
 /dev/block/by-name/persistent   /persistent     emmc    defaults                                                    defaults
 /dev/block/by-name/metadata     /metadata       ext4    noatime,nosuid,nodev,errors=panic{{#metadata_encryption}},discard{{/metadata_encryption}}                           wait,check,formattable,first_stage_mount
 {{/use_cic}}
