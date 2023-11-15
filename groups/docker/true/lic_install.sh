@@ -3,6 +3,9 @@
 CORECONTAINERS="gamecore aicore"
 COREIMAGES="gamecore aicore"
 
+storage_location="/data/vendor/docker"
+lic_pci_storage=$(getprop persist.vendor.lic.pci_storage)
+
 function msg() {
   echo ">> $@"
 }
@@ -103,7 +106,6 @@ EOF
       msg "wait for dockerd to terminated..."
       sleep 1
     done
-    export XDG_RUNTIME_DIR=/data/vendor/docker/tmp
     dockerd --iptables=false &
     sleep 20
   fi
@@ -121,6 +123,25 @@ EOF
   fi
 
   msg "Done!"
+}
+
+function mount_pci_storage() {
+  if mountpoint -q "$storage_location"; then
+      echo "PCI external storage already mounted at $storage_location"
+  else
+      echo "Mounting PCI external storage $lic_pci_storage to $storage_location"
+      mkdir -p -v "$storage_location"
+      mount "$lic_pci_storage" "$storage_location"
+  fi
+}
+
+function unmount_pci_storage() {
+  if mountpoint -q "$storage_location"; then
+      echo "Unmounting PCI external storage from $storage_location"
+      umount "$storage_location"
+  else
+      echo "PCI external storage is not mounted at $storage_location"
+  fi
 }
 
 function install() {
@@ -154,18 +175,19 @@ function install() {
 
   local help=$(
     cat <<EOF
-Usage: $SELF install [-b <backend>] [-s <size>] [-p] [m <memory_size>]
+Usage: $SELF install [-b <backend>] [-s <size>] [-p] [m <memory_size>] [-l storage_location]
   Install LIC for android ivi
 
-  -b <backend>:       weston backend, default: $backend
-  -s <size>:          resolution of LIC in headless backend, default: $size
-  -p:                 create container with privileged mode
-  -m <memory_size>    Memory size(a positive integer, followed by a suffix of b, k, m, g, to indicate bytes, kilobytes, megabytes, or gigabytes). Maximum and default: $memory_size
-  -h:                 print the usage message
+  -b <backend>:          weston backend, default: $backend
+  -s <size>:             resolution of LIC in headless backend, default: $size
+  -p:                    create container with privileged mode
+  -m <memory_size>       Memory size(a positive integer, followed by a suffix of b, k, m, g, to indicate bytes, kilobytes, megabytes, or gigabytes). Maximum and default: $memory_size
+  -l <storage_location>: Storage location (default: $storage_location)
+  -h:                    print the usage message
 EOF
   )
 
-  while getopts 'b:d:s:hpn:m:' opt; do
+  while getopts 'b:d:s:hpn:m:l:i:' opt; do
     case $opt in
     b)
       backend=$OPTARG
@@ -178,6 +200,9 @@ EOF
       ;;
     m)
       memory_size=$OPTARG
+      ;;
+    l)
+      storage_location=$OPTARG
       ;;
     h)
       echo "$help" && exit
@@ -192,6 +217,7 @@ EOF
   echo "Install LIC:"
   echo "backend = $backend"
   echo "memory_size = $memory_size"
+  echo "storage_location = $storage_location"
   if [ $backend == "headless" ]; then
     echo "size = $size"
     echo "width = $width height = $height"
@@ -199,18 +225,21 @@ EOF
     echo "device = $device"
   fi
 
-  cleanup_container $CORECONTAINERS
+  export XDG_RUNTIME_DIR=$storage_location/tmp
 
+  cleanup_container $CORECONTAINERS
   msg "create gamecore container with $backend backend..."
-  create_opts="-ti --network=host -e http_proxy=$http_proxy -e https_proxy=$https_proxy -v /dev/binder:/dev/binder -v /data/vendor/docker/sys/class/power_supply:/sys/class/power_supply -v /data/vendor/docker/config/99-ignore-mouse.rules:/etc/udev/rules.d/99-ignore-mouse.rules -v /data/vendor/docker/config/99-ignore-keyboard.rules:/etc/udev/rules.d/99-ignore-keyboard.rules --shm-size 8G --memory=$memory_size"
+
+ create_opts="-ti --network=host -e http_proxy=$http_proxy -e https_proxy=$https_proxy -v /dev/binder:/dev/binder -v /data/vendor/docker/sys/class/power_supply:/sys/class/power_supply -v /data/vendor/docker/config/99-ignore-mouse.rules:/etc/udev/rules.d/99-ignore-mouse.rules -v /data/vendor/docker/config/99-ignore-keyboard.rules:/etc/udev/rules.d/99-ignore-keyboard.rules --shm-size 8G --memory=$memory_size"
+
   if [ $backend == "drm" ]; then
-    create_opts="$create_opts --privileged --user root -v /data/vendor/docker/steam:/home/wid/.steam -v /data/vendor/docker/xdg_config:/home/wid/xdg_config -v /data/vendor/docker/Games:/home/wid/Games --name gamecore --hostname gamecore"
+    create_opts="$create_opts --privileged --user root -v $storage_location/steam:/home/wid/.steam -v $storage_location/xdg_config:/home/wid/xdg_config -v $storage_location/Games:/home/wid/Games --name gamecore --hostname gamecore"
     docker create $create_opts gamecore
   elif [ $backend == "headless" ]; then
-    rm -rf -v /data/vendor/docker/image/workdir/ipc
-    mkdir -p -v /data/vendor/docker/image/workdir/ipc
-    create_opts="$create_opts -e BACKEND=$backend -e DEVICE=$device -e K8S_ENV_DISPLAY_RESOLUTION_X=$width -e K8S_ENV_DISPLAY_RESOLUTION_Y=$height -e HEADLESS=true -v /data/vendor/docker/image/workdir/ipc:/workdir/ipc --ulimit nofile=524288:524288"
-    create_opts="$create_opts -v /data/vendor/docker/steam:/home/wid/.steam -v /data/vendor/docker/xdg_config:/home/wid/xdg_config -v /data/vendor/docker/Games:/home/wid/Games -e CONTAINER_ID=1 --name gamecore --hostname gamecore"
+    rm -rf -v $storage_location/image/home/wid/Games
+    mkdir -p -v $storage_location/image/home/wid/Games
+    create_opts="$create_opts -e BACKEND=$backend -e DEVICE=$device -e K8S_ENV_DISPLAY_RESOLUTION_X=$width -e K8S_ENV_DISPLAY_RESOLUTION_Y=$height -e HEADLESS=true -v $storage_location/Games:/home/wid/Games -v $storage_location/steam:/home/wid/.steam"
+    create_opts="$create_opts -v $storage_location/xdg_config:/home/wid/xdg_config --ulimit nofile=524288:524288 -e CONTAINER_ID=1 --name gamecore --hostname gamecore"
     if [ $privileged == "true" ]; then
       docker create $create_opts --privileged gamecore
     else
@@ -226,8 +255,6 @@ EOF
     msg "create aicore container..."
     docker create -ti --network=host -e http_proxy=$http_proxy -e https_proxy=$https_proxy -v /dev/binder:/dev/binder -v /data/vendor/neuralnetworks/:/home/wid/.ipc/ --memory=$memory_size --name aicore --hostname aicore --security-opt seccomp=unconfined --security-opt apparmor=unconfined --device-cgroup-rule='a *:* rmw' -v /sys:/sys:rw --device $device --device /dev/snd --device /dev/tty0 --device /dev/tty1 --device /dev/tty2 --device /dev/tty3 --cap-add=NET_ADMIN --cap-add=SYS_ADMIN aicore
   fi
-
-  msg "Done!"
 }
 
 function uninstall() {
@@ -236,11 +263,21 @@ function uninstall() {
 }
 
 function start() {
-  start_container $CORECONTAINERS
+  if [ -n "$lic_pci_storage" ]; then
+      mount_pci_storage
+  else
+      msg "Internal storage is used"
+  fi
+  start_container "$CORECONTAINERS"
 }
 
 function stop() {
-  stop_container $CORECONTAINERS
+  if [ -n "$lic_pci_storage" ]; then
+      unmount_pci_storage
+  else
+      msg "Internal storage is used"
+  fi
+  stop_container "$CORECONTAINERS"
 }
 
 function main() {
