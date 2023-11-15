@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<!-- Copyright (C) 2012 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,73 +13,117 @@
      limitations under the License.
 -->
 
-<!-- The contents of this file was copied
-from AOSP frameworks/av/media/libstagefright/data/media_codecs_google_c2_video.xml
-and updated to vendor media codecs.
+<!--
+<!DOCTYPE MediaCodecs [
+<!ELEMENT MediaCodecs (Decoders,Encoders)>
+<!ELEMENT Decoders (MediaCodec*)>
+<!ELEMENT Encoders (MediaCodec*)>
+<!ELEMENT MediaCodec (Type*,Quirk*)>
+<!ATTLIST MediaCodec name CDATA #REQUIRED>
+<!ATTLIST MediaCodec type CDATA>
+<!ELEMENT Type EMPTY>
+<!ATTLIST Type name CDATA #REQUIRED>
+<!ELEMENT Quirk EMPTY>
+<!ATTLIST Quirk name CDATA #REQUIRED>
+]>
+
+There's a simple and a complex syntax to declare the availability of a
+media codec:
+
+A codec that properly follows the OpenMax spec and therefore doesn't have any
+quirks and that only supports a single content type can be declared like so:
+
+    <MediaCodec name="OMX.foo.bar" type="something/interesting" />
+
+If a codec has quirks OR supports multiple content types, the following syntax
+can be used:
+
+    <MediaCodec name="OMX.foo.bar" >
+        <Type name="something/interesting" />
+        <Type name="something/else" />
+        ...
+        <Quirk name="requires-allocate-on-input-ports" />
+        <Quirk name="requires-allocate-on-output-ports" />
+        <Quirk name="output-buffers-are-unreadable" />
+    </MediaCodec>
+
+Only the three quirks included above are recognized at this point:
+
+"requires-allocate-on-input-ports"
+    must be advertised if the component does not properly support specification
+    of input buffers using the OMX_UseBuffer(...) API but instead requires
+    OMX_AllocateBuffer to be used.
+
+"requires-allocate-on-output-ports"
+    must be advertised if the component does not properly support specification
+    of output buffers using the OMX_UseBuffer(...) API but instead requires
+    OMX_AllocateBuffer to be used.
+
+"output-buffers-are-unreadable"
+    must be advertised if the emitted output buffers of a decoder component
+    are not readable, i.e. use a custom format even though abusing one of
+    the official OMX colorspace constants.
+    Clients of such decoders will not be able to access the decoded data,
+    naturally making the component much less useful. The only use for
+    a component with this quirk is to render the output to the screen.
+    Audio decoders MUST NOT advertise this quirk.
+    Video decoders that advertise this quirk must be accompanied by a
+    corresponding color space converter for thumbnail extraction,
+    matching surfaceflinger support that can render the custom format to
+    a texture and possibly other code, so just DON'T USE THIS QUIRK.
+
 -->
 
-<!-- 
-    Max block-count = maxHeight / block-size(height) * maxWidth / block-size(W)
-    Max blocks-per-second = Max block-count * frames-per-second
--->
-
-<Included>
+<MediaCodecs>
     <Decoders>
-{{#hw_vd_h264}}
+
+{{#enable_msdk_c2}}
         <MediaCodec name="c2.intel.avc.decoder" type="video/avc">
             <!-- profiles and levels:  ProfileHigh : Level52 -->
             <Limit name="size" min="64x64" max="4096x4096" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
-            <Limit name="block-count" range="1-65536" /> <!-- max 4096x4096 equivalent -->
+            <Limit name="block-count" range="1-32768" /> <!-- max 4096x2048 equivalent -->
             <Limit name="blocks-per-second" range="1-1966080" />
-            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="bitrate" range="1-48000000" />
             <Limit name="performance-point-3840x2160" value="30" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_h264}}
 
-{{#hw_vd_h265}}
         <MediaCodec name="c2.intel.hevc.decoder" type="video/hevc">
             <!-- profiles and levels:  ProfileMain : MainTierLevel51 -->
             <Limit name="size" min="64x64" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="8x8" />
-            <Limit name="block-count" range="1-1048576" /> <!-- max 8192x8192 -->
-            <Limit name="blocks-per-second" range="1-31457280" />
-            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="block-count" range="1-196608" /> <!-- max 4096x3072 -->
+            <Limit name="blocks-per-second" range="1-2000000" />
+            <Limit name="bitrate" range="1-10000000" />
             <Limit name="performance-point-3840x2160" value="30" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_h265}}
 
-{{#hw_vd_vp9}}
         <MediaCodec name="c2.intel.vp9.decoder" type="video/x-vnd.on2.vp9">
             <Limit name="size" min="64x64" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
-            <Limit name="block-count" range="1-262144" />
-            <Limit name="blocks-per-second" range="1-7864320" />
-            <Limit name="bitrate" range="1-40000000" />
-            <Limit name="performance-point-3840x2160" value="30" />
-	    <Feature name="adaptive-playback" />
-        </MediaCodec>
-{{/hw_vd_vp9}}
-
-{{#hw_vd_vp8}}
-        <MediaCodec name="c2.intel.vp8.decoder" type="video/x-vnd.on2.vp8">
-            <Limit name="size" min="64x64" max="4096x4096" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="block-count" range="1-131072" />
+            <Limit name="block-count" range="1-16384" />
             <Limit name="blocks-per-second" range="1-500000" />
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_vp8}}
 
-{{#hw_vd_mp2}}
+        <MediaCodec name="c2.intel.vp8.decoder" type="video/x-vnd.on2.vp8">
+            <Limit name="size" min="64x64" max="4096x4096" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-16384" />
+            <Limit name="blocks-per-second" range="1-500000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+            <Feature name="adaptive-playback" />
+        </MediaCodec>
+
         <MediaCodec name="c2.intel.mp2.decoder" type="video/mpeg2">
             <Limit name="size" min="64x64" max="2048x2048" />
             <Limit name="alignment" value="2x2" />
@@ -91,9 +134,7 @@ and updated to vendor media codecs.
             <Limit name="performance-point-1920x1080" value="30" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_mp2}}
 
-{{#hw_vd_av1}}
         <MediaCodec name="c2.intel.av1.decoder" type="video/av01">
             <Limit name="size" min="64x64" max="4096x4096" />
             <Limit name="alignment" value="2x2" />
@@ -104,13 +145,13 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="30" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_av1}}
+{{/enable_msdk_c2}}
     </Decoders>
 
     <Encoders>
-{{#hw_ve_h264}}
+
+{{#enable_msdk_c2}}
         <MediaCodec name="c2.intel.avc.encoder" type="video/avc">
-            <!-- profiles and levels:  ProfileBaseline : Level41 -->
             <Limit name="size" min="176x144" max="4096x4096" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
@@ -119,9 +160,7 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-12000000" />
             <Limit name="performance-point-3840x2160" value="30" />
         </MediaCodec>
-{{/hw_ve_h264}}
 
-{{#hw_ve_h265}}
         <MediaCodec name="c2.intel.hevc.encoder" type="video/hevc" >
             <Limit name="size" min="176x144" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
@@ -130,10 +169,8 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
         </MediaCodec>
-{{/hw_ve_h265}}
 
-{{#hw_ve_vp9}}
-	<MediaCodec name="c2.intel.vp9.encoder" type="video/x-vnd.on2.vp9" >
+        <MediaCodec name="c2.intel.vp9.encoder" type="video/x-vnd.on2.vp9" >
             <Limit name="size" min="128x96" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
@@ -142,6 +179,11 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
         </MediaCodec>
-{{/hw_ve_vp9}}
+{{/enable_msdk_c2}}
     </Encoders>
-</Included>
+    <Include href="media_codecs_google_video.xml" />
+    <Include href="media_codecs_google_audio.xml" />
+    <Settings>
+        <Setting name="max-video-encoder-input-buffers" value="9" />
+    </Settings>
+</MediaCodecs>

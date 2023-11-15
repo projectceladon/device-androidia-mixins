@@ -8,14 +8,12 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:vendor/etc/media_codecs_google_video.xml
 {{/sw_omx_video}}
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_{{gpu}}.xml:vendor/etc/media_codecs.xml
-
 {{#hw_omx_video}}
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_gen9.xml:vendor/etc/media_codecs_gen9.xml \
     $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_gen12.xml:vendor/etc/media_codecs_gen12.xml \
-    $(LOCAL_PATH)/{{_extra_dir}}/mfx_omxil_core.conf:vendor/etc/mfx_omxil_core.conf
+    $(LOCAL_PATH)/{{_extra_dir}}/mfx_omxil_core.conf:vendor/etc/mfx_omxil_core.conf \
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_{{gpu}}.xml:vendor/etc/media_codecs.xml
 {{/hw_omx_video}}
 
 {{^codec_perf_xen}}
