@@ -6,6 +6,9 @@ $(PRODUCT_OUT)/system.img:  $(DOCKERD_ENV_RESOLV_CONF)
 LIC_IMAGE_SOURCE := $(PRODUCT_OUT)/vendor/etc/docker/gamecore.tar
 $(LIC_IMAGE_SOURCE):
 	@mkdir -p $(PRODUCT_OUT)/vendor/etc/docker
+ifneq ($(wildcard $(TOP)/vendor/intel/weston-in-docker/image),)
+	@cp -r $(TOP)/vendor/intel/weston-in-docker/image $(PRODUCT_OUT)/vendor/etc/docker/
+endif
 ifneq ($(wildcard $(TOP)/vendor/intel/weston-in-docker/gamecore),)
 	@tar --exclude .git -cf $(PRODUCT_OUT)/vendor/etc/docker/gamecore.tar -C $(TOP)/vendor/intel/weston-in-docker/gamecore .
 endif
