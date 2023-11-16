@@ -1,6 +1,6 @@
 [defaults]
-target = caas_dev
-ref_target = caas_dev
+target = caas_vbb
+ref_target = caas_vbb
 ota-update = false
 
 [mixinfo]
