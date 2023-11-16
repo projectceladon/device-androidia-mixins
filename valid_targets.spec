@@ -2,4 +2,4 @@
 celadon_ivi:
 celadon_tablet:
 caas:
-caas_dev:
+caas_vbb:
