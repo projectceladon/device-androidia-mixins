@@ -170,8 +170,13 @@ BOARD_BOOTLOADER_IASIMAGE := $(BOARD_BOOTLOADER_DIR)/kf4sbl.sbl
 BOARD_BOOTLOADER_VAR_IMG := $(BOARD_BOOTLOADER_DIR)/bootloader.img
 BOARD_FLASHFILES += $(BOARD_BOOTLOADER_DEFAULT_IMG):bootloader
 
+ifeq ($(TARGET_PRODUCT),blizzard_ivi)
+PREBUILT_INSTALLER := hardware/intel/kernelflinger/prebuilt/board/RPL_IVI/$(TARGET_PRODUCT)/installer.efi
+PREBUILT_KERNELFLINGER := hardware/intel/kernelflinger/prebuilt/board/RPL_IVI/$(TARGET_PRODUCT)/kernelflinger.efi
+else
 PREBUILT_INSTALLER := hardware/intel/kernelflinger/prebuilt/board/RPL_IVI/installer.efi
 PREBUILT_KERNELFLINGER := hardware/intel/kernelflinger/prebuilt/board/RPL_IVI/kernelflinger.efi
+endif
 INSTALLER_EFI := $(PRODUCT_OUT)/efi/installer.efi
 
 $(BOARD_BOOTLOADER_DIR):
