@@ -1,0 +1,2 @@
+on post-fs
+    wait /dev/graphics/fb0

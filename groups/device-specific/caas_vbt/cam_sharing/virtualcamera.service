@@ -1,0 +1,19 @@
+[Unit]
+Description=Virtual Camera Auto Start
+
+After=default.target
+
+[Service]
+ExecStartPre=/usr/sbin/modprobe v4l2loopback devices=2 video_nr=6,9 card_label="normal","tobii" exclusive_caps=1,1
+
+ExecStart=/usr/bin/IntelCameraService -i /dev/video0 -o /dev/video6 -o /dev/video9 -w 1920 -h 1080 -f MJPG
+
+SuccessExitStatus=255
+
+Restart=always
+
+RestartSec=10
+
+[Install]
+WantedBy=default.target
+
