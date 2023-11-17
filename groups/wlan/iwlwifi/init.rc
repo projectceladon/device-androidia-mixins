@@ -2,6 +2,7 @@ on post-fs-data
     chmod 0660 /data/misc/wifi/p2p_supplicant.conf
     setprop wifi.interface wlan0
     setprop wifi.direct.interface p2p-dev-wlan0
+    setprop ro.boot.wificountrycode CN
 
 on early-boot
 {{^iwl_upstream_drv}}
