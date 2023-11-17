@@ -7,10 +7,10 @@ on post-fs
 	start staticip
 
 {{#static-ip}}
-service staticip /system/bin/ifconfig eth0 {{static-ip}} 255.255.255.0
+service staticip /system/bin/ip addr add {{static-ip}} dev eth0
 {{/static-ip}}
 {{^static-ip}}
-service staticip /system/bin/ifconfig eth0 192.168.42.1 255.255.255.0
+service staticip /system/bin/ip addr add 192.168.11.123/24 dev eth0
 {{/static-ip}}
      class main
      disabled
