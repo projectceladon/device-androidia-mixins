@@ -1,20 +1,10 @@
-{{#eth-driver}}
-on boot
-	insmod ${ro.vendor.boot.moduleslocation}/{{eth-driver}}
-{{/eth-driver}}
-
-on post-fs
-	start staticip
-
-{{#static-ip}}
-service staticip /system/bin/ifconfig eth0 {{static-ip}} 255.255.255.0
-{{/static-ip}}
-{{^static-ip}}
-service staticip /system/bin/ifconfig eth0 192.168.42.1 255.255.255.0
-{{/static-ip}}
+service staticip /system/bin/ifconfig eth0 10.239.152.11 255.255.255.0
      class main
+     user system
+     group system inet
      disabled
      oneshot
-     # Use seclabel since ifconfig is symlink
-     # Also do not want to change symlink type
-     seclabel u:r:staticip:s0
+
+on post-fs
+     start staticip
+
