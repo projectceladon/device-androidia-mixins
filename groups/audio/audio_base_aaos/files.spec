@@ -1,5 +1,6 @@
 [mapping]
 default: audio/default
+boards: audio/boards
 PCH-ALC283: audio/PCH-ALC283
 PCH-CX20724: audio/PCH-CX20724
 reference_configurable_audio_policy: audio/reference_configurable_audio_policy
@@ -7,6 +8,7 @@ common/AndroidBoard.mk: audio/AndroidBoard.mk
 
 [devicefiles]
 default: 
+boards:
 PCH-ALC283: 
 PCH-CX20724: 
 reference_configurable_audio_policy:

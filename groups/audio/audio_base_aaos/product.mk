@@ -4,6 +4,10 @@ TARGET_BOARD_PLATFORM := celadon
 AUDIO_POLICY_WITH_USB_AUDIO := true
 {{/with_usb_audio}}
 
+# Audio hidl
+MK := $(shell find $(LOCAL_PATH)/audio/boards -name product.mk)
+$(foreach mk, $(MK), $(call inherit-product, $(mk)))
+
 # Tinyalsa
 PRODUCT_PACKAGES_DEBUG += \
     tinymix \
@@ -18,10 +22,6 @@ PRODUCT_PACKAGES += meta.package.audio
 # Sound Trigger HAL
 PRODUCT_PACKAGES += \
        sound_trigger.primary.$(TARGET_BOARD_PLATFORM)
-
-# Audio Primary HAL
-PRODUCT_PACKAGES += \
-       audio.primary.$(TARGET_BOARD_PLATFORM)
 
 # Extended Audio HALs
 PRODUCT_PACKAGES += \
@@ -56,8 +56,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration_devices.xml:vendor/etc/audio_policy_configuration_devices.xml \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration_mixports.xml:vendor/etc/audio_policy_configuration_mixports.xml \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration_routes.xml:vendor/etc/audio_policy_configuration_routes.xml \
-    $(LOCAL_PATH)/audio/default/policy/audio_hal_configuration.xml:vendor/etc/audio_hal_configuration.xml \
-    $(LOCAL_PATH)/audio/default/policy/audio_hal_configuration_intel_poc.xml:vendor/etc/audio_hal_configuration_intel_poc.xml \
     $(LOCAL_PATH)/audio/default/policy/a2dp_audio_policy_configuration.xml:vendor/etc/a2dp_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/default/policy/r_submix_audio_policy_configuration.xml:vendor/etc/r_submix_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/default/policy/usb_audio_policy_configuration.xml:vendor/etc/usb_audio_policy_configuration.xml \
@@ -74,8 +72,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration_devices.xml:vendor/etc/audio_policy_configuration_devices.xml \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration_mixports.xml:vendor/etc/audio_policy_configuration_mixports.xml \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration_routes.xml:vendor/etc/audio_policy_configuration_routes.xml \
-    $(LOCAL_PATH)/audio/default/policy/audio_hal_configuration.xml:vendor/etc/audio_hal_configuration.xml \
-    $(LOCAL_PATH)/audio/default/policy/audio_hal_configuration_intel_poc.xml:vendor/etc/audio_hal_configuration_intel_poc.xml \
     $(LOCAL_PATH)/audio/default/policy/a2dp_audio_policy_configuration.xml:vendor/etc/a2dp_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/default/policy/r_submix_audio_policy_configuration.xml:vendor/etc/r_submix_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/default/policy/usb_audio_policy_configuration.xml:vendor/etc/usb_audio_policy_configuration.xml \

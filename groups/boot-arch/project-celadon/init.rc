@@ -57,3 +57,6 @@ on fs
 on verity-logging
     exec u:r:slideshow:s0 -- /sbin/slideshow -t 30000 -p warning/verity_red_1 warning/verity_red_2
 {{/verity_warning}}
+
+on post-fs-data
+     exec - system system -- /vendor/bin/set_board_prop.sh
