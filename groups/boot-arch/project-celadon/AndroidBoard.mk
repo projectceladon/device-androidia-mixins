@@ -300,8 +300,11 @@ $(tee_zip): $(bootloader_zip)
 	$(hide) rm -rf $(tee_root)
 	$(hide) rm -f $@
 	$(hide) mkdir -p $(tee_root)
-# Reserved for tee sbl container
+ifeq ($(TEE),optee)
+	$(hide) $(ACP) $(PRODUCT_OUT)/sbl_mod_tee $(tee_root)/tee.sbl
+else
 	$(hide) touch $(tee_root)/tee.sbl
+endif
 	$(hide) (cd $(tee_root) && zip -qry ../$(notdir $@) .)
 
 define generate_multiboot_img
@@ -318,6 +321,9 @@ rm -f $(BOARD_TEE_IMG)
 dd of=$(BOARD_TEE_IMG) if=/dev/zero bs=1M count=33;
 ls -l $(BOARD_TEE_IMG)
 $(hide)mkdosfs -F32 $(BOARD_TEE_IMG);
+$(hide)if [ $(findstring optee,$(TEE)) ]; then \
+	mcopy -Q -i $(BOARD_TEE_IMG) $(PRODUCT_OUT)/sbl_mod_tee ::tee.sbl; \
+fi
 echo "TEE image successfully generated $(BOARD_TEE_IMG)"
 endef
 
