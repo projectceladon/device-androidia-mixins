@@ -28,6 +28,7 @@ and updated to vendor media codecs.
     <Decoders>
 {{#hw_vd_h264}}
 	<MediaCodec name="c2.intel.avc.decoder" type="video/avc">
+            <Alias name="OMX.intel.avc.decoder" /> <!--[WA]ijkplayer only knows the name starts with "OMX" -->
             <!-- profiles and levels:  ProfileHigh : Level52 -->
             <Limit name="size" min="64x64" max="4096x4096" />
             <Limit name="alignment" value="2x2" />
@@ -42,6 +43,7 @@ and updated to vendor media codecs.
 
 {{#hw_vd_h265}}
 	<MediaCodec name="c2.intel.hevc.decoder" type="video/hevc">
+            <Alias name="OMX.intel.hevc.decoder" /> <!--[WA]ijkplayer only knows the name starts with "OMX" -->
             <!-- profiles and levels:  ProfileMain : MainTierLevel51 -->
             <Limit name="size" min="64x64" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
@@ -56,6 +58,7 @@ and updated to vendor media codecs.
 
 {{#hw_vd_vp9}}
 	<MediaCodec name="c2.intel.vp9.decoder" type="video/x-vnd.on2.vp9">
+            <Alias name="OMX.intel.vp9.decoder" /> <!--[WA]ijkplayer only knows the name starts with "OMX" -->
             <Limit name="size" min="64x64" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
