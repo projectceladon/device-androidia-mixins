@@ -10,3 +10,4 @@ on post-fs
 	insmod /vendor/lib/modules/max96717f_dummy.ko
 	insmod /vendor/lib/modules/max96722.ko
     insmod /vendor/lib/modules/intel-ipu6-isys.ko
+    insmod /vendor/lib/modules/intel-ipu6-psys.ko
