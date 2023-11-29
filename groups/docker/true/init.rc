@@ -5,6 +5,11 @@ service docker_manager /vendor/bin/docker_manager
     setenv XDG_RUNTIME_DIR /data/vendor/docker/tmp
     disabled
 
+{{^mvm}}
 on property:sys.boot_completed=1
     start docker_manager
-
+{{/mvm}}
+{{#mvm}}
+on property:sys.boot_completed=1 && property:vendor.mvm.enable=1
+    start docker_manager
+{{/mvm}}

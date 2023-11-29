@@ -4,3 +4,4 @@ coreu_msync = true
 mesa_acrn_sepolicy = false
 enable_guc = true
 acrn-guest = false
+mvm = false

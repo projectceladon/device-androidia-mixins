@@ -127,7 +127,13 @@ ifneq ($(KERNEL_MODULES_DIFFCONFIG),)
 endif
 {{/more_modules}}
 
+{{#mvm}}
+KERNEL_VM3CONFIG := $(KERNEL_CONFIG_PATH)/vm3_diffconfig
+KERNEL_CONFIG_DEPS = $(strip $(KERNEL_DEFCONFIG) $(KERNEL_DIFFCONFIG) $(KERNEL_VM3CONFIG))
+{{/mvm}}
+{{^mvm}}
 KERNEL_CONFIG_DEPS = $(strip $(KERNEL_DEFCONFIG) $(KERNEL_DIFFCONFIG))
+{{/mvm}}
 
 CHECK_CONFIG_SCRIPT := $(LOCAL_KERNEL_SRC)/scripts/diffconfig
 CHECK_CONFIG_LOG :=  $(LOCAL_KERNEL_PATH)/.config.check

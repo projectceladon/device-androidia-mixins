@@ -36,3 +36,4 @@ lts2020_chromium_cfg_path =
 linux_intel_lts2021_src_path =
 linux_intel_lts2021_cfg_path =
 more_modules = false
+mvm = false
