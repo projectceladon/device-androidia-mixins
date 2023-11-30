@@ -22,6 +22,9 @@
     <!-- Whether to show a warning notification when the device reaches a certain temperature. -->
     <integer name="config_showTemperatureWarning">1</integer>
 
+    <!-- Disable KeyguardSerivce -->
+    <bool name="config_enableKeyguardService">false</bool>
+
     <!-- Temp at which to show a warning notification if config_showTemperatureWarning is true.
          If < 0, uses the value from
          HardwarePropertiesManager#getDeviceTemperatures - config_warningTemperatureTolerance. -->
