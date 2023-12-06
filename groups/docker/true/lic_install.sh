@@ -106,6 +106,7 @@ EOF
       msg "wait for dockerd to terminated..."
       sleep 1
     done
+    export XDG_RUNTIME_DIR=/data/vendor/docker/tmp
     dockerd --iptables=false &
     sleep 20
   fi
@@ -187,7 +188,7 @@ Usage: $SELF install [-b <backend>] [-s <size>] [-p] [m <memory_size>] [-l stora
 EOF
   )
 
-  while getopts 'b:d:s:hpn:m:l:i:' opt; do
+  while getopts 'b:d:s:hpn:m:l:' opt; do
     case $opt in
     b)
       backend=$OPTARG
@@ -224,9 +225,7 @@ EOF
     echo "privileged = $privileged"
     echo "device = $device"
   fi
-
-  export XDG_RUNTIME_DIR=$storage_location/tmp
-
+  
   cleanup_container $CORECONTAINERS
   msg "create gamecore container with $backend backend..."
 
@@ -255,6 +254,8 @@ EOF
     msg "create aicore container..."
     docker create -ti --network=host -e http_proxy=$http_proxy -e https_proxy=$https_proxy -v /dev/binder:/dev/binder -v /data/vendor/neuralnetworks/:/home/wid/.ipc/ --memory=$memory_size --name aicore --hostname aicore --security-opt seccomp=unconfined --security-opt apparmor=unconfined --device-cgroup-rule='a *:* rmw' -v /sys:/sys:rw --device $device --device /dev/snd --device /dev/tty0 --device /dev/tty1 --device /dev/tty2 --device /dev/tty3 --cap-add=NET_ADMIN --cap-add=SYS_ADMIN aicore
   fi
+
+  msg "Done!"
 }
 
 function uninstall() {
