@@ -1,6 +1,7 @@
 {{#gen9+}}
 
 I915_FW_PATH := vendor/linux/firmware/i915
+I915_EDID_PATH := vendor/linux/firmware/edid
 
 # List of i915/guc_xxx.bin
 $(foreach t, $(patsubst $(I915_FW_PATH)/%,%,$(wildcard $(I915_FW_PATH)/kbl_guc_70*)) ,$(eval I915_FW += i915/$(t)) $(eval $(LOCAL_KERNEL) : $(PRODUCT_OUT)/vendor/firmware/i915/$(t)))
@@ -30,7 +31,11 @@ $(foreach t, $(patsubst $(I915_FW_PATH)/%,%,$(wildcard $(I915_FW_PATH)/adlp_dmc*
 $(foreach t, $(patsubst $(I915_FW_PATH)/%,%,$(wildcard $(I915_FW_PATH)/adls_dmc*)) ,$(eval I915_FW += i915/$(t)) $(eval $(LOCAL_KERNEL) : $(PRODUCT_OUT)/vendor/firmware/i915/$(t)))
 $(foreach t, $(patsubst $(I915_FW_PATH)/%,%,$(wildcard $(I915_FW_PATH)/dg2_dmc*)) ,$(eval I915_FW += i915/$(t)) $(eval $(LOCAL_KERNEL) : $(PRODUCT_OUT)/vendor/firmware/i915/$(t)))
 
+#List of edid firmware
+$(foreach t, $(patsubst $(I915_EDID_PATH)/%,%,$(wildcard $(I915_EDID_PATH)/*)) ,$(eval EDID_FW += edid/$(t)) $(eval $(LOCAL_KERNEL) : $(PRODUCT_OUT)/vendor/firmware/edid/$(t)))
+
 _EXTRA_FW_ += $(I915_FW)
+_EXTRA_FW_ += $(EDID_FW)
 
 AUTO_IN += $(TARGET_DEVICE_DIR)/{{_extra_dir}}/auto_hal.in
 
