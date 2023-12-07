@@ -27,6 +27,7 @@
             <VirtId>11</VirtId>
             <VirtId>12</VirtId>
         </Bind>
+        <Subdev>/dev/v4l-subdev4</Subdev>
     </Device>
     <!--
     <Device>
