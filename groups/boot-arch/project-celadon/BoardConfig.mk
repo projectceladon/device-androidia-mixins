@@ -84,6 +84,9 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 #
 BOARD_KERNEL_CMDLINE += gpt
 
+# Improve performance if CPU is shared between VMs
+BOARD_KERNEL_CMDLINE += idle=halt
+
 #
 # Trusted Factory Reset - persistent partition
 #
