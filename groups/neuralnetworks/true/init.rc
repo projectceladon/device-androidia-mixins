@@ -1,2 +1,8 @@
+{{^mvm}}
 on post-fs-data
     mkdir /data/vendor/neuralnetworks 0770 system system
+{{/mvm}}
+{{#mvm}}
+on post-fs-data && property:vendor.vm3.enable=1
+    start docker_manager
+{{/mvm}

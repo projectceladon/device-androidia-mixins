@@ -1,3 +1,7 @@
+{{#mvm}}
+ifeq ($(VM3), true)
+{{/mvm}}
+
 # neuralnetworks HAL
 PRODUCT_PACKAGES += \
     android.hardware.neuralnetworks@1.3-generic-service \
@@ -17,3 +21,7 @@ PRODUCT_PROPERTY_OVERRIDES += vendor.nn.hal.grpc_ip_port=vsock:2:50059
 {{/vsock-remote-infer}}
 
 PRODUCT_PROPERTY_OVERRIDES += vendor.nn.hal.ngraph=true
+
+{{#mvm}}
+endif
+{{/mvm}}
