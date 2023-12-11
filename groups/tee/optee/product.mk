@@ -3,6 +3,7 @@ PRODUCT_PACKAGES += \
 	libteec \
 	tee-supplicant
 
+{{#hw_km}}
 # optee keymaster
 PRODUCT_PACKAGES += \
 	android.hardware.keymaster@3.0-service.optee \
@@ -10,6 +11,13 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.hardware.keystore=optee
+{{/hw_km}}
+
+{{^hw_km}}
+PRODUCT_PACKAGES += \
+	android.hardware.keymaster@3.0-service \
+	android.hardware.keymaster@3.0-impl
+{{/hw_km}}
 
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:vendor/etc/permissions/android.hardware.keystore.app_attest_key.xml
