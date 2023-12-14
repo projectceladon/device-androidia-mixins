@@ -1,7 +1,8 @@
 # optee_client library and service
 PRODUCT_PACKAGES += \
 	libteec \
-	tee-supplicant
+	tee-supplicant \
+	dba51a17-0563-11e7-93b1-6fa7b0071a51.ta
 
 {{#hw_km}}
 # optee keymaster
