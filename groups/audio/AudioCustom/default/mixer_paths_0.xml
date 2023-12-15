@@ -49,7 +49,9 @@
   <ctl name="DAC IF2 Data Switch" value="0" />
   <ctl name="RECMIXR BST2 Switch" value="1" />
   <ctl name="RECMIXL BST2 Switch" value="1" />
-
+<!--settings for karaOK playback and capture-->
+  <ctl name="ssp2p_fe2 KaraOK Playback Volume" value="2147483647 2147483647" />
+  <ctl name="ssp2c_be Main Capture Volume" value="2147483647 2147483647" />
 
   <path name="speaker">
     <ctl name="Master Playback Switch" value="1 1" />
