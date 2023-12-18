@@ -46,7 +46,7 @@
         <PairId>50</PairId>
         <SrcCamera>/dev/video1</SrcCamera>
         <Driver>v4l2 loopback</Driver>
-        <Setting width="1920" height="1080" fps="30" format="UYVY"/>
+        <Setting width="1920" height="1080" fps="30" format="YUYV"/>
     </Loopback>
 
     <MediaCtlConfig id="1" platform="ivi_config_1">
