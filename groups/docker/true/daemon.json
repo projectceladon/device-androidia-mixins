@@ -8,5 +8,10 @@
     "storage-driver": "overlay2",
    	"insecure-registries": [
 		"localhost:5000"
-	]
+	],
+    "log-driver": "json-file",
+    "log-opts": {
+        "max-size": "100m",
+        "max-file": "1"
+    }
 }
