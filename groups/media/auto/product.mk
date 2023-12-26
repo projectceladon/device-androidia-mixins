@@ -41,6 +41,7 @@ BOARD_HAVE_OMX_SRC := true
 # Open source media_driver
 PRODUCT_PACKAGES += i965_drv_video
 PRODUCT_PACKAGES += libigfxcmrt
+PRODUCT_PACKAGES += libgmm_umd
 
 # Open source hdcp
 PRODUCT_PACKAGES += libhdcpsdk
