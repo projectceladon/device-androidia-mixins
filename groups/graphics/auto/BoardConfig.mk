@@ -5,11 +5,11 @@ LIBDRM_VER ?= intel
 BOARD_KERNEL_CMDLINE += i915.modeset=1 drm.atomic=1 i915.nuclear_pageflip=1 drm.vblankoffdelay=1 i915.fastboot=1
 {{^acrn-guest}}
 {{#enable_guc}}
-BOARD_KERNEL_CMDLINE += i915.enable_guc=2
+#BOARD_KERNEL_CMDLINE += i915.enable_guc=2
 {{/enable_guc}}
 {{/acrn-guest}}
 
-BOARD_KERNEL_CMDLINE += i915.enable_guc=1
+BOARD_KERNEL_CMDLINE += i915.enable_guc=2
 
 USE_OPENGL_RENDERER := true
 USE_INTEL_UFO_DRIVER := false
