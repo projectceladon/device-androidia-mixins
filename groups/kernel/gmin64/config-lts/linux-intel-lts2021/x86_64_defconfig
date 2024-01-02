@@ -3875,7 +3875,7 @@ CONFIG_V4L_PLATFORM_DRIVERS=y
 #
 # VirtIO media platform drivers
 #
-CONFIG_VIDEO_VIRTIO_CAMERA=m
+CONFIG_VIDEO_VIRTIO_CAMERA=y
 # end of Media drivers
 
 #
