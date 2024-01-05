@@ -5,3 +5,8 @@ PRODUCT_PACKAGES_DEBUG += \
     pytimechart-record \
     lspci \
     llvm-symbolizer
+
+{{#logcat2hvc}}
+PRODUCT_PACKAGES_DEBUG += \
+    logcat2hvc
+{{/logcat2hvc}}
