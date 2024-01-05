@@ -1,1 +1,2 @@
 [defaults]
+logcat2hvc=
