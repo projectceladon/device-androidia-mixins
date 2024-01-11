@@ -1,17 +1,8 @@
-{{#eth-driver}}
-on boot
-	insmod ${ro.vendor.boot.moduleslocation}/{{eth-driver}}
-{{/eth-driver}}
+on post-fs-data
+        start staticip
 
-on device-added-/dev/eth0
-	start staticip
-
-{{#static-ip}}
-service staticip /system/bin/ifconfig eth0 {{static-ip}} 255.255.255.0
-{{/static-ip}}
-{{^static-ip}}
-service staticip /system/bin/ifconfig eth0 192.168.42.1 255.255.255.0
-{{/static-ip}}
+service staticip /system/bin/ifconfig eth0 10.239.152.11 255.255.255.0
      class main
      disabled
      oneshot
+
