@@ -6,7 +6,9 @@ PRODUCT_PACKAGES_DEBUG += \
     lspci \
     llvm-symbolizer
 
+ifeq ($(MIXIN_DEBUG_LOGS),true)
 {{#logcat2hvc}}
 PRODUCT_PACKAGES_DEBUG += \
     logcat2hvc
 {{/logcat2hvc}}
+endif
