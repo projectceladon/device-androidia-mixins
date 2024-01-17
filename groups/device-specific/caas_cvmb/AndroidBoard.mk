@@ -10,19 +10,7 @@ LOCAL_MAKE:= \
         PATH="$(LOCAL_CLANG_PATH):$(PWD)/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/x86_64-linux/bin:$$PATH" \
 	$(PWD)/prebuilts/build-tools/linux-x86/bin/make
 
-.PHONY: vinput-manager
-vinput-manager:
-	cd device/intel/civ/host/virtual-input-manager && $(LOCAL_MAKE)
-	cp device/intel/civ/host/virtual-input-manager/vinput-manager $(PRODUCT_OUT)/scripts/
-	cp device/intel/civ/host/virtual-input-manager/sendkey $(PRODUCT_OUT)/scripts/
-
-.PHONY: em-host-utilities
-em-host-utilities:
-	mkdir -p $(PRODUCT_OUT)/scripts/
-	cd device/intel/civ/host/backend/battery/vm_battery_utility && $(LOCAL_MAKE)
-	cp device/intel/civ/host/backend/battery/vm_battery_utility/batsys $(PRODUCT_OUT)/scripts/
-	cd device/intel/civ/host/backend/thermal/vm_thermal_utility && $(LOCAL_MAKE)
-	cp device/intel/civ/host/backend/thermal/vm_thermal_utility/thermsys $(PRODUCT_OUT)/scripts/
-
-.PHONY: host-pkg
-host-pkg: em-host-utilities vinput-manager
+# SKip host-pkg release, host-pkg PHONY is required by flashfiles PHONY
+PHONY: host-pkg
+host-pkg:
+	echo "Skip host package release for cvmb"
