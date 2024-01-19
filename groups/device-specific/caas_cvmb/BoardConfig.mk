@@ -11,23 +11,7 @@ BOARD_KERNEL_CMDLINE += \
 
 BOARD_FLASHFILES += ${TARGET_DEVICE_DIR}/bldr_utils.img:bldr_utils.img
 BOARD_FLASHFILES += $(PRODUCT_OUT)/LICENSE
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/start_flash_usb.sh
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/auto_switch_pt_usb_vms.sh
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/findall.py
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_host.sh
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/ai_raw_tensor.sh
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_ai_dispatcher.sh
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/sof_audio/configure_sof.sh
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/cam_sharing/0001-Netlink-sync.patch
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/cam_sharing/IntelCameraService
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/cam_sharing/virtualcamera.service
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_cam_sharing.sh
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/setup_audio_host.sh
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/guest_pm_control
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/intel-thermal-conf.xml
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/thermald.service
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/rpmb_dev
-BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/vm-manager.deb
+BOARD_FLASHFILES += $(PRODUCT_OUT)/scripts/README_cvmb:README_cvmb
 
 # for USB OTG WA
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/bxt_usb
