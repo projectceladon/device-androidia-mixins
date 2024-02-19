@@ -1,0 +1,3 @@
+on boot
+    setprop ro.hardware.audio.primary goldfish
+
