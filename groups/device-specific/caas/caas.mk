@@ -51,6 +51,7 @@ TARGET_DEVICE := $(shell basename $(TARGET_DEVICE_DIR))
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)
 
 PRODUCT_NAME := {{target}}
 PRODUCT_DEVICE := {{target}}
