@@ -1,0 +1,2 @@
+[defaults]
+swappiness = 100
