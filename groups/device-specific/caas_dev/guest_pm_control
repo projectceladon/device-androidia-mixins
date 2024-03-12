@@ -78,7 +78,7 @@ def main():
     # to connect to this unix socket. To avoid this failure delay of 2 second
     # has been kept. With this delay there is no connection failure.
     time.sleep(2)
-    qemu = qmp.QEMUMonitorProtocol(argv[1])
+    qemu = QEMUMonitorProtocol(argv[1])
 
     # Make a connection to QMP server. Break while loop only when the connection is made.
     # put a timeout 2 minutes if connection is not successful
