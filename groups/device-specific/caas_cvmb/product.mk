@@ -17,8 +17,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += vndservicemanager
 
-PRODUCT_PACKAGES += ClipboardAgent
-
 PRODUCT_PACKAGES += androidx.window.extensions \
 		    androidx.window.sidecar
 
