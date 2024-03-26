@@ -3258,11 +3258,16 @@ CONFIG_PROC_THERMAL_MMIO_RAPL=y
 #
 # Trusty
 #
+{{#trusty_driver}}
 CONFIG_TRUSTY=m
 CONFIG_TRUSTY_LOG=m
 CONFIG_TRUSTY_VIRTIO=m
 CONFIG_TRUSTY_VIRTIO_IPC=m
 CONFIG_TRUSTY_BACKUP_TIMER=m
+{{/trusty_driver}}
+{{^trusty_driver}}
+# CONFIG_TRUSTY is not set
+{{/trusty_driver}}
 # end of Trusty
 
 CONFIG_WATCHDOG=y
