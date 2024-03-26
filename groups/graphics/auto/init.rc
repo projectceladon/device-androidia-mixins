@@ -6,6 +6,9 @@ on init
 on post-fs-data
    #setprop debug.sf.nobootanimation 1
    mkdir /data/system 0770 system system
+   setprop ro.hardware.egl swiftshader
+   setprop ro.hardware.hwcomposer default
+   setprop ro.hardware.gralloc default
 
 on boot
    chown system graphics /sys/kernel/debug/sync/sw_sync
