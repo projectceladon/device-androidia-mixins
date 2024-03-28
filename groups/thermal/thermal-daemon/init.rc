@@ -20,5 +20,5 @@ on post-fs-data
     setprop persist.vendor.thermal.mode thermal-daemon
     mkdir /data/vendor/thermal-daemon 0660 system system
 
-on property:sys.boot_completed=1 && property:vendor.thermal.enable=1
-    start thermal-daemon
+# on property:sys.boot_completed=1 && property:vendor.thermal.enable=1
+#    start thermal-daemon
