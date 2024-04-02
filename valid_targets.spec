@@ -1,5 +1,5 @@
 [project-celadon]
-celadon_ivi:
+base_aaos:
 celadon_tablet:
 caas:
 caas_dev:

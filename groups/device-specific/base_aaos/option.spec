@@ -1,6 +1,6 @@
 [defaults]
-target = celadon_ivi
-ref_target = celadon_ivi
+target = base_aaos
+ref_target = base_aaos
 ota-update = false
 
 [mixinfo]
