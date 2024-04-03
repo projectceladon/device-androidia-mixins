@@ -23,8 +23,8 @@ PRODUCT_PACKAGES += android.hardware.automotive.vehicle.intel@2.0-service
 PRODUCT_PACKAGES += android.hardware.automotive.audiocontrol@1.0-service.intel
 
 {{#aosp_hal}}
-PRODUCT_PACKAGES += android.hardware.automotive.vehicle@2.0-default-service \
-    android.hardware.automotive.vehicle@2.0-default-impl
+PRODUCT_PACKAGES += android.hardware.automotive.vehicle@V1-default-service \
+    android.hardware.automotive.vehicle@V1-default-impl
 {{/aosp_hal}}
 
 VEHICLE_HAL_PROTO_TYPE := {{vhal-proto-type}}

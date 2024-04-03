@@ -39,15 +39,15 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl" optional="false">
+    <!--<hal format="hidl" optional="false">
         <name>android.system.wifi.keystore</name>
         <version>1.0</version>
         <interface>
             <name>IKeystore</name>
             <instance>default</instance>
         </interface>
-    </hal>
-    <!--<vendor-ndk>
-        <version>33</version>
-    </vendor-ndk>-->
+    </hal>-->
+    <vendor-ndk>
+        <version>34</version>
+    </vendor-ndk>
 </compatibility-matrix>
