@@ -10,3 +10,4 @@ on post-fs-data
 on boot
    chown system graphics /sys/kernel/debug/sync/sw_sync
    symlink /sys/kernel/debug/sync/sw_sync /dev/sw_sync
+   insmod /vendor/lib/modules/fpd_dp_ser_drv.ko
