@@ -24,8 +24,8 @@ PRODUCT_PACKAGES += ClipboardAgent
 
 PRODUCT_PACKAGES +=  \
                     android.hardware.usb-service.example \
-                    camera.device@1.0-impl \
-                    android.hardware.camera.provider@2.4-impl \
+                    camera.vendor.device@1.0-impl \
+                    android.hardware.camera.provider@2.4-impl-intel \
                     android.hardware.graphics.mapper@4.0-impl.minigbm_intel \
                     android.hardware.graphics.allocator-service.minigbm \
                     android.hardware.renderscript@1.0-impl \
