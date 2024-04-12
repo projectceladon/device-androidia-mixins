@@ -1,0 +1,60 @@
+on post-fs && property:vendor.intel.enable.audio=legacy-hda
+    insmod /vendor/lib/modules/snd-compress.ko
+    insmod /vendor/lib/modules/snd-ctl-led.ko
+    insmod /vendor/lib/modules/snd-hda-core.ko
+    insmod /vendor/lib/modules/snd-hda-codec.ko
+    insmod /vendor/lib/modules/snd-hda-codec-generic.ko
+    insmod /vendor/lib/modules/snd-intel-dspcfg.ko dsp_driver=1
+    insmod /vendor/lib/modules/snd-hda-intel.ko
+    insmod /vendor/lib/modules/snd-hda-codec-realtek.ko
+    insmod /vendor/lib/modules/snd-hda-codec-hdmi.ko
+    insmod /vendor/lib/modules/snd-intel-sdw-acpi.ko
+    insmod /vendor/lib/modules/snd-soc-acpi.ko
+    insmod /vendor/lib/modules/snd-soc-acpi-intel-match.ko
+    insmod /vendor/lib/modules/snd-soc-core.ko
+
+on post-fs && property:vendor.intel.enable.audio=sof-hda
+    insmod /vendor/lib/modules/snd-compress.ko
+    insmod /vendor/lib/modules/snd-ctl-led.ko
+    insmod /vendor/lib/modules/snd-hda-core.ko
+    insmod /vendor/lib/modules/snd-hda-codec.ko
+    insmod /vendor/lib/modules/snd-hda-codec-generic.ko
+    insmod /vendor/lib/modules/snd-intel-dspcfg.ko dsp_driver=3
+    insmod /vendor/lib/modules/snd-hda-intel.ko
+    insmod /vendor/lib/modules/snd-hda-codec-realtek.ko
+    insmod /vendor/lib/modules/snd-hda-codec-hdmi.ko
+    insmod /vendor/lib/modules/snd-intel-sdw-acpi.ko
+    insmod /vendor/lib/modules/snd-soc-acpi.ko
+    insmod /vendor/lib/modules/snd-soc-acpi-intel-match.ko
+    insmod /vendor/lib/modules/snd-soc-core.ko
+    insmod /vendor/lib/modules/snd-sof-utils.ko
+    insmod /vendor/lib/modules/snd-sof-xtensa-dsp.ko
+    insmod /vendor/lib/modules/snd-sof.ko
+    insmod /vendor/lib/modules/snd-sof-pci.ko
+    insmod /vendor/lib/modules/snd-sof-acpi.ko
+    insmod /vendor/lib/modules/snd-hda-ext-core.ko
+    insmod /vendor/lib/modules/snd-sof-intel-hda.ko
+    insmod /vendor/lib/modules/snd-soc-hdac-hda.ko
+    insmod /vendor/lib/modules/snd-sof-intel-hda-common.ko
+    insmod /vendor/lib/modules/snd-soc-dmic.ko
+    insmod /vendor/lib/modules/snd-soc-hdac-hdmi.ko
+    insmod /vendor/lib/modules/snd-soc-intel-hda-dsp-common.ko
+    insmod /vendor/lib/modules/snd-soc-sst-dsp.ko
+    insmod /vendor/lib/modules/snd-soc-sst-ipc.ko
+    insmod /vendor/lib/modules/snd-sof-acpi-intel-bdw.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-apl.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-cnl.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-icl.ko
+    insmod /vendor/lib/modules/snd-usb-hiface.ko
+    insmod /vendor/lib/modules/snd-soc-skl_hda_dsp.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-tgl.ko
+
+on boot
+    insmod /vendor/lib/modules/snd.ko
+    insmod /vendor/lib/modules/snd-timer.ko
+    insmod /vendor/lib/modules/snd-pcm.ko
+    insmod /vendor/lib/modules/snd-dummy.ko
+
+on property:sys.boot_completed=1 && property:ro.vendor.hdmi.audio=tgl
+    stop audioserver
+    start audioserver
