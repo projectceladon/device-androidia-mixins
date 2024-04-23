@@ -106,18 +106,12 @@ def main():
                         if "guest-reset" in json.dumps(resp["data"]):
                             print("VM is rebooting")
                             print("Reason: guest reset request")
-                            cmdCommand = "reboot"
-                            signal.signal(signal.SIGTERM, signal.SIG_IGN)
-                            time.sleep(3)
-                            process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE, shell=True)
+                            os.system('reboot')
                             break
                         elif "host-qmp-system-reset" in json.dumps(resp["data"]):
                             print("VM is rebooting")
                             print("Reason: Reboot triggered by host")
-                            cmdCommand = "reboot"
-                            signal.signal(signal.SIGTERM, signal.SIG_IGN)
-                            time.sleep(3)
-                            process = subprocess.Popen(cmdCommand.split(), stdout=subprocess.PIPE, shell=True)
+                            os.system('reboot')
                             break
                         elif "host-qmp-quit" in json.dumps(resp["data"]):
                             print("VM is getting Shutdown")
