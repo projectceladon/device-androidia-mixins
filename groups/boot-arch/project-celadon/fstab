@@ -5,6 +5,7 @@
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 {{#dynamic-partitions}}
 system   /system  {{system_fs}} ro{{#system_fs_ext4}},barrier=1{{/system_fs_ext4}} wait{{#slot-ab}},slotselect{{/slot-ab}},avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey,avb=vbmeta,logical,first_stage_mount
+system   /system  ext4 ro,barrier=1  wait{{#slot-ab}},slotselect{{/slot-ab}},avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey,avb=vbmeta,logical,first_stage_mount
 {{/dynamic-partitions}}
 {{^dynamic-partitions}}
 /dev/block/by-name/system       /{{^slot-ab}}system{{/slot-ab}}         {{system_fs}}    ro                                                          wait{{#slot-ab}},slotselect{{/slot-ab}},avb
