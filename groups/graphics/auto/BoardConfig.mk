@@ -56,5 +56,8 @@ BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/graphics/mesa
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/graphics/mesa_acrn
 {{/mesa_acrn_sepolicy}}
 
-BOARD_SEPOLICY_M4DEFS += module_hwc_info_service=true
+{{#opencl_sepolicy}}
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/graphics/opencl
+{{/opencl_sepolicy}}
 
+BOARD_SEPOLICY_M4DEFS += module_hwc_info_service=true
