@@ -2,9 +2,10 @@ PRODUCT_PACKAGES += \
     libGLES_android \
     libigdrcl \
     libOpenCL \
-    libcommon_clang \
+    libopencl-clang \
     libigc \
-    libigdfcl
+    libigdfcl \
+    clinfo \
 
 #Gallium drivers since mesa 22.0.3
 PRODUCT_PACKAGES += \
@@ -48,6 +49,9 @@ $(foreach fw,$(I915_FW),$(eval PRODUCT_PACKAGES += $(notdir $(fw))))
 # move configure files provided by intel to vendor partition
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/drirc:vendor/etc/drirc
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/{{_extra_dir}}/intel.icd:vendor/Khronos/OpenCL/vendors/intel.icd
 
 # DRM HWComposer
 PRODUCT_PACKAGES += \
