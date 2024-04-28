@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<IVICamera platform="ivi_config_1">
+    <Provider>
+        <CameraIdOffset>0</CameraIdOffset>
+        <CaptureManager>disable</CaptureManager>
+        <ignore> <!-- Internal video devices to be ignored by external camera HAL -->
+            <!--
+            <id>5</id>
+            <id>6</id>
+            <id>7</id>
+            -->
+        </ignore>
+    </Provider>
+    <!-- See ExternalCameraUtils.cpp for default values of Device configurations below
+    <Device>
+        <Path>/dev/video0</Path>
+        <Driver>intel-ipu6-isys</Driver>
+        <NumVideoBuffers count="2"/>
+        <NumStillBuffers count="2"/>
+        <Setting width="1920" height="1080" fps="30" format="UYVY"/>
+        <Bind>
+            <VirtId>10</VirtId>
+        </Bind>
+    </Device>
+-->
+    <Device>
+        <Path>/dev/video1</Path>
+        <Driver>intel-ipu6-isys</Driver>
+        <NumVideoBuffers count="2"/>
+        <NumStillBuffers count="2"/>
+        <Setting width="1920" height="1080" fps="30" format="UYVY"/>
+        <Bind>
+            <VirtId>11</VirtId>
+            <VirtId>12</VirtId>
+        </Bind>
+    </Device>
+    <!--
+    <Device>
+        <Path>/dev/video5</Path>
+        <Driver>uvcvideo</Driver>
+        <NumVideoBuffers count="2"/>
+        <NumStillBuffers count="2"/>
+        <Setting width="1920" height="1080" fps="30" format="YUYV"/>
+        <Bind>
+            <VirtId>13</VirtId>
+        </Bind>
+    </Device>
+    -->
+
+    <Loopback>
+        <PairId>50</PairId>
+        <SrcCamera>/dev/video1</SrcCamera>
+        <Driver>v4l2 loopback</Driver>
+        <Setting width="1920" height="1080" fps="30" format="UYVY"/>
+    </Loopback>
+
+    <MediaCtlConfig id="1" platform="ivi_config_1">
+        <!-- IPU sensors -->
+        <format name="max9295a_dummy" pad="0" width="1920" height="1080" format="V4L2_MBUS_FMT_UYVY8_1X16"/>
+        <format name="max926717f_dummy" pad="0" width="1920" height="1080" format="V4L2_MBUS_FMT_UYVY8_1X16"/>
+
+        <format name="max96722" pad="0" width="1920" height="1080" format="V4L2_MBUS_FMT_UYVY8_1X16"/>
+        <format name="max96722" pad="1" width="1920" height="1080" format="V4L2_MBUS_FMT_UYVY8_1X16"/>
+        <format name="max96722" pad="4" width="1920" height="1080" format="V4L2_MBUS_FMT_UYVY8_1X16"/>
+
+        <format name="Intel IPU6 CSI-2 1" pad="0" width="1920" height="1080" format="V4L2_MBUS_FMT_UYVY8_1X16"/>
+        <format name="Intel IPU6 CSI-2 1" pad="1" width="1920" height="1080" format="V4L2_MBUS_FMT_UYVY8_1X16"/>
+
+        <format name="Intel IPU6 CSI2 BE SOC 0" pad="0" width="1920" height="1080" format="V4L2_MBUS_FMT_UYVY8_1X16"/>
+        <format name="Intel IPU6 CSI2 BE SOC 0" pad="1" width="1920" height="1080" format="V4L2_MBUS_FMT_UYVY8_1X16"/>
+        <format name="Intel IPU6 CSI2 BE SOC 0" pad="2" width="1920" height="1080" format="V4L2_MBUS_FMT_UYVY8_1X16"/>
+
+        <format name="Intel IPU6 BE SOC capture 0" pad="0" width="1920" height="1080" format="V4L2_MBUS_FMT_UYVY8_1X16"/>
+        <format name="Intel IPU6 BE SOC capture 1" pad="0" width="1920" height="1080" format="V4L2_MBUS_FMT_UYVY8_1X16"/>
+
+        <!-- DPIN -->
+
+        <link srcName="max96717f_dummy" srcPad="0" sinkName="max96722" sinkPad="0" enable="true"/>
+        <link srcName="max9295a_dummy" srcPad="0" sinkName="max96722" sinkPad="1" enable="true"/>
+        <link srcName="max96722" srcPad="4" sinkName="Intel IPU6 CSI-2 1" sinkPad="0" enable="true"/>
+
+        <link srcName="Intel IPU6 CSI-2 1" srcPad="1" sinkName="Intel IPU6 CSI2 BE SOC 0" sinkPad="0" enable="true"/>
+
+        <link srcName="Intel IPU6 CSI2 BE SOC 0" srcPad="2" sinkName="Intel IPU6 BE SOC capture 1" sinkPad="0" enable="true"/>
+        <link srcName="Intel IPU6 CSI2 BE SOC 0" srcPad="1" sinkName="Intel IPU6 BE SOC capture 0" sinkPad="0" enable="true"/>
+
+    </MediaCtlConfig>
+</IVICamera>
