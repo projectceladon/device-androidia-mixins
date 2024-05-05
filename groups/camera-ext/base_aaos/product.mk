@@ -7,7 +7,7 @@ PRODUCT_COPY_FILES += \
 
 # External camera service
 
-PRODUCT_PACKAGES += android.iacamera.provider@2.4-ivi-service \
+#PRODUCT_PACKAGES += android.iacamera.provider@2.4-ivi-service \
                     android.ia.hardware.camera.provider@2.4-ivi \
                     android.hardware.camera.provider@2.4-impl-ia
 
