@@ -1,3 +1,17 @@
+on post-fs-data
+    sysctl -w net.ipv4.tcp_keepalive_time=120
+    sysctl -w net.ipv4.tcp_retries1=5
+    sysctl -w net.ipv4.tcp_keepalive_intvl=15
+    sysctl -w net.ipv4.tcp_slow_start_after_idle=0
+    sysctl -w net.ipv4.tcp_allowed_congestion_control=0
+    sysctl -w net.ipv4.neigh.wlan0.retrans_time=0
+    sysctl -w net.ipv4.tcp_recovery=0
+    sysctl -w net.ipv4.tcp_base_mss=1460
+    sysctl -w net.ipv4.neigh.eth0.retrans_time_ms=1000
+    sysctl -w net.ipv4.tcp_syn_retries=5
+    sysctl -w net.ipv4.tcp_synack_retries=5
+    sysctl -w net.ipv4.tcp_retries2=8
+
 service dhcpcd_eth0 /system/bin/dhcpcd -ABDKL
     class main
     user system
