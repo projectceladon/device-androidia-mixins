@@ -9,7 +9,7 @@
         <version>1</version>
         <fqname>IHealth/default</fqname>
     </hal-->
-    <hal format="hidl">
+    <!--<hal format="hidl">
         <name>android.hardware.audio</name>
         <transport>hwbinder</transport>
         <version>7.1</version>
@@ -26,7 +26,7 @@
             <name>IEffectsFactory</name>
             <instance>default</instance>
         </interface>
-    </hal>
+    </hal-->
     <hal format="hidl">
        <name>android.hardware.bluetooth</name>
        <transport>hwbinder</transport>

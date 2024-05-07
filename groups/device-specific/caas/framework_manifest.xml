@@ -59,24 +59,41 @@
             <name>IGatekeeper</name>
             <instance>default</instance>
         </interface>
+    </hal> 
+    <hal format="aidl" optional="true">
+        <name>android.hardware.audio.core</name>
+        <version>1</version>
+        <fqname>IModule/default</fqname>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.audio</name>
-        <transport>hwbinder</transport>
-        <version>7.1</version>
-        <interface>
-            <name>IDevicesFactory</name>
-            <instance>default</instance>
-        </interface>
+    <hal format="aidl" optional="true">
+        <name>android.hardware.audio.core</name>
+        <version>1</version>
+        <fqname>IModule/r_submix</fqname>
     </hal>
-    <hal format="hidl">
+    <hal format="aidl" optional="true">
+        <name>android.hardware.audio.core</name>
+        <version>1</version>
+        <fqname>IModule/stub</fqname>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>android.hardware.audio.core</name>
+        <version>1</version>
+        <fqname>IModule/usb</fqname>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>android.hardware.audio.core</name>
+        <version>1</version>
+        <fqname>IModule/bluetooth</fqname>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>android.hardware.audio.core</name>
+        <version>1</version>
+        <fqname>IConfig/default</fqname>
+    </hal>
+    <hal format="aidl" optional="true">
         <name>android.hardware.audio.effect</name>
-        <transport>hwbinder</transport>
-        <version>7.0</version>
-        <interface>
-            <name>IEffectsFactory</name>
-            <instance>default</instance>
-        </interface>
+        <version>1</version>
+        <fqname>IFactory/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.graphics.mapper</name>
