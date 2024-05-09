@@ -7742,3 +7742,10 @@ CONFIG_ARCH_USE_MEMTEST=y
 #
 # end of Rust hacking
 # end of Kernel hacking
+
+#
+# Socwatch drivers
+#
+# CONFIG_INTEL_SOCWATCH is not set
+#
+# end of Socwatch drivers
