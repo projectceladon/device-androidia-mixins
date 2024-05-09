@@ -16,6 +16,10 @@ PRODUCT_PACKAGES += \
     VmsPublisherClientSample \
     VmsSubscriberClientSample \
 
+PRODUCT_PACKAGES += cardisplayproxyd
+PRODUCT_PACKAGES += evs_app
+PRODUCT_PACKAGES += evsmanagerd
+
 {{^aosp_hal}}
 PRODUCT_PACKAGES += android.hardware.automotive.vehicle.intel@2.0-service
 {{/aosp_hal}}
