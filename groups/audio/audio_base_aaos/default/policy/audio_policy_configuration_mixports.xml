@@ -57,9 +57,9 @@
     </mixPort>
     <!-- TODO update for input-->
     <mixPort name="primary input" role="sink">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+        <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                  samplingRates="48000"
-                 channelMasks="AUDIO_CHANNEL_IN_MONO"/>
+                 channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
     </mixPort>
     <mixPort name="mixport_bus_1000_input_zone_0" role="sink">
         <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"

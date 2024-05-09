@@ -9,6 +9,6 @@
     <Pcm Card="SoundCard" Device="1" SampleRate="48000" Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" />
   </Stream>
   <Stream Address="Built-In Mic" Direction="capture" Mmap="false">
-    <Pcm Card="SoundCard" Device="1" SampleRate="48000" Format="16" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="1" StopThreshold="4096" />
+    <Pcm Card="SoundCard" Device="1" SampleRate="48000" Format="16" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" />
   </Stream>
 </Streams>
