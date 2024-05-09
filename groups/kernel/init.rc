@@ -84,6 +84,3 @@ on property:sys.boot_completed=1
 
 on early-init
 	mount proc proc /proc remount hidepid=2,gid=3009
-
-on boot
-	setrlimit 8 8388608 8388608
