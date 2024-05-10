@@ -22,3 +22,8 @@ COMPRESS_GPTIMAGE ?= true
 ifeq ($(COMPRESS_GPTIMAGE), true)
 GPTIMAGE_GZ ?= $(GPTIMAGE_BIN).gz
 endif
+
+{{#generate_qcow2}}
+QEMU_IMG := prebuilts/android-emulator/linux-x86_64/qemu-img
+QCOW2IMAGE_BIN = $(PRODUCT_OUT)/$(TARGET_PRODUCT).qcow2
+{{/generate_qcow2}}
