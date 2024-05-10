@@ -163,3 +163,14 @@ $(GPTIMAGE_BIN): \
 
 .PHONY: gptimage
 gptimage: $(GPTIMAGE_BIN)
+
+
+{{#generate_qcow2}}
+$(QCOW2IMAGE_BIN): $(GPTIMAGE_BIN)
+	$(hide) rm -f $@
+	@echo "Generate qcow2 image..."
+	$(hide) $(QEMU_IMG) convert -f raw -O qcow2 $(GPTIMAGE_BIN) $@
+
+.PHONY: qcow2image
+qcow2image: $(QCOW2IMAGE_BIN)
+{{/generate_qcow2}}
