@@ -6,9 +6,9 @@
   </Stream>
 -->
   <Stream Address="bus0_media_out" Direction="playback" Mmap="false">
-    <Pcm Card="SoundCard" Device="1" SampleRate="48000" Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" />
+    <Pcm Card="SoundCard" Device="1" SampleRate="48000" Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
   </Stream>
   <Stream Address="Built-In Mic" Direction="capture" Mmap="false">
-    <Pcm Card="SoundCard" Device="1" SampleRate="48000" Format="16" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" />
+    <Pcm Card="SoundCard" Device="1" SampleRate="48000" Format="16" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
   </Stream>
 </Streams>
