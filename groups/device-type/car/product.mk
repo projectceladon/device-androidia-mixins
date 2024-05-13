@@ -19,6 +19,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += cardisplayproxyd
 PRODUCT_PACKAGES += evs_app
 PRODUCT_PACKAGES += evsmanagerd
+PRODUCT_PACKAGES += android.hardware.automotive.evs-default
 
 {{^aosp_hal}}
 PRODUCT_PACKAGES += android.hardware.automotive.vehicle.intel@2.0-service
