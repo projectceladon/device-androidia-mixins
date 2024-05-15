@@ -6700,7 +6700,23 @@ CONFIG_NVMEM_SYSFS=y
 # end of HW tracing support
 
 # CONFIG_FPGA is not set
-# CONFIG_TEE is not set
+CONFIG_TEE=y
+
+#
+# TEE drivers
+#
+CONFIG_OPTEE=y
+CONFIG_OPTEE_SHM_NUM_PRIV_PAGES=1
+# CONFIG_OPTEE_BENCHMARK is not set
+# CONFIG_OPTEE_HV_IKGT is not set
+# CONFIG_OPTEE_VSOCK is not set
+CONFIG_OPTEE_IVSHMEM=y
+# end of TEE drivers
+
+CONFIG_HW_RANDOM_OPTEE=y
+# CONFIG_TCG_FTPM_TEE is not set
+# CONFIG_RTC_DRV_OPTEE is not set
+
 CONFIG_PM_OPP=y
 # CONFIG_SIOX is not set
 # CONFIG_SLIMBUS is not set
