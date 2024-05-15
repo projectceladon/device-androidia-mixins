@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<audioPolicyConfiguration version="1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+<audioPolicyConfiguration version="7.1" xmlns:xi="http://www.w3.org/2001/XInclude">
     <!-- version section contains a “version” tag in the form “major.minor” e.g version=”1.0” -->
 
     <!-- Global configuration Decalaration -->
@@ -49,8 +49,8 @@
     <modules>
         <!-- Primary Audio HAL -->
         <module name="primary" halVersion="3.0">
-            <defaultOutputDevice>bus0_media_out</defaultOutputDevice>
             <xi:include href="audio_policy_configuration_attached_devices.xml"/>
+            <defaultOutputDevice>bus0_media_out</defaultOutputDevice>
             <xi:include href="audio_policy_configuration_mixports.xml"/>
             <xi:include href="audio_policy_configuration_devices.xml"/>
 	    <xi:include href="audio_policy_configuration_routes.xml"/>
