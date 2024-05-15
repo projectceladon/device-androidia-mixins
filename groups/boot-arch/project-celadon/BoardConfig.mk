@@ -149,6 +149,11 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_OPTIONAL_vendor=true
 {{/slot-ab}}
 
+{{#fw_sbl}}
+    TARGET_USE_SBL := true
+{{/fw_sbl}}
+
+
 BOARD_AVB_ENABLE := true
 KERNELFLINGER_AVB_CMDLINE := true
 BOARD_VBMETAIMAGE_PARTITION_SIZE := 2097152
