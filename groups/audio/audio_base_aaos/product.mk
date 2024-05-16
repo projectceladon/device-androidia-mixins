@@ -17,7 +17,7 @@ PRODUCT_PACKAGES += \
 
 # Audio Primary HAL
 PRODUCT_PACKAGES += \
-       audio.primary.$(TARGET_BOARD_PLATFORM)
+       audio.primary.aaos.$(TARGET_BOARD_PLATFORM)
 
 # Extended Audio HALs
 PRODUCT_PACKAGES += \
