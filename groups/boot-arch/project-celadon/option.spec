@@ -50,3 +50,4 @@ fw_sbl = false
 x64 = false
 use_ec_uart = false
 ifwi_variant = release
+trusty = false

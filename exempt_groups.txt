@@ -169,7 +169,7 @@ thermal
 touch
 tpm
 treble
-trusty
+tee
 unity-replacement
 usb
 usb-audio-init
