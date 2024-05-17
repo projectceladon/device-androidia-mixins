@@ -1,6 +1,6 @@
 # Audio/video codec support.
 PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:vendor/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_c2_audio.xml:vendor/etc/media_codecs_google_c2_audio.xml \
     $(LOCAL_PATH)/{{_extra_dir}}/{{profile_file}}:vendor/etc/media_profiles_V1_0.xml
 
 {{#sw_omx_video}}
