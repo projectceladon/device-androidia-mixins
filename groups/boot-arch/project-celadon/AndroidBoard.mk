@@ -264,6 +264,32 @@ $(INSTALLER_EFI):
 
 {{/fw_sbl}}
 
+TEE := {{{tee}}}
+ifeq ($(TEE),optee)
+
+BOARD_TEE_IMG := $(PRODUCT_OUT)/tee.img
+BOARD_FLASHFILES += $(BOARD_TEE_IMG)
+
+define generate_tee_img
+rm -f $(BOARD_TEE_IMG)
+dd of=$(BOARD_TEE_IMG) if=/dev/zero bs=1M count=33;
+ls -l $(BOARD_TEE_IMG)
+$(hide)mkdosfs -F32 $(BOARD_TEE_IMG);
+echo "TEE image successfully generated $(BOARD_TEE_IMG)"
+endef
+
+OPTEE_ELF := $(PRODUCT_OUT)/optee/x86_64-plat-standalonevm/core/tee.elf
+tee: $(OPTEE_ELF)
+
+	$(call generate_tee_img)
+
+$(BOARD_TEE_IMG): tee
+	@echo "Generate TEE image: $@ finished."
+
+droidcore: tee
+
+INSTALLED_RADIOIMAGE_TARGET += $(BOARD_TEE_IMG)
+endif
 
 .PHONY: bootloader
 {{#bootloader_policy}}

@@ -1,0 +1,23 @@
+on post-fs
+    chmod 666 /dev/tee0
+    chmod 666 /dev/teepriv0
+
+    chown system system /persist
+    chmod 0771 /persist
+    restorecon /persist
+    mkdir /persist/tee 0770 shell shell
+    restorecon_recursive /persist/tee
+
+    start tee-supplicantd
+    start vendor.keymaster-3-0-optee
+    start vendor.gatekeeper-1-0-optee
+
+service tee-supplicantd /vendor/bin/tee-supplicant
+    class main
+    user root
+    group root
+    disabled
+
+on late-fs
+    exec_start wait_for_keymaster_optee
+
