@@ -37,3 +37,4 @@ linux_intel_lts2022_cfg_path =
 more_modules = false
 branch =
 kmi_generation =
+i915_ag_mods_version = false

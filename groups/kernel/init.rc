@@ -84,3 +84,11 @@ on property:sys.boot_completed=1
 
 on early-init
 	mount proc proc /proc remount hidepid=2,gid=3009
+
+{{#i915_ag_mods_version}}
+on fs
+	insmod /vendor/lib/modules/compat.ko
+	insmod /vendor/lib/modules/intel_vsec.ko
+	insmod /vendor/lib/modules/i915_ag.ko
+
+{{/i915_ag_mods_version}}
