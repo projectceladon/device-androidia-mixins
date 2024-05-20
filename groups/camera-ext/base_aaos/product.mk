@@ -11,5 +11,8 @@ PRODUCT_PACKAGES += android.iacamera.provider@2.4-ivi-service \
                     android.ia.hardware.camera.provider@2.4-ivi \
                     android.hardware.camera.provider@2.4-impl-ia
 
+PRODUCT_PACKAGES += android.ia.hardware.camera.provider-ivi \
+					android.iacamera.provider-ivi-service
+
 PRODUCT_PACKAGES += MultiCameraApp
 PRODUCT_PACKAGES += Camera2
