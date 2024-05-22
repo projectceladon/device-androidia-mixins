@@ -35,3 +35,5 @@ linux_intel_lts2021_cfg_path =
 linux_intel_lts2022_src_path =
 linux_intel_lts2022_cfg_path =
 more_modules = false
+branch =
+kmi_generation =
