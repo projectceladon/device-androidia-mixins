@@ -120,6 +120,12 @@ KERNEL_MAKE_OPTIONS += \
     LLVM=1 \
     HOSTLDFLAGS=-fuse-ld=lld \
 
+KERNEL_BRANCH = {{{branch}}}
+KERNEL_KMI_GENERATION = {{{kmi_generation}}}
+KERNEL_MAKE_OPTIONS += \
+    BRANCH=$(KERNEL_BRANCH) \
+    KMI_GENERATION=$(KERNEL_KMI_GENERATION)
+
 {{#more_modules}}
 KERNEL_MODULES_DIFFCONFIG += $(wildcard $(KERNEL_CONFIG_PATH)/modules_diffconfig)
 ifneq ($(KERNEL_MODULES_DIFFCONFIG),)
