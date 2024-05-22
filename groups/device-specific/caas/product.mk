@@ -31,6 +31,7 @@ PRODUCT_PACKAGES +=  \
                     android.hardware.renderscript@1.0-impl \
                     android.hardware.identity \
                     android.hardware.identity-service.example \
+		    android.hardware.graphics.composer3-service.intel \
                     android.hardware.media.omx@1.0-service
 
 

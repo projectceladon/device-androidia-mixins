@@ -1,0 +1,75 @@
+<mixer>
+  <!-- These are the initial mixer settings -->
+  <ctl name="Master Playback Volume" value="87 87" />
+  <ctl name="Master Playback Switch" value="1 1" />
+  <ctl name="Headphone Playback Switch" value="0 0" />
+  <ctl name="Speaker Playback Switch" value="0 0" />
+  <ctl name="Capture Switch" value="0 0" />
+<!-- settings for new cards-->
+  <ctl name="DAI select" value="0" />
+  <ctl name="DAC MIXL INF1 Switch" value="1" />
+  <ctl name="DAC MIXR INF1 Switch" value="1" />
+  <ctl name="Stereo DAC MIXL DAC L1 Switch" value="1" />
+  <ctl name="Stereo DAC MIXR DAC R1 Switch" value="1" />
+  <ctl name="OUT MIXL DAC L1 Switch" value="1" />
+  <ctl name="OUT MIXR DAC R1 Switch" value="1" />
+  <ctl name="HPO MIX HPVOL Switch" value="1" />
+  <ctl name="HP Channel Switch" value="1" />
+  <ctl name="HP L Playback Switch" value="1" />
+  <ctl name="HP R Playback Switch" value="1" />
+<!-- settings for new card mic -->
+  <ctl name="RECMIXL BST1 Switch" value="0" />
+  <ctl name="RECMIXR BST1 Switch" value="0" />
+  <ctl name="RECMIXL BST1 Switch" value="1" />
+  <ctl name="RECMIXR BST1 Switch" value="1" />
+  <ctl name="Stereo ADC1 Mux" value="ADC" />
+  <ctl name="Stereo ADC MIXL ADC2 Switch" value="0" />
+  <ctl name="Stereo ADC MIXR ADC2 Switch" value="0" />
+  <ctl name="Stereo ADC MIXL ADC1 Switch" value="1" />
+  <ctl name="Stereo ADC MIXR ADC1 Switch" value="1" />
+  <ctl name="IN2 Boost" value="4" />
+<!--additional set as per poland team configuration-->
+  <ctl name="Mono Playback Switch" value="1" />
+  <ctl name="Speaker Playback Volume" value="17 17" />
+  <ctl name="HP Playback Volume" value="31 31" />
+  <ctl name="OUT Playback Volume" value="31 31" />
+  <ctl name="DAC2 Playback Switch" value="1 1" />
+  <ctl name="DAC2 Playback Volume" value="175 175" />
+  <ctl name="DAC1 Playback Volume" value="175 175" />
+  <ctl name="IN Capture Volume" value="23 23" />
+  <ctl name="ADC Capture Switch" value="1 1" />
+  <ctl name="ADC Capture Volume" value="72 72" />
+  <ctl name="Mono ADC Capture Volume " value="47 47" />
+  <ctl name="Stereo ADC1 Mux " value="1" />
+  <ctl name="Mono ADC L1 Mux" value="1" />
+  <ctl name="Mono ADC R1 Mux" value="1" />
+  <ctl name="ADC IF1 Data Switch" value="0" />
+  <ctl name="DAC IF1 Data Switch" value="0" />
+  <ctl name="ADC IF2 Data Switch" value="0" />
+  <ctl name="DAC IF2 Data Switch" value="0" />
+  <ctl name="RECMIXR BST2 Switch" value="1" />
+  <ctl name="RECMIXL BST2 Switch" value="1" />
+
+
+  <path name="speaker">
+    <ctl name="Master Playback Switch" value="1 1" />
+    <ctl name="Speaker Playback Switch" value="1 1" />
+  </path>
+
+  <path name="headphone">
+    <ctl name="Master Playback Switch" value="1 1" />
+    <ctl name="Headphone Playback Switch" value="1 1" />
+  </path>
+
+  <path name="main-mic">
+    <ctl name="Capture Switch" value="1 1" />
+    <ctl name="Capture Volume" value="63 63" />
+    <ctl name="Capture Source" value="Internal Mic" />
+  </path>
+
+  <path name="headset-mic">
+    <ctl name="Capture Switch" value="1 1" />
+    <ctl name="Capture Volume" value="63 63" />
+    <ctl name="Capture Source" value="Headset Mic" />
+  </path>
+</mixer>

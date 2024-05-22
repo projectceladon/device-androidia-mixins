@@ -1,0 +1,5 @@
+<mixer>
+  <!-- These are the initial mixer settings -->
+  <ctl name="PCM Playback Volume" value="44 44" />
+  <ctl name="Headset Playback Volume" value="24 24" />
+</mixer>

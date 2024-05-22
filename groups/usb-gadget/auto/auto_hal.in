@@ -4,7 +4,7 @@ case "$(cat /sys/class/dmi/id/chassis_vendor | head -1)" in
 		setprop vendor.usb.controller "dwc3.2.auto"
 		;;
 	*)
-		setprop vendor.usb.controller "dwc3.1.auto"
+		setprop vendor.usb.controller "dwc3.0.auto"
 		;;
 esac
 }
