@@ -38,5 +38,6 @@ system_dlkm /system_dlkm {{system_fs}} ro{{#system_fs_ext4}},barrier=1{{/system_
 /dev/block/by-name/bootloader2  /bootloader2    emmc    defaults                                                    recoveryonly
 /dev/block/by-name/persistent   /persistent     emmc    defaults                                                    defaults
 /dev/block/by-name/metadata     /metadata       ext4    noatime,nosuid,nodev,errors=panic{{#metadata_encryption}},discard{{/metadata_encryption}}                           wait,check,formattable,first_stage_mount
+/dev/block/by-name/share_data   /mnt/share_data ext4    noatime,nosuid,nodev,noauto_da_alloc,errors=panic           wait,check,formattable,latemount
 {{/use_cic}}
 
