@@ -56,6 +56,10 @@ BOARD_KERNEL_CMDLINE += \
 BOARD_KERNEL_CMDLINE += \
        intel_pstate=passive
 {{/schedutil}}
+{{^schedutil}}
+BOARD_KERNEL_CMDLINE += \
+       intel_pstate=active
+{{/schedutil}}
 
 BOARD_KERNEL_CMDLINE += \
       clearcpuid=517 \
