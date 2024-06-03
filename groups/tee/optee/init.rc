@@ -9,7 +9,7 @@ on post-fs
     restorecon_recursive /persist/tee
 
     start tee-supplicantd
-    start vendor.keymaster-3-0-optee
+    start vendor.keymint-optee
     start vendor.gatekeeper-1-0-optee
 
 service tee-supplicantd /vendor/bin/tee-supplicant
