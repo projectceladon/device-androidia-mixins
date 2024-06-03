@@ -17,8 +17,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += android.hardware.security.keymint-service
 {{/hw_km}}
 
+{{#hw_gk}}
 PRODUCT_PACKAGES += android.hardware.gatekeeper@1.0-service.optee
 PRODUCT_PROPERTY_OVERRIDES += ro.hardware.gatekeeper=optee
+{{/hw_gk}}
+
+{{^hw_gk}}
+PRODUCT_PACKAGES += android.hardware.gatekeeper@1.0-service.software
+{{/hw_gk}}
 
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:vendor/etc/permissions/android.hardware.keystore.app_attest_key.xml
