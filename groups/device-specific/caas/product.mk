@@ -38,6 +38,7 @@ PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
 PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.useautofastjni=true
 PRODUCT_PRODUCT_PROPERTIES += persist.adb.tcp.port=5555
 PRODUCT_PRODUCT_PROPERTIES += persist.sys.fuse.bpf.enable=true
+PRODUCT_PRODUCT_PROPERTIES += ro.odm.build.media_performance_class=34
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.crypto.volume.metadata.method=dm-default-key \
