@@ -15,7 +15,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ueventd.rc:root/ueventd.$(TARGET_PRODUCT).rc \
 {{/treble}}
 
-PRODUCT_PACKAGES += MultiDisplaySecondaryHomeTestLauncher
+PRODUCT_PACKAGES += MultiDisplaySecondaryHomeTestLauncher \
+                    armrestapp
 
 PRODUCT_PACKAGES += vndservicemanager
 
