@@ -16,7 +16,7 @@ KERNEL_LOGLEVEL ?= {{{user_loglevel}}}
 endif
 
 ifeq ($(TARGET_BUILD_VARIANT),user)
-BOARD_KERNEL_CMDLINE += console=tty0
+BOARD_KERNEL_CMDLINE += console=ttyS0,115200n8
 endif
 
 BOARD_KERNEL_CMDLINE += \
