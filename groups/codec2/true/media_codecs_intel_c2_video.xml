@@ -36,7 +36,8 @@ and updated to vendor media codecs.
             <Limit name="block-count" range="1-65536" /> <!-- max 4096x4096 equivalent -->
             <Limit name="blocks-per-second" range="1-1966080" />
             <Limit name="bitrate" range="1-40000000" />
-            <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="performance-point-3840x2160" value="120" />
+            <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
 {{/hw_vd_h264}}
@@ -51,7 +52,8 @@ and updated to vendor media codecs.
             <Limit name="block-count" range="1-1048576" /> <!-- max 8192x8192 -->
             <Limit name="blocks-per-second" range="1-31457280" />
             <Limit name="bitrate" range="1-40000000" />
-            <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="performance-point-3840x2160" value="120" />
+            <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
 {{/hw_vd_h265}}
@@ -65,7 +67,8 @@ and updated to vendor media codecs.
             <Limit name="block-count" range="1-262144" />
             <Limit name="blocks-per-second" range="1-7864320" />
             <Limit name="bitrate" range="1-40000000" />
-            <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="performance-point-3840x2160" value="120" />
+            <Limit name="performance-point-1920x1080" value="180" />
 	    <Feature name="adaptive-playback" />
         </MediaCodec>
 {{/hw_vd_vp9}}
@@ -105,6 +108,7 @@ and updated to vendor media codecs.
             <Limit name="blocks-per-second" range="1-500000" />
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
 {{/hw_vd_av1}}
@@ -120,7 +124,8 @@ and updated to vendor media codecs.
             <Limit name="block-count" range="1-8192" /> <!-- max 2048x1024 -->
             <Limit name="blocks-per-second" range="1-245760" />
             <Limit name="bitrate" range="1-12000000" />
-            <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="performance-point-3840x2160" value="120" />
+            <Limit name="performance-point-1920x1080" value="180" />
             <!--Feature name="intra-refresh" /-->
             <Diagnostics dumpOutput="false" />
         </MediaCodec>
@@ -133,7 +138,8 @@ and updated to vendor media codecs.
             <Limit name="block-size" value="16x16" />
             <Limit name="blocks-per-second" range="1-972000" />
             <Limit name="bitrate" range="1-40000000" />
-            <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="performance-point-3840x2160" value="120" />
+            <Limit name="performance-point-1920x1080" value="180" />
         </MediaCodec>
 {{/hw_ve_h265}}
 
@@ -145,7 +151,8 @@ and updated to vendor media codecs.
             <Limit name="block-count" range="1-245760" />
             <Limit name="blocks-per-second" range="1-972000" />
             <Limit name="bitrate" range="1-40000000" />
-            <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="performance-point-3840x2160" value="120" />
+            <Limit name="performance-point-1920x1080" value="180" />
         </MediaCodec>
 {{/hw_ve_vp9}}
     </Encoders>
