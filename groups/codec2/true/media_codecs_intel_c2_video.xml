@@ -107,7 +107,7 @@ and updated to vendor media codecs.
             <Limit name="block-count" range="1-16384" />
             <Limit name="blocks-per-second" range="1-500000" />
             <Limit name="bitrate" range="1-40000000" />
-            <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
