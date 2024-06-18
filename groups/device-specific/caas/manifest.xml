@@ -63,7 +63,7 @@
         </interface>
     </hal>
     <!--<kernel target-level="5"/>-->
-    <sepolicy>
+    <!--sepolicy>
         <version>34.0</version>
-    </sepolicy>
+    </sepolicy-->
 </manifest>
