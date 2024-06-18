@@ -39,19 +39,19 @@ endif
 {{/ifwi_debug}}
 
 ifneq ($(EFI_IFWI_BIN),)
-$(call dist-for-goals,droidcore,$(EFI_IFWI_BIN):$(TARGET_PRODUCT)-ifwi-$(FILE_NAME_TAG).bin)
+$(call dist-for-goals,droidcore,$(EFI_IFWI_BIN):$(TARGET_PRODUCT)-ifwi-intel.bin)
 endif
 
 ifneq ($(EFI_IFWI_DNX_BIN),)
-$(call dist-for-goals,droidcore,$(EFI_IFWI_DNX_BIN):$(TARGET_PRODUCT)-ifwi_dnx-$(FILE_NAME_TAG).bin)
+$(call dist-for-goals,droidcore,$(EFI_IFWI_DNX_BIN):$(TARGET_PRODUCT)-ifwi_dnx-intel.bin)
 endif
 
 ifneq ($(EFI_AFU_BIN),)
-$(call dist-for-goals,droidcore,$(EFI_AFU_BIN):$(TARGET_PRODUCT)-afu-$(FILE_NAME_TAG).bin)
+$(call dist-for-goals,droidcore,$(EFI_AFU_BIN):$(TARGET_PRODUCT)-afu-intel.bin)
 endif
 
 ifneq ($(BOARD_SFU_UPDATE),)
-$(call dist-for-goals,droidcore,$(BOARD_SFU_UPDATE):$(TARGET_PRODUCT)-sfu-$(FILE_NAME_TAG).fv)
+$(call dist-for-goals,droidcore,$(BOARD_SFU_UPDATE):$(TARGET_PRODUCT)-sfu-intel.fv)
 endif
 
 ifneq ($(CALLED_FROM_SETUP),true)
@@ -155,7 +155,7 @@ INSTALLED_RADIOIMAGE_TARGET += $(bootloader_zip) $(bootloader_bin) $(bootloader_
 droidcore: $(bootloader_bin)
 
 bootloader: $(bootloader_bin)
-$(call dist-for-goals,droidcore,$(bootloader_bin):$(TARGET_PRODUCT)-bootloader-$(FILE_NAME_TAG))
+$(call dist-for-goals,droidcore,$(bootloader_bin):$(TARGET_PRODUCT)-bootloader-intel)
 
 $(call dist-for-goals,droidcore,$(INTEL_PATH_BUILD)/testkeys/testkeys_lockdown.txt:test-keys_efi_lockdown.txt)
 $(call dist-for-goals,droidcore,$(INTEL_PATH_BUILD)/testkeys/unlock.txt:efi_unlock.txt)
@@ -381,7 +381,7 @@ droidcore: $(esp_bin)
 .PHONY: esp
 esp: $(esp_bin)
 
-$(call dist-for-goals,droidcore,$(esp_bin):$(TARGET_PRODUCT)-esp-$(FILE_NAME_TAG).img)
+$(call dist-for-goals,droidcore,$(esp_bin):$(TARGET_PRODUCT)-esp-intel.img)
 
 $(PRODUCT_OUT)/vendor.img: $(PRODUCT_OUT)/vendor/firmware/kfld.efi
 $(PRODUCT_OUT)/vendor/firmware/kfld.efi: $(PRODUCT_OUT)/efi/kfld.efi
