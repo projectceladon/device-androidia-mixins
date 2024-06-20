@@ -3,7 +3,7 @@ BOARD_SUPER_PARTITION_GROUPS := group_sys
 BOARD_GROUP_SYS_PARTITION_LIST := system{{#vendor-partition}} vendor{{/vendor-partition}}{{#product-partition}} product{{/product-partition}}{{#odm-partition}} odm{{/odm-partition}}
 
 {{^dp_retrofit}}
-BOARD_SUPER_PARTITION_SIZE := $(shell echo {{super_partition_size}}*1024*1024 | bc)
+BOARD_SUPER_PARTITION_SIZE := $(shell echo 10000*1024*1024 | bc)
 {{^slot-ab}}
 BOARD_GROUP_SYS_SIZE = $(shell echo "$(BOARD_SUPER_PARTITION_SIZE) - {{overhead_size}}*1024*1024" | bc)
 {{/slot-ab}}
