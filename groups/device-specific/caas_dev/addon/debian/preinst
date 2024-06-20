@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+DIR="/opt/RELEASE_DEB"
+echo $DIR
+#rm -rf $DIR
+exit 0
