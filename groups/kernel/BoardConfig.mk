@@ -22,9 +22,9 @@ BOARD_KERNEL_CMDLINE += \
         firmware_class.path={{{firmware_path}}}
 
 ifeq ($(BOOTCONFIG_ENABLE), true)
-BOARD_BOOTCONFIG += androidboot.hardware=$(TARGET_DEVICE)
+BOARD_BOOTCONFIG += androidboot.hardware=caas
 else
-BOARD_KERNEL_CMDLINE += androidboot.hardware=$(TARGET_DEVICE)
+BOARD_KERNEL_CMDLINE += androidboot.hardware=caas
 endif
 {{#boot_boost}}
 
