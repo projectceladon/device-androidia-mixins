@@ -1,0 +1,8 @@
+update_aaf_mounted() {
+
+if mount | grep aaf; then
+    setprop vendor.aaf.mounted 1
+fi
+
+}
+update_aaf_mounted
