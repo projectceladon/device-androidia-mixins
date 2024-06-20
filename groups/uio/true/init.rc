@@ -1,0 +1,10 @@
+#For UIO device
+on post-fs
+    chmod 0660 /dev/uio0
+    chown system system /dev/uio0
+    chmod 0660 /dev/uio1
+    chown system system /dev/uio1
+    chmod 0660 /dev/uio2
+    chown system system /dev/uio2
+    chmod 0660 /dev/uio3
+    chown system system /dev/uio3
