@@ -19,7 +19,8 @@ this option is used to enable support for external camera in build
         - hw_ve_h265:   select hw accelerated h.265 encoder
         - hw_ve_h264:   select hw accelerated h.264 encoder
         - hw_vd_h264:   select hw accelerated h.264 decoder
-        - hw_vd_av1：   select hw accelerated av1 decoder
+        - hw_vd_av1:    select hw accelerated av1 decoder
+        - hw_ve_av1:    select hw accelerated av1 encoder
 
     --- code dir
 	- frameworks/av/media/codec2
