@@ -155,5 +155,17 @@ and updated to vendor media codecs.
             <Limit name="performance-point-1920x1080" value="180" />
         </MediaCodec>
 {{/hw_ve_vp9}}
+
+{{#hw_ve_av1}}
+        <MediaCodec name="c2.intel.av1.encoder" type="video/av01">
+            <Limit name="size" min="176x144" max="4096x4096" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-16384" />
+            <Limit name="blocks-per-second" range="1-500000" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+        </MediaCodec>
+{{/hw_ve_av1}}
     </Encoders>
 </Included>
