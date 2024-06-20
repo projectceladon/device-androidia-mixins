@@ -26,3 +26,7 @@ on property:sys.boot_completed=1
 
 on boot
     setprop vendor.powerhal.throttle.exit 1
+
+on property:sys.force.s3=1
+    write /sys/power/state mem
+    setprop sys.force.s3 0
