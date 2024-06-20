@@ -48,3 +48,8 @@ on init
 
 on fs
     mount_all /fstab.${ro.hardware}
+
+on boot
+    # disable icmp redirects
+    write /proc/sys/net/ipv4/conf/all/accept_redirects 0
+    write /proc/sys/net/ipv6/conf/all/accept_redirects 0
