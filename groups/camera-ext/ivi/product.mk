@@ -6,8 +6,8 @@ PRODUCT_COPY_FILES += \
 
 
 # External camera service
-PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-external-service \
-                    android.hardware.camera.provider@2.4-impl
+PRODUCT_PACKAGES += android.vendor.hardware.camera.provider@2.4-ivi-service \
+                    android.hardware.camera.provider@2.4-impl-intel
 
 
 PRODUCT_PACKAGES += MultiCameraApp
