@@ -24,7 +24,7 @@ PRODUCT_PROPERTY_OVERRIDES += ro.hardware.gatekeeper=optee
 {{/hw_gk}}
 
 {{^hw_gk}}
-PRODUCT_PACKAGES += android.hardware.gatekeeper@1.0-service.software
+PRODUCT_PACKAGES += android.hardware.gatekeeper-service.software
 {{/hw_gk}}
 
 PRODUCT_COPY_FILES += \
