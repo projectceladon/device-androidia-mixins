@@ -2,24 +2,13 @@
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.autofocus.xml:vendor/etc/permissions/android.hardware.camera.autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.external.xml:vendor/etc/permissions/android.hardware.camera.external.xml \
-    $(LOCAL_PATH)/{{_extra_dir}}/external_camera_config.xml:vendor/etc/external_camera_config.xml
+    $(LOCAL_PATH)/{{_extra_dir}}/external_camera_config.xml:vendor/etc/external_camera_config.xml \
+    $(LOCAL_PATH)/{{_extra_dir}}/remote_camera_config.xml:vendor/etc/remote_camera_config.xml
 
 
 # External camera service
 PRODUCT_PACKAGES += android.vendor.hardware.camera.provider-V1-external-service
 
-#VHAL camera
-PRODUCT_PACKAGES += camera.$(TARGET_BOARD_PLATFORM) \
-                    camera.$(TARGET_BOARD_PLATFORM).jpeg
-
-PRODUCT_PROPERTY_OVERRIDES += ro.vendor.remote.sf.fake_camera ="both" \
-                              ro.vendor.camera.in_frame_format.h264=false \
-                              ro.vendor.camera.in_frame_format.i420=true \
-                              ro.vendor.camera.decode.vaapi=false \
-                              ro.vendor.remote.sf.back_camera_hal= \
-                              ro.vendor.remote.sf.front_camera_hal= \
-                              ro.vendor.camera.transference="VSOCK" \
-                              vendor.camera.external="VHAL"
 #removing not required apps
 # Only include test apps in eng or userdebug builds.
 #PRODUCT_PACKAGES_DEBUG += TestingCamera
