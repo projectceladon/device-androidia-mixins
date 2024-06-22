@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<RemoteCamera>
+    <Provider>
+        <CameraIdOffset>127</CameraIdOffset>
+        <ignore> <!-- Internal video devices to be ignored by external camera HAL -->
+        </ignore>
+    </Provider>
+    <!-- See ExternalCameraUtils.cpp for default values of Device configurations below
+-->
+    <Device>
+        <Path>/dev/video127</Path>
+        <NumVideoBuffers count="2"/>
+        <NumStillBuffers count="2"/>
+		<MaxJpegBufferSize bytes="3145728"/>
+		<Default width="1920" height="1080"/>
+        <Setting width="1920" height="1080" fps="30" format="UYVY"/>
+		<Setting width="1280" height="720" fps="30" format="UYVY"/>
+		<Setting width="640" height="480" fps="30" format="UYVY"/>
+		<StreamId>-1</StreamId>
+		<PartialResult>1</PartialResult>
+		<JpegBufferSize width="256" height="1024" />
+		<KSyncWaitTimeoutMs>500</KSyncWaitTimeoutMs>
+		<MaxThumbCodeSize width="64" height="1024" />
+		<FpsList>
+            <!-- width/height must be increasing, fpsBound must be decreasing-->
+            <Limit width="640" height="480" fpsBound="60.0"/>
+            <Limit width="720" height="480" fpsBound="60.0"/>
+            <Limit width="960" height="560" fpsBound="60.0"/>
+            <Limit width="1280" height="720" fpsBound="60.0"/>
+            <Limit width="1920" height="1080" fpsBound="60.0"/>
+            <Limit width="3840" height="2160" fpsBound="30.0"/>
+            <Limit width="4096" height="2160" fpsBound="30.0"/>
+            <!-- image size larger than the last entry will not be supported-->
+        </FpsList>
+        
+    </Device>
+</RemoteCamera>
