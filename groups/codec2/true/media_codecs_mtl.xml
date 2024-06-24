@@ -14,5 +14,8 @@
      limitations under the License.
 -->
 <MediaCodecs>
-    <Include href="media_codecs_intel_c2_video.xml" />
+    <Include href="media_codecs_intel_c2_video_mtl.xml" />
+    <Settings>
+        <Setting name="max-video-encoder-input-buffers" value="9" />
+    </Settings>
 </MediaCodecs>

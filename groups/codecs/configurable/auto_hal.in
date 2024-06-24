@@ -15,6 +15,9 @@ elif [ $value_model == 151 ]; then
 elif [ $value_model == 154 ]; then
     setprop ro.vendor.media.target_variant "_gen12"
     setprop ro.vendor.media.target_variant_platform "_adl"
+elif [ $value_model == 170 ]; then
+    setprop ro.vendor.media.target_variant "_mtl"
+    setprop ro.vendor.media.target_variant_platform "_mtl"
 else
     :
 fi
