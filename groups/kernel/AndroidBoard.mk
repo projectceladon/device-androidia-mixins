@@ -223,7 +223,7 @@ $(LOCAL_KERNEL_PATH)/copy_modules: $(LOCAL_KERNEL)
 		find $(LOCAL_KERNEL_PATH)/lib/modules/ -name $$f -exec cp {} $(TARGET_RECOVERY_ROOT_OUT)/$(KERNEL_MODULES_ROOT)/ \; ;\
 		done
 #mei for recovery
-	$(hide) for f in mei.ko mei-me.ko; do \
+	$(hide) for f in mei.ko mei-me.ko mei-txe.ko mei-gsc.ko mei_pxp.ko mei_hdcp.ko; do \
 		find $(LOCAL_KERNEL_PATH)/lib/modules/ -name $$f -exec cp {} $(TARGET_RECOVERY_ROOT_OUT)/$(KERNEL_MODULES_ROOT)/ \; ;\
 		done
 {{#camera_cos_hack}}
