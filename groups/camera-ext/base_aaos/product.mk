@@ -15,3 +15,4 @@ PRODUCT_PACKAGES += android.ia.hardware.camera.provider-ivi \
 					android.iacamera.provider-ivi-service
 
 PRODUCT_PACKAGES += Camera2
+PRODUCT_PACKAGES += MultiCameraApp
