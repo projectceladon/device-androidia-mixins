@@ -301,6 +301,24 @@ endef
 $(foreach v,$(BOARD_DTB_VARIANTS),$(eval $(call board_dtb_per_variant,$(v))))
 {{/build_dtbs}}
 
+{{#i915_ag_mods_version}}
+
+I915_AG_ADDITIONS_PATH := ../modules/intel-gpu-i915-backports
+I915_AG_MODS_SRC_PATH := $(I915_AG_ADDITIONS_PATH)/
+I915_AG_MODS_OBJ_PATH := $(LOCAL_KERNEL_PATH)/$(I915_AG_ADDITIONS_PATH)/
+I915_AG_MODS_TARGET   := $(LOCAL_KERNEL_PATH)/$(I915_AG_ADDITIONS_PATH)/build_i915_ag_{{{i915_ag_mods_version}}}
+
+$(I915_AG_MODS_TARGET): $(LOCAL_KERNEL)
+	@echo BUILDING $(I915_AG_MODS_SRC_PATH)
+	$(hide) mkdir -p $(I915_AG_MODS_OBJ_PATH)
+	$(hide) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_OPTIONS) M=$(I915_AG_MODS_SRC_PATH) modules
+	$(hide) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_OPTIONS) M=$(I915_AG_MODS_SRC_PATH) INSTALL_MOD_STRIP=1 modules_install
+	@touch $@
+
+$(LOCAL_KERNEL_PATH)/copy_modules: $(I915_AG_MODS_TARGET)
+
+{{/i915_ag_mods_version}}
+
 # Add a kernel target, so "make kernel" will build the kernel
 .PHONY: kernel
 kernel: $(LOCAL_KERNEL_PATH)/copy_modules $(PRODUCT_OUT)/kernel
