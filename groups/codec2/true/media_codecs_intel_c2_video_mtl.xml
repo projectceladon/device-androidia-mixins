@@ -26,7 +26,6 @@ and updated to vendor media codecs.
 
 <Included>
     <Decoders>
-{{#hw_vd_h264}}
         <MediaCodec name="c2.intel.avc.decoder" type="video/avc">
             <Alias name="OMX.intel.avc.decoder" /> <!--[WA]ijkplayer only knows the name starts with "OMX" -->
             <!-- profiles and levels:  ProfileHigh : Level52 -->
@@ -40,9 +39,7 @@ and updated to vendor media codecs.
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_h264}}
 
-{{#hw_vd_h265}}
         <MediaCodec name="c2.intel.hevc.decoder" type="video/hevc">
             <Alias name="OMX.intel.hevc.decoder" /> <!--[WA]ijkplayer only knows the name starts with "OMX" -->
             <!-- profiles and levels:  ProfileMain : MainTierLevel51 -->
@@ -56,9 +53,7 @@ and updated to vendor media codecs.
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_h265}}
 
-{{#hw_vd_vp9}}
         <MediaCodec name="c2.intel.vp9.decoder" type="video/x-vnd.on2.vp9">
             <Alias name="OMX.intel.vp9.decoder" /> <!--[WA]ijkplayer only knows the name starts with "OMX" -->:
             <Limit name="size" min="64x64" max="8192x8192" />
@@ -71,22 +66,8 @@ and updated to vendor media codecs.
             <Limit name="performance-point-1920x1080" value="180" />
 	    <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_vp9}}
 
-{{#hw_vd_vp8}}
-        <MediaCodec name="c2.intel.vp8.decoder" type="video/x-vnd.on2.vp8">
-            <Limit name="size" min="64x64" max="4096x4096" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="block-count" range="1-131072" />
-            <Limit name="blocks-per-second" range="1-500000" />
-            <Limit name="bitrate" range="1-40000000" />
-            <Limit name="performance-point-3840x2160" value="30" />
-            <Feature name="adaptive-playback" />
-        </MediaCodec>
-{{/hw_vd_vp8}}
 
-{{#hw_vd_mp2}}
         <MediaCodec name="c2.intel.mp2.decoder" type="video/mpeg2">
             <Limit name="size" min="64x64" max="2048x2048" />
             <Limit name="alignment" value="2x2" />
@@ -97,9 +78,7 @@ and updated to vendor media codecs.
             <Limit name="performance-point-1920x1080" value="30" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_mp2}}
 
-{{#hw_vd_av1}}
 	<MediaCodec name="c2.intel.av1.decoder" type="video/av01">
             <Limit name="size" min="64x64" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
@@ -111,11 +90,9 @@ and updated to vendor media codecs.
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-{{/hw_vd_av1}}
     </Decoders>
 
     <Encoders>
-{{#hw_ve_h264}}
         <MediaCodec name="c2.intel.avc.encoder" type="video/avc">
             <!-- profiles and levels:  ProfileBaseline : Level41 -->
             <Limit name="size" min="176x144" max="4096x4096" />
@@ -129,9 +106,7 @@ and updated to vendor media codecs.
             <!--Feature name="intra-refresh" /-->
             <Diagnostics dumpOutput="false" />
         </MediaCodec>
-{{/hw_ve_h264}}
 
-{{#hw_ve_h265}}
         <MediaCodec name="c2.intel.hevc.encoder" type="video/hevc" >
             <Limit name="size" min="176x144" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
@@ -141,9 +116,7 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
         </MediaCodec>
-{{/hw_ve_h265}}
 
-{{#hw_ve_vp9}}
 	<MediaCodec name="c2.intel.vp9.encoder" type="video/x-vnd.on2.vp9" >
             <Limit name="size" min="128x96" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
@@ -154,9 +127,7 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
         </MediaCodec>
-{{/hw_ve_vp9}}
 
-{{#hw_ve_av1}}
         <MediaCodec name="c2.intel.av1.encoder" type="video/av01">
             <Limit name="size" min="176x144" max="4096x4096" />
             <Limit name="alignment" value="2x2" />
@@ -166,6 +137,5 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
         </MediaCodec>
-{{/hw_ve_av1}}
     </Encoders>
 </Included>

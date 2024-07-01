@@ -10,6 +10,7 @@ hw_ve_vp8 = false
 hw_ve_vp9 = false
 hw_ve_h265 = true
 hw_ve_h264 = true
+hw_ve_av1 = false
 gpu = gen12
 platform = adl
 enable_msdk_c2 = true
