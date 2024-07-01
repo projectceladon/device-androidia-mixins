@@ -2,11 +2,11 @@ on post-fs
     chmod 666 /dev/tee0
     chmod 666 /dev/teepriv0
 
-    chown system system /persist
-    chmod 0771 /persist
-    restorecon /persist
-    mkdir /persist/tee 0770 shell shell
-    restorecon_recursive /persist/tee
+    chown system system /reess
+    chmod 0771 /reess
+    restorecon /reess
+    mkdir /reess/tee 0770 shell shell
+    restorecon_recursive /reess/tee
 
     start tee-supplicantd
     start vendor.keymint-optee
