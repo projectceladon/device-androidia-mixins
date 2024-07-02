@@ -1,0 +1,14 @@
+<Streams>
+<!--
+  <Stream Address="bus0_media_out" Direction="playback" Mmap="false">
+    <Pcm Card="avsrt56401" Device="1" SampleRate="48000" Format="16" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="2048" StopThreshold="4096" AvailMin="1024" />
+    <Mixer Card="avsrt56401" MixerPath="/vendor/etc/mixer_paths_0.xml"/>
+  </Stream>
+-->
+  <Stream Address="bus0_media_out" Direction="playback" Mmap="false">
+    <Pcm Card="SoundCard" Device="1" SampleRate="48000" Format="16" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
+  </Stream>
+  <Stream Address="Built-In Mic" Direction="capture" Mmap="false">
+    <Pcm Card="SoundCard" Device="1" SampleRate="48000" Format="16" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="1" StopThreshold="4096" AdditionalOutputDeviceDelay="5"/>
+  </Stream>
+</Streams>
