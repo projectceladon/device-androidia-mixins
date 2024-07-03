@@ -20,4 +20,4 @@ BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/tee/optee
 AB_OTA_PARTITIONS += tee
 
 include vendor/intel/optee/optee_client/optee_client.device.mk
-$(call soong_config_set,optee_client,cfg_tee_fs_parent_path,/persist/tee)
+$(call soong_config_set,optee_client,cfg_tee_fs_parent_path,/mnt/vendor/persist/tee)
