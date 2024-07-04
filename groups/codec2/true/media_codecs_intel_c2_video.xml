@@ -126,6 +126,7 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-25000000" />
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
+            <Feature name="bitrate-modes" value="VBR,CBR" />
             <!--Feature name="intra-refresh" /-->
             <Diagnostics dumpOutput="false" />
         </MediaCodec>
@@ -140,6 +141,7 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
+            <Feature name="bitrate-modes" value="VBR,CBR" />
         </MediaCodec>
 {{/hw_ve_h265}}
 
