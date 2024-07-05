@@ -10,3 +10,9 @@ on post-fs-data
 on boot
    chown system graphics /sys/kernel/debug/sync/sw_sync
    symlink /sys/kernel/debug/sync/sw_sync /dev/sw_sync
+   insmod /vendor/lib/modules/mei.ko
+   insmod /vendor/lib/modules/mei-me.ko
+   insmod /vendor/lib/modules/mei-txe.ko
+   insmod /vendor/lib/modules/mei-gsc.ko
+   insmod /vendor/lib/modules/mei_pxp.ko
+   insmod /vendor/lib/modules/mei_hdcp.ko
