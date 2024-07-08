@@ -34,10 +34,8 @@ PRODUCT_PACKAGES += \
 
 # Audio HAL
 PRODUCT_PACKAGES += \
-    android.hardware.audio.effect@7.0-impl \
-    android.hardware.audio@7.1-impl \
-    android.hardware.audio@2.0-service
-
+    android.hardware.audio.effect.service-aidl.example \
+    android.hardware.audio.service-aidl.example \
 #Audio policy engine configuration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_criteria.conf:vendor/etc/audio_policy_criteria.conf
@@ -53,7 +51,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/hdmi_audio_policy_configuration.xml:vendor/etc/hdmi_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_volumes.xml:vendor/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/audio/default/policy/default_volume_tables.xml:vendor/etc/default_volume_tables.xml \
-    $(LOCAL_PATH)/audio/default/effect/audio_effects.xml:vendor/etc/audio_effects.xml
+    $(LOCAL_PATH)/audio/default/effect/audio_effects.xml:vendor/etc/audio_effects.xml \
+    $(LOCAL_PATH)/audio/default/effect/audio_effects_config.xml:vendor/etc/audio_effects_config.xml
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/mixer_paths_0.xml:vendor/etc/mixer_paths_0.xml \
