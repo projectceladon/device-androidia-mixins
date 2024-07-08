@@ -453,13 +453,6 @@ CONFIG_LEGACY_VSYSCALL_NONE=y
 CONFIG_HAVE_LIVEPATCH=y
 # end of Processor type and features
 
-#
-# Crash Memory Dump IVI
-#
-CONFIG_IVI_CRASH_DUMP=y
-CONFIG_IVI_SHARE_MEMORY=y
-# end of Crash Memory Dump IVI
-
 CONFIG_CC_HAS_SLS=y
 CONFIG_CC_HAS_RETURN_THUNK=y
 CONFIG_SPECULATION_MITIGATIONS=y
@@ -1763,6 +1756,12 @@ CONFIG_UEFI_CPER_X86=y
 # Tegra firmware driver
 #
 # end of Tegra firmware driver
+
+#
+# ivi options
+#
+# CONFIG_IVI_SHARE_MEMORY is not set
+# end of ivi options
 # end of Firmware Drivers
 
 # CONFIG_GNSS is not set
