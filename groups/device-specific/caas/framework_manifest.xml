@@ -127,15 +127,6 @@
         <name>android.hardware.camera.provider</name>
 	<fqname>ICameraProvider/external/0</fqname>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.renderscript</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IDevice</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <!--vendor-ndk>
         <version>34</version>
     </vendor-ndk-->

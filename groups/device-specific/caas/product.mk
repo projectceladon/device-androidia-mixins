@@ -27,7 +27,6 @@ PRODUCT_PACKAGES +=  \
                     camera.device@1.0-impl \
                     android.hardware.camera.provider@2.4-impl \
                     android.hardware.graphics.allocator-service.minigbm \
-                    android.hardware.renderscript@1.0-impl \
                     android.hardware.identity \
                     android.hardware.identity-service.example \
 		    android.hardware.graphics.composer3-service.intel \
