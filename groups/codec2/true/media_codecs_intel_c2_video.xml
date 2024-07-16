@@ -60,7 +60,7 @@ and updated to vendor media codecs.
 
 {{#hw_vd_vp9}}
         <MediaCodec name="c2.intel.vp9.decoder" type="video/x-vnd.on2.vp9">
-            <Alias name="OMX.intel.vp9.decoder" /> <!--[WA]ijkplayer only knows the name starts with "OMX" -->:
+            <Alias name="OMX.intel.vp9.decoder" /> <!--[WA]ijkplayer only knows the name starts with "OMX" -->
             <Limit name="size" min="64x64" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
@@ -128,7 +128,7 @@ and updated to vendor media codecs.
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="bitrate-modes" value="VBR,CBR" />
             <!--Feature name="intra-refresh" /-->
-            <Diagnostics dumpOutput="false" />
+            <!--<Diagnostics dumpOutput="false" />-->
         </MediaCodec>
 {{/hw_ve_h264}}
 

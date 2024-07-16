@@ -1,8 +1,12 @@
-# MSDK codec2.0 support.
+# Audio/video codec support.
+PRODUCT_COPY_FILES += \
+    frameworks/av/media/libstagefright/data/media_codecs_google_c2_audio.xml:vendor/etc/media_codecs_google_c2_audio.xml \
+    $(LOCAL_PATH)/{{_extra_dir}}/{{profile_file}}:vendor/etc/media_profiles_V1_0.xml
 
+# MSDK codec2.0 support.
 {{#enable_msdk_c2}}
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_c2_adl.xml:vendor/etc/media_codecs_performance_c2.xml \
+    $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_c2_{{platform}}.xml:vendor/etc/media_codecs_performance_c2.xml \
     $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_c2_tgl.xml:vendor/etc/media_codecs_performance_tgl.xml \
     $(LOCAL_PATH)/{{_extra_dir}}/media_codecs_performance_c2_adl.xml:vendor/etc/media_codecs_performance_adl.xml \
     $(LOCAL_PATH)/{{_extra_dir}}/mfx_c2_store.conf:vendor/etc/mfx_c2_store.conf \
