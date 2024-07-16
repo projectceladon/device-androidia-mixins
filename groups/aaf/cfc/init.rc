@@ -6,5 +6,3 @@ on fs
     setprop vendor.sys.display.size 540x960
     setprop ro.hardware.gralloc ${vendor.gralloc.set}
     setprop ro.power.fixed_performance_scale_factor ${vendor.power.fixed_performance_scale_factor}
-    setprop ro.media.xml_variant.codecs ${ro.vendor.media.target_variant}
-    setprop ro.media.xml_variant.codecs_performance ${ro.vendor.media.target_variant_platform}
