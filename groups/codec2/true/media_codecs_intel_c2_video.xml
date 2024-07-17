@@ -34,8 +34,8 @@ and updated to vendor media codecs.
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
             <Limit name="block-count" range="1-65536" /> <!-- max 4096x4096 equivalent -->
-            <Limit name="blocks-per-second" range="1-1966080" />
-            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="blocks-per-second" range="1-3932160" />
+            <Limit name="bitrate" range="1-120000000" />
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
@@ -48,10 +48,10 @@ and updated to vendor media codecs.
             <!-- profiles and levels:  ProfileMain : MainTierLevel51 -->
             <Limit name="size" min="64x64" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="8x8" />
-            <Limit name="block-count" range="1-1048576" /> <!-- max 8192x8192 -->
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-262144" /> <!-- max 8192x8192 -->
             <Limit name="blocks-per-second" range="1-31457280" />
-            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="bitrate" range="1-360000000" />
             <Limit name="concurrent-instances" max="12" />
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
@@ -67,7 +67,7 @@ and updated to vendor media codecs.
             <Limit name="block-size" value="16x16" />
             <Limit name="block-count" range="1-262144" />
             <Limit name="blocks-per-second" range="1-7864320" />
-            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="bitrate" range="1-80000000" />
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
 	    <Feature name="adaptive-playback" />
@@ -119,12 +119,12 @@ and updated to vendor media codecs.
 {{#hw_ve_h264}}
         <MediaCodec name="c2.intel.avc.encoder" type="video/avc">
             <!-- profiles and levels:  ProfileBaseline : Level41 -->
-            <Limit name="size" min="176x144" max="4096x4096" />
+            <Limit name="size" min="128x96" max="4096x4096" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
             <Limit name="block-count" range="1-65536" /> <!-- max 4096x4096 equivalent -->
-            <Limit name="blocks-per-second" range="1-1966080" />
-            <Limit name="bitrate" range="1-25000000" />
+            <Limit name="blocks-per-second" range="1-3932160" />
+            <Limit name="bitrate" range="1-120000000" />
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="bitrate-modes" value="VBR,CBR" />
@@ -138,9 +138,9 @@ and updated to vendor media codecs.
             <Limit name="size" min="176x144" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
-            <Limit name="block-count" range="1-245760" />
-            <Limit name="blocks-per-second" range="1-972000" />
-            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="block-count" range="1-262144" />
+            <Limit name="blocks-per-second" range="1-31457280" />
+            <Limit name="bitrate" range="1-360000000" />
             <Limit name="concurrent-instances" max="12" />
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
@@ -153,9 +153,9 @@ and updated to vendor media codecs.
             <Limit name="size" min="128x96" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
-            <Limit name="block-count" range="1-245760" />
-            <Limit name="blocks-per-second" range="1-972000" />
-            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="block-count" range="1-262144" />
+            <Limit name="blocks-per-second" range="1-7864320" />
+            <Limit name="bitrate" range="1-80000000" />
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
         </MediaCodec>
