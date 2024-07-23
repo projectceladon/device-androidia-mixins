@@ -99,7 +99,7 @@
     <!-- TODO update for input-->
     <devicePort tagName="bus_1000_input_zone_0" type="AUDIO_DEVICE_IN_BUS"
                 role="source" address="bus_1000_input_zone_0">
-        <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
         <gains>
@@ -110,19 +110,19 @@
     </devicePort>
     <devicePort tagName="Built-In Mic" type="AUDIO_DEVICE_IN_BUILTIN_MIC" role="source"
                 address="Built-In Mic" >
-        <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="8000 11025 12000 16000 22050 24000 32000 44100 48000"
                  channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
     </devicePort>
     <devicePort tagName="Built-In Back Mic" type="AUDIO_DEVICE_IN_BACK_MIC"
                 role="source" address="Built-In Back Mic">
-        <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="8000 11025 12000 16000 22050 24000 32000 44100 48000"
                  channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
     </devicePort>
     <devicePort tagName="Echo-Reference Mic" type="AUDIO_DEVICE_IN_ECHO_REFERENCE" role="source"
                 address="Echo-Reference Mic">
-        <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="8000 11025 12000 16000 22050 24000 32000 44100 48000"
                  channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
     </devicePort>
@@ -223,7 +223,7 @@
     <!-- TODO update for input-->
     <devicePort tagName="bus_2000_input_zone_1" type="AUDIO_DEVICE_IN_BUS"
                 role="source" address="bus_2000_input_zone_1">
-        <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
         <gains>
