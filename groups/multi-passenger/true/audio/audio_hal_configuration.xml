@@ -36,9 +36,9 @@
     <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
   </Stream>
   <Stream Address="bus100_audio_zone_1" Direction="playback" Mmap="false">
-    <Pcm Card="SoundCard1" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
+    <Pcm Card="SoundCard" Device="2" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
   </Stream>
   <Stream Address="bus_2000_input_zone_1" Direction="capture" Mmap="false">
-    <Pcm Card="SoundCard1" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
+    <Pcm Card="SoundCard" Device="2" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
   </Stream>
   </Streams>
