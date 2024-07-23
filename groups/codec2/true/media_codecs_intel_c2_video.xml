@@ -62,7 +62,7 @@ and updated to vendor media codecs.
 {{#hw_vd_vp9}}
         <MediaCodec name="c2.intel.vp9.decoder" type="video/x-vnd.on2.vp9">
             <Alias name="OMX.intel.vp9.decoder" /> <!--[WA]ijkplayer only knows the name starts with "OMX" -->
-            <Limit name="size" min="64x64" max="8192x8192" />
+            <Limit name="size" min="2x2" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
             <Limit name="block-count" range="1-262144" />
