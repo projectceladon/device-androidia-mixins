@@ -1,37 +1,51 @@
-update_graphics() {
-case "$(cat /proc/fb)" in
-        *i915*)
-                echo "i915 rendering"
-                setprop vendor.egl.set mesa
-                setprop vendor.vulkan.set intel
-                ;;
-        *intel*)
-                echo "intel rendering"
-                setprop vendor.egl.set mesa
-                setprop vendor.vulkan.set intel
-                ;;
-	*virtio*)
-                if [ "$(cat /sys/kernel/debug/dri/0/name |awk '{print $1}')" = "i915" ];then
-                        echo "sriov rendering"
-                        setprop vendor.egl.set mesa
-                        setprop vendor.vulkan.set intel
-                else
-                        if [ "$(cat /sys/kernel/debug/dri/0/virtio-gpu-features |grep virgl |awk '{print $3}')" = "no" ];then
-                                echo "angle rendering"
-                                setprop vendor.egl.set angle
-                                setprop vendor.vulkan.set pastel
-                        else
-                                echo "virtio rendering"
-                                setprop vendor.egl.set mesa
-                                setprop vendor.vulkan.set pastel
-                        fi
+has_intel_gpu() {
+        local found=0
+	for f in /sys/class/drm/card*; do
+		if [ ! -e "$f"/device/vendor ]; then
+			continue
+		fi
+		local vendor=$(cat "$f"/device/vendor)
+		if [ "$vendor" = "0x8086" ]; then
+			found=1
+                        break
+		fi
+	done
+	echo $found
+}
+
+has_virgl() {
+        # Assume that virgl is always available unless it's explicitly ruled out.
+        local found=1
+        for f in /sys/kernel/debug/dri/*; do
+                if [ ! -e "$f/virtio-gpu-features" ]; then
+                        continue
                 fi
-                ;;
-        *)
-                echo "sw rendering"
+                # Note that it's likely that we don't have debugfs in user build,
+                # but we don't have better way to check accessibility of virgl
+                # for now.
+                if [ "$(cat $f/virtio-gpu-features |grep virgl |awk '{print $3}')" = "no" ]; then
+                        found=0
+                        break
+                fi
+        done
+        echo $found
+}
+
+update_graphics_driver_prop() {
+        if [ "$(has_intel_gpu)" = "1" ]; then
+                echo "Use Intel GPU for rendering"
+                setprop vendor.egl.set mesa
+                setprop vendor.vulkan.set intel
+        elif [ "$(has_virgl)" = "1" ]; then
+                echo "Use virtio-GPU for rendering"
+                setprop vendor.egl.set mesa
+                setprop vendor.vulkan.set pastel
+        else
+                echo "Use software rendering"
                 setprop vendor.egl.set angle
                 setprop vendor.vulkan.set pastel
-                ;;
-esac
+        fi
 }
-update_graphics
+
+update_graphics_driver_prop
+
