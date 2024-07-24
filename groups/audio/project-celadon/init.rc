@@ -54,6 +54,20 @@ on boot
     insmod /vendor/lib/modules/snd-timer.ko
     insmod /vendor/lib/modules/snd-pcm.ko
     insmod /vendor/lib/modules/snd-dummy.ko
+    insmod /vendor/lib/modules/snd-compress.ko
+    insmod /vendor/lib/modules/snd-ctl-led.ko
+    insmod /vendor/lib/modules/snd-hda-core.ko
+    insmod /vendor/lib/modules/snd-hda-codec.ko
+    insmod /vendor/lib/modules/snd-hda-codec-generic.ko
+    insmod /vendor/lib/modules/snd-intel-dspcfg.ko dsp_driver=1
+    insmod /vendor/lib/modules/snd-hda-intel.ko
+    insmod /vendor/lib/modules/snd-hda-codec-realtek.ko
+    insmod /vendor/lib/modules/snd-hda-codec-hdmi.ko
+    insmod /vendor/lib/modules/snd-intel-sdw-acpi.ko
+    insmod /vendor/lib/modules/snd-soc-acpi.ko
+    insmod /vendor/lib/modules/snd-soc-acpi-intel-match.ko
+    insmod /vendor/lib/modules/snd-soc-core.ko
+
 
 on property:sys.boot_completed=1 && property:ro.vendor.hdmi.audio=tgl
     stop audioserver
