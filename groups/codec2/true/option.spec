@@ -14,4 +14,3 @@ hw_ve_av1 = false
 platform = adl
 enable_msdk_c2 = true
 use_onevpl = true
-profile_file = media_profiles_1080p.xml
