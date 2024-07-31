@@ -35,6 +35,10 @@ PRODUCT_PACKAGES += \
     android.hardware.automotive.audiocontrol-service.example \
     android.hardware.audio@2.0-service
 
+# rro overlay for audioUseDynamicRouting
+PRODUCT_PACKAGES += \
+    CarServiceMultiDisplayOverlayIntel
+
 #Audio policy engine configuration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_criteria.conf:vendor/etc/audio_policy_criteria.conf
