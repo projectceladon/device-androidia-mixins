@@ -1,26 +1,25 @@
-update_codec() {
-case "$(cat /proc/fb)" in
-        *i915drmfb)
-                echo "Intel"
-                setprop vendor.intel.video.codec hardware
-                ;;
-        *inteldrmfb)
-                echo "Intel"
-                setprop vendor.intel.video.codec hardware
-                ;;
-        *i915)
-                echo "Intel"
-                setprop vendor.intel.video.codec hardware
-                ;;
-        *)
-                if [ "$(cat /sys/kernel/debug/dri/0/i915_sriov_info |grep enabled |awk '{print $2}')" = "yes" ];then
-                       echo "Intel SRIOV"
-                       setprop vendor.intel.video.codec hardware
-                else
-                       echo "software codec"
-                       setprop vendor.intel.video.codec software
-                fi
-                ;;
-esac
+is_intel_gpu_exist() {
+        local found=0
+	    for f in /sys/class/drm/card*; do
+		       if [ ! -e "$f"/device/vendor ]; then
+			           continue
+		       fi
+		       local vendor=$(cat "$f"/device/vendor)
+		       if [ "$vendor" = "0x8086" ]; then
+			           found=1
+                       break
+		       fi
+	    done
+	    echo $found
 }
-update_codec
+
+update_video_codec_prop() {
+        if [ "$(is_intel_gpu_exist)" = "1" ]; then
+                echo "Using Intel hardware codec"
+                setprop vendor.intel.video.codec hardware
+        else
+                echo "Using software codec"
+                setprop vendor.intel.video.codec software
+        fi
+}
+update_video_codec_prop
