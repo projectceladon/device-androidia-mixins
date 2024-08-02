@@ -18,7 +18,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     libmfx_c2_components_hw \
-    hardware.intel.media.c2@1.0-service
+    android.hardware.media.c2-service.intel
 
 BOARD_HAVE_MEDIASDK_CODEC2 := true
 {{/enable_msdk_c2}}
