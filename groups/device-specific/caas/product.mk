@@ -29,7 +29,7 @@ PRODUCT_PACKAGES +=  \
                     android.hardware.graphics.allocator-service.minigbm \
                     android.hardware.identity \
                     android.hardware.identity-service.example \
-		    android.hardware.graphics.composer3-service.intel \
+                    android.hardware.graphics.composer3-service.intel \
                     android.hardware.media.omx@1.0-service
 
 
@@ -69,3 +69,5 @@ PRODUCT_COPY_FILES += device/intel/common/host_scripts/start_flash_usb.sh:$(PROD
 PRODUCT_COPY_FILES += vendor/intel/fw/trusty-release-binaries/rpmb_dev:$(PRODUCT_OUT)/scripts/rpmb_dev
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/wakeup.py:$(PRODUCT_OUT)/scripts/wakeup.py
 PRODUCT_COPY_FILES += device/intel/civ/host/vm-manager-binaries/vm-manager.deb:$(PRODUCT_OUT)/scripts/vm-manager.deb
+
+PRODUCT_VENDOR_PROPERTIES += media.c2.hal.selection=aidl
