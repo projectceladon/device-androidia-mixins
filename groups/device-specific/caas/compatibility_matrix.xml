@@ -3,6 +3,10 @@
         <name>android.frameworks.sensorservice</name>
         <fqname>ISensorManager/default</fqname>
     </hal>
+    <hal format="aidl">
+        <name>android.hardware.media.c2</name>
+        <fqname>IComponentStore/software</fqname>
+    </hal>
     <!--hal format="hidl" optional="false">
         <name>android.frameworks.sensorservice</name>
         <version>1.0</version>
