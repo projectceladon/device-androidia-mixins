@@ -45,6 +45,3 @@ PRODUCT_PACKAGES += libigfxcmrt
 # Open source hdcp
 PRODUCT_PACKAGES += libhdcpsdk
 PRODUCT_PACKAGES += lihdcpcommon
-
-PRODUCT_PACKAGES += \
-    libpciaccess

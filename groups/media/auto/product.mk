@@ -49,8 +49,5 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += libhdcpsdk
 PRODUCT_PACKAGES += lihdcpcommon
 
-PRODUCT_PACKAGES += \
-    libpciaccess
-
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.stagefright.c2inputsurface=-1
 
