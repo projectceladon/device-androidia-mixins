@@ -15,6 +15,9 @@
 -->
 
 <user-types>
+    <full-type name="android.os.usertype.full.SECONDARY" >
+	<default-restrictions no_sms="false" no_outgoing_calls="false"/>
+    </full-type>
     <full-type name="android.os.usertype.full.GUEST"
         max-allowed="3" >
         <default-restrictions no_factory_reset="true" no_remove_user="true"
