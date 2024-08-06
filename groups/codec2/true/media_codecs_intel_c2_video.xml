@@ -128,6 +128,7 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="bitrate-modes" value="VBR,CBR" />
+            <Diagnostics lowPowerMode="false" />
             <!--Feature name="intra-refresh" /-->
             <!--<Diagnostics dumpOutput="false" />-->
         </MediaCodec>
