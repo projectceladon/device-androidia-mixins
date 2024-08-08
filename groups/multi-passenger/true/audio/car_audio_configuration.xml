@@ -63,6 +63,7 @@
             <inputDevices>
 		<inputDevice address="bus_1000_input_zone_0"/>
 		<inputDevice address="Built-In Mic"/>
+		<inputDevice address="Built-In Back Mic"/>
             </inputDevices>
          </zone>
       <zone name="front passenger zone 1" audioZoneId="1" occupantZoneId="1">

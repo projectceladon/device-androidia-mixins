@@ -31,6 +31,9 @@
   </Stream>
   <Stream Address="Built-In Mic" Direction="capture" Mmap="false">
     <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
+    <Stream Address="Built-In Back Mic" Direction="capture" Mmap="false">
+    <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
+  </Stream>
   </Stream>
   <Stream Address="bus_1000_input_zone_0" Direction="capture" Mmap="false">
     <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
