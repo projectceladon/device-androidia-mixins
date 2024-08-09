@@ -35,15 +35,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-       <name>android.hardware.bluetooth</name>
-       <transport>hwbinder</transport>
-       <version>1.0</version>
-       <interface>
-           <name>IBluetoothHci</name>
-           <instance>default</instance>
-       </interface>
-   </hal>
     <!--hal format="aidl" optional="true">
         <name>android.hardware.bluetooth.audio</name>
         <version>2</version>
