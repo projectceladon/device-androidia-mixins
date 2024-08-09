@@ -1,8 +1,69 @@
-update_codec_variant(){
-CMD_CPU_INFO="/proc/cpuinfo"
-value_model=`grep -i model /proc/cpuinfo | cut -d ':' -f2 | head -n 1`
-if [ $value_model == 170 ]; then
-    setprop ro.vendor.media.target_variant_platform "_mtl"
-fi
+DG2_IDS=(
+    "0x4f80"
+    "0x4f81"
+    "0x4f82"
+    "0x4f83"
+    "0x4f84"
+    "0x4f85"
+    "0x4f86"
+    "0x4f87"
+    "0x4f88"
+    "0x5690"
+    "0x5691"
+    "0x5692"
+    "0x5693"
+    "0x5694"
+    "0x5695"
+    "0x5696"
+    "0x5697"
+    "0x5698"
+    "0x56a0"
+    "0x56a1"
+    "0x56a2"
+    "0x56a3"
+    "0x56a4"
+    "0x56a5"
+    "0x56a6"
+    "0x56a7"
+    "0x56a8"
+    "0x56a9"
+    "0x56b0"
+    "0x56b1"
+    "0x56b2"
+    "0x56b3"
+    "0x56ba"
+    "0x56bb"
+    "0x56bc"
+    "0x56bd"
+    "0x56be"
+    "0x56bf"
+)
+
+has_intel_dg2() {
+	local ret=0
+	for f in /sys/class/drm/card*; do
+        if [ ! -e "$f"/device/vendor ]; then
+            continue
+        fi
+        local vendor=$(cat "$f"/device/vendor)
+        local device=$(cat "$f"/device/device)
+        if [ "$vendor" = "0x8086" ]; then
+            if printf "%s\n" "${DG2_IDS[@]}" | awk -v search="$device" '$0 == search { found = 1 } END { exit !found }'; then
+                ret=1
+                break
+            fi
+		fi
+	done
+	echo $ret
+}
+
+update_codec_variant() {
+    CMD_CPU_INFO="/proc/cpuinfo"
+    value_model=`grep -i model /proc/cpuinfo | cut -d ':' -f2 | head -n 1`
+    if [ $value_model == 170 ]; then
+        setprop ro.vendor.media.target_variant_platform "_mtl"
+    elif [ "$(has_intel_dg2)" = "1"  ]; then
+        setprop ro.vendor.media.target_variant_platform "_dg2"
+    fi
 }
 update_codec_variant
