@@ -129,7 +129,8 @@ and updated to vendor media codecs.
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="bitrate-modes" value="VBR,CBR" />
             <!--Feature name="intra-refresh" /-->
-            <!--<Diagnostics dumpOutput="false" />-->
+            <Limit name="dumpOutput" value="false" />
+            <Limit name="lowPowerMode" value="false" />
         </MediaCodec>
 {{/hw_ve_h264}}
 

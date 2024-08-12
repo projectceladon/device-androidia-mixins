@@ -104,7 +104,8 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <!--Feature name="intra-refresh" /-->
-            <!--<Diagnostics dumpOutput="false" />-->
+            <Limit name="dumpOutput" value="false" />
+            <Limit name="lowPowerMode" value="false" />
         </MediaCodec>
 
         <MediaCodec name="c2.intel.hevc.encoder" type="video/hevc" >
