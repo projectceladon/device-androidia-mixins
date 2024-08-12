@@ -6,7 +6,7 @@ PRODUCT_COPY_FILES += \
 
 
 # External camera service
-PRODUCT_PACKAGES += android.vendor.hardware.camera.provider-V1-external-service
+PRODUCT_PACKAGES += android.hardware.camera.provider-V1-external-service
 
 # Only include test apps in eng or userdebug builds.
 #PRODUCT_PACKAGES_DEBUG += TestingCamera
