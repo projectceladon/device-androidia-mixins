@@ -14,5 +14,5 @@
      limitations under the License.
 -->
 <MediaCodecs>
-    <Include href="media_codecs_intel_c2_video_mtl.xml" />
+    <Include href="media_codecs_intel_c2_video_gen13.xml" />
 </MediaCodecs>
