@@ -48,7 +48,7 @@
         </interface>
     </hal-->
     <system-sdk>
-        <version>VanillaIceCream</version>
+        <version>35</version>
     </system-sdk>
     <vendor-ndk>
         <version>35</version>
