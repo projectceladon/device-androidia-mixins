@@ -29,8 +29,7 @@ PRODUCT_PACKAGES +=  \
                     android.hardware.graphics.allocator-service.minigbm \
                     android.hardware.identity \
                     android.hardware.identity-service.example \
-                    android.hardware.graphics.composer3-service.intel \
-                    android.hardware.media.omx@1.0-service
+                    android.hardware.graphics.composer3-service.intel
 
 
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
