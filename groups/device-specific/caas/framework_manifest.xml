@@ -127,7 +127,7 @@
         <name>android.hardware.camera.provider</name>
 	<fqname>ICameraProvider/external/0</fqname>
     </hal>
-    <!--vendor-ndk>
-        <version>34</version>
-    </vendor-ndk-->
+    <vendor-ndk>
+        <version>35</version>
+    </vendor-ndk>
 </manifest>

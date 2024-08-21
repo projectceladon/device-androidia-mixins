@@ -47,10 +47,10 @@
             <instance>default</instance>
         </interface>
     </hal-->
-    <!--system-sdk>
+    <system-sdk>
         <version>VanillaIceCream</version>
     </system-sdk>
     <vendor-ndk>
         <version>35</version>
-    </vendor-ndk-->
+    </vendor-ndk>
 </compatibility-matrix>
