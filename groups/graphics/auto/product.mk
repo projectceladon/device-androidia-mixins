@@ -53,6 +53,16 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/intel.icd:vendor/Khronos/OpenCL/vendors/intel.icd
 
+# virtio-gpu backend
+PRODUCT_PACKAGES += \
+    libacrn_dm_backend \
+    DmBackendApp \
+    acrn-bkend-server \
+    dm-backend \
+    libCastFrontClientJni \
+    ScreenCastClient
+
+
 # DRM HWComposer
 PRODUCT_PACKAGES += \
     hwcomposer.drm_minigbm
