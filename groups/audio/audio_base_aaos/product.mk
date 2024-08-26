@@ -1,5 +1,9 @@
 TARGET_BOARD_PLATFORM := celadon
 
+{{#with_usb_audio}}
+AUDIO_POLICY_WITH_USB_AUDIO := true
+{{/with_usb_audio}}
+
 # Tinyalsa
 PRODUCT_PACKAGES_DEBUG += \
     tinymix \
@@ -39,6 +43,25 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_criteria.conf:vendor/etc/audio_policy_criteria.conf
 
+ifeq ($(AUDIO_POLICY_WITH_USB_AUDIO), true)
+# Vendor audio configuration files
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration_usb.xml:vendor/etc/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/audio/default/policy/car_audio_configuration.xml:vendor/etc/car_audio_configuration.xml \
+    $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration_attached_devices.xml:vendor/etc/audio_policy_configuration_attached_devices.xml \
+    $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration_devices.xml:vendor/etc/audio_policy_configuration_devices.xml \
+    $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration_mixports.xml:vendor/etc/audio_policy_configuration_mixports.xml \
+    $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration_routes.xml:vendor/etc/audio_policy_configuration_routes.xml \
+    $(LOCAL_PATH)/audio/default/policy/audio_hal_configuration.xml:vendor/etc/audio_hal_configuration.xml \
+    $(LOCAL_PATH)/audio/default/policy/audio_hal_configuration_intel_poc.xml:vendor/etc/audio_hal_configuration_intel_poc.xml \
+    $(LOCAL_PATH)/audio/default/policy/a2dp_audio_policy_configuration.xml:vendor/etc/a2dp_audio_policy_configuration.xml \
+    $(LOCAL_PATH)/audio/default/policy/r_submix_audio_policy_configuration.xml:vendor/etc/r_submix_audio_policy_configuration.xml \
+    $(LOCAL_PATH)/audio/default/policy/usb_audio_policy_configuration.xml:vendor/etc/usb_audio_policy_configuration.xml \
+    $(LOCAL_PATH)/audio/default/policy/hdmi_audio_policy_configuration.xml:vendor/etc/hdmi_audio_policy_configuration.xml \
+    $(LOCAL_PATH)/audio/default/policy/audio_policy_volumes.xml:vendor/etc/audio_policy_volumes.xml \
+    $(LOCAL_PATH)/audio/default/policy/default_volume_tables.xml:vendor/etc/default_volume_tables.xml \
+    $(LOCAL_PATH)/audio/default/effect/audio_effects.xml:vendor/etc/audio_effects.xml
+else
 # Vendor audio configuration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_configuration.xml:vendor/etc/audio_policy_configuration.xml \
@@ -56,6 +79,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_volumes.xml:vendor/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/audio/default/policy/default_volume_tables.xml:vendor/etc/default_volume_tables.xml \
     $(LOCAL_PATH)/audio/default/effect/audio_effects.xml:vendor/etc/audio_effects.xml
+endif
+
 ifeq ($(BASE_YOCTO_KERNEL), true)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/mixer_paths_ehl.xml:vendor/etc/mixer_paths_0.xml \
