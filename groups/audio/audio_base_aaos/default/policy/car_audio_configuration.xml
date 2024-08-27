@@ -64,7 +64,6 @@
 	    </volumeGroups>
             <inputDevices>
 		<inputDevice address="bus_1000_input_zone_0"/>
-		<inputDevice address="Built-In Mic"/>
             </inputDevices>
         </zone>
     </zones>
