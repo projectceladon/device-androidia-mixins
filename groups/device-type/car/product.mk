@@ -17,7 +17,7 @@ PRODUCT_PACKAGES += \
     VmsSubscriberClientSample \
 
 PRODUCT_PACKAGES += cardisplayproxyd
-PRODUCT_PACKAGES += evs_intel_app
+PRODUCT_PACKAGES += evs_app
 PRODUCT_PACKAGES += evsmanagerd
 PRODUCT_PACKAGES += android.hardware.automotive.evs-intel_default
 
