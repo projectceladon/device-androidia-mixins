@@ -53,4 +53,4 @@ PRODUCT_PACKAGES += \
     libpciaccess
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += debug.stagefright.c2inputsurface=-1
-
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.has_HDR_display=false
