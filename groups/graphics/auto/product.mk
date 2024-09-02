@@ -1,5 +1,4 @@
 PRODUCT_PACKAGES += \
-    libGLES_android \
     libigdrcl \
     libOpenCL \
     libopencl-clang \
@@ -18,10 +17,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vulkan.intel
 
-#Keep legacy mesa driver for compatibility
-PRODUCT_PACKAGES += \
-    libGLES_mesa
-
 PRODUCT_PACKAGES += \
     libdrm \
     libdrm_intel \
@@ -32,8 +27,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     gralloc.default
-
-PRODUCT_PACKAGES += ufo_prebuilts
 
 #Surface Flinger related Properties
 
@@ -78,19 +71,6 @@ PRODUCT_PACKAGES += \
     gralloc.drm
 {{/minigbm}}
 
-{{^gen9+}}
-# GLES version. We cannot enable Android
-# 3.2 support for Gen9+ devices.
-PRODUCT_PROPERTY_OVERRIDES += \
-   ro.opengles.version=196609
-
-{{#vulkan}}
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:vendor/etc/permissions/android.hardware.vulkan.level.xml
-{{/vulkan}}
-
-{{/gen9+}}
-
 {{#gen9+}}
 # Mesa
 PRODUCT_COPY_FILES += \
@@ -121,7 +101,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.vulkan.deqp.level-2023-03-01.xml:vendor/etc/permissions/android.software.vulkan.deqp.level.xml
 
 PRODUCT_PACKAGES += \
-    vulkan.$(TARGET_BOARD_PLATFORM) \
     vulkan.pastel
 {{/vulkan}}
 
