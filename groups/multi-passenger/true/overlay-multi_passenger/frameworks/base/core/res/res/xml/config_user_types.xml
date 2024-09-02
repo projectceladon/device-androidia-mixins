@@ -22,6 +22,10 @@
                   no_uninstall_apps="true"/>
     </full-type>
 
+    <system-type name="android.os.usertype.system.HEADLESS" >
+	 <default-restrictions no_sms="false" no_outgoing_calls="false"/>
+    </system-type>
+
     <profile-type name="android.os.usertype.profile.CLONE"
         enabled='0' >
     </profile-type>
