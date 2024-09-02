@@ -65,36 +65,6 @@
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
-    <devicePort tagName="bus5_alarm_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus5_alarm_out">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-        <gains>
-            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-3200" maxValueMB="600"
-                  defaultValueMB="0" stepValueMB="100"/>
-        </gains>
-    </devicePort>
-    <devicePort tagName="bus6_notification_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus6_notification_out">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-        <gains>
-            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-3200" maxValueMB="600"
-                  defaultValueMB="0" stepValueMB="100"/>
-        </gains>
-    </devicePort>
-    <devicePort tagName="bus7_system_sound_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus7_system_sound_out">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-        <gains>
-            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-3200" maxValueMB="600"
-                  defaultValueMB="0" stepValueMB="100"/>
-        </gains>
-    </devicePort>
 
     <!-- TODO update for input-->
     <devicePort tagName="bus_1000_input_zone_0" type="AUDIO_DEVICE_IN_BUS"

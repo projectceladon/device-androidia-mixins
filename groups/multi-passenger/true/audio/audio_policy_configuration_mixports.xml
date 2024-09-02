@@ -40,21 +40,6 @@
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
     </mixPort>
-    <mixPort name="mixport_bus5_alarm_out" role="source">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000"
-                 channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-    </mixPort>
-    <mixPort name="mixport_bus6_notification_out" role="source">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000"
-                 channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-    </mixPort>
-    <mixPort name="mixport_bus7_system_sound_out" role="source">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000"
-                 channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-    </mixPort>
     <!-- TODO update for input-->
     <mixPort name="primary input" role="sink">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
