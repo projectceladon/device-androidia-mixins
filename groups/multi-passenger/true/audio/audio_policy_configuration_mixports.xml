@@ -106,4 +106,32 @@
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
     </mixPort>
+
+    <!-- zone 2 -->
+    <mixPort name="mixport_bus200_audio_zone_2" role="source"
+             flags="AUDIO_OUTPUT_FLAG_PRIMARY">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000"
+                 channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+    </mixPort>
+    <!-- TODO update for input-->
+    <mixPort name="mixport_bus_3000_input_zone_2" role="sink">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000"
+                 channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
+    </mixPort>
+
+    <!-- zone 3 -->
+    <mixPort name="mixport_bus300_audio_zone_3" role="source"
+             flags="AUDIO_OUTPUT_FLAG_PRIMARY">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000"
+                 channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+    </mixPort>
+    <!-- TODO update for input-->
+    <mixPort name="mixport_bus_4000_input_zone_3" role="sink">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000"
+                 channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
+    </mixPort>
 </mixPorts>
