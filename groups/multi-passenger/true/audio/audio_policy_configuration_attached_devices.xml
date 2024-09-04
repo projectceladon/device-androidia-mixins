@@ -39,4 +39,16 @@
 
     <!-- TODO update for input-->
     <item>bus_2000_input_zone_1</item>
+
+    <!-- zone 2 -->
+    <item>bus200_audio_zone_2</item>
+
+    <!-- TODO update for input-->
+    <item>bus_3000_input_zone_2</item>
+
+    <!-- zone 3 -->
+    <item>bus300_audio_zone_3</item>
+
+    <!-- TODO update for input-->
+    <item>bus_4000_input_zone_3</item>
 </attachedDevices>

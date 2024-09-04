@@ -41,4 +41,17 @@
     <route type="mix" sink="mixport_bus_1000_input_zone_0" sources="bus_1000_input_zone_0"/>
     <route type="mix" sink="primary input"
            sources="Built-In Mic,Built-In Back Mic,Echo-Reference Mic"/>
+
+    <!-- zone 2 -->
+    <route type="mix" sink="bus200_audio_zone_2" sources="mixport_bus200_audio_zone_2"/>
+
+    <!-- TODO update for input-->
+    <route type="mix" sink="mixport_bus_3000_input_zone_2" sources="bus_3000_input_zone_2"/>
+
+    <!-- zone 3 -->
+    <route type="mix" sink="bus300_audio_zone_3" sources="mixport_bus300_audio_zone_3"/>
+
+    <!-- TODO update for input-->
+    <route type="mix" sink="mixport_bus_4000_input_zone_3" sources="bus_4000_input_zone_3"/>
+
 </routes>
