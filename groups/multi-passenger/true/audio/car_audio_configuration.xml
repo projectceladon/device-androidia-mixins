@@ -82,7 +82,53 @@
           <inputDevices>
              <inputDevice address="bus_2000_input_zone_1"/>
           </inputDevices>
-       </zone>
+      </zone>
+      <zone name="back passenger zone 2" audioZoneId="2" occupantZoneId="2">
+          <volumeGroups>
+              <group>
+                  <device address="bus200_audio_zone_2">
+                      <context context="music"/>
+                      <context context="navigation"/>
+                      <context context="voice_command"/>
+                      <context context="call_ring"/>
+                      <context context="call"/>
+                      <context context="alarm"/>
+                      <context context="notification"/>
+                      <context context="system_sound"/>
+                      <context context="emergency"/>
+                      <context context="safety"/>
+                      <context context="vehicle_status"/>
+                      <context context="announcement"/>
+                  </device>
+              </group>
+          </volumeGroups>
+          <inputDevices>
+              <inputDevice address="bus_3000_input_zone_2"/>
+          </inputDevices>
+      </zone>
+      <zone name="back passenger zone 3" audioZoneId="3" occupantZoneId="3">
+          <volumeGroups>
+              <group>
+                  <device address="bus300_audio_zone_3">
+                      <context context="music"/>
+                      <context context="navigation"/>
+                      <context context="voice_command"/>
+                      <context context="call_ring"/>
+                      <context context="call"/>
+                      <context context="alarm"/>
+                      <context context="notification"/>
+                      <context context="system_sound"/>
+                      <context context="emergency"/>
+                      <context context="safety"/>
+                      <context context="vehicle_status"/>
+                      <context context="announcement"/>
+                  </device>
+              </group>
+          </volumeGroups>
+          <inputDevices>
+              <inputDevice address="bus_4000_input_zone_3"/>
+          </inputDevices>
+      </zone>
     </zones>
 </carAudioConfiguration>
 
