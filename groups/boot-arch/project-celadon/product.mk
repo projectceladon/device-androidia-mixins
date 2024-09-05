@@ -122,7 +122,12 @@ KERNELFLINGER_SUPPORT_SELF_USB_DEVICE_MODE_PROTOCOL := {{self_usb_device_mode_pr
 {{/fw_sbl}}
 {{/self_usb_device_mode_protocol}}
 
+{{#high_security}}
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/vdc
+{{/high_security}}
+{{^high_security}}
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/persistent
+{{/high_security}}
 
 {{#fsverity}}
 # Enable fs-verity
