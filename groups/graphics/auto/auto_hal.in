@@ -15,6 +15,7 @@ case "$(cat /proc/fb)" in
                         echo "sriov rendering"
                         setprop vendor.egl.set mesa
                         setprop vendor.vulkan.set intel
+                        setprop ro.vendor.drm.nonblock_commit.on 0
                 else
                         if [ "$(cat /sys/module/virtio_gpu/parameters/is_virgl_3d)" = "N" ];then
                                 echo "swiftshader rendering"
