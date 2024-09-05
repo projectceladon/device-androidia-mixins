@@ -1,0 +1,17 @@
+# create swap partition
+service diskswap /vendor/bin/diskswap.sh
+    class main
+    user root
+    group root shell system
+    disabled
+    oneshot
+
+# Enable swap partition
+on boot
+    # Read one page at a time for swap (default is 8)
+    write /proc/sys/vm/page-cluster 0
+    # Avoid evicting pages and use disk swap
+    write /proc/sys/vm/swappiness {{swappiness}}
+    # Enable disk_based_swap on Chromium kernels
+    write /proc/sys/vm/disk_based_swap 1
+    start diskswap
