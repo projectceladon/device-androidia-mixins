@@ -1,0 +1,40 @@
+From 43d5f2ef7d6f04b7392f5c7497b4320ffb82adfb Mon Sep 17 00:00:00 2001
+From: amritaintel <amrita.h.s@intel.com>
+Date: Fri, 4 Mar 2022 20:37:20 +0530
+Subject: [PATCH] Changes to Haswell
+
+Signed-off-by: amritaintel <amrita.h.s@intel.com>
+---
+ groups/cpu-arch/hsw/BoardConfig.mk | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
+
+diff --git a/groups/cpu-arch/hsw/BoardConfig.mk b/groups/cpu-arch/hsw/BoardConfig.mk
+index 6b8afc3..7f0b852 100644
+--- a/groups/cpu-arch/hsw/BoardConfig.mk
++++ b/groups/cpu-arch/hsw/BoardConfig.mk
+@@ -1,7 +1,20 @@
+ TARGET_CPU_ABI_LIST_32_BIT := x86
+-TARGET_CPU_ABI := x86
++#TARGET_CPU_ABI := x86
+ TARGET_ARCH_VARIANT := haswell
+-TARGET_ARCH := x86
++#TARGET_ARCH := x86
+ TARGET_CPU_SMP := true
+ 
++ifeq ($(BOARD_USE_64BIT_USERSPACE),true)
++# 64b-specific items:
++TARGET_ARCH := x86_64
++TARGET_CPU_ABI := x86_64
++TARGET_2ND_CPU_ABI := x86
++TARGET_2ND_ARCH := x86
++TARGET_2ND_ARCH_VARIANT := haswell
++TARGET_2ND_CPU_VARIANT := haswell
++else
++# 32b-specific items:
++TARGET_ARCH := x86
++TARGET_CPU_ABI := x86
++endif
+ 
+-- 
+2.17.1
+
