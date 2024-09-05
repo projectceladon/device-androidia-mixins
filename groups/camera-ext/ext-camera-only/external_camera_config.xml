@@ -27,7 +27,7 @@
         <!-- Size of v4l2 buffer queue when streaming >= 30fps -->
         <!-- Larger value: more request can be cached pipeline (less janky)  -->
         <!-- Smaller value: use less memory -->
-        <NumVideoBuffers count="8"/>
+        <NumVideoBuffers count="2"/>
         <!-- Size of v4l2 buffer queue when streaming < 30fps -->
         <NumStillBuffers count="2"/>
 
