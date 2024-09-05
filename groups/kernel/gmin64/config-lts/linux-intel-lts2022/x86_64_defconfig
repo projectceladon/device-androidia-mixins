@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86_64 6.1.59 Kernel Configuration
+# Linux/x86_64 6.1.80 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="Android (10087095, +pgo, +bolt, +lto, -mlgo, based on r487747c) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)"
 CONFIG_GCC_VERSION=0
@@ -3844,6 +3844,8 @@ CONFIG_RADIO_ADAPTERS=y
 # CONFIG_USB_RAREMONO is not set
 # CONFIG_RADIO_SI470X is not set
 CONFIG_MEDIA_PLATFORM_DRIVERS=y
+# CONFIG_INTEL_IPU6_TGLRVP_PDATA is not set
+# CONFIG_INTEL_IPU6_ADLRVP_PDATA is not set
 CONFIG_V4L_PLATFORM_DRIVERS=y
 # CONFIG_V4L_MEM2MEM_DRIVERS is not set
 
@@ -3882,8 +3884,6 @@ CONFIG_VIDEO_VIRTIO_CAMERA=y
 #
 # Chips&Media media platform drivers
 #
-# CONFIG_INTEL_IPU6_TGLRVP_PDATA is not set
-# CONFIG_INTEL_IPU6_ADLRVP_PDATA is not set
 
 #
 # Marvell media platform drivers
