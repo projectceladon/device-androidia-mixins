@@ -2,6 +2,10 @@ on init
     mkdir /mnt/vendor 0755 root root
     mkdir /mnt/vendor/persist 0771 system system
 
+on init && property:ro.boot.tee=optee
+    setprop ro.hardware.keystore optee
+    setprop ro.hardware.gatekeeper optee
+
 on post-fs
     chmod 666 /dev/tee0
     chmod 666 /dev/teepriv0

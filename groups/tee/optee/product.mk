@@ -9,8 +9,6 @@ PRODUCT_PACKAGES += \
 	android.hardware.security.keymint-service.optee \
 	wait_for_keymaster_optee
 
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.hardware.keystore=optee
 {{/hw_km}}
 
 {{^hw_km}}
@@ -20,7 +18,6 @@ PRODUCT_PACKAGES += android.hardware.security.keymint-service
 {{#hw_gk}}
 # optee gatekeeper
 PRODUCT_PACKAGES += android.hardware.gatekeeper@1.0-service.optee
-PRODUCT_PROPERTY_OVERRIDES += ro.hardware.gatekeeper=optee
 {{/hw_gk}}
 
 {{^hw_gk}}
