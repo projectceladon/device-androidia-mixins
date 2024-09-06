@@ -37,4 +37,26 @@
   <Stream Address="bus_2000_input_zone_1" Direction="capture" Mmap="false">
     <Pcm Card="SoundCard" Device="2" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
   </Stream>
+
+  <!-- zone 2 -->
+  <Stream Address="bus200_audio_zone_2" Direction="playback" Mmap="false">
+    <Pcm Card="SoundCard" Device="3" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
+  </Stream>
+  <Stream Address="bus_3000_input_zone_2" Direction="capture" Mmap="false">
+    <Pcm Card="SoundCard" Device="3" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
+  </Stream>
+
+  <!-- zone 3 -->
+  <Stream Address="bus300_audio_zone_3" Direction="playback" Mmap="false">
+    <Pcm Card="SoundCard" Device="4" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
+  </Stream>
+  <!--
+       there is only 3 capture pcm devices on SoundCard.
+       Based on the limitation, zone 3 uses the same capture pcm device with zone 2.
+       To be refined after a new design
+  -->
+  <Stream Address="bus_4000_input_zone_3" Direction="capture" Mmap="false">
+    <Pcm Card="SoundCard" Device="3" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
+  </Stream>
+
   </Streams>
