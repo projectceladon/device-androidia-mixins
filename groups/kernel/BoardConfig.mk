@@ -1,10 +1,8 @@
 # Specify location of board-specific kernel headers
-ifeq ($(BASE_LTS2021_CHROMIUM_KERNEL), true)
-  TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{lts2021_chromium_src_path}}}/kernel-headers
-else ifeq ($(BASE_LINUX_INTEL_LTS2021_KERNEL), true)
-  TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{linux_intel_lts2021_src_path}}}/kernel-headers
-else ifeq ($(BASE_LINUX_INTEL_LTS2022_KERNEL), true)
-  TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{linux_intel_lts2022_src_path}}}/kernel-headers
+ifeq ($(BASE_LTS2023_CHROMIUM_KERNEL), true)
+  TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{lts2023_chromium_src_path}}}/kernel-headers
+else ifeq ($(BASE_LINUX_INTEL_LTS2023_KERNEL), true)
+  TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{linux_intel_lts2023_src_path}}}/kernel-headers
 else
   TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{src_path}}}/kernel-headers
 endif
