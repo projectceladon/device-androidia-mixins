@@ -6,8 +6,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += bluetooth.rfkill=1
 
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth-service.default.vbt \
-    android.hardware.bluetooth.audio-impl \
+    android.hardware.bluetooth-service.default.vbt 
 
 {{#ivi}}
 PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/bluetooth/overlay-car
