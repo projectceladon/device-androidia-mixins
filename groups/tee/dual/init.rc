@@ -1,0 +1,31 @@
+on init
+    mkdir /mnt/vendor 0755 root root
+    mkdir /mnt/vendor/persist 0771 system system
+
+on post-fs && property:ro.hardware.tee=optee
+    setprop ro.hardware.keystore optee
+    setprop ro.hardware.gatekeeper optee
+
+    chmod 666 /dev/tee0
+    chmod 666 /dev/teepriv0
+
+    restorecon_recursive /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/tee 0770 system system
+
+    start tee-supplicantd
+    start vendor.keymint-optee
+    start vendor.gatekeeper-1-0-optee
+
+on post-fs && property:ro.hardware.tee=software
+    start vendor.keymint-default
+    start vendor.gatekeeper_intel
+    
+service tee-supplicantd /vendor/bin/tee-supplicant
+    class main
+    user root
+    group root
+    disabled
+
+on late-fs
+    exec_start wait_for_keymaster_optee
+

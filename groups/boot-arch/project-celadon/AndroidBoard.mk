@@ -265,6 +265,9 @@ $(INSTALLER_EFI):
 {{/fw_sbl}}
 
 TEE := {{{tee}}}
+ifeq ($(TEE),dual)
+    TEE := optee
+endif
 ifeq ($(TEE),optee)
 
 BOARD_TEE_IMG := $(PRODUCT_OUT)/tee.img
