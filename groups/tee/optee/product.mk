@@ -9,6 +9,8 @@ PRODUCT_PACKAGES += \
 	android.hardware.security.keymint-service.optee \
 	wait_for_keymaster_optee
 
+PRODUCT_PRODUCT_PROPERTIES += remote_provisioning.tee.rkp_only=true
+
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.hardware.keystore=optee
 {{/hw_km}}
