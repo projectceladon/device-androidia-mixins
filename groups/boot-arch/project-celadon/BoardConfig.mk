@@ -109,6 +109,15 @@ BOARD_GPT_BIN = $(PRODUCT_OUT)/gpt.bin
 BOARD_FLASHFILES += $(BOARD_GPT_BIN):gpt.bin
 INSTALLED_RADIOIMAGE_TARGET += $(BOARD_GPT_BIN)
 BOARD_FLASHFILES += device/intel/project-celadon/$(TARGET_PRODUCT)/gpt.ini
+BOARD_GPT_BIN_RO = $(PRODUCT_OUT)/gpt_ro.bin
+BOARD_FLASHFILES += $(BOARD_GPT_BIN_RO):gpt_ro.bin
+INSTALLED_RADIOIMAGE_TARGET += $(BOARD_GPT_BIN_RO)
+BOARD_GPT_BIN_RW = $(PRODUCT_OUT)/gpt_rw.bin
+BOARD_FLASHFILES += $(BOARD_GPT_BIN_RW):gpt_rw.bin
+INSTALLED_RADIOIMAGE_TARGET += $(BOARD_GPT_BIN_RW)
+BOARD_GPT_BIN_RW_NO_LIC = $(PRODUCT_OUT)/gpt_rw_nolic.bin
+BOARD_FLASHFILES += $(BOARD_GPT_BIN_RW_NO_LIC):gpt_rw_nolic.bin
+INSTALLED_RADIOIMAGE_TARGET += $(BOARD_GPT_BIN_RW_NO_LIC)
 
 # We offer the possibility to flash from a USB storage device using
 # the "installer" EFI application

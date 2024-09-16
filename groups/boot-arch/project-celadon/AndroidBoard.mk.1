@@ -5,6 +5,53 @@ $(BOARD_GPT_BIN): $(BOARD_GPT_INI)
 	$(hide) $(GPT_INI2BIN) $< > $@
 	$(hide) echo GEN $(notdir $@)
 
+TEMP_INI_RO := $(PRODUCT_OUT)/gpt_ro.tmp
+$(BOARD_GPT_BIN_RO): $(BOARD_GPT_INI)
+	cp  $<  $(TEMP_INI_RO)
+	sed -i '/^partitions =/ { \
+		s/ share_data//g \
+		s/ metadata//g \
+		s/ teedata//g \
+		s/ data//g \
+		s/  */ /g \
+	}' $(TEMP_INI_RO)
+
+	$(hide) $(GPT_INI2BIN) $(TEMP_INI_RO) > $@
+	$(hide) echo GEN $(notdir $@)
+
+TEMP_INI_RW := $(PRODUCT_OUT)/gpt_rw.tmp
+$(BOARD_GPT_BIN_RW): $(BOARD_GPT_INI)
+	cp  $<  $(TEMP_INI_RW)
+	sed -i '/^partitions =/ { \
+		s/ bootloader2//g \
+		s/ bootloader//g \
+		s/ boot//g \
+		s/ misc//g \
+		s/ acpio//g \
+		s/ super//g \
+		s/ persistent//g \
+		s/ vbmeta//g \
+		s/  */ /g \
+	}' $(TEMP_INI_RW)
+
+	sed -e 's/partitions += vendor_boot//' -i $(TEMP_INI_RW)
+	sed -e 's/partitions += config//' -i $(TEMP_INI_RW)
+
+	$(hide) $(GPT_INI2BIN) $(TEMP_INI_RW) > $@
+	$(hide) echo GEN $(notdir $@)
+
+$(BOARD_GPT_BIN_RW_NO_LIC): $(BOARD_GPT_INI) $(BOARD_GPT_BIN_RW)
+	sed -e '/partitions =/s/share_data//g' -i $(TEMP_INI_RW) #vm1/2 only
+
+	awk 'BEGIN { found = 0 } \
+	/^\[partition\.data\]$$/ { found = 1; } \
+	found && /^len =/ {  sub(/^len =.*/, "len = -1"); found = 0 } \
+	{ print } \
+	' $(TEMP_INI_RW) > tmpfile && mv tmpfile $(TEMP_INI_RW) #vm1/2 only
+
+	$(hide) $(GPT_INI2BIN) $(TEMP_INI_RW) > $@
+	$(hide) echo GEN $(notdir $@)
+
 $(PRODUCT_OUT)/efi/startup.nsh: $(TARGET_DEVICE_DIR)/{{_extra_dir}}/$(@F)
 	$(ACP) $(TARGET_DEVICE_DIR)/{{_extra_dir}}/$(@F) $@
 	sed -i '/#/d' $@
