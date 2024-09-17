@@ -687,7 +687,7 @@ class Parser(FileHelper):
         definitions. If a ConfigParser is supplied as an argument, it will
         be augmented with the new data"""
         if not cp:
-            cp = configparser.SafeConfigParser()
+            cp = configparser.ConfigParser()
             cp.optionxform = str
 
         spec_file = sf
@@ -695,7 +695,7 @@ class Parser(FileHelper):
             spec_file = self.render_file_content(sf, params)
         try:
             with open(spec_file) as fp:
-                cp.readfp(fp)
+                cp.read_file(fp)
         except IOError:
             if os.path.islink(spec_file):
                 self.error("reading sf {} which is a symlink,"
