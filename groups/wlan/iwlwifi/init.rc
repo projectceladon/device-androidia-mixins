@@ -16,7 +16,7 @@ service dhcpcd_wlan0 /system/bin/dhcpcd -ABDKL
     disabled
     oneshot
 
-service apcreate /system/bin/iw phy phy0 interface add wlan1 type __ap
+service apcreate /vendor/bin/iw phy phy0 interface add wlan1 type __ap
     user root
     group root shell
     disabled

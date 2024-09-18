@@ -6,6 +6,7 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_cli \
     iw \
+    iw_vendor \
     TetheringConfigOverlay \
     TetheringConfigOverlayGsi \
     WifiOverlay
