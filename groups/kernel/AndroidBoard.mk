@@ -60,6 +60,9 @@ ifeq ($(BASE_LTS2023_CHROMIUM_KERNEL), true)
 else ifeq ($(BASE_LINUX_INTEL_LTS2023_KERNEL), true)
   LOCAL_KERNEL_SRC := {{{linux_intel_lts2023_src_path}}}
   KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{linux_intel_lts2023_cfg_path}}}
+else ifeq ($(BASE_ANDROID_MAINLINE_V6.10_KERNEL), true)
+  LOCAL_KERNEL_SRC := {{{android_mainline_v6_10_src_path}}}
+  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{android_mainline_v6_10_cfg_path}}}
 else
   LOCAL_KERNEL_SRC := {{{src_path}}}
   EXT_MODULES := {{{external_modules}}}
