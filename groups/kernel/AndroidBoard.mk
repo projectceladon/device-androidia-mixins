@@ -60,6 +60,9 @@ ifeq ($(BASE_LTS2023_CHROMIUM_KERNEL), true)
 else ifeq ($(BASE_LINUX_INTEL_LTS2023_KERNEL), true)
   LOCAL_KERNEL_SRC := {{{linux_intel_lts2023_src_path}}}
   KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{linux_intel_lts2023_cfg_path}}}
+else ifeq ($(BASE_LTS2024_ANDROID_KERNEL), true)
+  LOCAL_KERNEL_SRC := {{{lts2024_android_src_path}}}
+  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{lts2024_android_cfg_path}}}
 else
   LOCAL_KERNEL_SRC := {{{src_path}}}
   EXT_MODULES := {{{external_modules}}}
@@ -306,6 +309,7 @@ endef
 $(foreach v,$(BOARD_DTB_VARIANTS),$(eval $(call board_dtb_per_variant,$(v))))
 {{/build_dtbs}}
 
+ifneq ($(BASE_LTS2024_ANDROID_KERNEL), true)
 {{#i915_ag_mods_version}}
 
 I915_AG_ADDITIONS_PATH := ../modules/intel-gpu-i915-backports
@@ -323,6 +327,7 @@ $(I915_AG_MODS_TARGET): $(LOCAL_KERNEL)
 $(LOCAL_KERNEL_PATH)/copy_modules: $(I915_AG_MODS_TARGET)
 
 {{/i915_ag_mods_version}}
+endif
 
 # Add a kernel target, so "make kernel" will build the kernel
 .PHONY: kernel
