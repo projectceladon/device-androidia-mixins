@@ -54,13 +54,7 @@ BOARD_DTB := $(LOCAL_KERNEL_PATH)/{{{board_dtb}}}
 DTB ?= $(BOARD_DTB)
 {{/build_dtbs}}
 
-ifeq ($(BASE_LTS2021_CHROMIUM_KERNEL), true)
-  LOCAL_KERNEL_SRC := {{{lts2021_chromium_src_path}}}
-  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{lts2021_chromium_cfg_path}}}
-else ifeq ($(BASE_LINUX_INTEL_LTS2021_KERNEL), true)
-  LOCAL_KERNEL_SRC := {{{linux_intel_lts2021_src_path}}}
-  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{linux_intel_lts2021_cfg_path}}}
-else ifeq ($(BASE_LINUX_INTEL_LTS2022_KERNEL), true)
+ifeq ($(BASE_LINUX_INTEL_LTS2022_KERNEL), true)
   LOCAL_KERNEL_SRC := {{{linux_intel_lts2022_src_path}}}
   KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{linux_intel_lts2022_cfg_path}}}
 else ifeq ($(BASE_LTS2022_CHROMIUM_KERNEL), true)
