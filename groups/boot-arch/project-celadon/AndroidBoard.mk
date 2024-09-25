@@ -240,7 +240,7 @@ endef
 
 fastboot_image: fb4sbl-$(TARGET_BUILD_VARIANT)
 
-bootloader: $(BOARD_BOOTLOADER_DIR) kf4sbl-$(TARGET_BUILD_VARIANT) fb4sbl-$(TARGET_BUILD_VARIANT)
+bootloader: $(BOARD_BOOTLOADER_DIR) kf4sbl-$(TARGET_BUILD_VARIANT) fb4sbl-$(TARGET_BUILD_VARIANT) cd4sbl-$(TARGET_BUILD_VARIANT)
 	$(call generate_bootloader_var)
 
 ifneq ($(INTEL_PATH_PREBUILTS_OUT),)
