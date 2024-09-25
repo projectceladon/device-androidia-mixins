@@ -37,7 +37,7 @@ service iprenew_p2p /system/bin/dhcpcd -n
 
 service load_iwl_modules /vendor/bin/load_iwl_modules.sh
     user system
-    group system shell
+    group system shell readtracefs
     capabilities SYS_MODULE MKNOD
     oneshot
     disabled
