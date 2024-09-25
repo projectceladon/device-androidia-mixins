@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<devicePorts>
+    <!-- zone 1 -->
+    <devicePort tagName="bus0_media_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus0_media_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+            </gains>
+    </devicePort>
+    <devicePort tagName="bus1_navigation_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus1_navigation_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="bus2_voice_command_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus2_voice_command_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="bus3_call_ring_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus3_call_ring_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="bus4_call_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus4_call_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="bus5_alarm_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus5_alarm_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="bus6_notification_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus6_notification_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="bus7_system_sound_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus7_system_sound_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+
+    <!-- TODO update for input-->
+    <devicePort tagName="bus_1000_input_zone_0" type="AUDIO_DEVICE_IN_BUS"
+                role="source" address="bus_1000_input_zone_0">
+        <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                 samplingRates="48000"
+                 channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="Built-In Mic" type="AUDIO_DEVICE_IN_BUILTIN_MIC" role="source"
+                address="Built-In Mic" >
+        <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                 samplingRates="8000 11025 12000 16000 22050 24000 32000 44100 48000"
+                 channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
+    </devicePort>
+    <devicePort tagName="Built-In Back Mic" type="AUDIO_DEVICE_IN_BACK_MIC"
+                role="source" address="Built-In Back Mic">
+        <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                 samplingRates="8000 11025 12000 16000 22050 24000 32000 44100 48000"
+                 channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
+    </devicePort>
+    <devicePort tagName="Echo-Reference Mic" type="AUDIO_DEVICE_IN_ECHO_REFERENCE" role="source"
+                address="Echo-Reference Mic">
+        <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                 samplingRates="8000 11025 12000 16000 22050 24000 32000 44100 48000"
+                 channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
+    </devicePort>
+
+    <!-- zone 2 -->
+    <devicePort tagName="bus100_audio_zone_1" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus100_audio_zone_1">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+            </gains>
+    </devicePort>
+
+    <devicePort tagName="bus10_media_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus10_media_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+            </gains>
+    </devicePort>
+    <devicePort tagName="bus11_navigation_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus11_navigation_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="bus12_voice_command_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus12_voice_command_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="bus13_call_ring_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus13_call_ring_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="bus14_call_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus14_call_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="bus15_alarm_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus15_alarm_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="bus16_notification_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus16_notification_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+    <devicePort tagName="bus17_system_sound_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus17_system_sound_out">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+
+    <!-- TODO update for input-->
+    <devicePort tagName="bus_2000_input_zone_1" type="AUDIO_DEVICE_IN_BUS"
+                role="source" address="bus_2000_input_zone_1">
+        <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                 samplingRates="48000"
+                 channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-3200" maxValueMB="600"
+                  defaultValueMB="0" stepValueMB="100"/>
+        </gains>
+    </devicePort>
+</devicePorts>
