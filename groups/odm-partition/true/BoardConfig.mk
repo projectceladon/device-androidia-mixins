@@ -8,6 +8,7 @@ ODM_PARTITION_SIZE := $(shell echo {{partition_size}}*1048576 | bc)
 BOARD_USES_ODM_DLKMIMAGE := true
 BOARD_ODM_DLKMIMAGE_FILE_SYSTEM_TYPE := {{system_fs}}
 TARGET_COPY_OUT_ODM_DLKM := odm_dlkm
+BOARD_AVB_ODM_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 
 {{^dynamic-partitions}}
 BOARD_ODMIMAGE_PARTITION_SIZE := $(ODM_PARTITION_SIZE)
