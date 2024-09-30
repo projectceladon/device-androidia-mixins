@@ -35,13 +35,7 @@
                         <context context="safety"/>
                         <context context="vehicle_status"/>
                         <context context="notification"/>
-                    </device>
-                </group>
-                <group>
-                    <device address="bus1_navigation_out">
                         <context context="navigation"/>
-                    </device>
-                    <device address="bus2_voice_command_out">
                         <context context="voice_command"/>
                     </device>
                 </group>
