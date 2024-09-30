@@ -38,6 +38,9 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 
         <MediaCodec name="c2.intel.hevc.decoder" type="video/hevc">
@@ -52,6 +55,9 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 
         <MediaCodec name="c2.intel.vp9.decoder" type="video/x-vnd.on2.vp9">
@@ -65,6 +71,9 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
 	    <Feature name="adaptive-playback" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 
 
@@ -77,6 +86,9 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-1920x1080" value="30" />
             <Feature name="adaptive-playback" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 
 	<MediaCodec name="c2.intel.av1.decoder" type="video/av01">
@@ -89,6 +101,9 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
     </Decoders>
 
@@ -104,8 +119,10 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <!--Feature name="intra-refresh" /-->
-            <Limit name="dumpOutput" value="false" />
-            <Limit name="lowPowerMode" value="false" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
+            <Limit name="low-power-mode" value="false" />
         </MediaCodec>
 
         <MediaCodec name="c2.intel.hevc.encoder" type="video/hevc" >
@@ -116,6 +133,9 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 
 	<MediaCodec name="c2.intel.vp9.encoder" type="video/x-vnd.on2.vp9" >
@@ -127,6 +147,9 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 
         <MediaCodec name="c2.intel.av1.encoder" type="video/av01">
@@ -137,6 +160,9 @@ and updated to vendor media codecs.
             <Limit name="blocks-per-second" range="1-500000" />
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
     </Encoders>
 </Included>
