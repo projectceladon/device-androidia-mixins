@@ -16,8 +16,6 @@
 <attachedDevices>
     <!-- One bus per context -->
     <item>bus0_media_out</item>
-    <item>bus1_navigation_out</item>
-    <item>bus2_voice_command_out</item>
     <item>bus3_call_ring_out</item>
     <item>bus4_call_out</item>
 

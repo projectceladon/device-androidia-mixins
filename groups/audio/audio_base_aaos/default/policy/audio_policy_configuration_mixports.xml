@@ -20,16 +20,6 @@
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         </mixPort>
-    <mixPort name="mixport_bus1_navigation_out" role="source">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000"
-                 channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-    </mixPort>
-    <mixPort name="mixport_bus2_voice_command_out" role="source">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000"
-                 channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-    </mixPort>
     <mixPort name="mixport_bus3_call_ring_out" role="source">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000"
