@@ -39,6 +39,9 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 {{/hw_vd_h264}}
 
@@ -56,6 +59,9 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 {{/hw_vd_h265}}
 
@@ -71,6 +77,9 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
 	    <Feature name="adaptive-playback" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 {{/hw_vd_vp9}}
 
@@ -84,6 +93,9 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
             <Feature name="adaptive-playback" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 {{/hw_vd_vp8}}
 
@@ -97,6 +109,9 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-1920x1080" value="30" />
             <Feature name="adaptive-playback" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 {{/hw_vd_mp2}}
 
@@ -111,6 +126,9 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 {{/hw_vd_av1}}
     </Decoders>
@@ -129,8 +147,10 @@ and updated to vendor media codecs.
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="bitrate-modes" value="VBR,CBR" />
             <!--Feature name="intra-refresh" /-->
-            <Limit name="dumpOutput" value="false" />
-            <Limit name="lowPowerMode" value="false" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
+            <Limit name="low-power-mode" value="false" />
         </MediaCodec>
 {{/hw_ve_h264}}
 
@@ -146,6 +166,9 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="bitrate-modes" value="VBR,CBR" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 {{/hw_ve_h265}}
 
@@ -159,6 +182,9 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-80000000" />
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 {{/hw_ve_vp9}}
 
@@ -171,6 +197,9 @@ and updated to vendor media codecs.
             <Limit name="blocks-per-second" range="1-500000" />
             <Limit name="bitrate" range="1-40000000" />
             <Limit name="performance-point-3840x2160" value="30" />
+            <Limit name="dump-output" value="false" />
+            <Limit name="dump-input" value="false" />
+            <Limit name="dump-frames-count" value="1" />
         </MediaCodec>
 {{/hw_ve_av1}}
     </Encoders>
