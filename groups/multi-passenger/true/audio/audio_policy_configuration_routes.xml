@@ -36,11 +36,6 @@
            sources="mixport_bus2_voice_command_out"/>
     <route type="mix" sink="bus3_call_ring_out" sources="mixport_bus3_call_ring_out"/>
     <route type="mix" sink="bus4_call_out" sources="mixport_bus4_call_out"/>
-    <route type="mix" sink="bus5_alarm_out" sources="mixport_bus5_alarm_out"/>
-    <route type="mix" sink="bus6_notification_out"
-           sources="mixport_bus6_notification_out"/>
-    <route type="mix" sink="bus7_system_sound_out"
-           sources="mixport_bus7_system_sound_out"/>
 
     <!-- TODO update for input-->
     <route type="mix" sink="mixport_bus_1000_input_zone_0" sources="bus_1000_input_zone_0"/>
