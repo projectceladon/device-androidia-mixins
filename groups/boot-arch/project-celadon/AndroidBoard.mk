@@ -175,8 +175,7 @@ PREBUILT_KERNELFLINGER := hardware/intel/kernelflinger/prebuilt/board/RPL_IVI/ke
 INSTALLER_EFI := $(PRODUCT_OUT)/efi/installer.efi
 
 $(BOARD_BOOTLOADER_DIR):
-	$(hide) rm -rf $(BOARD_BOOTLOADER_DIR)
-	$(hide) mkdir -p $(BOARD_BOOTLOADER_DIR)
+	$(hide) if [ ! -d $(BOARD_BOOTLOADER_DIR) ]; then mkdir -p $(BOARD_BOOTLOADER_DIR); fi
 
 intermediates := $(call intermediates-dir-for,PACKAGING,bootloader_zip)
 bootloader_zip := $(intermediates)/bootloader.zip
