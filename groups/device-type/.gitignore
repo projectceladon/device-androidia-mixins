@@ -1,0 +1,11 @@
+*
+!.gitignore
+!autodetect
+!car
+!clamshell
+!default
+!doc.spec
+!false
+!handheld
+!tablet
+!tablet-lowram

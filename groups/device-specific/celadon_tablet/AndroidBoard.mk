@@ -1,5 +1,0 @@
-KERNEL_APL_DIFFCONFIG = $(wildcard $(KERNEL_CONFIG_PATH)/apl_nuc_diffconfig)
-KERNEL_DIFFCONFIG += $(KERNEL_APL_DIFFCONFIG)
-
-# Specify /dev/mmcblk0 size here
-BOARD_MMC_SIZE = 15335424K
