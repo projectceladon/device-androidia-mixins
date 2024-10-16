@@ -1,3 +1,7 @@
-# ignore base_aaos
-base_aaos/
-aaos_iasw/
+*
+!.gitignore
+!caas/
+!default
+!doc.spec
+!false
+!mixinfo.spec
