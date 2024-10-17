@@ -1290,6 +1290,7 @@ class Updater(FileHelper):
 
 def get_valid_spec_files_and_targets():
     fn = os.path.join(os.path.dirname(sys.argv[0]), Configurer.VALID_TARGETS_FN)
+    fn1 = os.path.join(os.path.dirname(sys.argv[0]), '../../../vendor/intel/utils_priv/embargoed_valid_targets.spec')
     dlines = []
     ret = []
     valid_targets = ""
@@ -1301,6 +1302,14 @@ def get_valid_spec_files_and_targets():
                 sf = os.path.join(Configurer.INTERNAL_DEVICE_DIR, platform, target, Configurer.PRODUCT_SPEC_FN)
                 if os.path.exists(sf):
                     ret.append(sf)
+        if os.path.exists(fn1):
+            cp = Parser().read_spec_file(fn1)
+            for platform in cp.sections():
+                for target in cp.options(platform):
+                    valid_targets += "{} ".format(target)
+                    sf = os.path.join(Configurer.INTERNAL_DEVICE_DIR, platform, target, Configurer.PRODUCT_SPEC_FN)
+                    if os.path.exists(sf):
+                        ret.append(sf)
     else:
         for root, dirs, files in os.walk("device"):
             if Configurer.PRODUCT_SPEC_FN in files:
