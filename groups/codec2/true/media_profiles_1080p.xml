@@ -84,7 +84,7 @@
                    height="720"
                    frameRate="30" />
 
-            <Audio codec="amrnb"
+            <Audio codec="aac"
                    bitRate="12200"
                    sampleRate="8000"
                    channels="1" />
