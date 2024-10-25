@@ -23,7 +23,7 @@ PRODUCT_PACKAGES += evsmanagerd
 PRODUCT_PACKAGES += android.hardware.automotive.evs-intel_default
 
 {{^aosp_hal}}
-PRODUCT_PACKAGES += android.hardware.automotive.vehicle.intel@2.0-service
+PRODUCT_PACKAGES += android.hardware.automotive.vehicle@intel-aidl-service
 {{/aosp_hal}}
 
 PRODUCT_PACKAGES += android.hardware.automotive.audiocontrol@1.0-service.intel
@@ -40,3 +40,5 @@ VEHICLE_HAL_PROTO_TYPE += {{ioc}}
 {{/ioc}}
 
 PRODUCT_PROPERTY_OVERRIDES += telephony.active_modems.max_count=2
+
+PRODUCT_PRODUCT_PROPERTIES += ro.vendor.fake_vhal.ap_power_state_req.config=1
