@@ -1,0 +1,2 @@
+# Add the configuration for /dev/spidev0.0
+/dev/spidev0.0          0660   vehicle_network   system
