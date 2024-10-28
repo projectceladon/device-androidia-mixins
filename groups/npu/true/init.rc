@@ -1,0 +1,2 @@
+on boot
+   insmod ${ro.vendor.boot.moduleslocation}/intel_vpu.ko
