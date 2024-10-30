@@ -53,8 +53,9 @@ PRODUCT_PACKAGES += \
     acrn-bkend-server \
     dm-backend \
     libCastFrontClientJni \
-    ScreenCastClient
-
+    ScreenCastClient \
+    open-node \
+    probe-node
 
 # DRM HWComposer
 PRODUCT_PACKAGES += \
