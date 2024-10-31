@@ -41,13 +41,18 @@ $(BOARD_GPT_BIN_RW): $(BOARD_GPT_INI)
 	$(hide) echo GEN $(notdir $@)
 
 $(BOARD_GPT_BIN_RW_NO_LIC): $(BOARD_GPT_INI) $(BOARD_GPT_BIN_RW)
-	sed -e '/partitions =/s/share_data//g' -i $(TEMP_INI_RW) #vm1/2 only
-
 	awk 'BEGIN { found = 0 } \
 	/^\[partition\.data\]$$/ { found = 1; } \
 	found && /^len =/ {  sub(/^len =.*/, "len = -1"); found = 0 } \
 	{ print } \
 	' $(TEMP_INI_RW) > tmpfile && mv tmpfile $(TEMP_INI_RW) #vm1/2 only
+
+	awk 'BEGIN { found = 0 } \
+	/^\[partition\.share_data\]$$/ { found = 1; } \
+	found && /^len =/ {  sub(/^len =.*/, "len = 50"); found = 0 } \
+	{ print } \
+	' $(TEMP_INI_RW) > tmpfile && mv tmpfile $(TEMP_INI_RW) #vm1/2 only
+
 
 	$(hide) $(GPT_INI2BIN) $(TEMP_INI_RW) > $@
 	$(hide) echo GEN $(notdir $@)
