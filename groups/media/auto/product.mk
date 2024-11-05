@@ -5,12 +5,13 @@ PRODUCT_PACKAGES += \
 
 # Media SDK and OMX IL components
 PRODUCT_PACKAGES += \
-    libmfx_omx_core
+    libmfx_omx_core \
+    libmfx_omx_components_hw
+{{/enable_msdk_omx}}
 
 {{#add_hw_msdk}}
 # MediaSDK library
 PRODUCT_PACKAGES += \
-    libmfx_omx_components_hw \
     libmfxhw32
 
 ifeq ($(BOARD_USE_64BIT_USERSPACE),true)
@@ -43,7 +44,6 @@ PRODUCT_PACKAGES += \
     libva \
     libva-android
 
-{{#add_hw_msdk}}
 # Open source media_driver
 PRODUCT_PACKAGES += i965_drv_video
 PRODUCT_PACKAGES += libigfxcmrt
@@ -54,5 +54,3 @@ PRODUCT_PACKAGES += lihdcpcommon
 
 PRODUCT_PACKAGES += \
     libpciaccess
-{{/add_hw_msdk}}
-{{/enable_msdk_omx}}
