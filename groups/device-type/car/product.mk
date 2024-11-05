@@ -4,7 +4,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.screen.landscape.xml:vendor/etc/permissions/android.hardware.screen.landscape.xml \
     frameworks/native/data/etc/android.hardware.ethernet.xml:vendor/etc/permissions/android.hardware.ethernet.xml \
     frameworks/native/data/etc/android.software.activities_on_secondary_displays.xml:vendor/etc/permissions/android.software.activities_on_secondary_displays.xml \
-    $(INTEL_PATH_COMMON)/framework/android.software.cant_save_state.xml:vendor/etc/permissions/android.software.cant_save_state.xml
+    $(INTEL_PATH_COMMON)/framework/android.software.cant_save_state.xml:vendor/etc/permissions/android.software.cant_save_state.xml \
+    frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:vendor/etc/permissions/android.hardware.keystore.app_attest_key.xml \
+    frameworks/native/data/etc/android.software.ipsec_tunnel_migration.xml:vendor/etc/permissions/android.software.ipsec_tunnel_migration.xml
 
 # Make sure vendor car product overlays take precedence than google definition
 # under packages/services/Car/car_product/overlay/
@@ -28,8 +30,8 @@ PRODUCT_PACKAGES += android.hardware.automotive.vehicle.intel@2.0-service
 PRODUCT_PACKAGES += android.hardware.automotive.audiocontrol@1.0-service.intel
 
 {{#aosp_hal}}
-PRODUCT_PACKAGES += android.hardware.automotive.vehicle@V1-default-service \
-    android.hardware.automotive.vehicle@V1-default-impl
+PRODUCT_PACKAGES += android.hardware.automotive.vehicle@V3-default-service \
+    android.hardware.automotive.vehicle@V3-default-impl
 {{/aosp_hal}}
 
 VEHICLE_HAL_PROTO_TYPE := {{vhal-proto-type}}
