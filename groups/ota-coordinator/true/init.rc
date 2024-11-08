@@ -1,0 +1,10 @@
+service ota_coordinator /system/bin/ota_coordinator
+    user root
+    class core
+    socket ota_socket stream 666 system system
+    oneshot
+    seclabel u:r:shell:s0
+    disabled
+
+on boot
+    mkdir /data/vendor/ota 660 system system
