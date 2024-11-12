@@ -1,0 +1,10 @@
+service ota_coordinator_recovery /system/bin/ota_coordinator_recovery
+    user root
+    class core
+    oneshot
+    seclabel u:r:recovery:s0
+
+on boot
+    mkdir /ota
+    start ota_coordinator_recovery
+
