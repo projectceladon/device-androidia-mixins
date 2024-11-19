@@ -15,6 +15,14 @@ service power_hal_helper /system/vendor/bin/power_hal_helper
     disabled
     oneshot
 
+service android_pm_tune /vendor/bin/android_pm_tune.sh
+    class main
+    user root
+    group root shell system
+    disabled
+    oneshot
+    seclabel u:r:android_pm_tune:s0
+
 {{#wakelock_trace}}
 on post-fs-data
     # Enable by default android java wakelock logging
@@ -23,6 +31,12 @@ on post-fs-data
 
 on property:sys.boot_completed=1
     setprop vendor.boot_completed 1
+
+{{#idle_display}}
+on property:sys.boot_completed=1
+    #Start android_pm_tune if enabled
+    start android_pm_tune
+{{/idle_display}}
 
 on boot
     setprop vendor.powerhal.throttle.exit 1
