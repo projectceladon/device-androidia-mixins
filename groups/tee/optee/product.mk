@@ -9,6 +9,9 @@ PRODUCT_PACKAGES += \
 	android.hardware.security.keymint-service.optee \
 	wait_for_keymaster_optee
 
+PRODUCT_PRODUCT_PROPERTIES += remote_provisioning.tee.rkp_only=true
+PRODUCT_PRODUCT_PROPERTIES += remote_provisioning.hostname=remoteprovisioning.googleapis.com
+
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.hardware.keystore=optee
 {{/hw_km}}
@@ -24,7 +27,7 @@ PRODUCT_PROPERTY_OVERRIDES += ro.hardware.gatekeeper=optee
 {{/hw_gk}}
 
 {{^hw_gk}}
-PRODUCT_PACKAGES += android.hardware.gatekeeper-service.software
+PRODUCT_PACKAGES += com.android.hardware.gatekeeper.nonsecure
 {{/hw_gk}}
 
 PRODUCT_COPY_FILES += \
