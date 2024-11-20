@@ -102,7 +102,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
    ro.opengles.version=196610
 
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.software.opengles.deqp.level-2023-03-01.xml:vendor/etc/permissions/android.software.opengles.deqp.level.xml
+    frameworks/native/data/etc/android.software.opengles.deqp.level-2024-03-01.xml:vendor/etc/permissions/android.software.opengles.deqp.level.xml
 
 {{#vulkan}}
 PRODUCT_COPY_FILES += \
@@ -119,7 +119,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_3.xml:vendor/etc/permissions/android.hardware.vulkan.version.xml
 
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.software.vulkan.deqp.level-2023-03-01.xml:vendor/etc/permissions/android.software.vulkan.deqp.level.xml
+    frameworks/native/data/etc/android.software.vulkan.deqp.level-2024-03-01.xml:vendor/etc/permissions/android.software.vulkan.deqp.level.xml
 
 PRODUCT_PACKAGES += \
     vulkan.$(TARGET_BOARD_PLATFORM) \
