@@ -2,6 +2,7 @@ on post-fs-data
     chmod 0660 /data/misc/wifi/p2p_supplicant.conf
     setprop wifi.interface wlan0
     setprop wifi.direct.interface p2p-dev-wlan0
+    setprop ro.boot.wificountrycode IN
 
 on zygote-start
     # Create the directories used by the Wireless subsystem
@@ -15,6 +16,15 @@ service dhcpcd_wlan0 /system/bin/dhcpcd -ABDKL
     group wifi system dhcp inet
     disabled
     oneshot
+
+service apcreate /system/bin/iw phy phy0 interface add wlan1 type __ap
+    user root
+    group root shell
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1
+    start apcreate
 
 service iprenew_wlan0 /system/bin/dhcpcd -n
     class main
