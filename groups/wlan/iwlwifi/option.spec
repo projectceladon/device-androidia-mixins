@@ -10,3 +10,5 @@ libwifi-hal = false
 firmware =
 nvm = true
 iwl_upstream_drv = true
+nan = false
+ivi = false
