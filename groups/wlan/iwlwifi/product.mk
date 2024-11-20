@@ -21,6 +21,15 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:vendor/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.software.ipsec_tunnels.xml:vendor/etc/permissions/android.software.ipsec_tunnels.xml
 
+{{^ivi}}
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.wifi.rtt.xml:vendor/etc/permissions/android.hardware.wifi.rtt.xml
+{{#nan}}
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.wifi.aware.xml:vendor/etc/permissions/android.hardware.wifi.aware.xml
+{{/nan}}
+{{/ivi}}
+
 PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/wlan/overlay-disable_keepalive_offload
 
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/load_iwl_modules.sh:vendor/bin/load_iwl_modules.sh

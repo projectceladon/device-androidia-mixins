@@ -12,3 +12,9 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB ?= lib_driver_cmd_intc
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/wlan/load_iwl_modules
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/wlan/iwlwifi
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
+
+{{^ivi}}
+{{#nan}}
+WIFI_HIDL_FEATURE_AWARE := true
+{{/nan}}
+{{/ivi}}
