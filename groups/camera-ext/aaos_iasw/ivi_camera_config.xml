@@ -10,6 +10,8 @@
             <id>7</id>
             -->
         </ignore>
+        <control_variable>
+        </control_variable>
     </Provider>
     <!-- See ExternalCameraUtils.cpp for default values of Device configurations below
     <Device>
@@ -46,6 +48,343 @@
         </Bind>
     </Device>
     -->
+
+    <MetadataType>
+        <Name>Limited720p</Name>
+        <metadata>
+            <!-- initDefaultCharsKeys -->
+            <info.supportedHardwareLevel value="EXTERNAL" />
+            <colorCorrection.availableAberrationModes value="OFF" />
+            <control.aeAvailableAntibandingModes value="AUTO" />
+            <control.maxRegions value="0, 0, 0" />
+            <control.availableVideoStabilizationModes value="OFF" />
+            <control.awbAvailableModes value="AUTO" />
+            <control.aeAvailableModes value="ON"/>
+            <control.availableEffects value="OFF" />
+            <control.availableModes value="OFF, AUTO" />
+            <edge.availableModes value="OFF" />
+            <flash.info.available value="FALSE" />
+            <hotPixel.availableModes value="OFF" />
+            <jpeg.availableThumbnailSizes value="0, 0, 176, 144, 240, 144, 256, 144, 240, 160, 256, 154, 240, 180" />
+            <jpeg.maxSize value="3145728" />
+            <lens.info.availableFocalLengths value="2.6" />
+            <lens.focalLength value="2.6" />
+            <lens.info.focusDistanceCalibration value="UNCALIBRATED" />
+            <lens.info.opticalStabilizationMode value="OFF" />
+            <lens.facing value="BACK"/>
+            <!-- 19 -->
+
+            <automotive.lensFacing value="INTERIOR_OTHER"/>
+            <automotive.location value="INTERIOR"/>
+            <lens.poseReference value="AUTOMOTIVE"/>
+            <lens.poseTranslation value="1.0, 1.0, 0.0"/>
+            <lens.poseRotation value="1.0, 0.0, 0.0, 0.0"/>
+            <lens.intrinsicCalibration value="1.0, 1.0, 0.0, 0.0, 0.0"/>
+            <noiseReduction.availableModes value= "OFF" />
+            <noiseReduction.mode value= "OFF" />
+            <request.partialResultCount value="1" />
+            <request.pipelineMaxDepth value="4" />
+            <request.maxNumOutputStreams value="0, 2, 1"/>
+            <request.maxNumInputStreams value="0"/>
+            <scaler.availableMaxDigitalZoom value="1" />
+            <scaler.cropType value="CENTER_ONLY" />
+            <!-- 14 -->
+
+            <sensor.availableTestPatternModes value="OFF, SOLID_COLOR" />
+            <sensor.info.timestampReadout value="HARDWARE" />
+            <sensor.info.timestampSource value="UNKNOWN" />
+            <sensor.orientation value="0"/>
+            <shading.availableModes value="OFF" />
+            <statistics.info.availableFaceDetectModes value="OFF" />
+            <statistics.info.maxFaceCount value="0" />
+            <statistics.info.availableHotPixelMapModes value="OFF" />
+            <statistics.info.availableLensShadingMapMode value="OFF" />
+            <sync.maxLatency value="UNKNOWN" />
+            <!-- 10 -->
+
+            <!-- initCameraControlsCharsKeys -->
+            <control.aeCompensationRange value="0, 0" />
+            <control.aeCompensationStep value="0, 1" />
+            <control.afAvailableModes value="OFF"/>
+            <control.availableSceneModes value="DISABLED" />
+            <control.aeLockAvailable value="FALSE" />
+            <control.awbLockAvailable value="FALSE"/>
+            <!-- <scaler.availableMaxDigitalZoom value="1" /> -->
+            <sensor.info.physicalSize value="5.376, 3.024" />
+            <!-- initAvailableCapabilities -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE" />
+            <!-- 8 -->
+
+            <!-- initOutputCharsKeys -->
+            <control.aeAvailableTargetFpsRanges value="15, 30" />
+            <sensor.info.maxFrameDuration value="66666666" />
+            <sensor.info.preCorrectionActiveArraySize value="0, 0, 1280, 720" />
+            <sensor.info.activeArraySize value="0, 0, 1280, 720" />
+            <sensor.info.pixelArraySize value="1280, 720" />
+            <!-- initOutputCharsKeysByFormat -->
+            <scaler.availableStreamConfigurations value="
+                IMPLEMENTATION_DEFINED, 1920, 1080, OUTPUT,
+                IMPLEMENTATION_DEFINED, 1280, 720,  OUTPUT,
+                IMPLEMENTATION_DEFINED, 640,  480,  OUTPUT,
+                IMPLEMENTATION_DEFINED, 320,  240,  OUTPUT,
+                YCbCr_420_888, 1920, 1080, OUTPUT,
+                YCbCr_420_888, 1280, 720,  OUTPUT,
+                YCbCr_420_888, 640,  480,  OUTPUT,
+                YCbCr_420_888, 320,  240,  OUTPUT,
+                BLOB, 1920, 1080, OUTPUT,
+                BLOB, 1280, 720,  OUTPUT,
+                BLOB, 640,  480,  OUTPUT,
+                BLOB, 320,  240,  OUTPUT" />
+            <scaler.availableMinFrameDurations value="
+                IMPLEMENTATION_DEFINED, 1280, 720,  33333333,
+                IMPLEMENTATION_DEFINED, 640,  480,  33333333,
+                IMPLEMENTATION_DEFINED, 320,  240,  33333333,
+                YCbCr_420_888, 1280, 720,  33333333,
+                YCbCr_420_888, 640,  480,  33333333,
+                YCbCr_420_888, 320,  240,  33333333,
+                BLOB, 1280, 720,  33333333,
+                BLOB, 640,  480,  33333333,
+                BLOB, 320,  240,  33333333" />
+            <scaler.availableStallDurations value="
+                IMPLEMENTATION_DEFINED, 1280, 720,  0,
+                IMPLEMENTATION_DEFINED, 640,  480,  0,
+                IMPLEMENTATION_DEFINED, 320,  240,  0,
+                YCbCr_420_888, 1280, 720,  0,
+                YCbCr_420_888, 640,  480,  0,
+                YCbCr_420_888, 320,  240,  0,
+                BLOB, 1280, 720,  1000000000,
+                BLOB, 640,  480,  1000000000,
+                BLOB, 320,  240,  1000000000" />
+            <!-- 8 -->
+
+            <!-- initDefaultRequests -->
+            <colorCorrection.aberrationMode value="OFF" />
+            <control.aeExposureCompensation value="0" />
+            <control.videoStabilizationMode value="OFF" />
+            <control.awbMode value="AUTO" />
+            <control.aeMode value="ON" />
+            <control.aePrecaptureTrigger value="IDLE" />
+            <control.afMode value="AUTO" />
+            <control.afTrigger value="IDLE" />
+            <control.sceneMode value="DISABLED" />
+            <control.effectMode value="OFF" />
+            <flash.mode value="OFF" />
+            <jpeg.thumbnailSize value="240, 180" />
+            <jpeg.quality value="90" />
+            <jpeg.thumbnailQuality value="90" />
+            <jpeg.orientation value="0" />
+            <!-- 15 -->
+
+            <lens.opticalStabilizationMode value="OFF" />
+            <!-- <noiseReduction.mode value= "OFF" /> -->
+            <sensor.testPatternMode value="OFF" />
+            <statistics.faceDetectMode value="OFF" />
+            <statistics.hotPixelMapMode value="OFF" />
+            <control.aeTargetFpsRange value="15, 30" />
+            <control.aeAntibandingMode value="AUTO" />
+            <control.mode value="AUTO" />
+            <control.captureIntent value="PREVIEW" />
+            <!-- fillCaptureResult -->
+            <control.afStat value="INACTIVE" />
+            <!-- 9 -->
+        </metadata>
+    </MetadataType>
+
+    <MetadataType>
+        <Name>Limited1080p</Name>
+        <metadata>
+            <!-- initDefaultCharsKeys -->
+            <info.supportedHardwareLevel value="EXTERNAL" />
+            <colorCorrection.availableAberrationModes value="OFF" />
+            <control.aeAvailableAntibandingModes value="AUTO" />
+            <control.maxRegions value="0, 0, 0" />
+            <control.availableVideoStabilizationModes value="OFF" />
+            <control.awbAvailableModes value="AUTO" />
+            <control.aeAvailableModes value="ON"/>
+            <control.availableEffects value="OFF" />
+            <control.availableModes value="OFF, AUTO" />
+            <edge.availableModes value="OFF" />
+            <flash.info.available value="FALSE" />
+            <hotPixel.availableModes value="OFF" />
+            <jpeg.availableThumbnailSizes value="0, 0, 176, 144, 240, 144, 256, 144, 240, 160, 256, 154, 240, 180" />
+            <jpeg.maxSize value="3145728" />
+            <lens.info.availableFocalLengths value="2.6" />
+            <lens.focalLength value="2.6" />
+            <lens.info.focusDistanceCalibration value="UNCALIBRATED" />
+            <lens.info.opticalStabilizationMode value="OFF" />
+            <lens.facing value="BACK"/>
+            <!-- 19 -->
+
+            <automotive.lensFacing value="INTERIOR_OTHER"/>
+            <automotive.location value="INTERIOR"/>
+            <lens.poseReference value="AUTOMOTIVE"/>
+            <lens.poseTranslation value="1.0, 1.0, 0.0"/>
+            <lens.poseRotation value="1.0, 0.0, 0.0, 0.0"/>
+            <lens.intrinsicCalibration value="1.0, 1.0, 0.0, 0.0, 0.0"/>
+            <noiseReduction.availableModes value= "OFF" />
+            <noiseReduction.mode value= "OFF" />
+            <request.partialResultCount value="1" />
+            <request.pipelineMaxDepth value="4" />
+            <request.maxNumOutputStreams value="0, 2, 1"/>
+            <request.maxNumInputStreams value="0"/>
+            <scaler.availableMaxDigitalZoom value="1" />
+            <scaler.cropType value="CENTER_ONLY" />
+            <!-- 14 -->
+
+            <sensor.availableTestPatternModes value="OFF, SOLID_COLOR" />
+            <sensor.info.timestampReadout value="HARDWARE" />
+            <sensor.info.timestampSource value="UNKNOWN" />
+            <sensor.orientation value="0"/>
+            <shading.availableModes value="OFF" />
+            <statistics.info.availableFaceDetectModes value="OFF" />
+            <statistics.info.maxFaceCount value="0" />
+            <statistics.info.availableHotPixelMapModes value="OFF" />
+            <statistics.info.availableLensShadingMapMode value="OFF" />
+            <sync.maxLatency value="UNKNOWN" />
+            <!-- 10 -->
+
+            <!-- initCameraControlsCharsKeys -->
+            <control.aeCompensationRange value="0, 0" />
+            <control.aeCompensationStep value="0, 1" />
+            <control.afAvailableModes value="OFF"/>
+            <control.availableSceneModes value="DISABLED" />
+            <control.aeLockAvailable value="FALSE" />
+            <control.awbLockAvailable value="FALSE"/>
+            <!-- <scaler.availableMaxDigitalZoom value="1" /> -->
+            <sensor.info.physicalSize value="5.376, 3.024" />
+            <!-- initAvailableCapabilities -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE" />
+            <!-- 8 -->
+
+            <!-- initOutputCharsKeys -->
+            <control.aeAvailableTargetFpsRanges value="15, 30" />
+            <sensor.info.maxFrameDuration value="66666666" />
+            <sensor.info.preCorrectionActiveArraySize value="0, 0, 1920, 1080" />
+            <sensor.info.activeArraySize value="0, 0, 1920, 1080" />
+            <sensor.info.pixelArraySize value="1920, 1080" />
+            <!-- initOutputCharsKeysByFormat -->
+            <scaler.availableStreamConfigurations value="
+                IMPLEMENTATION_DEFINED, 1920, 1080, OUTPUT,
+                IMPLEMENTATION_DEFINED, 1280, 720,  OUTPUT,
+                IMPLEMENTATION_DEFINED, 640,  480,  OUTPUT,
+                IMPLEMENTATION_DEFINED, 320,  240,  OUTPUT,
+                YCbCr_420_888, 1920, 1080, OUTPUT,
+                YCbCr_420_888, 1280, 720,  OUTPUT,
+                YCbCr_420_888, 640,  480,  OUTPUT,
+                YCbCr_420_888, 320,  240,  OUTPUT,
+                BLOB, 1920, 1080, OUTPUT,
+                BLOB, 1280, 720,  OUTPUT,
+                BLOB, 640,  480,  OUTPUT,
+                BLOB, 320,  240,  OUTPUT" />
+            <scaler.availableMinFrameDurations value="
+                IMPLEMENTATION_DEFINED, 1920, 1080, 33333333,
+                IMPLEMENTATION_DEFINED, 1280, 720,  33333333,
+                IMPLEMENTATION_DEFINED, 640,  480,  33333333,
+                IMPLEMENTATION_DEFINED, 320,  240,  33333333,
+                YCbCr_420_888, 1920, 1080, 33333333,
+                YCbCr_420_888, 1280, 720,  33333333,
+                YCbCr_420_888, 640,  480,  33333333,
+                YCbCr_420_888, 320,  240,  33333333,
+                BLOB, 1920, 1080, 33333333,
+                BLOB, 1280, 720,  33333333,
+                BLOB, 640,  480,  33333333,
+                BLOB, 320,  240,  33333333" />
+            <scaler.availableStallDurations value="
+                IMPLEMENTATION_DEFINED, 1920, 1080, 0,
+                IMPLEMENTATION_DEFINED, 1280, 720,  0,
+                IMPLEMENTATION_DEFINED, 640,  480,  0,
+                IMPLEMENTATION_DEFINED, 320,  240,  0,
+                YCbCr_420_888, 1920, 1080, 0,
+                YCbCr_420_888, 1280, 720,  0,
+                YCbCr_420_888, 640,  480,  0,
+                YCbCr_420_888, 320,  240,  0,
+                BLOB, 1920, 1080, 1000000000,
+                BLOB, 1280, 720,  1000000000,
+                BLOB, 640,  480,  1000000000,
+                BLOB, 320,  240,  1000000000" />
+            <!-- 8 -->
+
+            <!-- initDefaultRequests -->
+            <colorCorrection.aberrationMode value="OFF" />
+            <control.aeExposureCompensation value="0" />
+            <control.videoStabilizationMode value="OFF" />
+            <control.awbMode value="AUTO" />
+            <control.aeMode value="ON" />
+            <control.aePrecaptureTrigger value="IDLE" />
+            <control.afMode value="AUTO" />
+            <control.afTrigger value="IDLE" />
+            <control.sceneMode value="DISABLED" />
+            <control.effectMode value="OFF" />
+            <flash.mode value="OFF" />
+            <jpeg.thumbnailSize value="240, 180" />
+            <jpeg.quality value="90" />
+            <jpeg.thumbnailQuality value="90" />
+            <jpeg.orientation value="0" />
+            <!-- 15 -->
+
+            <lens.opticalStabilizationMode value="OFF" />
+            <!-- <noiseReduction.mode value= "OFF" /> -->
+            <sensor.testPatternMode value="OFF" />
+            <statistics.faceDetectMode value="OFF" />
+            <statistics.hotPixelMapMode value="OFF" />
+            <control.aeTargetFpsRange value="15, 30" />
+            <control.aeAntibandingMode value="AUTO" />
+            <control.mode value="AUTO" />
+            <control.captureIntent value="PREVIEW" />
+            <!-- fillCaptureResult -->
+            <control.afStat value="INACTIVE" />
+            <!-- 9 -->
+        </metadata>
+    </MetadataType>
+
+    <Device>
+        <Name>/dev/video0</Name>
+        <Driver>virtio-camera</Driver>
+        <position>front</position>
+        <mandatory>
+            <format name="p1080" width="1920" height="1080" fps="30" fourcc="UYVY"/>
+            <format name="p720"  width="1280" height="720"  fps="30" fourcc="UYVY"/>
+            <format name="VGA"   width="640"  height="480"  fps="30" fourcc="UYVY"/>
+            <format name="QVGA"  width="320"  height="240"  fps="30" fourcc="UYVY"/>
+        </mandatory>
+        <metadataBaseType>Limited1080p</metadataBaseType>
+    </Device>
+    <Device>
+        <Name>/dev/video1</Name>
+        <Driver>virtio-camera</Driver>
+        <position>right</position>
+        <mandatory>
+            <format name="p1080" width="1920" height="1080" fps="30" fourcc="UYVY"/>
+            <format name="p720"  width="1280" height="720"  fps="30" fourcc="UYVY"/>
+            <format name="VGA"   width="640"  height="480"  fps="30" fourcc="UYVY"/>
+            <format name="QVGA"  width="320"  height="240"  fps="30" fourcc="UYVY"/>
+        </mandatory>
+        <metadataBaseType>Limited1080p</metadataBaseType>
+    </Device>
+    <Device>
+        <Name>/dev/video2</Name>
+        <Driver>virtio-camera</Driver>
+        <position>rear</position>
+        <mandatory>
+            <format name="p1080" width="1920" height="1080" fps="30" fourcc="UYVY"/>
+            <format name="p720"  width="1280" height="720"  fps="30" fourcc="UYVY"/>
+            <format name="VGA"   width="640"  height="480"  fps="30" fourcc="UYVY"/>
+            <format name="QVGA"  width="320"  height="240"  fps="30" fourcc="UYVY"/>
+        </mandatory>
+        <metadataBaseType>Limited1080p</metadataBaseType>
+    </Device>
+    <Device>
+        <Name>/dev/video3</Name>
+        <Driver>virtio-camera</Driver>
+        <position>left</position>
+        <mandatory>
+            <format name="p1080" width="1920" height="1080" fps="30" fourcc="UYVY"/>
+            <format name="p720"  width="1280" height="720"  fps="30" fourcc="UYVY"/>
+            <format name="VGA"   width="640"  height="480"  fps="30" fourcc="UYVY"/>
+            <format name="QVGA"  width="320"  height="240"  fps="30" fourcc="UYVY"/>
+        </mandatory>
+        <metadataBaseType>Limited1080p</metadataBaseType>
+    </Device>
 
     <Loopback>
         <PairId>50</PairId>
