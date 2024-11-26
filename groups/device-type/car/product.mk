@@ -17,8 +17,6 @@ PRODUCT_PACKAGES += \
     VmsPublisherClientSample \
     VmsSubscriberClientSample \
 
-PRODUCT_PACKAGES += IntelExternalStoragePermissionService
-
 PRODUCT_PACKAGES += cardisplayproxyd
 PRODUCT_PACKAGES += evs_intel_app
 PRODUCT_PACKAGES += evsmanagerd
