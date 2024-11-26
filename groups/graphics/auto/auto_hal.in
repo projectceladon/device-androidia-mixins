@@ -34,7 +34,12 @@ has_virgl() {
 update_graphics_driver_prop() {
         if [ "$(has_intel_gpu)" = "1" ]; then
                 echo "Use Intel GPU for rendering"
+{{#use_vulkan}}
+                setprop vendor.egl.set angle
+{{/use_vulkan}}
+{{^use_vulkan}}
                 setprop vendor.egl.set mesa
+{{/use_vulkan}}
                 setprop vendor.vulkan.set intel
         elif [ "$(has_virgl)" = "1" ]; then
                 echo "Use virtio-GPU for rendering"
