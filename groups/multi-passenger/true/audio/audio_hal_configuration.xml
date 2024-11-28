@@ -5,6 +5,7 @@
     <Mixer Card="avsrt56401" MixerPath="/vendor/etc/mixer_paths_0.xml"/>
   </Stream>
 -->
+<!-- Audio Zone 0-->
   <Stream Address="bus0_media_out" Direction="playback" Mmap="false">
     <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
   </Stream>
@@ -35,13 +36,14 @@
     <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
   </Stream>
   </Stream>
-  <Stream Address="bus_1000_input_zone_0" Direction="capture" Mmap="false">
+  <Stream Address="input_bus1_zone_0" Direction="capture" Mmap="false">
     <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
   </Stream>
+  <!-- Audio Zone 1-->
   <Stream Address="bus100_audio_zone_1" Direction="playback" Mmap="false">
     <Pcm Card="SoundCard" Device="2" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
   </Stream>
-  <Stream Address="bus_2000_input_zone_1" Direction="capture" Mmap="false">
+  <Stream Address="input_bus100_zone_1" Direction="capture" Mmap="false">
     <Pcm Card="SoundCard" Device="2" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
   </Stream>
   </Streams>
