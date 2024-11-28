@@ -59,14 +59,14 @@
                         <context context="vehicle_status"/>
                     </device>
                 </group>
-	    </volumeGroups>
+	        </volumeGroups>
             <inputDevices>
-		<inputDevice address="bus_1000_input_zone_0"/>
-		<inputDevice address="Built-In Mic"/>
-		<inputDevice address="Built-In Back Mic"/>
+                <!-- <inputDevice address="Built-In Mic"/>
+                <inputDevice address="Built-In Back Mic"/> -->
+                <inputDevice address="input_bus1_zone_0"/>
             </inputDevices>
-         </zone>
-      <zone name="front passenger zone 1" audioZoneId="1" occupantZoneId="1">
+        </zone>
+        <zone name="front passenger zone 1" audioZoneId="1" occupantZoneId="1">
          <volumeGroups>
             <group>
                 <device address="bus100_audio_zone_1">
@@ -86,7 +86,7 @@
              </group>
           </volumeGroups>
           <inputDevices>
-             <inputDevice address="bus_2000_input_zone_1"/>
+             <inputDevice address="input_bus100_zone_1"/>
           </inputDevices>
        </zone>
     </zones>

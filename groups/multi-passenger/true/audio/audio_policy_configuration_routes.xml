@@ -14,22 +14,8 @@
      limitations under the License.
 -->
 <routes>
-    <route type="mix" sink="bus100_audio_zone_1" sources="mixport_bus100_audio_zone_1"/>
-    <route type="mix" sink="bus10_media_out" sources="mixport_bus10_media_out"/>
-    <route type="mix" sink="bus11_navigation_out" sources="mixport_bus11_navigation_out"/>
-    <route type="mix" sink="bus12_voice_command_out"
-           sources="mixport_bus12_voice_command_out"/>
-    <route type="mix" sink="bus13_call_ring_out" sources="mixport_bus13_call_ring_out"/>
-    <route type="mix" sink="bus14_call_out" sources="mixport_bus14_call_out"/>
-    <route type="mix" sink="bus15_alarm_out" sources="mixport_bus15_alarm_out"/>
-    <route type="mix" sink="bus16_notification_out"
-           sources="mixport_bus16_notification_out"/>
-    <route type="mix" sink="bus17_system_sound_out"
-           sources="mixport_bus17_system_sound_out"/>
 
-    <!-- TODO update for input-->
-    <route type="mix" sink="mixport_bus_2000_input_zone_1" sources="bus_2000_input_zone_1"/>
-
+    <!-- Audio Zone 0-->
     <route type="mix" sink="bus0_media_out" sources="mixport_bus0_media_out"/>
     <route type="mix" sink="bus1_navigation_out" sources="mixport_bus1_navigation_out"/>
     <route type="mix" sink="bus2_voice_command_out"
@@ -41,9 +27,12 @@
            sources="mixport_bus6_notification_out"/>
     <route type="mix" sink="bus7_system_sound_out"
            sources="mixport_bus7_system_sound_out"/>
-
-    <!-- TODO update for input-->
-    <route type="mix" sink="mixport_bus_1000_input_zone_0" sources="bus_1000_input_zone_0"/>
+    
     <route type="mix" sink="primary input"
            sources="Built-In Mic,Built-In Back Mic,Echo-Reference Mic"/>
+    <route type="mix" sink="mixport_input_bus1_zone_0" sources="input_bus1_zone_0"/>
+    
+    <!-- Audio Zone 1-->
+    <route type="mix" sink="bus100_audio_zone_1" sources="mixport_bus100_audio_zone_1"/>
+    <route type="mix" sink="mixport_input_bus100_zone_1" sources="input_bus100_zone_1"/>
 </routes>
