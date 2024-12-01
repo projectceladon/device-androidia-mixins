@@ -5,7 +5,7 @@
     <Mixer Card="avsrt56401" MixerPath="/vendor/etc/mixer_paths_0.xml"/>
   </Stream>
 -->
-  <Property UsbAudio="false"/>
+  <Property UsbAudio="true"/>
 
   <Stream Address="bus0_media_out" Direction="playback" Mmap="false">
     <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
