@@ -42,4 +42,7 @@ VEHICLE_HAL_PROTO_TYPE += {{ioc}}
 
 PRODUCT_PROPERTY_OVERRIDES += telephony.active_modems.max_count=2
 
-PRODUCT_PRODUCT_PROPERTIES += ro.vendor.fake_vhal.ap_power_state_req.config=1
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.vendor.fake_vhal.ap_power_state_req.config=1 \
+    ro.carwatchdog.vhal_healthcheck.interval=10 \
+    ro.carwatchdog.client_healthcheck.interval=20 \
