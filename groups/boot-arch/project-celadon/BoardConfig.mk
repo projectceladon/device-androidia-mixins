@@ -42,6 +42,12 @@ BOARD_CACHEIMAGE_PARTITION_SIZE ?= 104857600
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := {{system_fs}}
 DATA_USE_F2FS := {{data_use_f2fs}}
 
+# system dlkm support
+BOARD_USES_SYSTEM_DLKMIMAGE := true
+BOARD_SYSTEM_DLKMIMAGE_FILE_SYSTEM_TYPE := {{system_fs}}
+TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
+AB_OTA_PARTITIONS += system_dlkm
+
 #fastbootd over ethernet support
 TARGET_RECOVERY_UI_LIB:=librecovery_ui_ethernet
 
