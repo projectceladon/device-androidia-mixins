@@ -22,7 +22,7 @@ PRODUCT_PACKAGES += android.hardware.security.keymint-service
 
 {{#hw_gk}}
 # optee gatekeeper
-PRODUCT_PACKAGES += android.hardware.gatekeeper@1.0-service.optee
+PRODUCT_PACKAGES += android.hardware.gatekeeper-service.optee
 PRODUCT_PROPERTY_OVERRIDES += ro.hardware.gatekeeper=optee
 {{/hw_gk}}
 
