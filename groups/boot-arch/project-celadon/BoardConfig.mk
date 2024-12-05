@@ -206,6 +206,3 @@ ENABLE_GRUB_INSTALLER ?= true
 {{/use_cic}}
 
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/soc
-
-BOARD_SYSTEM_KERNEL_MODULES := kernel/prebuilts/6.1/x86_64/pppox.ko
-BOARD_ODM_KERNEL_MODULES  := kernel/prebuilts/6.1/x86_64/pppox.ko
