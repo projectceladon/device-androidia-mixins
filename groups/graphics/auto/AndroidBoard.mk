@@ -18,6 +18,11 @@ $(foreach t, $(patsubst $(I915_FW_PATH)/%,%,$(wildcard $(I915_FW_PATH)/i915_ag*)
 
 _EXTRA_FW_ += $(I915_FW)
 
+XE_FW_PATH := vendor/linux/firmware/xe
+$(foreach t, $(patsubst $(XE_FW_PATH)/%,%,$(wildcard $(XE_FW_PATH)/lnl*)) ,$(eval XE_FW += xe/$(t)) $(eval $(LOCAL_KERNEL) : $(PRODUCT_OUT)/vendor/firmware/xe/$(t)))
+$(foreach t, $(patsubst $(XE_FW_PATH)/%,%,$(wildcard $(XE_FW_PATH)/ptl*)) ,$(eval XE_FW += xe/$(t)) $(eval $(LOCAL_KERNEL) : $(PRODUCT_OUT)/vendor/firmware/xe/$(t)))
+_EXTRA_FW_ += $(XE_FW)
+
 AUTO_IN += $(TARGET_DEVICE_DIR)/{{_extra_dir}}/auto_hal.in
 
 {{/gen9+}}
