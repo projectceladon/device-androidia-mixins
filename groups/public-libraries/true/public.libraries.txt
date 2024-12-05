@@ -2,6 +2,3 @@
 # So that Apps can use Intel proprietary libraries
 libOpenCL.so
 libopenvino.so
-libtbb.so
-libc++_shared.so
-
