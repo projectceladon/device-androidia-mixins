@@ -48,12 +48,6 @@ BOARD_SYSTEM_DLKMIMAGE_FILE_SYSTEM_TYPE := {{system_fs}}
 TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
 AB_OTA_PARTITIONS += system_dlkm
 
-# Enabled chained vbmeta for system_dlkm
-BOARD_AVB_VBMETA_SYSTEM_DLKM := system_dlkm
-BOARD_AVB_VBMETA_SYSTEM_DLKM_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
-BOARD_AVB_VBMETA_SYSTEM_DLKM_ALGORITHM := SHA256_RSA4096
-BOARD_AVB_SYSTEM_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
-
 #fastbootd over ethernet support
 TARGET_RECOVERY_UI_LIB:=librecovery_ui_ethernet
 
