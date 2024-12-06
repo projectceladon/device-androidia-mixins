@@ -3,6 +3,8 @@ ifeq ($(BASE_LTS2023_CHROMIUM_KERNEL), true)
   TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{lts2023_chromium_src_path}}}/kernel-headers
 else ifeq ($(BASE_LINUX_INTEL_LTS2023_KERNEL), true)
   TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{linux_intel_lts2023_src_path}}}/kernel-headers
+else ifeq ($(BASE_ANDROID_MAINLINE_V6.10_KERNEL), true)
+  TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{android_mainline_v6_10_src_path}}}/kernel-headers
 else
   TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{src_path}}}/kernel-headers
 endif
