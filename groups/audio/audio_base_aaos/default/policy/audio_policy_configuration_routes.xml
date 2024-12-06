@@ -14,6 +14,7 @@
      limitations under the License.
 -->
 <routes>
+    <route type="mix" sink="bus100_audio_zone_1" sources="mixport_bus100_audio_zone_1"/>
     <route type="mix" sink="bus10_media_out" sources="mixport_bus10_media_out"/>
     <route type="mix" sink="bus11_navigation_out" sources="mixport_bus11_navigation_out"/>
     <route type="mix" sink="bus12_voice_command_out"
