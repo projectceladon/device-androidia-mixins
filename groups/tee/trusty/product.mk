@@ -7,7 +7,8 @@ PRODUCT_PACKAGES += \
 	android.hardware.gatekeeper-service.trusty \
 	android.hardware.security.keymint-service.trusty \
 	keybox_provisioning \
-	RemoteProvisioner
+	RemoteProvisioner \
+	rpmb_dev
 
 PRODUCT_PACKAGES_DEBUG += \
 	intel-secure-storage-unit-test \
