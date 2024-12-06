@@ -1,7 +1,6 @@
 # Mesa
 PRODUCT_PACKAGES += \
     libGLES_mesa \
-    libGLES_android \
     libigdrcl \
     libOpenCL \
     libcommon_clang \
@@ -14,8 +13,6 @@ PRODUCT_PACKAGES += \
     libdrm_intel \
     libsync \
     libmd
-
-PRODUCT_PACKAGES += ufo_prebuilts
 
 # i915 firmwares
 $(foreach fw,$(I915_FW),$(eval PRODUCT_PACKAGES += $(notdir $(fw))))
@@ -47,19 +44,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     gralloc.drm
 {{/minigbm}}
-
-{{^gen9+}}
-# GLES version. We cannot enable Android
-# 3.2 support for Gen9+ devices.
-PRODUCT_PROPERTY_OVERRIDES += \
-   ro.opengles.version=196609
-
-{{#vulkan}}
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:vendor/etc/permissions/android.hardware.vulkan.level.xml
-{{/vulkan}}
-
-{{/gen9+}}
 
 {{#gen9+}}
 # Mesa
