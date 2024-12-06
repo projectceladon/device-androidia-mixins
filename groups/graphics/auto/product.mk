@@ -35,6 +35,18 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += ufo_prebuilts
 
+{{#use_vulkan}}
+# Graphics config overrides to use vulkan
+PRODUCT_VENDOR_PROPERTIES += \
+    debug.renderengine.backend=skiavkthreaded \
+    ro.hardware.egl=angle \
+    persist.graphics.egl=angle \
+    ro.gfx.angle.supported=true
+
+# Enable HWUI Vulkan backend
+TARGET_USES_VULKAN = true
+{{/use_vulkan}}
+
 #Surface Flinger related Properties
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.max_frame_buffer_acquired_buffers=3
