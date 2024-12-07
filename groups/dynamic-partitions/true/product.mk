@@ -19,7 +19,7 @@ $(call inherit-product, \
     $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 {{#virtual_ab_compression}}
 $(call inherit-product, \
-    $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+    $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
 PRODUCT_PACKAGES += snapuserd_ramdisk
 {{/virtual_ab_compression}}
 {{/virtual_ab}}
