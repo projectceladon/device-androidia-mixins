@@ -11,6 +11,7 @@ PRODUCT_PACKAGES += \
 {{#ivi}}
 PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/bluetooth/overlay-car
 PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/bluetooth/intel/car/overlay
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/android.hardware.telephony.automotive.xml:vendor/etc/permissions/android.hardware.telephony.automotive.xml
 {{/ivi}}
 
 {{^ivi}}
