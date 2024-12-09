@@ -29,7 +29,8 @@
     <item>Built-In Mic</item>
     <item>Built-In Back Mic</item>
     <item>Echo-Reference Mic</item>
-
+    
+    <item>bus100_audio_zone_1</item>
     <item>bus10_media_out</item>
     <item>bus11_navigation_out</item>
     <item>bus12_voice_command_out</item>
