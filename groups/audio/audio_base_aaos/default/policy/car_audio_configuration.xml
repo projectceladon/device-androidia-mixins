@@ -29,6 +29,7 @@
                     <device address="bus0_media_out">
                         <context context="music"/>
                         <context context="announcement"/>
+                        <context context="call"/>
                     </device>
                     <device address="bus6_notification_out">
                         <context context="notification"/>
@@ -46,9 +47,6 @@
                     <device address="bus3_call_ring_out">
                         <context context="call_ring"/>
                     </device>
-                    <device address="bus4_call_out">
-                        <context context="call"/>
-                    </device>
                 </group>
                 <group>
                     <device address="bus5_alarm_out">
@@ -61,11 +59,36 @@
                         <context context="vehicle_status"/>
                     </device>
                 </group>
-	    </volumeGroups>
+	        </volumeGroups>
             <inputDevices>
-		<inputDevice address="bus_1000_input_zone_0"/>
+                <!-- <inputDevice address="Built-In Mic"/>
+                <inputDevice address="Built-In Back Mic"/> -->
+                <inputDevice address="input_bus1_zone_0"/>
             </inputDevices>
         </zone>
+        <zone name="front passenger zone 1" audioZoneId="1" occupantZoneId="1">
+         <volumeGroups>
+            <group>
+                <device address="bus100_audio_zone_1">
+                   <context context="music"/>
+                   <context context="navigation"/>
+                   <context context="voice_command"/>
+                   <context context="call_ring"/>
+                   <context context="call"/>
+                   <context context="alarm"/>
+                   <context context="notification"/>
+                   <context context="system_sound"/>
+                   <context context="emergency"/>
+                   <context context="safety"/>
+                   <context context="vehicle_status"/>
+                   <context context="announcement"/>
+                </device>
+             </group>
+          </volumeGroups>
+          <inputDevices>
+             <inputDevice address="input_bus100_zone_1"/>
+          </inputDevices>
+       </zone>
     </zones>
 </carAudioConfiguration>
 
