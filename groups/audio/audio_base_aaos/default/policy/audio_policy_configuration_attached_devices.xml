@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 <attachedDevices>
-    <!-- One bus per context -->
+
+    <!-- Audio Zone 0 -->
     <item>bus0_media_out</item>
     <item>bus1_navigation_out</item>
     <item>bus2_voice_command_out</item>
@@ -24,21 +25,14 @@
     <item>bus6_notification_out</item>
     <item>bus7_system_sound_out</item>
 
-    <!-- TODO update for input-->
-    <item>bus_1000_input_zone_0</item>
     <item>Built-In Mic</item>
     <item>Built-In Back Mic</item>
     <item>Echo-Reference Mic</item>
-
-    <item>bus10_media_out</item>
-    <item>bus11_navigation_out</item>
-    <item>bus12_voice_command_out</item>
-    <item>bus13_call_ring_out</item>
-    <item>bus14_call_out</item>
-    <item>bus15_alarm_out</item>
-    <item>bus16_notification_out</item>
-    <item>bus17_system_sound_out</item>
-
-    <!-- TODO update for input-->
-    <item>bus_2000_input_zone_1</item>
+    <item>input_bus1_zone_0</item>
+    
+    <!-- Audio Zone 1 -->
+    <item>bus100_audio_zone_1</item>
+    
+    <item>input_bus100_zone_1</item>
+    
 </attachedDevices>
