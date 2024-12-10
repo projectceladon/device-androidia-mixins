@@ -210,6 +210,17 @@ $(LOCAL_KERNEL_PATH)/copy_modules: $(LOCAL_KERNEL)
 		mkdir -p $(PWD)/$(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)/$(KERNELRELEASE)/$$(dirname $$f) ; \
 		ln -s /$(KERNEL_MODULES_ROOT_PATH)/$$(basename $$f) $(PWD)/$(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)/$(KERNELRELEASE)/$$f || exit 1; \
 		done
+	$(hide) cd $(LOCAL_KERNEL_PATH)/lib/modules/$(KERNELRELEASE) && for f in `find . -name 'compat.ko'`; do \
+		cp $$f $(PWD)/$(PRODUCT_OUT)/vendor/firmware/i915/ || exit 1; \
+		done
+	$(hide) cd $(LOCAL_KERNEL_PATH)/lib/modules/$(KERNELRELEASE) && for f in `find . -name 'intel_vsec.ko'`; do \
+		cp $$f $(PWD)/$(PRODUCT_OUT)/vendor/firmware/i915/ || exit 1; \
+		done
+	$(hide) cd $(LOCAL_KERNEL_PATH)/lib/modules/$(KERNELRELEASE) && for f in `find . -name 'i915_ag.ko'`; do \
+		cp $$f $(PWD)/$(PRODUCT_OUT)/vendor/firmware/i915/ || exit 1; \
+		done
+	$(hide) rm -rf $(PWD)/$(PRODUCT_OUT)/obj/kernel/drivers/base/firmware_loader
+	$(KERNEL_MAKE_CMD) $(KERNEL_MAKE_OPTIONS)
 	$(hide) touch $@
 #usb-init for recovery
 	$(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/$(KERNEL_MODULES_ROOT)
