@@ -6,6 +6,8 @@ PRODUCT_PACKAGES += \
     libigc \
     libigdfcl \
     clinfo \
+    libclvk \
+    clspv \
 
 #Gallium drivers since mesa 22.0.3
 PRODUCT_PACKAGES += \
