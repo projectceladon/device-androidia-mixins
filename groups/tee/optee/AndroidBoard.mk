@@ -1,2 +1,2 @@
-# OPTEE_ELF triggered by keymaster TA in optee-os
-$(OPTEE_ELF) : dba51a17-0563-11e7-93b1-6fa7b0071a51.ta
+# OPTEE_ELF triggered by Gatekeeper TA in optee-os
+$(OPTEE_ELF) : 4d573443-6a56-4272-ac6f-2425af9ef9bb.ta
