@@ -17,78 +17,124 @@
 <!--
   Defines the audio configuration in a car, including
     - Audio zones
-    - Context to audio bus mappings
-    - Volume groups
+    - Zone configurations (in each audio zone)
+    - Volume groups (in each zone configuration)
+    - Context to audio bus mappings (in each volume group)
   in the car environment.
 -->
-<carAudioConfiguration version="2">
+<carAudioConfiguration version="4">
+    <activationVolumeConfigs>
+        <activationVolumeConfig name="activation_volume_on_boot_config">
+            <activationVolumeConfigEntry maxActivationVolumePercentage="90" invocationType="onBoot" />
+        </activationVolumeConfig>
+        <activationVolumeConfig name="activation_volume_on_source_changed_config">
+            <activationVolumeConfigEntry minActivationVolumePercentage="20" maxActivationVolumePercentage="90" invocationType="onSourceChanged" />
+        </activationVolumeConfig>
+        <activationVolumeConfig name="activation_volume_on_playback_changed_config">
+            <activationVolumeConfigEntry minActivationVolumePercentage="20" maxActivationVolumePercentage="90" />
+        </activationVolumeConfig>
+    </activationVolumeConfigs>
     <zones>
         <zone name="primary zone" isPrimary="true" occupantZoneId="0">
-            <volumeGroups>
-                <group>
-                    <device address="bus0_media_out">
-                        <context context="music"/>
-                        <context context="announcement"/>
-                        <context context="call"/>
-                    </device>
-                    <device address="bus6_notification_out">
-                        <context context="notification"/>
-                    </device>
-                </group>
-                <group>
-                    <device address="bus1_navigation_out">
-                        <context context="navigation"/>
-                    </device>
-                    <device address="bus2_voice_command_out">
-                        <context context="voice_command"/>
-                    </device>
-                </group>
-                <group>
-                    <device address="bus3_call_ring_out">
-                        <context context="call_ring"/>
-                    </device>
-                </group>
-                <group>
-                    <device address="bus5_alarm_out">
-                        <context context="alarm"/>
-                    </device>
-                    <device address="bus7_system_sound_out">
-                        <context context="system_sound"/>
-                        <context context="emergency"/>
-                        <context context="safety"/>
-                        <context context="vehicle_status"/>
-                    </device>
-                </group>
-	        </volumeGroups>
-            <inputDevices>
-                <!-- <inputDevice address="Built-In Mic"/>
-                <inputDevice address="Built-In Back Mic"/> -->
-                <inputDevice address="input_bus1_zone_0"/>
-            </inputDevices>
+            <zoneConfigs>
+                <zoneConfig name="primary zone config 0" isDefault="true">
+                    <volumeGroups name="primary output">
+                        <group maxActivationVolumePercentage="90" activationConfig="activation_volume_on_boot_config">
+                            <device address="bus0_media_out">
+                                <context context="music"/>
+                                <context context="announcement"/>
+                            </device>
+                            <device address="bus6_notification_out">
+                                <context context="notification"/>
+                            </device>
+                        </group>
+			<group minActivationVolumePercentage="20" activationConfig="activation_volume_on_source_changed_config">
+                            <device address="bus1_navigation_out">
+                                <context context="navigation"/>
+                            </device>
+                            <device address="bus2_voice_command_out">
+                                <context context="voice_command"/>
+                            </device>
+                        </group>
+                        <group minActivationVolumePercentage="20" activationConfig="activation_volume_on_playback_changed_config">
+                            <device address="bus4_call_out">
+                                <context context="call"/>
+                            </device>
+                            <device address="bus3_call_ring_out">
+                                <context context="call_ring"/>
+                            </device>
+                        </group>
+                        <group activationConfig="activation_volume_on_source_changed_config">
+                            <device address="bus5_alarm_out">
+                                <context context="alarm"/>
+                            </device>
+                            <device address="bus7_system_sound_out">
+                                <context context="system_sound"/>
+                                <context context="emergency"/>
+                                <context context="safety"/>
+                                <context context="vehicle_status"/>
+                            </device>
+                        </group>
+                    </volumeGroups>
+                    <applyFadeConfigs>
+                        <fadeConfig name="relaxed fading" isDefault="true">
+                        </fadeConfig>
+                        <fadeConfig name="aggressive fading">
+                            <audioAttributes>
+                                <usage value="AUDIO_USAGE_VOICE_COMMUNICATION" />
+                                <usage value="AUDIO_USAGE_ANNOUNCEMENT" />
+                                <usage value="AUDIO_USAGE_VEHICLE_STATUS" />
+                                <usage value="AUDIO_USAGE_SAFETY" />
+                            </audioAttributes>
+                        </fadeConfig>
+                        <fadeConfig name="disabled fading">
+                            <audioAttributes>
+                                <usage value="AUDIO_USAGE_EMERGENCY" />
+                            </audioAttributes>
+                        </fadeConfig>
+                    </applyFadeConfigs>
+                </zoneConfig>
+                <zoneConfig name="primary zone config bt">
+                    <volumeGroups name="a2dp output">
+                        <group maxActivationVolumePercentage="90" >
+                            <device address="a2dp output" type="TYPE_BLUETOOTH_A2DP">
+                                <context context="music"/>
+                                <context context="announcement"/>
+                                <context context="notification"/>
+                                <context context="navigation"/>
+                                <context context="voice_command"/>
+                                <context context="call_ring"/>
+                                <context context="call"/>
+                                <context context="alarm"/>
+                                <context context="system_sound"/>
+                                <context context="emergency"/>
+                                <context context="safety"/>
+                                <context context="vehicle_status"/>
+                            </device>
+                        </group>
+                    </volumeGroups>
+                </zoneConfig>
+                <zoneConfig name="primary zone config usb">
+                    <volumeGroups name="usb output">
+                        <group maxActivationVolumePercentage="90" activationConfig="activation_volume_on_boot_config">
+                            <device address="usb_device output" type="TYPE_USB_HEADSET">
+                                <context context="music"/>
+                                <context context="announcement"/>
+                                <context context="notification"/>
+                                <context context="navigation"/>
+                                <context context="voice_command"/>
+                                <context context="call_ring"/>
+                                <context context="call"/>
+                                <context context="alarm"/>
+                                <context context="system_sound"/>
+                                <context context="emergency"/>
+                                <context context="safety"/>
+                                <context context="vehicle_status"/>
+                            </device>
+                        </group>
+                    </volumeGroups>
+                </zoneConfig>
+            </zoneConfigs>
         </zone>
-        <zone name="front passenger zone 1" audioZoneId="1" occupantZoneId="1">
-         <volumeGroups>
-            <group>
-                <device address="bus100_audio_zone_1">
-                   <context context="music"/>
-                   <context context="navigation"/>
-                   <context context="voice_command"/>
-                   <context context="call_ring"/>
-                   <context context="call"/>
-                   <context context="alarm"/>
-                   <context context="notification"/>
-                   <context context="system_sound"/>
-                   <context context="emergency"/>
-                   <context context="safety"/>
-                   <context context="vehicle_status"/>
-                   <context context="announcement"/>
-                </device>
-             </group>
-          </volumeGroups>
-          <inputDevices>
-             <inputDevice address="input_bus100_zone_1"/>
-          </inputDevices>
-       </zone>
     </zones>
 </carAudioConfiguration>
-
