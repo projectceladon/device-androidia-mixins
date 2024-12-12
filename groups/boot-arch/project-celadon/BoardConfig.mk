@@ -96,6 +96,7 @@ DEVICE_PACKAGE_OVERLAYS += $(INTEL_PATH_HARDWARE)/bootctrl/boot/overlay
 BOARD_GPT_BIN = $(PRODUCT_OUT)/gpt.bin
 BOARD_FLASHFILES += $(BOARD_GPT_BIN):gpt.bin
 INSTALLED_RADIOIMAGE_TARGET += $(BOARD_GPT_BIN)
+BOARD_FLASHFILES += device/intel/project-celadon/$(TARGET_PRODUCT)/gpt.ini
 
 # We offer the possibility to flash from a USB storage device using
 # the "installer" EFI application
