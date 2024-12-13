@@ -15,8 +15,8 @@
 -->
 <devicePorts>
     <!-- Audio zone 0 -->
-    <devicePort tagName="bus0_media_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus0_media_out">
+    <devicePort tagName="bus0_media_CARD_0_DEV_1" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus0_media_CARD_0_DEV_1">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
@@ -25,8 +25,8 @@
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
-    <devicePort tagName="bus1_navigation_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus1_navigation_out">
+    <devicePort tagName="bus1_navigation_CARD_0_DEV_1" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus1_navigation_CARD_0_DEV_1">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
@@ -35,8 +35,8 @@
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
-    <devicePort tagName="bus2_voice_command_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus2_voice_command_out">
+    <devicePort tagName="bus2_voice_command_CARD_0_DEV_1" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus2_voice_command_CARD_0_DEV_1">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
@@ -45,8 +45,8 @@
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
-    <devicePort tagName="bus3_call_ring_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus3_call_ring_out">
+    <devicePort tagName="bus3_call_ring_CARD_0_DEV_1" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus3_call_ring_CARD_0_DEV_1">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
@@ -55,8 +55,8 @@
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
-    <devicePort tagName="bus4_call_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus4_call_out">
+    <devicePort tagName="bus4_call_CARD_0_DEV_1" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus4_call_CARD_0_DEV_1">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
@@ -65,8 +65,8 @@
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
-    <devicePort tagName="bus5_alarm_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus5_alarm_out">
+    <devicePort tagName="bus5_alarm_CARD_0_DEV_1" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus5_alarm_CARD_0_DEV_1">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
@@ -75,8 +75,8 @@
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
-    <devicePort tagName="bus6_notification_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus6_notification_out">
+    <devicePort tagName="bus6_notification_CARD_0_DEV_1" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus6_notification_CARD_0_DEV_1">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
@@ -85,8 +85,8 @@
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
-    <devicePort tagName="bus7_system_sound_out" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus7_system_sound_out">
+    <devicePort tagName="bus7_system_sound_CARD_0_DEV_1" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus7_system_sound_CARD_0_DEV_1">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
@@ -114,8 +114,8 @@
                  samplingRates="8000 11025 12000 16000 22050 24000 32000 44100 48000"
                  channelMasks="AUDIO_CHANNEL_IN_MONO AUDIO_CHANNEL_IN_STEREO AUDIO_CHANNEL_IN_FRONT_BACK"/>
     </devicePort>
-    <devicePort tagName="input_bus1_zone_0" type="AUDIO_DEVICE_IN_BUS"
-            role="source" address="input_bus1_zone_0">
+    <devicePort tagName="i_bus1_CARD_0_DEV_1" type="AUDIO_DEVICE_IN_BUS"
+            role="source" address="i_bus1_CARD_0_DEV_1">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                     samplingRates="48000"
                     channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
@@ -127,8 +127,8 @@
     </devicePort>
 
     <!-- Audio zone 1 -->
-    <devicePort tagName="bus100_audio_zone_1" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus100_audio_zone_1">
+    <devicePort tagName="bus100_CARD_0_DEV_2" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus100_CARD_0_DEV_2">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
@@ -138,8 +138,8 @@
             </gains>
     </devicePort>
 
-    <devicePort tagName="input_bus100_zone_1" type="AUDIO_DEVICE_IN_BUS"
-                role="source" address="input_bus100_zone_1">
+    <devicePort tagName="i_bus100_CARD_0_DEV_2" type="AUDIO_DEVICE_IN_BUS"
+                role="source" address="i_bus100_CARD_0_DEV_2">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
