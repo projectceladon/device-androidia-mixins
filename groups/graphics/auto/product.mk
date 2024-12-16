@@ -17,6 +17,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vulkan.intel
 
+#mesa perfetto gpu counter data producer
+PRODUCT_PACKAGES += \
+    libgpudataproducer \
+    gpudataproducer
+
 PRODUCT_PACKAGES += \
     libdrm \
     libdrm_intel \
