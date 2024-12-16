@@ -1829,6 +1829,12 @@ CONFIG_UEFI_CPER_X86=y
 # end of Tegra firmware driver
 # end of Firmware Drivers
 
+#
+# ivi options
+#
+# CONFIG_IVI_SHARE_MEMORY is not set
+# end of ivi options
+
 # CONFIG_GNSS is not set
 # CONFIG_MTD is not set
 # CONFIG_OF is not set
