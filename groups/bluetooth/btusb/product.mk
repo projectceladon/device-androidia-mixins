@@ -9,6 +9,7 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth-service.default.vbt 
 
 {{#ivi}}
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/android.hardware.telephony.automotive.xml:vendor/etc/permissions/android.hardware.telephony.automotive.xml
 PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/bluetooth/overlay-car
 PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/bluetooth/intel/car/overlay
 {{/ivi}}
