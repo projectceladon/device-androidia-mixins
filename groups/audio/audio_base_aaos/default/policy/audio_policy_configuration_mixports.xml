@@ -75,7 +75,13 @@
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-        </mixPort>
+    </mixPort>
+    <mixPort name="mixport_bus101_audio_zone_1" role="source"
+             flags="AUDIO_OUTPUT_FLAG_PRIMARY">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000"
+                 channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+    </mixPort>
 
     <mixPort name="mixport_input_bus100_zone_1" role="sink">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"

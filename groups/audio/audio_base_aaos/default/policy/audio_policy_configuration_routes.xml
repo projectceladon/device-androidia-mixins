@@ -34,5 +34,6 @@
     
     <!-- Audio Zone 1-->
     <route type="mix" sink="bus100_CARD_0_DEV_2" sources="mixport_bus100_audio_zone_1"/>
+    <route type="mix" sink="bus101_CARD_0_DEV_3" sources="mixport_bus101_audio_zone_1"/>
     <route type="mix" sink="mixport_input_bus100_zone_1" sources="i_bus100_CARD_0_DEV_2"/>
 </routes>
