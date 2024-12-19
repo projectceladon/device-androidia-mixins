@@ -9,4 +9,5 @@ service ota_coordinator /vendor/bin/ota_coordinator
 on boot
     mkdir /data/vendor/ota 660 system system
     mount virtiofs myfs /data/vendor/ota 
+    restorecon --recursive --cross-filesystems /data/vendor/ota
     start ota_coordinator
