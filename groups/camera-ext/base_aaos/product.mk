@@ -1,7 +1,6 @@
 # Camera: Device-specific configuration files.
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.camera.xml:vendor/etc/permissions/android.hardware.camera.xml \
-    $(LOCAL_PATH)/{{_extra_dir}}/ivi_camera_config.xml:vendor/etc/ivi_camera_config.xml
+    frameworks/native/data/etc/android.hardware.camera.xml:vendor/etc/permissions/android.hardware.camera.xml
 
 # External camera service
 
