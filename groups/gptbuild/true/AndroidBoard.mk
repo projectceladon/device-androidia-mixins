@@ -65,6 +65,9 @@ $(ACRN_GPTIMAGE_BIN): acpioimage
 endif
 {{/acpio-partition}}
 
+TARGET_INTERMEDIATE := $(PRODUCT_OUT)/obj/PACKAGING/target_files_intermediates
+TARGET_IMAGE_PATH := $(TARGET_INTERMEDIATE)/$(TARGET_PRODUCT)-target_files/IMAGES
+
 $(GPTIMAGE_BIN): \
 	bootloader \
 	bootimage \
@@ -86,7 +89,7 @@ $(GPTIMAGE_BIN): \
 	{{/odm-partition}}
 	{{/dynamic-partitions}}
 	{{#dynamic-partitions}}
-	superimage \
+	superimage_dist \
 	{{/dynamic-partitions}}
 	$(SIMG2IMG) \
 	$(raw_config) \
@@ -114,7 +117,7 @@ $(GPTIMAGE_BIN): \
 	{{/odm-partition}}
 	{{/dynamic-partitions}}
 	{{#dynamic-partitions}}
-	$(SIMG2IMG) $(INSTALLED_SUPERIMAGE_TARGET) $(INSTALLED_SUPERIMAGE_TARGET).raw
+	$(SIMG2IMG) $(INTERNAL_SUPERIMAGE_DIST_TARGET) $(INSTALLED_SUPERIMAGE_TARGET).raw
 	{{/dynamic-partitions}}
 
 	$(INTEL_PATH_BUILD)/create_gpt_image.py \
@@ -128,12 +131,12 @@ $(GPTIMAGE_BIN): \
 		--bootloader $(bootloader_bin) \
 		--tos $(tos_bin) \
 		--multiboot $(multiboot_bin) \
-		--boot $(INSTALLED_BOOTIMAGE_TARGET) \
+		--boot $(TARGET_IMAGE_PATH)/boot.img \
 		{{^slot-ab}}
 		--recovery $(INSTALLED_RECOVERYIMAGE_TARGET) \
 		--cache $(INSTALLED_CACHEIMAGE_TARGET).raw \
 		{{/slot-ab}}
-		--vbmeta $(INSTALLED_VBMETAIMAGE_TARGET) \
+		--vbmeta $(TARGET_IMAGE_PATH)/vbmeta.img \
 	{{^dynamic-partitions}}
 		--system $(INSTALLED_SYSTEMIMAGE).raw \
 	{{#vendor-partition}}
@@ -156,7 +159,7 @@ $(GPTIMAGE_BIN): \
 		--acpio $(raw_acpio) \
 	{{/acpio-partition}}
 	{{#vendor-boot}}
-		--vendor_boot $(INSTALLED_VENDOR_BOOTIMAGE_TARGET) \
+		--vendor_boot $(TARGET_IMAGE_PATH)/vendor_boot.img \
 	{{/vendor-boot}}
 		--config $(raw_config) \
 		--factory $(raw_factory)
