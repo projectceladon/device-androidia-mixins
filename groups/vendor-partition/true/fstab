@@ -11,4 +11,5 @@
 {{/dynamic-partitions}}
 {{#dynamic-partitions}}
 vendor   /vendor  {{system_fs}} ro{{#system_fs_ext4}},barrier=1{{/system_fs_ext4}} wait{{#slot-ab}},slotselect{{/slot-ab}},avb,logical,first_stage_mount
+vendor_dlkm /vendor_dlkm {{system_fs}} ro{{#system_fs_ext4}},barrier=1{{/system_fs_ext4}} wait,logical,first_stage_mount,{{#slot-ab}}slotselect,{{/slot-ab}}avb
 {{/dynamic-partitions}}
