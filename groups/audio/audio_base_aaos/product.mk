@@ -19,9 +19,12 @@ PRODUCT_PACKAGES += meta.package.audio
 PRODUCT_PACKAGES += \
        sound_trigger.primary.$(TARGET_BOARD_PLATFORM)
 
-# Audio Primary HAL
-PRODUCT_PACKAGES += \
-       audio.primary.$(TARGET_BOARD_PLATFORM)
+# Audio hidl
+MK := $(shell find vendor/intel/audio/audio_aaos -name product.mk)
+$(foreach mk, $(MK), $(call inherit-product, $(mk)))
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio/default/policy/set_board_prop.sh:vendor/bin/set_board_prop.sh
 
 # Extended Audio HALs
 PRODUCT_PACKAGES += \
