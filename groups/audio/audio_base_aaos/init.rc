@@ -49,6 +49,9 @@ on post-fs && property:vendor.intel.enable.audio=sof-hda
     insmod /vendor/lib/modules/snd-soc-skl_hda_dsp.ko
     insmod /vendor/lib/modules/snd-sof-pci-intel-tgl.ko
 
+on post-fs-data
+     exec - system system -- /vendor/bin/set_board_prop.sh
+
 on boot
     insmod /vendor/lib/modules/snd.ko
     insmod /vendor/lib/modules/snd-timer.ko
