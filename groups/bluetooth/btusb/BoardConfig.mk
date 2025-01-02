@@ -2,6 +2,9 @@ BOARD_HAVE_BLUETOOTH_INTEL_ICNV := true
 {{#ivi}}
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(INTEL_PATH_COMMON)/bluetooth/intel/car/
 {{/ivi}}
+{{#ivi}}
+BOARD_KERNEL_CMDLINE += usbcore.uevent_suppress=8087:0032,8087:0033,8087:0026
+{{/ivi}}
 {{^ivi}}
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(INTEL_PATH_COMMON)/bluetooth/intel/tablet/
 {{/ivi}}
