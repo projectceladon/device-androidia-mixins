@@ -9,28 +9,31 @@ PRODUCT_PACKAGES += \
     libclvk \
     clspv \
 
-#Gallium drivers since mesa 22.0.3
+ifeq ($(USE_PREBUILT_MESA), true)
+MESA_PREBUILTS := \
+    lib64/libgallium_dri.so \
+    lib64/libglapi.so \
+    lib64/egl/libEGL_mesa.so \
+    lib64/egl/libGLESv1_CM_mesa.so \
+    lib64/egl/libGLESv2_mesa.so \
+    lib64/hw/vulkan.intel.so
+
+PRODUCT_COPY_FILES += $(foreach blob, $(MESA_PREBUILTS), \
+    hardware/intel/external/mesa3d-intel/prebuilts/$(blob):$(TARGET_COPY_OUT_VENDOR)/$(blob))
+else
 PRODUCT_PACKAGES += \
     libEGL_mesa \
     libGLESv1_CM_mesa \
     libGLESv2_mesa \
     libgallium_dri \
-    libglapi
-#Vulkan driver since mesa 22.0.3
-PRODUCT_PACKAGES += \
+    libglapi \
     vulkan.intel
-
-#Keep legacy mesa driver for compatibility
-PRODUCT_PACKAGES += \
-    libGLES_mesa
+endif
 
 PRODUCT_PACKAGES += \
     libdrm \
     libdrm_intel \
     libsync
-#   libmd
-#Epic mdapi was deprecated for TGL and ADL platform
-#So disable libmd and leave mdapi compiling issue with mesa 22.0.3
 
 PRODUCT_PACKAGES += \
     gralloc.default
