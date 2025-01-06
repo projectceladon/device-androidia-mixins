@@ -23,7 +23,7 @@
 -->
 <carAudioConfiguration version="3">
     <zones>
-        <zone name="primary zone" isPrimary="true" occupantZoneId="0">
+        <zone name="primary zone" isPrimary="true"  audioZoneId="0" occupantZoneId="0">
             <zoneConfigs>
                 <zoneConfig name="primary zone config" isDefault="true">
                     <volumeGroups>
