@@ -30,7 +30,7 @@ PRODUCT_PACKAGES += \
 
 # Audio HAL
 PRODUCT_PACKAGES += \
-    com.android.hardware.audio \
+    com.android.hardware.audio.intel \
     android.hardware.automotive.audiocontrol-service.example
 
 # rro overlay for audioUseDynamicRouting
