@@ -26,7 +26,12 @@ BOARD_HAVE_MEDIASDK_CODEC2 := true
 {{#use_onevpl}}
 PRODUCT_PACKAGES += \
     libvpl \
-    libmfx-gen
+    libmfx-gen \
+    hello-encode \
+    vpl_sample_decode \
+    vpl_sample_encode \
+    vpl_sample_multi_transcode \
+    vpl_sample_vpp
 USE_ONEVPL := true
 {{/use_onevpl}}
 

@@ -18,7 +18,7 @@ TARGET_RECOVERY_FSTAB ?= $(TARGET_DEVICE_DIR)/fstab.recovery
 TARGET_RELEASETOOLS_EXTENSIONS ?= $(INTEL_PATH_BUILD)/test
 
 # By default recovery minui expects RGBA framebuffer
-TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
+TARGET_RECOVERY_PIXEL_FORMAT := BGRA_8888
 
 
 #
@@ -41,6 +41,18 @@ BOARD_CACHEIMAGE_PARTITION_SIZE ?= 104857600
 {{/slot-ab}}
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := {{system_fs}}
 DATA_USE_F2FS := {{data_use_f2fs}}
+
+# system dlkm support
+BOARD_USES_SYSTEM_DLKMIMAGE := true
+BOARD_SYSTEM_DLKMIMAGE_FILE_SYSTEM_TYPE := {{system_fs}}
+TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
+AB_OTA_PARTITIONS += system_dlkm
+
+# Enabled chained vbmeta for system_dlkm
+BOARD_AVB_VBMETA_SYSTEM_DLKM := system_dlkm
+BOARD_AVB_VBMETA_SYSTEM_DLKM_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
+BOARD_AVB_VBMETA_SYSTEM_DLKM_ALGORITHM := SHA256_RSA4096
+BOARD_AVB_SYSTEM_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 
 #fastbootd over ethernet support
 TARGET_RECOVERY_UI_LIB:=librecovery_ui_ethernet
@@ -96,6 +108,7 @@ DEVICE_PACKAGE_OVERLAYS += $(INTEL_PATH_HARDWARE)/bootctrl/boot/overlay
 BOARD_GPT_BIN = $(PRODUCT_OUT)/gpt.bin
 BOARD_FLASHFILES += $(BOARD_GPT_BIN):gpt.bin
 INSTALLED_RADIOIMAGE_TARGET += $(BOARD_GPT_BIN)
+BOARD_FLASHFILES += device/intel/project-celadon/$(TARGET_PRODUCT)/gpt.ini
 
 # We offer the possibility to flash from a USB storage device using
 # the "installer" EFI application
@@ -194,3 +207,6 @@ ENABLE_GRUB_INSTALLER ?= true
 {{/use_cic}}
 
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/soc
+
+BOARD_SYSTEM_KERNEL_MODULES := kernel/prebuilts/6.1/x86_64/pppox.ko
+BOARD_ODM_KERNEL_MODULES  := kernel/prebuilts/6.1/x86_64/pppox.ko

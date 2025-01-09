@@ -1,2 +1,0 @@
-[devicefiles]
-audio : "audio files"

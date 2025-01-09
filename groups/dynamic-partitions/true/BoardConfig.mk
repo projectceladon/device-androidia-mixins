@@ -1,6 +1,6 @@
 # Configure super partitions
 BOARD_SUPER_PARTITION_GROUPS := group_sys
-BOARD_GROUP_SYS_PARTITION_LIST := system{{#vendor-partition}} vendor{{/vendor-partition}}{{#product-partition}} product{{/product-partition}}{{#odm-partition}} odm{{/odm-partition}}
+BOARD_GROUP_SYS_PARTITION_LIST := system{{#vendor-partition}} vendor vendor_dlkm{{/vendor-partition}}{{#product-partition}} product{{/product-partition}}{{#odm-partition}} odm odm_dlkm{{/odm-partition}} system_dlkm
 
 {{^dp_retrofit}}
 BOARD_SUPER_PARTITION_SIZE := $(shell echo {{super_partition_size}}*1024*1024 | bc)
@@ -19,7 +19,7 @@ BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/virtual_ab
 {{/dp_retrofit}}
 
 {{#dp_retrofit}}
-BOARD_SUPER_PARTITION_BLOCK_DEVICES := system{{#vendor-partition}} vendor{{/vendor-partition}}{{#product-partition}} product{{/product-partition}}{{#odm-partition}} odm{{/odm-partition}}
+BOARD_SUPER_PARTITION_BLOCK_DEVICES :=  system{{#vendor-partition}} vendor vendor_dlkm{{/vendor-partition}}{{#product-partition}} product{{/product-partition}}{{#odm-partition}} odm odm_dlkm{{/odm-partition}} system_dlkm
 BOARD_SUPER_PARTITION_METADATA_DEVICE := system
 BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE = $(SYSTEM_PARTITION_SIZE)
 {{#vendor-partition}}

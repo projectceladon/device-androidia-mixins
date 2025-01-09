@@ -1,7 +1,7 @@
 on fs
     mkdir /mnt/share
     mount 9p aaf /mnt/share
-    exec - system system -- /vendor/bin/logwrapper /vendor/bin/sh /vendor/bin/auto_detection.sh
+    exec - system system -- /vendor/bin/auto_detection.sh
     setprop ro.hardware.hwcomposer remote
     setprop vendor.sys.display.size 540x960
     setprop ro.hardware.gralloc ${vendor.gralloc.set}
