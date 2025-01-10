@@ -31,34 +31,28 @@
                             <device address="bus0_media_CARD_0_DEV_1">
                                 <context context="music"/>
                                 <context context="announcement"/>
-                                <context context="call"/>
-                            </device>
-                            <device address="bus6_notification_CARD_0_DEV_1">
-                                <context context="notification"/>
                             </device>
                         </group>
                         <group>
-                            <device address="bus1_navigation_CARD_0_DEV_1">
+                            <device address="bus1_navigation_CARD_0_DEV_7">
                                 <context context="navigation"/>
                             </device>
-                            <device address="bus2_voice_command_CARD_0_DEV_1">
-                                <context context="voice_command"/>
-                            </device>
                         </group>
                         <group>
-                            <device address="bus3_call_ring_CARD_0_DEV_1">
+                            <device address="bus3_call_ring_CARD_0_DEV_8">
                                 <context context="call_ring"/>
+                                <context context="call"/>
                             </device>
                         </group>
                         <group>
-                            <device address="bus5_alarm_CARD_0_DEV_1">
-                                <context context="alarm"/>
-                            </device>
-                            <device address="bus7_system_sound_CARD_0_DEV_1">
+                            <device address="bus7_system_sound_CARD_0_DEV_9">
                                 <context context="system_sound"/>
                                 <context context="emergency"/>
                                 <context context="safety"/>
                                 <context context="vehicle_status"/>
+                                <context context="notification"/>
+                                <context context="voice_command"/>
+                                <context context="alarm"/>
                             </device>
                         </group>
                     </volumeGroups>
