@@ -4,8 +4,9 @@ PRODUCT_PACKAGES += \
 	storageproxyd \
 	libinteltrustystorage \
 	libinteltrustystorageinterface \
-	android.hardware.gatekeeper-service.trusty \
-	android.hardware.security.keymint-service.trusty \
+	android.hardware.gatekeeper-service.nonsecure \
+	com.android.hardware.gatekeeper.nonsecure \
+        android.hardware.security.keymint-service \
 	keybox_provisioning \
 	RemoteProvisioner
 
@@ -16,10 +17,6 @@ PRODUCT_PACKAGES_DEBUG += \
 	scrypt_test \
 	RemoteProvisionerUnitTests \
 	libkeymint_remote_prov_support_test
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.hardware.gatekeeper=trusty \
-	ro.hardware.keystore=trusty
 
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:vendor/etc/permissions/android.hardware.keystore.app_attest_key.xml
