@@ -710,10 +710,10 @@ class Parser(FileHelper):
         regx_val = re.compile(r"(?<!\\),")  # param's value can contain comma (escaped with backslash)
         res = []
         for group, option_params in selections:
-            m = re.match('([^\s(]+)\s*\(([^)]*)\)\s*$', option_params)
+            m = re.match(r'([^\s(]+)\s*\(([^)]*)\)\s*$', option_params)
             if m is not None:
                 option = m.group(1)
-                params = dict(map(str.strip, x.replace('\,',',').split('=', 1)) for x in regx_val.split(m.group(2)))
+                params = dict(map(str.strip, x.replace(r'\,',',').split('=', 1)) for x in regx_val.split(m.group(2)))
                 self._coerce_boolean(params)
                 res.append((group, option, ReadTrackingDict(params)))
             else:
@@ -1126,7 +1126,7 @@ class Updater(FileHelper):
             self.error("build-time references to paths inside mixin directory are not allowed; {} is invalid".format(src))
 
         # much faster than previous regexp (\w*)
-        m = re.findall('(' + '|'.join(self.warn_vars) + ')\s*:=', slines)
+        m = re.findall(r'(' + '|'.join(self.warn_vars) + r')\s*:=', slines)
         if m:
             self.warning("Non-accumulative assignment to '{}' found in {}".format(m[0], src))
 
