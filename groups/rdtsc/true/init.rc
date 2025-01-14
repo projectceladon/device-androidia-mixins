@@ -1,0 +1,9 @@
+on property:sys.boot_completed=1
+    start init_rdtsc
+
+service init_rdtsc /vendor/bin/rdtsc
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
