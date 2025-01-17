@@ -119,7 +119,7 @@ and updated to vendor media codecs.
 {{#hw_ve_h264}}
         <MediaCodec name="c2.intel.avc.encoder" type="video/avc">
             <!-- profiles and levels:  ProfileBaseline : Level41 -->
-            <Limit name="size" min="128x96" max="4096x4096" />
+            <Limit name="size" min="128x128" max="4096x4096" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
             <Limit name="block-count" range="1-65536" /> <!-- max 4096x4096 equivalent -->
@@ -135,7 +135,7 @@ and updated to vendor media codecs.
 
 {{#hw_ve_h265}}
         <MediaCodec name="c2.intel.hevc.encoder" type="video/hevc" >
-            <Limit name="size" min="176x144" max="8192x8192" />
+            <Limit name="size" min="176x176" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
             <Limit name="block-count" range="1-262144" />
@@ -150,7 +150,7 @@ and updated to vendor media codecs.
 
 {{#hw_ve_vp9}}
 	<MediaCodec name="c2.intel.vp9.encoder" type="video/x-vnd.on2.vp9" >
-            <Limit name="size" min="128x96" max="8192x8192" />
+            <Limit name="size" min="128x128" max="8192x8192" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
             <Limit name="block-count" range="1-262144" />
@@ -163,7 +163,7 @@ and updated to vendor media codecs.
 
 {{#hw_ve_av1}}
         <MediaCodec name="c2.intel.av1.encoder" type="video/av01">
-            <Limit name="size" min="176x144" max="4096x4096" />
+            <Limit name="size" min="176x176" max="4096x4096" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
             <Limit name="block-count" range="1-16384" />
