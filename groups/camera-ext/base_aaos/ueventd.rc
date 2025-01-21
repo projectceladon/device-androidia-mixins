@@ -1,2 +1,4 @@
 # Camera
 /dev/video*       0660  system  camera
+/dev/uvcvideo*       0660  system  camera
+/dev/virtvideo*       0660  system  camera
