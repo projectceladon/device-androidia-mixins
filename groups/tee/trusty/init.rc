@@ -1,13 +1,5 @@
 on post-fs-data
     mkdir /data/vendor/securestorage 0700 system system
-    chmod 666 /dev/rpmb0
-
-on early-fs
-    start storageproxyd
-
-service storageproxyd /vendor/bin/storageproxyd -d /dev/trusty-ipc-dev0 -p /data/vendor/securestorage -r /dev/vport0p1 -t virt
-    user system
-    group system
 
 on boot
     start keyboxd
@@ -19,5 +11,4 @@ service keyboxd /vendor/bin/keybox_provisioning -d /dev/trusty-ipc-dev0 -p /dev/
 
 on post-fs
     wait_for_prop vendor.modules.trusty.ready true
-    chmod 666 /dev/vport0p1
     chmod 666 /dev/trusty-ipc-dev0
