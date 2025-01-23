@@ -7,6 +7,7 @@ endif
 BOARD_USES_TRUSTY := true
 BOARD_USES_KEYMASTER1 := true
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/tee/trusty
+BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/tee/trusty/mock_rpmb
 BOARD_SEPOLICY_M4DEFS += module_trusty=true
 
 TRUSTY_BUILDROOT = $(PWD)/$(PRODUCT_OUT)/obj/trusty/
