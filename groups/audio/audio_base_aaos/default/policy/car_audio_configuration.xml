@@ -31,7 +31,6 @@
                             <device address="bus0_media_CARD_0_DEV_1">
                                 <context context="music"/>
                                 <context context="announcement"/>
-                                <context context="call"/>
                             </device>
                             <device address="bus6_notification_CARD_0_DEV_1">
                                 <context context="notification"/>
@@ -47,7 +46,8 @@
                         </group>
                         <group>
                             <device address="bus3_call_ring_CARD_0_DEV_1">
-                                <context context="call_ring"/>
+				    <context context="call_ring"/>
+				    <context context="call"/>
                             </device>
                         </group>
                         <group>
