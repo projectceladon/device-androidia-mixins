@@ -1,1 +1,0 @@
-../option.spec-gmin
