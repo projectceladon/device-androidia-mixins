@@ -12,6 +12,8 @@ debug.nn.cpuonly=0
 camera.disable_treble=false
 ro.incremental.enable=yes
 
+persist.vendor.thermal.daemon.supported=1
+
 # Set the Bluetooth Class of Device
 # Service Field: 0x5A -> 90
 #    Bit 17: Networking
