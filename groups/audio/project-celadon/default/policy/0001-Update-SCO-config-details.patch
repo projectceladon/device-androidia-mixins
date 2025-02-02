@@ -1,0 +1,52 @@
+From 048795a74000ec9459c57c487b7f812e97e19461 Mon Sep 17 00:00:00 2001
+From: padmashree mandri <padmashree.mandri@intel.com>
+Date: Sun, 2 Feb 2025 11:26:27 +0000
+Subject: [PATCH] Update SCO config details
+
+This patch adds changes to enable SCO connection configs
+to audio xml.
+
+Tracked-On: OAM-127846
+Signed-off-by: padmashree mandri <padmashree.mandri@intel.com>
+---
+ .../default/policy/audio_policy_configuration.xml      | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+ mode change 100755 => 100644 groups/audio/project-celadon/default/policy/audio_policy_configuration.xml
+
+diff --git a/groups/audio/project-celadon/default/policy/audio_policy_configuration.xml b/groups/audio/project-celadon/default/policy/audio_policy_configuration.xml
+old mode 100755
+new mode 100644
+index 95767f9..d8640d1
+--- a/groups/audio/project-celadon/default/policy/audio_policy_configuration.xml
++++ b/groups/audio/project-celadon/default/policy/audio_policy_configuration.xml
+@@ -71,11 +71,17 @@
+                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                 </devicePort>
+ 
+-                <devicePort tagName="BT SCO" type="AUDIO_DEVICE_OUT_BLUETOOTH_SCO" role="sink">
++		<devicePort tagName="BT SCO" type="AUDIO_DEVICE_OUT_BLUETOOTH_SCO" role="sink">
++			<profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
++                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                 </devicePort>
+                 <devicePort tagName="BT SCO Headset" type="AUDIO_DEVICE_OUT_BLUETOOTH_SCO_HEADSET" role="sink">
++			<profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
++                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                 </devicePort>
+                 <devicePort tagName="BT SCO Headset Mic" type="AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET" role="source">
++			<profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
++                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                 </devicePort>
+ 
+                 <devicePort tagName="Built-In Mic" type="AUDIO_DEVICE_IN_BUILTIN_MIC" role="source">
+@@ -121,6 +127,8 @@
+                        sources="primary output"/>
+                 <route type="mix" sink="BT SCO Headset"
+ 			sources="primary output"/>
++                <route type="mix" sink="primary input"
++			sources="BT SCO Headset Mic"/>
+                 <route type="mix" sink="HDMI"
+                         sources="hdmi_stereo,hdmi_multi"/>
+                 <route type="mix" sink="HDMI_2"
+-- 
+2.34.1
+
