@@ -3,6 +3,7 @@ on early-boot
     insmod /vendor/lib/modules/ecdh_generic.ko
     insmod /vendor/lib/modules/bluetooth.ko
     insmod /vendor/lib/modules/btintel.ko
+    insmod /vendor/lib/modules/btintel_pcie.ko
     insmod /vendor/lib/modules/btbcm.ko
     insmod /vendor/lib/modules/btrtl.ko
     insmod /vendor/lib/modules/btusb.ko
