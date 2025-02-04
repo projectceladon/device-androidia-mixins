@@ -1,8 +1,10 @@
 LOCAL_NPU_FIRMWARE_DIR := hardware/intel/external/linux-npu-driver/firmware/bin
+LOCAL_NPU_FIRMWARE_DIR_PREBUILTS := hardware/intel/external/npu-prebuilts/firmware/bin
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_NPU_FIRMWARE_DIR)/vpu_37xx_v0.0.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/intel/vpu/vpu_37xx_v0.0.bin \
-    $(LOCAL_NPU_FIRMWARE_DIR)/vpu_40xx_v0.0.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/intel/vpu/vpu_40xx_v0.0.bin
+    $(LOCAL_NPU_FIRMWARE_DIR)/vpu_40xx_v0.0.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/intel/vpu/vpu_40xx_v0.0.bin \
+    $(LOCAL_NPU_FIRMWARE_DIR_PREBUILTS)/vpu_50xx_v0.0.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/intel/vpu/vpu_50xx_v0.0.bin
 
 PRODUCT_PACKAGES += \
     libnpu_driver_compiler \
