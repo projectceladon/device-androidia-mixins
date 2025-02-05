@@ -1,5 +1,6 @@
 on boot
     write /sys/devices/pci0000\:00/0000\:00\:14.0/power/control auto
+    write /sys/devices/pci0000\:00/0000\:00\:14.0/usb3/3-*/power/wakeup enabled
 
 on charger
     write /sys/devices/pci0000\:00/0000\:00\:14.0/power/control auto
