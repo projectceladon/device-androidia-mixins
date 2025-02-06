@@ -37,6 +37,6 @@
     </hal>
     <!--<kernel target-level="5"/>-->
     <sepolicy>
-        <version>202404</version>
+        <version>202604</version>
     </sepolicy>
 </manifest>
