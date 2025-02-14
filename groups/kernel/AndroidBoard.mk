@@ -307,17 +307,37 @@ $(foreach v,$(BOARD_DTB_VARIANTS),$(eval $(call board_dtb_per_variant,$(v))))
 {{/build_dtbs}}
 
 {{#i915_ag_mods_version}}
+I915_AG_MAKE_OPTIONS = \
+    SHELL=/bin/bash \
+    -C $(LOCAL_KERNEL_PATH)/$(I915_AG_ADDITIONS_PATH) \
+    KLIB=$(abspath $(LOCAL_KERNEL_PATH)) \
+    KLIB_BUILD=$(abspath $(LOCAL_KERNEL_PATH)) \
+    ARCH=$(TARGET_KERNEL_ARCH) \
+    INSTALL_MOD_PATH=$(KERNEL_INSTALL_MOD_PATH) \
+    CROSS_COMPILE="x86_64-linux-androidkernel-" \
+    CCACHE_SLOPPINESS=$(KERNEL_CCSLOP) \
+    $(KERNEL_CLANG_TRIPLE) \
+    $(KERNEL_CC)
+
+#$(abspath $(LOCAL_KERNEL_PATH))
+
+I915_AG_MAKE_OPTIONS += \
+    LLVM=1 \
+    HOSTLDFLAGS=-fuse-ld=lld \
+
+I915_AG_MAKE_OPTIONS += \
+    BRANCH=$(KERNEL_BRANCH) \
+    KMI_GENERATION=$(KERNEL_KMI_GENERATION)
 
 I915_AG_ADDITIONS_PATH := ../modules/intel-gpu-i915-backports
 I915_AG_MODS_SRC_PATH := $(I915_AG_ADDITIONS_PATH)/
-I915_AG_MODS_OBJ_PATH := $(LOCAL_KERNEL_PATH)/$(I915_AG_ADDITIONS_PATH)/
 I915_AG_MODS_TARGET   := $(LOCAL_KERNEL_PATH)/$(I915_AG_ADDITIONS_PATH)/build_i915_ag_{{{i915_ag_mods_version}}}
 
 $(I915_AG_MODS_TARGET): $(LOCAL_KERNEL)
 	@echo BUILDING $(I915_AG_MODS_SRC_PATH)
-	$(hide) mkdir -p $(I915_AG_MODS_OBJ_PATH)
-	$(hide) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_OPTIONS) M=$(I915_AG_MODS_SRC_PATH) modules
-	$(hide) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_OPTIONS) M=$(I915_AG_MODS_SRC_PATH) INSTALL_MOD_STRIP=1 modules_install
+	$(hide) mkdir -p $(LOCAL_KERNEL_PATH)/../modules/
+	$(hide) cp -r $(LOCAL_KERNEL_SRC)/$(I915_AG_ADDITIONS_PATH) $(LOCAL_KERNEL_PATH)/../modules/
+	$(KERNEL_MAKE_CMD) $(I915_AG_MAKE_OPTIONS) INSTALL_MOD_STRIP=1 modules_install
 	@touch $@
 
 $(LOCAL_KERNEL_PATH)/copy_modules: $(I915_AG_MODS_TARGET)
