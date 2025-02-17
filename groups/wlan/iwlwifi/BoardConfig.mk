@@ -7,7 +7,10 @@ WPA_SUPPLICANT_VERSION := VER_2_1_DEVEL
 BOARD_WLAN_DEVICE := iwlwifi
 {{/libwifi-hal}}
 
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB ?= lib_driver_cmd_intc
+#BOARD_WPA_SUPPLICANT_PRIVATE_LIB ?= lib_driver_cmd_intc
+
+BOARD_HOSTAPD_PRIVATE_LIB   := //hardware/intel/wlan/libwifihal/open/wpa_supplicant_8_lib:lib_driver_cmd_intc
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := //hardware/intel/wlan/libwifihal/open/wpa_supplicant_8_lib:lib_driver_cmd_intc
 
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/wlan/load_iwl_modules
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/wlan/iwlwifi
