@@ -28,7 +28,13 @@
                 <item>Telephony Rx</item>
             </attachedDevices>
             <defaultOutputDevice>Speaker</defaultOutputDevice>
-            <mixPorts>
+	    <mixPorts>
+                {{#deep_buffer}}
+                <mixPort name="deep buffer" role="source" flags="AUDIO_OUTPUT_FLAG_DEEP_BUFFER">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </mixPort>
+		{{/deep_buffer}}
                 <mixPort name="primary output" role="source" flags="AUDIO_OUTPUT_FLAG_PRIMARY">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
@@ -104,13 +110,23 @@
                 </devicePort>
 	    </devicePorts>
             <!-- route declaration, i.e. list all available sources for a given sink -->
-            <routes>
+	    <routes>
+                {{#deep_buffer}}
+                <route type="mix" sink="Wired Headset"
+                       sources="deep buffer"/>
+                <route type="mix" sink="Wired Headphones"
+                       sources="deep buffer"/>
+                <route type="mix" sink="Speaker"
+		       sources="deep buffer"/>
+	        {{/deep_buffer}}
+                {{^deep_buffer}}
                 <route type="mix" sink="Wired Headset"
                        sources="primary output"/>
                 <route type="mix" sink="Wired Headphones"
                        sources="primary output"/>
                 <route type="mix" sink="Speaker"
-                       sources="primary output"/>
+		       sources="primary output"/>
+	        {{/deep_buffer}}
                 <route type="mix" sink="primary input"
                        sources="Wired Headset Mic,Built-In Mic,BT SCO Headset Mic"/>
                 <route type="mix" sink="voice_rx"
