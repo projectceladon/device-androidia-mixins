@@ -57,6 +57,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/hdmi_audio_policy_configuration.xml:vendor/etc/hdmi_audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/default/policy/audio_policy_volumes.xml:vendor/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/audio/default/policy/default_volume_tables.xml:vendor/etc/default_volume_tables.xml \
+    $(LOCAL_PATH)/audio/default/policy/android.hardware.audio.xml:vendor/etc/permissions/android.hardware.audio.xml \
     $(LOCAL_PATH)/audio/default/effect/audio_effects.xml:vendor/etc/audio_effects.xml \
     $(LOCAL_PATH)/audio/default/effect/audio_effects_config.xml:vendor/etc/audio_effects_config.xml
 
