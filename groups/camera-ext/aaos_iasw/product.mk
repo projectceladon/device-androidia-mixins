@@ -14,3 +14,7 @@ PRODUCT_PACKAGES += android.ia.hardware.camera.provider-ivi \
 
 PRODUCT_PACKAGES += Camera2
 PRODUCT_PACKAGES += MultiCameraApp
+
+PRODUCT_PACKAGES += yavta
+PRODUCT_PACKAGES += media-ctl
+
