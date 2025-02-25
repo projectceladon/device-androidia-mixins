@@ -32,7 +32,7 @@
     <integer name="config_multiuserMaximumUsers">10</integer>
 
     <!-- Maximum number of users we allow to be running at a time -->
-    <integer name="config_multiuserMaxRunningUsers">5</integer>
+    <integer name="config_multiuserMaxRunningUsers">7</integer>
 
     <!-- True if the device supports system decorations on secondary displays. -->
     <bool name="config_supportsSystemDecorsOnSecondaryDisplays">true</bool>

@@ -23,4 +23,14 @@
     shouldShowSystemDecors="true"
     shouldShowIme="true" />
 
+<!-- Display settings for 5th Home -->
+<display name="port:5"
+    shouldShowSystemDecors="true"
+    shouldShowIme="true" />
+
+<!-- Display settings for 6th Home -->
+<display name="port:6"
+    shouldShowSystemDecors="true"
+    shouldShowIme="true" />
+
 </display-settings>
