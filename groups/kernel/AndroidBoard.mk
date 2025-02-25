@@ -1,24 +1,10 @@
-ifneq ($(wildcard $(INTEL_PATH_PREKERNEL)/$(TARGET_KERNEL_ARCH)/kernel), )
-TARGET_PREBUILT_KERNEL := $(INTEL_PATH_PREKERNEL)/$(TARGET_KERNEL_ARCH)/kernel
+ifeq ($(TARGET_PREBUILT_KERNEL), true)
+
+ifeq ($(TARGET_BUILD_VARIANT), user)
+PREBUILT_KERNEL_ROOT := device/intel/common/kernel/prebuilts/6.6/aaos_x86_64/user
+else
+PREBUILT_KERNEL_ROOT := device/intel/common/kernel/prebuilts/6.6/aaos_x86_64/userdebug
 endif
-
-ifneq ($(TARGET_PREBUILT_KERNEL), )
-
-TARGET_PREBUILT_KERNEL_MODULE := $(INTEL_PATH_PREKERNEL)/modules
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-
-$(PRODUCT_OUT)/kernel: $(LOCAL_KERNEL) $(wildcard $(TARGET_PREBUILT_KERNEL_MODULE)/*)
-	  $(hide) echo "Copy prebuilt kernel from $(LOCAL_KERNEL) into $@"
-	  $(hide) cp $(LOCAL_KERNEL) $@
-	  $(hide) echo "Copy modules from $(TARGET_PREBUILT_KERNEL_MODULE) into $(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)"
-	  $(hide) mkdir -p $(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)
-	  $(hide) cp -r $(TARGET_PREBUILT_KERNEL_MODULE)/* $(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)/
-
-# kernel modules must be copied before ramdisk is generated
-$(PRODUCT_OUT)/ramdisk.img: $(PRODUCT_OUT)/kernel
-
-.PHONY: kernel
-kernel: $(PRODUCT_OUT)/kernel
 
 else
 
