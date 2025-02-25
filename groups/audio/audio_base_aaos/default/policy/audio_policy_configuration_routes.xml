@@ -17,23 +17,33 @@
 
     <!-- Audio Zone 0-->
     <route type="mix" sink="bus0_media_CARD_0_DEV_1" sources="mixport_bus0_media_out"/>
-    <route type="mix" sink="bus1_navigation_CARD_0_DEV_1" sources="mixport_bus1_navigation_out"/>
-    <route type="mix" sink="bus2_voice_command_CARD_0_DEV_1"
+    <route type="mix" sink="bus1_navigation_CARD_0_DEV_5" sources="mixport_bus1_navigation_out"/>
+    <route type="mix" sink="bus2_voice_command_CARD_0_DEV_5"
            sources="mixport_bus2_voice_command_out"/>
-    <route type="mix" sink="bus3_call_ring_CARD_0_DEV_1" sources="mixport_bus3_call_ring_out"/>
-    <route type="mix" sink="bus4_call_CARD_0_DEV_1" sources="mixport_bus4_call_out"/>
-    <route type="mix" sink="bus5_alarm_CARD_0_DEV_1" sources="mixport_bus5_alarm_out"/>
+    <route type="mix" sink="bus3_call_ring_CARD_0_DEV_6" sources="mixport_bus3_call_ring_out"/>
+    <route type="mix" sink="bus4_call_CARD_0_DEV_6" sources="mixport_bus4_call_out"/>
+    <route type="mix" sink="bus5_alarm_CARD_0_DEV_7" sources="mixport_bus5_alarm_out"/>
     <route type="mix" sink="bus6_notification_CARD_0_DEV_1"
            sources="mixport_bus6_notification_out"/>
-    <route type="mix" sink="bus7_system_sound_CARD_0_DEV_1"
+    <route type="mix" sink="bus7_system_sound_CARD_0_DEV_7"
            sources="mixport_bus7_system_sound_out"/>
     
-    <route type="mix" sink="primary input"
-           sources="Built-In Mic,Built-In Back Mic,Echo-Reference Mic"/>
-    <route type="mix" sink="mixport_input_bus1_zone_0" sources="i_bus1_CARD_0_DEV_1"/>
+    <route type="mix" sink="primary input" sources="bottom"/>
+    <route type="mix" sink="Built-In Back Mic" sources="back"/>
+    <route type="mix" sink="Echo-Reference" sources="Echo-Reference Mic"/>
+    <route type="mix" sink="mixport_input_bus1_zone_0" sources="i_bus1_CARD_0_DEV_5"/>
     
     <!-- Audio Zone 1-->
     <route type="mix" sink="bus100_CARD_0_DEV_2" sources="mixport_bus100_audio_zone_1"/>
-    <route type="mix" sink="bus101_CARD_0_DEV_3" sources="mixport_bus101_audio_zone_1"/>
+    <route type="mix" sink="bus101_CARD_0_DEV_8" sources="mixport_bus101_audio_zone_1"/>
     <route type="mix" sink="mixport_input_bus100_zone_1" sources="i_bus100_CARD_0_DEV_2"/>
+
+    <!-- Audio Zone 2-->
+    <route type="mix" sink="bus200_CARD_0_DEV_3" sources="mixport_bus200_CARD_0_DEV_3"/>
+    <route type="mix" sink="mixport_input_bus200_zone_2" sources="i_bus200_CARD_0_DEV_3"/>
+
+    <!-- Audio Zone 3-->
+    <route type="mix" sink="bus300_CARD_0_DEV_4" sources="mixport_bus101_audio_zone_1"/>
+    <route type="mix" sink="mixport_input_bus300_zone_3" sources="i_bus300_CARD_0_DEV_4"/>
+
 </routes>
