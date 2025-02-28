@@ -39,6 +39,7 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
+            <Feature name="dynamic-color-aspects" />
         </MediaCodec>
 {{/hw_vd_h264}}
 
@@ -56,6 +57,7 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
+            <Feature name="dynamic-color-aspects" />
         </MediaCodec>
 {{/hw_vd_h265}}
 
@@ -70,7 +72,8 @@ and updated to vendor media codecs.
             <Limit name="bitrate" range="1-80000000" />
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
-	    <Feature name="adaptive-playback" />
+            <Feature name="adaptive-playback" />
+            <Feature name="dynamic-color-aspects" />
         </MediaCodec>
 {{/hw_vd_vp9}}
 
@@ -111,6 +114,7 @@ and updated to vendor media codecs.
             <Limit name="performance-point-3840x2160" value="120" />
             <Limit name="performance-point-1920x1080" value="180" />
             <Feature name="adaptive-playback" />
+            <Feature name="dynamic-color-aspects" />
         </MediaCodec>
 {{/hw_vd_av1}}
     </Decoders>
