@@ -3225,6 +3225,7 @@ CONFIG_SPI_PXA2XX_PCI=y
 # CONFIG_SPI_SC18IS602 is not set
 # CONFIG_SPI_SIFIVE is not set
 # CONFIG_SPI_MXIC is not set
+# CONFIG_SPI_VIRTIO is not set
 # CONFIG_SPI_XCOMM is not set
 # CONFIG_SPI_XILINX is not set
 # CONFIG_SPI_AMD is not set
