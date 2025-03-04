@@ -113,6 +113,36 @@ and updated to vendor media codecs.
             <Feature name="adaptive-playback" />
         </MediaCodec>
 {{/hw_vd_av1}}
+<!--secure components-->
+{{#hw_vd_h264_secure}}
+        <MediaCodec name="c2.intel.avc.decoder.secure" type="video/avc">
+            <!-- profiles and levels:  ProfileHigh : Level52 -->
+            <Limit name="size" min="64x64" max="4096x4096" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="block-count" range="1-65536" /> <!-- max 4096x4096 equivalent -->
+            <Limit name="blocks-per-second" range="1-1966080" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+            <Feature name="adaptive-playback" />
+            <Feature name="secure-playback" required="true" />
+        </MediaCodec>
+{{/hw_vd_h264_secure}}
+
+{{#hw_vd_h265_secure}}
+        <MediaCodec name="c2.intel.hevc.decoder.secure" type="video/hevc">
+            <!-- profiles and levels:  ProfileMain : MainTierLevel51 -->
+            <Limit name="size" min="64x64" max="8192x8192" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="8x8" />
+            <Limit name="block-count" range="1-1048576" /> <!-- max 8192x8192 -->
+            <Limit name="blocks-per-second" range="1-31457280" />
+            <Limit name="bitrate" range="1-40000000" />
+            <Limit name="performance-point-3840x2160" value="30" />
+            <Feature name="adaptive-playback" />
+            <Feature name="secure-playback" required="true" />
+        </MediaCodec>
+{{/hw_vd_h265_secure}}
     </Decoders>
 
     <Encoders>

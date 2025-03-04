@@ -35,3 +35,10 @@ PRODUCT_PACKAGES += \
 USE_ONEVPL := true
 {{/use_onevpl}}
 
+{{#hw_vd_h264_secure}}
+ENABLE_WIDEVINE := true
+{{/hw_vd_h264_secure}}
+
+{{#hw_vd_h265_secure}}
+ENABLE_WIDEVINE := true
+{{/hw_vd_h265_secure}}
