@@ -1,5 +1,5 @@
 {{^ota-update}}
-<manifest version="1.0" type="device" target-level="202404">
+<manifest version="1.0" type="device" target-level="202604">
 {{/ota-update}}
 {{#ota-update}}
 <manifest version="1.0" type="device">
@@ -11,7 +11,7 @@
     </hal-->
     <hal format="aidl">
         <name>android.hardware.graphics.composer3</name>
-        <version>3</version>
+        <version>4</version>
         <interface>
             <name>IComposer</name>
             <instance>default</instance>
