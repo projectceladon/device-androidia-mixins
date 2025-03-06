@@ -1,3 +1,13 @@
+service set-attestation-ids /vendor/bin/optee_keymaster_set_attestation_ids
+    class main
+    user root
+    group root
+    disabled
+    oneshot
+
+on boot
+    start set-attestation-ids
+
 on init
     mkdir /mnt/vendor 0755 root root
     mkdir /mnt/vendor/persist 0771 system system
@@ -21,4 +31,3 @@ service tee-supplicantd /vendor/bin/tee-supplicant
 
 on late-fs
     exec_start wait_for_keymaster_optee
-

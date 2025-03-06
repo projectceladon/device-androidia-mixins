@@ -7,7 +7,9 @@ PRODUCT_PACKAGES += \
 # optee keymaster
 PRODUCT_PACKAGES += \
 	android.hardware.security.keymint-service.optee \
-	wait_for_keymaster_optee
+	wait_for_keymaster_optee \
+	optee_keymaster_set_attestation_ids \
+	optee_keymaster_destroy_attestation_ids
 
 PRODUCT_PRODUCT_PROPERTIES += remote_provisioning.tee.rkp_only=true
 PRODUCT_PRODUCT_PROPERTIES += remote_provisioning.hostname=remoteprovisioning.googleapis.com
