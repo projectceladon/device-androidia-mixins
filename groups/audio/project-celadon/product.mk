@@ -67,5 +67,8 @@ PRODUCT_COPY_FILES += \
 
 
 PRODUCT_PROPERTY_OVERRIDES += audio.safemedia.bypass=true
+{{#deep_buffer}}
+PRODUCT_PROPERTY_OVERRIDES += audio.deep_buffer.media=true
+{{/deep_buffer}}
 
 PRODUCT_PACKAGE_OVERLAYS += $(INTEL_PATH_COMMON)/audio/overlay-car-legacy
