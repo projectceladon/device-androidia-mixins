@@ -5,7 +5,7 @@ BOARD_KERNEL_CMDLINE += \
 	noxsaves \
 	reboot_panic=p,w \
 	i915.hpd_sense_invert=0x7 \
-	intel_iommu=off \
+	intel_iommu=on \
 	i915.enable_pvmmio=0 \
 	loop.max_part=7
 
