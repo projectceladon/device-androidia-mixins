@@ -15,7 +15,7 @@ has_intel_gpu() {
 
 has_virgl() {
         # Assume that virgl is always available unless it's explicitly ruled out.
-        local found=1
+        local found=0
         for f in /sys/kernel/debug/dri/*; do
                 if [ ! -e "$f/virtio-gpu-features" ]; then
                         continue
