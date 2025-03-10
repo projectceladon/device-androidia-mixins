@@ -67,7 +67,8 @@
             <inputDevices>
                 <!-- <inputDevice address="Built-In Mic"/>
                 <inputDevice address="Built-In Back Mic"/> -->
-                <inputDevice address="i_bus1_CARD_0_DEV_1"/>
+		<inputDevice address="i_bus1_CARD_0_DEV_1"/>
+		<inputDevice address="r_submix input" type="TYPE_REMOTE_SUBMIX"/>
             </inputDevices>
         </zone>
         <zone name="front passenger zone 1" audioZoneId="1" occupantZoneId="1">
