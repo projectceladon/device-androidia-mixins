@@ -17,23 +17,36 @@
 
     <!-- Audio Zone 0 -->
     <item>bus0_media_CARD_0_DEV_1</item>
-    <item>bus1_navigation_CARD_0_DEV_1</item>
-    <item>bus2_voice_command_CARD_0_DEV_1</item>
-    <item>bus3_call_ring_CARD_0_DEV_1</item>
-    <item>bus4_call_CARD_0_DEV_1</item>
-    <item>bus5_alarm_CARD_0_DEV_1</item>
+    <item>bus1_navigation_CARD_0_DEV_5</item>
+    <item>bus2_voice_command_CARD_0_DEV_5</item>
+    <item>bus3_call_ring_CARD_0_DEV_6</item>
+    <item>bus4_call_CARD_0_DEV_6</item>
+    <item>bus5_alarm_CARD_0_DEV_7</item>
     <item>bus6_notification_CARD_0_DEV_1</item>
-    <item>bus7_system_sound_CARD_0_DEV_1</item>
+    <item>bus7_system_sound_CARD_0_DEV_7</item>
 
-    <item>Built-In Mic</item>
-    <item>Built-In Back Mic</item>
+    <item>bottom</item>
+    <!-- back mic pcm6-->
+    <item>back</item>
     <item>Echo-Reference Mic</item>
-    <item>i_bus1_CARD_0_DEV_1</item>
+    <!-- voice assistant pcm 5-->
+    <item>i_bus1_CARD_0_DEV_5</item>
     
     <!-- Audio Zone 1 -->
     <item>bus100_CARD_0_DEV_2</item>
-    <item>bus101_CARD_0_DEV_3</item>
-    
+    <!-- In Call-->
+    <item>bus101_CARD_0_DEV_8</item>
+
     <item>i_bus100_CARD_0_DEV_2</item>
-    
+
+    <!-- Audio Zone 2-->
+    <item>bus200_CARD_0_DEV_3</item>
+
+    <item>i_bus200_CARD_0_DEV_3</item>
+
+    <!-- Audio Zone 3-->
+    <item>bus300_CARD_0_DEV_4</item>
+
+    <item>i_bus300_CARD_0_DEV_4</item>
+
 </attachedDevices>
