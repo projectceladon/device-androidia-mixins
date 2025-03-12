@@ -42,6 +42,14 @@ BOARD_HAVE_OMX_SRC := true
 PRODUCT_PACKAGES += iHD_drv_video
 PRODUCT_PACKAGES += libigfxcmrt
 
+# Close source media_driver
+MCD_PREBUILTS := \
+    lib64/iHD_drv_video_1.so \
+    lib/iHD_drv_video_1.so
+
+PRODUCT_COPY_FILES += $(foreach blob, $(MCD_PREBUILTS), \
+    hardware/intel/external/media/mod/prebuilts/$(blob):$(TARGET_COPY_OUT_VENDOR)/$(blob))
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/igfx_user_feature_next.txt:vendor/etc/igfx_user_feature_next.txt
 
