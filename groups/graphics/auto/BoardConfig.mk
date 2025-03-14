@@ -5,7 +5,8 @@ LIBDRM_VER ?= intel
 BOARD_KERNEL_CMDLINE += vga=current i915.modeset=1 drm.atomic=1 i915.nuclear_pageflip=1 drm.vblankoffdelay=1 i915.fastboot=1
 
 BOARD_USE_CUSTOMIZED_MESA := true
-
+SANITIZE_HOST := hwaddress
+SANITIZE_TARGET := hwaddress
 #For mesa cross compiling with meson build system
 BOARD_MESA3D_USES_MESON_BUILD := true
 BOARD_MESA3D_GALLIUM_DRIVERS := virgl iris
