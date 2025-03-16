@@ -9,6 +9,11 @@ else
   TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{src_path}}}/kernel-headers
 endif
 
+ifeq ($(TARGET_PREBUILT_KERNEL), true)
+BOARD_VENDOR_KERNEL_MODULES := \
+        $(wildcard $(PREBUILT_KERNEL_ROOT)/vendor_dlkm/*.ko)
+endif
+
 ifneq ($(TARGET_BUILD_VARIANT),user)
 KERNEL_LOGLEVEL ?= {{{loglevel}}}
 else
