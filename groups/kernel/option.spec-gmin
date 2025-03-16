@@ -37,3 +37,4 @@ branch =
 kmi_generation =
 i915_ag_mods_version = false
 use_prebuilt_kernel = false
+prebuilt_kernel_target = client_x86_64
