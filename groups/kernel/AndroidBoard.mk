@@ -1,26 +1,10 @@
-ifneq ($(wildcard $(INTEL_PATH_PREKERNEL)/$(TARGET_KERNEL_ARCH)/kernel), )
-TARGET_PREBUILT_KERNEL := $(INTEL_PATH_PREKERNEL)/$(TARGET_KERNEL_ARCH)/kernel
-endif
-
-ifneq ($(TARGET_PREBUILT_KERNEL), )
-
-TARGET_PREBUILT_KERNEL_MODULE := $(INTEL_PATH_PREKERNEL)/modules
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-
-$(PRODUCT_OUT)/kernel: $(LOCAL_KERNEL) $(wildcard $(TARGET_PREBUILT_KERNEL_MODULE)/*)
-	  $(hide) echo "Copy prebuilt kernel from $(LOCAL_KERNEL) into $@"
-	  $(hide) cp $(LOCAL_KERNEL) $@
-	  $(hide) echo "Copy modules from $(TARGET_PREBUILT_KERNEL_MODULE) into $(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)"
-	  $(hide) mkdir -p $(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)
-	  $(hide) cp -r $(TARGET_PREBUILT_KERNEL_MODULE)/* $(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)/
-
-# kernel modules must be copied before ramdisk is generated
-$(PRODUCT_OUT)/ramdisk.img: $(PRODUCT_OUT)/kernel
-
-.PHONY: kernel
-kernel: $(PRODUCT_OUT)/kernel
-
+ifeq ($(TARGET_PREBUILT_KERNEL), true)
+ifeq ($(TARGET_BUILD_VARIANT), user)
+PREBUILT_KERNEL_ROOT := device/intel/common/kernel/prebuilts/6.6/aaos_x86_64/user
 else
+PREBUILT_KERNEL_ROOT := device/intel/common/kernel/prebuilts/6.6/aaos_x86_64/userdebug
+endif
+endif
 
 TARGET_KERNEL_CLANG_VERSION := r530567
 CLANG_PREBUILTS_PATH := $(abspath $(INTEL_PATH_DEVICE)/../../../prebuilts/clang)
@@ -205,6 +189,7 @@ $(PRODUCT_OUT)/vendor.img: $(LOCAL_KERNEL_PATH)/copy_modules
 # Second, create flat hierarchy for insmod linking to previous hierarchy
 $(LOCAL_KERNEL_PATH)/copy_modules: $(LOCAL_KERNEL)
 	@echo Copy modules from $(LOCAL_KERNEL_PATH)/lib/modules/$(KERNELRELEASE) into $(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)
+ifneq ($(TARGET_PREBUILT_KERNEL), true)
 	$(hide) rm -rf $(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)
 	$(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/$(KERNEL_MODULES_ROOT)
 	$(hide) mkdir -p $(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)
@@ -213,6 +198,7 @@ $(LOCAL_KERNEL_PATH)/copy_modules: $(LOCAL_KERNEL)
 		mkdir -p $(PWD)/$(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)/$(KERNELRELEASE)/$$(dirname $$f) ; \
 		ln -s /$(KERNEL_MODULES_ROOT_PATH)/$$(basename $$f) $(PWD)/$(PRODUCT_OUT)/$(KERNEL_MODULES_ROOT)/$(KERNELRELEASE)/$$f || exit 1; \
 		done
+endif
 	$(hide) cd $(LOCAL_KERNEL_PATH)/lib/modules/$(KERNELRELEASE) && for f in `find . -name 'compat.ko'`; do \
 		cp $$f $(PWD)/$(PRODUCT_OUT)/vendor/firmware/i915/ || exit 1; \
 		done
@@ -230,10 +216,26 @@ $(LOCAL_KERNEL_PATH)/copy_modules: $(LOCAL_KERNEL)
 	$(hide) for f in dwc3.ko dwc3-pci.ko xhci-hcd.ko xhci-pci.ko; do \
 		find $(LOCAL_KERNEL_PATH)/lib/modules/ -name $$f -exec cp {} $(TARGET_RECOVERY_ROOT_OUT)/$(KERNEL_MODULES_ROOT)/ \; ;\
 		done
+ifeq ($(TARGET_PREBUILT_KERNEL), true)
+	echo "Copying mei modules from prebuilt"
+#mei for recovery
+	$(hide) mkdir -p $(TARGET_RECOVERY_ROOT_OUT)/$(KERNEL_MODULES_ROOT)
+	$(hide) for f in mei.ko mei-me.ko mei-txe.ko mei-gsc.ko mei_pxp.ko mei_hdcp.ko; do \
+		find $(PREBUILT_KERNEL_ROOT)/vendor_dlkm/ -name $$f -exec cp {} $(TARGET_RECOVERY_ROOT_OUT)/$(KERNEL_MODULES_ROOT)/ \; ;\
+		done
+	$(hide) cp $(PRODUCT_OUT)/obj/modules/intel-gpu-i915-backports/compat/compat.ko $(PRODUCT_OUT)/vendor_dlkm/lib/modules/
+	$(hide) cp $(PRODUCT_OUT)/obj/modules/intel-gpu-i915-backports/drivers/gpu/drm/i915/i915_ag.ko $(PRODUCT_OUT)/vendor_dlkm/lib/modules/
+	$(hide) cp $(PRODUCT_OUT)/obj/modules/intel-gpu-i915-backports/drivers/platform/x86/intel/intel_vsec.ko $(PRODUCT_OUT)/vendor_dlkm/lib/modules/
+	rm -rf out/target/product/base_aaos/obj/kernel
+	rm -rf out/target/product/base_aaos/obj/modules
+else
+	echo "Copying mei modules from legacy kernel"
 #mei for recovery
 	$(hide) for f in mei.ko mei-me.ko mei-txe.ko mei-gsc.ko mei_pxp.ko mei_hdcp.ko; do \
 		find $(LOCAL_KERNEL_PATH)/lib/modules/ -name $$f -exec cp {} $(TARGET_RECOVERY_ROOT_OUT)/$(KERNEL_MODULES_ROOT)/ \; ;\
 		done
+endif
+
 {{#camera_cos_hack}}
 ifeq ($(KERNEL_MODULES_ROOT),vendor/lib/modules)
 	$(hide) mkdir -p $(PRODUCT_OUT)/root/vendor/lib/modules/
@@ -333,5 +335,4 @@ endif
 .PHONY: kernel
 kernel: $(LOCAL_KERNEL_PATH)/copy_modules $(PRODUCT_OUT)/kernel
 
-endif
 
