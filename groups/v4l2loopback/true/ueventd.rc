@@ -1,0 +1,4 @@
+# Camera
+/dev/video*       0660  system  camera
+/dev/media*       0660  system  camera
+/dev/v4l*         0660  system  camera
