@@ -48,7 +48,8 @@ PRODUCT_PACKAGES += \
 {{#gen9+}}
 # Mesa
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.opengles.aep.xml:vendor/etc/permissions/android.hardware.opengles.aep.xml
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:vendor/etc/permissions/android.hardware.opengles.aep.xml \
+    vendor/intel/hardware/interfaces/graphic/dgpu-renderwlocal.cfg:vendor/etc/dgpu-renderwlocal.cfg
 
 # GLES version
 PRODUCT_PROPERTY_OVERRIDES += \
