@@ -51,6 +51,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/{{_extra_dir}}/intel.icd:vendor/Khronos/OpenCL/vendors/intel.icd
 
+PRODUCT_COPY_FILES += \
+    vendor/intel/hardware/interfaces/graphic/dgpu-renderwlocal.cfg:vendor/etc/dgpu-renderwlocal.cfg
+
 # virtio-gpu backend
 PRODUCT_PACKAGES += \
     libacrn_dm_backend \
