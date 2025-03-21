@@ -21,7 +21,7 @@
     - Volume groups
   in the car environment.
 -->
-<carAudioConfiguration version="3">
+<carAudioConfiguration version="4">
     <zones>
         <zone name="primary zone" isPrimary="true"  audioZoneId="0" occupantZoneId="0">
             <zoneConfigs>
@@ -55,6 +55,68 @@
                                 <context context="alarm"/>
                             </device>
                             <device address="bus7_system_sound_CARD_0_DEV_1">
+                                <context context="system_sound"/>
+                                <context context="emergency"/>
+                                <context context="safety"/>
+                                <context context="vehicle_status"/>
+                            </device>
+                        </group>
+                    </volumeGroups>
+                </zoneConfig>
+		<!--
+                <zoneConfig name="primary zone config bt">
+                    <volumeGroups name="a2dp output">
+                        <group>
+                            <device address="a2dp output" type="TYPE_BLUETOOTH_A2DP">
+                                <context context="music"/>
+                                <context context="announcement"/>
+                                <context context="notification"/>
+                                <context context="navigation"/>
+                                <context context="voice_command"/>
+                                <context context="call_ring"/>
+                                <context context="call"/>
+                                <context context="alarm"/>
+                                <context context="system_sound"/>
+                                <context context="emergency"/>
+                                <context context="safety"/>
+                                <context context="vehicle_status"/>
+                            </device>
+                        </group>
+                    </volumeGroups>
+                </zoneConfig>
+		-->
+                <zoneConfig name="primary zone config usb headset">
+                    <volumeGroups name="usb headset output">
+                        <group>
+                            <device address="usb_headset output" type="TYPE_USB_HEADSET">
+                                <context context="music"/>
+                                <context context="announcement"/>
+                                <context context="notification"/>
+                                <context context="navigation"/>
+                                <context context="voice_command"/>
+                                <context context="call_ring"/>
+                                <context context="call"/>
+                                <context context="alarm"/>
+                                <context context="system_sound"/>
+                                <context context="emergency"/>
+                                <context context="safety"/>
+                                <context context="vehicle_status"/>
+                            </device>
+                        </group>
+                    </volumeGroups>
+		</zoneConfig>
+                <zoneConfig name="primary zone config usb device">
+                    <volumeGroups name="usb device output">
+                        <group>
+                            <device address="usb_device output" type="TYPE_USB_DEVICE">
+                                <context context="music"/>
+                                <context context="announcement"/>
+                                <context context="notification"/>
+                                <context context="navigation"/>
+                                <context context="voice_command"/>
+                                <context context="call_ring"/>
+                                <context context="call"/>
+                                <context context="alarm"/>
                                 <context context="system_sound"/>
                                 <context context="emergency"/>
                                 <context context="safety"/>
