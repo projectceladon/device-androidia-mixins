@@ -1,2 +1,2 @@
 # Thermal Hal
-PRODUCT_PACKAGES += android.hardware.thermal@aidl-service.intel
+PRODUCT_PACKAGES += com.android.hardware.thermal.intel
