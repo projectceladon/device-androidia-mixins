@@ -21,33 +21,76 @@
     - Volume groups
   in the car environment.
 -->
-<carAudioConfiguration version="3">
+<carAudioConfiguration version="4">
+    <deviceConfigurations>
+        <deviceConfiguration name="useCoreAudioVolume" value="true"/>
+    </deviceConfigurations>
     <zones>
         <zone name="primary zone" isPrimary="true"  audioZoneId="0" occupantZoneId="0">
             <zoneConfigs>
                 <zoneConfig name="primary zone config" isDefault="true">
                     <volumeGroups>
-                        <group>
+                        <group name="media">
                             <device address="bus0_media_CARD_0_DEV_1">
                                 <context context="music"/>
                                 <context context="announcement"/>
                                 <context context="notification"/>
                             </device>
                         </group>
-                        <group>
+                        <group name="navigation">
                             <device address="bus1_navigation_CARD_0_DEV_5">
                                 <context context="navigation"/>
                                 <context context="voice_command"/>
                             </device>
                         </group>
-                        <group>
+                        <group name="call">
                             <device address="bus2_call_CARD_0_DEV_6">
 		                <context context="call_ring"/>
 				<context context="call"/>
                             </device>
                         </group>
-                        <group>
+                        <group name="system">
                             <device address="bus3_alarm_CARD_0_DEV_7">
+                                <context context="alarm"/>
+                                <context context="system_sound"/>
+                                <context context="emergency"/>
+                                <context context="safety"/>
+                                <context context="vehicle_status"/>
+                            </device>
+                        </group>
+                    </volumeGroups>
+                </zoneConfig>
+                <zoneConfig name="primary zone config usb headset">
+                    <volumeGroups name="usb headset output">
+                        <group name="usb headset volume">
+                            <device address="usb_headset output" type="TYPE_USB_HEADSET">
+                                <context context="music"/>
+                                <context context="announcement"/>
+                                <context context="notification"/>
+                                <context context="navigation"/>
+                                <context context="voice_command"/>
+                                <context context="call_ring"/>
+                                <context context="call"/>
+                                <context context="alarm"/>
+                                <context context="system_sound"/>
+                                <context context="emergency"/>
+                                <context context="safety"/>
+                                <context context="vehicle_status"/>
+                            </device>
+                        </group>
+                    </volumeGroups>
+                </zoneConfig>
+                <zoneConfig name="primary zone config usb device">
+                    <volumeGroups name="usb device output">
+                        <group name="usb device volume">
+                            <device address="usb_device output" type="TYPE_USB_DEVICE">
+                                <context context="music"/>
+                                <context context="announcement"/>
+                                <context context="notification"/>
+                                <context context="navigation"/>
+                                <context context="voice_command"/>
+                                <context context="call_ring"/>
+                                <context context="call"/>
                                 <context context="alarm"/>
                                 <context context="system_sound"/>
                                 <context context="emergency"/>
@@ -68,7 +111,7 @@
             <zoneConfigs>
                 <zoneConfig name="front passenger zone 1 config 0" isDefault="true">
                     <volumeGroups>
-                        <group>
+                        <group name="zone1 config0 volume">
                             <device address="bus100_CARD_0_DEV_2">
                             <context context="music"/>
                             <context context="navigation"/>
@@ -88,7 +131,7 @@
                 </zoneConfig>
                 <zoneConfig name="front passenger zone 1 config 1">
                     <volumeGroups>
-                        <group>
+                        <group name="zone1 config1 volume">
                             <device address="bus101_CARD_0_DEV_8">
                             <context context="music"/>
                             <context context="navigation"/>
@@ -115,7 +158,7 @@
             <zoneConfigs>
                 <zoneConfig name="front passenger zone 2 config 0" isDefault="true">
                     <volumeGroups>
-                        <group>
+                        <group name="zone2 config0 volume">
                             <device address="bus200_CARD_0_DEV_3">
                             <context context="music"/>
                             <context context="navigation"/>
@@ -142,7 +185,7 @@
             <zoneConfigs>
                 <zoneConfig name="front passenger zone 3 config 0" isDefault="true">
                     <volumeGroups>
-                        <group>
+                        <group name="zone3 config0 volume">
                             <device address="bus300_CARD_0_DEV_4">
                             <context context="music"/>
                             <context context="navigation"/>
