@@ -1,50 +1,50 @@
 <Streams>
 <!--
-  <Stream Address="bus0_media_out" Direction="playback" Mmap="false" DataDump="false">
+  <Stream Address="bus0_media_out" Direction="playback" Mmap="false" AudioZone="0" DataDump="false">
     <Pcm Card="avsrt56401" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="2048" StopThreshold="4096" AvailMin="1024" />
     <Mixer Card="avsrt56401" MixerPath="/vendor/etc/mixer_paths_0.xml"/>
   </Stream>
 -->
-  <Property UsbAudio="true"/>
+  <Property UsbAudio="true" UsbAudioZone="0"/>
 
-  <Stream Address="bus0_media_out" Direction="playback" Mmap="false">
+  <Stream Address="bus0_media_out" Direction="playback" Mmap="false" AudioZone="0">
     <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
   </Stream>
-  <Stream Address="bus1_navigation_out" Direction="playback" Mmap="false">
+  <Stream Address="bus1_navigation_out" Direction="playback" Mmap="false" AudioZone="0">
     <Pcm Card="SoundCard" Device="5" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
   </Stream>
-  <Stream Address="bus3_call_ring_out" Direction="playback" Mmap="false">
+  <Stream Address="bus3_call_ring_out" Direction="playback" Mmap="false" AudioZone="0">
     <Pcm Card="SoundCard" Device="6" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
   </Stream>
-  <Stream Address="bus4_call_out" Direction="playback" Mmap="false">
+  <Stream Address="bus4_call_out" Direction="playback" Mmap="false" AudioZone="0">
     <Pcm Card="SoundCard" Device="6" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
   </Stream>
-  <Stream Address="Built-In Mic" Direction="capture" Mmap="false">
+  <Stream Address="Built-In Mic" Direction="capture" Mmap="false" AudioZone="0">
     <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
-    <Stream Address="Built-In Back Mic" Direction="capture" Mmap="false">
-    <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
-  </Stream>
-  </Stream>
-  <Stream Address="bus_1000_input_zone_0" Direction="capture" Mmap="false">
+    <Stream Address="Built-In Back Mic" Direction="capture" Mmap="false" AudioZone="0">
     <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
   </Stream>
-  <Stream Address="bus100_audio_zone_1" Direction="playback" Mmap="false">
+  </Stream>
+  <Stream Address="bus_1000_input_zone_0" Direction="capture" Mmap="false" AudioZone="0">
+    <Pcm Card="SoundCard" Device="1" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
+  </Stream>
+  <Stream Address="bus100_audio_zone_1" Direction="playback" Mmap="false" AudioZone="1">
     <Pcm Card="SoundCard" Device="2" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
   </Stream>
-  <Stream Address="bus_2000_input_zone_1" Direction="capture" Mmap="false">
+  <Stream Address="bus_2000_input_zone_1" Direction="capture" Mmap="false" AudioZone="1">
     <Pcm Card="SoundCard" Device="2" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
   </Stream>
 
   <!-- zone 2 -->
-  <Stream Address="bus200_audio_zone_2" Direction="playback" Mmap="false">
+  <Stream Address="bus200_audio_zone_2" Direction="playback" Mmap="false" AudioZone="2">
     <Pcm Card="SoundCard" Device="3" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
   </Stream>
-  <Stream Address="bus_3000_input_zone_2" Direction="capture" Mmap="false">
+  <Stream Address="bus_3000_input_zone_2" Direction="capture" Mmap="false" AudioZone="2">
     <Pcm Card="SoundCard" Device="3" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
   </Stream>
 
   <!-- zone 3 -->
-  <Stream Address="bus300_audio_zone_3" Direction="playback" Mmap="false">
+  <Stream Address="bus300_audio_zone_3" Direction="playback" Mmap="false" AudioZone="3">
     <Pcm Card="SoundCard" Device="4" SampleRate="48000"  Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="4096" AdditionalOutputDeviceDelay="5"/>
   </Stream>
   <!--
@@ -52,10 +52,10 @@
        Based on the limitation, zone 3 uses the same capture pcm device with zone 2.
        To be refined after a new design
   -->
-  <Stream Address="bus_4000_input_zone_3" Direction="capture" Mmap="false">
+  <Stream Address="bus_4000_input_zone_3" Direction="capture" Mmap="false" AudioZone="3">
     <Pcm Card="SoundCard" Device="3" SampleRate="48000"  Format="32" Channels="2" PeriodSize="960" PeriodCount="4" StartThreshhold="1" StopThreshold="3840" AdditionalOutputDeviceDelay="5"/>
   </Stream>
-  <Stream Address="Echo-Reference Mic" Direction="capture" Mmap="false">
+  <Stream Address="Echo-Reference Mic" Direction="capture" Mmap="false" AudioZone="0">
     <Pcm Card="SoundCard" Device="4" SampleRate="48000" Format="32" Channels="2" PeriodSize="1024" PeriodCount="4" StartThreshhold="1" StopThreshold="4096" AdditionalOutputDeviceDelay="5"/>
   </Stream>
   </Streams>
