@@ -16,8 +16,7 @@
 <mixPorts>
 
 <!-- Audio Zone 0-->
-    <mixPort name="mixport_bus0_media_out" role="source"
-             flags="AUDIO_OUTPUT_FLAG_PRIMARY">
+    <mixPort name="mixport_bus0_media_out" role="source">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
@@ -65,14 +64,12 @@
     </mixPort>
 
 <!-- Audio Zone 1-->
-    <mixPort name="mixport_bus100_audio_zone_1" role="source"
-             flags="AUDIO_OUTPUT_FLAG_PRIMARY">
+    <mixPort name="mixport_bus100_audio_zone_1" role="source">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
     </mixPort>
-    <mixPort name="mixport_bus101_audio_zone_1" role="source"
-             flags="AUDIO_OUTPUT_FLAG_PRIMARY">
+    <mixPort name="mixport_bus101_audio_zone_1" role="source">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
@@ -85,8 +82,7 @@
     </mixPort>
 
     <!-- Audio Zone 2-->
-    <mixPort name="mixport_bus200_CARD_0_DEV_3" role="source"
-             flags="AUDIO_OUTPUT_FLAG_PRIMARY">
+    <mixPort name="mixport_bus200_CARD_0_DEV_3" role="source">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
@@ -99,8 +95,7 @@
     </mixPort>
 
     <!-- Audio Zone 3-->
-    <mixPort name="mixport_bus101_audio_zone_1" role="source"
-             flags="AUDIO_OUTPUT_FLAG_PRIMARY">
+    <mixPort name="mixport_bus101_audio_zone_1" role="source">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
