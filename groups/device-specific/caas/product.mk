@@ -21,7 +21,7 @@ PRODUCT_PACKAGES += vndservicemanager
 		    androidx.window.sidecar
 
 PRODUCT_PACKAGES +=  \
-                    android.hardware.usb-service.example \
+                    com.android.hardware.usb \
                     camera.device@1.0-impl \
                     android.hardware.camera.provider@2.4-impl \
                     android.hardware.graphics.allocator-service.minigbm \
