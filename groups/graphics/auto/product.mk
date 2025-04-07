@@ -73,7 +73,8 @@ PRODUCT_COPY_FILES += \
 
 # DRM HWComposer
 PRODUCT_PACKAGES += \
-    hwcomposer.drm_minigbm
+    libhwcservice \
+    libhwcservicelib
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.hwcomposer=drm_minigbm
