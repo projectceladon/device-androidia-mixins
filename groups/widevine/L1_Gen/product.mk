@@ -30,7 +30,7 @@ $(call inherit-product, vendor/widevine/libwvdrmengine/apex/device/device.mk)
 
 PRODUCT_PACKAGES_ENG += ExoPlayerDemo
 
-PRODUCT_PACKAGES += liboemcrypto
+PRODUCT_PACKAGES += liboemcrypto.L1
 #		    sigma \
 
 #CP prebuilt binaries
