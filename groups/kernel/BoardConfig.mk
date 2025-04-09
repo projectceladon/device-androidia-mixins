@@ -59,6 +59,7 @@ BOARD_KERNEL_CMDLINE += \
 
 BOARD_KERNEL_CMDLINE += \
       clearcpuid=517 \
+      initcall_debug \
       mce=no_lmce \
       mce=ignore_ce
 
