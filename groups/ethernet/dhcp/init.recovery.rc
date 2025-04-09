@@ -4,6 +4,7 @@ on boot
 {{/eth-driver}}
 
 service dhcpcd_eth0 /system/bin/dhcpcd -ABDKL eth0
+    user root
     class main
     disabled
     oneshot

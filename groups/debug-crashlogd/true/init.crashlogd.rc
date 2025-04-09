@@ -4,10 +4,12 @@ on post-fs-data
     mkdir {{logs_dir}}/aplogs 0775 system log
 
 service vendor.crashlogd /system/vendor/bin/crashlogd
+    user root
     class late_start
 
 # started by vendor/intel/log_capture/crashlog
 service vendor.logsystemstate /system/vendor/bin/dumpstate_dropbox.sh -v
+    user root
     disabled
     oneshot
 
@@ -40,11 +42,13 @@ on property:logd.logpersistd=clear
     mkdir {{logs_dir}}/aplogs 0775 system log
 
 service vendor.logfs /vendor/bin/logfs.sh
+    user root
     group root shell log
     class late_start
     oneshot
 
 service vendor.aplog /vendor/bin/aplog.sh
+    user root
     group root shell log
     class late_start
     oneshot
@@ -53,6 +57,7 @@ service vendor.aplog /vendor/bin/aplog.sh
 ############### Aplog generate by AOSP logpersist ###############
 
 service vendor.earlylogs /vendor/bin/elogs.sh
+    user root
     class core
     oneshot
 
