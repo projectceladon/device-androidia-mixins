@@ -6,7 +6,7 @@ PREBUILT_KERNEL_ROOT := vendor/intel/utils_priv/kernel/prebuilts/6.6/{{{prebuilt
 endif
 endif
 
-TARGET_KERNEL_CLANG_VERSION := r530567
+TARGET_KERNEL_CLANG_VERSION := r530567b
 CLANG_PREBUILTS_PATH := $(abspath $(INTEL_PATH_DEVICE)/../../../prebuilts/clang)
 
 ifneq ($(TARGET_KERNEL_CLANG_VERSION),)
