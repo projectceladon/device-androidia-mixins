@@ -4,4 +4,4 @@ on boot
     insmod ${ro.vendor.boot.moduleslocation}/xhci-hcd.ko
     insmod ${ro.vendor.boot.moduleslocation}/xhci-pci.ko
 on property:sys.usb.ffs.ready=1
-    write /sys/class/usb_role/intel_xhci_usb_sw-role-switch/role "device"
+    write /sys/class/usb_role/intel_xhci_usb_sw.1.auto-role-switch/role "device"
