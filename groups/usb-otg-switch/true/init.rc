@@ -5,7 +5,7 @@ on property:sys.boot_completed=1
     setprop vendor.sys.usb.role device
 
 on property:vendor.sys.usb.role=host
-    exec - system system -- /vendor/bin/usb_otg_switch.sh h
+    exec - system system -- /vendor/bin/usb_otg_switch.sh h {{port}}
 
 on property:vendor.sys.usb.role=device
-    exec - system system -- /vendor/bin/usb_otg_switch.sh p
+    exec - system system -- /vendor/bin/usb_otg_switch.sh p {{port}}
