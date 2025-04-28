@@ -1,5 +1,9 @@
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     com.android.hardware.gatekeeper.nonsecure \
+    android.hardware.security.keymint-service
+
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper-service.nonsecure \
     android.hardware.security.keymint-service
 
 #PRODUCT_PACKAGES += \
