@@ -49,25 +49,40 @@ on post-fs && property:vendor.intel.enable.audio=sof-hda
     insmod /vendor/lib/modules/snd-soc-skl_hda_dsp.ko
     insmod /vendor/lib/modules/snd-sof-pci-intel-tgl.ko
 
-on boot
-    insmod /vendor/lib/modules/snd.ko
-    insmod /vendor/lib/modules/snd-timer.ko
-    insmod /vendor/lib/modules/snd-pcm.ko
+on post-fs && property:vendor.intel.enable.audio=sof
     insmod /vendor/lib/modules/snd-dummy.ko
-    insmod /vendor/lib/modules/snd-compress.ko
     insmod /vendor/lib/modules/snd-ctl-led.ko
-    insmod /vendor/lib/modules/snd-hda-core.ko
-    insmod /vendor/lib/modules/snd-hda-codec.ko
-    insmod /vendor/lib/modules/snd-hda-codec-generic.ko
-    insmod /vendor/lib/modules/snd-intel-dspcfg.ko dsp_driver=1
-    insmod /vendor/lib/modules/snd-hda-intel.ko
-    insmod /vendor/lib/modules/snd-hda-codec-realtek.ko
-    insmod /vendor/lib/modules/snd-hda-codec-hdmi.ko
-    insmod /vendor/lib/modules/snd-intel-sdw-acpi.ko
+    insmod /vendor/lib/modules/ac97_bus.ko
+    insmod /vendor/lib/modules/snd-compress.ko
+    insmod /vendor/lib/modules/snd-soc-core.ko
     insmod /vendor/lib/modules/snd-soc-acpi.ko
     insmod /vendor/lib/modules/snd-soc-acpi-intel-match.ko
-    insmod /vendor/lib/modules/snd-soc-core.ko
-
+    insmod /vendor/lib/modules/snd-intel-sdw-acpi.ko
+    insmod /vendor/lib/modules/snd-intel-dspcfg.ko dsp_driver=3
+    insmod /vendor/lib/modules/snd-sof-utils.ko
+    insmod /vendor/lib/modules/snd-sof.ko
+    insmod /vendor/lib/modules/snd-sof-acpi.ko
+    insmod /vendor/lib/modules/snd-sof-pci.ko
+    insmod /vendor/lib/modules/snd-hda-core.ko
+    insmod /vendor/lib/modules/snd-hda-ext-core.ko
+    insmod /vendor/lib/modules/snd-hda-codec.ko
+    insmod /vendor/lib/modules/snd-hda-codec-hdmi.ko
+    insmod /vendor/lib/modules/snd-sof-intel-hda.ko
+    insmod /vendor/lib/modules/snd-sof-xtensa-dsp.ko
+    insmod /vendor/lib/modules/soundwire-bus.ko
+    insmod /vendor/lib/modules/soundwire-generic-allocation.ko
+    insmod /vendor/lib/modules/snd-sof-intel-hda-mlink.ko
+    insmod /vendor/lib/modules/regmap-sdw.ko
+    insmod /vendor/lib/modules/soundwire-cadence.ko
+    insmod /vendor/lib/modules/soundwire-intel.ko
+    insmod /vendor/lib/modules/snd-soc-max98363.ko
+    insmod /vendor/lib/modules/snd-soc-cs42l42.ko
+    insmod /vendor/lib/modules/snd-soc-cs42l42-sdw.ko
+    insmod /vendor/lib/modules/snd-soc-hdac-hda.ko
+    insmod /vendor/lib/modules/snd-sof-intel-hda-common.ko
+    insmod /vendor/lib/modules/snd-soc-dmic.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-tgl.ko
+    insmod /vendor/lib/modules/snd-sof-pci-intel-mtl.ko
 
 on property:sys.boot_completed=1 && property:ro.vendor.hdmi.audio=tgl
     stop audioserver
