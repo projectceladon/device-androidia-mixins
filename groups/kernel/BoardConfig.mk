@@ -49,7 +49,7 @@ BOARD_KERNEL_CMDLINE += \
 {{/memory_hole}}
 {{#interactive_governor}}
 BOARD_KERNEL_CMDLINE += \
-	intel_pstate=disable
+	intel_pstate=active
 {{/interactive_governor}}
 {{#relative_sleepstates}}
 
