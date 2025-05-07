@@ -1,4 +1,4 @@
-on post-fs && property:vendor.intel.enable.audio=legacy-hda
+on post-fs
     insmod /vendor/lib/modules/snd-compress.ko
     insmod /vendor/lib/modules/snd-ctl-led.ko
     insmod /vendor/lib/modules/snd-hda-core.ko
