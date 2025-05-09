@@ -54,6 +54,7 @@ on boot
     insmod /vendor/lib/modules/snd-timer.ko
     insmod /vendor/lib/modules/snd-pcm.ko
     insmod /vendor/lib/modules/snd-dummy.ko
+    insmod /vendor/lib/modules/virtio_snd.ko
 
 on property:sys.boot_completed=1 && property:ro.vendor.hdmi.audio=tgl
     stop audioserver
