@@ -2,6 +2,7 @@
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.autofocus.xml:vendor/etc/permissions/android.hardware.camera.autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.xml:vendor/etc/permissions/android.hardware.camera.xml
+    $(LOCAL_PATH)/{{_extra_dir}}/media_profiles_V1_0.xml:vendor/etc/media_profiles_V1_0.xml
 
 # External camera service
 
