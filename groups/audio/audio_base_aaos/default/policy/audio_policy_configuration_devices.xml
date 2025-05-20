@@ -31,7 +31,7 @@
                  samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
             <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-3200" maxValueMB="600"
+                  minValueMB="-4400" maxValueMB="0"
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
@@ -41,7 +41,7 @@
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
             <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-3200" maxValueMB="600"
+                  minValueMB="-4400" maxValueMB="0"
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
@@ -51,7 +51,7 @@
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
             <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-3200" maxValueMB="600"
+                  minValueMB="-4400" maxValueMB="0"
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
@@ -103,7 +103,7 @@
                  samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
             <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-3200" maxValueMB="600"
+                  minValueMB="-4400" maxValueMB="0"
                   defaultValueMB="0" stepValueMB="100"/>
             </gains>
     </devicePort>
@@ -127,7 +127,7 @@
                  samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
             <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-3200" maxValueMB="600"
+                  minValueMB="-4400" maxValueMB="0"
                   defaultValueMB="0" stepValueMB="100"/>
             </gains>
     </devicePort>
@@ -151,7 +151,7 @@
                  samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
             <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-3200" maxValueMB="600"
+                  minValueMB="-4400" maxValueMB="0"
                   defaultValueMB="0" stepValueMB="100"/>
             </gains>
     </devicePort>
