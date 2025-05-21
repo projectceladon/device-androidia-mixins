@@ -82,9 +82,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/default/policy/fallback/audio_policy_volumes.xml:system/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/audio/default/policy/fallback/default_volume_tables.xml:system/etc/default_volume_tables.xml
 
-ifeq ($(VM3), true)
-PRODUCT_PRODUCT_PROPERTIES += ro.vendor.audio.vm3=1
-endif
+PRODUCT_PROPERTY_OVERRIDES += vendor.intel.audio.aidl.datamq.buffer_size_frames=1024
 
 PRODUCT_PROPERTY_OVERRIDES += audio.safemedia.bypass=true
 
