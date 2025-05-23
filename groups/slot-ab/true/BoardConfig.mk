@@ -6,7 +6,13 @@ AB_OTA_PARTITIONS := \
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 {{/dynamic-partitions}}
 TARGET_NO_RECOVERY := true
+{{^init-boot}}
 BOARD_USES_RECOVERY_AS_BOOT := true
+{{/init-boot}}
+{{#init-boot}}
+BOARD_USES_RECOVERY_AS_BOOT :=
+{{/init-boot}}
+
 BOARD_SLOT_AB_ENABLE := true
 BOARD_KERNEL_CMDLINE += rootfstype=ext4
 BOARD_SEPOLICY_DIRS += $(INTEL_PATH_SEPOLICY)/slot-ab
