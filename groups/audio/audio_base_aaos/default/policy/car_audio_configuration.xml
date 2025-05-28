@@ -73,8 +73,6 @@
                             <context context="music"/>
                             <context context="navigation"/>
                             <context context="voice_command"/>
-                            <context context="call_ring"/>
-                            <context context="call"/>
                             <context context="alarm"/>
                             <context context="notification"/>
                             <context context="system_sound"/>
@@ -84,11 +82,19 @@
                             <context context="announcement"/>
                             </device>
                         </group>
+                        <group>
+                            <device address="bus101_CARD_0_DEV_8">
+                                <context context="call_ring"/>
+                                <context context="call"/>
+                            </device>
+                        </group>
                     </volumeGroups>
                 </zoneConfig>
                 <zoneConfig name="front passenger zone 1 config 1">
                     <volumeGroups>
                         <group>
+                            <!-- Due to a shortage of devices and devices in different zoneconfigs 
+                            is exclusive, temporarily use the same device as config 0 in call. -->
                             <device address="bus101_CARD_0_DEV_8">
                             <context context="music"/>
                             <context context="navigation"/>
