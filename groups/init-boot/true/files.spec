@@ -1,5 +1,5 @@
 [devicefiles]
-{{target}}/vendor_boot-ramdisk: vendor_boot-ramdisk
+{{target}}/init_boot-ramdisk: init_boot-ramdisk
 
 [mapping]
-{{target}}/vendor_boot-ramdisk: vendor_boot-ramdisk
+{{target}}/init_boot-ramdisk: init_boot-ramdisk
