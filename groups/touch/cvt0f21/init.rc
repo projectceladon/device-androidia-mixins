@@ -1,0 +1,5 @@
+on early-boot
+	insmod /vendor/lib/modules/pinctrl-alderlake.ko
+	insmod /vendor/lib/modules/i2c-hid.ko
+	insmod /vendor/lib/modules/i2c-hid-acpi.ko
+	insmod /vendor/lib/modules/hid-multitouch.ko
