@@ -161,6 +161,9 @@ $(GPTIMAGE_BIN): \
 	{{#vendor-boot}}
 		--vendor_boot $(TARGET_IMAGE_PATH)/vendor_boot.img \
 	{{/vendor-boot}}
+	{{#init-boot}}
+		--init_boot $(TARGET_IMAGE_PATH)/init_boot.img \
+	{{/init-boot}}
 		--config $(raw_config) \
 		--factory $(raw_factory)
 

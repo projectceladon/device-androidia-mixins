@@ -1,0 +1,2 @@
+BOARD_USES_RECOVERY_AS_BOOT := true
+BOARD_FLASHFILES += $(PRODUCT_OUT)/boot-debug.img
