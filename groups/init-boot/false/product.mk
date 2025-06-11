@@ -1,3 +1,5 @@
+INITBOOT_ENABLE := false
+
 # disable debug boot image for GSI testing
 # For Generic Kernel Image (GKI) using devices that have a vendor_boot partition,
 # boot-debug.img mustn't be flashed, as the boot partition must be flashed with

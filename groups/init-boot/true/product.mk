@@ -1,9 +1,4 @@
-{{#initboot_enable}}
 INITBOOT_ENABLE := true
-{{/initboot_enable}}
-{{^initboot_enable}}
-INITBOOT_ENABLE := false
-{{/initboot_enable}}
 
 # disable debug boot image for GSI testing
 # For Generic Kernel Image (GKI) using devices that have a vendor_boot partition,
