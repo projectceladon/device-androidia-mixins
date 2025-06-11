@@ -1,5 +1,5 @@
 {{^ota-update}}
-<manifest version="1.0" type="device" target-level="202604">
+<manifest version="1.0" type="device" target-level="202504">
 {{/ota-update}}
 {{#ota-update}}
 <manifest version="1.0" type="device">
@@ -37,6 +37,6 @@
     </hal>
     <!--<kernel target-level="5"/>-->
     <sepolicy>
-        <version>202604</version>
+        <version>202504</version>
     </sepolicy>
 </manifest>
