@@ -10,6 +10,7 @@ on post-fs-data
    #setprop debug.sf.nobootanimation 1
    setprop debug.sf.enable_vrr_config false
    setprop debug.sf.vrr_timeout_hint_enabled false
+   setprop debug.renderengine.backend skiavkthreaded
    mkdir /data/system 0770 system system
 
 on boot
