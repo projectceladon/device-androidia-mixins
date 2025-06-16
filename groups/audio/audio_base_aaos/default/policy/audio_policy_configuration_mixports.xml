@@ -74,34 +74,13 @@
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
     </mixPort>
+    <mixPort name="mixport_bus102_audio_zone_1" role="source">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000"
+                 channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+    </mixPort>
 
     <mixPort name="mixport_input_bus100_zone_1" role="sink">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000"
-                 channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
-    </mixPort>
-
-    <!-- Audio Zone 2-->
-    <mixPort name="mixport_bus200_CARD_0_DEV_3" role="source">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000"
-                 channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-    </mixPort>
-
-    <mixPort name="mixport_input_bus200_zone_2" role="sink">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000"
-                 channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
-    </mixPort>
-
-    <!-- Audio Zone 3-->
-    <mixPort name="mixport_bus101_audio_zone_1" role="source">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000"
-                 channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-    </mixPort>
-
-    <mixPort name="mixport_input_bus300_zone_3" role="sink">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
