@@ -41,13 +41,13 @@
                             </device>
                         </group>
                         <group>
-                            <device address="bus2_call_CARD_0_DEV_6">
+                            <device address="bus2_call_CARD_0_DEV_7">
 		                <context context="call_ring"/>
 				<context context="call"/>
                             </device>
                         </group>
                         <group>
-                            <device address="bus3_alarm_CARD_0_DEV_7">
+                            <device address="bus3_alarm_CARD_0_DEV_8">
                                 <context context="alarm"/>
                                 <context context="system_sound"/>
                                 <context context="emergency"/>
@@ -83,7 +83,7 @@
                             </device>
                         </group>
                         <group>
-                            <device address="bus101_CARD_0_DEV_8">
+                            <device address="bus101_CARD_0_DEV_9">
                                 <context context="call_ring"/>
                                 <context context="call"/>
                             </device>
@@ -95,7 +95,7 @@
                         <group>
                             <!-- Due to a shortage of devices and devices in different zoneconfigs 
                             is exclusive, temporarily use the same device as config 0 in call. -->
-                            <device address="bus101_CARD_0_DEV_8">
+                            <device address="bus102_CARD_0_DEV_10">
                             <context context="music"/>
                             <context context="navigation"/>
                             <context context="voice_command"/>
@@ -115,60 +115,6 @@
             </zoneConfigs>
             <inputDevices>
                 <inputDevice address="i_bus100_CARD_0_DEV_2"/>
-            </inputDevices>
-       </zone>
-       <zone name="front passenger zone 2" audioZoneId="2" occupantZoneId="2">
-            <zoneConfigs>
-                <zoneConfig name="front passenger zone 2 config 0" isDefault="true">
-                    <volumeGroups>
-                        <group>
-                            <device address="bus200_CARD_0_DEV_3">
-                            <context context="music"/>
-                            <context context="navigation"/>
-                            <context context="voice_command"/>
-                            <context context="call_ring"/>
-                            <context context="call"/>
-                            <context context="alarm"/>
-                            <context context="notification"/>
-                            <context context="system_sound"/>
-                            <context context="emergency"/>
-                            <context context="safety"/>
-                            <context context="vehicle_status"/>
-                            <context context="announcement"/>
-                            </device>
-                        </group>
-                    </volumeGroups>
-                </zoneConfig>
-            </zoneConfigs>
-            <inputDevices>
-                <inputDevice address="i_bus200_CARD_0_DEV_3"/>
-            </inputDevices>
-       </zone>
-       <zone name="front passenger zone 3" audioZoneId="3" occupantZoneId="3">
-            <zoneConfigs>
-                <zoneConfig name="front passenger zone 3 config 0" isDefault="true">
-                    <volumeGroups>
-                        <group>
-                            <device address="bus300_CARD_0_DEV_4">
-                            <context context="music"/>
-                            <context context="navigation"/>
-                            <context context="voice_command"/>
-                            <context context="call_ring"/>
-                            <context context="call"/>
-                            <context context="alarm"/>
-                            <context context="notification"/>
-                            <context context="system_sound"/>
-                            <context context="emergency"/>
-                            <context context="safety"/>
-                            <context context="vehicle_status"/>
-                            <context context="announcement"/>
-                            </device>
-                        </group>
-                    </volumeGroups>
-                </zoneConfig>
-            </zoneConfigs>
-            <inputDevices>
-                <inputDevice address="i_bus300_CARD_0_DEV_4"/>
             </inputDevices>
        </zone>
     </zones>
