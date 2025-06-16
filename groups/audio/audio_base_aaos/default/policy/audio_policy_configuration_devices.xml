@@ -35,8 +35,8 @@
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
-    <devicePort tagName="bus2_call_CARD_0_DEV_6" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus2_call_CARD_0_DEV_6">
+    <devicePort tagName="bus2_call_CARD_0_DEV_7" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus2_call_CARD_0_DEV_7">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
@@ -45,8 +45,8 @@
                   defaultValueMB="0" stepValueMB="100"/>
         </gains>
     </devicePort>
-    <devicePort tagName="bus3_alarm_CARD_0_DEV_7" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus3_alarm_CARD_0_DEV_7">
+    <devicePort tagName="bus3_alarm_CARD_0_DEV_8" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus3_alarm_CARD_0_DEV_8">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
@@ -97,8 +97,18 @@
                   defaultValueMB="0" stepValueMB="100"/>
             </gains>
     </devicePort>
-    <devicePort tagName="bus101_CARD_0_DEV_8" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus101_CARD_0_DEV_8">
+    <devicePort tagName="bus101_CARD_0_DEV_9" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus101_CARD_0_DEV_9">
+        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
+                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+        <gains>
+            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
+                  minValueMB="-4400" maxValueMB="0"
+                  defaultValueMB="0" stepValueMB="100"/>
+            </gains>
+    </devicePort>
+    <devicePort tagName="bus102_CARD_0_DEV_10" role="sink" type="AUDIO_DEVICE_OUT_BUS"
+                address="bus102_CARD_0_DEV_10">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
         <gains>
@@ -110,54 +120,6 @@
 
     <devicePort tagName="i_bus100_CARD_0_DEV_2" type="AUDIO_DEVICE_IN_BUS"
                 role="source" address="i_bus100_CARD_0_DEV_2">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000"
-                 channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
-        <gains>
-            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-3200" maxValueMB="600"
-                  defaultValueMB="0" stepValueMB="100"/>
-        </gains>
-    </devicePort>
-
-    <!-- Audio zone 2 -->
-    <devicePort tagName="bus200_CARD_0_DEV_3" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus200_CARD_0_DEV_3">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-        <gains>
-            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-4400" maxValueMB="0"
-                  defaultValueMB="0" stepValueMB="100"/>
-            </gains>
-    </devicePort>
-
-    <devicePort tagName="i_bus200_CARD_0_DEV_3" type="AUDIO_DEVICE_IN_BUS"
-                role="source" address="i_bus200_CARD_0_DEV_3">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000"
-                 channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
-        <gains>
-            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-3200" maxValueMB="600"
-                  defaultValueMB="0" stepValueMB="100"/>
-        </gains>
-    </devicePort>
-
-    <!-- Audio zone 3-->
-    <devicePort tagName="bus300_CARD_0_DEV_4" role="sink" type="AUDIO_DEVICE_OUT_BUS"
-                address="bus300_CARD_0_DEV_4">
-        <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
-                 samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
-        <gains>
-            <gain name="" mode="AUDIO_GAIN_MODE_JOINT"
-                  minValueMB="-4400" maxValueMB="0"
-                  defaultValueMB="0" stepValueMB="100"/>
-            </gains>
-    </devicePort>
-
-    <devicePort tagName="i_bus300_CARD_0_DEV_4" type="AUDIO_DEVICE_IN_BUS"
-                role="source" address="i_bus300_CARD_0_DEV_4">
         <profile name="" format="AUDIO_FORMAT_PCM_32_BIT"
                  samplingRates="48000"
                  channelMasks="AUDIO_CHANNEL_IN_STEREO"/>
