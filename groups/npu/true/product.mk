@@ -17,10 +17,18 @@ PRODUCT_PACKAGES += \
     libopenvino_intel_gpu_plugin \
     libopenvino_intel_npu_plugin \
     libopenvino_ir_frontend \
-    libopenvino_tensorflow_lite_frontend
+    libopenvino_tensorflow_lite_frontend \
+    libtensorflowlite_intel_openvino_delegate \
+    libtflite_intel_openvino_tflitefe_delegate \
+    libtbb \
+    settings-tflite-fe.json \
+    settings-tflite-legacy.json \
 
 ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_PACKAGES += \
     benchmark_app \
-    hello_query_device
+    hello_query_device \
+    benchmark_model \
+    inference_diff_eval \
+    stable_delegate_test_suite
 endif
