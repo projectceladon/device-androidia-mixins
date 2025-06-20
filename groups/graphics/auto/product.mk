@@ -74,6 +74,18 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/intel/hardware/interfaces/graphic/dgpu-renderwlocal.cfg:vendor/etc/dgpu-renderwlocal.cfg
 
+# virtio-gpu backend
+PRODUCT_PACKAGES += \
+    libacrn_dm_backend \
+    DmBackendApp \
+    acrn-bkend-server \
+    dm-backend \
+    libCastFrontClientJni \
+    ScreenCastClient \
+    open-node \
+    probe-node \
+    VirtualDisplayDemo
+
 # DRM HWComposer
 PRODUCT_PACKAGES += \
     hwcomposer.drm_minigbm
