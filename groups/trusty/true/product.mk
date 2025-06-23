@@ -7,6 +7,7 @@ PRODUCT_PACKAGES += \
 	android.hardware.gatekeeper@1.0-service.trusty \
 	android.hardware.security.keymint-service.trusty \
 	keybox_provisioning \
+	rpmb_dev \
 	RemoteProvisioner
 
 PRODUCT_PACKAGES_DEBUG += \
