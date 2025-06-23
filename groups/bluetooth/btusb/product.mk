@@ -6,7 +6,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += bluetooth.rfkill=1
 
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth-service.default.vbt 
+{{#ivi}}
+    android.hardware.bluetooth.audio-impl \
+{{/ivi}}
+    android.hardware.bluetooth-service.default.vbt
 
 {{#ivi}}
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/{{_extra_dir}}/android.hardware.telephony.automotive.xml:vendor/etc/permissions/android.hardware.telephony.automotive.xml
