@@ -1,9 +1,6 @@
 on boot
     insmod ${ro.vendor.boot.moduleslocation}/btif_drv.ko
 
-on post-fs-data
-    mkdir /data/misc/dhcp 0770 dhcp system
-
 service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
     disabled
     oneshot
