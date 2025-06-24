@@ -9,9 +9,6 @@ on boot
     insmod ${ro.vendor.boot.moduleslocation}/bluetooth.ko
     insmod ${ro.vendor.boot.moduleslocation}/btusb.ko
 
-on post-fs-data
-    mkdir /data/misc/dhcp 0770 dhcp system
-
 service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
     disabled
     oneshot

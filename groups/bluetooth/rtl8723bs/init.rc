@@ -54,9 +54,6 @@ on boot
     chmod 0644 /sys/kernel/debug/bluetooth/l2cap_le_max_credits
     chmod 0644 /sys/kernel/debug/bluetooth/l2cap_le_default_mps
 
-on post-fs-data
-    mkdir /data/misc/dhcp 0770 dhcp system
-
 on property:vendor.bluetooth.hwcfg=start
     start vendor.btcfg
 

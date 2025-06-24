@@ -16,7 +16,7 @@ PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.bluetooth.xml:
 
 {{^hsu}}
 PRODUCT_PROPERTY_OVERRIDES += vendor.bluetooth.hwcfg=stop \
-                bluetooth.rfkill=1
+                vendor.bluetooth.rfkill=1
 
 # Bluetooth eng / userdebug
 ifneq ($(TARGET_BUILD_VARIANT),user)
