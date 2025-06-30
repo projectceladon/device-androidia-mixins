@@ -1,2 +1,2 @@
 [defaults]
-enable_sensor_list = true
+enable_sensor_list = false
