@@ -48,6 +48,10 @@ else ifeq ($(BASE_LINUX_INTEL_LTS2023_KERNEL), true)
 else ifeq ($(BASE_LTS2024_ANDROID_KERNEL), true)
   LOCAL_KERNEL_SRC := {{{lts2024_android_src_path}}}
   KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{lts2024_android_cfg_path}}}
+else ifeq ($(BASE_LINUX_INTEL_LTS2024_KERNEL), true)
+  LOCAL_KERNEL_SRC := {{{linux_intel_lts2024_src_path}}}
+  KERNEL_CONFIG_PATH := $(TARGET_DEVICE_DIR)/{{{linux_intel_lts2024_cfg_path}}}
+  ENABLE_I915_OOT_MODULE_LOADING := true
 else
   LOCAL_KERNEL_SRC := {{{src_path}}}
   EXT_MODULES := {{{external_modules}}}
