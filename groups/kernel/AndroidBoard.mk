@@ -222,6 +222,7 @@ endif
 		find $(LOCAL_KERNEL_PATH)/lib/modules/ -name $$f -exec cp {} $(TARGET_RECOVERY_ROOT_OUT)/$(KERNEL_MODULES_ROOT)/ \; ;\
 		done
 ifneq ($(BASE_LTS2024_ANDROID_KERNEL), true)
+ifneq ($(BASE_LINUX_INTEL_LTS2024_KERNEL), true)
 ifeq ($(TARGET_PREBUILT_KERNEL), true)
 	echo "Copying mei modules from prebuilt"
 #mei for recovery
@@ -240,6 +241,7 @@ else
 	$(hide) for f in mei.ko mei-me.ko mei-txe.ko mei-gsc.ko mei_pxp.ko mei_hdcp.ko; do \
 		find $(LOCAL_KERNEL_PATH)/lib/modules/ -name $$f -exec cp {} $(TARGET_RECOVERY_ROOT_OUT)/$(KERNEL_MODULES_ROOT)/ \; ;\
 		done
+endif
 endif
 endif
 
@@ -319,6 +321,7 @@ $(foreach v,$(BOARD_DTB_VARIANTS),$(eval $(call board_dtb_per_variant,$(v))))
 {{/build_dtbs}}
 
 ifneq ($(BASE_LTS2024_ANDROID_KERNEL), true)
+ifneq ($(BASE_LINUX_INTEL_LTS2024_KERNEL), true)
 {{#i915_ag_mods_version}}
 
 I915_AG_ADDITIONS_PATH := ../modules/intel-gpu-i915-backports
@@ -336,6 +339,7 @@ $(I915_AG_MODS_TARGET): $(LOCAL_KERNEL)
 $(LOCAL_KERNEL_PATH)/copy_modules: $(I915_AG_MODS_TARGET)
 
 {{/i915_ag_mods_version}}
+endif
 endif
 
 # Add a kernel target, so "make kernel" will build the kernel
