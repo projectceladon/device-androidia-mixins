@@ -9,7 +9,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libnpu_driver_compiler \
     libze_loader \
-    libze_intel_vpu \
+    libze_intel_npu \
 
 PRODUCT_PACKAGES += \
     libc++_shared \
