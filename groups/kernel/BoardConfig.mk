@@ -5,6 +5,8 @@ else ifeq ($(BASE_LINUX_INTEL_LTS2023_KERNEL), true)
   TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{linux_intel_lts2023_src_path}}}/kernel-headers
 else ifeq ($(BASE_LTS2024_ANDROID_KERNEL), true)
   TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{lts2024_android_src_path}}}/kernel-headers
+else ifeq ($(BASE_DRM_TIP_ANDROID_KERNEL), true)
+  TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{drmtip_android_src_path}}}/kernel-headers
 else
   TARGET_BOARD_KERNEL_HEADERS := $(INTEL_PATH_COMMON)/{{{src_path}}}/kernel-headers
 endif
