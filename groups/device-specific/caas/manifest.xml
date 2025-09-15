@@ -33,7 +33,7 @@
     </hal-->
     <hal format="aidl">
         <name>android.hardware.camera.provider</name>
-	<fqname>ICameraProvider/external/0</fqname>
+	<fqname>ICameraProvider/ivi/0</fqname>
     </hal>
     <!--<kernel target-level="5"/>-->
     <sepolicy>
